@@ -4,13 +4,35 @@ namespace App\Http\Controllers\Open;
 
 use App\Facades\ClientAuth;
 use App\Http\Controllers\Controller;
+use App\Models\Feature;
 use App\Models\Menu;
+use App\Models\Technology;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class IndexController extends Controller
 {
+    /**
+     * 首页数据
+     */
+    public function getIndex(){
+        $data = [
+            'features'=>Feature::take(50)->get(),
+            'technologys'=>Technology::take(100)->get()
+        ];
+        return Response::returns($data);
+    }
+
+    /**
+     * 联系我们
+     * @return mixed
+     */
+    public function contact(){
+        $data = [];
+        return Response::returns($data);
+    }
+
     /**
      * 生成index.html文件生成的数据
      * @return array

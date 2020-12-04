@@ -53,7 +53,7 @@
                     <router-link class="pull-right" to="/open/register">注册账号</router-link>
                 </div>
             </div>
-            <icp></icp>
+           <!-- <icp></icp>-->
         </div>
 
     </div>
@@ -240,7 +240,7 @@
 
     };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .open_login {
         position: relative;
         background: url('/dist/img/login-bg.jpg') no-repeat;

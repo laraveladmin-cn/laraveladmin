@@ -40,7 +40,7 @@
                     <router-link class="pull-right" to="/open/login">直接登录</router-link>
                 </div>
             </div>
-            <icp></icp>
+          <!--  <icp></icp>-->
         </div>
     </div>
 </template>

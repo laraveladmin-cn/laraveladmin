@@ -77,6 +77,7 @@
 
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
+
     import lockEdit from "common_components/lockEdit";
     export default {
         components:{

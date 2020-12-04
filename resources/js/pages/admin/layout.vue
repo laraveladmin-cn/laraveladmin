@@ -103,43 +103,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown user user-menu">
-                                <a class="dropdown-toggle" data-toggle="dropdown">
-                                    <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="user-image" alt="用户头像">
-                                    <span class="hidden-xs">{{user['name']}}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="user-header">
-                                        <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" alt="用户头像">
-
-                                        <p>
-                                            {{user['name']}} - {{roleName}}
-                                            <small>入职日期:2019-08-01</small>
-                                        </p>
-                                    </li>
-                                    <li class="user-body">
-                                        <div class="row">
-                                            <div class="col-xs-4 text-center">
-                                                <a>栏目一</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a>栏目二</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a>栏目三</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a class="btn btn-default btn-flat">个人中心</a>
-                                        </div>
-                                        <div class="pull-right">
-                                            <a class="btn btn-default btn-flat" @click="logout">退出</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            <user-menu></user-menu>
                             <li>
                                 <a data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                             </li>
@@ -257,7 +221,7 @@
                         <b>系统版本：</b> {{version}}
                     </div>
                     <strong>Copyright &copy; 2020
-                        <a target="_blank" href="http://www.laraveladmin.cn">Laravel Admin</a>
+                        <a target="_blank" href="http://www.laraveladmin.cn">{{name}}</a>
                     </strong>
                     <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 备案号:{{icp}}
                 </footer>
@@ -396,12 +360,14 @@
     import SidebarItems from 'common_components/sidebarItems.vue';
     import Message from 'admin_components/message.vue';
     import Modal from 'admin_components/modal.vue';
+    import userMenu from 'pages_components/userMenu.vue';
     import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
     export default {
         components: {
             "sidebar-items": SidebarItems,
             "message":Message,
-            "modal":Modal
+            "modal":Modal,
+            "user-menu":userMenu
         },
         props: {},
         data(){
@@ -481,7 +447,8 @@
                 'name_short',
                 'version',
                 'icp',
-                'alerts'
+                'alerts',
+                'name'
             ]),
             ...mapState('menu',{
                 menus:state => state.menus,
@@ -596,5 +563,7 @@
     .progress-tool{
         height: 20px;
     }
-
+    body{
+        padding-top: 0px;
+    }
 </style>

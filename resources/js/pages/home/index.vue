@@ -1,23 +1,60 @@
 <template>
-    <div class="admin_index">
-        后台主页
-        <router-link to="/admin">后台</router-link>
-        <router-link to="/">官网</router-link>
-        {{user}}
-
+    <div class="home_index" ref="home_index">
+        <iframe ref="iframe" :src="doc_url"  frameborder= "0" scrolling="no"></iframe>
     </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapState,mapGetters } from 'vuex';
     export default {
+        components:{
+        },
         props: {
+        },
+        data(){
+            return {
+            };
         },
         computed:{
             ...mapState('user',{
-                user:state => state.user,
-                loadingUser:state => state.loading
+                user:state => state.user
             }),
+            ...mapState(['app_url']),
+            doc_url(){
+                return this.app_url+'/doc.html';
+            }
+        },
+        created() {
+        },
+        methods:{
+            initIframe(){
+                let iframe = this.$refs['iframe'];
+                try{
+                    let bHeight = iframe.contentWindow.document.body.scrollHeight;
+                    let dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+                    let height = Math.max(bHeight, dHeight);
+                    iframe.height = height;
+                }catch (ex){}
+            },
+            clickIframe(){
+                this.$refs['iframe'].onload = ()=>{
+                    this.$refs['iframe'].contentDocument.onclick =  () =>{
+                        this.$refs['home_index'].click();
+                    }
+                };
+            }
+        },
+        mounted() {
+            window.setInterval(this.initIframe, 200);
+            this.clickIframe();
         }
     };
 </script>
+<style lang="scss" scoped>
+    iframe{
+        width: 100%;
+        border: none;
+        position: relative;
+        z-index: 0;
+    }
+</style>
