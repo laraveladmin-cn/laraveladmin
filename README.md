@@ -23,7 +23,7 @@ laravel后台管理系统
 1. 下载代码
 
 ```shell script
-git clone https://gitee.com/zsping1989/laraveladmin.git
+git clone https://gitee.com/laravel-admin/laraveladmin.git
 cd laraveladmin
 ```
 
