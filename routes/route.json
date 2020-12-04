@@ -484,6 +484,20 @@
             "description" : "提交编辑修改密码",
             "group": "home",
             "action": "PersonageController@postIndex"
+        },
+        {
+            "id": 83,
+            "name": "文件上传",
+            "icons": "fa-upload",
+            "url":"/home/upload/index",
+            "method":2,
+            "status":2,
+            "is_page": 0,
+            "parent_id": 3,
+            "disabled": 0,
+            "description" : "文件上传",
+            "group": "home",
+            "action": "UploadController@postIndex"
         }
     ],
     "ressorce": [

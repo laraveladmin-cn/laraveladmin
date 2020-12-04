@@ -1,12 +1,14 @@
 <template>
     <div>
         <el-upload class="avatar-uploader"
-                   :action="action"
+                   :action="use_url+action"
                    :show-file-list="false"
                    :on-success="handleAvatarSuccess"
                    :on-error="handleAvatarError"
                    @click="$emit('blur')"
-                   name="upfile"
+                   :data="{_token:_token}"
+                   :headers="headers"
+                   name="file"
                    :before-upload="beforeAvatarUpload">
             <img v-if="value || placeholderValue" :src="showurl" class="avatar" :width="width+'px'" :height="height+'px'">
             <i v-else class="el-icon-plus avatar-uploader-icon avatar" :style="'line-height: '+height+'px;height:'+height+'px;width:'+width+'px'"></i>
@@ -38,6 +40,7 @@
 </style>
 <script>
     import ElUpload from 'element-ui/lib/upload';
+    import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
     export default {
         components: {
             'el-upload':ElUpload
@@ -47,6 +50,7 @@
                 parm:''
             };
         },
+
         props:{
             value: {
                 type:[String],
@@ -61,7 +65,7 @@
             },
             action:{
                 default: function () {
-                    return '/ueditor/server?action=upload-image';
+                    return '/home/upload/index?type=image';
                 }
             },
             width:{
@@ -90,11 +94,19 @@
             },
         },
         methods:{
+            ...mapActions({
+                refreshToken: 'refreshToken',
+                pushMessage: 'pushMessage',
+            }),
+            ...mapMutations({
+                set:'set'
+            }),
             handleAvatarSuccess(res, file){
+                this.refreshToken();
                 let $this = this;
                 //弹窗
                 if (typeof res != 'undefined' && typeof res.alert != 'undefined' && res.alert) {
-                    $this.$store.commit('alert',res.alert);
+                    this.pushMessage(res.alert);
                 }
                 if(res.state=='SUCCESS'){
                     let url = res.url;
@@ -112,11 +124,18 @@
 
             },
             handleAvatarError(res){
-                let $this = this;
-                //弹窗
-                if (typeof res != 'undefined' && typeof res.alert != 'undefined' && res.alert) {
-                    $this.$store.commit('alert',res.alert);
-                }
+                let errors = JSON.parse(res.message);
+                this.pushMessage({
+                    'showClose':true,
+                    'title':'上传失败!',
+                    'message':array_get(errors,'errors.file.0') || '',
+                    'type':'danger',
+                    'position':'top',
+                    'iconClass':'fa-warning',
+                    'customClass':'',
+                    'duration':3000,
+                    'show':true
+                });
             }
         },
         computed:{
@@ -128,8 +147,21 @@
                     return this.value+'&'+this.parm;
                 }
                 return this.value+'?'+this.parm;
+            },
+            ...mapState([
+                '_token',
+                'use_url',
+            ]),
+            headers(){
+                let headers = {
+                    Accept:'application/json, text/plain, */*'
+                };
+                let token = getCookie('Authorization');
+                if(token){
+                    headers.Authorization= decodeURIComponent(token);
+                }
+                return headers;
             }
-
         },
         watch:{
 

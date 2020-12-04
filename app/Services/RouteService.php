@@ -15,6 +15,7 @@ class RouteService
     protected static $pager = '\App\Http\Controllers\Open\IndexController@index';
     protected static $pager404 = '\App\Http\Controllers\Open\IndexController@page404';
     protected static $web_route_prefix = '';
+    protected static $named=[];
     /**
      * 通过 PhpStorm 创建.
      * 创建人: zhangshiping
@@ -176,8 +177,8 @@ class RouteService
                                     $route =  Route::$type($path, $action);
                                 }
                             });
-                            if($route && $rote_name = Arr::get($item,'as','')){
-                                //$route->name($rote_name);
+                            if($route && $as = Arr::get($item,'as','')){
+                                self::name($route,$as);
                             }
                             if($route && $middleware1 = Arr::get($item,'middleware','')){
                                 $route->middleware($middleware1);
@@ -256,8 +257,8 @@ class RouteService
                                     $route =  Route::$type($path, $action);
                                 }
                             });
-                            if($route && $rote_name = Arr::get($item,'as','')){
-                                $route->name($rote_name);
+                            if($route && $as = Arr::get($item,'as','')){
+                                self::name($route,$as);
                             }
                             if($route && $middleware1 = Arr::get($item,'middleware','')){
                                 $route->middleware($middleware1);
@@ -282,7 +283,7 @@ class RouteService
                 if($route){
                     $route = Route::get($route,self::$pager);
                     if($as = Arr::get($item,'as','')){
-                        $route->name($as);
+                        self::name($route,$as);
                     }
                 }
             });
@@ -323,6 +324,13 @@ class RouteService
     public static function currentUrlPrefix(){
         $model = ClientAuth::isApi()?'api':'web';
         return getRoutePrefix($model);
+    }
+
+    protected static function name($route,$name){
+       if(isset(self::$named[$name])){
+           $route->name($name);
+           self::$named[$name] = $route;
+       };
     }
 
 }

@@ -97,7 +97,7 @@ return [
         'tymon.jwt.auth',
         'tymon.jwt.parser',
         'tymon.jwt.claim.factory',
-        'tymon.jwt.manager','data','life_data','option','ueditor.storage'
+        'tymon.jwt.manager','data','life_data','option'
     ],
 
     /*
@@ -108,10 +108,8 @@ return [
     'providers' => [
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Filesystem\FilesystemServiceProvider::class,
-        Overtrue\LaravelUEditor\UEditorServiceProvider::class,
         Overtrue\LaravelWeChat\ServiceProvider::class,
         App\Providers\AppServiceProvider::class,
-        Overtrue\LaravelUEditor\UEditorServiceProvider::class,
         Laravel\Sanctum\SanctumServiceProvider::class
     ],
 

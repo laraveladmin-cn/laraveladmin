@@ -175,6 +175,7 @@ return [
         'available'             => '可用的',
         'size'                  => '大小',
         'mobile_phone'=>'手机号码',
-        'old_password'=>'旧密码'
+        'old_password'=>'旧密码',
+        'file'=>'文件'
     ],
 ];
