@@ -1,0 +1,5 @@
+#demo项目定时任务
+*/1 * * * * www-data /bin/bash /var/www/laravel/laraveladmin/docker/php/cron.sh >> /dev/null 2>&1
+#测试定时任务是否执行
+#*/1 * * * * echo 'test' >> /tmp/test.txt
+#必须空行保证定时任务在执行

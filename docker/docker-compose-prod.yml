@@ -1,0 +1,71 @@
+version: '2'
+services:
+  mysql: #数据库服务
+    image: mysql:8 #镜像源
+    volumes: #数据卷,挂载目录
+      - ../docker/mysql/data:/var/lib/mysql #mysql数据库数据文件存放目录;宿主机目录:容器目录
+      - ../docker/mysql/shared:/var/lib/mysql_shared #与php共享目录
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql #数据库初始化sql
+#    ports: #与宿主进的端口映射
+#      - 3306:3306 #宿主机端口:容器端口
+    restart: always #异常退出后重启
+    env_file: .env #导入配置变量
+    environment: #容器中环境变量
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}" #数据库root用户密码
+      MYSQL_DATABASE: "${DB_DATABASE}" #新创建数据库名称
+#      MYSQL_USER: "${DB_USERNAME}" #数据库用户名
+#      MYSQL_PASSWORD: "${DB_PASSWORD}" #数据库密码
+  redis: #redis服务
+    build: ./docker/redis
+    restart: always
+    env_file: .env #导入配置变量
+    command: > #设置redis启动密码
+      --requirepass "${REDIS_PASSWORD}"
+    environment: #容器中环境变量
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
+#    ports:
+#      - 6379:6379
+    volumes:
+      - ../docker/redis/data:/data #redis数据文件存放目录
+      - ./docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+  php: #swoole项目 用于生产环境
+    build:
+      context: ./ #编译运行上下文目录
+      dockerfile: ./docker/php/Dockerfile #dockerfile对应文件
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - .:/var/www/laravel/laraveladmin #代码目录
+      - ./docker/php/cron:/var/spool/cron/crontabs/root # 定时任务计划
+      - ./docker/php/ini/php.ini:/usr/local/etc/php/php.ini #php配置文件
+      - ./docker/php/ini/www.conf:/usr/local/etc/php-fpm.d/www.conf # php-fpm配置文件
+      - ../docker/mysql/shared:/var/lib/mysql_shared #与php共享目录
+      - ~/.ssh:/root/.ssh #秘钥挂载方便拉取代码
+      - ~/.composer:/root/.composer #compoer全局安装包
+    links:
+      - mysql:db
+      - redis:redis
+    #ports:
+    #  - 1215:1215
+    restart: always
+  nginx: #服务器服务
+    image: nginx:1.15
+    depends_on:
+      - php
+    volumes:
+      - .:/var/www/laravel/laraveladmin # 主目录
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/vhost:/etc/nginx/conf.d/vhost
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    links:
+      - php:phpswoole
+  node:
+    build: ./docker/node
+    volumes:
+      - .:/var/www/laravel/laraveladmin #代码目录
+#    command:
+#      npm run watch
