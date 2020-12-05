@@ -131,21 +131,19 @@
                       options.readOnly = this.disabled;
                       options.imageUploadURL = this.use_url+ options.imageUploadURL;
                       options.onchange =  ()=> {
-                          if(typeof this.editorMd.getValue != "undefined"){
-                              setTimeout(()=>{
-                                  let val = this.editorMd.getValue();
-                                  if((typeof this.value!="undefined") && val!=this.value){
-                                      this.$emit('input', val); //修改值
-                                      this.$emit('change',val); //修改值
-                                  }
-                              },50);
-                          }
                       };
                       this.editorMd = editormd(options);
                   }
               },250);
           },
             mouseoutEvent(){
+                if(this.editorMd){
+                    let val = this.editorMd.getValue();
+                    if((typeof this.value!="undefined") && val!=this.value){
+                        this.$emit('input', val); //修改值
+                        this.$emit('change',val); //修改值
+                    }
+                }
                 this.$emit('blur'); //修改值
             }
         },
