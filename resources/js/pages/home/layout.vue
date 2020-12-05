@@ -1,5 +1,7 @@
 <template>
     <div class="home_layout h100 hold-transition skin-blue layout-top-nav" v-show="user.id" v-cloak>
+        <message></message>
+        <modal></modal>
         <div class="wrapper">
             <header class="main-header">
                 <nav class="navbar navbar-static-top">
@@ -111,8 +113,12 @@
     require('public/dist/js/adminlte.js');
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     import userMenu from 'pages_components/userMenu.vue';
+    import Message from 'admin_components/message.vue';
+    import Modal from 'admin_components/modal.vue';
     export default {
         components:{
+            "message":Message,
+            "modal":Modal,
             "user-menu":userMenu
         },
         props: {},
