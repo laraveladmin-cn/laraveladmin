@@ -474,7 +474,7 @@
             "id": 82,
             "name": "下载",
             "icons": "fa-download",
-            "url":"https://gitee.com/zsping1989/laraveladmin",
+            "url":"https://gitee.com/laravel-admin/laraveladmin",
             "method":0,
             "status":1,
             "is_page": 0,
