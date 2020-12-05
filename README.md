@@ -1,17 +1,19 @@
 # laravelAdmin
 
 [![Packagist](https://img.shields.io/packagist/l/encore/laravel-admin.svg?maxAge=2592000)](https://gitee.com/laravel-admin/laraveladmin)  
+
 [![Total Downloads](https://img.shields.io/packagist/dt/zsping1989/laravel-admin.svg?style=flat-square)](https://gitee.com/laravel-admin/laraveladmin)  
-[![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://gitee.com/laravel-admin/laraveladmin)
+
+[![Awesome Laravel](https://img.shields.io/badge/Awesome-laraveladmin-green)](https://gitee.com/laravel-admin/laraveladmin)
 
 #### 介绍
 `laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。\(QQ群: 391528810\)
-[Demo](http://www.laraveladmin.cn) \|\| [阅读文档](http://www.laraveladmin.cn/home/index)
+[Demo](http://demo.laraveladmin.cn) \|\| [阅读文档](http://www.laraveladmin.cn/home/index)
 
 
 ## Screenshots
 
-![laravel-admin](http://help.laraveladmin.cn/assets/F959191C-187F-4ADA-B0BD-428F81639A24.png)
+![laravel-admin](https://www.laraveladmin.cn/storage/uploads/images/2020/12/05/kg3F2blsJISs6GbyFdmItHU7VKGLPx4zUIrPS0H6.jpeg)
 
 #### 软件架构
 
@@ -32,21 +34,21 @@
 
 1. 下载代码
 
-```shell script
+```shell
 git clone https://gitee.com/laravel-admin/laraveladmin.git
 cd laraveladmin
 ```
 
 2. 参照.env.example配置.env文件(务必设置好mysql密码,redis密码)
 
-```shell script
+```shell
 cp .env.example .env
 vi .env
 ```
 
 3. 初始化安装
 
-```shell script
+```shell
 sh ./docker/install.sh
 ```
 
@@ -54,7 +56,7 @@ sh ./docker/install.sh
 
 5. php容器环境中安装composer相关扩展包及项目代码初始化
 
-```shell script
+```shell
 docker-compose run --rm php composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer && \
 docker-compose run --rm php composer global require laravel/envoy -vvv && \
 docker-compose run --rm php composer global dump-autoload && \
@@ -76,7 +78,7 @@ docker-compose up -d
 
 8. 代码更新升级
 
-```shell script
+```shell
 docker-compose exec php envoy run update --branch=master
 ```
 

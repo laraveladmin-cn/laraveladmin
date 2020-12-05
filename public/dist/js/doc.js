@@ -50,6 +50,7 @@ window.$docsify = {
         '/.*/_sidebar.md': '/_sidebar.md'
     },
     logo: '/dist/img/logo.png',
+    themeColor: '#3c8dbc'
 
 
 };
