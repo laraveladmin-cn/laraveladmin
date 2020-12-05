@@ -31,7 +31,7 @@ array_map(function ($value)use(&$hosts){
     if(!$value){
         return ;
     }
-    $item = explode(':',$value);
+    $item = explode('|',$value);
     if(count($item)==2){
         $hosts[$item[0]] = $item[1];
     }
