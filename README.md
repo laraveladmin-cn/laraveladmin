@@ -1,7 +1,17 @@
 # laravelAdmin
 
+[![Packagist](https://img.shields.io/packagist/l/encore/laravel-admin.svg?maxAge=2592000)](https://gitee.com/laravel-admin/laraveladmin)  
+[![Total Downloads](https://img.shields.io/packagist/dt/zsping1989/laravel-admin.svg?style=flat-square)](https://gitee.com/laravel-admin/laraveladmin)  
+[![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://gitee.com/laravel-admin/laraveladmin)
+
 #### 介绍
-laravel后台管理系统
+`laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。\(QQ群: 391528810\)
+[Demo](http://www.laraveladmin.cn) \|\| [阅读文档](http://www.laraveladmin.cn/home/index)
+
+
+## Screenshots
+
+![laravel-admin](http://help.laraveladmin.cn/assets/F959191C-187F-4ADA-B0BD-428F81639A24.png)
 
 #### 软件架构
 
