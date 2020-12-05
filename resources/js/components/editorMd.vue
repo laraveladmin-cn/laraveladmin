@@ -131,14 +131,13 @@
                       options.readOnly = this.disabled;
                       options.imageUploadURL = this.use_url+ options.imageUploadURL;
                       options.onchange =  ()=> {
-
                       };
                       this.editorMd = editormd(options);
                   }
               },250);
           },
             mouseoutEvent(){
-                if(typeof this.editorMd.getValue != "undefined"){
+                if(this.editorMd){
                     let val = this.editorMd.getValue();
                     if((typeof this.value!="undefined") && val!=this.value){
                         this.$emit('input', val); //修改值
