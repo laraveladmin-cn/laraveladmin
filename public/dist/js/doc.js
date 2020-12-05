@@ -14,7 +14,7 @@ let getCookie = function (cname)
 let token = getCookie('Authorization');
 window.$docsify = {
     el: '#app',
-    repo: 'https://gitee.com/zsping1989/laraveladmin',
+    repo: 'https://gitee.com/laravel-admin/laraveladmin',
     basePath: '/api/home/docs/',
     auto2top: true,
     requestHeaders: {
