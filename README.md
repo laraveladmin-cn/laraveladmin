@@ -45,10 +45,12 @@ sh ./docker/install.sh
 5. php容器环境中安装composer相关扩展包及项目代码初始化
 
 ```shell script
+docker-compose run --rm php composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer && \
 docker-compose run --rm php composer global require laravel/envoy -vvv && \
 docker-compose run --rm php composer global dump-autoload && \
 docker-compose run --rm php envoy run init --branch=master && \
 docker-compose up -d
+docker-compose run --rm node npm run prod
 ```
 
 6. 访问
@@ -60,9 +62,11 @@ docker-compose up -d
 ```
 
 7. 代码更新升级
+
 ```shell script
 docker-compose exec php envoy run update --branch=master
 ```
+
 #### 使用说明
 
 1. [官网及相关文档: https://www.laraveladmin.cn](https://www.laraveladmin.cn)
