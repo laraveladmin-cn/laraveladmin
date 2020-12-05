@@ -25,6 +25,7 @@
             }
         },
         created() {
+            this.getData();
         },
         methods:{
             initIframe(){
