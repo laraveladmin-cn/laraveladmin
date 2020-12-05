@@ -10,6 +10,7 @@
 <script>
     //editor.md  markdown编辑器
     //window.editormd = require('editor.md/editormd.min');
+    import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
     export default {
         name: "editorMd",
         props:{
@@ -66,7 +67,7 @@
                       //dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
                       imageUpload : true,
                       imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                      imageUploadURL : "/ueditor/server?action=upload-image&disk=qiniu_public&image_field_name=editormd-image-file",
+                      imageUploadURL : "/home/upload/index?type=image",
                       onload : function() {
                       //console.log('onload', this);
                       //this.fullscreen();
@@ -104,6 +105,13 @@
 
         },
         methods:{
+            ...mapActions({
+                refreshToken: 'refreshToken',
+                pushMessage: 'pushMessage',
+            }),
+            ...mapMutations({
+                set:'set'
+            }),
             setValue(val){
                 if(this.editorMd && this.editorMd.getMarkdown()!=val){
                     this.editorMd.setMarkdown(val || '');
@@ -121,6 +129,7 @@
                       let options = copyObj(this.options);
                       options.markdown = this.value || '';
                       options.readOnly = this.disabled;
+                      options.imageUploadURL = this.use_url+ options.imageUploadURL;
                       options.onchange =  ()=> {
                           if(typeof this.editorMd.getValue != "undefined"){
                               setTimeout(()=>{
@@ -152,6 +161,22 @@
         },
         mounted() {
             this.init();
+        },
+        computed:{
+            ...mapState([
+                '_token',
+                'use_url',
+            ]),
+            headers(){
+                let headers = {
+                    Accept:'application/json, text/plain, */*'
+                };
+                let token = getCookie('Authorization');
+                if(token){
+                    headers.Authorization= decodeURIComponent(token);
+                }
+                return headers;
+            }
         }
     }
 </script>

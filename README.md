@@ -48,12 +48,15 @@ sh ./docker/install.sh
 docker-compose run --rm php composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer && \
 docker-compose run --rm php composer global require laravel/envoy -vvv && \
 docker-compose run --rm php composer global dump-autoload && \
+docker-compose run --rm node cnpm install && \
+docker-compose run --rm node npm run prod && \
 docker-compose run --rm php envoy run init --branch=master && \
 docker-compose up -d
-docker-compose run --rm node npm run prod
 ```
 
-6. 访问
+6. [解决扩展包mrgoon/aliyun-sms自动加载问题](/aliyun_sms.md "解决扩展包mrgoon/aliyun-sms自动加载问题")
+
+7. 访问
 
 本地开发环境绑定hosts后就可以进行访问了
 
@@ -61,11 +64,13 @@ docker-compose run --rm node npm run prod
 127.0.0.1 local.laraveladmin.cn
 ```
 
-7. 代码更新升级
+8. 代码更新升级
 
 ```shell script
 docker-compose exec php envoy run update --branch=master
 ```
+
+
 
 #### 使用说明
 
