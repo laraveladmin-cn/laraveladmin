@@ -16,6 +16,7 @@ window.$docsify = {
     el: '#app',
     repo: 'https://gitee.com/zsping1989/laraveladmin',
     basePath: '/api/home/docs/',
+    auto2top: true,
     requestHeaders: {
         'Authorization': decodeURIComponent(token)
     },
@@ -23,12 +24,33 @@ window.$docsify = {
         renderer: {
             code: function(code, lang) {
                 lang = lang.replace(' script','');
-                if(lang=='shell'){
-                    lang = 'bash'
-                }
                 return this.origin.code.apply(this, arguments);
             }
         }
-    }
+    },
+    copyCode: {
+        buttonText : '复制',
+        errorText  : '错误',
+        successText: '复制成功'
+    },
+    pagination: {
+        previousText: '上一页',
+        nextText: '下一页',
+        crossChapter: true,
+        crossChapterText: true,
+    },
+    count:{
+        countable:true,
+        fontsize:'0.9em',
+        color:'rgb(90,90,90)',
+        language:'chinese'
+    },
+    loadSidebar: true,
+    alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+    },
+    logo: '/dist/img/logo.png',
+
+
 };
 
