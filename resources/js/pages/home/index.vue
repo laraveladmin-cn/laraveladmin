@@ -1,6 +1,6 @@
 <template>
     <div class="home_index" ref="home_index">
-        <iframe ref="iframe" :src="doc_url"  frameborder= "0" scrolling="no"></iframe>
+        <iframe ref="iframe" :src="doc_url"  frameborder= "0" :onload="ifrmLoad()" scrolling="no"></iframe>
     </div>
 </template>
 
@@ -13,6 +13,7 @@
         },
         data(){
             return {
+                intervalObj:null
             };
         },
         computed:{
@@ -33,8 +34,8 @@
                 try{
                     let bHeight = iframe.contentWindow.document.body.scrollHeight;
                     let dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-                    let height = Math.max(bHeight, dHeight);
-                    iframe.height = height;
+                    let h = Math.max(bHeight, dHeight);
+                    iframe.height = h;
                 }catch (ex){}
             },
             clickIframe(){
@@ -43,10 +44,14 @@
                         this.$refs['home_index'].click();
                     }
                 };
+            },
+            ifrmLoad(){
+                if(!this.intervalObj){
+                    this.intervalObj = window.setInterval(this.initIframe, 200);
+                }
             }
         },
         mounted() {
-            window.setInterval(this.initIframe, 200);
             this.clickIframe();
         }
     };
