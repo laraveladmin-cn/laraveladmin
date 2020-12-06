@@ -157,5 +157,8 @@
     body{
         padding-top: 0px;
     }
+    .navbar-brand{
+        margin-top: 5px;
+    }
 
 </style>
