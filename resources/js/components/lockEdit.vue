@@ -48,7 +48,7 @@
                     this.val = val;
                 }
             },
-            password(val){
+            val(val){
                 this.$emit('input', val); //修改值
                 this.$emit('change',val); //修改值
             }
