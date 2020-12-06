@@ -100,6 +100,7 @@
                 this.verifyCode = '';
                 if(res.status==200 && res.data.token){
                     setCookie('Authorization','Bearer '+res.data.token,res.data.lifetime/60/24);
+                    this.getUser();
                 }else if(res.data.errors){
                     let errors = catchError({response:res});
                     this.errorFun(errors);
@@ -164,7 +165,8 @@
 
             },
             ...mapActions({
-                refreshToken: 'refreshToken'
+                refreshToken: 'refreshToken',
+                getUser: 'user/getUser',
             }),
             //全局数据设置,设置弹窗提示
             ...mapMutations({
