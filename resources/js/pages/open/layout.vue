@@ -134,7 +134,6 @@
     };
 </script>
 <style scoped>
-    @import url('/dist/css/site.min.css');
     .logo{
         background: white none repeat scroll 0% 0%;
         height: 30px;
@@ -157,8 +156,6 @@
     body{
         padding-top: 0px;
     }
-    .navbar-brand{
-        margin-top: 5px;
-    }
+
 
 </style>

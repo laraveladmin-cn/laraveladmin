@@ -179,7 +179,5 @@
     };
 </script>
 <style scoped>
-    .navbar-brand{
-        margin-top: 5px;
-    }
+
 </style>
