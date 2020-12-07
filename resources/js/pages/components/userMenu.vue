@@ -8,7 +8,7 @@
             <li class="user-header">
                 <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" alt="用户头像">
                 <p>
-                    {{user['name']}} - {{roleName}}
+                    {{user['name']}} - {{isAdmin?roleName:'普通会员'}}
                     <small>加入日期:{{user['created_at']}}</small>
                 </p>
             </li>
