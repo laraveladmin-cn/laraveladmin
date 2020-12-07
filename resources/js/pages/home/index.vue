@@ -34,9 +34,24 @@
                 try{
                     let bHeight = iframe.contentWindow.document.body.scrollHeight;
                     let dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-                    let h = Math.max(bHeight, dHeight);
-                    iframe.height = h;
-                }catch (ex){}
+                    let h1 = Math.max(bHeight, dHeight);
+                    let h2 = Math.max($(iframe).contents().find(".sidebar-nav").height(),
+                        $(iframe).contents().find(".markdown-section").height());
+                    let h = Math.min(h1,h2+100);
+                    if($(iframe).contents().find("body").hasClass('medium-zoom--opened')){
+                        //let $img =  $(iframe).contents().find('.medium-zoom-image--opened');
+                     /*   h = window.document.body.scrollHeight
+                            -$('.main-header').height()
+                            -$('.content-header').height()
+                            -50;*/
+                    }
+                    if(h){
+                        iframe.height = h;
+                    }
+
+                }catch (ex){
+                    dd(ex);
+                }
             },
             clickIframe(){
                 this.$refs['iframe'].onload = ()=>{
