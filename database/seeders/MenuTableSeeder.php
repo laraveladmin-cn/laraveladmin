@@ -128,6 +128,21 @@ class MenuTableSeeder extends Seeder
                 Menu::find($item['from'])->moveNear($item['to'],$item['type']);
             }
         });
+        //禁用的菜单功能
+        $menu_ids = explode(',',config('laravel_admin.disabled_menus',''));
+        if($menu_ids){
+            Menu::where(function ($q)use($menu_ids){
+                $q->where('id','=',0);
+                Menu::whereIn('id',$menu_ids)->get()
+                    ->map(function ($item)use(&$q){
+                        $q->orWhere(function ($q)use($item){
+                            $q->where('left_margin','>=',$item['left_margin'])
+                                ->where('right_margin','<=',$item['right_margin']);
+                        });
+                    });
+            })
+                ->update(['disabled'=>1]);
+        }
     }
 
 
