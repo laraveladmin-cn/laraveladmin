@@ -66,13 +66,6 @@ then
         ln -s ./docker/docker-compose-prod.yml  ./docker-compose.yml
     fi
 fi
-#编排环境
-docker-compose build
-#删除无用镜像
-if [ "$is_local" == "0" ]
-    then
-       docker rmi -f  `docker images | grep '<none>' | awk '{print $3}'`
-fi
 if [ ! -d ./docker/mysql ]
     then
     mkdir ./docker/mysql
@@ -81,12 +74,19 @@ fi
 if [ ! -f ./docker/mysql/init.sql ]
 then
     sql=$(cat <<EOF
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '${DB_PASSWORD}';
-flush privileges;
+ALTER USER '${DB_USERNAME}'@'%' IDENTIFIED WITH mysql_native_password BY '${DB_PASSWORD}';
 EOF
 )
-    echo "GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'root'@'%';" > ./docker/mysql/init.sql
+    echo "GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO '${DB_USERNAME}'@'%';" > ./docker/mysql/init.sql
     echo $sql >> ./docker/mysql/init.sql
+    echo "flush privileges;" >> ./docker/mysql/init.sql
+fi
+#编排环境
+docker-compose build
+#删除无用镜像
+if [ "$is_local" == "0" ]
+    then
+       docker rmi -f  `docker images | grep '<none>' | awk '{print $3}'`
 fi
 unset $(grep -Ev '^$|[#;]' .env | sed -E 's/(.*)=.*/\1/')
 

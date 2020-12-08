@@ -64,6 +64,7 @@ return [
     'log_exclude_method'=>[
         'get'
     ],
-    'log_id_key'=>'_log_id'
+    'log_id_key'=>'_log_id',
+    'disabled_menus'=>env('DISABLED_MENUS', '')
 
 ];
