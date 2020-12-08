@@ -38,15 +38,29 @@
                     let h2 = Math.max($(iframe).contents().find(".sidebar-nav").height(),
                         $(iframe).contents().find(".markdown-section").height());
                     let h = Math.min(h1,h2+100);
+                    let flag = false;
                     if($(iframe).contents().find("body").hasClass('medium-zoom--opened')){
-                        //let $img =  $(iframe).contents().find('.medium-zoom-image--opened');
-                     /*   h = window.document.body.scrollHeight
+                       /* h = window.document.body.scrollHeight
                             -$('.main-header').height()
                             -$('.content-header').height()
                             -50;*/
+                        flag = true;
                     }
-                    if(h){
+                    if(h && iframe.height!=h){
                         iframe.height = h;
+                        if(flag){
+                   /*         let $img =  $(iframe).contents().find('.medium-zoom-image--opened');
+                            let $img_old = $(iframe).contents().find('.content img[src="'+$img.attr('src')+'"]');
+                            $img.remove();
+                            $(iframe).contents().find('.medium-zoom-overlay').remove();
+                            setTimeout(()=>{
+                                $img_old.trigger('click');
+                            },50);*/
+
+                            //$img_old.trigger('click');
+                            //dd($img);
+                        }
+
                     }
 
                 }catch (ex){

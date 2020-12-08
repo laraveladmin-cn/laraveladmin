@@ -23,7 +23,7 @@ window.$docsify = {
     markdown: {
         renderer: {
             code: function(code, lang) {
-                lang = lang.replace(' script','');
+                lang = lang?lang.replace(' script',''):lang;
                 return this.origin.code.apply(this, arguments);
             }
         }
