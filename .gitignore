@@ -18,3 +18,4 @@ yarn-error.log
 docker-compose.yml
 /docker/mysql/init.sql
 __MACOSX
+.idea
