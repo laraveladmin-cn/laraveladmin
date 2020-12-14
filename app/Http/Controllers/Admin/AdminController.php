@@ -24,6 +24,7 @@ class AdminController extends Controller
      * @var array
      */
     protected $sizer=[
+        'roles.id'=>'=',
         'user.name|user.uname'=>'like',
         'roles.name'=>'like',
     ];

@@ -65,5 +65,5 @@ RUN chown -R www-data:www-data /var/www && \
 WORKDIR /var/www/laravel/laraveladmin
 ENV LARAVEL_DIR /var/www/laravel
 
-CMD /bin/bash ./docker/php/run.sh
+CMD [ "sh", "-c", "/var/www/laravel/laraveladmin/docker/php/run.sh" ]
 EXPOSE 1215-1225

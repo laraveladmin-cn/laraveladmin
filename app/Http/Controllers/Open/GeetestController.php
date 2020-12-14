@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Open;
 
 use App\Services\SessionService;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use ZBrettonYe\Geetest\Geetest;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class GeetestController extends Controller
         $data = [
             'user_id' => @Auth::user()?@Auth::user()->id:'UnLoginUser',
             'client_type' => 'web',
-            'ip_address' => Request::ip()
+            'ip_address' => RequestFacade::header('x-real-ip',RequestFacade::ip())
         ];
         $status = Geetest::preProcess($data);
         SessionService::put('gtserver', $status);
