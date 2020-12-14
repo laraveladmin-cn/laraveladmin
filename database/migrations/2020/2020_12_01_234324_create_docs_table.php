@@ -15,7 +15,7 @@ class CreateDocsTable extends Migration
     {
         Schema::create('docs', function (Blueprint $table) {
             $table->increments('id')->comment('ID');
-            $table->string('name')->default('')->comment('名称@required');
+            $table->string('name')->index()->default('')->comment('名称@required');
             $table->text('description')->comment('内容$markdown');
             $table->timestamps();
             $table->softDeletes()->comment('删除时间');
