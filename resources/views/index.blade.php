@@ -6,6 +6,7 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="all,follow">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>{{config('app.name')}}</title>
     <meta name="keywords" content="{{config('app.name')}},laravel,php-swoole,docker,laravel后台管理系统,官网:{{config('app.url')}}" />
