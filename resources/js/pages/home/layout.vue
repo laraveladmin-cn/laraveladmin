@@ -5,7 +5,8 @@
         <div class="wrapper">
             <header class="main-header">
                 <nav class="navbar navbar-static-top">
-                    <div class="container">
+                  <!--  <div class="container">-->
+                   <div>
                         <div class="navbar-header">
                             <router-link to="/open/index" class="navbar-brand">
                                 {{name}}
