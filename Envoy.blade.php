@@ -72,6 +72,10 @@ chown -R www-data:www-data storage public && \
     unzip -o -d ./ ./vendor.zip && \
 @endif
 composer install --optimize-autoloader @if($is_online) --no-dev @endif && \
+@if(!$is_online)
+php artisan config:clear && \
+php artisan cache:clear && \
+@endif
 php artisan key:generate --force && \
 php artisan storage:link && \
 php artisan db:seed --class=CheckDatabaseSeeder --force && \

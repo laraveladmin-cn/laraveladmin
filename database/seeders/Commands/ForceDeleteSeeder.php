@@ -15,7 +15,7 @@ class ForceDeleteSeeder extends Seeder
     public function run()
     {
 
-     /*   collect(Storage::allFiles(app_path('Models')))
+        collect(Storage::allFiles(app_path('Models')))
             ->map(function($file){
                 $model_str = '\\App\Models\\'.str_replace('.php','',$file);
                 $model = new $model_str();
@@ -31,6 +31,6 @@ class ForceDeleteSeeder extends Seeder
                         ->onlyTrashed()
                         ->forceDelete();
                 }
-            });*/
+            });
     }
 }
