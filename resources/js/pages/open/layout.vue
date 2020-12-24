@@ -156,8 +156,10 @@
     body{
         padding-top: 0px;
     }
-    .navbar-brand{
-        margin-top: 5px;
+    @media (min-width: 768px) {
+        .navbar-brand{
+            margin-top: 5px;
+        }
     }
 
 </style>

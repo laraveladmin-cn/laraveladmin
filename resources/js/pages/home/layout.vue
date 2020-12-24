@@ -5,8 +5,7 @@
         <div class="wrapper">
             <header class="main-header">
                 <nav class="navbar navbar-static-top">
-                  <!--  <div class="container">-->
-                   <div>
+                    <div class="container">
                         <div class="navbar-header">
                             <router-link to="/open/index" class="navbar-brand">
                                 {{name}}
@@ -65,7 +64,8 @@
                 </nav>
             </header>
             <div class="content-wrapper">
-                <div class="container">
+              <!--  <div class="container">-->
+                <div>
                     <section class="content-header">
                         <h1>
                             {{current_menu['name']}}
@@ -180,7 +180,10 @@
     };
 </script>
 <style scoped>
-    .navbar-brand{
-        margin-top: 5px;
+    @media (min-width: 768px) {
+        .navbar-brand{
+            margin-top: 5px;
+        }
     }
+
 </style>
