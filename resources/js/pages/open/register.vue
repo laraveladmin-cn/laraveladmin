@@ -7,7 +7,7 @@
                 <validation-observer ref="register" v-slot="{invalid,validate}">
                     <form method="post">
                         <form-item v-model="username" :options="{key:'username',name:'账号',rules:'required|min:5|max:18',icon:'fa-user',placeholder:'请输入账号'}"></form-item>
-                        <form-item v-model="email" :options="{key:'email',name:'邮箱',type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:'请输入邮箱地址'}"></form-item>
+                        <form-item v-model="email" :options="{key:'email',name:'邮箱',type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:'请输入邮箱地址',title:'填了邮箱将优先使用邮件通知'}"></form-item>
                         <form-item v-model="mobile_phone" :options="{key:'mobile_phone',name:'手机号码',rules:email?'':'required|mobile',icon:'glyphicon-phone',placeholder:'请输入手机号码'}"></form-item>
                         <form-item v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:'验证码',rules:'',label:false}">
                             <geetest style="width: 150px"  v-if="verify['type']=='geetest'" :url="web_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></geetest>

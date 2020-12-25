@@ -4,6 +4,10 @@
             <label class="control-label" v-if="options.label!==false || (errors.length && options.messages!==false)">
                 {{options.label!==false?options.name+'：':''}}
             </label>
+            <label class="control-label pull-right text-light-blue title-label" v-show="options.title && (!errors.length || options.messages===false)">
+                <i class="fa fa-info-circle"></i>
+                <span>{{options.title}}</span>
+            </label>
             <label class="control-label pull-right" v-if="options.messages!==false">
                 <i class="fa fa-times-circle-o" v-show="errors.length>0" ></i>
                 <span v-for="value in errors">
@@ -82,6 +86,10 @@
     }
     .control-label{
         margin-bottom:0px;
+    }
+    .title-label{
+        font-weight: 500;
+        font-size: 12px;
     }
 
 </style>
