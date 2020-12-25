@@ -211,7 +211,10 @@
                         </ol>
                     </section>
                     <section class="content">
-                        <transition name="fade" enter-active-class="animated lightSpeedIn faster" mode="out-in" leave-active-class="animated lightSpeedOut faster">
+                        <transition name="fade"
+                                    mode="out-in"
+                                    enter-active-class="animated lightSpeedIn faster"
+                                    leave-active-class="animated lightSpeedOut faster">
                             <router-view></router-view>
                         </transition>
                     </section>
