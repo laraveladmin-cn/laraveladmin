@@ -34,6 +34,7 @@
                                                  :placeholder-show="'请选择用户'"
                                                  :placeholder-value="'0'"
                                                  :params="{where:{admin:0,id:props.data.row['user_id_back']}}"
+                                                 :show="['name','uname']"
                                                  :is-ajax="true" >
                                         </select2>
                                     </div>
