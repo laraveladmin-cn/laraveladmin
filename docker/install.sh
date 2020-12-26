@@ -5,14 +5,14 @@ if [ "$(uname)" == "Darwin" ]
     then
         # Mac安装docker
         ! which docker && \
-        cp ./docker/daemon.json /etc/docker/daemon.json && \
+        \cp -rf ./docker/daemon.json /etc/docker/daemon.json && \
         brew cask install docker && \
         docker-compose --version
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]
     then
         # Linux安装docker
         ! which docker && \
-        cp ./docker/daemon.json /etc/docker/daemon.json && \
+        \cp -rf ./docker/daemon.json /etc/docker/daemon.json && \
         yum install -y yum-utils \
                    device-mapper-persistent-data \
                    lvm2 && \

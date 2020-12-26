@@ -106,7 +106,7 @@ trait CommonController{
     public $exportFields = [];
 
     /**
-     * 导入值未多选值
+     * 导入值为多选值
      * @var array
      */
     public $importMultipleFields = [];
