@@ -69,8 +69,10 @@
             },
             clickIframe(){
                 this.$refs['iframe'].onload = ()=>{
-                    this.$refs['iframe'].contentDocument.onclick =  () =>{
-                        this.$refs['home_index'].click();
+                    if(this.$refs['iframe'].contentDocument){
+                        this.$refs['iframe'].contentDocument.onclick =  () =>{
+                            this.$refs['home_index'].click();
+                        }
                     }
                 };
             },
