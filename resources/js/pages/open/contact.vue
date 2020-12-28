@@ -39,6 +39,16 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
+                                    <i class="fa fa-qq" style="color:#979797;font-size:20px"></i>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">官方QQ群: 391528810</h4>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
                                     <i class="glyphicon glyphicon-list-alt" style="color:#979797;font-size:20px"></i>
                                 </a>
                             </div>
