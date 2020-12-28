@@ -138,7 +138,7 @@ class User extends Authenticatable
     }
 
     public function scopeIsAdmin($query){
-        return LifeData::remember('_role_ids',function ()use($query){
+        return LifeData::remember('_is_admin',function ()use($query){
             $user = Auth::user();
             return $user ? !!$user->admin : false;
         });
