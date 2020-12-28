@@ -131,7 +131,7 @@ class Role extends Model
 
     public function scopeGetRoleIds($query){
         return LifeData::remember('_role_ids',function ()use($query){
-            return !!$query->main()->pluck('id')->toArray();
+            return $query->main()->pluck('id')->toArray();
         });
     }
 
