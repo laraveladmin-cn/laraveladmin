@@ -95,6 +95,8 @@ vi .env
 sh ./docker/install.sh
 ```
 
+4. 请用phpstorm编辑器查看./docker/mysql/init.sql密码值是否存在换行问题,如有请处理一下,不然后面数据库连接不上
+
 5. php容器环境中安装composer相关扩展包及项目代码初始化
 
 > 如果安装"laravel/envoy"过程中失败请切换下全局镜像源,进行尝试
@@ -106,14 +108,14 @@ sh ./docker/install.sh
     - phpcomposer:https://packagist.phpcomposer.com
 
 ```shell
-docker-compose run --rm php composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer #设置镜像源
-docker-compose run --rm php composer global require laravel/envoy -vvv #该命令出错了请切换镜像源
-docker-compose run --rm php composer global dump-autoload
-docker-compose run --rm node cnpm install #前端编译扩展包安装
-docker-compose run --rm node npm run prod #编译前端页面js
-docker-compose run --rm php chmod u+x docker/php/run.sh #启动命令添加执行权限
-docker-compose run --rm php envoy run init --branch=master #项目初始化
-docker-compose up -d #启动服务
+winpty docker-compose run --rm php composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer #设置镜像源
+winpty docker-compose run --rm php composer global require laravel/envoy -vvv #该命令出错了请切换镜像源
+winpty docker-compose run --rm php composer global dump-autoload
+winpty docker-compose run --rm node cnpm install #前端编译扩展包安装
+winpty docker-compose run --rm node npm run prod #编译前端页面js
+winpty docker-compose run --rm php chmod u+x docker/php/run.sh #启动命令添加执行权限
+winpty docker-compose run --rm php envoy run init --branch=master #项目初始化
+winpty docker-compose up -d #启动服务
 ```
 6. 系统已安装有nginx服务器导致端口(80,443)冲突依据如下进行配置
     
@@ -160,7 +162,7 @@ server
 9. 开发环境前端实时编译启动
 
 ```shell
-docker-compose run --rm node npm run watch
+winpty docker-compose run --rm node npm run watch
 ```
 
 10. 代码更新升级
