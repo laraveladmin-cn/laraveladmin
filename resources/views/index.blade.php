@@ -9,7 +9,7 @@
     <meta name="robots" content="all,follow">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>{{config('app.name')}}</title>
-    <meta name="keywords" content="{{config('app.name')}},laravel,php-swoole,docker,laravel后台管理系统,官网:{{config('app.url')}}" />
+    <meta name="keywords" content="{{config('app.name')}},laravel,vue,laravel后台,单页面,spa,前后端分离,api,php-swoole,docker,laravel后台管理系统,php后台系统,代码自动生成,官网:{{config('app.url')}}" />
     <meta name="description" content="{{config('app.name')}},简洁、直观、强悍的前端后端开发框架，让全栈开发更迅速、简单。官网:{{config('app.url')}}" />
     <link rel="icon" type="image/x-icon" href="{{config('laravel_admin.logo')}}">
     <link href="/css/app.css?{{$time_str}}" rel="stylesheet">
