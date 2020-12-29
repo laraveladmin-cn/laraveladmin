@@ -66,7 +66,8 @@ services:
     links:
       - php:phpswoole
   node:
-    build: ./docker/node
+#    build: ./docker/node
+    image: laraveladmin/node #镜像源
     volumes:
       - .:/var/www/laravel/laraveladmin #代码目录
 #    command:

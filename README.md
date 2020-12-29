@@ -25,7 +25,7 @@
 
 #### 安装前准备
 
-1. 提前安装好git
+1. 提前安装好git(整套部署流程使用git方式部署,请依照文档通过git clone命令安装)
 
 #### 安装教程
 
@@ -37,6 +37,8 @@ cd laraveladmin
 ```
 
 2. 参照.env.example配置.env文件(务必设置好mysql密码,redis密码)
+
+- 数据库连接用户请使用root,程序需要检查数据库是否存在并创建数据库,开发环境的代码生成是通过读取数据表结构进行代码生成的
 
 ```shell
 cp .env.example .env
@@ -71,10 +73,41 @@ docker-compose run --rm node npm run prod #编译前端页面js
 docker-compose run --rm php envoy run init --branch=master #项目初始化
 docker-compose up -d #启动服务
 ```
+6. 系统已安装有nginx服务器导致端口(80,443)冲突依据如下进行配置
+    
+    - 将nginx容器暴露宿主机端口修改防止冲突
+    
+```shell
+vim docker-compose.yml
+```
+![宿主机暴露端口修改](https://www.laraveladmin.cn/storage/uploads/images/2020/12/28/jYgF3xITF8KGmqgDHTNtqOP6fZeAySo11Bih2mkY.jpeg)
+    
+    - 设置本机已有的nginx代理配置
+    
+```
+server
+{
+    listen 80;
+    server_name local.laraveladmin.cn;
+    location / {
+          proxy_http_version 1.1;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Real-PORT $remote_port;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header Host $http_host;
+          proxy_set_header Scheme $scheme;
+          proxy_set_header Server-Protocol $server_protocol;
+          proxy_set_header Server-Name $server_name;
+          proxy_set_header Server-Addr $server_addr;
+          proxy_set_header Server-Port $server_port;
+          proxy_pass http://host.docker.internal:81;
+    }
+}
+```
 
-6. [解决扩展包mrgoon/aliyun-sms自动加载问题](/aliyun_sms.md "解决扩展包mrgoon/aliyun-sms自动加载问题")
+7. [解决扩展包mrgoon/aliyun-sms自动加载问题](/aliyun_sms.md "解决扩展包mrgoon/aliyun-sms自动加载问题")
 
-7. 访问
+8. 访问
 
 本地开发环境绑定hosts后就可以进行访问了
 
@@ -82,13 +115,13 @@ docker-compose up -d #启动服务
 127.0.0.1 local.laraveladmin.cn
 ```
 
-8. 开发环境前端实时编译启动
+9. 开发环境前端实时编译启动
 
 ```shell
 docker-compose run --rm node npm run watch
 ```
 
-9. 代码更新升级
+10. 代码更新升级
 
 ```shell
 docker-compose exec php envoy run update --branch=master
