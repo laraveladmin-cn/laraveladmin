@@ -38,6 +38,8 @@ cd laraveladmin
 
 2. 参照.env.example配置.env文件(务必设置好mysql密码,redis密码)
 
+- 数据库连接用户请使用root,程序需要检查数据库是否存在并创建数据库,开发环境的代码生成是通过读取数据表结构进行代码生成的
+
 ```shell
 cp .env.example .env
 vi .env
