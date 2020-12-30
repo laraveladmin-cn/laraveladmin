@@ -11,7 +11,9 @@ class ClientMiddleware{
     public function __construct()
     {
         $this->except = [
-            getRoutePrefix().'/open/config'
+            getRoutePrefix().'/open/config',
+            getRoutePrefix().'/home/docs/*',
+            getRoutePrefix().'/home/index'
         ];
 
     }

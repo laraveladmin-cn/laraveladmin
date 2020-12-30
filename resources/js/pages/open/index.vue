@@ -5,7 +5,8 @@
                 <h1>{{name}}</h1>
                 <h2>简洁、直观、强悍的前端后端开发框架，让全栈开发更迅速、简单。</h2>
                 <p class="masthead-button-links">
-                    <router-link :to="user.id?'/home/index':'/open/login'" class="btn btn-lg btn-primary btn-shadow" role="button">
+       <!--             <router-link :to="user.id?'/home/index':'/open/login'" class="btn btn-lg btn-primary btn-shadow" role="button">-->
+                    <router-link :to="'/home/index'" class="btn btn-lg btn-primary btn-shadow" role="button">
                         LaravelAdmin文档
                     </router-link>
                 </p>

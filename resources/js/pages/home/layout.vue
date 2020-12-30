@@ -1,5 +1,5 @@
 <template>
-    <div class="home_layout h100 hold-transition skin-blue layout-top-nav" v-show="user.id" v-cloak>
+    <div class="home_layout h100 hold-transition skin-blue layout-top-nav" v-cloak>
         <message></message>
         <modal></modal>
         <div class="wrapper">
@@ -34,7 +34,7 @@
                             </ul>
                         </div>
                         <div class="navbar-custom-menu">
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav" v-if="user && user.id">
                                 <li class="dropdown messages-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="fa fa-envelope-o"></i>
@@ -58,6 +58,14 @@
                                     </ul>
                                 </li>
                                 <user-menu></user-menu>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right hidden-sm" v-else>
+                                <li>
+                                    <router-link to="/open/login">登录</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/open/register">注册</router-link>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -151,7 +159,7 @@
             }),
             ...mapMutations({
                 menuSet: 'menu/set',  //设置当前路由,用于菜单选中
-            })
+            }),
         },
         watch: {
             '$route'(to, from) {

@@ -13,6 +13,11 @@
             "namespace": "\\App\\Http\\Controllers\\Home",
             "middleware": ["auth"]
         },
+        "_home": {
+            "prefix": "/home",
+            "namespace": "\\App\\Http\\Controllers\\Home",
+            "middleware": []
+        },
         "admin": {
             "prefix": "/admin",
             "namespace": "\\App\\Http\\Controllers\\Admin",
@@ -519,7 +524,7 @@
             "parent_id": 3,
             "disabled": 0,
             "description" : "使用文档说明",
-            "group": "home",
+            "group": "_home",
             "action": "IndexController@index"
         },{
             "id": 102,
@@ -582,7 +587,7 @@
             "parent_id": 3,
             "disabled": 0,
             "description" : "文档获取文档内容",
-            "group": "home",
+            "group": "_home",
             "action": "IndexController@getDocs"
         },
         {
