@@ -8,9 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="all,follow">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>{{config('app.name')}}</title>
-    <meta name="keywords" content="{{config('app.name')}},laravel,vue,laravel后台,单页面,spa,前后端分离,api,php-swoole,docker,laravel后台管理系统,php后台系统,代码自动生成,官网:{{config('app.url')}}" />
-    <meta name="description" content="{{config('app.name')}},简洁、直观、强悍的前端后端开发框架，让全栈开发更迅速、简单。官网:{{config('app.url')}}" />
+
+    <title>{{$app_name}}</title>
+    <meta name="keywords" content="{{$app_name}},{{$app_name}}官网,{{$app_name}}单页面应用,{{$app_name}}前后端分离,Laravel后台管理系统,{{$app_name}}企业网站,{{$app_name}}要怎么用,{{$app_name}}文档,{{$app_name}}Swoole,Laravel,laravel-swoole,docker,官网:{{config('app.url')}}" />
+    <meta name="description" content="{{$app_name}},简洁、直观、强悍的前端后端开发框架，让全栈开发更迅速的SPA单页面应用。企业官网:{{config('app.url')}}" />
     <link rel="icon" type="image/x-icon" href="{{config('laravel_admin.logo')}}">
     <link href="/css/app.css?{{$time_str}}" rel="stylesheet">
     <script src="{{config('app.url').getRoutePrefix(config('laravel_admin.web_api_model'))}}/open/config?script=AppConfig{{$time_str}}" type="application/javascript"></script>

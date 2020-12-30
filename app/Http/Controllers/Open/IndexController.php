@@ -39,7 +39,8 @@ class IndexController extends Controller
      */
     protected function indexData(){
         return [
-            'time_str'=>'&time='.time()
+            'time_str'=>'&time='.time(),
+            'app_name'=>config('app.name')
         ];
     }
 

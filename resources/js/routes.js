@@ -10,17 +10,22 @@ let routes = [
     {path: '/403', component: page403},
     {path: '*', component: page404},
 ];
-collect(['open','home','admin']).map((name)=>{
+collect(routesConfig.group).map((group,key)=>{
+    group.prefix = group.prefix || '';
+    group.name = key;
+    return group;
+}).values().groupBy('prefix').map((groups,name)=>{
+    let group_names = collect(groups).pluck('name');
     //子页面
     let children = collect(routesConfig.menus).filter((item)=>{
-        return item.disabled==0 && item.is_page==1 && item.group==name && item.url;
+        return item.disabled==0 && item.is_page==1 && group_names.contains(item.group) && item.url;
     }).map((item)=>{
         let path_arr = item.url.split('/');
         path_arr.shift();
         path_arr.shift();
         let path = path_arr.join('/');
-        let path1 = (name+'/'+path).replace('-','_');
-        let pathName = 'pages/'+path1+'.vue';
+        let path1 = ((name?name+'/':'')+path).replace('-','_');
+        let pathName = 'pages'+path1+'.vue';
         let route = {
             path: path,
             component: () => import(/* webpackChunkName: "[request]" */ `./${pathName}`)
@@ -31,15 +36,15 @@ collect(['open','home','admin']).map((name)=>{
         return route;
     });
     collect(routesConfig.ressorce).filter((item)=>{
-        return item.disabled==0 && item.is_page==1 && item.group==name && item.url;
+        return item.disabled==0 && item.is_page==1 && group_names.contains(item.group) && item.url;
     }).map((item)=>{
         let path_arr = item.url.split('/');
         path_arr.shift();
         path_arr.shift();
         let path = path_arr.join('/');
-        let path1 = (name+'/'+path).replace('-','_');
+        let path1 = ((name?name+'/':'')+path).replace('-','_');
         path1 = path=='index'?path1:path1+'/index';
-        let pathName = 'pages/'+path1+'.vue';
+        let pathName = 'pages'+path1+'.vue';
         let route = {
             path: path,
             component: () => import(/* webpackChunkName: "[request]" */ `./${pathName}`)
@@ -50,7 +55,7 @@ collect(['open','home','admin']).map((name)=>{
         children.push(route);
         if(path!='index'){
             let path2 = (path1+'.vue').replace('index.vue','edit').replace('-','_');
-            let pathName2 = 'pages/'+path2+'.vue';
+            let pathName2 = 'pages'+path2+'.vue';
             let edit = {
                 path: path+'/:id',
                 component: () => import(/* webpackChunkName: "[request]" */ `./${pathName2}`)
@@ -72,13 +77,15 @@ collect(['open','home','admin']).map((name)=>{
             path: '*',
             component: page404
         }]).all();
-    let path1 = name+'/layout';
-    let pathName = 'pages/'+path1+'.vue';
-    let module =  {
-        path: '/'+name,
-        component: () => import(/* webpackChunkName: "[request]" */ `./${pathName}`),
-        children:children
-    };
-    routes.push(module);
+    if(name){
+        let path1 = (name?name+'/':'')+'layout';
+        let pathName = 'pages'+path1+'.vue';
+        let module =  {
+            path: name,
+            component: () => import(/* webpackChunkName: "[request]" */ `./${pathName}`),
+            children:children
+        };
+        routes.push(module);
+    }
 });
 export default routes;

@@ -1,4 +1,4 @@
-# laravelAdmin
+# LaravelAdmin
 
 [![Packagist](https://img.shields.io/packagist/l/encore/laravel-admin.svg?maxAge=2592000)](https://gitee.com/laravel-admin/laraveladmin)  
 
@@ -10,6 +10,13 @@
 `laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。\(QQ群: 391528810\)
 [Demo](http://demo.laraveladmin.cn) \|\| [阅读文档](http://www.laraveladmin.cn/home/index)
 
+#### 特点
+
+- Laravel+Vue组合
+- SPA单页面应用
+- 前后端分离,后台只提供API接口,前端负责视图渲染
+- 开箱即用的laravel后台管理系统
+- 海量Vue组件直接拿来即用
 
 ## 截图
 
