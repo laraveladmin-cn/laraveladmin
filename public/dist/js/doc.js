@@ -121,5 +121,8 @@ window.$docsify = {
 if(self == top){
     setTimeout(()=>{
         window.document.getElementById('box').style.display = 'none';
+        let div=document.createElement("div");
+        div.innerText = "跳转中,请稍等...";
+        document.body.appendChild(div);
     },100);
 }
