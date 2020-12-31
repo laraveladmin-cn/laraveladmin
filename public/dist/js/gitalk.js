@@ -6119,7 +6119,11 @@ object-assign
                             var comment = _this.state.comment;
 
                             window.localStorage.setItem(_const.GT_COMMENT, encodeURIComponent(comment));
-                            window.location.href = _this.loginLink;
+                            if(window.parent){
+                                window.parent.location.href = _this.loginLink;
+                            }else {
+                                window.location.href = _this.loginLink;
+                            }
                         };
 
                         _this.handleIssueCreate = function () {
