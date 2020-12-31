@@ -118,7 +118,7 @@ if(self == top){
         window.document.getElementById('box').style.display = 'none';
         setTimeout(()=>{
             window.location.href = '/home/index';
-        },1500);
+        },15000);
     },100);
 
 }
