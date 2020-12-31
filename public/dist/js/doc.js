@@ -114,8 +114,11 @@ window.$docsify = {
     ]
 };
 if(self == top){
-    document.getElementsByName('body').style.display = 'none';
     setTimeout(()=>{
-        window.location.href = '/home/index';
-    },1500);
+        window.document.getElementById('box').style.display = 'none';
+        setTimeout(()=>{
+            window.location.href = '/home/index';
+        },1500);
+    },100);
+
 }
