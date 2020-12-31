@@ -6236,7 +6236,7 @@ object-assign
                         };
 
                         _this.options = (0, _assign2.default)({}, {
-                            id: window.location.href,
+                            id: window.parent?window.parent.location.href:window.location.href,
                             number: -1,
                             labels: ['Gitalk'],
                             title: window.document.title,
@@ -6255,7 +6255,7 @@ object-assign
                             },
                             enableHotKey: true,
 
-                            url: window.location.href,
+                            url: window.parent?window.parent.location.href:window.location.href,
 
                             defaultAuthor: {
                                 avatarUrl: '//avatars1.githubusercontent.com/u/29697133?s=50',
@@ -6919,7 +6919,7 @@ object-assign
 
                             var query = {
                                 client_id: clientID,
-                                redirect_uri: window.location.href,
+                                redirect_uri: window.parent?window.parent.location.href:window.location.href,
                                 scope: 'public_repo'
                             };
                             return githubOauthUrl + '?' + (0, _util.queryStringify)(query);
@@ -10956,7 +10956,7 @@ object-assign
                                 };
                             }
 
-                            originURL = resolveURL(window.location.href);
+                            originURL = resolveURL(window.parent?window.parent.location.href:window.location.href);
 
                             /**
                              * Determine if a URL shares the same origin as the current location
