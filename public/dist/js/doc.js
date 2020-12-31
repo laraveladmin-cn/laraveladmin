@@ -96,7 +96,12 @@ window.$docsify = {
                        distractionFreeMode: true,
                        id: location.hash.replace('#','')
                    });
-                       gitalk.render('comments');
+                   gitalk.render('comments');
+                   if(self == top){
+                       setTimeout(()=>{
+                           window.location.href = '/home/index';
+                       },5000);
+                   }
                }catch (e) {
                    console.log(e);
                }
@@ -116,9 +121,5 @@ window.$docsify = {
 if(self == top){
     setTimeout(()=>{
         window.document.getElementById('box').style.display = 'none';
-        setTimeout(()=>{
-            window.location.href = '/home/index';
-        },15000);
     },100);
-
 }
