@@ -54,7 +54,6 @@ window.$docsify = {
         function(hook, vm) {
             hook.init(function() {
                 // 初始化完成后调用，只调用一次，没有参数。
-                console.log(11);
             });
 
             hook.beforeEach(function(content) {
@@ -86,17 +85,22 @@ window.$docsify = {
                     enable:true
                 });
                 giteement.render('comments');*/
-                const gitalk = new Gitalk({
-                    clientID: 'cc773b758ba981ee03c5',
-                    clientSecret: '1408f07f17667d34bd78947cdd597b2ae9cd62f5',
-                    repo: 'laraveladmin',
-                    owner: 'laraveladmin-cn',
-                    admin: ['laraveladmin-cn'],
-                    // facebook-like distraction free mode
-                    distractionFreeMode: true,
-                    id: location.hash.replace('#','')
-                });
-                gitalk.render('comments');
+               try {
+                   const gitalk = new Gitalk({
+                       clientID: 'cc773b758ba981ee03c5',
+                       clientSecret: '1408f07f17667d34bd78947cdd597b2ae9cd62f5',
+                       repo: 'laraveladmin',
+                       owner: 'laraveladmin-cn',
+                       admin: ['laraveladmin-cn'],
+                       // facebook-like distraction free mode
+                       distractionFreeMode: true,
+                       id: location.hash.replace('#','')
+                   });
+                       gitalk.render('comments');
+               }catch (e) {
+                   console.log(e);
+               }
+
             });
 
             hook.mounted(function() {
