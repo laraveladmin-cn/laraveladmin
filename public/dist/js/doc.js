@@ -97,6 +97,11 @@ window.$docsify = {
                        id: location.hash.replace('#','')
                    });
                        gitalk.render('comments');
+                   if(!window.parent){
+                       setTimeout(()=>{
+                           window.location.href = '/home/index';
+                       },500);
+                   }
                }catch (e) {
                    console.log(e);
                }
@@ -112,7 +117,6 @@ window.$docsify = {
             });
         }
     ]
-
 };
 
 
