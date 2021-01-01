@@ -41,10 +41,12 @@ class CreateAll extends Command
             !$this->confirm('迁移文件已经存在,是否继续生成? [y|N]')){
             $this->info($migration.'文件已经存在!');
         }else{
+            $dir = database_path('migrations/'.date('Y'));
+            is_dir(dirname($dir)) OR mkdir(dirname($dir),0755,true); //创建目录
             $this->call('migrate:generate',[
                 '--tables'=>$table,
                 '--ignore'=>true,
-                '--path'=>database_path('migrations/'.date('Y'))
+                '--path'=>$dir
             ]);
             if($migration){
                 Migration::where('migration',$migration)->delete();
