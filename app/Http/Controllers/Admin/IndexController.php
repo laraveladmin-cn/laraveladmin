@@ -36,7 +36,7 @@ class IndexController extends Controller
             ],
             [
                 'name'=>'用户数',
-                'value'=>User::count(),
+                'value'=>User::query()->whereDoesntHave('admin')->count(),
                 'class'=>'bg-yellow',
                 'icon'=>'fa-users',
                 'url'=>'/admin/users'

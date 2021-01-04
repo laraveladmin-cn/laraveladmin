@@ -460,6 +460,29 @@
         },
         {
             "id": 81,
+            "name": "保险管理",
+            "icons": "fa-cubes",
+            "url":"",
+            "method":0,
+            "status":1,
+            "is_page": 0,
+            "parent_id": 2,
+            "disabled": 0,
+            "description" : "保险管理"
+        },
+        {
+            "id": 82,
+            "name": "合作渠道",
+            "icons": "fa-globe",
+            "url":"",
+            "method":0,
+            "status":1,
+            "is_page": 0,
+            "parent_id": 2,
+            "disabled": 0,
+            "description" : "保险管理"
+        },{
+            "id": 139,
             "name": "个人资料",
             "icons": "fa-heart",
             "url":"/home/personage/index",
@@ -472,32 +495,18 @@
             "group": "home"
         },
         {
-            "id": 82,
+            "id": 140,
             "name": "提交编辑修改个人资料",
             "icons": "fa-lock",
             "url":"/home/personage/index",
             "method":2,
             "status":2,
             "is_page": 0,
-            "parent_id": 81,
+            "parent_id": 139,
             "disabled": 0,
             "description" : "提交编辑修改密码",
             "group": "home",
             "action": "PersonageController@postIndex"
-        },
-        {
-            "id": 83,
-            "name": "文件上传",
-            "icons": "fa-upload",
-            "url":"/home/upload/index",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 3,
-            "disabled": 0,
-            "description" : "文件上传",
-            "group": "home",
-            "action": "UploadController@postIndex"
         }
     ],
     "ressorce": [
@@ -593,10 +602,116 @@
             "group": "admin",
             "options": {},
             "end_id": 56
+        },
+        {
+            "id": 83,
+            "name": "银行管理",
+            "item_name": "银行",
+            "icons": "fa-bank",
+            "url":"/admin/banks",
+            "method":1,
+            "status":1,
+            "is_page": 1,
+            "parent_id": 81,
+            "disabled": 0,
+            "description" : "银行管理",
+            "group": "admin",
+            "options": {},
+            "end_id": 90
+        },
+        {
+            "id": 91,
+            "name": "保险公司",
+            "icons": "fa-hand-pointer-o",
+            "url":"/admin/firms",
+            "method":1,
+            "status":1,
+            "is_page": 1,
+            "parent_id": 81,
+            "disabled": 0,
+            "description" : "保险公司",
+            "group": "admin",
+            "options": {},
+            "end_id": 98
+        },
+        {
+            "id": 99,
+            "name": "保险产品",
+            "icons": "fa-cubes",
+            "url":"/admin/products",
+            "method":1,
+            "status":1,
+            "is_page": 1,
+            "parent_id": 81,
+            "disabled": 0,
+            "description" : "保险产品",
+            "group": "admin",
+            "options": {},
+            "end_id": 106
+        },
+        {
+            "id": 107,
+            "name": "险种分类",
+            "icons": "fa-map",
+            "url":"/admin/classifys",
+            "method":1,
+            "status":1,
+            "is_page": 1,
+            "parent_id": 81,
+            "disabled": 0,
+            "description" : "险种分类",
+            "group": "admin",
+            "options": {},
+            "end_id": 114
+        },
+        {
+            "id": 115,
+            "name": "险种分组",
+            "icons": "fa-object-group",
+            "url":"/admin/pclassifys",
+            "method":1,
+            "status":1,
+            "is_page": 1,
+            "parent_id": 81,
+            "disabled": 0,
+            "description" : "险种分组",
+            "group": "admin",
+            "options": {},
+            "end_id": 122
+        },
+        {
+            "id": 123,
+            "name": "交费年期",
+            "icons": "fa-clock-o",
+            "url":"/admin/years",
+            "method":1,
+            "status":1,
+            "is_page": 1,
+            "parent_id": 81,
+            "disabled": 0,
+            "description" : "交费年期",
+            "group": "admin",
+            "options": {},
+            "end_id": 130
+        },
+        {
+            "id": 131,
+            "name": "合作公司",
+            "icons": "fa-sitemap",
+            "url":"/admin/agent-systems",
+            "method":1,
+            "status":1,
+            "is_page": 1,
+            "parent_id": 82,
+            "disabled": 0,
+            "description" : "合作公司",
+            "group": "admin",
+            "options": {},
+            "end_id": 138
         }
     ],
     "update_position": [
-
+        {"from": 83,"to": 99,"type": "after"}
     ]
 
 }

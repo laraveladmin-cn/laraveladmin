@@ -34,12 +34,13 @@
                         clearInterval(this.intervalTime);
                         this.initing = true;
                         this.$el.style.display = 'block'; //显示节点
-                        this.chart = echarts.init(this.$el, 'macarons');
+                        this.chart = echarts.init(this.$el);
+                        dd(JSON.stringify(this.options));
                         this.chart.setOption(this.options);
                         this.$el.style.display = null; //删除节点样式
                         this.initing = false;
                     }
-                },300);
+                },1300);
 
             },
             resizefn(){
@@ -78,7 +79,7 @@
                 let editormdJs = document.createElement('script');
                 editormdJs.id = 'echarts-js';
                 editormdJs.type = 'text/javascript';
-                editormdJs.src = 'https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js';
+                editormdJs.src = 'https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-rc.1/echarts.min.js';
                 document.body.appendChild(editormdJs);
             }
         },

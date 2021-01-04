@@ -4,7 +4,9 @@
         <router-link to="/admin">后台</router-link>
         <router-link to="/">官网</router-link>
         {{user}}
-
+        <h1>
+            <a href="https://www.laraveladmin.cn">正式环境官网:https://www.laraveladmin.cn</a>
+        </h1>
     </div>
 </template>
 
