@@ -197,7 +197,7 @@
         }
     }
     .navbar-brand{
-        padding: 0px 15px;
+        padding: 5px 15px;
     }
     .logo{
         background-color:unset;
@@ -205,6 +205,7 @@
         border-radius:unset;
         height: 45px;
         display: inline-block;
+        padding: 0 10px;
     }
     .skin-blue .main-header .logo {
         background-color:unset;
