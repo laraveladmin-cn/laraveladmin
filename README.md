@@ -6,6 +6,10 @@
 
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-laraveladmin-green)](https://gitee.com/laravel-admin/laraveladmin)
 
+<center>
+    <img src="https://www.laraveladmin.cn/dist/img/logo1.png" data-origin="httpw://www.laraveladmin.cn/dist/img/logo1.png" alt="Logo" style="width: 200px" />
+</center>
+
 #### 介绍
 `laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。\(QQ群: 391528810\)
 [Demo](http://demo.laraveladmin.cn) \|\| [阅读文档](http://www.laraveladmin.cn/home/index)

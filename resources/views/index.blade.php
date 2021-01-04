@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="all,follow">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
     <title>{{$app_name}}</title>
     <meta name="keywords" content="{{$app_name}},{{$app_name}}官网,{{$app_name}}单页面应用,{{$app_name}}前后端分离,Laravel后台管理系统,{{$app_name}}企业网站,{{$app_name}}要怎么用,{{$app_name}}文档,{{$app_name}}Swoole,Laravel,laravel-swoole,docker,官网:{{config('app.url')}}" />
     <meta name="description" content="{{$app_name}},简洁、直观、强悍的前端后端开发框架，让全栈开发更迅速的SPA单页面应用。企业官网:{{config('app.url')}}" />
@@ -21,6 +20,9 @@
     <![endif]-->
 </head>
 <body>
+<div class="hide">
+    {{$markdown}}
+</div>
 <div id="app" class="app">
     <transition name="fade" enter-active-class="animated zoomIn faster" mode="out-in" leave-active-class="animated zoomOut faster">
         <router-view></router-view>

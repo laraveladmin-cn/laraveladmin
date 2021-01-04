@@ -135,10 +135,10 @@
 </script>
 <style scoped>
     .logo{
-        background: white none repeat scroll 0% 0%;
         height: 30px;
         display: inline-block;
         font-size: 20px;
+        border-radius:unset;
     }
     footer{
         position: fixed;

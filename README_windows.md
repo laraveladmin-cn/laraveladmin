@@ -1,10 +1,14 @@
-# laravelAdmin
+# LaravelAdmin
 
 [![Packagist](https://img.shields.io/packagist/l/encore/laravel-admin.svg?maxAge=2592000)](https://gitee.com/laravel-admin/laraveladmin)  
 
 [![Total Downloads](https://img.shields.io/packagist/dt/zsping1989/laravel-admin.svg?style=flat-square)](https://gitee.com/laravel-admin/laraveladmin)  
 
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-laraveladmin-green)](https://gitee.com/laravel-admin/laraveladmin)
+
+<center>
+    <img src="https://www.laraveladmin.cn/dist/img/logo1.png" data-origin="httpw://www.laraveladmin.cn/dist/img/logo1.png" alt="Logo" style="width: 200px" />
+</center>
 
 #### 介绍
 `laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。\(QQ群: 391528810\)

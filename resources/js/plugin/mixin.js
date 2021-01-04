@@ -108,7 +108,7 @@ export default {
         window.axios.defaults.withCredentials = true;
         //获取连接ID唯一标识
         this.refreshClientId();
-        //CSRF _token更新
+        //CSRF_token更新
         setTimeout(()=>{
             this.refreshToken();
         },1500);

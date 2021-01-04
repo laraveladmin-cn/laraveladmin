@@ -8,6 +8,7 @@
                     <div class="container">
                         <div class="navbar-header">
                             <router-link to="/open/index" class="navbar-brand">
+                                <img :src="app_url+logo" alt="LOGO" class="img-circle logo">
                                 {{name}}
                             </router-link>
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -194,4 +195,13 @@
         }
     }
 
+    .logo{
+        background-color:unset;
+        width: unset;
+        border-radius:unset;
+        height: 45px;
+    }
+    .skin-blue .main-header .logo {
+        background-color:unset;
+    }
 </style>

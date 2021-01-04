@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\Open\IndexController;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
@@ -42,10 +43,7 @@ class BuildIndexHtml extends Command
     {
         //开发环境无需生成index.html
         if($this->option('force') || config('app.env')=='production'){
-            $indexHtml = view('index',[
-                'time_str'=>'&time='.time(),
-                'app_name'=>config('app.name')
-            ])->render();
+            $indexHtml = view('index',(new IndexController())->indexData())->render();
             file_put_contents(public_path($this->fileName),$indexHtml);
         }
         $this->checkEnvValue();
