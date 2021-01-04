@@ -34,7 +34,7 @@
                         clearInterval(this.intervalTime);
                         this.initing = true;
                         this.$el.style.display = 'block'; //显示节点
-                        this.chart = echarts.init(this.$el, 'macarons');
+                        this.chart = echarts.init(this.$el);
                         this.chart.setOption(this.options);
                         this.$el.style.display = null; //删除节点样式
                         this.initing = false;
