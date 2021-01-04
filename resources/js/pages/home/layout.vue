@@ -190,12 +190,6 @@
     };
 </script>
 <style scoped>
-    @media (min-width: 768px) {
-        .navbar-brand{
-            margin-top: 5px;
-
-        }
-    }
     .navbar-brand{
         padding: 5px 15px;
     }
