@@ -161,5 +161,9 @@
             margin-top: 5px;
         }
     }
+    .navbar-toggle{
+        margin-top: 5px;
+        position: relative;
+    }
 
 </style>

@@ -139,6 +139,7 @@
                 'app_url',
                 'name',
                 'version',
+                'name_short',
             ]),
             ...mapState('user', {
                 user: state => state.user
@@ -192,14 +193,18 @@
     @media (min-width: 768px) {
         .navbar-brand{
             margin-top: 5px;
+
         }
     }
-
+    .navbar-brand{
+        padding: 0px 15px;
+    }
     .logo{
         background-color:unset;
         width: unset;
         border-radius:unset;
         height: 45px;
+        display: inline-block;
     }
     .skin-blue .main-header .logo {
         background-color:unset;
