@@ -151,7 +151,7 @@
                 return options;
             },
             placeholder_show(){
-                return !this.multiple && this.placeholder && this.value==this.placeholderValue;
+                return !this.multiple && this.placeholder && this.value===this.placeholderValue;
             }
         },
         methods:{
@@ -264,7 +264,7 @@
                     if(this.placeholderValue===value){
                         return value==this.value ? 'selected':null;
                     }else {
-                        return value===this.value ? 'selected':null;
+                        return value==this.value && (this.value!=='' && value!==0) ? 'selected':null;
                     }
 
                 }
