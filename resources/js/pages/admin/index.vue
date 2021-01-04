@@ -1,7 +1,7 @@
 <template>
     <div class="admin_index">
         <div class="row">
-            <div class="col-lg-3 col-xs-6" v-for="(item,index) in (data.count||[])">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" v-for="(item,index) in (data.count||[])">
                 <div class="small-box" :class="item['class']">
                     <div class="inner">
                         <h3>{{item['value']}}</h3>
@@ -17,13 +17,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <echart :options="option1" style="height:400px;"></echart>
             </div>
-            <div class="col-lg-8 col-xs-6">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                 <echart :options="option2" style="height:400px;"></echart>
             </div>
-            <div class="col-lg-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <echart :options="option3" style="height:400px;"></echart>
             </div>
         </div>
