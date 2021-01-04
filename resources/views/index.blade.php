@@ -21,7 +21,7 @@
 </head>
 <body>
 <div class="hide">
-    {{$markdown}}
+    {{isset($markdown)?$markdown:''}}
 </div>
 <div id="app" class="app">
     <transition name="fade" enter-active-class="animated zoomIn faster" mode="out-in" leave-active-class="animated zoomOut faster">
