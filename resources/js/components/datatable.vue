@@ -3,17 +3,31 @@
         <div class="data-table">
             <div class="box-header sizer">
                 <slot name="header" :data="data"></slot>
-                <slot name="sizer" :data="data" :ids="check_ids">
+                <slot name="sizer"
+                      :data="data"
+                      :ids="check_ids"
+                      :checkbox="checkbox"
+                      :check_ids="check_ids"
+                      :refresh="refresh"
+                      :remove="remove"
+                      :sizer_more="sizer_more"
+                      :id="id"
+                      :show_export_fields="show_export_fields"
+                >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
-                            <router-link :to="data.configUrl['createUrl']+'/0'" class="btn btn-info" v-if="data.configUrl['createUrl']">
-                                <i class="fa fa-plus"></i> 新建
-                            </router-link>
-                            <button class="btn btn-success"
-                                    type="button"
-                                    @click="refresh">
-                                <i class="fa fa-refresh"></i> 刷新
-                            </button>
+                            <slot name="add" :url="data.configUrl['createUrl']?data.configUrl['createUrl']+'/0':''">
+                                <router-link :to="data.configUrl['createUrl']+'/0'" class="btn btn-info" v-if="data.configUrl['createUrl']">
+                                    <i class="fa fa-plus"></i> 新建
+                                </router-link>
+                            </slot>
+                            <slot name="refresh">
+                                <button class="btn btn-success"
+                                        type="button"
+                                        @click="refresh">
+                                    <i class="fa fa-refresh"></i> 刷新
+                                </button>
+                            </slot>
                             <button class="btn btn-danger"
                                     type="button"
                                     @click="remove(check_ids)"
