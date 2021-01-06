@@ -169,6 +169,11 @@
                 let value = route.query;
                 let options = copyObj(value);
                 this.getData(options);
+            },
+            'options.url'(){
+                //获取数据
+                let params = this.options.params || this.$router.currentRoute.query;
+                this.getData(params);
             }
         }
 

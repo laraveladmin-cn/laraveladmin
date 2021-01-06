@@ -234,14 +234,35 @@
             editItem: ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
 {!! $components !!}
         },
-        props: {},
+        props: {
+            url:{
+                type: [String],
+                default: function () {
+                    return '';
+                }
+            },
+            noBack:{
+                type: [Boolean],
+                default: function () {
+                    return false;
+                }
+            },
+            callback:{
+                type: [Function],
+                default: function () {
+                    return function () {};
+                }
+            },
+        },
         data() {
             return {
                 options: {
                     id: 'edit', //多个组件同时使用时唯一标识
-                    url: '', //数据表请求数据地址
                     params: null, //默认筛选条件
+                    url:this.url || '', //数据表请求数据地址
+                    no_back:this.noBack,
                     callback: (response, row) => { //修改成功
+                        this.callback();
                     }
                 }
             };
@@ -251,6 +272,11 @@
             ...mapState([
                 'use_url'
             ])
+        },
+        watch:{
+            url(val){
+                this.options.url = val;
+            }
         }
     };
 </script>
