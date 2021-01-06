@@ -1,8 +1,16 @@
 <template>
     <div class="admin_user_index">
+        <modal v-model="modal" class-name="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <edit :url="edit_url" :no-back="true" :callback="callback"></edit>
+        </modal>
         <div class="row">
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
+                    <template slot="add" slot-scope="props">
+                        <button class="btn btn-info" @click="openModal(props.url)">
+                            <i class="fa fa-plus"></i> 新建
+                        </button>
+                    </template>
                         <template slot="sizer-more" slot-scope="props">
                             <div class="row" >
                                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item">
@@ -24,19 +32,20 @@
                                 @click="props.remove([props.row[options.primaryKey]])">
                             <i class="fa fa-trash-o"></i>
                         </button>
-                        <router-link class="btn btn-info btn-xs"
-                                     title="编辑"
-                                     :to="props.data.configUrl['showUrl'].replace('{id}',props.row[options.primaryKey])"
-                                     v-if="props.data.configUrl['showUrl']">
+                        <button class="btn btn-info btn-xs"
+                                title="编辑"
+                                @click="openModal(props.data.configUrl['showUrl'].replace('{id}',props.row[options.primaryKey]))"
+                                v-if="props.data.configUrl['showUrl']">
                             <i class="fa fa-edit"></i>
-                        </router-link>
+                        </button>
                     </template>
                     <template slot="col-checkbox" slot-scope="props">
                         <icheck v-model="props.check_ids"
                                 class="ids"
                                 :disabled-label="true"
                                 :disabled="props.row[options.primaryKey]==1"
-                                :option="props.row[options.primaryKey]"></icheck>
+                                :option="props.row[options.primaryKey]">
+                        </icheck>
                     </template>
                 </data-table>
             </div>
@@ -52,12 +61,16 @@
             'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+            "edit":()=>import(/* webpackChunkName: "pages/admin/users/edit.vue" */ './edit.vue'),
+            "modal":()=>import(/* webpackChunkName: "common_components/modal.vue" */ 'common_components/modal.vue'),
         },
         props: {
         },
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                modal:false,
+                edit_url:'',
                 options:{
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
@@ -82,6 +95,15 @@
         computed:{
 
         },
+        methods:{
+            openModal(val){
+                this.modal = true;
+                this.edit_url = val;
+            },
+            callback(){
+                this.modal = false;
+            }
+        }
 
     };
 </script>
