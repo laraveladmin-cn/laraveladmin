@@ -35,6 +35,7 @@ let AppConfig = {
     client_id:'',
     api_url_model:'api',
     use_url:'',
+    env:'',
     ...(window.AppConfig || {})
 };
 //使用请求地址

@@ -3168,5 +3168,9 @@ body {
 #remktfrm {
   display: none;
 }
-
-/* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) */
+.hide{
+    display: none;
+}
+.move-items {
+  min-height: 59px;
+}

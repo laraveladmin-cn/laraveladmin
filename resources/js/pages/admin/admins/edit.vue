@@ -7,7 +7,7 @@
             <div class="box-body">
                 <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="bind_user" :options="{name: '绑定已有账户', required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
@@ -70,7 +70,7 @@
                             <edit-item key-name="user.description" :options="{name: '备注', required: false,type:'textarea'}"  :datas="props">
                             </edit-item>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12 ">
                             <edit-item key-name="user.avatar" :options="{name: '头像', required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <upload v-model="row_user()['avatar']"
@@ -80,7 +80,7 @@
                                 </template>
                             </edit-item>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="role_ids" :options="{name: '用户角色选择', required: true,rules:'required'}"  :datas="props">
                                 <template slot="input-item">
                                     <div>

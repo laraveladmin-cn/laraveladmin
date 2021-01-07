@@ -75,6 +75,7 @@ class IndexController extends Controller
         $data['name'] = config('app.name');
         $data['name_short'] = config('laravel_admin.name_short');
         $data['debug'] = config('app.debug');
+        $data['env'] = config('app.env');
         $data['icp'] = config('laravel_admin.icp');
         $data['api_url_model'] =  config('laravel_admin.web_api_model');
         $data['app_url'] = config('app.url');
