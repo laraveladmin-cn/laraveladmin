@@ -9,8 +9,9 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <button type="button" class="btn btn-primary pull-right" :disabled="!url"  @click="submitForm(invalid,validate)">提交</button>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
-                    <button type="button" class="btn btn-default" @click="resetForm">重置</button>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <button type="button" class="btn btn-default pull-left" @click="resetForm">重置</button>
+                    <button type="button" class="btn btn-success pull-right" v-if="is_local">保存布局</button>
                 </div>
             </div>
         </validation-observer>
@@ -20,6 +21,7 @@
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     import {ValidationObserver} from 'vee-validate';
+    import sortable from 'sortablejs';
     export default {
         name: "edit",
         components: {
@@ -37,7 +39,8 @@
         computed:{
             ...mapState([
                 '_token',
-                'use_url'
+                'use_url',
+                'env'
             ]),
             //组件唯一标识ID
             id(){
@@ -59,6 +62,9 @@
             },
             validation(){
                 return this.$refs[this.id];
+            },
+            is_local(){
+                return this.env=='local';
             }
         },
         data(){
@@ -175,8 +181,18 @@
                 let params = this.options.params || this.$router.currentRoute.query;
                 this.getData(params);
             }
+        },
+        mounted() {
+            if(this.is_local){
+                $(this.$el).find('.move-items').each(function () {
+                    sortable.create(this,  {
+                        animation: 1000,
+                        draggable: ".move-item",
+                        group: { name: "edit", pull: true, put: true },
+                    });
+                });
+            }
         }
-
     }
 </script>
 

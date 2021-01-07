@@ -3169,4 +3169,8 @@ body {
   display: none;
 }
 
+.move-items {
+  min-height: 59px;
+}
+
 /* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) */
