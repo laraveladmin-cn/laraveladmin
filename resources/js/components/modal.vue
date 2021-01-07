@@ -87,6 +87,7 @@
 
     .modal {
         display: inline-block;
+        overflow-y: scroll;
     }
 
     .modal:before {
