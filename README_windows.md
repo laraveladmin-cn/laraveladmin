@@ -40,6 +40,7 @@
 使用相关技术:vue+bootstrap+phpswoole+docker+laravel
 
 ### Mac环境,Linux环境安装请查看 [Linux安装](README.md)
+### 已有项目环境手动安装请查看 [手动安装](README_self.md)
 
 #### 安装前准备
 

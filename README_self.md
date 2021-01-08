@@ -1,3 +1,4 @@
+
 <p align="center">
     <img src="https://www.laraveladmin.cn/dist/img/logo1.png" data-origin="httpw://www.laraveladmin.cn/dist/img/logo1.png" alt="Logo" style="width: 200px" />
 </p>
@@ -38,12 +39,33 @@
 
 使用相关技术:vue+bootstrap+phpswoole+docker+laravel
 
+### Mac环境,Linux环境安装请查看 [Linux安装](README.md)
 ### Windows环境安装请查看 [Windows安装](README_windows.md)
-### 已有项目环境手动安装请查看 [手动安装](README_self.md)
+
+#### 安装环境要求
+
+1. php>=7.3(目前项目使用的laravel8)
+
+2. 已安装好mysql数据库
+
+3. 安装好nodejs,cnpm(用于前端模板打包编译)
+
+> 安装cnpm
+
+```shell
+npm install -g cnpm --registry=https://registry.npm.taobao.org && \
+cnpm -v
+```
+
+4. 安装好composer(用于下载php扩展包)
 
 #### 安装前准备
 
 1. 提前安装好git(整套部署流程使用git方式部署,请依照文档通过git clone命令安装)
+
+2. Windows环境请进入git bash命令行工具进行执行安装
+   
+![进入git bash](https://www.laraveladmin.cn/storage/uploads/images/2020/12/09/DCVTN13VC08tcVTBGtpYB0xzCrhMf1Gq9DNKfEPl.png)
 
 #### 安装教程
 
@@ -63,16 +85,7 @@ cp .env.example .env
 vi .env
 ```
 
-3. 初始化安装
-
-```shell
-sh ./docker/install.sh
-```
-
-4. 设置当前代码目录的上级目录跟"\~"目录必须包含 dokcer的File Sharing列表中的目录中
-
-5. php容器环境中安装composer相关扩展包及项目代码初始化
-
+3. 安装composer相关扩展包及项目代码初始化
 
 > 如果安装"laravel/envoy"过程中失败请切换下全局镜像源,进行尝试
 
@@ -83,49 +96,19 @@ sh ./docker/install.sh
     - phpcomposer:https://packagist.phpcomposer.com
 
 ```shell
-docker-compose run --rm php composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer #设置镜像源
-docker-compose run --rm php composer global require laravel/envoy -vvv #该命令出错了请切换镜像源
-docker-compose run --rm php composer global dump-autoload
-docker-compose run --rm node cnpm install #前端编译扩展包安装
-docker-compose run --rm node npm run prod #编译前端页面js
-docker-compose run --rm php envoy run init --branch=master #项目初始化
-docker-compose up -d #启动服务
-```
-6. 系统已安装有nginx服务器导致端口(80,443)冲突依据如下进行配置
-    
-    - 将nginx容器暴露宿主机端口修改防止冲突
-    
-```shell
-vim docker-compose.yml
-```
-![宿主机暴露端口修改](https://www.laraveladmin.cn/storage/uploads/images/2020/12/28/jYgF3xITF8KGmqgDHTNtqOP6fZeAySo11Bih2mkY.jpeg)
-    
-    - 设置本机已有的nginx代理配置
-    
-```
-server
-{
-    listen 80;
-    server_name local.laraveladmin.cn;
-    location / {
-          proxy_http_version 1.1;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Real-PORT $remote_port;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header Host $http_host;
-          proxy_set_header Scheme $scheme;
-          proxy_set_header Server-Protocol $server_protocol;
-          proxy_set_header Server-Name $server_name;
-          proxy_set_header Server-Addr $server_addr;
-          proxy_set_header Server-Port $server_port;
-          proxy_pass http://127.0.0.1:81; #docker容器中运行的nginx设置成http://host.docker.internal:81
-    }
-}
+composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer #设置镜像源
+composer global require laravel/envoy -vvv #该命令出错了请切换镜像源
+composer global dump-autoload
+cnpm install #前端编译扩展包安装
+npm run prod #编译前端页面js
+envoy run init --branch=master #项目初始化
 ```
 
-7. [解决扩展包mrgoon/aliyun-sms自动加载问题](/aliyun_sms.md "解决扩展包mrgoon/aliyun-sms自动加载问题")
+4. [解决扩展包mrgoon/aliyun-sms自动加载问题](/aliyun_sms.md "解决扩展包mrgoon/aliyun-sms自动加载问题")
 
-8. 访问
+5. 配置nginx访问请参照"docker/nginx/vhost_dev/local.laraveladmin.cn.conf"
+
+6. 访问
 
 本地开发环境绑定hosts后就可以进行访问了
 
@@ -133,19 +116,29 @@ server
 127.0.0.1 local.laraveladmin.cn
 ```
 
-9. 开发环境前端实时编译启动
+7. 开发环境前端实时编译启动
 
 ```shell
-docker-compose run --rm node npm run watch
+npm run watch
 ```
 
-10. 代码更新升级
+8. 代码更新升级
 
 ```shell
-docker-compose exec php envoy run update --branch=master
+envoy run update --branch=master
 ```
 
+9. 添加自己的代码仓库源
 
+```shell
+git remote add self https://用户名:密码@gitee.com/自己代码仓库.git
+```
+
+10. 定时任务,队列,守护进程管理请自己手动添加
+
+[定时任务](https://laravelacademy.org/post/8484)
+
+[队列,Supervisor](https://laravelacademy.org/post/21535)
 
 #### 使用说明
 
