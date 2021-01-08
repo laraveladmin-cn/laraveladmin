@@ -161,7 +161,7 @@ server
           proxy_set_header Server-Name $server_name;
           proxy_set_header Server-Addr $server_addr;
           proxy_set_header Server-Port $server_port;
-          proxy_pass http://host.docker.internal:81;
+          proxy_pass http://127.0.0.1:81; #docker容器中运行的nginx设置成http://host.docker.internal:81
     }
 }
 ```
