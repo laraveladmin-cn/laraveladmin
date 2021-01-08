@@ -93,7 +93,7 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
 @foreach ($table_fields_show->chunk(ceil($chunk_count/$chunk_num)) as $table_field_chunk)
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
 @foreach ($table_field_chunk as $table_field)
                             <edit-item key-name="{{$table_field['Field']}}" :options="{name: '{{$table_field["info"]}}',type:'{{$table_field['showType']}}', rules:'{{Arr::get($validates,$table_field['Field'],'')}}',title:''}" :datas="props">
 @if($table_field['showType']=='date')
