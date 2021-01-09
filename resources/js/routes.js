@@ -18,6 +18,9 @@ collect(routesConfig.group).map((group,key)=>{
     let group_names = collect(groups).pluck('name');
     //子页面
     let children = collect(routesConfig.menus).filter((item)=>{
+        if (item.env && window.AppConfig && window.AppConfig.env && item.env!=window.AppConfig.env){
+            return false;
+        }
         return item.disabled==0 && item.is_page==1 && group_names.contains(item.group) && item.url;
     }).map((item)=>{
         let path_arr = item.url.split('/');
@@ -36,6 +39,9 @@ collect(routesConfig.group).map((group,key)=>{
         return route;
     });
     collect(routesConfig.ressorce).filter((item)=>{
+        if (item.env && window.AppConfig && window.AppConfig.env && item.env!=window.AppConfig.env){
+            return false;
+        }
         return item.disabled==0 && item.is_page==1 && group_names.contains(item.group) && item.url;
     }).map((item)=>{
         let path_arr = item.url.split('/');
