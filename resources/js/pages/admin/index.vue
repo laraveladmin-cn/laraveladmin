@@ -17,14 +17,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 over">
                 <echart :options="option1" style="height:400px;"></echart>
+
             </div>
-            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                <echart :options="option2" style="height:400px;"></echart>
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 over">
+                <div style="min-width: 710px">
+                    <echart :options="option2" style="height:400px;"></echart>
+                </div>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <echart :options="option3" style="height:400px;"></echart>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 over">
+                <div style="min-width: 710px">
+                    <echart :options="option3" style="height:400px;"></echart>
+                </div>
             </div>
         </div>
     </div>
@@ -272,3 +277,8 @@
         }
     };
 </script>
+<style>
+    .over{
+        overflow-x: scroll;
+    }
+</style>
