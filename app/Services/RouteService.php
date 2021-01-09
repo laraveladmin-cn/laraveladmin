@@ -16,6 +16,7 @@ class RouteService
     protected static $pager404 = '\App\Http\Controllers\Open\IndexController@page404';
     protected static $web_route_prefix = '';
     protected static $named=[];
+    protected static $env = '';
     /**
      * 通过 PhpStorm 创建.
      * 创建人: zhangshiping
@@ -125,6 +126,7 @@ class RouteService
      * @param string $route_prefix
      */
     public static function routeRegisterApi($route_prefix=''){
+        self::$env = config('app.env');
         //Api使用web模式不注册
         if(!$route_prefix && config('laravel_admin.web_api_model')=='web' && !config('laravel_admin.with_api')){
             return ;
@@ -153,6 +155,7 @@ class RouteService
                             Arr::get($item,'url','') &&
                             Arr::get($item,'method','') &&
                             Arr::get($item,'disabled','')==0 &&
+                            Arr::get($item,'env',self::$env)==self::$env &&
                             in_array('api',$use);
                     })
                     ->map(function ($item){
@@ -190,6 +193,7 @@ class RouteService
                     ->filter(function ($item)use ($key){
                         return Arr::get($item,'group','')==$key &&
                             Arr::get($item,'url','') &&
+                            Arr::get($item,'env',self::$env)==self::$env &&
                             Arr::get($item,'disabled','')==0;
                     })
                     ->map(function ($item){
@@ -210,6 +214,7 @@ class RouteService
      */
     public static function routeRegisterWeb(){
         self::$web_route_prefix = getRoutePrefix('web');
+        self::$env = config('app.env');
         //页面返回
         $routesConfig = json_decode(file_get_contents(base_path(self::$routes)),true);
         //web页面接口
@@ -232,6 +237,7 @@ class RouteService
                             Arr::get($item,'is_page','')!=1 &&
                             Arr::get($item,'url','') &&
                             Arr::get($item,'disabled','')==0 &&
+                            Arr::get($item,'env',self::$env)==self::$env &&
                             Arr::get($item,'method','') &&
                             in_array('web',$use);
                     })
@@ -276,6 +282,7 @@ class RouteService
                     Arr::get($item,'is_page','')==1 &&
                     Arr::get($item,'url','') &&
                     Arr::get($item,'method','')==1 &&
+                    Arr::get($item,'env',self::$env)==self::$env &&
                     Arr::get($item,'disabled','')==0;
             })
             ->map(function ($item){
@@ -292,6 +299,7 @@ class RouteService
         collect(Arr::get($routesConfig,'ressorce',[]))
             ->filter(function ($item){
                 return Arr::get($item,'url','') &&
+                    Arr::get($item,'env',self::$env)==self::$env &&
                     Arr::get($item,'disabled','')==0;
             })
             ->map(function ($item){

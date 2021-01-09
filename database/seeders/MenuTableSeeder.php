@@ -27,7 +27,8 @@ class MenuTableSeeder extends Seeder
                 'method'=>Menu::methodValue(Arr::get($item,'method.type')),
                 'parent_id'=>$roleMenu['id'],
                 'url'=>$item['route']?$roleMenu['url'].'/'.$item['route']:$roleMenu['url'],
-                'status'=>2
+                'status'=>2,
+                'disabled'=>$roleMenu['disabled']
             ];
             if($key=='list'){
                 $data['name'] = $name.'分页';
@@ -93,7 +94,7 @@ class MenuTableSeeder extends Seeder
     {
         $this->methods = RouteService::getRessorceRoutes(['except'=>['index']]);
         $routes_json = file_get_contents(base_path('routes/route.json'));
-        $hash = md5($routes_json);
+        $hash = md5(config('app.env').$routes_json);
         //判断菜单是否改变
         if($hash==Cache::get($this->cache_key, '')){
             $this->command->line('菜单未改变!');
@@ -112,6 +113,9 @@ class MenuTableSeeder extends Seeder
                 ->toArray())
             ->sortBy('id')
             ->map(function ($item){
+                if(Arr::get($item,'env',config('app.env'))!=config('app.env')){
+                    $item['disabled'] = 1;
+                }
                 if(Arr::get($item,'is_ressorce')){
                     $menu = Menu::create(collect($item)->only($this->fillable)->toArray());
                     $name = Arr::get($item,'item_name',Arr::get($item,'name',''));

@@ -507,6 +507,34 @@
             "description" : "提交编辑修改密码",
             "group": "home",
             "action": "PersonageController@postIndex"
+        },{
+            "id": 141,
+            "name": "开发辅助",
+            "icons": "fa-wrench",
+            "url":"/admin/developments/index",
+            "method":1,
+            "status":1,
+            "is_page": 1,
+            "parent_id": 7,
+            "disabled": 0,
+            "env": "local",
+            "description" : "开发辅助功能页面",
+            "group": "admin",
+            "action": "DevelopmentsController@index"
+        },
+        {
+            "id": 142,
+            "name": "编辑页面布局保存",
+            "icons": "fa-save",
+            "url":"/admin/developments/layout",
+            "method":2,
+            "status":1,
+            "parent_id": 141,
+            "disabled": 0,
+            "env": "local",
+            "description" : "提交编辑页面布局保存",
+            "group": "admin",
+            "action": "DevelopmentsController@postLayout"
         }
     ],
     "ressorce": [
