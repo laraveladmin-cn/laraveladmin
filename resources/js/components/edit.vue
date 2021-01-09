@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <button type="button" class="btn btn-default pull-left" @click="resetForm">重置</button>
-                    <button type="button" class="btn btn-success pull-right" v-if="is_local">保存布局</button>
+                    <button type="button" class="btn btn-success pull-right" v-if="is_local" @click="saveLayout">保存布局</button>
                 </div>
             </div>
         </validation-observer>
@@ -129,7 +129,7 @@
                                 'show':true
                             });
                         }
-                    })
+                    });
                 };
                 if(invalid){
                     validate().then(success => {
@@ -162,6 +162,27 @@
                     this.loading = false;
                 }).catch((error) => {
                     this.loading = false;
+                });
+            },
+            //开发环境布局保存
+            saveLayout(){
+                let url = this.options.url || this.$router.currentRoute.path;
+                let path_arr = url.split('/');
+                path_arr[path_arr.length-1] = 'edit.vue';
+                let items = [];
+                $(this.$el).find('.move-items').each(function () {
+                    let items_group = [];
+                    $(this).find('.move-item').map(function () {
+                        items_group[items_group.length] = $(this).attr('data-id');
+                    });
+                    items[items.length] = items_group;
+                });
+                let data = {
+                    path: this.options.componentPath || path_arr.join('/'), //修改的布局页面组件
+                    items:items
+                };
+                axios.post(this.use_url+'/admin/developments/layout', data).then( (response)=>{
+                }).catch((error) =>{
                 });
             }
         },
