@@ -604,8 +604,8 @@
             "group": "home",
             "action": "UploadController@postIndex"
         },
-        ,{
-            "id": 84,
+        {
+            "id": 116,
             "name": "开发辅助",
             "icons": "fa-wrench",
             "url":"/admin/developments/index",
@@ -620,13 +620,13 @@
             "action": "DevelopmentsController@index"
         },
         {
-            "id": 85,
+            "id": 117,
             "name": "编辑页面布局保存",
             "icons": "fa-save",
             "url":"/admin/developments/layout",
             "method":2,
             "status":1,
-            "parent_id": 84,
+            "parent_id": 116,
             "disabled": 0,
             "env": "local",
             "description" : "提交编辑页面布局保存",
