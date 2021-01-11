@@ -5,7 +5,7 @@
         </modal>
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box box-primary" :options="options">
+                <data-table class="box box-primary" :options="options" ref="table">
                     <template slot="add" slot-scope="props">
                         <button class="btn btn-info" @click="openModal(props.url)">
                             <i class="fa fa-plus"></i> 新建
@@ -102,6 +102,8 @@
             },
             callback(){
                 this.modal = false;
+                //刷新页面
+                this.$refs['table'].refresh();
             }
         }
 
