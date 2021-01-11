@@ -90,7 +90,7 @@
                 <h3 class="box-title">快速填写</h3>
             </div>
             <div class="box-body">
-                <edit :options="options">
+                <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
 @foreach ($table_fields_show->chunk(ceil($chunk_count/$chunk_num)) as $table_field_chunk)
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">

@@ -499,7 +499,7 @@
             "group": "home",
             "action": "UploadController@postIndex"
         },
-        ,{
+        {
             "id": 84,
             "name": "开发辅助",
             "icons": "fa-wrench",
