@@ -44,9 +44,9 @@
 
 #### 安装环境要求
 
-1. php>=7.3(目前项目使用的laravel8)
+1. php>=7.4(目前项目使用的laravel8)
 
-2. 已安装好mysql数据库
+2. 已安装好mysql数据库(mysql>=8)
 
 3. 安装好nodejs,cnpm(用于前端模板打包编译)
 
@@ -87,6 +87,10 @@ vi .env
 
 3. 安装composer相关扩展包及项目代码初始化
 
+> windows安装请先直接下载vendor.zip解压在项目代码中
+
+[vendor.zip](./vendor.zip)
+
 > 如果安装"laravel/envoy"过程中失败请切换下全局镜像源,进行尝试
 
     - 腾讯云composer镜像源:https://mirrors.cloud.tencent.com/composer
@@ -101,7 +105,7 @@ composer global require laravel/envoy -vvv #该命令出错了请切换镜像源
 composer global dump-autoload
 cnpm install #前端编译扩展包安装
 npm run prod #编译前端页面js
-envoy run init --branch=master #项目初始化
+envoy run init --branch=master --self=1 #项目初始化
 ```
 
 4. [解决扩展包mrgoon/aliyun-sms自动加载问题](/aliyun_sms.md "解决扩展包mrgoon/aliyun-sms自动加载问题")
@@ -124,8 +128,10 @@ npm run watch
 
 8. 代码更新升级
 
+> Linux,Mac系统执行
+
 ```shell
-envoy run update --branch=master
+envoy run update --branch=master --self=1
 ```
 
 9. 添加自己的代码仓库源

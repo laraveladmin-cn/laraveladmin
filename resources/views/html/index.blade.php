@@ -3,7 +3,7 @@
     <div class="{{$class}}_index">
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box box-primary" :options="options">
+                <data-table class="box box-primary" :options="options" ref="table">
                 </data-table>
             </div>
         </div>

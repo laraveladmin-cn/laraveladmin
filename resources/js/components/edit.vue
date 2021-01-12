@@ -64,7 +64,7 @@
                 return this.$refs[this.id];
             },
             is_local(){
-                return this.env=='local';
+                return this.env=='local' && (typeof this.options.fixed=="undefined" || !this.options.fixed);
             }
         },
         data(){
@@ -178,7 +178,7 @@
                     items[items.length] = items_group;
                 });
                 let data = {
-                    path: this.options.componentPath || path_arr.join('/'), //修改的布局页面组件
+                    path: this.options.componentPath || '/pages'+path_arr.join('/'), //修改的布局页面组件
                     items:items
                 };
                 axios.post(this.use_url+'/admin/developments/layout', data).then( (response)=>{
