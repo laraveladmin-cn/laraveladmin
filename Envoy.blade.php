@@ -49,15 +49,17 @@ array_map(function ($value)use(&$hosts){
     }
 },(isset($env['HOSTS']) && $env['HOSTS'])?explode(';',$env['HOSTS']):[]);
 $hosts['local'] = '127.0.0.1';
-
+$self = isset($self)?$self:0;
 ?>
 @servers($hosts)
 
 @task('update', ['on' => ['local']])
+@if(!$self)
 @if($disk)
     {{$disk}}: && \
 @endif
 cd {{$path_dir}} && \
+@endif
 php {{$path_dir}}/artisan down --redirect="/503" --retry=60 && \
 git pull origin {{$branch}} && \
 @if($composer_install)
@@ -79,13 +81,17 @@ php artisan up
 @endtask
 
 @task('init', ['on' => ['local']])
+@if(!$self)
 @if($disk)
 {{$disk}}: && \
 @endif
 cd {{$path_dir}} && \
+@endif
 git checkout {{$branch}} && \
 git pull origin {{$branch}} && \
+@if(!$self)
 chown -R www-data:www-data storage public && \
+@endif
 @if($unzip_vendor)
     unzip -o -d ./ ./vendor.zip && \
 @endif
