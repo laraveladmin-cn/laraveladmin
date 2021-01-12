@@ -89,7 +89,7 @@ vi .env
 
 > windows安装请先直接下载vendor.zip解压在项目代码中
 
-[vendor.zip](./vendor.zip)
+[vendor.zip](https://www.laraveladmin.cn/api/home/docs/vendor.zip)
 
 > 如果安装"laravel/envoy"过程中失败请切换下全局镜像源,进行尝试
 
