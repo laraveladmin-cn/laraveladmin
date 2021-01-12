@@ -64,7 +64,7 @@
                 return this.$refs[this.id];
             },
             is_local(){
-                return this.env=='local';
+                return this.env=='local' && (typeof this.options.fixed=="undefined" || !this.options.fixed);
             }
         },
         data(){
