@@ -10,14 +10,36 @@ use KubAT\PhpSimple\HtmlDomParser;
 
 class DevelopmentsController extends Controller
 {
+    protected $commands = [];
+
+    public function __construct()
+    {
+        $file = storage_path('developments/commands.json');
+        if(file_exists($file)){
+            $this->commands = json_decode(file_get_contents($file),true);
+        }
+    }
 
     /**
      * 后台首页数据
      * @return array
      */
     public function index(){
-        $data = [];
+        $data = [
+            'row'=>[
+                'command'=>'help'
+            ],
+            'commands'=>$this->commands
+
+        ];
         return $data;
+    }
+
+    /**
+     * 调用命令
+     */
+    public function command(){
+
     }
 
     /**
