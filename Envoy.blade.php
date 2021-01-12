@@ -25,7 +25,13 @@ if($cache['composer.json']!=$md5_composer){
 }
 file_put_contents($cache_file,json_encode($cache));
 $path = (isset($path) && $path) ? $path : 'laraveladmin';
+$disk = '';
 if(isset($path_root) && $path_root){
+    if(strpos($path_root,':') !== false){
+        $path_root_arr = explode(':',$path_root);
+        $disk = $path_root_arr[0];
+        $path_root = $path_root_arr[1];
+    }
     $path_dir = $path_root.'/'.$path;
 }else{
     $path_dir = '/var/www/laravel/'.$path;
@@ -48,6 +54,9 @@ $hosts['local'] = '127.0.0.1';
 @servers($hosts)
 
 @task('update', ['on' => ['local']])
+@if($disk)
+    {{$disk}}: && \
+@endif
 cd {{$path_dir}} && \
 php {{$path_dir}}/artisan down --redirect="/503" --retry=60 && \
 git pull origin {{$branch}} && \
@@ -70,6 +79,9 @@ php artisan up
 @endtask
 
 @task('init', ['on' => ['local']])
+@if($disk)
+{{$disk}}: && \
+@endif
 cd {{$path_dir}} && \
 git checkout {{$branch}} && \
 git pull origin {{$branch}} && \
