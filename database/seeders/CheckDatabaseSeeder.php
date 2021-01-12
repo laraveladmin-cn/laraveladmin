@@ -21,7 +21,10 @@ class CheckDatabaseSeeder extends Seeder
             $this->command->warn('请检查连接数据库用户是否有读取schema数据库权限!');
         }
         if(!$has){
-            $sql = 'CREATE DATABASE `'.$database.'` CHARACTER SET utf8';
+            $default = config('database.default');
+            $charset = config('database.connections.'.$default.'.charset');
+            $collation = config('database.connections.'.$default.'.collation');
+            $sql = 'CREATE DATABASE `'.$database.'` CHARACTER SET "'.$charset.'" COLLATE "'.$collation.'"';
             try{
                 DB::connection('schema')->statement($sql);
             }catch (\Exception $exception){
