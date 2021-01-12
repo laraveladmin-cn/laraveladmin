@@ -11,7 +11,9 @@ array_map(function ($item)use (&$env){
 },explode("\n",file_get_contents('.env')));
 $is_online = isset($env['APP_ENV']) && $env['APP_ENV'] && $env['APP_ENV']!='local';
 $composer_install = false;
-$cache_file = './storage/app/envoy/cache.json';
+$cache_file_dir = './storage/app/envoy';
+is_dir($cache_file_dir) OR mkdir($cache_file_dir,0755,true); //创建目录
+$cache_file = $cache_file_dir.'/cache.json';
 $cache = ['composer.json'=>''];
 if(file_exists($cache_file)){
     $cache = json_decode(file_get_contents($cache_file),true)?:[];
@@ -23,7 +25,11 @@ if($cache['composer.json']!=$md5_composer){
 }
 file_put_contents($cache_file,json_encode($cache));
 $path = (isset($path) && $path) ? $path : 'laraveladmin';
-$path_dir = '/var/www/laravel/'.$path;
+if(isset($path_root) && $path_root){
+    $path_dir = $path_root.'/'.$path;
+}else{
+    $path_dir = '/var/www/laravel/'.$path;
+}
 $branch = (isset($branch) && $branch) ? $branch : ($is_online?'master':'dev');
 $host = (isset($host) && $host) ? explode(',',$host):[];
 $hosts = [];
