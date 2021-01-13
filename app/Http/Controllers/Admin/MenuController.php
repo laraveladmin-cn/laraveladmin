@@ -10,7 +10,17 @@ class MenuController extends Controller
 {
     use ResourceController;
 
-
+    /**
+     * 绑定模型
+     * @return mixed
+     */
+    protected function bindModel()
+    {
+        if (!$this->bindModel) {
+            $this->bindModel = $this->newBindModel()->where('disabled',0);
+        }
+        return $this->bindModel;
+    }
     /**
      * 资源模型
      * @var  string

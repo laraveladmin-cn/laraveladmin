@@ -23,8 +23,14 @@ class CheckDatabaseSeeder extends Seeder
         if(!$has){
             $default = config('database.default');
             $charset = config('database.connections.'.$default.'.charset');
+            $sql = 'CREATE DATABASE `'.$database.'`';
+            if($charset){
+                $sql = $sql.' CHARACTER SET "'.$charset.'"';
+            }
             $collation = config('database.connections.'.$default.'.collation');
-            $sql = 'CREATE DATABASE `'.$database.'` CHARACTER SET "'.$charset.'" COLLATE "'.$collation.'"';
+            if($collation){
+                $sql = $sql.' COLLATE "'.$collation.'"';
+            }
             try{
                 DB::connection('schema')->statement($sql);
             }catch (\Exception $exception){
