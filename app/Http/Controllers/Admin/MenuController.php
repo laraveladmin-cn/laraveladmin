@@ -17,7 +17,7 @@ class MenuController extends Controller
     protected function bindModel()
     {
         if (!$this->bindModel) {
-            $this->bindModel = $this->newBindModel()->where('disabled',0);
+            $this->bindModel = $this->newBindModel()->usable();
         }
         return $this->bindModel;
     }
@@ -119,6 +119,7 @@ class MenuController extends Controller
     protected function handleEditReturn($id,&$data){
         //树状结构可选数据
         $data['maps']['optional_parents'] = Menu::optionalParent($id ? $data['row'] : null)
+            ->usable()
             ->orderBy('left_margin', 'asc')
             ->get(['id','name','icons','parent_id','level','left_margin','right_margin']);
         $data['configUrl']['importUrl'] = '';
