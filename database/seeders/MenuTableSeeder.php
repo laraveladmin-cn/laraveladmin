@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class MenuTableSeeder extends Seeder
 {
+    public function __construct()
+    {
+        $this->fillable = Menu::getFillables();
+    }
+
     /**
      * ID+5
      * 创建资源菜单
@@ -94,7 +99,8 @@ class MenuTableSeeder extends Seeder
     {
         $this->methods = RouteService::getRessorceRoutes(['except'=>['index']]);
         $routes_json = file_get_contents(base_path('routes/route.json'));
-        $hash = md5(config('app.env').$routes_json);
+        $disabled_menus = config('laravel_admin.disabled_menus','');
+        $hash = md5(config('app.env').$routes_json.$disabled_menus);
         //判断菜单是否改变
         if($hash==Cache::get($this->cache_key, '')){
             $this->command->line('菜单未改变!');
@@ -133,7 +139,8 @@ class MenuTableSeeder extends Seeder
             }
         });
         //禁用的菜单功能
-        $menu_ids = explode(',',config('laravel_admin.disabled_menus',''));
+        $menu_ids = explode(',',$disabled_menus)?:[];
+        $menu_ids = collect(Menu::where('disabled',1)->pluck('id'))->merge($menu_ids)->unique()->toArray();
         if($menu_ids){
             Menu::where(function ($q)use($menu_ids){
                 $q->where('id','=',0);
