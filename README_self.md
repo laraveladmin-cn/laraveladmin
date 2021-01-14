@@ -46,7 +46,9 @@
 
 1. php>=7.4(目前项目使用的laravel8)
 
-2. 已安装好mysql数据库(mysql>=8)
+2. 已安装好mysql数据库
+
+> 已有数据库请正确设置好数据库默认编码charset:utf8mb4;collation:utf8mb4_unicode_ci
 
 3. 安装好nodejs,cnpm(用于前端模板打包编译)
 
