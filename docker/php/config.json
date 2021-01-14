@@ -1,25 +1,9 @@
 {
     "config": {},
-    "repositories": [
-        {
+    "repositories": {
+        "packagist": {
             "type": "composer",
             "url": "https://mirrors.cloud.tencent.com/composer"
-        },
-        {
-            "type": "composer",
-            "url": "https://mirrors.aliyun.com/composer/"
-        },
-        {
-            "type": "composer",
-            "url": "https://mirrors.huaweicloud.com/repository/php/"
-        },
-        {
-            "type": "composer",
-            "url": "https://php.cnpkg.org"
-        },
-        {
-            "type": "composer",
-            "url": "https://packagist.laravel-china.org"
         }
-    ]
+    }
 }
