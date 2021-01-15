@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use KubAT\PhpSimple\HtmlDomParser;
 
 class DevelopmentsController extends Controller
@@ -60,16 +61,23 @@ class DevelopmentsController extends Controller
      */
     public function tables(){
 
+
     }
 
     /**
      * 保存拖拽后的布局
      */
     public function postLayout(\Illuminate\Http\Request $request){
-        $this->validate($request,[
+        $validator = Validator::make($request->all(),[
             'path'=>'required|string',
             'items'=>'required|array'
-        ]);//验证数据
+        ]);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
         $data = Request::all();
         $errors = [];
         $path = resource_path('js'.$data['path']);
