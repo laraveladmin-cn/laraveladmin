@@ -167,9 +167,7 @@ server
 }
 ```
 
-7. [解决扩展包mrgoon/aliyun-sms自动加载问题](/aliyun_sms.md "解决扩展包mrgoon/aliyun-sms自动加载问题")
-
-8. 访问
+7. 访问
 
 本地开发环境绑定hosts后就可以进行访问了
 
@@ -177,19 +175,19 @@ server
 127.0.0.1 local.laraveladmin.cn
 ```
 
-9. 开发环境前端实时编译启动
+8. 开发环境前端实时编译启动
 
 ```shell
 winpty docker-compose run --rm node npm run watch
 ```
 
-10. 代码更新升级
+9. 代码更新升级
 
 ```shell
 winpty docker-compose exec php envoy run update --branch=master
 ```
 
-11. 添加自己的代码仓库源
+10. 添加自己的代码仓库源
 
 ```shell
 git remote add self https://用户名:密码@gitee.com/自己代码仓库.git
