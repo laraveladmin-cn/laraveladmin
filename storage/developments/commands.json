@@ -9,7 +9,9 @@
                 "value": "",
                 "rules": "required",
                 "title": "数据表名称",
-                "name": "数据表"
+                "name": "数据表",
+                "type": "select2tables",
+                "placeholderValue": ""
             },
             {
                 "key": "connection",
@@ -17,9 +19,10 @@
                 "rules": "",
                 "title": "数据库连接",
                 "name": "数据库连接",
-                "type": "select",
+                "type": "select2",
                 "map_key": "database",
                 "placeholderValue": ""
+
             },
             {
                 "key": "module",

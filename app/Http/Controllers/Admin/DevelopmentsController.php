@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Facades\LifeData;
 use App\Http\Controllers\Controller;
+use App\Models\Table;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -39,7 +42,11 @@ class DevelopmentsController extends Controller
             ],
             'maps'=>[
                 //可选数据库
-                'database'=>collect(config('database.connections'))->map(function ($item,$key){
+                'database'=>collect(config('database.connections'))
+                    ->filter(function ($item,$key){
+                        return $item['driver']=='mysql' && $key!='schema';
+                    })
+                    ->map(function ($item,$key){
                     return $key;
                 })->toArray()
             ],
@@ -59,9 +66,33 @@ class DevelopmentsController extends Controller
     /**
      * 查询数据表
      */
-    public function tables(){
-
-
+    public function tables(\Illuminate\Http\Request $request){
+        $validator = Validator::make($request->all(),[
+            'where.TABLE_NAME'=>'nullable|string',
+            'connection'=>'nullable|string',
+        ]);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
+        $connection = $request->input('connection')?:config('database.default');
+        $tname = $request->input('where.TABLE_NAME');
+        $tableModel = new Table();
+        $tableModel = $tableModel->setConnection($connection)
+            ->setTable(DB::raw('information_schema.`TABLES`'))
+            ->where('TABLE_SCHEMA',config('database.connections.'.$connection.'.database'))
+            ->where('TABLE_NAME','like','%'.$tname.'%');
+               //获取分页数据
+        if (!Request::input('page') || Request::input('get_count')) {
+            $data = $tableModel->paginate();
+        } else { //不统计条数
+            $data = $tableModel->simplePaginate();
+        }
+        //返回响应数据存放,方便操作日志记录
+        LifeData::set('list', $data);
+        return $data;
     }
 
     /**

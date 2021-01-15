@@ -12,6 +12,9 @@
                     <li>
                         <a href="#plug_in" data-toggle="tab">插件安装</a>
                     </li>
+                    <li>
+                        <a href="#docs" data-toggle="tab">相关文档</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="chart tab-pane active" id="console">
@@ -33,16 +36,59 @@
                                                          :placeholder-show="'请选择'"
                                                          :placeholder-value="0"
                                                          :primary-key="'_id'"
+                                                         @change="changeCommand(props.data)"
                                                          :show="['command','chinese']" >
                                                 </select2>
                                             </div>
                                         </template>
                                     </edit-item>
-                                    <edit-item :key-name="'parameters.'+index+'.value'"
-                                               :options="item"
-                                               :datas="props"
-                                               v-for="(item,index) in props.data.row.parameters">
-                                    </edit-item>
+                                    <div v-if="props.data.row.parameters">
+                                        <div v-for="(item,index) in props.data.row.parameters">
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-if="item.type=='select2tables'"
+                                                       :options="item"
+                                                       :datas="props"
+                                                       :key="index">
+                                                <template slot="input-item">
+                                                    <div class="edit-item-content">
+                                                        <select2 v-model="item.value"
+                                                                 :default-options="[]"
+                                                                 :url="use_url+'/admin/developments/tables'"
+                                                                 :keyword-key="'TABLE_NAME'"
+                                                                 :show="['TABLE_NAME']"
+                                                                 :primary-key="'TABLE_NAME'"
+                                                                 :placeholder-show="'请选择'"
+                                                                 :placeholder-value="''"
+                                                                 :params="{connection:connection_value(props.data.row.parameters)}"
+                                                                 :is-ajax="true" >
+                                                        </select2>
+                                                    </div>
+                                                </template>
+                                            </edit-item>
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-else-if="item.type=='select2'"
+                                                       :options="item"
+                                                       :datas="props"
+                                                       :key="index">
+                                                <template slot="input-item">
+                                                    <div class="edit-item-content">
+                                                        <select2 v-model="item.value"
+                                                                 :default-options="array_get(props,'data.maps.'+item.map_key,[])"
+                                                                 :placeholder-show="'请选择'"
+                                                                 :placeholder-value="''"
+                                                                 :is-ajax="false" >
+                                                        </select2>
+                                                    </div>
+                                                </template>
+                                            </edit-item>
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-else
+                                                       :options="item"
+                                                       :datas="props"
+                                                       :key="index">
+                                            </edit-item>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                                     命令:
@@ -86,6 +132,9 @@
                     </div>
                     <div class="chart tab-pane" id="plug_in">
                         安装应用插件
+                    </div>
+                    <div class="chart tab-pane" id="docs">
+                        相关文档
                     </div>
                 </div>
             </div>
@@ -158,6 +207,14 @@
                     return ' --'+parameter.key+'='+parameter.value;
                 }).implode('');
                 return 'php artisan '+command.command+parm_str;
+            },
+            connection_value(parms){
+                return collect(parms).first((parm)=>{
+                    return parm.key=='connection';
+                }).value;
+            },
+            changeCommand(data){
+                data.row = data.commands[data.index-1];
             }
         }
     }
