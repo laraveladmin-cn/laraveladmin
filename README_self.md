@@ -110,6 +110,10 @@ npm run prod #编译前端页面js
 envoy run init --branch=master --self=1 #项目初始化
 ```
 
+> 安装完成请在编辑器排除这两个目录防止编辑器被卡死
+
+![防止编辑器卡死](https://www.laraveladmin.cn/api/home/docs/images/防止编辑器卡顿.png)
+
 4. 配置nginx访问请参照"docker/nginx/vhost_dev/local.laraveladmin.cn.conf"
 
 5. 访问

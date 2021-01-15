@@ -91,6 +91,11 @@ docker-compose run --rm node npm run prod #编译前端页面js
 docker-compose run --rm php envoy run init --branch=master #项目初始化
 docker-compose up -d #启动服务
 ```
+
+> 安装完成请在编辑器排除这两个目录防止编辑器被卡死
+
+![防止编辑器卡死](https://www.laraveladmin.cn/api/home/docs/images/防止编辑器卡顿.png)
+
 6. 系统已安装有nginx服务器导致端口(80,443)冲突依据如下进行配置
     
     - 将nginx容器暴露宿主机端口修改防止冲突
