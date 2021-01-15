@@ -25,12 +25,25 @@ class DevelopmentsController extends Controller
      * @return array
      */
     public function index(){
+        $commands = collect($this->commands)->map(function ($command,$index){
+            $command['_id'] = $index+1;
+            return $command;
+        })->toArray();
+        $index = 1;
         $data = [
-            'row'=>[
-                'command'=>'help'
+            'row'=>$commands[$index-1],
+            'commands'=>$commands,
+            'configUrl'=>[
+                'createUrl'=>'/admin/developments/command'
             ],
-            'commands'=>$this->commands
-
+            'maps'=>[
+                //可选数据库
+                'database'=>collect(config('database.connections'))->map(function ($item,$key){
+                    return $key;
+                })->toArray()
+            ],
+            'index'=>$index,
+            'history'=>[]
         ];
         return $data;
     }
@@ -38,7 +51,14 @@ class DevelopmentsController extends Controller
     /**
      * 调用命令
      */
-    public function command(){
+    public function postCommand(){
+
+    }
+
+    /**
+     * 查询数据表
+     */
+    public function tables(){
 
     }
 
