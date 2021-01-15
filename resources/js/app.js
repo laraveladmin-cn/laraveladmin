@@ -9,6 +9,8 @@ import VueRouter from 'vue-router'; //路由插件
 Vue.use(VueRouter);
 import Vuex from 'vuex'; //数据存储插件
 Vue.use(Vuex);
+import VueClipboard from 'vue-clipboard2';//复制到粘贴板组件
+Vue.use(VueClipboard);
 import './plugin/index.js'; //自定义插件
 //路由注册
 import routes from './routes.js';
