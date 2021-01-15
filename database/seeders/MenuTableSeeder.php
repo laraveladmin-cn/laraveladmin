@@ -106,9 +106,9 @@ class MenuTableSeeder extends Seeder
             $this->command->line('菜单未改变!');
             return true;
         }
-        Cache::put($this->cache_key, $hash);
         //初始化数据表
         DB::table('menus')->truncate(); //菜单权限表
+        Cache::put($this->cache_key, $hash);
         $routesConfig = json_decode($routes_json,true);
         collect(Arr::get($routesConfig,'menus',[]))
             ->merge(collect(Arr::get($routesConfig,'ressorce',[]))
