@@ -554,14 +554,14 @@
             "action": "DevelopmentsController@postLayout"
         },
         {
-            "id": 86,
+            "id": 144,
             "name": "数据表查询",
             "icons": "fa-table",
             "url":"/admin/developments/tables",
             "method":1,
             "status":2,
             "is_page": 0,
-            "parent_id": 84,
+            "parent_id": 142,
             "disabled": 0,
             "env": "local",
             "description" : "数据表名称联想查询",
