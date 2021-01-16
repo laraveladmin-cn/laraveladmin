@@ -134,11 +134,17 @@ class RegisterController extends Controller
         $model = $this->caseType(); //模式
         $model_name = Arr::get($this->map,$model); //模式名称
         //最后验证短信码
-        $this->validate($request,[
+        $validator = Validator::make($request->all(), [
             'message_code' => 'required|send_code:'.$model.','.config($this->send_code_key)
         ], [
             'message_code.send_code' => $model_name.'验证码验证失败'
         ], ['message_code' => $model_name.'验证码']);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
         $data = $request->all();
         $data['status'] = 1;
         $data['uname'] = $data['username'];

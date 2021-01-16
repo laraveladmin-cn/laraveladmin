@@ -24,7 +24,7 @@ class CreateAll extends Command
      *
      * @var string
      */
-    protected $description = '生成资源页面';
+    protected $description = '生成所有资源';
 
     /**
      * Execute the console command.

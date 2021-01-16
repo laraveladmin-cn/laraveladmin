@@ -70,6 +70,11 @@
             'name' => 'password-edit',
             'path' => 'common_components/passwordEdit.vue',
             'info' => '密码输入框组件'
+        ],
+        'date' =>[
+            'name' => 'el-date-picker',
+            'path' => 'element-ui/lib/date-picker',
+            'info' => '日期组件'
         ]
     ];
     $components = collect($components)

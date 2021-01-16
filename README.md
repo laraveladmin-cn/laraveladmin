@@ -91,6 +91,11 @@ docker-compose run --rm node npm run prod #编译前端页面js
 docker-compose run --rm php envoy run init --branch=master #项目初始化
 docker-compose up -d #启动服务
 ```
+
+> 安装完成请在编辑器排除这两个目录防止编辑器被卡死
+
+![防止编辑器卡死](https://www.laraveladmin.cn/api/home/docs/images/防止编辑器卡顿.png)
+
 6. 系统已安装有nginx服务器导致端口(80,443)冲突依据如下进行配置
     
     - 将nginx容器暴露宿主机端口修改防止冲突
@@ -123,9 +128,7 @@ server
 }
 ```
 
-7. [解决扩展包mrgoon/aliyun-sms自动加载问题](/aliyun_sms.md "解决扩展包mrgoon/aliyun-sms自动加载问题")
-
-8. 访问
+7. 访问
 
 本地开发环境绑定hosts后就可以进行访问了
 
@@ -133,19 +136,23 @@ server
 127.0.0.1 local.laraveladmin.cn
 ```
 
-9. 开发环境前端实时编译启动
+8. 开发环境前端实时编译启动
 
 ```shell
 docker-compose run --rm node npm run watch
 ```
 
-10. 代码更新升级
+9. 代码更新升级
 
 ```shell
 docker-compose exec php envoy run update --branch=master
 ```
 
+10. 添加自己的代码仓库源
 
+```shell
+git remote add self https://用户名:密码@gitee.com/自己代码仓库.git
+```
 
 #### 使用说明
 

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 trait SendCodeController
@@ -187,7 +188,7 @@ trait SendCodeController
         }
 
         //验证
-        $this->validate($request, $validate, [
+        $validator = Validator::make($request->all(), $validate, [
             'verify.required' => '验证码必填',
             'verify.geetest' => '验证码验证失败',
             'verify.captcha' => '验证码验证失败',
@@ -200,6 +201,13 @@ trait SendCodeController
             'uname'=>'用户名',
             'mobile_phone'=>'手机号码'
         ]);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
+
     }
 
     /**

@@ -151,7 +151,8 @@ trait ResourceController
      */
     public function create(\Illuminate\Http\Request $request)
     {
-        $validator = Validator::make($request->all(), $this->getValidateRule());
+        $validate = $this->getValidateRule();
+        $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
@@ -182,7 +183,8 @@ trait ResourceController
     public function update($id = 0)
     {
         $request = Request::instance();
-        $validator = Validator::make($request->all(), $this->getValidateRule());
+        $validate = $this->getValidateRule();
+        $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),

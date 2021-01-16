@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class UploadController extends Controller
 {
@@ -16,7 +17,14 @@ class UploadController extends Controller
         ]
     ];
     public function postIndex(\Illuminate\Http\Request $request){
-        $this->validate($request, $this->getValidateRule()); //验证数据
+        $validate = $this->getValidateRule();
+        $validator = Validator::make($request->all(), $validate);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
         $type = $request->input('type','image'); //上传类型
         $disk = $request->input('disk','public'); //上传磁盘
         $file = $request->file('file');

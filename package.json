@@ -39,6 +39,7 @@
     "ueditor": "^1.2.3",
     "vee-validate": "^3.4.0",
     "velocity-animate": "^1.5.2",
+    "vue-clipboard2": "^0.3.1",
     "vue-json-views": "^1.1.0",
     "vue-router": "^3.1.2",
     "vuex": "^3.1.1",

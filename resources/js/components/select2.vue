@@ -124,6 +124,7 @@
                 if(!options){
                     return [];
                 }
+                options = this.copyObj(options);
                 //获取第一个值
                 if(typeof collect(options).first()!="object"){
                     options = collect(options).map((item,key)=>{

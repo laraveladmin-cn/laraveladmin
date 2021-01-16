@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Open\Traits;
 
 use App\Facades\Formatter;
+use App\Models\Menu;
 use App\Models\Ouser;
 use App\Services\FormatterService;
 use App\Services\SessionService;
@@ -45,6 +46,10 @@ trait LoginResponseController
             Cookie::queue($rememberTokenCookieKey, Cookie::get($rememberTokenCookieKey), $lifetime);
         }
         if(Arr::get($user,'admin') ){
+            $hasPermission = Menu::hasPermission($this->redirectTo,'get',false);
+            if(!$hasPermission){
+                $this->redirectTo = Menu::mainAdmin()->where('is_page',1)->orderBy('left_margin','asc')->value('url');
+            }
             $redirect = $this->redirectTo;
         }else{
             $redirect = $this->redirectToTourist;

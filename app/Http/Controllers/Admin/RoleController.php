@@ -9,6 +9,7 @@ use App\Models\MenuRole;
 use App\Models\Role;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class RoleController extends Controller
 {
@@ -106,7 +107,14 @@ class RoleController extends Controller
      */
     public function postEdit(\Illuminate\Http\Request $request)
     {
-        $this->validate($request, $this->getValidateRule());//验证数据
+        $validate = $this->getValidateRule();
+        $validator = Validator::make($request->all(), $validate);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
         $id = $request->get('id');
         $is_super = Role::isSuper();
         if($id && !$is_super && !in_array($id,Role::onlyChildren()->pluck('id')->toArray())){

@@ -16,7 +16,7 @@
         "laravel/horizon": "^5.3",
         "laravel/sanctum": "^2.7",
         "laravel/tinker": "^2.0",
-        "mrgoon/aliyun-sms": "^2.0",
+        "laraveladmin/aliyun-sms": "^2.1",
         "overtrue/laravel-lang": "^4.1",
         "overtrue/laravel-wechat": "^6.0",
         "socialiteproviders/qq": "^3.0",

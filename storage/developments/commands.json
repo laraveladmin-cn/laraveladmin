@@ -1,5 +1,39 @@
 [
     {
+        "command": "create:all",
+        "chinese": "生成所有资源",
+        "english": "",
+        "parameters": [
+            {
+                "key": "table",
+                "value": "",
+                "rules": "required",
+                "title": "数据表名称",
+                "name": "数据表",
+                "type": "select2tables",
+                "placeholderValue": ""
+            },
+            {
+                "key": "connection",
+                "value": "",
+                "rules": "",
+                "title": "数据库连接",
+                "name": "数据库连接",
+                "type": "select2",
+                "map_key": "database",
+                "placeholderValue": ""
+
+            },
+            {
+                "key": "module",
+                "value": "",
+                "rules": "",
+                "title": "生成对应代码在哪个模块,默认Admin",
+                "name": "模块"
+            }
+
+        ]
+    },{
         "command": "clear-compiled",
         "chinese": "删除已编译的类文件",
         "english": "Remove the compiled class file"
@@ -141,8 +175,8 @@
     },
     {
         "command": "make:event",
-        "chinese": "---",
-        "english": "创建一个新的 event 类"
+        "chinese": "创建一个新的 event 类",
+        "english": ""
     },
     {
         "command": "make:exception",
