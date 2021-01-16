@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Facades\LifeData;
 use App\Http\Controllers\Controller;
+use App\Models\Table;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use KubAT\PhpSimple\HtmlDomParser;
 
 class DevelopmentsController extends Controller
@@ -25,12 +29,29 @@ class DevelopmentsController extends Controller
      * @return array
      */
     public function index(){
+        $commands = collect($this->commands)->map(function ($command,$index){
+            $command['_id'] = $index+1;
+            return $command;
+        })->toArray();
+        $index = 1;
         $data = [
-            'row'=>[
-                'command'=>'help'
+            'row'=>$commands[$index-1],
+            'commands'=>$commands,
+            'configUrl'=>[
+                'createUrl'=>'/admin/developments/command'
             ],
-            'commands'=>$this->commands
-
+            'maps'=>[
+                //可选数据库
+                'database'=>collect(config('database.connections'))
+                    ->filter(function ($item,$key){
+                        return $item['driver']=='mysql' && $key!='schema';
+                    })
+                    ->map(function ($item,$key){
+                    return $key;
+                })->toArray()
+            ],
+            'index'=>$index,
+            'history'=>[]
         ];
         return $data;
     }
@@ -38,18 +59,56 @@ class DevelopmentsController extends Controller
     /**
      * 调用命令
      */
-    public function command(){
+    public function postCommand(){
 
+    }
+
+    /**
+     * 查询数据表
+     */
+    public function tables(\Illuminate\Http\Request $request){
+        $validator = Validator::make($request->all(),[
+            'where.TABLE_NAME'=>'nullable|string',
+            'connection'=>'nullable|string',
+        ]);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
+        $connection = $request->input('connection')?:config('database.default');
+        $tname = $request->input('where.TABLE_NAME');
+        $tableModel = new Table();
+        $tableModel = $tableModel->setConnection($connection)
+            ->setTable(DB::raw('information_schema.`TABLES`'))
+            ->where('TABLE_SCHEMA',config('database.connections.'.$connection.'.database'))
+            ->where('TABLE_NAME','like','%'.$tname.'%');
+               //获取分页数据
+        if (!Request::input('page') || Request::input('get_count')) {
+            $data = $tableModel->paginate();
+        } else { //不统计条数
+            $data = $tableModel->simplePaginate();
+        }
+        //返回响应数据存放,方便操作日志记录
+        LifeData::set('list', $data);
+        return $data;
     }
 
     /**
      * 保存拖拽后的布局
      */
     public function postLayout(\Illuminate\Http\Request $request){
-        $this->validate($request,[
+        $validator = Validator::make($request->all(),[
             'path'=>'required|string',
             'items'=>'required|array'
-        ]);//验证数据
+        ]);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
         $data = Request::all();
         $errors = [];
         $path = resource_path('js'.$data['path']);

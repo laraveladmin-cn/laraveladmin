@@ -16,7 +16,7 @@
         "laravel/horizon": "^5.3",
         "laravel/sanctum": "^2.7",
         "laravel/tinker": "^2.0",
-        "mrgoon/aliyun-sms": "^2.0",
+        "laraveladmin/aliyun-sms": "^2.1",
         "overtrue/laravel-lang": "^4.1",
         "overtrue/laravel-wechat": "^6.0",
         "socialiteproviders/qq": "^3.0",
@@ -80,26 +80,10 @@
             "@php artisan key:generate --ansi"
         ]
     },
-    "repositories": [
-        {
+    "repositories": {
+        "packagist": {
             "type": "composer",
             "url": "https://mirrors.cloud.tencent.com/composer"
-        },
-        {
-            "type": "composer",
-            "url": "https://mirrors.aliyun.com/composer/"
-        },
-        {
-            "type": "composer",
-            "url": "https://mirrors.huaweicloud.com/repository/php/"
-        },
-        {
-            "type": "composer",
-            "url": "https://php.cnpkg.org"
-        },
-        {
-            "type": "composer",
-            "url": "https://packagist.laravel-china.org"
         }
-    ]
+    }
 }

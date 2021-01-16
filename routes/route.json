@@ -633,6 +633,21 @@
             "description" : "提交编辑页面布局保存",
             "group": "admin",
             "action": "DevelopmentsController@postLayout"
+        },
+        {
+            "id": 86,
+            "name": "数据表查询",
+            "icons": "fa-table",
+            "url":"/admin/developments/tables",
+            "method":1,
+            "status":2,
+            "is_page": 0,
+            "parent_id": 84,
+            "disabled": 0,
+            "env": "local",
+            "description" : "数据表名称联想查询",
+            "group": "admin",
+            "action": "DevelopmentsController@tables"
         }
     ],
     "ressorce": [

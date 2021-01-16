@@ -9,41 +9,132 @@
                     <li>
                         <a href="#menus" data-toggle="tab">菜单路由</a>
                     </li>
+                    <li>
+                        <a href="#plug_in" data-toggle="tab">插件安装</a>
+                    </li>
+                    <li>
+                        <a href="#docs" data-toggle="tab">相关文档</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="chart tab-pane active" id="console">
                         <edit :options="options" ref="edit">
                             <template slot="content" slot-scope="props">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <h5>
-                                        <code>php artisan {{props.data.row.command}}</code>
-                                    </h5>
-                                    <div>
-                                        <table class="table table-hover table-bordered table-striped text-center dataTable">
-                                            <thead>
-                                                <tr>
-                                                    <th>命令</th>
-                                                    <th>中文</th>
-                                                    <th>English</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="item in props.data.commands">
-                                                    <td>
-                                                        <code>{{item.command}}</code>
-                                                    </td>
-                                                    <td>{{item.chinese}}</td>
-                                                    <td>{{item.english}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <h3 class="text-center">
+                                        命令名称: {{props.data.row.chinese}}
+                                    </h3>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                    <edit-item :key-name="'index'"
+                                               :options="{name:'选择命令',rules:'required',title:'需要执行的命令'}"
+                                               :datas="props">
+                                        <template slot="input-item">
+                                            <div class="edit-item-content">
+                                                <select2 v-model="props.data.index"
+                                                         :default-options="commands"
+                                                         :placeholder-show="'请选择'"
+                                                         :placeholder-value="0"
+                                                         :primary-key="'_id'"
+                                                         @change="changeCommand(props.data)"
+                                                         :show="['command','chinese']" >
+                                                </select2>
+                                            </div>
+                                        </template>
+                                    </edit-item>
+                                    <div v-if="props.data.row.parameters">
+                                        <div v-for="(item,index) in props.data.row.parameters">
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-if="item.type=='select2tables'"
+                                                       :options="item"
+                                                       :datas="props"
+                                                       :key="index">
+                                                <template slot="input-item">
+                                                    <div class="edit-item-content">
+                                                        <select2 v-model="item.value"
+                                                                 :default-options="[]"
+                                                                 :url="use_url+'/admin/developments/tables'"
+                                                                 :keyword-key="'TABLE_NAME'"
+                                                                 :show="['TABLE_NAME']"
+                                                                 :primary-key="'TABLE_NAME'"
+                                                                 :placeholder-show="'请选择'"
+                                                                 :placeholder-value="''"
+                                                                 :params="{connection:connection_value(props.data.row.parameters)}"
+                                                                 :is-ajax="true" >
+                                                        </select2>
+                                                    </div>
+                                                </template>
+                                            </edit-item>
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-else-if="item.type=='select2'"
+                                                       :options="item"
+                                                       :datas="props"
+                                                       :key="index">
+                                                <template slot="input-item">
+                                                    <div class="edit-item-content">
+                                                        <select2 v-model="item.value"
+                                                                 :default-options="array_get(props,'data.maps.'+item.map_key,[])"
+                                                                 :placeholder-show="'请选择'"
+                                                                 :placeholder-value="''"
+                                                                 :is-ajax="false" >
+                                                        </select2>
+                                                    </div>
+                                                </template>
+                                            </edit-item>
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-else
+                                                       :options="item"
+                                                       :datas="props"
+                                                       :key="index">
+                                            </edit-item>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
+                                    命令:
+                                    <div v-clipboard:copy="command(props.data.row)"  v-clipboard:success="onCopy" class="snippet command">
+                                        <button class="btn">
+                                            <img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="复制到粘贴板">
+                                            复制到粘贴板
+                                        </button>
+                                        <code>
+                                            {{command(props.data.row)}}
+                                        </code>
+                                    </div>
+                                    执行结果:
                                 </div>
                             </template>
                         </edit>
+                        <div>
+                            <table class="table table-hover table-bordered table-striped text-center dataTable">
+                                <thead>
+                                <tr>
+                                    <th>命令</th>
+                                    <th>说明</th>
+                               <!--     <th>English</th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="item in commands">
+                                    <td v-clipboard:copy="'php artisan '+item.command"  v-clipboard:success="onCopy" class="snippet">
+                                        <button class="btn" data-clipboard-snippet=""><img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="Copy to clipboard"></button>
+                                        <code>{{item.command}}</code>
+                                    </td>
+                                    <td>{{item.chinese}}</td>
+                                 <!--   <td>{{item.english}}</td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="chart tab-pane" id="menus">
                         菜单内容
+                    </div>
+                    <div class="chart tab-pane" id="plug_in">
+                        安装应用插件
+                    </div>
+                    <div class="chart tab-pane" id="docs">
+                        相关文档
                     </div>
                 </div>
             </div>
@@ -53,10 +144,14 @@
 </template>
 
 <script>
+    import {mapActions,mapState} from 'vuex';
+    let $this;
     export default {
         components: {
             'edit': () => import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
-            "edit-item": () => import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue')
+            "edit-item": () => import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
+            "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
+
         },
         data() {
             return {
@@ -68,16 +163,65 @@
                     callback: (response, row) => { //修改成功
 
                     }
-                }
+                },
+                commands:[],
+                interval:''
             }
         },
         mounted() {
-
-
+            this.interval = setInterval(()=>{
+                if(this.$refs['edit'].data.commands){
+                    this.commands = this.$refs['edit'].data.commands;
+                    clearInterval(this.interval);
+                }
+            },500);
+            $this = this;
+        },
+        computed:{
+            ...mapState([
+                'use_url'
+            ])
+        },
+        methods:{
+            ...mapActions({
+                refreshToken: 'refreshToken',
+                pushMessage: 'pushMessage',
+            }),
+            onCopy:  (e)=> {
+                $this.pushMessage({
+                    'showClose':true,
+                    'title':e.text+' 命令复制成功!',
+                    'message':'',
+                    'type':'success',
+                    'position':'top',
+                    'iconClass':'fa-check',
+                    'customClass':'',
+                    'duration':3000,
+                    'show':true
+                });
+            },
+            command(command){
+                let parm_str = collect(command.parameters).filter((parameter)=>{
+                    return parameter.value;
+                }).map((parameter)=>{
+                    return ' --'+parameter.key+'='+parameter.value;
+                }).implode('');
+                return 'php artisan '+command.command+parm_str;
+            },
+            connection_value(parms){
+                return collect(parms).first((parm)=>{
+                    return parm.key=='connection';
+                }).value;
+            },
+            changeCommand(data){
+                data.row = data.commands[data.index-1];
+            }
         }
     }
 </script>
 
 <style scoped>
-
+.command{
+    margin-bottom: 10px ;
+}
 </style>

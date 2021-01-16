@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request as ValidateRequest;
+use Illuminate\Support\Facades\Validator;
 
 class PersonageController extends Controller
 {
@@ -85,7 +86,13 @@ class PersonageController extends Controller
         $rule = $this->getValidateRestPasswordRule();
         $password = $request->input('password');
         $unbind_ids = $request->input('unbind_ids');
-        $this->validate($request,$rule,[],['old_password'=>'旧密码']);
+        $validator = Validator::make($request->all(), $rule,[],['old_password'=>'旧密码']);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
         $user = Auth::user();
         $fields = ['email','mobile_phone'];
         if($password){
@@ -124,7 +131,14 @@ class PersonageController extends Controller
      * 修改个人资料
      */
     public function postIndex(\Illuminate\Http\Request $request){
-        $this->validate($request, $this->getValidateIndexRule());//验证数据
+        $validate = $this->getValidateIndexRule();
+        $validator = Validator::make($request->all(), $validate);
+        if ($validator->fails()) {
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
+        }
         $user = Auth::user();
         $res = $user->update($request->only(['name','avatar','description'])); //修改个人资料
         if ($res === false) {

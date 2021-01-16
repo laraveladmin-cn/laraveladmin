@@ -46,7 +46,9 @@
 
 1. php>=7.4(目前项目使用的laravel8)
 
-2. 已安装好mysql数据库(mysql>=8)
+2. 已安装好mysql数据库
+
+> 已有数据库请正确设置好数据库默认编码charset:utf8mb4;collation:utf8mb4_unicode_ci
 
 3. 安装好nodejs,cnpm(用于前端模板打包编译)
 
@@ -108,11 +110,13 @@ npm run prod #编译前端页面js
 envoy run init --branch=master --self=1 #项目初始化
 ```
 
-4. [解决扩展包mrgoon/aliyun-sms自动加载问题](/aliyun_sms.md "解决扩展包mrgoon/aliyun-sms自动加载问题")
+> 安装完成请在编辑器排除这两个目录防止编辑器被卡死
 
-5. 配置nginx访问请参照"docker/nginx/vhost_dev/local.laraveladmin.cn.conf"
+![防止编辑器卡死](https://www.laraveladmin.cn/api/home/docs/images/防止编辑器卡顿.png)
 
-6. 访问
+4. 配置nginx访问请参照"docker/nginx/vhost_dev/local.laraveladmin.cn.conf"
+
+5. 访问
 
 本地开发环境绑定hosts后就可以进行访问了
 
@@ -120,13 +124,13 @@ envoy run init --branch=master --self=1 #项目初始化
 127.0.0.1 local.laraveladmin.cn
 ```
 
-7. 开发环境前端实时编译启动
+6. 开发环境前端实时编译启动
 
 ```shell
 npm run watch
 ```
 
-8. 代码更新升级
+7. 代码更新升级
 
 > Linux,Mac系统执行
 
@@ -134,13 +138,13 @@ npm run watch
 envoy run update --branch=master --self=1
 ```
 
-9. 添加自己的代码仓库源
+8. 添加自己的代码仓库源
 
 ```shell
 git remote add self https://用户名:密码@gitee.com/自己代码仓库.git
 ```
 
-10. 定时任务,队列,守护进程管理请自己手动添加
+9. 定时任务,队列,守护进程管理请自己手动添加
 
 [定时任务](https://laravelacademy.org/post/8484)
 

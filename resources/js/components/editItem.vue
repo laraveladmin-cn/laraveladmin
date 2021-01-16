@@ -40,10 +40,10 @@
                                 v-model="itemObj[_key]"
                                 :disabled="!datas.url || options.disabled">
                             <option v-if="typeof options['placeholderValue']!='undefined'" :value="options['placeholderValue']">请选择</option>
-                            <option v-for="(val,index) in array_get(datas.data.maps,keyName)" :value="index">{{val}}</option>
+                            <option v-for="(val,index) in array_get(datas.data.maps,_map_key)" :value="index">{{val}}</option>
                         </select>
                         <div class="row" v-else-if="options.type=='checkbox'">
-                            <div v-for="(item,index) in array_get(datas.data.maps,keyName)" class="col-sm-4">
+                            <div v-for="(item,index) in array_get(datas.data.maps,_map_key)" class="col-sm-4">
                                 <label>
                                     <input v-model="itemObj[_key]" :value="index" :disabled="!datas.url || options.disabled" type="checkbox" />
                                     {{item}}
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="row" v-else-if="options.type=='radio'">
-                            <div v-for="(item,index) in array_get(datas.data.maps,keyName)" class="col-sm-4">
+                            <div v-for="(item,index) in array_get(datas.data.maps,_map_key)" class="col-sm-4">
                                 <label>
                                     <input v-model="itemObj[_key]" :value="index" :disabled="!datas.url || options.disabled" type="radio"  />
                                     {{item}}
@@ -138,6 +138,9 @@
                     return this.datas.data.row;
                 }
                 return array_get(this.datas,'data.row.'+_key);
+            },
+            _map_key(){
+                return this.options.map_key || this.keyName;
             }
         },
         watch:{
