@@ -131,7 +131,8 @@ class PersonageController extends Controller
      * 修改个人资料
      */
     public function postIndex(\Illuminate\Http\Request $request){
-        $validator = Validator::make($request->all(), $this->getValidateIndexRule());
+        $validate = $this->getValidateIndexRule();
+        $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),

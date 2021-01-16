@@ -17,7 +17,8 @@ class UploadController extends Controller
         ]
     ];
     public function postIndex(\Illuminate\Http\Request $request){
-        $validator = Validator::make($request->all(), $this->getValidateRule());
+        $validate = $this->getValidateRule();
+        $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
