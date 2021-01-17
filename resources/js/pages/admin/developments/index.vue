@@ -165,7 +165,7 @@
                     }
                 },
                 commands:[],
-                interval:''
+                interval:'',
             }
         },
         mounted() {
