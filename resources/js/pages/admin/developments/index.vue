@@ -56,9 +56,11 @@
                                                                  :url="use_url+'/admin/developments/tables'"
                                                                  :keyword-key="'TABLE_NAME'"
                                                                  :show="['TABLE_NAME']"
+                                                                 :disabled="!props.url"
                                                                  :primary-key="'TABLE_NAME'"
                                                                  :placeholder-show="'请选择'"
                                                                  :placeholder-value="''"
+                                                                 @change="clearInput"
                                                                  :params="{connection:connection_value(props.data.row.parameters)}"
                                                                  :is-ajax="true" >
                                                         </select2>
@@ -75,7 +77,9 @@
                                                         <select2 v-model="item.value"
                                                                  :default-options="array_get(props,'data.maps.'+item.map_key,[])"
                                                                  :placeholder-show="'请选择'"
+                                                                 :disabled="!props.url"
                                                                  :placeholder-value="''"
+                                                                 @change="clearInput"
                                                                  :is-ajax="false" >
                                                         </select2>
                                                     </div>
@@ -91,17 +95,38 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
-                                    命令:
-                                    <div v-clipboard:copy="command(props.data.row)"  v-clipboard:success="onCopy" class="snippet command">
-                                        <button class="btn">
-                                            <img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="复制到粘贴板">
-                                            复制到粘贴板
-                                        </button>
-                                        <code>
-                                            {{command(props.data.row)}}
-                                        </code>
+                                    <div class="form-group" :class="{'has-error':inputCommand && command(props.data.row)!=inputCommand}">
+                                        <label>手动输入命令:</label>
+                                        <div class="input-group">
+                                            <input
+                                                type="text"
+                                                v-model.trim="inputCommand"
+                                                class="form-control"
+                                                :placeholder="'请输入'">
+                                            <div class="input-group-addon" v-clipboard:copy="inputCommand"  v-clipboard:success="onCopy" >
+                                                <i class="fa fa-copy"></i>
+                                            </div>
+                                        </div>
                                     </div>
-                                    执行结果:
+                                    <div class="form-group">
+                                        <label>命令:</label>
+                                        <div v-clipboard:copy="command(props.data.row)"  v-clipboard:success="onCopy" class="snippet command">
+                                            <button class="btn">
+                                                <img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="复制到粘贴板">
+                                                复制到粘贴板
+                                            </button>
+                                            <code>
+                                                {{command(props.data.row)}}
+                                            </code>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>执行结果:</label>
+                                        <div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </template>
                         </edit>
@@ -165,7 +190,8 @@
                     }
                 },
                 commands:[],
-                interval:''
+                interval:'',
+                inputCommand:''
             }
         },
         mounted() {
@@ -215,6 +241,40 @@
             },
             changeCommand(data){
                 data.row = data.commands[data.index-1];
+                this.clearInput();
+            },
+            clearInput(){
+                this.inputCommand = '';
+            }
+        },
+        watch:{
+            //手动修改输入命令
+            inputCommand(val){
+                if(val){
+                    let values = collect(val.replace('php artisan ','').split(' '));
+                    let command = values.shift();
+                    //反向修改命令
+                    let row = copyObj(collect(this.commands).keyBy('command').get(command));
+                    values = values.filter((value)=>{
+                        return value;
+                    }).map((value)=>{
+                        let param = value.replace('--','').split('=');
+                        return {
+                            key:param[0],
+                            value:param[1] || ''
+                        }
+                    }).pluck('value','key').all();
+                    collect(row.parameters || []).each((parameter)=>{
+                        if(typeof values[parameter.key]=="undefined"){
+                            parameter.value = parameter._value;
+                        }else {
+                            parameter.value = values[parameter.key];
+                        }
+                    });
+                    this.$refs['edit'].data.index = row['_id'];
+                    this.$refs['edit'].data.row = row;
+                }
+
             }
         }
     }

@@ -205,8 +205,11 @@ class LoginController extends Controller
             $errors = $validator->errors()->toArray();
             if(!isset($errors['verify']) && $this->mustVerify()){
                 $errors['verify'] = ['验证码必填'];
-                throw ValidationException::withMessages($errors);
             }
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => 'The given data was invalid.'
+            ], 422);
         }
     }
 
@@ -328,7 +331,9 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        $this->validateLogin($request);
+        if($res = $this->validateLogin($request)){
+            return $res;
+        };
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }

@@ -17,6 +17,7 @@
                             v-if="!options.type || options.type=='input' || options.type=='text'"
                             type="text"
                             v-model="itemObj[_key]"
+                            @change="$emit('change',itemObj[_key])"
                             class="form-control"
                             :disabled="!datas.url || options.disabled"
                             :placeholder="'请输入'+options.name">
@@ -24,12 +25,14 @@
                             v-else-if="options.type=='email'"
                             type="email"
                             v-model="itemObj[_key]"
+                            @change="$emit('change',itemObj[_key])"
                             class="form-control"
                             :disabled="!datas.url || options.disabled"
                             :placeholder="'请输入'+options.name">
                         <textarea
                             v-else-if="options.type=='textarea'"
                             v-model="itemObj[_key]"
+                            @change="$emit('change',itemObj[_key])"
                             class="form-control"
                             rows="6"
                             :disabled="!datas.url || options.disabled"
@@ -38,6 +41,7 @@
                         <select v-else-if="options.type=='select'"
                                 class="form-control"
                                 v-model="itemObj[_key]"
+                                @change="$emit('change',itemObj[_key])"
                                 :disabled="!datas.url || options.disabled">
                             <option v-if="typeof options['placeholderValue']!='undefined'" :value="options['placeholderValue']">请选择</option>
                             <option v-for="(val,index) in array_get(datas.data.maps,_map_key)" :value="index">{{val}}</option>
@@ -45,7 +49,7 @@
                         <div class="row" v-else-if="options.type=='checkbox'">
                             <div v-for="(item,index) in array_get(datas.data.maps,_map_key)" class="col-sm-4">
                                 <label>
-                                    <input v-model="itemObj[_key]" :value="index" :disabled="!datas.url || options.disabled" type="checkbox" />
+                                    <input v-model="itemObj[_key]" @change="$emit('change',itemObj[_key])" :value="index" :disabled="!datas.url || options.disabled" type="checkbox" />
                                     {{item}}
                                 </label>
                             </div>
@@ -53,7 +57,7 @@
                         <div class="row" v-else-if="options.type=='radio'">
                             <div v-for="(item,index) in array_get(datas.data.maps,_map_key)" class="col-sm-4">
                                 <label>
-                                    <input v-model="itemObj[_key]" :value="index" :disabled="!datas.url || options.disabled" type="radio"  />
+                                    <input v-model="itemObj[_key]" @change="$emit('change',itemObj[_key])" :value="index" :disabled="!datas.url || options.disabled" type="radio"  />
                                     {{item}}
                                 </label>
                             </div>
@@ -62,6 +66,7 @@
                             <input
                                 type="text"
                                 v-model="itemObj[_key]"
+                                @change="$emit('change',itemObj[_key])"
                                 class="form-control"
                                 :disabled="!datas.url || options.disabled"
                                 :placeholder="'请输入'+options.name">
@@ -73,6 +78,7 @@
                             <input
                                 type="text"
                                 v-model="itemObj[_key]"
+                                @change="$emit('change',itemObj[_key])"
                                 class="form-control"
                                 :disabled="!datas.url || options.disabled"
                                 :placeholder="'请输入'+options.name">
