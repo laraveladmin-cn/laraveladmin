@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Facades\LifeData;
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
 use App\Models\Table;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -29,8 +30,13 @@ class DevelopmentsController extends Controller
      * @return array
      */
     public function index(){
+        $submit = '/admin/developments/command';
         $commands = collect($this->commands)->map(function ($command,$index){
             $command['_id'] = $index+1;
+            $command['parameters'] = collect(Arr::get($command,'parameters',[]))->map(function ($parameter){
+                $parameter['_value'] = $parameter['value'];
+                return $parameter;
+            });
             return $command;
         })->toArray();
         $index = 1;
@@ -38,7 +44,7 @@ class DevelopmentsController extends Controller
             'row'=>$commands[$index-1],
             'commands'=>$commands,
             'configUrl'=>[
-                'createUrl'=>'/admin/developments/command'
+                'createUrl'=>Menu::hasPermission($submit,'post') ? $submit : ''
             ],
             'maps'=>[
                 //可选数据库
@@ -60,7 +66,7 @@ class DevelopmentsController extends Controller
      * 调用命令
      */
     public function postCommand(){
-
+        return Response::returns(['alert' => alert(['message' => '功能正在开发...'])],422);
     }
 
     /**
