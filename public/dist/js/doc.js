@@ -14,8 +14,6 @@ window.$docsify = {
     el: '#app',
     repo: 'https://gitee.com/laravel-admin/laraveladmin',
     basePath: '/api/home/docs/',
-    // 入口文件改为 /home.md
-    homepage: 'env.md',
     auto2top: true,
     requestHeaders: {
         'Authorization': decodeURIComponent(token)
@@ -101,7 +99,7 @@ window.$docsify = {
                    gitalk.render('comments');
                    if(self == top){
                        setTimeout(()=>{
-                           window.location.href = '/home/index';
+                           //window.location.href = '/home/index';
                        },5000);
                    }
                }catch (e) {
@@ -121,10 +119,10 @@ window.$docsify = {
     ]
 };
 if(self == top){
-    setTimeout(()=>{
+/*    setTimeout(()=>{
         window.document.getElementById('box').style.display = 'none';
         let div=document.createElement("div");
         div.innerText = "跳转中,请稍等...";
         document.body.appendChild(div);
-    },100);
+    },100);*/
 }
