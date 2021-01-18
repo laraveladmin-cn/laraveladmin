@@ -87,11 +87,28 @@ cp .env.example .env
 vi .env
 ```
 
-3. 安装composer相关扩展包及项目代码初始化
+3. 安装composer相关扩展包及项目代码初始化(以下两种方式选一种进行安装即可)
 
 > windows安装请先直接下载vendor.zip解压在项目代码中
 
 [vendor.zip](https://www.laraveladmin.cn/api/home/docs/vendor.zip)
+
+
+3-1. 直接命令安装
+
+```shell
+cnpm install #前端编译扩展包安装
+npm run prod #编译前端页面js
+php artisan config:clear #清理配置缓存
+php artisan cache:clear #清理缓存
+php artisan key:generate --force #生成APP_KEY
+php artisan storage:link #创建上传文件目录软连接
+php artisan db:seed --class=CheckDatabaseSeeder --force #检查并创建数据库
+php artisan migrate:all #创建数据表
+php artisan db:seed --force #初始化数据
+```
+
+3-2. 通过envoy命令进行安装
 
 > 如果安装"laravel/envoy"过程中失败请切换下全局镜像源,进行尝试
 

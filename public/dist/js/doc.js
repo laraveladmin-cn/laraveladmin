@@ -14,6 +14,8 @@ window.$docsify = {
     el: '#app',
     repo: 'https://gitee.com/laravel-admin/laraveladmin',
     basePath: '/api/home/docs/',
+    // 入口文件改为 /home.md
+    homepage: 'env.md',
     auto2top: true,
     requestHeaders: {
         'Authorization': decodeURIComponent(token)
