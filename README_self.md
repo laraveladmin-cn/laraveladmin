@@ -141,6 +141,9 @@ envoy run init --branch=master --self=1 #项目初始化
 127.0.0.1 local.laraveladmin.cn
 ```
 
+> 登录用户名及密码参照.env中的"ADMIN_USER_NAME","ADMIN_PASSWORD"设置项
+> 登录验证码使用的极验滑块验证(免费的),注册后在.env中进行配置
+
 6. 开发环境前端实时编译启动
 
 ```shell
