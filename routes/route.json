@@ -567,6 +567,21 @@
             "description" : "数据表名称联想查询",
             "group": "admin",
             "action": "DevelopmentsController@tables"
+        },
+        {
+            "id": 87,
+            "name": "命令执行",
+            "icons": "fa-code",
+            "url":"/admin/developments/command",
+            "method":2,
+            "status":2,
+            "is_page": 0,
+            "parent_id": 84,
+            "disabled": 0,
+            "env": "local",
+            "description" : "提交命令进行执行",
+            "group": "admin",
+            "action": "DevelopmentsController@postCommand"
         }
     ],
     "ressorce": [

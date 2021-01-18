@@ -136,6 +136,20 @@ winpty docker-compose run --rm php envoy run init --branch=master #项目初始�
 winpty docker-compose up -d #启动服务
 ```
 
+> 执行命令winpty docker-compose ps显示php容器一直restart的状态是部分Windows docker对"docker/php/run.sh"的文件编码不能识别问题!请执行如下操作
+```shell
+winpty docker-compose down
+winpty docker-compose run --rm php bash
+mv docker/php/run.sh docker/php/run.sh.back
+echo '' > docker/php/run.sh
+cat docker/php/run.sh.back >> docker/php/run.sh
+chmod u+x docker/php/run.sh
+chmod 777 docker/php/run.sh
+exit
+winpty docker-compose up -d
+winpty docker-compose ps
+```
+
 > 安装完成请在编辑器排除这两个目录防止编辑器被卡死
 
 ![防止编辑器卡死](https://www.laraveladmin.cn/api/home/docs/images/防止编辑器卡顿.png)
