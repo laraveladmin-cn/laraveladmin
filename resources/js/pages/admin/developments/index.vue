@@ -137,6 +137,11 @@
                                         </div>
                                     </div>
                                 </div>
+
+                            </template>
+                        </edit>
+                        <div>
+                            <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
                                         <label>执行结果:</label>
@@ -145,9 +150,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </template>
-                        </edit>
-                        <div>
+                            </div>
                             <table class="table table-hover table-bordered table-striped text-center dataTable">
                                 <thead>
                                 <tr>
