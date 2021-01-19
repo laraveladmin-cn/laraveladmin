@@ -58,7 +58,7 @@
                                                                  :show="['TABLE_NAME']"
                                                                  :disabled="!props.url"
                                                                  :primary-key="'TABLE_NAME'"
-                                                                 :placeholder-show="'请选择'"
+                                                                 :placeholder-show="item.placeholder || '请选择'"
                                                                  :placeholder-value="''"
                                                                  @change="clearInput"
                                                                  :params="{connection:connection_value(props.data.row.parameters)}"
@@ -76,12 +76,28 @@
                                                     <div class="edit-item-content">
                                                         <select2 v-model="item.value"
                                                                  :default-options="array_get(props,'data.maps.'+item.map_key,[])"
-                                                                 :placeholder-show="'请选择'"
+                                                                 :placeholder-show="item.placeholder || '请选择'"
                                                                  :disabled="!props.url"
                                                                  :placeholder-value="''"
                                                                  @change="clearInput"
                                                                  :is-ajax="false" >
                                                         </select2>
+                                                    </div>
+                                                </template>
+                                            </edit-item>
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-else-if="item.type=='switch'"
+                                                       :options="item"
+                                                       :datas="props"
+                                                       :key="index">
+                                                <template slot="input-item">
+                                                    <div class="edit-item-content">
+                                                        <el-switch v-model="item.value"
+                                                                   active-text="是"
+                                                                   inactive-text="否"
+                                                                   :active-value="1"
+                                                                   :inactive-value="0">
+                                                        </el-switch>
                                                     </div>
                                                 </template>
                                             </edit-item>
@@ -120,13 +136,14 @@
                                             </code>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
                                         <label>执行结果:</label>
-                                        <div>
-
+                                        <div class="output-body" v-show="output">
+                                            {{output}}
                                         </div>
                                     </div>
-
                                 </div>
                             </template>
                         </edit>
@@ -176,7 +193,7 @@
             'edit': () => import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
             "edit-item": () => import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
-
+            "el-switch": ()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
         },
         data() {
             return {
@@ -185,16 +202,18 @@
                     url: '/admin/developments/index', //数据表请求数据地址
                     params: {},
                     fixed: true,
+                    no_back:true,
                     callback: (response, row) => { //修改成功
-
+                        this.output = response.data.output || '';
                     },
                     resetCallback(){
                         $this.clearInput();
-                    }
+                    },
                 },
                 commands:[],
                 interval:'',
-                inputCommand:''
+                inputCommand:'',
+                output:''
             }
         },
         mounted() {
@@ -245,7 +264,11 @@
                         return ' '+parameter.value;
                     }
                 }).implode('');
-                return 'php artisan '+command.command+parm_str;
+                let _exec = command.command+parm_str;
+                if(this.$refs['edit'] && this.$refs['edit'].data && this.$refs['edit'].data.row._exec != _exec){
+                    this.$refs['edit'].data.row._exec = _exec;
+                }
+                return 'php artisan '+_exec;
             },
             //连接参数
             connection_value(parms){
@@ -265,8 +288,26 @@
                 if(!this.inputCommand){
                     return false;
                 }
+                let command = props.data.row;
+                let keys_as = collect(command.parameters).filter((parameter)=>{
+                    return parameter.key_as;
+                }).pluck('key','key_as');
                 let inputCommand = this.inputCommand.replace(/  /g,' ').replace(/  /g,' ');
-                inputCommand = collect(inputCommand.split(' ')).sort().implode(' ');
+                inputCommand = collect(inputCommand.split(' '))
+                    .map((value)=>{
+                        if(value.indexOf('--')!=-1){
+                            let param = value.replace('--','').split('=');
+                            keys_as.each((key,key_as)=>{
+                                if(param[0]==key_as){
+                                    param[0]=key;
+                                }
+                            });
+                            return  '--'+collect(param).implode('=');
+                        }
+                       return value;
+                    })
+                    .sort()
+                    .implode(' ');
                 let inputCommand1 = this.command(props.data.row);
                 inputCommand1 = collect(inputCommand1.split(' ')).sort().implode(' ');
                return inputCommand1!=inputCommand;
@@ -318,18 +359,22 @@
                                 parameter.value = parms[index];
                             }
                             index = index+1;
-                        }else {
+                        }else { //选项
                             if(parameter.is_boolean){
-                                if(typeof options[parameter.key]=="undefined"){
+                                if(typeof options[parameter.key]!="undefined"){
+                                    parameter.value = 1;
+                                }else if(parameter.key_as && typeof options[parameter.key_as]!="undefined"){
                                     parameter.value = 1;
                                 }else {
                                     parameter.value = 0;
                                 }
                             }else {
-                                if(typeof options[parameter.key]=="undefined"){
-                                    parameter.value = parameter._value;
-                                }else {
+                                if(typeof options[parameter.key]!="undefined"){
                                     parameter.value = options[parameter.key];
+                                }else if(parameter.key_as && typeof options[parameter.key_as]!="undefined"){
+                                    parameter.value = options[parameter.key_as];
+                                }else {
+                                    parameter.value = parameter._value;
                                 }
                             }
                         }
@@ -347,5 +392,14 @@
 <style scoped>
 .command{
     margin-bottom: 10px ;
+}
+.output-body {
+    white-space: pre-wrap;
+    background: #000000;
+    color: #00fa4a;
+    padding: 10px;
+    border-radius: 0;
+ /*   max-height: 500px;
+    overflow: scroll;*/
 }
 </style>

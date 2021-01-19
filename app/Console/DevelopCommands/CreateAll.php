@@ -16,7 +16,7 @@ class CreateAll extends Command
      *
      * @var string
      */
-    protected $signature = 'create:all {table : The name of model} {module?} {--connection}';
+    protected $signature = 'create:all {table : The name of model} {module?} {--c|connection= : The database connection to use}';
 
     /**
      * The console command description.

@@ -1,5 +1,5 @@
 <template>
-    <div :id="id">
+    <div :id="id" :class="{'active-move':is_local}">
         <validation-observer :ref="id" v-slot="{invalid,validate}">
             <div class="row">
                 <slot name="content" :data="data" :url="url" :error="error">

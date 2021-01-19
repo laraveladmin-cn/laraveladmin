@@ -220,6 +220,7 @@ class Menu extends Model
                 });
         });
 
+        //登录用户
         if($user){
             $query->orWhere(function ($q){
                 $q->mainHome();
