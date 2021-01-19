@@ -145,6 +145,9 @@
                 this.error = {};
                 this.data = copyObj(this.back_data);
                 this.validation.reset();
+                if(typeof this.options.resetCallback=="function"){
+                    this.options.resetCallback();
+                }
             },
             //获取数据
             getData(params){

@@ -14,6 +14,13 @@
                 "placeholderValue": ""
             },
             {
+                "key": "module",
+                "value": "",
+                "rules": "",
+                "title": "生成对应代码在哪个模块,默认Admin",
+                "name": "模块"
+            },
+            {
                 "key": "connection",
                 "value": "",
                 "rules": "",
@@ -21,17 +28,9 @@
                 "name": "数据库连接",
                 "type": "select2",
                 "map_key": "database",
-                "placeholderValue": ""
-
-            },
-            {
-                "key": "module",
-                "value": "",
-                "rules": "",
-                "title": "生成对应代码在哪个模块,默认Admin",
-                "name": "模块"
+                "placeholderValue": "",
+                "is_option": true
             }
-
         ]
     },{
         "command": "clear-compiled",

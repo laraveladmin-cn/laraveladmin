@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
-                                    <div class="form-group" :class="{'has-error':inputCommand && command(props.data.row)!=inputCommand}">
+                                    <div class="form-group" :class="{'has-error':inputError(props)}">
                                         <label>手动输入命令:</label>
                                         <div class="input-group">
                                             <input
@@ -187,6 +187,9 @@
                     fixed: true,
                     callback: (response, row) => { //修改成功
 
+                    },
+                    resetCallback(){
+                        $this.clearInput();
                     }
                 },
                 commands:[],
@@ -213,6 +216,7 @@
                 refreshToken: 'refreshToken',
                 pushMessage: 'pushMessage',
             }),
+            //复制粘贴板成功后执行
             onCopy:  (e)=> {
                 $this.pushMessage({
                     'showClose':true,
@@ -226,50 +230,110 @@
                     'show':true
                 });
             },
+            //线上组装后的命令
             command(command){
                 let parm_str = collect(command.parameters).filter((parameter)=>{
                     return parameter.value;
                 }).map((parameter)=>{
-                    return ' --'+parameter.key+'='+parameter.value;
+                    if(parameter.is_option){
+                        if(parameter.is_boolean){
+                            return parameter.value?' --'+parameter.key:'';
+                        }else {
+                            return ' --'+parameter.key+'='+parameter.value;
+                        }
+                    }else {
+                        return ' '+parameter.value;
+                    }
                 }).implode('');
                 return 'php artisan '+command.command+parm_str;
             },
+            //连接参数
             connection_value(parms){
                 return collect(parms).first((parm)=>{
                     return parm.key=='connection';
                 }).value;
             },
+            //修改命令清空手动输入
             changeCommand(data){
                 data.row = data.commands[data.index-1];
                 this.clearInput();
             },
             clearInput(){
                 this.inputCommand = '';
+            },
+            inputError(props){
+                if(!this.inputCommand){
+                    return false;
+                }
+                let inputCommand = this.inputCommand.replace(/  /g,' ').replace(/  /g,' ');
+                inputCommand = collect(inputCommand.split(' ')).sort().implode(' ');
+                let inputCommand1 = this.command(props.data.row);
+                inputCommand1 = collect(inputCommand1.split(' ')).sort().implode(' ');
+               return inputCommand1!=inputCommand;
             }
         },
         watch:{
             //手动修改输入命令
             inputCommand(val){
                 if(val){
-                    let values = collect(val.replace('php artisan ','').split(' '));
-                    let command = values.shift();
+                    let values = collect(val.replace(/  /g,' ')
+                        .replace(/  /g,' ') //去除多余空格
+                        .replace('php artisan ','') //去除前置命令
+                        .split(' '));
+                    let command = values.shift(); //命令集
+                    let item  = collect(this.commands).keyBy('command').get(command);
+                    if(!item || typeof item.command=="undefined"){
+                        return ;
+                    }
                     //反向修改命令
-                    let row = copyObj(collect(this.commands).keyBy('command').get(command));
-                    values = values.filter((value)=>{
-                        return value;
+                    let row = copyObj(item);
+                    //参数
+                    let parms = values.filter((value)=>{
+                        return value && value.indexOf('--')==-1;
+                    }).values()
+                        .map((value,index)=>{
+                        return {
+                            key:index+'',
+                            value:value
+                        }
+                    }).pluck('value','key')
+                        .all();
+                    //选项
+                    let options = values.filter((value)=>{
+                        return value && value.indexOf('--')!=-1;
                     }).map((value)=>{
                         let param = value.replace('--','').split('=');
                         return {
                             key:param[0],
                             value:param[1] || ''
                         }
-                    }).pluck('value','key').all();
+                    }).pluck('value','key')
+                        .all();
+                    let index = 0;
                     collect(row.parameters || []).each((parameter)=>{
-                        if(typeof values[parameter.key]=="undefined"){
-                            parameter.value = parameter._value;
+                        if(!parameter.is_option){ //参数
+                            if(typeof parms[index]=="undefined"){
+                                parameter.value = '';
+                            }else {
+                                parameter.value = parms[index];
+                            }
+                            index = index+1;
                         }else {
-                            parameter.value = values[parameter.key];
+                            if(parameter.is_boolean){
+                                if(typeof options[parameter.key]=="undefined"){
+                                    parameter.value = 1;
+                                }else {
+                                    parameter.value = 0;
+                                }
+                            }else {
+                                if(typeof options[parameter.key]=="undefined"){
+                                    parameter.value = parameter._value;
+                                }else {
+                                    parameter.value = options[parameter.key];
+                                }
+                            }
                         }
+
                     });
                     this.$refs['edit'].data.index = row['_id'];
                     this.$refs['edit'].data.row = row;
