@@ -1,5 +1,5 @@
 <template>
-    <div :id="id">
+    <div :id="id" :class="{'active-move':is_local}">
         <validation-observer :ref="id" v-slot="{invalid,validate}">
             <div class="row">
                 <slot name="content" :data="data" :url="url" :error="error">
@@ -145,6 +145,9 @@
                 this.error = {};
                 this.data = copyObj(this.back_data);
                 this.validation.reset();
+                if(typeof this.options.resetCallback=="function"){
+                    this.options.resetCallback();
+                }
             },
             //获取数据
             getData(params){

@@ -3206,3 +3206,7 @@ body {
     }
 }
 
+/* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) */
+.active-move .move-item{
+    cursor: move;
+}

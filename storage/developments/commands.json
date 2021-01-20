@@ -14,6 +14,14 @@
                 "placeholderValue": ""
             },
             {
+                "key": "module",
+                "value": "",
+                "rules": "",
+                "title": "生成对应代码在哪个模块,默认Admin",
+                "name": "模块",
+                "placeholder": "Admin"
+            },
+            {
                 "key": "connection",
                 "value": "",
                 "rules": "",
@@ -21,19 +29,260 @@
                 "name": "数据库连接",
                 "type": "select2",
                 "map_key": "database",
-                "placeholderValue": ""
-
+                "placeholderValue": "",
+                "is_option": true,
+                "key_as": "c"
+            }
+        ]
+    },
+    {
+        "command": "migrate:generate",
+        "chinese": "生成数据表对应的迁移文件",
+        "english": "",
+        "parameters": [
+            {
+                "key": "tables",
+                "value": "",
+                "rules": "required",
+                "title": "数据表名称(eg:users,posts,comments)",
+                "name": "数据表",
+                "type": "select2tables",
+                "placeholderValue": "",
+                "placeholder": "users"
             },
             {
-                "key": "module",
+                "key": "connection",
                 "value": "",
                 "rules": "",
-                "title": "生成对应代码在哪个模块,默认Admin",
-                "name": "模块"
+                "title": "数据库连接",
+                "name": "数据库连接",
+                "type": "select2",
+                "map_key": "database",
+                "placeholderValue": "",
+                "is_option": true,
+                "key_as": "c"
+            },
+            {
+                "key": "tables",
+                "value": "",
+                "rules": "",
+                "title": "数据表名称(eg:users,posts,comments)",
+                "name": "数据表",
+                "type": "select2tables",
+                "placeholderValue": "",
+                "is_option": true,
+                "key_as": "t",
+                "placeholder": "users"
+            },
+            {
+                "key": "ignore",
+                "value": "",
+                "rules": "",
+                "title": "忽略数据表名称(eg:users,posts,comments)",
+                "name": "忽略数据表",
+                "type": "select2tables",
+                "placeholderValue": "",
+                "is_option": true,
+                "key_as": "i",
+                "placeholder": "users"
+            },
+            {
+                "key": "path",
+                "value": "",
+                "rules": "",
+                "title": "指定迁移文件生成的目录(eg:database/migrations/2021)",
+                "name": "生成目录",
+                "placeholderValue": "",
+                "is_option": true,
+                "key_as": "p",
+                "placeholder": "database/migrations/2021"
+            },
+            {
+                "key": "templatePath",
+                "value": "",
+                "rules": "",
+                "title": "使用本地模板进行生成迁移文档",
+                "name": "使用模板",
+                "placeholderValue": "",
+                "is_option": true,
+                "key_as": "tp"
+            },
+            {
+                "key": "defaultIndexNames",
+                "value": 0,
+                "rules": "",
+                "title": "不要在迁移时使用数据库索引名",
+                "name": "不用索引",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "defaultFKNames",
+                "value": 0,
+                "rules": "",
+                "title": "不要在迁移时使用db外键名",
+                "name": "不用外键",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
-
         ]
-    },{
+    },
+    {
+        "command": "create:model",
+        "chinese": "创建模型",
+        "english": "",
+        "parameters": [
+            {
+                "key": "table",
+                "value": "",
+                "rules": "required",
+                "title": "数据表名称",
+                "name": "数据表",
+                "type": "select2tables",
+                "placeholderValue": ""
+            },
+            {
+                "key": "connection",
+                "value": "",
+                "rules": "",
+                "title": "数据库连接",
+                "name": "数据库连接",
+                "type": "select2",
+                "map_key": "database",
+                "placeholderValue": "",
+                "is_option": true,
+                "key_as": "c"
+            },
+            {
+                "key": "no_dump",
+                "value": 0,
+                "rules": "",
+                "title": "生成代码后不检查自动加载",
+                "name": "不自动加载",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "nd"
+            }
+        ]
+    },
+    {
+        "command": "create:controller",
+        "chinese": "创建控制器",
+        "english": "",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "控制器名称",
+                "name": "控制器",
+                "placeholder": "Admin/User"
+            },
+            {
+                "key": "model",
+                "value": "",
+                "rules": "",
+                "title": "模型(不填自动使用控制器名称)",
+                "name": "模型",
+                "placeholder": "Admin/User"
+            },
+            {
+                "key": "namespace",
+                "value": 0,
+                "rules": "",
+                "title": "模型不使用'APP'下的命名空间",
+                "name": "不使用APP命名空间",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "n"
+            },
+            {
+                "key": "no_dump",
+                "value": 0,
+                "rules": "",
+                "title": "生成代码后不检查自动加载",
+                "name": "不自动加载",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "nd"
+            }
+        ]
+    },
+    {
+        "command": "create:view",
+        "chinese": "创建视图",
+        "english": "",
+        "parameters": [
+            {
+                "key": "controller",
+                "value": "",
+                "rules": "required",
+                "title": "控制器名称",
+                "name": "控制器",
+                "placeholder": "Admin/User"
+            },
+            {
+                "key": "template",
+                "value": "",
+                "rules": "required",
+                "title": "生成代码模板",
+                "name": "模板",
+                "type": "select2",
+                "map": {
+                    "index": "列表页面",
+                    "edit": "编辑页面"
+                }
+            },
+            {
+                "key": "output",
+                "value": "",
+                "rules": "",
+                "title": "生成代码输出位置",
+                "name": "输出位置",
+                "placeholder": "admin/users/index"
+            },
+            {
+                "key": "namespace",
+                "value": 0,
+                "rules": "",
+                "title": "不使用默认命名空间",
+                "name": "不用命名空间",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "n"
+            }
+        ]
+    },
+    {
+        "command": "build:index.html",
+        "chinese": "前端入口页面index.html生成",
+        "english": "",
+        "parameters": [
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "强制生成(开发环境默认不进行生成)",
+                "name": "强制生成",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "f"
+            }
+        ]
+    },
+    {
+        "command": "migrate:all",
+        "chinese": "执行所有目录迁移文件",
+        "english": ""
+    },
+    {
         "command": "clear-compiled",
         "chinese": "删除已编译的类文件",
         "english": "Remove the compiled class file"

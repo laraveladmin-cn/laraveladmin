@@ -15,7 +15,7 @@ class CreateController extends BaseCreate
      *
      * @var string
      */
-    protected $signature = 'create:controller {name} {model?} {--namespace} {--no_dump}';
+    protected $signature = 'create:controller {name} {model?} {--n|namespace} {--nd|no_dump}';
 
     /**
      * The console command description.

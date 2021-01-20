@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\Table;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
@@ -37,6 +38,7 @@ class DevelopmentsController extends Controller
                 $parameter['_value'] = $parameter['value'];
                 return $parameter;
             });
+            $command['_exec'] = '';
             return $command;
         })->toArray();
         $index = 1;
@@ -57,7 +59,7 @@ class DevelopmentsController extends Controller
                 })->toArray()
             ],
             'index'=>$index,
-            'history'=>[]
+            'history'=>[],
         ];
         return $data;
     }
@@ -65,8 +67,21 @@ class DevelopmentsController extends Controller
     /**
      * 调用命令
      */
-    public function postCommand(){
-        return Response::returns(['alert' => alert(['message' => '功能正在开发...'])],422);
+    public function postCommand(\Illuminate\Http\Request $request){
+        $this->validate($request,[
+            '_exec'=>'required|string'
+        ]);
+        $exitCode = Artisan::call($request->input('_exec'));
+        if($exitCode){
+            return Response::returns([
+                'alert' => alert(['message' => '执行失败!'],500),
+                'output'=>Artisan::output()
+            ],500);
+        }
+        return Response::returns([
+            'alert' => alert(['message' => '执行成功!']),
+            'output'=>Artisan::output()
+        ]);
     }
 
     /**
