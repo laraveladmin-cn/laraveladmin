@@ -93,6 +93,8 @@ vi .env
 
 [vendor.zip](https://www.laraveladmin.cn/api/home/docs/vendor.zip)
 
+> phpstudy安装执行迁移命令出现如下错误时,可以升级mysql到8版本,或请参考解决方案[执行迁移文件错误解决](https://stackoverflow.com/questions/42244541/laravel-migration-error-syntax-error-or-access-violation-1071-specified-key-wa)
+![执行迁移文件错误](https://www.laraveladmin.cn/api/home/docs/images/执行迁移文件错误.jpg)
 
 3-1. 直接命令安装
 
