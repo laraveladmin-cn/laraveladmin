@@ -142,11 +142,20 @@
                         </edit>
                         <div>
                             <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <label>执行结果:</label>
-                                        <div class="output-body" v-show="output">
-                                            {{output}}
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" v-show="output">
+                                    <div class="box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">执行结果:</h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="output-body" >
+                                                {{output}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -405,4 +414,7 @@
  /*   max-height: 500px;
     overflow: scroll;*/
 }
+    .box{
+        margin-top: 10px;
+    }
 </style>
