@@ -58,6 +58,7 @@
 ![LaravelAdmin弹窗编辑](https://www.laraveladmin.cn/api/home/docs/images/弹窗编辑.jpg)
 
 * 手机端适配
+
 ![LaravelAdmin手机端适配](https://www.laraveladmin.cn/api/home/docs/images/手机端.jpg)
 
 * 平板适配
