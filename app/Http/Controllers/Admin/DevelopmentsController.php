@@ -74,7 +74,7 @@ class DevelopmentsController extends Controller
         $exitCode = Artisan::call($request->input('_exec'));
         if($exitCode){
             return Response::returns([
-                'alert' => alert(['message' => '执行成功!'],500),
+                'alert' => alert(['message' => '执行失败!'],500),
                 'output'=>Artisan::output()
             ],500);
         }

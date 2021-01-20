@@ -75,7 +75,7 @@
                                                 <template slot="input-item">
                                                     <div class="edit-item-content">
                                                         <select2 v-model="item.value"
-                                                                 :default-options="array_get(props,'data.maps.'+item.map_key,[])"
+                                                                 :default-options="item.map || array_get(props,'data.maps.'+item.map_key,[])"
                                                                  :placeholder-show="item.placeholder || '请选择'"
                                                                  :disabled="!props.url"
                                                                  :placeholder-value="''"

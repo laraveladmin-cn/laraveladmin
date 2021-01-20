@@ -225,8 +225,62 @@
                 "title": "控制器名称",
                 "name": "控制器",
                 "placeholder": "Admin/User"
+            },
+            {
+                "key": "template",
+                "value": "",
+                "rules": "required",
+                "title": "生成代码模板",
+                "name": "模板",
+                "type": "select2",
+                "map": {
+                    "index": "列表页面",
+                    "edit": "编辑页面"
+                }
+            },
+            {
+                "key": "output",
+                "value": "",
+                "rules": "",
+                "title": "生成代码输出位置",
+                "name": "输出位置",
+                "placeholder": "admin/users/index"
+            },
+            {
+                "key": "namespace",
+                "value": 0,
+                "rules": "",
+                "title": "不使用默认命名空间",
+                "name": "不用命名空间",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "n"
             }
         ]
+    },
+    {
+        "command": "build:index.html",
+        "chinese": "前端入口页面index.html生成",
+        "english": "",
+        "parameters": [
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "强制生成(开发环境默认不进行生成)",
+                "name": "强制生成",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "f"
+            }
+        ]
+    },
+    {
+        "command": "migrate:all",
+        "chinese": "执行所有目录迁移文件",
+        "english": ""
     },
     {
         "command": "clear-compiled",
