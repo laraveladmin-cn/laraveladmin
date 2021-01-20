@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://www.laraveladmin.cn/dist/img/logo1.png" data-origin="httpw://www.laraveladmin.cn/dist/img/logo1.png" alt="Logo" style="width: 200px" />
+    <img src="https://www.laraveladmin.cn/dist/img/logo1.png" width="200px" data-origin="httpw://www.laraveladmin.cn/dist/img/logo1.png" alt="Logo" style="width: 200px" />
 </p>
 
 <p align="center">
@@ -16,36 +16,71 @@
 
 # LaravelAdmin
 
-#### 介绍
+## 项目简介
+
+### 简介说明
+
 `laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。\(QQ群: 391528810\)
 [Demo](http://demo.laraveladmin.cn) \|\| [阅读文档](http://www.laraveladmin.cn/home/index)
 
-#### 特点
+### 功能特色
 
-- Laravel+Vue组合
-- SPA单页面应用
-- 前后端分离,后台只提供API接口,前端负责视图渲染
-- 开箱即用的laravel后台管理系统
-- 海量Vue组件直接拿来即用
+* Laravel+Vue+Bootstrap+Docker+phpswoole
+* SPA单页面应用
+* 前后端分离,后台只提供API接口,前端负责视图渲染
+* 开箱即用的laravel后台管理系统
+* 海量Vue组件直接拿来即用
 
-## 截图
+### 功能截图
 
-![laravel-admin](https://www.laraveladmin.cn/storage/uploads/images/2020/12/05/kg3F2blsJISs6GbyFdmItHU7VKGLPx4zUIrPS0H6.jpeg)
+* 首页
+![LaravelAdmin首页](https://www.laraveladmin.cn/storage/uploads/images/2020/12/05/kg3F2blsJISs6GbyFdmItHU7VKGLPx4zUIrPS0H6.jpeg)
+
+* 登录页面
+![LaravelAdmin登录页面](https://www.laraveladmin.cn/api/home/docs/images/登录页面.jpg)
+
+* 注册页面
+![LaravelAdmin注册页面](https://www.laraveladmin.cn/api/home/docs/images/注册页面.jpg)
+
+* 忘记密码
+![LaravelAdmin忘记密码](https://www.laraveladmin.cn/api/home/docs/images/忘记密码.jpg)
+
+* 开发辅助
+![LaravelAdmin开发辅助](https://www.laraveladmin.cn/api/home/docs/images/开发辅助.jpg)
+
+* 列表页面
+![LaravelAdmin登录页面](https://www.laraveladmin.cn/api/home/docs/images/列表页面.jpg)
+
+* 编辑页面
+![LaravelAdmin编辑页面](https://www.laraveladmin.cn/api/home/docs/images/页面编辑.jpg)
+
+* 弹窗编辑
+![LaravelAdmin弹窗编辑](https://www.laraveladmin.cn/api/home/docs/images/弹窗编辑.jpg)
+
+* 手机端适配
+![LaravelAdmin手机端适配](https://www.laraveladmin.cn/api/home/docs/images/手机端.jpg)
+
+* 平板适配
+![LaravelAdmin平板适配](https://www.laraveladmin.cn/api/home/docs/images/pad屏幕.jpg)
+
+* 编辑页面拖拽布局后反向更代码
+![LaravelAdmin拖拽布局](https://www.laraveladmin.cn/api/home/docs/images/拖拽布局.gif)
 
 #### 软件架构
 
-基于laravel框架实现前后端分离的单页面应用架构
+## 环境部署
 
-使用相关技术:vue+bootstrap+phpswoole+docker+laravel
+### 不同环境
 
-### Windows环境安装请查看 [Windows安装](README_windows.md)
-### 已有项目环境手动安装请查看 [手动安装](README_self.md)
+#### Windows环境安装请查看 [Windows安装](README_windows.md)
 
-#### 安装前准备
+#### 已有项目环境手动安装请查看 [手动安装](README_self.md)
+
+### 准备工作
 
 1. 提前安装好git(整套部署流程使用git方式部署,请依照文档通过git clone命令安装)
 
-#### 安装教程
+### 安装教程
 
 1. 下载代码
 
@@ -154,17 +189,21 @@ docker-compose exec php envoy run update --branch=master
 git remote add self https://用户名:密码@gitee.com/自己代码仓库.git
 ```
 
-#### 使用说明
+## 使用说明
 
+### 目录结构
+
+[可参考laravel目录结构](https://laravelacademy.org/post/9529.html)
+
+### 更多说明
 1. [官网及相关文档: https://www.laraveladmin.cn](https://www.laraveladmin.cn)
 
 2. [在线示例演示环境: https://demo.laraveladmin.cn](https://demo.laraveladmin.cn)
 
-用户名:demo_admin
-    
-密码:admin123456
+        用户名:demo_admin
+        密码:admin123456
 
-#### 参与贡献
+## 参与贡献
 
 1. Fork 本仓库
 2. 新建 Feat_xxx 分支
