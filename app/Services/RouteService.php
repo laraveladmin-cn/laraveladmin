@@ -148,6 +148,10 @@ class RouteService
                 }
                 //普通路由
                 collect(Arr::get($routesConfig,'menus',[]))
+                    ->map(function ($item){
+                        $item = Menu::decodeValue($item);//兼容解码
+                        return $item;
+                    })
                     ->filter(function ($item)use ($key){
                         $use = Arr::get($item,'use','api');
                         $use = is_string($use)?[$use]:$use;
@@ -190,6 +194,10 @@ class RouteService
                     });
                 //资源路由注册
                 collect(Arr::get($routesConfig,'ressorce',[]))
+                    ->map(function ($item){
+                        $item = Menu::decodeValue($item);//兼容解码
+                        return $item;
+                    })
                     ->filter(function ($item)use ($key){
                         return Arr::get($item,'group','')==$key &&
                             Arr::get($item,'url','') &&
@@ -229,6 +237,10 @@ class RouteService
             Route::group($group,function()use($routesConfig,$key,$group){
                 //普通路由
                 collect(Arr::get($routesConfig,'menus',[]))
+                    ->map(function ($item){
+                        $item = Menu::decodeValue($item);//兼容解码
+                        return $item;
+                    })
                     ->filter(function ($item)use ($key){
                         $use = Arr::get($item,'use','api');
                         $use = is_string($use)?[$use]:$use;
@@ -277,6 +289,10 @@ class RouteService
 
         //普通路由
         collect(Arr::get($routesConfig,'menus',[]))
+            ->map(function ($item){
+                $item = Menu::decodeValue($item);//兼容解码
+                return $item;
+            })
             ->filter(function ($item){
                 return
                     Arr::get($item,'is_page','')==1 &&
@@ -297,6 +313,10 @@ class RouteService
 
         //资源路由注册
         collect(Arr::get($routesConfig,'ressorce',[]))
+            ->map(function ($item){
+                $item = Menu::decodeValue($item);//兼容解码
+                return $item;
+            })
             ->filter(function ($item){
                 return Arr::get($item,'url','') &&
                     Arr::get($item,'env',self::$env)==self::$env &&

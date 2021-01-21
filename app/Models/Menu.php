@@ -344,6 +344,30 @@ class Menu extends Model
         return $is_bool?$isIn:$menu;
     }
 
+    /**
+     * 兼容解码值
+     * @param $query
+     */
+    public function scopeDecodeValue($query,&$item){
+        //解码
+        collect(['method','disabled','status','is_page'])->map(function ($key)use(&$item){
+            if(!isset($item[$key])){
+                return;
+            }
+            $val = Arr::get($item,$key);
+            $map = Arr::get($this->fieldsShowMaps,$key);
+            if(!is_null($val) && !collect($map)->keys()->map(function ($val){
+                    return $val.'';
+                })->contains($val)){
+                $default = $key=='method'?0:Arr::get($this->fieldsDefault,$key);
+
+                $item[$key] = collect($map)->flip()->get($val,$default);
+            }
+
+        });
+        return $item;
+    }
+
 
 
 }

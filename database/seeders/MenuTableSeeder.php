@@ -119,6 +119,7 @@ class MenuTableSeeder extends Seeder
                 ->toArray())
             ->sortBy('id')
             ->map(function ($item){
+                $item = Menu::decodeValue($item);//兼容解码
                 if(Arr::get($item,'env',config('app.env'))!=config('app.env')){
                     $item['disabled'] = 1;
                 }
