@@ -62,7 +62,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(ResponseFactory $factory)
     {
         //注册创建代码命令
-        if ($this->app->runningInConsole() && $this->app->environment() !== 'production')  {
+        if ($this->app->environment() == 'local')  {
             //开发环境注册
             $commands = [];
             $commands[] = CreateModel::class;

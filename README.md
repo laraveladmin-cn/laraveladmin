@@ -64,7 +64,7 @@
 * 平板适配
 ![LaravelAdmin平板适配](https://www.laraveladmin.cn/api/home/docs/images/pad屏幕.jpg)
 
-* 编辑页面拖拽布局后反向更代码
+* 编辑页面拖拽布局后反向更新代码
 ![LaravelAdmin拖拽布局](https://www.laraveladmin.cn/api/home/docs/images/拖拽布局.gif)
 
 ## 环境部署

@@ -16,7 +16,7 @@ class CreateAll extends Command
      *
      * @var string
      */
-    protected $signature = 'create:all {table : The name of model} {module?} {--c|connection= : The database connection to use}';
+    protected $signature = 'create:all {table : The name of model} {module?} {--c|connection= : The database connection to use} {--no_dump}';
 
     /**
      * The console command description.
@@ -33,11 +33,13 @@ class CreateAll extends Command
     public function handle()
     {
         $table = $this->argument('table');
-
+        $in_console = app()->runningInConsole();
         //生成迁移
         $migration = Migration::where('migration','like','%create_'.$table.'_table')->value('migration');
         if($migration &&
-            !$this->confirm('迁移文件已经存在,是否继续生成? [y|N]')){
+            (!$in_console ||
+            !$this->confirm('迁移文件已经存在,是否继续生成? [y|N]'))
+        ){
             $this->info($migration.'文件已经存在!');
         }else{
             $dir = database_path('migrations/'.date('Y'));
@@ -52,6 +54,7 @@ class CreateAll extends Command
                 Storage::disk('migrations')->delete(substr($migration,0,4).'/'.$migration.'.php');
             }
         }
+
 
         //生成模型
         $this->call('create:model',[
@@ -71,11 +74,15 @@ class CreateAll extends Command
             'controller'=>$modelName,
             'template'=>'index'
         ]);
+
         //生成编辑视图
         $this->call('create:view',[
             'controller'=>$modelName,
             'template'=>'edit'
         ]);
-        app('composer')->dumpAutoloads(); //自动加载文件
+        if(!($this->hasOption('no_dump') && $this->option('no_dump'))){
+            app('composer')->dumpAutoloads(); //自动加载文件
+        }
+
     }
 }

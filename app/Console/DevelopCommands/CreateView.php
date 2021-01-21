@@ -14,7 +14,7 @@ class CreateView extends BaseCreate
      *
      * @var string
      */
-    protected $signature = 'create:view {controller} {template} {output?} {--n|namespace=}';
+    protected $signature = 'create:view {controller} {template} {output?} {--namespace=}';
 
     /**
      * The console command description.

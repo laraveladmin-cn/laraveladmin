@@ -38,7 +38,8 @@ abstract class BaseCreate extends Command
         $file = $this->outputPath.'.'.$this->type;
         is_dir(dirname($file)) OR mkdir(dirname($file),0755,true); //创建目录
         if(file_exists($file)){ //如果文件存在
-            if(!$this->confirm($this->confirmName.'文件已存在是否覆盖? [y|N]')){
+            $in_console = app()->runningInConsole();
+            if(!$in_console || !$this->confirm($this->confirmName.'文件已存在是否覆盖? [y|N]')){
                 $this->info($file.'文件已经存在!');
                 return ;
             }

@@ -15,7 +15,7 @@ class CreateModel extends BaseCreate
      * @var string
      */
     protected $signature = 'create:model {table : The name of model}
-    {--c|connection} {--nd|no_dump}';
+    {--connection} {--no_dump}';
 
     /**
      * The console command description.

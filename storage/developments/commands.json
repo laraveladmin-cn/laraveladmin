@@ -32,6 +32,16 @@
                 "placeholderValue": "",
                 "is_option": true,
                 "key_as": "c"
+            },
+            {
+                "key": "no_dump",
+                "value": 1,
+                "rules": "",
+                "title": "生成代码后不检查自动加载",
+                "name": "不自动加载",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ]
     },
@@ -152,8 +162,7 @@
                 "type": "select2",
                 "map_key": "database",
                 "placeholderValue": "",
-                "is_option": true,
-                "key_as": "c"
+                "is_option": true
             },
             {
                 "key": "no_dump",
@@ -163,8 +172,7 @@
                 "name": "不自动加载",
                 "type": "switch",
                 "is_option": true,
-                "is_boolean": true,
-                "key_as": "nd"
+                "is_boolean": true
             }
         ]
     },
@@ -197,8 +205,7 @@
                 "name": "不使用APP命名空间",
                 "type": "switch",
                 "is_option": true,
-                "is_boolean": true,
-                "key_as": "n"
+                "is_boolean": true
             },
             {
                 "key": "no_dump",
@@ -208,8 +215,7 @@
                 "name": "不自动加载",
                 "type": "switch",
                 "is_option": true,
-                "is_boolean": true,
-                "key_as": "nd"
+                "is_boolean": true
             }
         ]
     },
@@ -254,8 +260,7 @@
                 "name": "不用命名空间",
                 "type": "switch",
                 "is_option": true,
-                "is_boolean": true,
-                "key_as": "n"
+                "is_boolean": true
             }
         ]
     },
