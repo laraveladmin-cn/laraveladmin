@@ -288,6 +288,43 @@
         "english": ""
     },
     {
+        "command": "db:seed",
+        "chinese": "填充数据库",
+        "english": "Seed the database with records",
+        "parameters": [
+            {
+                "key": "class",
+                "value": "VersionSeeder",
+                "rules": "",
+                "title": "默认是DatabaseSeeder",
+                "name": "填充类",
+                "placeholder": "VersionSeeder",
+                "is_option": true
+            },
+            {
+                "key": "database",
+                "value": "",
+                "rules": "",
+                "title": "数据库连接",
+                "name": "数据库连接",
+                "type": "select2",
+                "map_key": "database",
+                "placeholderValue": "",
+                "is_option": true
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "强制执行(非本地环境时)",
+                "name": "强制执行",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
+    },
+    {
         "command": "clear-compiled",
         "chinese": "删除已编译的类文件",
         "english": "Remove the compiled class file"
@@ -386,11 +423,6 @@
         "command": "config:clear",
         "chinese": "删除配置缓存文件",
         "english": "Remove the configuration cache file"
-    },
-    {
-        "command": "db:seed",
-        "chinese": "填充数据库",
-        "english": "Seed the database with records"
     },
     {
         "command": "event:generate",
