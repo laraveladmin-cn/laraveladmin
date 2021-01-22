@@ -105,7 +105,7 @@
                                 <template slot="input-item">
                                     <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
                                                     class="w-100"
-                                                    @change="props['row']['{{$table_field['Field']}}'] = arguments[0]"
+                                                    value-format="yyyy-MM-dd"
                                                     placeholder="选择日期" type="date" :clearable="false"
                                                     :editable="false" :disabled="!props.url">
                                     </el-date-picker>
@@ -114,8 +114,10 @@
                                 <template slot="input-item">
                                     <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
                                                     class="w-100"
-                                                    @change="props['row']['{{$table_field['Field']}}'] = arguments[0]"
-                                                    format="yyyy-MM-01" placeholder="选择月份" type="month"
+                                                    @change="props.data['row']['{{$table_field['Field']}}'] = arguments[0]"
+                                                    value-format="yyyy-MM-01"
+                                                    placeholder="选择月份"
+                                                    type="month"
                                                     :clearable="false" :editable="false"
                                                     :disabled="!props.url">
                                     </el-date-picker>
@@ -135,14 +137,15 @@
                                 </template>
 @elseif($table_field['showType']=='select2')
                                 <template slot="input-item">
-@if(str_contains('_id',$table_field['Field']))
+@if(str_contains($table_field['Field'],'_id'))
                                         <select2 v-model="props.data.row['{{$table_field['Field']}}']"
                                                  :default-options="props.data.maps['{{$table_field['Field']}}']"
-                                                 :url="'{{$prefix}}/{{str_replace('_','-',str_replace('_id','',$table_field['Field']))}}/list'"
+                                                 :url="use_url+'{{$prefix}}/{{str_replace('_','-',str_replace('_id','',$table_field['Field']))}}s/list'"
                                                  :keyword-key="'name'"
                                                  :show="['name']"
                                                  :disabled="!props.url"
-                                                 :placeholder="false"
+                                                 :placeholder-show="'请选择'"
+                                                 :placeholder-value="0"
                                                  :is-ajax="true">
                                         </select2>
 @else
@@ -164,6 +167,7 @@
                                 <template slot="input-item">
                                     <el-time-select v-model="props.data.row['{{$table_field['Field']}}']"
                                                     class="w-100"
+                                                    value-format="HH-mm"
                                                     :picker-options="{start: '00:00',step: '00:30',end: '23:30'}"
                                                     :disabled="!props.url" placeholder="选择时间">
                                     </el-time-select>
@@ -172,6 +176,7 @@
                                 <template slot="input-item">
                                     <el-time-picker v-model="props.data.row['{{$table_field['Field']}}']"
                                                     class="w-100"
+                                                    value-format="HH-mm-ss"
                                                     :picker-options="{selectableRange: '00:00:00 - 23:59:59'}"
                                                     :disabled="!props.url" placeholder="选择时间点">
                                     </el-time-picker>

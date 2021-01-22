@@ -1,5 +1,5 @@
 //自定义验证
-import {configure,extend,localize} from 'vee-validate'; //表单验证
+import {configure,extend,localize,validate} from 'vee-validate'; //表单验证
 import * as rules from 'vee-validate/dist/rules'; //验证规则
 import zh_CN from './vee-validate/zh_CN'; //验证语言包
 
@@ -80,6 +80,32 @@ let array =  {
     computesRequired: false
 };
 extend('array', array);
+//数字之间
+extend('digits_between', {
+    validate:(value,{ min ,max}) => {
+        let length = (value+'').length;
+        return length>=min && length<=max && (value-0)==value;
+    },
+    params: ['min','max'],
+    computesRequired: true
+});
+extend('alpha_numeric', rules.alpha_num);
+//同意
+let accepted =  {
+    validate:(value) => {
+        return ['yes',1,'1','no'].indexOf(value)!=-1 || value===true;
+    },
+    params: [],
+    computesRequired: false
+};
+extend('accepted', accepted);
+extend('boolean', {
+    validate:(value) => {
+        return (typeof value)=='boolean';
+    },
+    params: [],
+    computesRequired: false
+});
 configure({
     locale: 'zh_CN'
 });
