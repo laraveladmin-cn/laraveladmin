@@ -47,7 +47,8 @@ class CreateAll extends Command
             $this->call('migrate:generate',[
                 '--tables'=>$table,
                 '--ignore'=>true,
-                '--path'=>$dir
+                '--path'=>$dir,
+                '--no-interaction'=>true
             ]);
             if($migration){
                 Migration::where('migration',$migration)->delete();
