@@ -6,6 +6,7 @@ namespace App\Console\DevelopCommands;
 use App\Models\Migration;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -50,13 +51,17 @@ class CreateAll extends Command
                 '--path'=>$dir,
                 '--no-interaction'=>true
             ]);
+
             if($migration){
                 Migration::where('migration',$migration)->delete();
                 Storage::disk('migrations')->delete(substr($migration,0,4).'/'.$migration.'.php');
             }
+            //获取生成结果进行处理
+            $migration_file = trim(str_replace(['Created:',$dir.'/','.php'],'',collect(explode("\n",Artisan::output()))->first(function ($value){
+                return str_contains($value,'Created:');
+            })));
+            $migration_file and Migration::firstOrCreate(['migration'=>$migration_file],['migration'=>$migration_file,'batch'=>0]);
         }
-
-
         //生成模型
         $this->call('create:model',[
             'table'=>$table,
