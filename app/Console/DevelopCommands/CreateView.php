@@ -88,12 +88,15 @@ class CreateView extends BaseCreate
             $class = get_class($this->bindModel);
             $data['tableInfo'] = $class::getTableInfo(); //数据表信息
             $data['validates'] = collect($data['tableInfo']['table_fields'])->map(function($item){
+
                 if($item['validator']){
                     if(str_contains($item['validator'],'unique:')){
                         $item['validator'] = preg_replace ('/unique\:(\w{1,})\,(\w{1,})/', 'unique:$1,$2,\'.\$id.\',id,deleted_at,NULL', $item['validator']);
                     }
                     $validator = collect(explode('|',$item['validator']))->filter(function ($value){
-                        return !in_array(Arr::get(explode(',',$value),'0',''),['nullable','exists','sometimes','unique']);
+                        return !in_array(Arr::get(explode(':',$value),'0',''),
+                            ['nullable','exists','sometimes','unique']
+                        );
 
                     })->implode('|');
                     $item['validator'] = $validator;

@@ -70,7 +70,16 @@ let url = {
     computesRequired: false
 };
 extend('url', url);
-
+extend('in', rules.oneOf);
+let array =  {
+    validate:(value) => {
+        let type = Object.prototype.toString.call(value);
+        return type=='[object Array]' || type=='[Object Object]';
+    },
+    params: [],
+    computesRequired: false
+};
+extend('array', array);
 configure({
     locale: 'zh_CN'
 });

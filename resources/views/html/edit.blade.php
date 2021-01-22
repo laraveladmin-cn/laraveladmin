@@ -104,6 +104,7 @@
 @if($table_field['showType']=='date')
                                 <template slot="input-item">
                                     <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
+                                                    class="w-100"
                                                     @change="props['row']['{{$table_field['Field']}}'] = arguments[0]"
                                                     placeholder="选择日期" type="date" :clearable="false"
                                                     :editable="false" :disabled="!props.url">
@@ -112,6 +113,7 @@
 @elseif($table_field['showType']=='month')
                                 <template slot="input-item">
                                     <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
+                                                    class="w-100"
                                                     @change="props['row']['{{$table_field['Field']}}'] = arguments[0]"
                                                     format="yyyy-MM-01" placeholder="选择月份" type="month"
                                                     :clearable="false" :editable="false"
@@ -161,6 +163,7 @@
 @elseif($table_field['showType']=='timeSelect')
                                 <template slot="input-item">
                                     <el-time-select v-model="props.data.row['{{$table_field['Field']}}']"
+                                                    class="w-100"
                                                     :picker-options="{start: '00:00',step: '00:30',end: '23:30'}"
                                                     :disabled="!props.url" placeholder="选择时间">
                                     </el-time-select>
@@ -168,6 +171,7 @@
 @elseif($table_field['showType']=='timePicker')
                                 <template slot="input-item">
                                     <el-time-picker v-model="props.data.row['{{$table_field['Field']}}']"
+                                                    class="w-100"
                                                     :picker-options="{selectableRange: '00:00:00 - 23:59:59'}"
                                                     :disabled="!props.url" placeholder="选择时间点">
                                     </el-time-picker>
@@ -175,28 +179,34 @@
 @elseif($table_field['showType']=='switch')
                                 <template slot="input-item">
                                     <el-switch v-model="props.data.row['{{$table_field['Field']}}']"
-                                               :disabled="!props.url" on-color="#13ce66" off-color="#ff4949"
-                                               on-value="1" off-value="0">
+                                               :disabled="!props.url" active-color="#13ce66" inactive-color="#ff4949"
+                                               active-value="1" inactive-value="0">
                                     </el-switch>
                                 </template>
 @elseif($table_field['showType']=='slider')
                                 <template slot="input-item">
-                                    <el-slider v-model="props.data.row['{{$table_field['Field']}}']"
-                                               :disabled="!props.url">
-                                    </el-slider>
+                                    <div class="slider-box">
+                                        <el-slider v-model="props.data.row['{{$table_field['Field']}}']"
+                                                   :disabled="!props.url">
+                                        </el-slider>
+                                    </div>
                                 </template>
 @elseif($table_field['showType']=='rate')
                                 <template slot="input-item">
                                     <el-rate v-model="props.data.row['{{$table_field['Field']}}']"
-                                             :disabled="!props.url" text-template="{value}" show-text
+                                             :disabled="!props.url" score-template="{value}" show-text
                                              text-color="#ff9900">
                                     </el-rate>
                                 </template>
 @elseif($table_field['showType']=='num')
                                 <template slot="input-item">
-                                    <el-input-number v-model="props.data.row['{{$table_field['Field']}}']"
-                                                     :disabled="!props.url" :step="1">
-                                    </el-input-number>
+                                    <div>
+                                        <el-input-number v-model="props.data.row['{{$table_field['Field']}}']"
+                                                         class="w-100"
+                                                         size="medium"
+                                                         :disabled="!props.url" :step="1">
+                                        </el-input-number>
+                                    </div>
                                 </template>
 @elseif($table_field['showType']=='upload')
                                 <template slot="input-item">
