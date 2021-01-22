@@ -43,7 +43,7 @@ class CreateAll extends Command
             $this->info($migration.'文件已经存在!');
         }else{
             $dir = database_path('migrations/'.date('Y'));
-            is_dir(dirname($dir)) OR mkdir(dirname($dir),0755,true); //创建目录
+            is_dir($dir) OR mkdir($dir,0755,true); //创建目录
             $this->call('migrate:generate',[
                 '--tables'=>$table,
                 '--ignore'=>true,
