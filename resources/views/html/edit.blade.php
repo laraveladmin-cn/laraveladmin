@@ -5,6 +5,11 @@
     $table_fields_show = collect($table_fields)->filter(function ($item) {
         return !(in_array($item['showType'], ['hidden']) || in_array($item['Field'], ['id', 'created_at', 'updated_at']));
     });
+    $datePicker = [
+        'name' => 'el-date-picker',
+        'path' => 'element-ui/lib/date-picker',
+        'info' => '日期组件'
+    ];
     $components = [
         'markdown'=>[
             'name' => 'editorMd',
@@ -71,17 +76,16 @@
             'path' => 'common_components/passwordEdit.vue',
             'info' => '密码输入框组件'
         ],
-        'date' =>[
-            'name' => 'el-date-picker',
-            'path' => 'element-ui/lib/date-picker',
-            'info' => '日期组件'
-        ]
+        'date' =>$datePicker,
+        'datetime'=>$datePicker,
+        'month'=>$datePicker
     ];
     $components = collect($components)
         ->only(collect($table_fields)
             ->pluck('showType')
             ->unique()
             ->toArray())
+        ->keyBy('name') //排重同一个组件
         ->map(function ($item) {
             $item['name'] = Str::studly($item['name']);
             return '            ' . lcfirst($item['name']) . ':()=>import(/* webpackChunkName: "'.$item['path'].'" */ \'' . $item['path'] . '\'), //' . $item['info'];
@@ -106,10 +110,23 @@
                                     <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
                                                     class="w-100"
                                                     value-format="yyyy-MM-dd"
-                                                    placeholder="选择日期" type="date" :clearable="false"
-                                                    :editable="false" :disabled="!props.url">
+                                                    placeholder="选择日期"
+                                                    type="date"
+                                                    :editable="false"
+                                                    :disabled="!props.url">
                                     </el-date-picker>
                                 </template>
+@elseif($table_field['showType']=='datetime')
+                                    <template slot="input-item">
+                                        <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
+                                                        class="w-100"
+                                                        value-format="yyyy-MM-dd HH:mm:ss"
+                                                        placeholder="选择时间"
+                                                        type="datetime"
+                                                        :editable="false"
+                                                        :disabled="!props.url">
+                                        </el-date-picker>
+                                    </template>
 @elseif($table_field['showType']=='month')
                                 <template slot="input-item">
                                     <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
@@ -118,7 +135,7 @@
                                                     value-format="yyyy-MM-01"
                                                     placeholder="选择月份"
                                                     type="month"
-                                                    :clearable="false" :editable="false"
+                                                    :editable="false"
                                                     :disabled="!props.url">
                                     </el-date-picker>
                                 </template>
@@ -176,7 +193,7 @@
                                 <template slot="input-item">
                                     <el-time-picker v-model="props.data.row['{{$table_field['Field']}}']"
                                                     class="w-100"
-                                                    value-format="HH-mm-ss"
+                                                    value-format="HH:mm:ss"
                                                     :picker-options="{selectableRange: '00:00:00 - 23:59:59'}"
                                                     :disabled="!props.url" placeholder="选择时间点">
                                     </el-time-picker>
