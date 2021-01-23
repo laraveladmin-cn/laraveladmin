@@ -26,6 +26,10 @@ class CreateAll extends Command
      */
     protected $description = '生成所有资源';
 
+    protected function migrationPath($migration){
+        return database_path('migrations/'.(explode('_',$migration)[0])).'/'.$migration.'.php';
+    }
+
     /**
      * Execute the console command.
      *
@@ -38,11 +42,15 @@ class CreateAll extends Command
         //生成迁移
         $migration = Migration::where('migration','like','%create_'.$table.'_table')->value('migration');
         if($migration &&
+            file_exists($migration_file = $this->migrationPath($migration)) &&
             (!$in_console ||
             !$this->confirm('迁移文件已经存在,是否继续生成? [y|N]'))
         ){
-            $this->info($migration.'文件已经存在!');
+            $this->info($migration_file.'文件已经存在!');
         }else{
+            if($migration){
+                Migration::where('migration',$migration)->delete();
+            }
             $dir = database_path('migrations/'.date('Y'));
             is_dir($dir) OR mkdir($dir,0755,true); //创建目录
             $this->call('migrate:generate',[
@@ -51,7 +59,6 @@ class CreateAll extends Command
                 '--path'=>$dir,
                 '--no-interaction'=>true
             ]);
-
             if($migration){
                 Migration::where('migration',$migration)->delete();
                 Storage::disk('migrations')->delete(substr($migration,0,4).'/'.$migration.'.php');
@@ -61,6 +68,8 @@ class CreateAll extends Command
                 return str_contains($value,'Created:');
             })));
             $migration_file and Migration::firstOrCreate(['migration'=>$migration_file],['migration'=>$migration_file,'batch'=>0]);
+            $migration = Migration::query()->latest('id')->value('migration');
+            $this->info( $this->migrationPath($migration).' 创建成功');
         }
         //生成模型
         $this->call('create:model',[
