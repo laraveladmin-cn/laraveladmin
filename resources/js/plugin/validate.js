@@ -87,6 +87,9 @@ extend('array', array);
 //数字之间
 extend('digits_between', {
     validate:(value,{ min ,max}) => {
+        if(value!==0 && !value){
+            return true;
+        }
         let length = (value+'').length;
         return length>=min && length<=max && (value-0)==value;
     },

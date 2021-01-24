@@ -201,8 +201,11 @@
 @elseif($table_field['showType']=='switch')
                                 <template slot="input-item">
                                     <el-switch v-model="props.data.row['{{$table_field['Field']}}']"
-                                               :disabled="!props.url" active-color="#13ce66" inactive-color="#ff4949"
-                                               active-value="1" inactive-value="0">
+                                               :disabled="!props.url"
+                                               active-color="#13ce66"
+                                               inactive-color="#ff4949"
+                                               :active-value="1"
+                                               :inactive-value="0">
                                     </el-switch>
                                 </template>
 @elseif($table_field['showType']=='slider')
