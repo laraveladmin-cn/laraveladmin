@@ -19,6 +19,7 @@
 #### 介绍
 `laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。\(QQ群: 391528810\)
 [Demo](http://demo.laraveladmin.cn) \|\| [阅读文档](http://www.laraveladmin.cn/home/index)
+![QQ群](https://www.laraveladmin.cn/api/home/docs/images/QQ群.jpg)
 
 #### 特点
 
