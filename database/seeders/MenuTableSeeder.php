@@ -18,7 +18,7 @@ class MenuTableSeeder extends Seeder
      * ID+5
      * 创建资源菜单
      */
-    protected function createRessorceMenu(Menu $roleMenu,$name='',array $options = []){
+    protected function createResourceMenu(Menu $roleMenu,$name='',array $options = []){
         //控制器默认路由注册
         $methods = collect($this->methods);
         if($options){
@@ -97,7 +97,7 @@ class MenuTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->methods = RouteService::getRessorceRoutes(['except'=>['index']]);
+        $this->methods = RouteService::getResourceRoutes(['except'=>['index']]);
         $routes_json = file_get_contents(base_path('routes/route.json'));
         $disabled_menus = config('laravel_admin.disabled_menus','');
         $hash = md5(config('app.env').$routes_json.$disabled_menus);
@@ -111,9 +111,9 @@ class MenuTableSeeder extends Seeder
         Cache::put($this->cache_key, $hash);
         $routesConfig = json_decode($routes_json,true);
         collect(Arr::get($routesConfig,'menus',[]))
-            ->merge(collect(Arr::get($routesConfig,'ressorce',[]))
+            ->merge(collect(Arr::get($routesConfig,'resource',[]))
                 ->map(function ($item){
-                    $item['is_ressorce'] = 1;
+                    $item['is_resource'] = 1;
                     return $item;
                 })
                 ->toArray())
@@ -123,11 +123,11 @@ class MenuTableSeeder extends Seeder
                 if(Arr::get($item,'env',config('app.env'))!=config('app.env')){
                     $item['disabled'] = 1;
                 }
-                if(Arr::get($item,'is_ressorce')){
+                if(Arr::get($item,'is_resource')){
                     $menu = Menu::create(collect($item)->only($this->fillable)->toArray());
                     $name = Arr::get($item,'item_name',Arr::get($item,'name',''));
                     $options = Arr::get($item,'options',[]);
-                    $this->createRessorceMenu($menu,$name,$options);
+                    $this->createResourceMenu($menu,$name,$options);
                 }else{
                     Menu::create(collect($item)->only($this->fillable)->toArray());
                 }

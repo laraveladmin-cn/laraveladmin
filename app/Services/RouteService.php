@@ -25,7 +25,7 @@ class RouteService
      * 自定义辅助函数
      */
 
-    public static function getRessorceRoutes(array $options = [])
+    public static function getResourceRoutes(array $options = [])
     {
         //控制器默认路由注册
         $methods = collect([
@@ -102,10 +102,10 @@ class RouteService
      * @param $controller
      * @param array $options
      */
-    public static function createRessorceRoute($name, $controller, array $options = [])
+    public static function createResourceRoute($name, $controller, array $options = [])
     {
         //控制器默认路由注册
-        $methods = self::getRessorceRoutes($options);
+        $methods = self::getResourceRoutes($options);
         //路由注册
         $methods->map(function ($item,$key) use ($name, $controller) {
             $type = Arr::get($item, 'method.type', []);
@@ -193,7 +193,7 @@ class RouteService
                         }
                     });
                 //资源路由注册
-                collect(Arr::get($routesConfig,'ressorce',[]))
+                collect(Arr::get($routesConfig,'resource',[]))
                     ->map(function ($item){
                         $item = Menu::decodeValue($item);//兼容解码
                         return $item;
@@ -208,7 +208,7 @@ class RouteService
                         $value = Arr::get(explode('/',Arr::get($item,'url','')),2,'');
                         if($value){
                             $class = ucfirst(Str::singular(Str::camel(str_replace('-','_',$value)))).'Controller';
-                            self::createRessorceRoute($value,$class,Arr::get($item,'options',[]));
+                            self::createResourceRoute($value,$class,Arr::get($item,'options',[]));
                         }
                     });
 
@@ -312,7 +312,7 @@ class RouteService
             });
 
         //资源路由注册
-        collect(Arr::get($routesConfig,'ressorce',[]))
+        collect(Arr::get($routesConfig,'resource',[]))
             ->map(function ($item){
                 $item = Menu::decodeValue($item);//兼容解码
                 return $item;
@@ -332,7 +332,7 @@ class RouteService
                         $only = ['index','show'];
                     }
                     $options['only'] = $only;
-                    collect(self::getRessorceRoutes($options))->map(function ($item)use($name){
+                    collect(self::getResourceRoutes($options))->map(function ($item)use($name){
                         $route = $item['route']?$name . '/' . $item['route']:$name;
                         Route::get($route,self::$pager);
                     });

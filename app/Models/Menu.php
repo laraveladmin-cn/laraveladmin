@@ -24,6 +24,7 @@ class Menu extends Model
     protected $adminRoot = [2]; //后台菜单
     //批量赋值白名单
     protected $fillable = [
+        //'id',
         'name',
         'disabled',
         'icons',
@@ -32,7 +33,12 @@ class Menu extends Model
         'parent_id',
         'method',
         'is_page',
-        'status'
+        'status',
+        'resource_id',
+        'group',
+        'action',
+        'env',
+        'plug_in_key'
     ];
     //输出隐藏字段
     protected $hidden = ['deleted_at'];
@@ -83,7 +89,12 @@ class Menu extends Model
         'level'=>0,
         'left_margin'=>0,
         'right_margin'=>0,
-        'disabled'=>0
+        'disabled'=>0,
+        'resource_id'=>'0',
+        'group'=>'',
+        'action'=>'',
+        'env'=>'',
+        'plug_in_key'=>''
     ];
 
     //字段默认值
@@ -98,6 +109,11 @@ class Menu extends Model
         'disabled' => '功能状态',
         'status' => '状态',
         'level' => '层级',
+        'resource_id'=>'所属资源ID',
+        'group'=>'所属组',
+        'action'=>'绑定控制器方法',
+        'env'=>'使用环境',
+        'plug_in_key'=>'插件菜单唯一标识',
         //'left_margin' => '左边界',
         //'right_margin' => '右边界',
         //'created_at' => '创建时间',
@@ -105,6 +121,14 @@ class Menu extends Model
         //'deleted_at' => '删除时间',
         'id' => 'ID',
     ];
+
+    /**
+     * 所属资源
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function resource(){
+        return $this->belongsTo('App\Models\Menu');
+    }
 
     /**
      * 菜单-角色

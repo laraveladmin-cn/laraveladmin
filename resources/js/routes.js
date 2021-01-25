@@ -40,7 +40,7 @@ collect(routesConfig.group).map((group,key)=>{
         }
         return route;
     });
-    collect(routesConfig.ressorce).filter(filter).map((item)=>{
+    collect(routesConfig.resource).filter(filter).map((item)=>{
         let path_arr = item.url.split('/');
         path_arr.shift();
         path_arr.shift();

@@ -364,7 +364,7 @@ trait ResourceController
             ->getCompiled()
             ->getStaticPrefix();
         $main = Menu::realRoute($main);
-        $data = collect(RouteService::getRessorceRoutes())->map(function ($item, $key) use ($main, $type) {
+        $data = collect(RouteService::getResourceRoutes())->map(function ($item, $key) use ($main, $type) {
             $item['path'] = $item['route'] ? $main . '/' . $item['route'] : $main;
             $item['key'] = $key . 'Url';
             return $item;
