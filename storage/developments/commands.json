@@ -447,112 +447,351 @@
     {
         "command": "make:channel",
         "chinese": "创建一个新的 channel 类",
-        "english": "Create a new channel class"
+        "english": "Create a new channel class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:command",
         "chinese": "创建一个新的 Artisan 命令",
-        "english": "Create a new Artisan command"
+        "english": "Create a new Artisan command",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "命令类名",
+                "name": "命令类名",
+                "placeholder": "SendEmails"
+            }
+        ]
     },
     {
         "command": "make:controller",
         "chinese": "创建一个新的控制器类",
-        "english": "Create a new controller class"
+        "english": "Create a new controller class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "类名",
+                "name": "类名",
+                "placeholder": "StudentController"
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "存在时也生成",
+                "name": "强制生成",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
     },
     {
         "command": "make:event",
         "chinese": "创建一个新的 event 类",
-        "english": ""
+        "english": "",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": "PodcastProcessed"
+            }
+        ]
     },
     {
         "command": "make:exception",
         "chinese": "创建一个新的自定义异常类",
-        "english": "Create a new custom exception class"
+        "english": "Create a new custom exception class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:factory",
         "chinese": "创建一个新的模型工厂",
-        "english": "Create a new model factory"
+        "english": "Create a new model factory",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:job",
         "chinese": "创建一个新的工作类",
-        "english": "Create a new job class"
+        "english": "Create a new job class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:listener",
         "chinese": "创建一个新的事件监听器类",
-        "english": "Create a new event listener class"
+        "english": "Create a new event listener class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": "SendPodcastNotification"
+            },
+            {
+                "key": "event",
+                "value": "",
+                "rules": "",
+                "title": "",
+                "name": "事件类名",
+                "placeholderValue": "PodcastProcessed",
+                "is_option": true
+            }
+        ]
     },
     {
         "command": "make:mail",
         "chinese": "创建一个新的电子邮件类",
-        "english": "Create a new email class"
+        "english": "Create a new email class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:middleware",
         "chinese": "创建一个新的中间件类",
-        "english": "Create a new middleware class"
+        "english": "Create a new middleware class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": "Activity"
+            }
+        ]
     },
     {
         "command": "make:migration",
         "chinese": "创建一个新的迁移文件",
-        "english": "Create a new migration file"
+        "english": "Create a new migration file",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": "create_student_table"
+            }
+        ]
     },
     {
         "command": "make:model",
         "chinese": "创建一个新的 Eloquent 模型类",
-        "english": "Create a new Eloquent model class"
+        "english": "Create a new Eloquent model class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": "Models/Activity"
+            }
+        ]
     },
     {
         "command": "make:notification",
         "chinese": "创建一个新的通知类",
-        "english": "Create a new notification class"
+        "english": "Create a new notification class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:observer",
         "chinese": "创建一个新的观察者类",
-        "english": "Create a new observer class"
+        "english": "Create a new observer class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:policy",
         "chinese": "创建一个新的策略类",
-        "english": "Create a new policy class"
+        "english": "Create a new policy class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:provider",
         "chinese": "创建一个新的服务提供者类",
-        "english": "Create a new service provider class"
+        "english": "Create a new service provider class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:request",
         "chinese": "创建一个新的表单请求类",
-        "english": "Create a new form request class"
+        "english": "Create a new form request class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:resource",
         "chinese": "创建一个新资源",
-        "english": "Create a new resource"
+        "english": "Create a new resource",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:rule",
         "chinese": "创建新的验证规则",
-        "english": "Create a new validation rule"
+        "english": "Create a new validation rule",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:scaffold",
         "chinese": "代码生成器 —— Laravel5.x Scaffold Generator",
-        "english": "Create a laralib scaffold"
+        "english": "Create a laralib scaffold",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:seeder",
         "chinese": "创建一个新的 seeder 类",
-        "english": "Create a new seeder class"
+        "english": "Create a new seeder class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "make:test",
         "chinese": "创建一个新的测试类",
-        "english": "Create a new test class"
+        "english": "Create a new test class",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "required",
+                "title": "名称",
+                "name": "名称",
+                "placeholder": ""
+            }
+        ]
     },
     {
         "command": "migrate:fresh",
@@ -677,7 +916,18 @@
     {
         "command": "vendor:publish",
         "chinese": "从供应商包中发布任何可发布的资产",
-        "english": "Publish any publishable assets from vendor packages"
+        "english": "Publish any publishable assets from vendor packages",
+        "parameters": [
+            {
+                "key": "provider",
+                "value": "",
+                "rules": "",
+                "title": "",
+                "name": "服务提供者",
+                "placeholderValue": "Laravel\\Tinker\\TinkerServiceProvider",
+                "is_option": true
+            }
+        ]
     },
     {
         "command": "view:cache",
