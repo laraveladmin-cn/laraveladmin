@@ -32,8 +32,9 @@ class MenuTableSeeder extends Seeder
                 'method'=>Menu::methodValue(Arr::get($item,'method.type')),
                 'parent_id'=>$roleMenu['id'],
                 'url'=>$item['route']?$roleMenu['url'].'/'.$item['route']:$roleMenu['url'],
-                'status'=>2,
-                'disabled'=>$roleMenu['disabled']
+                'status'=>2, //不显示
+                'disabled'=>$roleMenu['disabled'],
+                'resource_id'=>$roleMenu['id']
             ];
             if($key=='list'){
                 $data['name'] = $name.'分页';
@@ -102,7 +103,7 @@ class MenuTableSeeder extends Seeder
         $disabled_menus = config('laravel_admin.disabled_menus','');
         $hash = md5(config('app.env').$routes_json.$disabled_menus);
         //判断菜单是否改变
-        if($hash==Cache::get($this->cache_key, '')){
+        if($hash==Cache::get($this->cache_key, '') && config('app.env')!='local'){
             $this->command->line('菜单未改变!');
             return true;
         }
@@ -114,6 +115,7 @@ class MenuTableSeeder extends Seeder
             ->merge(collect(Arr::get($routesConfig,'resource',[]))
                 ->map(function ($item){
                     $item['is_resource'] = 1;
+                    $item['resource_id'] = -1;
                     return $item;
                 })
                 ->toArray())
