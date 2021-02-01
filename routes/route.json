@@ -246,7 +246,7 @@
             "description" : "退出登录",
             "group": "open",
             "action": "LoginController@logout",
-            "route_name": "logout",
+            "as": "logout",
             "use": ["web","api"]
         },
         {
