@@ -27,6 +27,7 @@ let localize = {
         "required_if": "{_field_} 必填",
         "size": "{_field_} 必须小于{size}KB",
         "mobile": "{_field_} 不格式正确",
+        "digits_between": "{_field_} 长度必须是介于 6 和 18 位之间。",
     },
     attributes: {
         mobile: '手机号码',

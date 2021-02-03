@@ -14,27 +14,62 @@ class MenuTableSeeder extends Seeder
         $this->fillable = Menu::getFillables();
     }
 
+    protected $del_ids = [];
+
     /**
      * ID+5
      * 创建资源菜单
      */
-    protected function createRessorceMenu(Menu $roleMenu,$name='',array $options = []){
+    protected function createResourceMenu(Menu $roleMenu,$name='',array $options = []){
         //控制器默认路由注册
         $methods = collect($this->methods);
+        $ids = [];
+        $map_item = collect([]);
         if($options){
             $except = Arr::get($options,'except');
             $only = Arr::get($options,'only');
-            $except AND $methods = $methods->except($except);
-            $only AND $methods = $methods->only($only);
+            if($except){
+                if(is_array($except[0])){
+                    $except = collect($except)->pluck('name');
+                }
+                $methods = $methods->except($except);
+            }
+            if($only){
+                if(is_array($only[0])){
+                    $map_item = collect($only)->keyBy('name');
+                    $only = collect($only)->pluck('name');
+                    $ids = collect($only)->pluck('id','name');
+                    $this->del_ids = collect($this->del_ids)->merge(collect($only)->filter(function ($item){
+                        return Arr::get($item,'_is_deleted');
+                    })->pluck('id')
+                        ->toArray())->toArray();
+                }
+                $methods = $methods->only($only);
+            }
         }
-        $methods->each(function ($item,$key)use ($name,$roleMenu){
+        $add_id = $roleMenu['id'];
+        $methods->each(function ($item,$key)use ($name,$roleMenu,$ids,&$add_id,$map_item){
+            $item1 = $map_item->get($key,[]);
+            $add_id = $add_id+1;
+            $p_env = Arr::get($roleMenu,'env','');
+            $env = Arr::get($item1,'env',$p_env);
+            $p_disabled = Arr::get($roleMenu,'disabled',0);
+            $disabled = Arr::get($item1,'disabled',$p_disabled);
             $data = [
                 'method'=>Menu::methodValue(Arr::get($item,'method.type')),
                 'parent_id'=>$roleMenu['id'],
                 'url'=>$item['route']?$roleMenu['url'].'/'.$item['route']:$roleMenu['url'],
-                'status'=>2,
-                'disabled'=>$roleMenu['disabled']
+                'status'=>2, //不显示
+                'disabled'=>$disabled,
+                'resource_id'=>$roleMenu['id'],
+                'item_name'=>'_'.$key,
+                'env'=> $env
             ];
+            if($id = Arr::get($ids,$key)){
+                $data['id'] = $id;
+            }else{
+                $data['id'] = $add_id;
+            }
             if($key=='list'){
                 $data['name'] = $name.'分页';
                 $data['icons'] = 'fa-list';
@@ -97,12 +132,12 @@ class MenuTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->methods = RouteService::getRessorceRoutes(['except'=>['index']]);
+        $this->methods = RouteService::getResourceRoutes(['except'=>['index']]);
         $routes_json = file_get_contents(base_path('routes/route.json'));
         $disabled_menus = config('laravel_admin.disabled_menus','');
         $hash = md5(config('app.env').$routes_json.$disabled_menus);
         //判断菜单是否改变
-        if($hash==Cache::get($this->cache_key, '')){
+        if($hash==Cache::get($this->cache_key, '') && config('app.env')!='local'){
             $this->command->line('菜单未改变!');
             return true;
         }
@@ -111,24 +146,30 @@ class MenuTableSeeder extends Seeder
         Cache::put($this->cache_key, $hash);
         $routesConfig = json_decode($routes_json,true);
         collect(Arr::get($routesConfig,'menus',[]))
-            ->merge(collect(Arr::get($routesConfig,'ressorce',[]))
+            ->merge(collect(Arr::get($routesConfig,'resource',[]))
                 ->map(function ($item){
-                    $item['is_ressorce'] = 1;
+                    $item['is_resource'] = 1;
+                    $item['resource_id'] = -1;
                     return $item;
                 })
                 ->toArray())
-            ->sortBy('id')
             ->map(function ($item){
-                if(Arr::get($item,'env',config('app.env'))!=config('app.env')){
-                    $item['disabled'] = 1;
-                }
-                if(Arr::get($item,'is_ressorce')){
+                $item['_id'] = Arr::get($item,'_id',$item['id']);
+                return $item;
+            })
+            ->sortBy('_id') //顺序创建
+            ->map(function ($item)use (&$del_ids){
+                $item = Menu::decodeValue($item);//兼容解码
+                if(Arr::get($item,'is_resource')){
                     $menu = Menu::create(collect($item)->only($this->fillable)->toArray());
                     $name = Arr::get($item,'item_name',Arr::get($item,'name',''));
                     $options = Arr::get($item,'options',[]);
-                    $this->createRessorceMenu($menu,$name,$options);
+                    $this->createResourceMenu($menu,$name,$options);
                 }else{
-                    Menu::create(collect($item)->only($this->fillable)->toArray());
+                    $menu = Menu::create(collect($item)->only($this->fillable)->toArray());
+                }
+                if(Arr::get($item,'_is_deleted')){
+                    $this->del_ids = collect($this->del_ids)->push($menu['id'])->toArray();
                 }
             });
         collect(Arr::get($routesConfig,'update_position',[]))->map(function ($item){
@@ -154,6 +195,10 @@ class MenuTableSeeder extends Seeder
             })
                 ->update(['disabled'=>1]);
         }
+        if($this->del_ids){
+            Menu::whereIn('id',$this->del_ids)->delete();
+        }
+
     }
 
 

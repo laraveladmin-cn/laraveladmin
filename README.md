@@ -21,7 +21,8 @@
 ### 简介说明
 
 `laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。\(QQ群: 391528810\)
-[Demo](http://demo.laraveladmin.cn) \|\| [阅读文档](http://www.laraveladmin.cn/home/index)
+[Demo](https://demo.laraveladmin.cn) \|\| [阅读文档](https://www.laraveladmin.cn/home/index)
+![QQ群](https://www.laraveladmin.cn/api/home/docs/images/QQ群.jpg)
 
 ### 功能特色
 
@@ -58,15 +59,14 @@
 ![LaravelAdmin弹窗编辑](https://www.laraveladmin.cn/api/home/docs/images/弹窗编辑.jpg)
 
 * 手机端适配
+
 ![LaravelAdmin手机端适配](https://www.laraveladmin.cn/api/home/docs/images/手机端.jpg)
 
 * 平板适配
 ![LaravelAdmin平板适配](https://www.laraveladmin.cn/api/home/docs/images/pad屏幕.jpg)
 
-* 编辑页面拖拽布局后反向更代码
+* 编辑页面拖拽布局后反向更新代码
 ![LaravelAdmin拖拽布局](https://www.laraveladmin.cn/api/home/docs/images/拖拽布局.gif)
-
-#### 软件架构
 
 ## 环境部署
 

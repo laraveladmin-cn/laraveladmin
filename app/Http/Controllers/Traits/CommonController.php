@@ -325,7 +325,7 @@ trait CommonController{
         if($order){
             $options['order'] = collect($order)->merge(collect($this->orderDefault)
                 ->map(function ($item,$key)use($order){
-                return isset($order[$key])?$order[$key]:$item;
+                    return Arr::get($order,$key,$item);
             })->toArray())->toArray();
         }else{
             $options['order'] = $this->orderDefault;

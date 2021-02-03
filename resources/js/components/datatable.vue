@@ -54,6 +54,7 @@
                                 <i class="fa" :class="show_export_fields?'fa-angle-double-up':'fa-angle-double-down'"></i>
                                 导出字段
                             </button>
+                            <slot name="add_btn"></slot>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item pull-right" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
                             <div class="box-tools">
@@ -174,12 +175,12 @@
                                 </td>
                                 <td v-for="(field,k) in show_fields" :class="field['class']">
                                     <slot name="col" :field="field" :data="data" :row="row" :k="k">
-                                        <span v-if="field.type =='label'">
+                                        <span v-if="field.type =='label' || field.type =='radio'">
                                             <span class="label" :class="labelClass(row,k)">
                                                 {{ data.maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
                                             </span>
                                         </span>
-                                        <span v-else-if="field.type =='labels'">
+                                        <span v-else-if="field.type =='labels' || field.type =='checkbox'">
                                             <span v-for="value in getItems(row,k)" class="label labels-m" :class="checkboxClass(value,2,statusClass,k)">
                                                 {{ data.maps| array_get(k.replace('.$index','')) | array_get(value) }}
                                             </span>

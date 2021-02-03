@@ -20,6 +20,7 @@ class DevelopmentsController extends Controller
 
     public function __construct()
     {
+        //读取命令列表
         $file = storage_path('developments/commands.json');
         if(file_exists($file)){
             $this->commands = json_decode(file_get_contents($file),true);
@@ -61,7 +62,7 @@ class DevelopmentsController extends Controller
             'index'=>$index,
             'history'=>[],
         ];
-        return $data;
+        return Response::returns($data);
     }
 
     /**
