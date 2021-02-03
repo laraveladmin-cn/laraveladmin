@@ -62,14 +62,7 @@ class DevelopmentsController extends Controller
             'index'=>$index,
             'history'=>[],
         ];
-        return $data;
-    }
-
-    /**
-     * 菜单路由页面
-     */
-    public function menus(){
-
+        return Response::returns($data);
     }
 
     /**
