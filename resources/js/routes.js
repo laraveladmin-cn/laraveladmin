@@ -18,7 +18,7 @@ collect(routesConfig.group).map((group,key)=>{
 }).values().groupBy('prefix').map((groups,name)=>{
     let group_names = collect(groups).pluck('name');
     let filter = (item)=>{
-        if (item.env && window.AppConfig && window.AppConfig.env && item.env!=window.AppConfig.env){
+        if ((item.env && window.AppConfig && window.AppConfig.env && item.env!=window.AppConfig.env) || item._is_deleted){
             return false;
         }
         return (item.disabled==0 || item.disabled=='启用') && (item.is_page==1 || item.is_page=='是') && group_names.contains(item.group) && item.url;

@@ -24,7 +24,7 @@ class Menu extends Model
     protected $adminRoot = [2]; //后台菜单
     //批量赋值白名单
     protected $fillable = [
-        //'id',
+        'id',
         'name',
         'disabled',
         'icons',
@@ -38,7 +38,11 @@ class Menu extends Model
         'group',
         'action',
         'env',
-        'plug_in_key'
+        'plug_in_key',
+        'use',
+        'as',
+        'middleware',
+        'item_name'
     ];
     //输出隐藏字段
     protected $hidden = ['deleted_at'];
@@ -70,6 +74,10 @@ class Menu extends Model
         'disabled'=>[
             0=>'启用',
             1=>'禁用'
+        ],
+        'use'=>[
+            1=>'api',
+            2=>'web'
         ]
     ];
 
@@ -86,15 +94,16 @@ class Menu extends Model
         'method'=>[1],
         'is_page'=>0,
         'status'=>2,
-        'level'=>0,
-        'left_margin'=>0,
-        'right_margin'=>0,
         'disabled'=>0,
-        'resource_id'=>'0',
+        'resource_id'=>0,
         'group'=>'',
         'action'=>'',
         'env'=>'',
-        'plug_in_key'=>''
+        'plug_in_key'=>'',
+        'as'=>'',
+        'middleware'=>[],
+        'use'=>[],
+        'item_name'=>''
     ];
 
     //字段默认值
@@ -114,6 +123,9 @@ class Menu extends Model
         'action'=>'绑定控制器方法',
         'env'=>'使用环境',
         'plug_in_key'=>'插件菜单唯一标识',
+        'use'=>'路由使用地方',
+        'as'=>'路由别名',
+        'middleware'=>'单独使用中间件',
         //'left_margin' => '左边界',
         //'right_margin' => '右边界',
         //'created_at' => '创建时间',
@@ -170,6 +182,49 @@ class Menu extends Model
     }
 
     /**
+     * 获取多选值
+     * @param  $value
+     * @return  array
+     */
+    public function getUseAttribute($value)
+    {
+        $field = $this->getFieldsMap('use')->toArray();
+        unset($field[0]);
+        return multiple($value,$field);
+    }
+
+    /**
+     * 设置多选值
+     * @param  $value
+     * @return  array
+     */
+    public function setUseAttribute($value)
+    {
+        $this->attributes['use'] = multipleToNum($value);
+    }
+
+    /**
+     * 获取多选值
+     * @param  $value
+     * @return  array
+     */
+    public function getMiddlewareAttribute($value)
+    {
+        $res = $value?json_decode($value,true):[];
+        return $res?:[];
+    }
+
+    /**
+     * 设置多选值
+     * @param  $value
+     * @return  array
+     */
+    public function setMiddlewareAttribute($value)
+    {
+        $this->attributes['middleware'] = is_array($value)?json_encode($value):'';
+    }
+
+    /**
      * 接口参数
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -190,7 +245,10 @@ class Menu extends Model
      * @param $query
      */
     public function scopeUsable($query){
-        $query->where('disabled','=',0);
+        $query->where('disabled','=',0)->where(function ($q){
+            $q->where('env',config('app.env'))
+                ->orWhere('env','');
+        });
     }
 
     public function menu_roles(){
@@ -374,20 +432,26 @@ class Menu extends Model
      */
     public function scopeDecodeValue($query,&$item){
         //解码
-        collect(['method','disabled','status','is_page'])->map(function ($key)use(&$item){
+        collect(['method','disabled','status','is_page','use'])->map(function ($key)use(&$item){
             if(!isset($item[$key])){
                 return;
             }
+
             $val = Arr::get($item,$key);
             $map = Arr::get($this->fieldsShowMaps,$key);
-            if(!is_null($val) && !collect($map)->keys()->map(function ($val){
+            if(!is_null($val)){
+                if(is_array($val)){
+                    $m = collect($map)->flip();
+                    $item[$key] = collect($val)->map(function ($v)use($key,$m){
+                        return $m->get($v,$v);
+                    })->toArray();
+                }elseif(!collect($map)->keys()->map(function ($val){
                     return $val.'';
                 })->contains($val)){
-                $default = $key=='method'?0:Arr::get($this->fieldsDefault,$key);
-
-                $item[$key] = collect($map)->flip()->get($val,$default);
+                    $default = $key=='method'?0:Arr::get($this->fieldsDefault,$key);
+                    $item[$key] = collect($map)->flip()->get($val,$default);
+                }
             }
-
         });
         return $item;
     }

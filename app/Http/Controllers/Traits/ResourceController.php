@@ -537,7 +537,7 @@ trait ResourceController
                     $value = collect(Arr::get($item, $k_arr[0], []))->pluck($k_arr[1])->implode(',');
                 } elseif ($map) {
                     if (!is_array($value)) {
-                        $value = Arr::get(Arr::get($maps, $key), $value);
+                        $value = Arr::get($map, $value);
                     } else {
                         $value = collect($value)->map(function ($value) use ($map) {
                             return Arr::get($map, $value);

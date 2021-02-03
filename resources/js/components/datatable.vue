@@ -54,6 +54,7 @@
                                 <i class="fa" :class="show_export_fields?'fa-angle-double-up':'fa-angle-double-down'"></i>
                                 导出字段
                             </button>
+                            <slot name="add_btn"></slot>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item pull-right" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
                             <div class="box-tools">
