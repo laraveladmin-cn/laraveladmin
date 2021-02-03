@@ -291,7 +291,7 @@ class RouteService
                             $route = [];
                             $methods = Menu::getFieldsMap('method');
                             collect($methods)->each(function ($type,$val)use(&$route,$method,$path,$action){
-                                if($method&$val){
+                                if((is_numeric($method) && $method&$val) || (is_array($method) && in_array($val,$method))){
                                     $route =  Route::$type($path, $action);
                                 }
                             });

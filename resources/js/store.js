@@ -45,7 +45,7 @@ export default {
         //刷新token
         refreshToken({commit}){
             if(window.AppConfig.api_url_model!='web'){
-                return ;
+                //return ;
             }
             axios.get((window.AppConfig['web_url'] || '')+'/open/token').then( (response) =>{
                 if (typeof response.data != 'undefined' && typeof response.data._token != 'undefined') {
