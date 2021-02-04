@@ -271,7 +271,7 @@ class RouteService
                             Arr::get($item,'disabled','')==0 &&
                             Arr::get($item,'env',self::$env)==self::$env &&
                             Arr::get($item,'method','') &&
-                            in_array(1,$use);
+                            in_array(2,$use);
                     })
                     ->map(function ($item){
                         $path_arr = explode('/',Arr::get($item,'url',''));
