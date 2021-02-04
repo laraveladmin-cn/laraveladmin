@@ -173,14 +173,14 @@ class RouteService
                         return $item;
                     })
                     ->filter(function ($item)use ($key){
-                        $use = Arr::get($item,'use',2);
+                        $use = Arr::get($item,'use',1);
                         $use = !is_array($use)?[$use]:$use;
                         return Arr::get($item,'group','')==$key &&
                             Arr::get($item,'url','') &&
                             Arr::get($item,'method','') &&
                             Arr::get($item,'disabled','')==0 &&
                             Arr::get($item,'env',self::$env)==self::$env &&
-                            in_array(2,$use);
+                            in_array(1,$use);
                     })
                     ->map(function ($item){
                         $path_arr = explode('/',Arr::get($item,'url',''));
@@ -262,7 +262,7 @@ class RouteService
                         return $item;
                     })
                     ->filter(function ($item)use ($key){
-                        $use = Arr::get($item,'use',1);
+                        $use = Arr::get($item,'use',2);
                         $use = !is_array($use)?[$use]:$use;
                         return
                             Arr::get($item,'group','')==$key &&

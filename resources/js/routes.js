@@ -21,7 +21,7 @@ collect(routesConfig.group).map((group,key)=>{
         if ((item.env && window.AppConfig && window.AppConfig.env && item.env!=window.AppConfig.env) || item._is_deleted){
             return false;
         }
-        return (item.disabled==0 || item.disabled=='启用') && (item.is_page==1 || item.is_page=='是') && group_names.contains(item.group) && item.url;
+        return (!item.disabled || item.disabled==0 || item.disabled=='启用') && (item.is_page==1 || item.is_page=='是') && group_names.contains(item.group) && item.url;
     };
     //子页面
     let children = collect(routesConfig.menus).filter(filter).map((item)=>{
