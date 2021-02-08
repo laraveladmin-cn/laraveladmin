@@ -56,13 +56,24 @@
                             </edit-item>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="menu_ids" :options="{name: '权限分配', required: true,rules:'required'}"  :datas="props">
+                            <edit-item key-name="_menu_ids" :options='{"name": "是否关联取消权限分配子节点"}' :datas="props">
+                                <template slot="input-item">
+                                    <el-switch v-model="cancel_children"
+                                               :disabled="!props.url"
+                                               active-text="是"
+                                               inactive-text="否"
+                                               :active-value="1"
+                                               :inactive-value="0">
+                                    </el-switch>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="menu_ids" :options="{name: '权限分配',rules:'required'}"  :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <ztree v-model="props.data.row['menu_ids']"
                                                :disabled="!props.url || props.data.row['tmp_id']>0 || props.data.row['id']==1"
                                                :id="'menus'"
-                                               :chkbox-type='{"Y": "ps", "N": "s"}'
+                                               :chkbox-type='cancel_children?{"Y": "ps", "N": "s"}:{"Y": "ps", "N": ""}'
                                                :data="props.data.maps['permissions']">
                                         </ztree>
                                     </div>
@@ -83,7 +94,8 @@
             'edit':()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             "edit-item": ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
-            "ztree":()=>import(/* webpackChunkName: "common_components/ztree.vue" */ 'common_components/ztree.vue')
+            "ztree":()=>import(/* webpackChunkName: "common_components/ztree.vue" */ 'common_components/ztree.vue'),
+            "el-switch": ()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
         },
         props: {
         },
@@ -93,7 +105,8 @@
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}
-                }
+                },
+                cancel_children:1
             };
         },
         computed:{

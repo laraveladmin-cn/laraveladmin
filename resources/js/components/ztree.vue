@@ -166,6 +166,9 @@
             },
             data(value){
                 this.init();
+            },
+            chkboxType(value){
+                this.ztree.setting.check.chkboxType = value;
             }
 
 
