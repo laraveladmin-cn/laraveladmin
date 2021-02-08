@@ -284,7 +284,10 @@ trait ResourceController
         collect($this->editFields)->map(function ($item1, $key) use ($data, $item) {
             $key1 = Str::singular($key) . '_ids';
             if (is_array($item1) && Str::endsWith($key, 's') && isset($data[$key1])) { //多个关联
-                $item->$key()->sync(Arr::get($data, $key1, []));
+                $obj = $item->$key();
+                if (method_exists($obj, 'sync')) { //多对多关系
+                    $obj->sync(Arr::get($data, $key1, []));
+                }
             }
         });
     }
