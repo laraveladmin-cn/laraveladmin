@@ -179,4 +179,7 @@ export default {
             width: 12.5%;
         }
     }
+    .row{
+        cursor:auto;
+    }
 </style>
