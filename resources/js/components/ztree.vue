@@ -5,6 +5,7 @@
 </template>
 <script>
     require('ztree/js/jquery.ztree.all.min');
+    let $this;
     export default {
         props:{
             //ztree配置
@@ -29,6 +30,9 @@
                             dblClickExpand: false
                         },
                         callback: {
+                            beforeClick(treeId, treeNode, clickFlag){
+                                return !$this.disabled;
+                            },
                             onCheck:  (e, id, node)=> {
                                 let data;
                                 if(this.multiple){
@@ -108,9 +112,16 @@
                 if(!this.multiple){
                     this.ztree.selectNode(this.ztree.getNodeByParam("id", this.val));
                 }
+                this.disabledChange(this.disabled);
+            },
+            disabledChange(value){
+                collect(this.ztree.transformToArray(this.ztree.getNodes())).map((item)=>{
+                    this.ztree.setChkDisabled(item, value);
+                });
             }
         },
         mounted() {
+            $this = this;
             this.init();
         },
         watch:{
@@ -151,9 +162,7 @@
                 }
             },
             disabled(value){
-                collect(this.ztree.transformToArray(this.ztree.getNodes())).map((item)=>{
-                    this.ztree.setChkDisabled(item, value);
-                });
+               this.disabledChange(value);
             },
             data(value){
                 this.init();
