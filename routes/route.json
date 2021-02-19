@@ -569,7 +569,6 @@
             "is_page": 0,
             "parent_id": 41,
             "disabled": 0,
-            "env": "local",
             "description" : "菜单拖拽页面数据",
             "group": "admin",
             "action": "MenuController@tree"
