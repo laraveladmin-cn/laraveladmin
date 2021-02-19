@@ -150,7 +150,7 @@ class CustomValidator extends Validator{
         if(Arr::get($parameters,0,'')){ //去掉参数
             $value = explode('?',$value)[0];
         }
-        return preg_match("/^[a-z0-9_\/]{0,}[a-z0-9\-_\/]{1,}$/", $value);
+        return preg_match("/^[a-z0-9_\/]{0,}[a-z0-9{}\-_\/]{1,}$/", $value);
     }
 
 

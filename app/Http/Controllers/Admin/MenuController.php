@@ -128,7 +128,9 @@ class MenuController extends Controller
         if($_type!=0){
             $validate['url'] = 'required|url_path';
             $validate['method'] = 'required|array';
-            $validate['group'] = 'required';
+            if(!Str::is('_*',Request::input('item_name'))){
+                $validate['group'] = 'required';
+            }
         }
         return $validate;
     }

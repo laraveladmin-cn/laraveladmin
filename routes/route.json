@@ -699,7 +699,42 @@
             "disabled": 0,
             "description": "菜单列表",
             "group": "admin",
-            "options": {},
+            "options": {
+                "only": [
+                    {
+                        "id": 42,
+                        "name": "list"
+                    },
+                    {
+                        "id": 43,
+                        "name": "export"
+                    },
+                    {
+                        "id": 44,
+                        "name": "import",
+                        "env": "local"
+                    },
+                    {
+                        "id": 45,
+                        "name": "show"
+                    },
+                    {
+                        "id": 46,
+                        "name": "create",
+                        "env": "local"
+                    },
+                    {
+                        "id": 47,
+                        "name": "update",
+                        "env": "local"
+                    },
+                    {
+                        "id": 48,
+                        "name": "delete",
+                        "env": "local"
+                    }
+                ]
+            },
             "end_id": 48
         },
         {
