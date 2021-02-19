@@ -228,7 +228,19 @@ class RouteService
                         $value = Arr::get(explode('/',Arr::get($item,'url','')),2,'');
                         if($value){
                             $class = ucfirst(Str::singular(Str::camel(str_replace('-','_',$value)))).'Controller';
-                            self::createResourceRoute($value,$class,Arr::get($item,'options',[]));
+                            $options = Arr::get($item,'options',[]);
+                            $only = Arr::get($options, 'only');
+                            if($only){
+                              if(is_array(collect($only)->first())){
+                                  $only[] = [
+                                      'name'=>'index'
+                                  ];
+                              }else{
+                                  $only[] = 'index';
+                              }
+                                $options['only'] = $only;
+                            }
+                            self::createResourceRoute($value,$class,$options);
                         }
                     });
 
@@ -424,7 +436,7 @@ class RouteService
         $resource = collect(listToTree($resource,'id','resource_id','children',-1))
             ->map(function ($menu)use($methods,$methods_count,$default,$maps){
                 $flog = false;
-                $children = collect($menu['children'])->filter(function ($item){
+                $children = collect(Arr::get($menu,'children',[]))->filter(function ($item){
                     return Str::is('_*',$item['item_name']);
                 })->map(function ($item)use(&$flog){
                     $row = [

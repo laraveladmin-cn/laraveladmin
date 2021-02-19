@@ -4,18 +4,30 @@
  */
 namespace App\Models;
 use App\Facades\LifeData;
+use App\Http\Kernel;
 use App\Models\Traits\ExcludeTop;
 use App\Models\Traits\TreeModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\BaseModel;
 use Illuminate\Support\Str;
 
 class Menu extends Model
 {
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $routesConfig = json_decode(file_get_contents(base_path('routes/route.json')),true);
+        $this->fieldsShowMaps['group'] = collect(Arr::get($routesConfig,'group',[]))->map(function ($item,$key){
+            return $key;
+        })->toArray();
+        $this->fieldsShowMaps['middleware'] = collect(app(Kernel::class)->getRouteMiddleware())->map(function ($value,$key){
+            return $key;
+        })->toArray();
+    }
+
     protected $table = 'menus'; //数据表名称
     //软删除,树状结构
     use SoftDeletes,TreeModel,ExcludeTop,BaseModel;
@@ -78,6 +90,12 @@ class Menu extends Model
         'use'=>[
             1=>'api',
             2=>'web'
+        ],
+        'env'=>[
+            'local'=>'local',
+            'testing'=>'testing',
+            'staging'=>'staging',
+            'production'=>'production'
         ]
     ];
 
@@ -140,6 +158,14 @@ class Menu extends Model
      */
     public function resource(){
         return $this->belongsTo('App\Models\Menu');
+    }
+
+    /**
+     * 所属资源
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function resources(){
+        return $this->hasMany('App\Models\Menu','resource_id','id');
     }
 
     /**
@@ -221,7 +247,7 @@ class Menu extends Model
      */
     public function setMiddlewareAttribute($value)
     {
-        $this->attributes['middleware'] = is_array($value)?json_encode($value):'';
+        $this->attributes['middleware'] = (is_array($value) && $value)?json_encode($value):'';
     }
 
     /**

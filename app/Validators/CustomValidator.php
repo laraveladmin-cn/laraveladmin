@@ -138,6 +138,22 @@ class CustomValidator extends Validator{
         return false;
     }
 
+    /**
+     * 验证是否
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @return bool
+     */
+    public function validateUrlPath($attribute, $value, $parameters){
+        if(!$value) return true;
+        if(Arr::get($parameters,0,'')){ //去掉参数
+            $value = explode('?',$value)[0];
+        }
+        return preg_match("/^[a-z0-9_\/]{0,}[a-z0-9\-_\/]{1,}$/", $value);
+    }
+
+
 
 
 }

@@ -558,6 +558,36 @@
             "description" : "提交命令进行执行",
             "group": "admin",
             "action": "DevelopmentsController@postCommand"
+        },
+        {
+            "id": 88,
+            "name": "菜单拖拽",
+            "icons": "fa-mouse-pointer",
+            "url":"/admin/menus/tree",
+            "method":1,
+            "status":2,
+            "is_page": 0,
+            "parent_id": 41,
+            "disabled": 0,
+            "env": "local",
+            "description" : "菜单拖拽页面数据",
+            "group": "admin",
+            "action": "MenuController@tree"
+        },
+        {
+            "id": 89,
+            "name": "提交菜单位置修改",
+            "icons": "fa-edit",
+            "url":"/admin/menus/update-position",
+            "method":2,
+            "status":2,
+            "is_page": 0,
+            "parent_id": 88,
+            "disabled": 0,
+            "env": "local",
+            "description" : "提交菜单位置修改",
+            "group": "admin",
+            "action": "MenuController@updatePosition"
         }
     ],
     "resource": [

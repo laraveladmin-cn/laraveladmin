@@ -13,6 +13,7 @@
                 type: Object,
                 default: function () {
                     return {
+                        enable: true,
                         check: {
                             enable: true,
                             chkboxType: {"Y": "ps", "N": "s"}
@@ -98,26 +99,35 @@
         data(){
             return {
                 ztree:null,
-                val:typeof this.value =="object" ? collect(copyObj(this.value)).sort().all():this.value
+                val:typeof this.value =="object" ? collect(copyObj(this.value)).sort().all():this.value,
+                old_disabled:this.disabled
             };
         },
         methods:{
             init(){
-                let $this = this;
-                    let ztree = $.fn.zTree.init($(this.$el).find('ul'),this.mainConfig,this.mainDatas);
-                    this.ztree = ztree;
-                    if(this.expandAll){
-                        ztree.expandAll(true); //全部展开
-                    }
+                let ul = $(this.$el).find('ul');
+                ul.html('');
+                let ztree = $.fn.zTree.init(ul,this.mainConfig,this.mainDatas);
+                this.ztree = ztree;
+                if(this.expandAll){
+                    ztree.expandAll(true); //全部展开
+                }
                 if(!this.multiple){
                     this.ztree.selectNode(this.ztree.getNodeByParam("id", this.val));
                 }
                 this.disabledChange(this.disabled);
             },
             disabledChange(value){
-                collect(this.ztree.transformToArray(this.ztree.getNodes())).map((item)=>{
-                    this.ztree.setChkDisabled(item, value);
-                });
+                if(this.old_disabled!=value){
+                    this.old_disabled = value;
+                    setTimeout(()=>{
+                        if(this.ztree){
+                            collect(this.ztree.transformToArray(this.ztree.getNodes())).map((item)=>{
+                                 this.ztree.setChkDisabled(item, value);
+                            });
+                        }
+                    },200);
+                }
             }
         },
         mounted() {
@@ -162,7 +172,7 @@
                 }
             },
             disabled(value){
-               this.disabledChange(value);
+                this.disabledChange(value);
             },
             data(value){
                 this.init();
@@ -170,8 +180,6 @@
             chkboxType(value){
                 this.ztree.setting.check.chkboxType = value;
             }
-
-
         },
         computed:{
             mainConfig(){
@@ -194,7 +202,6 @@
                     }
                     return item;
                 }).all();
-                //console.log(datas);
                 return datas;
             }
         },
