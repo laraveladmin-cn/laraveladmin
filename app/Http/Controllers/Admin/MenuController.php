@@ -238,6 +238,8 @@ class MenuController extends Controller
                 Menu::find($item['from'])->moveNear($item['to'],$item['type']);
             }
         });
+        //更新路由数据
+        RouteService::upRouteJson();
         return Response::returns(['alert' => alert(['message' => '修改成功!'])]);
     }
 
