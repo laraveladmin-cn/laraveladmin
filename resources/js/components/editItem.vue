@@ -11,7 +11,7 @@
                     <i class="fa fa-warning"></i>
                     <span v-for="error in errors">{{error.replace('is not valid','不是有效的')}}</span>
                 </label>
-                <div>
+                <div class="ignore-move-item-content">
                     <slot name="input-item">
                         <input
                             v-if="!options.type || options.type=='input' || options.type=='text'"
@@ -185,6 +185,9 @@
     .edit-item .help-block{
         margin-top: 0px;
         margin-bottom: 5px;
+    }
+    .ignore-move-item-content{
+        cursor: default;
     }
 
 </style>
