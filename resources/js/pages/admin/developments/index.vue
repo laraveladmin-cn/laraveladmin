@@ -86,6 +86,19 @@
                                                 </template>
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-else-if="item.type=='checkbox'"
+                                                       :options="item"
+                                                       :datas="props"
+                                                       :key="index">
+                                                <template slot="input-item">
+                                                    <div class="row">
+                                                        <div v-for="(item1,index) in (item.map || array_get(props,'data.maps.'+item.map_key,[]))" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                            <icheck v-model="item.value" :option="index" :disabled="!props.url" :label="item1"> {{item1}}</icheck>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </edit-item>
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else-if="item.type=='switch'"
                                                        :options="item"
                                                        :datas="props"
@@ -207,6 +220,8 @@
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             "el-switch": ()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
             "menus": ()=>import(/* webpackChunkName: "pages/admin/developments/menus" */ 'pages/admin/developments/menus.vue'),
+            "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+
         },
         data() {
             return {
@@ -280,6 +295,9 @@
                         if(parameter.is_boolean){
                             return parameter.value?' --'+parameter.key:'';
                         }else {
+                            if(Array.isArray(parameter.value) && !parameter.value.length){
+                                return ''
+                            }
                             return ' --'+parameter.key+'='+parameter.value;
                         }
                     }else {
