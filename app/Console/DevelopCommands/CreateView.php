@@ -55,7 +55,8 @@ class CreateView extends BaseCreate
         if ($this->argument('output')) {
             $this->outputPath = resource_path('js/pages/' . $this->argument('output'));
         } else {
-            $this->outputPath = resource_path('js/pages/admin/' . Str::snake(basename($this->argument('controller'))) . 's/' . Str::snake($this->argument('template')));
+            $pathinfo = pathinfo(Str::lower($this->argument('controller')));
+            $this->outputPath = resource_path('js/pages/'.Arr::get($pathinfo,'dirname').'/' . Str::snake(Arr::get($pathinfo,'basename')) . 's/' . Str::snake($this->argument('template')));
         }
     }
 
