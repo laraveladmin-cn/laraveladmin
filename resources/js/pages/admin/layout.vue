@@ -259,7 +259,9 @@
                     <strong>Copyright &copy; 2020
                         <a target="_blank" href="http://www.laraveladmin.cn">Laravel Admin</a>
                     </strong>
-                    <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 备案号:{{icp}}
+                    <span v-if="icp">
+                         <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 备案号:{{icp}}
+                    </span>
                 </footer>
             </div>
             <aside class="control-sidebar control-sidebar-dark">
