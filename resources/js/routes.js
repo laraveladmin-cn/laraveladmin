@@ -29,7 +29,7 @@ collect(routesConfig.group).map((group,key)=>{
         path_arr.shift();
         path_arr.shift();
         let path = path_arr.join('/');
-        let path1 = ((name?name+'/':'')+path).replace('-','_');
+        let path1 = ((name?name+'/':'')+path).replace(/-/g,'_');
         let pathName = 'pages'+path1+'.vue';
         let route = {
             path: path,
@@ -45,7 +45,7 @@ collect(routesConfig.group).map((group,key)=>{
         path_arr.shift();
         path_arr.shift();
         let path = path_arr.join('/');
-        let path1 = ((name?name+'/':'')+path).replace('-','_');
+        let path1 = ((name?name+'/':'')+path).replace(/-/g,'_');
         path1 = path=='index'?path1:path1+'/index';
         let pathName = 'pages'+path1+'.vue';
         let route = {
@@ -57,7 +57,7 @@ collect(routesConfig.group).map((group,key)=>{
         }
         children.push(route);
         if(path!='index'){
-            let path2 = (path1+'.vue').replace('index.vue','edit').replace('-','_');
+            let path2 = (path1+'.vue').replace('index.vue','edit').replace(/-/g,'_');
             let pathName2 = 'pages'+path2+'.vue';
             let edit = {
                 path: path+'/:id',
