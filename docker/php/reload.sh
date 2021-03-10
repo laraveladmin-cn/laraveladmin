@@ -1,8 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #set -x
 ##代码更新重载phpswoole
 code_dir=${LARAVEL_DIR}
+if [ "${code_dir}" = "" ]
+    then
+    code_dir="/var/www/laravel"
+fi
 projects=`ls $code_dir`
 for project in ${projects}
 do
