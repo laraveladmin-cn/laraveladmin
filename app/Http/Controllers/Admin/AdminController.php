@@ -133,7 +133,7 @@ class AdminController extends Controller
         return $validate;
     }
 
-    protected function handleListReturn(&$data){
+    protected function handleListReturn(&$data,$obj){
         $data = collect($data)->toArray();
         $data['data'] = collect($data['data'])->map(function($item){
             $item['roles_name'] = collect($item['roles'])->pluck('name')->implode(',');

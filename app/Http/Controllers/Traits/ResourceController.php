@@ -116,11 +116,11 @@ trait ResourceController
 
         //获取分页数据
         if (!Request::input('page') || Request::input('get_count')) {
-            $data = $obj->paginate();
+            $data = (clone $obj)->paginate();
         } else { //不统计条数
-            $data = $obj->simplePaginate();
+            $data = (clone $obj)->simplePaginate();
         }
-        $data = $this->handleListReturn($data);
+        $data = $this->handleListReturn($data,$obj);
         //返回响应数据存放,方便操作日志记录
         LifeData::set('list', $data);
         return $data;
@@ -578,12 +578,16 @@ trait ResourceController
     {
         $model = $this->newBindModel();
         $maps = $this->getFieldsMap($this->exportFields, $model, true);
+        $multipleFields = collect($this->exportFieldsName)->filter(function ($v, $k) {
+            return str_contains($k, '$index');
+        })->keys()->toArray();
         $maps = $this->handleImportMaps($maps);
         $default = $this->editDefaultFields($this->exportFields, $model);
         $key_name = $model->getKeyName();
         $bindModel = $this->getModelNamespace() . $this->getResourceModel();
         $errors = []; //错误数据项
         $relation_keys = []; //关系数据
+        $maps1 = $this->getFieldsMap($this->exportFields, $model);
         $datas = collect(Request::input('datas', []) ?: [])->map(function ($row) use ($maps, $default, &$relation_keys, $model) { //数据解码
             $relation_row = [];
             $row = collect($row)->map(function ($item, $key) use ($maps, $default, &$relation_keys, $model, &$relation_row) {
@@ -614,7 +618,7 @@ trait ResourceController
                 return $value;
             })->merge($relation_row)->toArray();
             return $row;
-        })->filter(function ($item) use (&$errors, $key_name, $relation_keys) { //数据验证
+        })->filter(function ($item) use (&$errors, $key_name, $relation_keys,$maps1, $multipleFields) { //数据验证
             $validator = Validator::make($item, $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
             $flog = !$validator->fails(); //验证状态
             if ($validator->fails()) {
@@ -623,6 +627,25 @@ trait ResourceController
                 })->implode(';');//错误信息
                 //去除关联添加数据
                 $item = collect($item)->except($relation_keys)->toArray();
+                //数据转码
+                $item = collect($item)->except($relation_keys)->toArray();
+                $item = collect($item)->map(function ($value,$key) use ( $item,$maps1, $multipleFields) {
+                    $map = Arr::get($maps1, $key);
+                    if (in_array($key, $multipleFields)) {
+                        $k_arr = explode('.$index.', $key);
+                        $value = collect(Arr::get($item, $k_arr[0], []))->pluck($k_arr[1])->implode(',');
+                    } elseif ($map) {
+                        if (!is_array($value)) {
+                            $value = Arr::get($map, $value);
+                        } else {
+                            $value = collect($value)->map(function ($value) use ($map) {
+                                return Arr::get($map, $value);
+                            })->implode(',');
+                        }
+                    }
+                    $value = $this->handleExportValue($item, $key, $maps1, $value);
+                    return $value;
+                })->toArray();
                 $errors[] = $item;
             }
             return $flog;
@@ -675,7 +698,7 @@ trait ResourceController
      * @param $data
      * @return mixed
      */
-    protected function handleListReturn(&$data)
+    protected function handleListReturn(&$data,$obj)
     {
         return $data;
     }
