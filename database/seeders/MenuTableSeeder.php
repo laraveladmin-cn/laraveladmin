@@ -77,6 +77,7 @@ class MenuTableSeeder extends Seeder
             }elseif($key=='show'){
                 $data['name'] = '编辑查看'.$name;
                 $data['icons'] = 'fa-edit';
+                $data['is_page'] = 1;
                 $data['description'] = $name.'编辑页面';
             }elseif($key=='create'){
                 $data['name'] = '创建'.$name;

@@ -321,6 +321,14 @@ export default {
                     });
                     let datas = collect(XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]));
                     let title = collect(datas.shift()); //去掉表头
+                    datas = datas.map( (item) =>{
+                        collect(title).each((name,key)=>{
+                            if(typeof item[key]=="undefined"){
+                                item[key] = '';
+                            }
+                        });
+                        return item;
+                    });
                     let total = datas.count();
                     datas = datas.chunk(200);
                     let count = datas.count() || 1; //总请求数
@@ -369,12 +377,20 @@ export default {
                                             content: '成功导入'+(total-errors.length)+'条数据,导入失败'+errors.length+'数据!是否下载错误数据?',
                                             callback:()=>{
                                                 title.put('error','错误信息'); //错误信息
-                                                let data = collect(errors).prepend(title.values().all()).prepend(title.keys().all()).all();
+                                                let data = collect(errors)
+                                                    .prepend(title.values().all())
+                                                    .prepend(title.keys().all()).all();
                                                 exportExcel(data,parms.sheet,'错误数据');
                                                 errors = [];
+                                                if(typeof parms.callback=="function"){
+                                                    parms.callback();
+                                                }
                                             },
                                             cancel:()=>{ //取消
                                                 errors = [];
+                                                if(typeof parms.callback=="function"){
+                                                    parms.callback();
+                                                }
                                             }
                                         }
                                     }, {root: true});
@@ -392,6 +408,9 @@ export default {
                                         'show' : true //是否自动弹出
                                     };
                                     dispatch('pushMessage', message, { root: true }); //消息提醒
+                                    if(typeof parms.callback=="function"){
+                                        parms.callback();
+                                    }
                                 }
                                 setTimeout(()=>{
                                     commit({
