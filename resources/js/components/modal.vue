@@ -8,7 +8,7 @@
                 <div :class="className" @click="clickContent($event)">
                     <div class="modal-content">
                         <button type="button" class="btn btn-sm close" @click="close">
-                            <i class="fa fa-times"></i>
+                            <span aria-hidden="true">×</span>
                         </button>
                         <div>
                             <slot></slot>
@@ -78,7 +78,7 @@
         position: absolute;
         right: 0px;
         z-index: 1;
-        padding: 5px;
+        padding: 10px;
     }
 
     .modal-content {

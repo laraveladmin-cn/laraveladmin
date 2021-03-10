@@ -1,5 +1,5 @@
 <template>
-    <div class="main_body admin_layout skin-blue sidebar-mini h100" v-if="loaded || !loading" v-cloak>
+    <div class="main_body admin_layout sidebar-mini h100" :class="skin" v-if="loaded || !loading" v-cloak>
         <message></message>
         <modal></modal>
         <div class="wrapper">
@@ -259,14 +259,23 @@
                     <strong>Copyright &copy; 2020
                         <a target="_blank" href="http://www.laraveladmin.cn">Laravel Admin</a>
                     </strong>
-                    <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 备案号:{{icp}}
+                    <span v-if="icp">
+                         <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 备案号:{{icp}}
+                    </span>
                 </footer>
             </div>
             <aside class="control-sidebar control-sidebar-dark">
                 <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-                    <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a>
+                    <li class="active">
+                        <a href="#control-sidebar-home-tab" data-toggle="tab">
+                            <i class="fa fa-home"></i>
+                        </a>
                     </li>
-                    <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+                    <li>
+                        <a href="#control-sidebar-settings-tab" data-toggle="tab">
+                            <i class="fa fa-gears"></i>
+                        </a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <!-- Home tab content -->
@@ -370,19 +379,22 @@
                         </ul>
                     </div>
                     <div class="tab-pane" id="control-sidebar-settings-tab">
-                        <form method="post">
-                            <h3 class="control-sidebar-heading">其它设置</h3>
-
-                            <div class="form-group">
-                                <label class="control-sidebar-subheading">
-                                    设置一
-                                    <input type="checkbox" class="pull-right" checked>
-                                </label>
-                                <p>
-                                    设置一说明
-                                </p>
-                            </div>
-                        </form>
+                        <h3 class="control-sidebar-heading">主题</h3>
+                        <ul class="list-unstyled clearfix">
+                            <li class="skin-item" v-for="(item,index) in skins">
+                                <a href="javascript:void(0)" class="clearfix full-opacity-hover" @click="setSkin(item.class)">
+                                    <div>
+                                        <span class="span1" :class="item.class1" :style="{background: item.background1}"></span>
+                                        <span class="span2" :class="item.class2" :style="{background: item.background2}"></span>
+                                    </div>
+                                    <div>
+                                        <span class="span3" :style="{background: item.background3}"></span>
+                                        <span class="span4" :style="{background: item.background4}"></span>
+                                    </div>
+                                </a>
+                                <p class="text-center no-margin">{{item.name}}</p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </aside>
@@ -408,13 +420,104 @@
             return {
                 loading:true,
                 keywords:'',
-                timer:null
+                timer:null,
+                skin:localStorage.getItem('skin') || 'skin-blue',
+                skins: [{
+                    "name": "Blue",
+                    "class": "skin-blue",
+                    "background1": "#367fa9",
+                    "class2": "bg-light-blue",
+                    "background3": "#222d32",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Black",
+                    "class": "skin-black",
+                    "background1": "#fefefe",
+                    "background2": " #fefefe",
+                    "background3": "#222",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Purple",
+                    "class": "skin-purple",
+                    "class1": "bg-purple-active",
+                    "class2": "bg-purple",
+                    "background3": "#222d32",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Green",
+                    "class": "skin-green",
+                    "class1": "bg-green-active",
+                    "class2": "bg-green",
+                    "background3": "#222d32",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Red",
+                    "class": "skin-red",
+                    "class1": "bg-red-active",
+                    "class2": "bg-red",
+                    "background3": "#222d32",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Yellow",
+                    "class": "skin-yellow",
+                    "class1": "bg-yellow-active",
+                    "class2": "bg-yellow",
+                    "background3": "#222d32",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Blue Light",
+                    "class": "skin-blue-light",
+                    "background1": "#367fa9",
+                    "class2": "bg-light-blue",
+                    "background3": "#f9fafc",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Black Light",
+                    "class": "skin-black-light",
+                    "background1": "#fefefe",
+                    "background2": " #fefefe",
+                    "background3": "#f9fafc",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Purple Light",
+                    "class": "skin-purple-light",
+                    "class1": "bg-purple-active",
+                    "class2": "bg-purple",
+                    "background3": "#f9fafc",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Green Light",
+                    "class": "skin-green-light",
+                    "class1": "bg-green-active",
+                    "class2": "bg-green",
+                    "background3": "#f9fafc",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Red Light",
+                    "class": "skin-red-light",
+                    "class1": "bg-red-active",
+                    "class2": "bg-red",
+                    "background3": "#f9fafc",
+                    "background4": "#f4f5f7"
+                }, {
+                    "name": "Yellow Light",
+                    "class": "skin-yellow-light",
+                    "class1": "bg-yellow-active",
+                    "class2": "bg-yellow",
+                    "background3": "#f9fafc",
+                    "background4": "#f4f5f7"
+                }]
             };
         },
         mounted(){
 
         },
         methods:{
+            //设置主题
+            setSkin(value){
+                this.skin = value;
+                localStorage.setItem('skin',value);
+            },
             load(){
                 //重载触发事件绑定
                 $(window).trigger('load');
@@ -564,7 +667,7 @@
         }
     };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .my-body{
         position: relative;
     }
@@ -595,6 +698,27 @@
     }
     .progress-tool{
         height: 20px;
+    }
+    .skin-item{
+        float:left;
+        width: 33.33333%;
+        padding: 5px;
+        a{
+            display: block;
+            box-shadow: 0 0 3px rgba(0,0,0,0.4)
+        }
+        .span1{
+            display:block; width: 20%; float: left; height: 7px;
+        }
+        .span2{
+            display:block; width: 80%; float: left; height: 7px;
+        }
+        .span3{
+            display:block; width: 20%; float: left; height: 20px;
+        }
+        .span4{
+            display:block; width: 80%; float: left; height: 20px;
+        }
     }
 
 </style>

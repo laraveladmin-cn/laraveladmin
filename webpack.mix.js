@@ -18,6 +18,7 @@ mix.webpackConfig({
             "admin_components": path.resolve(__dirname, 'resources/js/pages/admin/components'),
             "open_components": path.resolve(__dirname, 'resources/js/pages/open/components'),
             "pages_components": path.resolve(__dirname, 'resources/js/pages/components'),
+            "pages": path.resolve(__dirname, 'resources/js/pages'),
             "bower_components_path": path.resolve(__dirname, 'public/bower_components'),
             "public": path.resolve(__dirname, 'public'),
         },

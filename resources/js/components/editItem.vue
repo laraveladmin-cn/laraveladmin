@@ -11,7 +11,7 @@
                     <i class="fa fa-warning"></i>
                     <span v-for="error in errors">{{error.replace('is not valid','不是有效的')}}</span>
                 </label>
-                <div>
+                <div class="ignore-move-item-content">
                     <slot name="input-item">
                         <input
                             v-if="!options.type || options.type=='input' || options.type=='text'"
@@ -20,7 +20,7 @@
                             @change="$emit('change',itemObj[_key])"
                             class="form-control"
                             :disabled="!datas.url || options.disabled"
-                            :placeholder="'请输入'+options.name">
+                            :placeholder="options.placeholder || '请输入'+options.name">
                         <input
                             v-else-if="options.type=='email'"
                             type="email"
@@ -28,7 +28,7 @@
                             @change="$emit('change',itemObj[_key])"
                             class="form-control"
                             :disabled="!datas.url || options.disabled"
-                            :placeholder="'请输入'+options.name">
+                            :placeholder="options.placeholder || '请输入'+options.name">
                         <textarea
                             v-else-if="options.type=='textarea'"
                             v-model="itemObj[_key]"
@@ -36,14 +36,16 @@
                             class="form-control"
                             rows="6"
                             :disabled="!datas.url || options.disabled"
-                            :placeholder="'请输入'+options.name">
+                            :placeholder="options.placeholder || '请输入'+options.name">
                     </textarea>
                         <select v-else-if="options.type=='select'"
                                 class="form-control"
                                 v-model="itemObj[_key]"
                                 @change="$emit('change',itemObj[_key])"
                                 :disabled="!datas.url || options.disabled">
-                            <option v-if="typeof options['placeholderValue']!='undefined'" :value="options['placeholderValue']">请选择</option>
+                            <option v-if="typeof options['placeholderValue']!='undefined'" :value="options['placeholderValue']">
+                                {{options.placeholder || '请选择'}}
+                            </option>
                             <option v-for="(val,index) in array_get(datas.data.maps,_map_key)" :value="index">{{val}}</option>
                         </select>
                         <div class="row" v-else-if="options.type=='checkbox'">
@@ -69,7 +71,7 @@
                                 @change="$emit('change',itemObj[_key])"
                                 class="form-control"
                                 :disabled="!datas.url || options.disabled"
-                                :placeholder="'请输入'+options.name">
+                                :placeholder="options.placeholder || '请输入'+options.name">
                             <div class="input-group-addon">
                                 <i class="fa" :class="itemObj[_key]"></i>
                             </div>
@@ -81,7 +83,7 @@
                                 @change="$emit('change',itemObj[_key])"
                                 class="form-control"
                                 :disabled="!datas.url || options.disabled"
-                                :placeholder="'请输入'+options.name">
+                                :placeholder="options.placeholder || '请输入'+options.name">
                             <div class="input-group-addon">
                                 <a v-if="itemObj[_key]" :href="itemObj[_key]" target="_blank">
                                     <i class="fa fa-link"></i>
@@ -184,8 +186,8 @@
         margin-top: 0px;
         margin-bottom: 5px;
     }
-    .move-item{
-        cursor: move;
+    .ignore-move-item-content{
+        cursor: default;
     }
 
 </style>

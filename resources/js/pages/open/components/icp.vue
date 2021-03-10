@@ -1,6 +1,5 @@
 <template>
-    <p class="text-center icp">
-
+    <p class="text-center icp" v-show="icp">
         <span class="wangjing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         备案号:{{icp}}
     </p>

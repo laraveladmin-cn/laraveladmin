@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Facades\ClientAuth;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use \Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use \App\Models\Menu;
@@ -25,7 +26,7 @@ class RouteService
      * 自定义辅助函数
      */
 
-    public static function getRessorceRoutes(array $options = [])
+    public static function getResourceRoutes(array $options = [])
     {
         //控制器默认路由注册
         $methods = collect([
@@ -90,8 +91,27 @@ class RouteService
         if ($options) {
             $except = Arr::get($options, 'except');
             $only = Arr::get($options, 'only');
-            $except AND $methods = $methods->except($except);
-            $only AND $methods = $methods->only($only);
+            if($except){
+                if(is_array($except[0])){
+                    $except = collect($except)->pluck('name');
+                }
+                $methods = $methods->except($except);
+            }
+            if($only){
+                if(is_array($only[0])){
+                    if(!self::$env){
+                        self::$env = config('app.env');
+                    }
+                    $only = collect($only)->filter(function ($item){
+                        $env = Arr::get($item,'env', self::$env);
+                        $del = Arr::get($item,'_is_deleted',0);
+                        $disabled = Arr::get($item,'disabled',0);
+                        return $env==self::$env && !$del && !$disabled;
+                    })->values()
+                        ->pluck('name');
+                }
+                $methods = $methods->only($only);
+            }
         }
         return $methods;
     }
@@ -102,10 +122,10 @@ class RouteService
      * @param $controller
      * @param array $options
      */
-    public static function createRessorceRoute($name, $controller, array $options = [])
+    public static function createResourceRoute($name, $controller, array $options = [])
     {
         //控制器默认路由注册
-        $methods = self::getRessorceRoutes($options);
+        $methods = self::getResourceRoutes($options);
         //路由注册
         $methods->map(function ($item,$key) use ($name, $controller) {
             $type = Arr::get($item, 'method.type', []);
@@ -148,15 +168,19 @@ class RouteService
                 }
                 //普通路由
                 collect(Arr::get($routesConfig,'menus',[]))
+                    ->map(function ($item){
+                        $item = Menu::decodeValue($item);//兼容解码
+                        return $item;
+                    })
                     ->filter(function ($item)use ($key){
-                        $use = Arr::get($item,'use','api');
-                        $use = is_string($use)?[$use]:$use;
+                        $use = Arr::get($item,'use',1);
+                        $use = !is_array($use)?[$use]:$use;
                         return Arr::get($item,'group','')==$key &&
                             Arr::get($item,'url','') &&
                             Arr::get($item,'method','') &&
                             Arr::get($item,'disabled','')==0 &&
                             Arr::get($item,'env',self::$env)==self::$env &&
-                            in_array('api',$use);
+                            in_array(1,$use);
                     })
                     ->map(function ($item){
                         $path_arr = explode('/',Arr::get($item,'url',''));
@@ -176,7 +200,7 @@ class RouteService
                             $route = [];
                             $methods = Menu::getFieldsMap('method');
                             collect($methods)->each(function ($type,$val)use(&$route,$method,$path,$action){
-                                if($method&$val){
+                                if((is_numeric($method) && $method&$val) || (is_array($method) && in_array($val,$method))){
                                     $route =  Route::$type($path, $action);
                                 }
                             });
@@ -189,7 +213,11 @@ class RouteService
                         }
                     });
                 //资源路由注册
-                collect(Arr::get($routesConfig,'ressorce',[]))
+                collect(Arr::get($routesConfig,'resource',[]))
+                    ->map(function ($item){
+                        $item = Menu::decodeValue($item);//兼容解码
+                        return $item;
+                    })
                     ->filter(function ($item)use ($key){
                         return Arr::get($item,'group','')==$key &&
                             Arr::get($item,'url','') &&
@@ -200,7 +228,19 @@ class RouteService
                         $value = Arr::get(explode('/',Arr::get($item,'url','')),2,'');
                         if($value){
                             $class = ucfirst(Str::singular(Str::camel(str_replace('-','_',$value)))).'Controller';
-                            self::createRessorceRoute($value,$class,Arr::get($item,'options',[]));
+                            $options = Arr::get($item,'options',[]);
+                            $only = Arr::get($options, 'only');
+                            if($only){
+                              if(is_array(collect($only)->first())){
+                                  $only[] = [
+                                      'name'=>'index'
+                                  ];
+                              }else{
+                                  $only[] = 'index';
+                              }
+                                $options['only'] = $only;
+                            }
+                            self::createResourceRoute($value,$class,$options);
                         }
                     });
 
@@ -229,9 +269,13 @@ class RouteService
             Route::group($group,function()use($routesConfig,$key,$group){
                 //普通路由
                 collect(Arr::get($routesConfig,'menus',[]))
+                    ->map(function ($item){
+                        $item = Menu::decodeValue($item);//兼容解码
+                        return $item;
+                    })
                     ->filter(function ($item)use ($key){
-                        $use = Arr::get($item,'use','api');
-                        $use = is_string($use)?[$use]:$use;
+                        $use = Arr::get($item,'use',2);
+                        $use = !is_array($use)?[$use]:$use;
                         return
                             Arr::get($item,'group','')==$key &&
                             Arr::get($item,'is_page','')!=1 &&
@@ -239,7 +283,7 @@ class RouteService
                             Arr::get($item,'disabled','')==0 &&
                             Arr::get($item,'env',self::$env)==self::$env &&
                             Arr::get($item,'method','') &&
-                            in_array('web',$use);
+                            in_array(2,$use);
                     })
                     ->map(function ($item){
                         $path_arr = explode('/',Arr::get($item,'url',''));
@@ -259,7 +303,7 @@ class RouteService
                             $route = [];
                             $methods = Menu::getFieldsMap('method');
                             collect($methods)->each(function ($type,$val)use(&$route,$method,$path,$action){
-                                if($method&$val){
+                                if((is_numeric($method) && $method&$val) || (is_array($method) && in_array($val,$method))){
                                     $route =  Route::$type($path, $action);
                                 }
                             });
@@ -277,6 +321,10 @@ class RouteService
 
         //普通路由
         collect(Arr::get($routesConfig,'menus',[]))
+            ->map(function ($item){
+                $item = Menu::decodeValue($item);//兼容解码
+                return $item;
+            })
             ->filter(function ($item){
                 return
                     Arr::get($item,'is_page','')==1 &&
@@ -296,7 +344,11 @@ class RouteService
             });
 
         //资源路由注册
-        collect(Arr::get($routesConfig,'ressorce',[]))
+        collect(Arr::get($routesConfig,'resource',[]))
+            ->map(function ($item){
+                $item = Menu::decodeValue($item);//兼容解码
+                return $item;
+            })
             ->filter(function ($item){
                 return Arr::get($item,'url','') &&
                     Arr::get($item,'env',self::$env)==self::$env &&
@@ -307,12 +359,21 @@ class RouteService
                 if($name){
                     $options = Arr::get($item,'options',[]);
                     if($only = Arr::get($options,'only')){
-                        $only = collect($only)->intersect(['index','show'])->toArray();
+                        if(is_array($only[0])){
+                            $only = collect($only)->filter(function ($item){
+                                $env = Arr::get($item,'env', self::$env);
+                                $del = Arr::get($item,'_is_deleted',0);
+                                $disabled = Arr::get($item,'disabled',0);
+                                return $env==self::$env && !$del && !$disabled;
+                            })->values()
+                                ->pluck('name');
+                        }
+                        $only = collect($only)->intersect(['index','show'])->values()->toArray();
                     }else{
                         $only = ['index','show'];
                     }
                     $options['only'] = $only;
-                    collect(self::getRessorceRoutes($options))->map(function ($item)use($name){
+                    collect(self::getResourceRoutes($options))->map(function ($item)use($name){
                         $route = $item['route']?$name . '/' . $item['route']:$name;
                         Route::get($route,self::$pager);
                     });
@@ -339,6 +400,126 @@ class RouteService
            $route->name($name);
            self::$named[$name] = $route;
        };
+    }
+
+    /**
+     * 通过数据表菜单内容反向更新route.json文件
+     */
+    public static function upRouteJson(){
+        $methods = RouteService::getResourceRoutes(['except'=>['index']]);
+        $methods_count = collect($methods)->count();
+        $fillable = collect(Menu::getFillables())->prepend('id')->unique()->toArray();
+        $default = collect(Menu::getFieldsDefault())->toArray();
+        $maps = Menu::getFieldsMap();
+        $_id = 1; //存储创建顺序
+        //查询所有菜单
+        $menus = collect(Menu::withTrashed()
+            ->whereRaw(DB::raw('1 or id=1'))
+            ->orderBy('left_margin','asc')
+            ->get($fillable)
+            ->all())
+            ->map(function ($menu)use(&$_id){
+                $is_del = $menu->deleted_at?1:0;
+                $menu = collect($menu)->toArray();
+                if($is_del){
+                    $menu['_is_deleted'] = $is_del;
+                }
+                $menu['_id'] = $_id;
+                $_id += 1;
+                return $menu;
+            });
+        //筛选资源菜单
+        $resource = $menus->filter(function ($menu){
+            return $menu['resource_id']!=0;
+        })->toArray();
+        //资源菜单处理
+        $resource = collect(listToTree($resource,'id','resource_id','children',-1))
+            ->map(function ($menu)use($methods,$methods_count,$default,$maps){
+                $flog = false;
+                $children = collect(Arr::get($menu,'children',[]))->filter(function ($item){
+                    return Str::is('_*',$item['item_name']);
+                })->map(function ($item)use(&$flog){
+                    $row = [
+                        'id'=>$item['id'],
+                        'name'=>Str::replaceFirst('_','',$item['item_name'])
+                    ];
+                    if(Arr::get($item,'_is_deleted')){
+                        $row['_is_deleted'] = 1;
+                        $flog = true;
+                    }
+                    if($env = Arr::get($item,'env')){
+                        $row['env'] = $env;
+                        $flog = true;
+                    }
+                    if($disabled = Arr::get($item,'disabled')){
+                        $row['disabled'] = $disabled;
+                        $flog = true;
+                    }
+                    return $row;
+                });
+                $children_count = $children->count();
+                $id = $menu['id'];
+                $end_id = $id+$children_count;
+                if($children_count!=$methods_count ||
+                    $children->min('id')<$id ||
+                    $children->max('id')>$end_id ||
+                    $flog
+                ){
+                    $menu['options'] = ['only'=>$children->toArray()];
+                }
+                collect($default)->map(function ($val,$key)use (&$menu){
+                    if($val===$menu[$key]){
+                        unset($menu[$key]);
+                    }
+                });
+                unset($menu['children']);
+                unset($menu['resource_id']);
+                $menu = collect($menu)->map(function ($value,$key)use($maps){
+                    $map = Arr::get($maps, $key);
+                    if ($map) {
+                        if (!is_array($value)) {
+                            $value = Arr::get($map, $value);
+                        } else {
+                            $value = collect($value)->map(function ($value) use ($map) {
+                                return Arr::get($map, $value);
+                            })->toArray();
+                        }
+                    }
+                    return $value;
+                });
+                $menu['end_id'] = $end_id;
+                return $menu;
+            });
+        //普通菜单处理
+        $menus = $menus->filter(function ($menu){
+            return $menu['resource_id']==0;
+        })->map(function ($menu)use($default,$maps){
+            collect($default)->map(function ($val,$key)use (&$menu){
+                if($val===$menu[$key] && $key!='method'){
+                    unset($menu[$key]);
+                }
+            });
+            $menu = collect($menu)->map(function ($value,$key)use($maps){
+                $map = Arr::get($maps, $key);
+                if ($map) {
+                    if (!is_array($value)) {
+                        $value = Arr::get($map, $value);
+                    } else {
+                        $value = collect($value)->map(function ($value) use ($map) {
+                            return Arr::get($map, $value);
+                        })->toArray();
+                    }
+                }
+                return $value;
+            });
+            return $menu;
+        });
+        //输出菜单数据
+        $out_menus = json_decode(file_get_contents(base_path(self::$routes)),true);
+        $out_menus['resource'] = $resource->values()->toArray();
+        $out_menus['menus'] = $menus->values()->toArray();
+        $out_menus['update_position'] = [];
+        file_put_contents(base_path(self::$routes),json_encode($out_menus,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
     }
 
 }

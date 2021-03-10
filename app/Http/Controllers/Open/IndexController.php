@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Open;
 use App\Facades\ClientAuth;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
@@ -51,9 +50,9 @@ class IndexController extends Controller
         $data['env'] = config('app.env');
         $data['icp'] = config('laravel_admin.icp');
         $data['api_url_model'] =  config('laravel_admin.web_api_model');
-        $data['app_url'] = config('app.url');
-        $data['api_url'] = config('app.url').getRoutePrefix();
-        $data['web_url'] = config('app.url').getRoutePrefix('web');
+        $data['app_url'] = $app_url;
+        $data['api_url'] = $app_url.getRoutePrefix();
+        $data['web_url'] = $app_url.getRoutePrefix('web');
         $data['domain'] = config('session.domain');
         $data['lifetime']= config('session.lifetime');
         $data['verify'] = config('laravel_admin.verify.type')=='captcha' ? $this->captcha() : $this->geetest(); //验证配置

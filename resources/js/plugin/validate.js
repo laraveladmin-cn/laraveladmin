@@ -1,5 +1,5 @@
 //自定义验证
-import {configure,extend,localize} from 'vee-validate'; //表单验证
+import {configure,extend,localize,validate} from 'vee-validate'; //表单验证
 import * as rules from 'vee-validate/dist/rules'; //验证规则
 import zh_CN from './vee-validate/zh_CN'; //验证语言包
 
@@ -16,7 +16,11 @@ const regexs = {
     id_card:/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/,
     fix_phone:/^0(10|21|22|23|[1-9]{1}[0-9]{1})[\-]{0,1}[0-9]{7,8}$/,
     addr:/^[\u4e00-\u9fa5]{2,}[\u4e00-\u9fa5\-0-9a-zA-Z]{2,}$/,
-    english_addr:/^[A-Za-z]{2,}[A-Za-z0-9\- ,\.]{2,}$/
+    english_addr:/^[A-Za-z]{2,}[A-Za-z0-9\- ,\.]{2,}$/,
+    ip:/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/,
+    ipv4:/^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$/,
+    ipv6:/^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/,
+
 };
 collect(regexs).each((item,key) => {
     extend(key, {
@@ -70,7 +74,45 @@ let url = {
     computesRequired: false
 };
 extend('url', url);
-
+extend('in', rules.oneOf);
+let array =  {
+    validate:(value) => {
+        let type = Object.prototype.toString.call(value);
+        return type=='[object Array]' || type=='[Object Object]';
+    },
+    params: [],
+    computesRequired: false
+};
+extend('array', array);
+//数字之间
+extend('digits_between', {
+    validate:(value,{ min ,max}) => {
+        if(value!==0 && !value){
+            return true;
+        }
+        let length = (value+'').length;
+        return length>=min && length<=max && (value-0)==value;
+    },
+    params: ['min','max'],
+    computesRequired: true
+});
+extend('alpha_numeric', rules.alpha_num);
+//同意
+let accepted =  {
+    validate:(value) => {
+        return ['yes',1,'1','no'].indexOf(value)!=-1 || value===true;
+    },
+    params: [],
+    computesRequired: false
+};
+extend('accepted', accepted);
+extend('boolean', {
+    validate:(value) => {
+        return (typeof value)=='boolean';
+    },
+    params: [],
+    computesRequired: false
+});
 configure({
     locale: 'zh_CN'
 });

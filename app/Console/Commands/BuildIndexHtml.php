@@ -12,7 +12,7 @@ class BuildIndexHtml extends Command
      *
      * @var string
      */
-    protected $signature = 'build:index.html {--force}';
+    protected $signature = 'build:index.html {--f|force}';
 
     /**
      * The console command description.

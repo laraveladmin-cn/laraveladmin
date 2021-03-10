@@ -7,7 +7,7 @@
             <div class="box-body">
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="uname" :options="{name: '用户名', required: true, rules:'required|alpha_dash|min:5|max:18',title:'必须是5-18位的非中文字符'}"  :datas="props">
                             </edit-item>
                             <edit-item key-name="password" :options="{name: '密码', required: !props.data.row['id'],rules:!props.data.row['id']?'required|min:6|max:18':'min:6|max:18',title:'必须是6-18位的字符'}"  :datas="props">
@@ -22,7 +22,7 @@
                             <edit-item key-name="description" :options="{name: '备注', required: false,type:'textarea'}"  :datas="props">
                             </edit-item>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="email" :options="{name: '电子邮箱', required: !props.data.row.mobile_phone,rules:props.data.row.mobile_phone?'':'required|email'}"  :datas="props">
                             </edit-item>
                             <edit-item key-name="mobile_phone" :options="{name: '手机号码', required: !props.data.row.email,rules:props.data.row.email?'':'required|mobile'}"  :datas="props">
@@ -40,7 +40,7 @@
                                 </template>
                             </edit-item>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="avatar" :options="{name: '头像', required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <upload v-model="props.data.row['avatar']"

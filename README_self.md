@@ -18,8 +18,10 @@
 # LaravelAdmin
 
 #### 介绍
-`laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供的页面组件和表单元素等功能，能帮助你使用很少的代码就实现功能完善的后台管理功能。\(QQ群: 391528810\)
+
+`laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供丰富的页面组件和表单元素，还有即插即用的功能组件，通过简单的配置或使用少量的代码就实现完善的后台管理功能。\(QQ群: 391528810\)
 [Demo](http://demo.laraveladmin.cn) \|\| [阅读文档](http://www.laraveladmin.cn/home/index)
+![QQ群](https://www.laraveladmin.cn/api/home/docs/images/QQ群.jpg)
 
 #### 特点
 
@@ -78,7 +80,7 @@ git clone https://gitee.com/laravel-admin/laraveladmin.git
 cd laraveladmin
 ```
 
-2. 参照.env.example配置.env文件(务必设置好mysql密码,redis密码)
+2. 参照.env.example配置[.env](env.md)文件(务必设置好mysql密码,redis密码)
 
 - 数据库连接用户请使用root,程序需要检查数据库是否存在并创建数据库,开发环境的代码生成是通过读取数据表结构进行代码生成的
 

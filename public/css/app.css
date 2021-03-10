@@ -3203,3 +3203,9 @@ body {
     }
 }
 /* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) */
+.active-move .move-item{
+    cursor: move;
+}
+.slider-box{
+    padding: 0px 10px;
+}

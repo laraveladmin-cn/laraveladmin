@@ -3,6 +3,10 @@
 #set -x
 # 将环境变量保存至 /etc/default/locale
 code_dir=${LARAVEL_DIR}
+if [ "${code_dir}" = "" ]
+    then
+    code_dir="/var/www/laravel"
+fi
 rm -rf /etc/default/locale
 chmod u+x ${code_dir}/laraveladmin/docker/php/cron.sh
 chmod 777 ${code_dir}/laraveladmin/docker/php/cron.sh

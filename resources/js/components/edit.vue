@@ -1,5 +1,5 @@
 <template>
-    <div :id="id">
+    <div :id="id" :class="{'active-move':is_local}">
         <validation-observer :ref="id" v-slot="{invalid,validate}">
             <div class="row">
                 <slot name="content" :data="data" :url="url" :error="error">
@@ -145,6 +145,9 @@
                 this.error = {};
                 this.data = copyObj(this.back_data);
                 this.validation.reset();
+                if(typeof this.options.resetCallback=="function"){
+                    this.options.resetCallback();
+                }
             },
             //获取数据
             getData(params){
@@ -209,6 +212,8 @@
                     sortable.create(this,  {
                         animation: 1000,
                         draggable: ".move-item",
+                        filter: ".ignore-move-item-content",  // 过滤器，不需要进行拖动的元素
+                        preventOnFilter: false, //  在触发过滤器`filter`的时候调用`event.preventDefault()`
                         group: { name: "edit", pull: true, put: true },
                     });
                 });
