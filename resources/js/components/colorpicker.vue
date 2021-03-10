@@ -55,7 +55,6 @@
                     }
                 },500);
             }
-
         },
         computed:{
 
@@ -63,21 +62,13 @@
         watch:{
             value(value,oldValue){
                 if(!this.changeing && this.colorpicker){
-                    if(!value){
-                        this.colorpicker.setValue(null);
-                    }else {
-                        this.colorpicker.setValue(value);
-                    }
+                    $(this.$el).find('i').css('background',value?value:null);
                 }
                 this.changeing = false;
             },
             disabled(value,oldValue){
-                if(this.colorpicker){
-                    if(value){
-                        this.colorpicker.colorpicker('disable');
-                    }else {
-                        this.colorpicker.colorpicker('enable');
-                    }
+                if(this.colorpicker && typeof this.colorpicker.colorpicker=="function"){
+                    this.colorpicker.colorpicker(value?'disable':'enable');
                 }
             }
         },
@@ -97,6 +88,7 @@
                 document.body.appendChild(editormdJs);
             }
         },
+
     }
 </script>
 <style lang="scss">

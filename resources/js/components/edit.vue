@@ -212,6 +212,8 @@
                     sortable.create(this,  {
                         animation: 1000,
                         draggable: ".move-item",
+                        filter: ".ignore-move-item-content",  // 过滤器，不需要进行拖动的元素
+                        preventOnFilter: false, //  在触发过滤器`filter`的时候调用`event.preventDefault()`
                         group: { name: "edit", pull: true, put: true },
                     });
                 });

@@ -173,14 +173,14 @@ class RouteService
                         return $item;
                     })
                     ->filter(function ($item)use ($key){
-                        $use = Arr::get($item,'use',2);
+                        $use = Arr::get($item,'use',1);
                         $use = !is_array($use)?[$use]:$use;
                         return Arr::get($item,'group','')==$key &&
                             Arr::get($item,'url','') &&
                             Arr::get($item,'method','') &&
                             Arr::get($item,'disabled','')==0 &&
                             Arr::get($item,'env',self::$env)==self::$env &&
-                            in_array(2,$use);
+                            in_array(1,$use);
                     })
                     ->map(function ($item){
                         $path_arr = explode('/',Arr::get($item,'url',''));
@@ -200,7 +200,7 @@ class RouteService
                             $route = [];
                             $methods = Menu::getFieldsMap('method');
                             collect($methods)->each(function ($type,$val)use(&$route,$method,$path,$action){
-                                if($method&$val){
+                                if((is_numeric($method) && $method&$val) || (is_array($method) && in_array($val,$method))){
                                     $route =  Route::$type($path, $action);
                                 }
                             });
@@ -228,7 +228,19 @@ class RouteService
                         $value = Arr::get(explode('/',Arr::get($item,'url','')),2,'');
                         if($value){
                             $class = ucfirst(Str::singular(Str::camel(str_replace('-','_',$value)))).'Controller';
-                            self::createResourceRoute($value,$class,Arr::get($item,'options',[]));
+                            $options = Arr::get($item,'options',[]);
+                            $only = Arr::get($options, 'only');
+                            if($only){
+                              if(is_array(collect($only)->first())){
+                                  $only[] = [
+                                      'name'=>'index'
+                                  ];
+                              }else{
+                                  $only[] = 'index';
+                              }
+                                $options['only'] = $only;
+                            }
+                            self::createResourceRoute($value,$class,$options);
                         }
                     });
 
@@ -262,7 +274,7 @@ class RouteService
                         return $item;
                     })
                     ->filter(function ($item)use ($key){
-                        $use = Arr::get($item,'use',1);
+                        $use = Arr::get($item,'use',2);
                         $use = !is_array($use)?[$use]:$use;
                         return
                             Arr::get($item,'group','')==$key &&
@@ -271,7 +283,7 @@ class RouteService
                             Arr::get($item,'disabled','')==0 &&
                             Arr::get($item,'env',self::$env)==self::$env &&
                             Arr::get($item,'method','') &&
-                            in_array(1,$use);
+                            in_array(2,$use);
                     })
                     ->map(function ($item){
                         $path_arr = explode('/',Arr::get($item,'url',''));
@@ -291,7 +303,7 @@ class RouteService
                             $route = [];
                             $methods = Menu::getFieldsMap('method');
                             collect($methods)->each(function ($type,$val)use(&$route,$method,$path,$action){
-                                if($method&$val){
+                                if((is_numeric($method) && $method&$val) || (is_array($method) && in_array($val,$method))){
                                     $route =  Route::$type($path, $action);
                                 }
                             });
@@ -424,7 +436,7 @@ class RouteService
         $resource = collect(listToTree($resource,'id','resource_id','children',-1))
             ->map(function ($menu)use($methods,$methods_count,$default,$maps){
                 $flog = false;
-                $children = collect($menu['children'])->filter(function ($item){
+                $children = collect(Arr::get($menu,'children',[]))->filter(function ($item){
                     return Str::is('_*',$item['item_name']);
                 })->map(function ($item)use(&$flog){
                     $row = [

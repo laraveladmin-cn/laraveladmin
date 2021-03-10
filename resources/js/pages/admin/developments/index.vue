@@ -4,16 +4,16 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs ui-sortable-handle">
                     <li class="active">
-                        <a href="#console" data-toggle="tab">控制台命令</a>
+                        <a href="#console" data-toggle="tab" @click="switchTag(0)">控制台命令</a>
                     </li>
                     <li>
-                        <a href="#menus" data-toggle="tab">菜单路由</a>
+                        <a href="#menus" data-toggle="tab" @click="switchTag(1)">菜单路由</a>
                     </li>
                     <li>
-                        <a href="#plug_in" data-toggle="tab">插件安装</a>
+                        <a href="#plug_in" data-toggle="tab" @click="switchTag(2)">插件安装</a>
                     </li>
                     <li>
-                        <a href="#docs" data-toggle="tab">相关文档</a>
+                        <a href="#docs" data-toggle="tab" @click="switchTag(3)">相关文档</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -82,6 +82,19 @@
                                                                  @change="clearInput"
                                                                  :is-ajax="false" >
                                                         </select2>
+                                                    </div>
+                                                </template>
+                                            </edit-item>
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-else-if="item.type=='checkbox'"
+                                                       :options="item"
+                                                       :datas="props"
+                                                       :key="index">
+                                                <template slot="input-item">
+                                                    <div class="row">
+                                                        <div v-for="(item1,index) in (item.map || array_get(props,'data.maps.'+item.map_key,[]))" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                            <icheck v-model="item.value" :option="index" :disabled="!props.url" :label="item1"> {{item1}}</icheck>
+                                                        </div>
                                                     </div>
                                                 </template>
                                             </edit-item>
@@ -165,7 +178,7 @@
                                 <tr>
                                     <th>命令</th>
                                     <th>说明</th>
-                               <!--     <th>English</th>-->
+                                    <!--     <th>English</th>-->
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -175,14 +188,14 @@
                                         <code>{{item.command}}</code>
                                     </td>
                                     <td>{{item.chinese}}</td>
-                                 <!--   <td>{{item.english}}</td>-->
+                                    <!--   <td>{{item.english}}</td>-->
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="chart tab-pane" id="menus">
-                        菜单内容
+                        <menus v-if="tag==1"></menus>
                     </div>
                     <div class="chart tab-pane" id="plug_in">
                         安装应用插件
@@ -206,6 +219,9 @@
             "edit-item": () => import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             "el-switch": ()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
+            "menus": ()=>import(/* webpackChunkName: "pages/admin/developments/menus" */ 'pages/admin/developments/menus.vue'),
+            "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+
         },
         data() {
             return {
@@ -225,7 +241,8 @@
                 commands:[],
                 interval:'',
                 inputCommand:'',
-                output:''
+                output:'',
+                tag:0
             }
         },
         mounted() {
@@ -237,6 +254,11 @@
             },500);
             $this = this;
         },
+        destroyed() {
+          if(this.interval)  {
+              clearInterval(this.interval);
+          }
+        },
         computed:{
             ...mapState([
                 'use_url'
@@ -247,6 +269,9 @@
                 refreshToken: 'refreshToken',
                 pushMessage: 'pushMessage',
             }),
+            switchTag(val){
+                this.tag = val;
+            },
             //复制粘贴板成功后执行
             onCopy:  (e)=> {
                 $this.pushMessage({
@@ -270,6 +295,9 @@
                         if(parameter.is_boolean){
                             return parameter.value?' --'+parameter.key:'';
                         }else {
+                            if(Array.isArray(parameter.value) && !parameter.value.length){
+                                return ''
+                            }
                             return ' --'+parameter.key+'='+parameter.value;
                         }
                     }else {

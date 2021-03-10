@@ -97,7 +97,7 @@
                         </div>
                     </slot>
                 </div>
-                <div class="collapse sizer_more">
+                <div class="collapse sizer_more in">
                     <slot name="sizer-more" :data="data" :where="data.options.where" :maps="data.maps">
                     </slot>
                     <div class="row">
@@ -463,6 +463,9 @@
                         callback:()=>{
                             axios.delete(this.use_url+this.data.configUrl['deleteUrl'], {data:{ids: ids}}).then((response)=>{
                                 this.refresh();
+                                if(typeof this.options.removeCallback=="function"){
+                                    this.options.removeCallback();
+                                }
                             }).catch((error)=>{
                                 this.pushMessage({
                                     'showClose':true,

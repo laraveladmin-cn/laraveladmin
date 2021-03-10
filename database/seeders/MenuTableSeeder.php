@@ -20,7 +20,10 @@ class MenuTableSeeder extends Seeder
      * ID+5
      * 创建资源菜单
      */
-    protected function createResourceMenu(Menu $roleMenu,$name='',array $options = []){
+    public function createResourceMenu(Menu $roleMenu,$name='',array $options = []){
+        if(!$this->methods){
+            $this->methods = RouteService::getResourceRoutes(['except'=>['index']]);
+        }
         //控制器默认路由注册
         $methods = collect($this->methods);
         $ids = [];
@@ -199,7 +202,7 @@ class MenuTableSeeder extends Seeder
         if($this->del_ids){
             Menu::whereIn('id',$this->del_ids)->delete();
         }
-
+        RouteService::upRouteJson();
     }
 
 

@@ -42,6 +42,22 @@
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
+            },
+            {
+                "key": "only",
+                "value": [],
+                "rules": "",
+                "title": "",
+                "name": "仅生成",
+                "type": "checkbox",
+                "is_option": true,
+                "map": {
+                    "migration": "迁移文件",
+                    "model": "模型",
+                    "controller": "控制器",
+                    "index": "列表页面",
+                    "edit": "编辑页面"
+                }
             }
         ]
     },
@@ -133,6 +149,26 @@
                 "rules": "",
                 "title": "不要在迁移时使用db外键名",
                 "name": "不用外键",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "ignore",
+                "value": 1,
+                "rules": "",
+                "title": "",
+                "name": "忽略",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "no-interaction",
+                "value": 1,
+                "rules": "",
+                "title": "",
+                "name": "不交互",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
