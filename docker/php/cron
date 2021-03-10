@@ -1,5 +1,7 @@
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #demo项目定时任务
-*/1 * * * * www-data /bin/bash /var/www/laravel/laraveladmin/docker/php/cron.sh >> /dev/null 2>&1
+*/1 * * * * /bin/su - www-data -s /bin/bash -c '/var/www/laravel/laraveladmin/docker/php/cron.sh >> /dev/null 2>&1'
 #测试定时任务是否执行
 #*/1 * * * * echo 'test' >> /tmp/test.txt
 #必须空行保证定时任务在执行
