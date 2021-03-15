@@ -584,7 +584,7 @@
             "action": "DevelopmentsController@postCommand"
         }
     ],
-    "ressorce": [
+    "resource": [
         {
             "id": 9,
             "name": "普通用户",
