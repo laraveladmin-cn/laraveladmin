@@ -53,6 +53,18 @@ export default Plugin = {
                 this.loading = false;
             });
         }
+        Vue.prototype.toUrl = function(url){
+            if(!url){
+                return
+            }
+            if(url.indexOf('http://')==0 || url.indexOf('https://')==0){
+                window.location.href=url;
+            }else {
+                this.$router.push({ path: url }).catch(error => {
+                    dd(error.message);
+                });
+            }
+        }
 
     }
 };
