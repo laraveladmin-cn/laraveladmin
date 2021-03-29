@@ -155,9 +155,6 @@
         padding-top: 10px;
         color: white;
     }
-    .open-content{
-        margin-bottom: 30px;
-    }
     body{
         padding-top: 0px;
     }

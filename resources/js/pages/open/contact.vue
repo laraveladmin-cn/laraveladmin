@@ -86,9 +86,7 @@
                             <div class="media-body">
                                 <h4 class="media-heading">地址:四川省成都市锦江区娇子一号</h4>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -117,7 +115,9 @@
     };
 </script>
 <style scoped>
-
+    .open_contact{
+        height: 100%;
+    }
     .media .pay-wx{
         height: 480px;
 
