@@ -17,7 +17,7 @@
                     <div class="navbar-custom-menu pull-left">
                         <ul class="nav navbar-nav">
                             <li :class="{active:module['active']}" v-for="module in modules">
-                                <a @click="toUrl(module['url'])">
+                                <a @click="toUrl(module['url'],$event)">
                                     <i class="fa" :class="module['icons']"></i> {{module['name']}}
                                 </a>
                             </li>
