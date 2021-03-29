@@ -17,9 +17,9 @@
                     <div class="navbar-custom-menu pull-left">
                         <ul class="nav navbar-nav">
                             <li :class="{active:module['active']}" v-for="module in modules">
-                                <router-link :to="module['url']">
+                                <a @click="toUrl(module['url'],$event)" :href="module['url']?module['url']:null">
                                     <i class="fa" :class="module['icons']"></i> {{module['name']}}
-                                </router-link>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -698,5 +698,8 @@
         .span4{
             display:block; width: 80%; float: left; height: 20px;
         }
+    }
+    .navbar-custom-menu a{
+        cursor:pointer;
     }
 </style>
