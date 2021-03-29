@@ -39,6 +39,11 @@
         </transition>
         <footer>
             <div class="container">
+                <ul class="bs-docs-footer-links">
+                    <li>特别鸣谢:</li>
+                    <li><a href="https://secure.quantumca.com.cn/" target="_blank">量子认证平台</a></li>
+                    <li><a href="https://laravelacademy.org/" target="_blank">Laravel学院</a></li>
+                </ul>
                 <p class="pull-right"><a href="#">返回顶部</a></p>
                 <p style="margin: 0px 0px">
                     &copy; 版权所有 &middot; <a>{{name}}</a>
@@ -141,7 +146,7 @@
         border-radius:unset;
     }
     footer{
-        position: fixed;
+      /*  position: fixed;*/
         left: 0;
         bottom: 0px;
         right: 0;
@@ -164,6 +169,16 @@
     .navbar-toggle{
         margin-top: 5px;
         position: relative;
+    }
+    .bs-docs-footer-links{
+        padding-left: 0px;
+        margin-top: 10px;
+    }
+    .bs-docs-footer-links li {
+        display: inline-block;
+    }
+    .bs-docs-footer-links li+li{
+        margin-left: 15px;
     }
 
 </style>
