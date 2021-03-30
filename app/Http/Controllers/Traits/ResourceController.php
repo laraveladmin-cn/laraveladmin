@@ -548,6 +548,9 @@ trait ResourceController
                     }
                 }
                 $value = $this->handleExportValue($item, $key, $maps, $value);
+                if(is_array($value)){
+                    $value = json_encode($value,JSON_UNESCAPED_UNICODE);
+                }
                 return $value;
             });
             return $row;

@@ -2,6 +2,7 @@ import helpers from './helpers';
 import filters from './filters';
 import Vue from 'vue';
 import './validate.js';
+import AppConfig from "../config";
 export default Plugin = {
     install(Vue, options){
         //全局变量注册
@@ -52,6 +53,30 @@ export default Plugin = {
             }).catch((error) => {
                 this.loading = false;
             });
+        }
+        Vue.prototype.toUrl = function(url,event){
+            if(!url){
+                return
+            }
+            let oEvent=window.event || event;
+            //获取ctrl 键对应的事件属性
+            let bCtrlKeyCode = oEvent.ctrlKey || oEvent.metaKey;
+            let is_external = url.indexOf('http://')==0 || url.indexOf('https://')==0;
+            //新窗口打开
+            if(bCtrlKeyCode){
+                if(!is_external){
+                    url = AppConfig.app_url+url;
+                }
+                window.open(url,'_blank');
+                return;
+            }
+            if(is_external){
+                window.location.href=url;
+            }else {
+                this.$router.push({ path: url }).catch(error => {
+                    dd(error.message);
+                });
+            }
         }
 
     }

@@ -326,10 +326,11 @@ class RouteService
                 return $item;
             })
             ->filter(function ($item){
+                $method = Arr::get($item,'method',[]);
                 return
                     Arr::get($item,'is_page','')==1 &&
                     Arr::get($item,'url','') &&
-                    Arr::get($item,'method','')==1 &&
+                    (is_numeric($method) && $method&1) || (is_array($method) && in_array(1,$method)) &&
                     Arr::get($item,'env',self::$env)==self::$env &&
                     Arr::get($item,'disabled','')==0;
             })

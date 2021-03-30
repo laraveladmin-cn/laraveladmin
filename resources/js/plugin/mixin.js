@@ -28,10 +28,14 @@ export default {
             if (typeof response.data != 'undefined' && typeof response.data.redirect != 'undefined' && response.data.redirect) {
                 if(response.data.redirect=='/open/login'){
                     this.refreshToken();
+                }else if(response.data.redirect.indexOf('http://')==0 || response.data.redirect.indexOf('https://')==0){
+                    window.location.href = response.data.redirect;
+
+                }else {
+                    this.$router.push({ path: response.data.redirect }).catch(error => {
+                        dd(error.message);
+                    });
                 }
-                this.$router.push({ path: response.data.redirect }).catch(error => {
-                    dd(error.message);
-                });
             }
             //消息提醒
             if (typeof response.data != 'undefined' && typeof response.data.alert != 'undefined' && response.data.alert) {
