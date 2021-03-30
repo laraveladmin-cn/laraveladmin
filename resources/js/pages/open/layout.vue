@@ -139,6 +139,12 @@
     };
 </script>
 <style scoped>
+    .navbar-fixed-top{
+        position:relative;
+    }
+    .navbar{
+        margin-bottom: 0px;
+    }
     @media screen and (min-width: 768px) {
         .open-content{
             min-height: 100%;
