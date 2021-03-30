@@ -5,7 +5,7 @@
                 <h3>联系我们<small>(开源不易谢谢支持)</small></h3>
                 <hr class="featurette-divider">
                 <div class="row featurette">
-                    <div class="col-md-4">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                         <div class="media">
                             <div class="media-left">
                                 <a href="#" class="thumbnail alipay">
@@ -14,7 +14,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                         <div class="contact-info">
                             <div class="media">
                                 <div class="media-left">
@@ -27,8 +27,7 @@
 
                         </div>
                     </div>
-
-                    <div class="col-md-4">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                         <div class="media">
                             <div class="media-body">
                                 <h4 class="media-heading">演示环境</h4>
@@ -115,23 +114,9 @@
     };
 </script>
 <style scoped>
-    .open_contact{
-        height: 100%;
-    }
-    .media .pay-wx{
-        height: 480px;
-
-
-    }
-    .media .alipay{
-        height: 520px;
-    }
     .page-header{
         border-bottom:1px solid #a4aaae;
         font-size: 14px;
-    }
-    .thumbnail{
-        height: 300px;
     }
     .featurette-divider{
         border-top: 1px solid #a4aaae;
