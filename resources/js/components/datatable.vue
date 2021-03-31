@@ -122,7 +122,7 @@
                                 条/页
                             </span>
                             <span class="pager-input pull-right">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
-                                <input type="number" :min="1" :max="data.list['last_page'] || 1"  @change="changePage" v-model.number="input_page" class="input-sm form-control inline topage">
+                                <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
                                 &nbsp;&nbsp;页
                             </span>
                             <ul class="pagination pagination-sm no-margin pull-right">
@@ -270,7 +270,7 @@
                                 条/页
                             </span>
                             <span class="pager-input pull-right">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
-                                <input type="number" :min="1" :max="data.list['last_page'] || 1"  @change="changePage" v-model.number="input_page" class="input-sm form-control inline topage">
+                                 <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
                                 &nbsp;&nbsp;页
                             </span>
                             <ul class="pagination pagination-sm no-margin pull-right">
@@ -316,6 +316,7 @@
             "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
             "el-select": ()=>import(/* webpackChunkName: "element-ui/lib/select" */ 'element-ui/lib/select'),
             "el-option": ()=>import(/* webpackChunkName: "element-ui/lib/option" */ 'element-ui/lib/option'),
+            "el-input-number": ()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
         },
         props: {
             //配置选项
@@ -545,8 +546,8 @@
                     this.getData(options);
                 }
             },
-            changePage(event){
-                let val = event.target.value.trim();
+            changePage(value){
+                let val = (value+'').trim();
                 if(/^[1-9]\d*$|^$/.test(val) && val>=1 && val<=this.data.list['last_page']) { //页面输入正确
                     this.toPage(val);
                 } else {
@@ -817,6 +818,9 @@
     .topage{
         width: 50px;
         padding: 5px 5px;
+    }
+    .topage1{
+        width: 90px;
     }
     .sizer .sizer-item .btn{
         margin-bottom: 5px;

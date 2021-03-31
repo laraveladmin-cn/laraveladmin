@@ -3209,3 +3209,7 @@ body {
 .slider-box{
     padding: 0px 10px;
 }
+.pager-input .el-input-number.is-controls-right .el-input__inner{
+    padding-left: 5px;
+    padding-right: 35px;
+}
