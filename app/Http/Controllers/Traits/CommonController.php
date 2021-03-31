@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Request;
 
 trait CommonController{
     /**
+     * 默认每页取多少条
+     * @var int
+     */
+    protected $per_page = 15;
+
+    /**
      * 筛选条件
      * @var array
      */

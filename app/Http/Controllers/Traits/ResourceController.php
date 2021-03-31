@@ -113,12 +113,13 @@ trait ResourceController
             ? $fields : array_merge([$this->newBindModel()->getKeyName()], $fields));
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel();
-
+        $perPage = Request::input('per_page',$this->per_page);
+        $perPage = $perPage>200?200:$perPage; //限制单页最大获取数据量
         //获取分页数据
         if (!Request::input('page') || Request::input('get_count')) {
-            $data = (clone $obj)->paginate();
+            $data = (clone $obj)->paginate($perPage);
         } else { //不统计条数
-            $data = (clone $obj)->simplePaginate();
+            $data = (clone $obj)->simplePaginate($perPage);
         }
         $data = $this->handleListReturn($data,$obj);
         //返回响应数据存放,方便操作日志记录
