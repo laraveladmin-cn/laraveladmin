@@ -419,6 +419,9 @@
                     let options = copyObj(this.affirm_options);
                     options['page'] = page;
                     options['per_page'] = per_page;
+                    if(per_page!=this.data.list.per_page){
+                        delete options['page'];
+                    }
                     this.getData(options);
                 }
             },
