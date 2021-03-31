@@ -430,6 +430,12 @@
                 if(this.loading){
                     return false;
                 }
+                //过滤为空的数据
+                if(options.where){
+                    options.where = collect(options.where).filter((value)=>{
+                       return value!=='';
+                    }).all();
+                }
                 this.loading = true;
                 let options_str = JSON.stringify(options);
                 this.options_str = options_str;
