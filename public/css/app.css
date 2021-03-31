@@ -3217,3 +3217,8 @@ div table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:aft
     bottom: 0;
     top: 12px;
 }
+.per_page .el-input--suffix .el-input__inner{
+    padding-left: 5px;
+    padding-right: 20px;
+    text-align:center;
+}

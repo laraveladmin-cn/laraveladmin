@@ -820,7 +820,7 @@
         padding: 5px 5px;
     }
     .topage1{
-        width: 90px;
+        width: 80px;
     }
     .sizer .sizer-item .btn{
         margin-bottom: 5px;
@@ -878,6 +878,6 @@
         position: relative;
     }
     .per_page{
-        width: 65px;
+        width: 55px;
     }
 </style>
