@@ -114,9 +114,15 @@
                 <slot name="pager" :data="data">
                     <div class="row">
                         <div class="col-lg-12">
-                            <span class="count">共 {{data | array_get('list.total',0)}} 条，{{data | array_get('list.per_page',15)}} 条/页</span>
+                            <span class="count">
+                                共 {{data | array_get('list.total',0)}} 条，
+                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" >
+                                    <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
+                                </el-select>
+                                条/页
+                            </span>
                             <span class="pager-input pull-right">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
-                                <input type="number" :min="1" :max="data.list['last_page'] || 1"  @change="changePage" v-model.number="input_page" class="input-sm form-control inline topage">
+                                <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
                                 &nbsp;&nbsp;页
                             </span>
                             <ul class="pagination pagination-sm no-margin pull-right">
@@ -257,10 +263,16 @@
                 <slot name="pager" :data="data">
                     <div class="row">
                         <div class="col-lg-12">
-                            <span class="count">共 {{data | array_get('list.total',0)}} 条，{{data | array_get('list.per_page',15)}} 条/页</span>
+                            <span class="count">共 {{data | array_get('list.total',0)}} 条，
+                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" >
+                                    <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
+                                </el-select>
+                                条/页
+                            </span>
                             <span class="pager-input pull-right">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
-                                <input type="number" :min="1" :max="data.list['last_page'] || 1"  @change="changePage" v-model.number="input_page" class="input-sm form-control inline topage">
-                                &nbsp;&nbsp;页</span>
+                                 <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
+                                &nbsp;&nbsp;页
+                            </span>
                             <ul class="pagination pagination-sm no-margin pull-right">
                                 <li :class="{ disabled: data.list['current_page']<=1 }">
                                     <a aria-label="Previous" @click="toPage(data.list['current_page']-1)">
@@ -302,6 +314,9 @@
         name: "datatable",
         components:{
             "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+            "el-select": ()=>import(/* webpackChunkName: "element-ui/lib/select" */ 'element-ui/lib/select'),
+            "el-option": ()=>import(/* webpackChunkName: "element-ui/lib/option" */ 'element-ui/lib/option'),
+            "el-input-number": ()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
         },
         props: {
             //配置选项
@@ -353,7 +368,9 @@
                 input_page:'', //输入页码
                 keywordKey:'',
                 check_ids_change:false,
-                options_str:''
+                options_str:'',
+                per_page_options:[10,15,20,30,50,100,200],
+                input_per_page:15
             };
         },
         methods:{
@@ -396,10 +413,15 @@
                 this.getData(options);
             },
             //跳转到对应页面
-            toPage(page){
-                if(page>0 && page<=this.data.list['last_page'] && page!=this.data.list['current_page']){
+            toPage(page,perPage){
+                let per_page = perPage || this.data.list.per_page || 15;
+                if((page>0 && page<=this.data.list['last_page'] && page!=this.data.list['current_page']) || per_page!=this.data.list.per_page){
                     let options = copyObj(this.affirm_options);
                     options['page'] = page;
+                    options['per_page'] = per_page;
+                    if(per_page!=this.data.list.per_page){
+                        delete options['page'];
+                    }
                     this.getData(options);
                 }
             },
@@ -407,6 +429,12 @@
             getData(options,flog){
                 if(this.loading){
                     return false;
+                }
+                //过滤为空的数据
+                if(options.where){
+                    options.where = collect(options.where).filter((value)=>{
+                       return value!=='';
+                    }).all();
                 }
                 this.loading = true;
                 let options_str = JSON.stringify(options);
@@ -433,6 +461,7 @@
                         }
                     }
                     this.input_page = this.data.list['current_page'];
+                    this.input_per_page = this.data.list['per_page'];
                     this.initLoading = false;
                     this.loading = false;
                     if(typeof(this.back_options) == "undefined"){
@@ -526,13 +555,16 @@
                     this.getData(options);
                 }
             },
-            changePage(event){
-                let val = event.target.value.trim();
+            changePage(value){
+                let val = (value+'').trim();
                 if(/^[1-9]\d*$|^$/.test(val) && val>=1 && val<=this.data.list['last_page']) { //页面输入正确
                     this.toPage(val);
                 } else {
                     this.input_page = this.data.list['current_page'];
                 }
+            },
+            perPage(value){
+                this.toPage(1,value);
             },
             changeKeywords(index){
                 this.data.options.where[this.data.options.where['_key']]='';
@@ -700,6 +732,12 @@
             },
             btnSizerMore(){
                 return (this.options.btnSizerMore || typeof this.options.btnSizerMore=="undefined" );
+            },
+            perPageOptions(){
+                if(this.options.per_page_options){
+                    return this.options.per_page_options;
+                }
+                return this.per_page_options;
             }
         },
         created() {
@@ -790,6 +828,9 @@
         width: 50px;
         padding: 5px 5px;
     }
+    .topage1{
+        width: 80px;
+    }
     .sizer .sizer-item .btn{
         margin-bottom: 5px;
     }
@@ -844,5 +885,8 @@
         height: 16px;
         width: 16px;
         position: relative;
+    }
+    .per_page{
+        width: 55px;
     }
 </style>
