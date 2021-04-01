@@ -9,6 +9,9 @@
                     <div class="col-xs-12">
                         <data-table :options="options" ref="table" class="box">
                             <template slot="sizer-more" slot-scope="props">
+                                <div v-show="false">
+                                    {{updateUrl()}}
+                                </div>
                                 <div class="row" >
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                         <select2 v-model="props.where['method']"
@@ -61,7 +64,7 @@
                     </div>
                 </div>
             </el-tab-pane>
-            <el-tab-pane :label="tabs[1]" :name="1+''" :key="1">
+            <el-tab-pane :label="tabs[1]" :name="1+''" :key="1" v-if="update_url">
                 <div class="row" >
                     <div class="col-xs-12">
                         <div class="box">
@@ -73,7 +76,6 @@
                 </div>
             </el-tab-pane>
         </el-tabs>
-
     </div>
 </template>
 
@@ -109,6 +111,7 @@
                 ],
                 edit_url:'',
                 modal:false,
+                update_url:false,
                 options: {
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: this.url || '', //数据表请求数据地址
@@ -141,6 +144,7 @@
             ...mapState([
                 'statusClass'
             ]),
+
         },
         watch: {
             url(val) {
@@ -159,9 +163,16 @@
                 this.modal = false;
                 //刷新页面
                 this.$refs['table'].refresh();
+            },
+            updateUrl(){
+                if(!this.$refs['table'] || !this.$refs['table'].data){
+                    this.update_url = '';
+                }else {
+                    this.update_url = this.$refs['table'].data.configUrl.updateUrl;
+                }
             }
-
-        },mounted() {
+        },
+        mounted() {
         }
     };
 </script>

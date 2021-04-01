@@ -106,16 +106,22 @@
         methods:{
             init(){
                 let ul = $(this.$el).find('ul');
-                ul.html('');
-                let ztree = $.fn.zTree.init(ul,this.mainConfig,this.mainDatas);
-                this.ztree = ztree;
-                if(this.expandAll){
-                    ztree.expandAll(true); //全部展开
+                if(this.ztree){
+                    $.fn.zTree.destroy('ztree_'+this.id);
                 }
-                if(!this.multiple){
-                    this.ztree.selectNode(this.ztree.getNodeByParam("id", this.val));
+                if(this.mainDatas.length){
+                    let ztree = $.fn.zTree.init(ul,this.mainConfig,this.mainDatas);
+                    this.ztree = ztree;
+                    if(this.expandAll){
+                        setTimeout(()=>{
+                            ztree.expandAll(true); //全部展开
+                        },500);
+                    }
+                    if(!this.multiple){
+                        this.ztree.selectNode(this.ztree.getNodeByParam("id", this.val));
+                    }
+                    this.disabledChange(this.disabled);
                 }
-                this.disabledChange(this.disabled);
             },
             disabledChange(value){
                 if(this.old_disabled!=value){
@@ -175,6 +181,7 @@
                 this.disabledChange(value);
             },
             data(value){
+                this.init();
                 this.init();
             },
             chkboxType(value){
