@@ -369,7 +369,7 @@ class RouteService
                             })->values()
                                 ->pluck('name');
                         }
-                        $only = collect($only)->intersect(['index','show'])->values()->toArray();
+                        $only = collect($only)->intersect(['index','show'])->prepend('index')->values()->toArray();
                     }else{
                         $only = ['index','show'];
                     }
