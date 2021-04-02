@@ -116,7 +116,7 @@
                         <div class="col-lg-12">
                             <span class="count">
                                 共 {{data | array_get('list.total',0)}} 条，
-                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" >
+                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
                                 条/页
@@ -264,7 +264,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <span class="count">共 {{data | array_get('list.total',0)}} 条，
-                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" >
+                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
                                 条/页

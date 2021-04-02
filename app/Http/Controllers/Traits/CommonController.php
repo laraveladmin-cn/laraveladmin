@@ -31,6 +31,12 @@ trait CommonController{
     ];
 
     /**
+     * 允许更多可排序字段
+     * @var array
+     */
+    protected $allowOrderMore=[];
+
+    /**
      * 条件筛选查询字段
      * @var array
      */
@@ -332,7 +338,9 @@ trait CommonController{
             $options['order'] = collect($order)->merge(collect($this->orderDefault)
                 ->map(function ($item,$key)use($order){
                     return Arr::get($order,$key,$item);
-            })->toArray())->toArray();
+            })->toArray())->map(function ($value){
+                return $value!='desc'?'asc':'desc';
+            })->toArray();
         }else{
             $options['order'] = $this->orderDefault;
         }

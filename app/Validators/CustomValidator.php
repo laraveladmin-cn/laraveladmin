@@ -153,6 +153,51 @@ class CustomValidator extends Validator{
         return preg_match("/^[a-z0-9_\/]{0,}[a-z0-9{}\-_\/]{1,}$/", $value);
     }
 
+    /**
+     * 验证数组是否完全在数组中
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @return bool
+     */
+    public function validateArrayInArray($attribute, $value, $parameters){
+        if(!$value) return true;
+        if(!is_array($value)){
+            return false;
+        }
+        return !collect($value)->diff($parameters)->toArray();
+
+    }
+
+    /**
+     * 验证数组是否完全在数组中
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @return bool
+     */
+    public function validateArrayKeysInArray($attribute, $value, $parameters){
+        if(!is_array($value)){
+            return false;
+        };
+        return $this->validateArrayInArray($attribute, collect($value)->keys()->toArray(), $parameters);
+    }
+
+    /**
+     * 验证是一维度数组或字符串
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @return bool
+     */
+    public function validateStringOrArray($attribute, $value, $parameters){
+        if(!$value || is_string($value)) return true;
+        return !collect($value)->filter(function ($item){
+            return is_array($item);
+        })->count();
+
+    }
+
 
 
 

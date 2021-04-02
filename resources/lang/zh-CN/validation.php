@@ -116,6 +116,9 @@ return [
     'uuid'                 => ':attribute 必须是有效的 UUID。',
     'ckeck_password'       => ':attribute 不正确。',
     'mobile_phone'       => ':attribute 不正确。',
+    'array_keys_in_array'                   => '已选的属性 :attribute 非法。',
+    'array_in_array'                   => '已选的属性 :attribute 非法。',
+    'sting_or_array'                   => '已选的属性 :attribute 非法。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -176,6 +179,8 @@ return [
         'size'                  => '大小',
         'mobile_phone'=>'手机号码',
         'old_password'=>'旧密码',
-        'file'=>'文件'
+        'file'=>'文件',
+        'order'=>'排序',
+        'where'=>'筛选条件'
     ],
 ];
