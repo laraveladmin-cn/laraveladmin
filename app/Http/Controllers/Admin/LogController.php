@@ -20,6 +20,10 @@ class LogController extends Controller
         'menu_id'=>'=',
         'user_id'=>'=',
         'parameters'=>'like',
+        'created_at'=>[
+            '>=',
+            '<='
+        ]
     ];
 
     protected $mapsWhereFields=[

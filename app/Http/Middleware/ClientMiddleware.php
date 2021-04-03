@@ -13,7 +13,8 @@ class ClientMiddleware{
         $this->except = [
             getRoutePrefix().'/open/config',
             getRoutePrefix().'/home/docs/*',
-            getRoutePrefix().'/home/index'
+            getRoutePrefix().'/home/index',
+            getRoutePrefix().'/open/client-id'
         ];
 
     }

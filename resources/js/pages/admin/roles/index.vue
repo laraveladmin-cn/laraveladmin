@@ -77,7 +77,7 @@
                         "id": {"name": "ID", "order": true},
                         "name": {"name": "名称", "order": true,levelName:'level',class:'text-left'},
                         "description": {"name": "描述", "order": true},
-                        "parent.name": {"name": "父级名称", "order": true},
+                        "parent.name": {"name": "父级名称", "order": false},
                         "admins_count": {"name": "管理员数量", "order": true},
                         //"created_at": {"name": "创建时间", "order": true},
                         "updated_at": {"name": "修改时间", "order": true},

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 trait ResourceController
 {
@@ -103,10 +104,110 @@ trait ResourceController
     }
 
     /**
+     * 查询参数验证
+     */
+    public function selectValidate(){
+        $this->bindModel OR $this->bindModel();
+        //搜集模型表内所有字段
+        $model = $this->bindModel->getModel();
+        $allow_order = collect($this->bindModel->getFieldsName())->keys()->push($model->getKeyName());
+        $class = get_class($model);
+        if(isset($class::$isTreeModel)){
+            $allow_order = $allow_order->merge(collect($this->bindModel->getTreeField())->values());
+        }
+        //自动完成的日期字段
+        if(isset($model->timestamps) && $model->timestamps){
+            $allow_order = $allow_order->merge([$model->getUpdatedAtColumn(),$model->getCreatedAtColumn()]);
+        }
+        //软删除字段
+        if(method_exists($model,'getDeletedAtColumn')){
+            $allow_order = $allow_order->merge([$model->getDeletedAtColumn()]);
+        }
+        //隐藏字段
+        if(method_exists($model,'getHidden')){
+            $allow_order = $allow_order->merge($model->getHidden());
+        }
+        //统计字段可排序
+        if(isset($this->showIndexFieldsCount) && $this->showIndexFieldsCount){
+            $showIndexFieldsCount = collect($this->showIndexFieldsCount)->map(function ($value,$key){
+                if(is_string($value)){
+                    $str = $value;
+                }else{
+                    $str = $key;
+                }
+                if(Str::contains(strtolower($str),' as ')){
+                    return collect(explode($str,' '))->last();
+                }else{
+                    return $str.'_count';
+                }
+            })->toArray();
+            $allow_order = $allow_order->merge($showIndexFieldsCount);
+        }
+        //自定义更多可排序字段
+        if(isset($this->allowOrderMore) && $this->allowOrderMore){
+            $allow_order = $allow_order->merge(is_array($this->allowOrderMore)?$this->allowOrderMore:[$this->allowOrderMore]);
+        }
+        $allow_order = $allow_order->filter()->unique()->implode(',');
+        $allow_order = $allow_order?':'.$allow_order:'';
+        $validate_rules = [
+            'where'=>'sometimes|nullable|array',
+            'order'=>['sometimes','nullable','array','array_keys_in_array'.$allow_order]
+        ];
+        $order = Request::input('order',[]);
+        if($order && is_array($order)){
+            collect($order)->map(function ($value,$key)use(&$validate_rules){
+                $validate_rules['order.'.$key] = 'in:asc,desc';
+            });
+        }
+        collect($this->sizer)->map(function ($value,$key)use(&$validate_rules){
+            $key = str_replace('.',' ',$key);
+            if(is_array($value)){
+                $validate_rules['where.'.$key] = 'sometimes|nullable|array';
+                collect($value)->map(function ($value,$key1)use(&$validate_rules,$key){
+                    $key1 = str_replace('.',' ',$key1);
+                    $this->whereValidate($validate_rules,$value,$key.'.'.$key1);
+                });
+            }else{
+                $this->whereValidate($validate_rules,$value,$key);
+            }
+        });
+        $data = collect(Request::all())->map(function ($item,$key){
+            if($key=='where' && $item && is_array($item)){
+                $item1 = [];
+                collect($item)->map(function ($value,$key1)use (&$item1){
+                    $key1 = str_replace('.',' ',$key1);
+                    $item1[$key1] = $value;
+                })->toArray();
+                $item = $item1;
+            }
+            return $item;
+        })->toArray();
+        $validator = Validator::make($data, $validate_rules);
+        if ($validator->fails()) {
+            throw ValidationException::withMessages($validator->errors()->toArray());
+        }
+    }
+
+    public function whereValidate(&$validate_rules,$value,$key){
+        if($value=='between'){
+            $validate_rules['where.'.$key] = 'sometimes|nullable|array';
+            $validate_rules['where.'.$key.'.0'] = 'sometimes|nullable|string';
+            $validate_rules['where.'.$key.'.1'] = 'sometimes|nullable|string';
+        }elseif($value=='in'){
+            $validate_rules['where.'.$key] = 'sometimes|nullable|sting_or_array';
+        }elseif(in_array($value,['&','|'])){
+            $validate_rules['where.'.$key] = 'sometimes|nullable|numeric';
+        }else{
+            $validate_rules['where.'.$key] = 'sometimes|nullable|string';
+        }
+    }
+
+    /**
      * 获取翻页数据
      */
     public function list()
     {
+        $this->selectValidate();
         //指定查询字段
         $fields = $this->selectFields($this->showIndexFields);
         $fields and $this->bindModel = $this->bindModel()->select(in_array($this->newBindModel()->getKeyName(), $fields)
@@ -233,11 +334,12 @@ trait ResourceController
     protected function getWithOptionModel($fields_key = 'showIndexFields')
     {
         $this->bindModel OR $this->bindModel();
+        $options = $this->getOptions(); //筛选项+排序项
         $obj = $this->bindModel->with($this->selectWithFields($fields_key))
             ->withCount(collect($this->getShowIndexFieldsCount())->filter(function ($item, $key) {
                 return !is_array($item);
             })->toArray())
-            ->options($this->getOptions());
+            ->options($options);
         return $obj;
     }
 
@@ -495,6 +597,7 @@ trait ResourceController
      */
     public function export()
     {
+        $this->selectValidate();
         $model = $this->newBindModel();
         $exportFieldsName = $this->exportFieldsName;
         if ($exportFieldsName) {
