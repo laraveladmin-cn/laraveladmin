@@ -114,18 +114,18 @@
                 <slot name="pager" :data="data">
                     <div class="row">
                         <div class="col-lg-12">
-                            <span class="count">
+                            <span class="count m-top">
                                 共 {{data | array_get('list.total',0)}} 条，
-                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page">
+                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page+''">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
                                 条/页
                             </span>
-                            <span class="pager-input pull-right">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
+                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
                                 <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
                                 &nbsp;&nbsp;页
                             </span>
-                            <ul class="pagination pagination-sm no-margin pull-right">
+                            <ul class="pagination pagination-sm no-margin pull-right m-top">
                                 <li :class="{ disabled: data.list['current_page']<=1 }">
                                     <a aria-label="Previous" @click="toPage(data.list['current_page']-1)">
                                         <span aria-hidden="true">上一页</span>
@@ -263,17 +263,17 @@
                 <slot name="pager" :data="data">
                     <div class="row">
                         <div class="col-lg-12">
-                            <span class="count">共 {{data | array_get('list.total',0)}} 条，
-                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page">
+                            <span class="count m-top">共 {{data | array_get('list.total',0)}} 条，
+                                <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page+''">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
                                 条/页
                             </span>
-                            <span class="pager-input pull-right">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
+                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
                                  <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
                                 &nbsp;&nbsp;页
                             </span>
-                            <ul class="pagination pagination-sm no-margin pull-right">
+                            <ul class="pagination pagination-sm no-margin pull-right m-top">
                                 <li :class="{ disabled: data.list['current_page']<=1 }">
                                     <a aria-label="Previous" @click="toPage(data.list['current_page']-1)">
                                         <span aria-hidden="true">上一页</span>
@@ -888,5 +888,11 @@
     }
     .per_page{
         width: 55px;
+    }
+    .box-footer{
+        padding-top: 0px;
+    }
+    .m-top{
+        margin-top: 10px !important;
     }
 </style>
