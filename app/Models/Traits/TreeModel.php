@@ -36,6 +36,10 @@ trait TreeModel{
         "parent_key"=>"parent_id"
     ];
 
+    public function scopeGetTreeField(){
+        return $this->treeField;
+    }
+
     /**
      * 初始化方法
      * Boot the soft deleting trait for a model.

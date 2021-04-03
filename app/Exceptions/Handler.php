@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Response;
 
@@ -50,7 +51,7 @@ class Handler extends ExceptionHandler
             return $e->response;
         }
 
-        return $request->expectsJson()
+        return ($request->expectsJson() || $request->input('json') || $request->is(getRoutePrefix().'/*'))
             ? $this->invalidJson($request, $e)
             : $this->invalid($request, $e);
     }
