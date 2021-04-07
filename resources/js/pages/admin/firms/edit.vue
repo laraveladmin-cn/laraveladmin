@@ -89,8 +89,7 @@
                                 <template slot="input-item">
                                     <upload :width="370" :height="201"  v-model="props.data.row['logo']"
                                             :disabled="!props.url"
-                                            :value-key="'url'"
-                                            :action="'/ueditor/server?action=upload-image&disk=qiniu_public'">
+                                            :value-key="'url'">
                                     </upload>
                                 </template>
                             </edit-item>
@@ -205,6 +204,12 @@
             },
         },
         props: {},
+        computed:{
+            ...mapState([
+                '_token',
+                'use_url',
+            ]),
+        },
         data() {
             return {
                 options: {
