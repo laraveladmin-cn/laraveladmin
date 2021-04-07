@@ -3233,4 +3233,7 @@ div table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:aft
     height: 34px;
     line-height:34px;
 }
+.sizer .el-input__icon{
+    line-height:34px
+}
 
