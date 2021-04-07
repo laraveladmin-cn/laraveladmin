@@ -1,10 +1,10 @@
 <template>
     <div @mouseout="mouseoutEvent">
+        <input type="hidden" :value="_token" ref="token" name="_token">
         <div :id="options.id" style="height: 100%">
             <textarea style="display:none;"></textarea>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -88,7 +88,9 @@
         data(){
           return {
               editorMd:null,
-              intervalTime:null
+              intervalTime:null,
+              onClick:false,
+              onSubmit:false
           };
         },
         watch:{
@@ -122,7 +124,8 @@
                     this.editorMd.config('readOnly',val);
                 }
             },
-          init(){
+
+            init(){
               this.intervalTime = setInterval(()=>{
                   if(typeof editormd=="function"){
                       clearInterval(this.intervalTime);
@@ -132,12 +135,47 @@
                       options.imageUploadURL = this.use_url+ options.imageUploadURL;
                       options.onchange =  ()=> {
                       };
+                      options.onload = async ()=>{
+                          //查找图片上传按钮并绑定事件
+                          while(true) {
+                              let $picture = $(this.$el).find('.editormd-toolbar-container .fa-picture-o');
+                              if($picture.length){
+                                  if(!this.onClick){
+                                      this.onClick=true;
+                                      $picture.on('click',async()=>{
+                                          while (true){
+                                              let $input = $(this.$el).find('.editormd-file-input input[type="file"]');
+                                              if($input.length){
+                                                  if(!this.onSubmit){
+                                                      this.onSubmit = true;
+                                                      $(this.$el).find('.editormd-dialog-container form').submit((event)=>{
+                                                          setTimeout(()=>{
+                                                              this.refreshToken();
+                                                          },1000);
+                                                      });
+                                                  }
+                                                  $input.attr('name','file');
+                                                  $(this.$el).find('.editormd-file-input').append($(this.$refs['token']));
+                                                  break;
+                                              }
+                                              await this.sleep(500);
+                                          }
+                                      });
+                                  }
+                                  break;
+                              }
+                              await this.sleep(1000);
+                          }
+                      };
                       this.editorMd = editormd(options);
                   }
               },250);
           },
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms))
+            },
             mouseoutEvent(){
-                if(this.editorMd){
+                if(this.editorMd && this.editorMd.getValue){
                     let val = this.editorMd.getValue();
                     if((typeof this.value!="undefined") && val!=this.value){
                         this.$emit('input', val); //修改值
