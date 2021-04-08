@@ -76,7 +76,7 @@ class CreateModel extends BaseCreate
                 $item->showType = in_array($item->Field,['created_at','updated_at']) ? 'time' : Arr::get($comment,'1',''); //字段显示类型
                 $item->showType = in_array($item->Field,['deleted_at','left_margin','right_margin','level','remember_token']) ? 'hidden' :  $item->showType;
                 $comment = explode(':',$comment[0]);
-                $info = ['created_at'=>'创建时间','updated_at'=>'修改时间'];
+                $info = ['created_at'=>'创建时间','updated_at'=>'修改时间','deleted_at'=>'删除时间'];
                 $item->info = isset($info[$item->Field]) ? $info[$item->Field]: $comment[0]; //字段说明
                 $item->info =  $item->info ?: $item->Field;
                 $comment = explode(',',Arr::get($comment,'1',''));
