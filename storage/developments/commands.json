@@ -319,6 +319,40 @@
         ]
     },
     {
+        "command": "create:seed",
+        "chinese": "创建数据填充",
+        "english": "",
+        "parameters": [
+            {
+                "key": "model",
+                "value": "",
+                "rules": "",
+                "title": "模型(不填自动使用控制器名称)",
+                "name": "模型",
+                "placeholder": "Models\\\\User"
+            },
+            {
+                "key": "namespace",
+                "value": 0,
+                "rules": "",
+                "title": "不使用默认命名空间",
+                "name": "不用命名空间",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },{
+                "key": "no_dump",
+                "value": 1,
+                "rules": "",
+                "title": "生成代码后不检查自动加载",
+                "name": "不自动加载",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
+    },
+    {
         "command": "migrate:all",
         "chinese": "执行所有目录迁移文件",
         "english": ""
