@@ -96,6 +96,35 @@
             "_id": 38
         },
         {
+            "id": 146,
+            "name": "菜单拖拽",
+            "icons": "fa-mouse-pointer",
+            "description": "菜单拖拽页面数据",
+            "url": "/admin/menus/tree",
+            "parent_id": 41,
+            "method": [
+                "get"
+            ],
+            "group": "admin",
+            "action": "MenuController@tree",
+            "_id": 47
+        },
+        {
+            "id": 147,
+            "name": "提交菜单位置修改",
+            "icons": "fa-edit",
+            "description": "提交菜单位置修改",
+            "url": "/admin/menus/update-position",
+            "parent_id": 146,
+            "method": [
+                "post"
+            ],
+            "group": "admin",
+            "action": "MenuController@updatePosition",
+            "env": "local",
+            "_id": 48
+        },
+        {
             "id": 142,
             "name": "开发辅助",
             "icons": "fa-wrench",
@@ -110,7 +139,7 @@
             "group": "admin",
             "action": "DevelopmentsController@index",
             "env": "local",
-            "_id": 55
+            "_id": 57
         },
         {
             "id": 143,
@@ -125,7 +154,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postLayout",
             "env": "local",
-            "_id": 56
+            "_id": 58
         },
         {
             "id": 144,
@@ -140,7 +169,7 @@
             "group": "admin",
             "action": "DevelopmentsController@tables",
             "env": "local",
-            "_id": 57
+            "_id": 59
         },
         {
             "id": 145,
@@ -155,7 +184,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postCommand",
             "env": "local",
-            "_id": 58
+            "_id": 60
         },
         {
             "id": 8,
@@ -165,7 +194,7 @@
             "parent_id": 2,
             "method": [],
             "status": "显示",
-            "_id": 59
+            "_id": 61
         },
         {
             "id": 57,
@@ -180,7 +209,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "_id": 60
+            "_id": 62
         },
         {
             "id": 58,
@@ -194,7 +223,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@postIndex",
-            "_id": 61
+            "_id": 63
         },
         {
             "id": 59,
@@ -209,7 +238,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "_id": 62
+            "_id": 64
         },
         {
             "id": 60,
@@ -223,7 +252,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@putPassword",
-            "_id": 63
+            "_id": 65
         },
         {
             "id": 81,
@@ -233,7 +262,7 @@
             "parent_id": 2,
             "method": [],
             "status": "显示",
-            "_id": 64
+            "_id": 66
         },
         {
             "id": 82,
@@ -243,7 +272,7 @@
             "parent_id": 2,
             "method": [],
             "status": "显示",
-            "_id": 113
+            "_id": 115
         },
         {
             "id": 3,
@@ -258,7 +287,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "home",
-            "_id": 122
+            "_id": 124
         },
         {
             "id": 78,
@@ -272,7 +301,7 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 123
+            "_id": 125
         },
         {
             "id": 139,
@@ -287,7 +316,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "home",
-            "_id": 124
+            "_id": 126
         },
         {
             "id": 140,
@@ -301,7 +330,7 @@
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 125
+            "_id": 127
         },
         {
             "id": 141,
@@ -315,7 +344,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 126
+            "_id": 128
         },
         {
             "id": 4,
@@ -328,7 +357,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "open",
-            "_id": 127
+            "_id": 129
         },
         {
             "id": 61,
@@ -341,7 +370,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 128
+            "_id": 130
         },
         {
             "id": 62,
@@ -357,7 +386,7 @@
             "use": [
                 "web"
             ],
-            "_id": 129
+            "_id": 131
         },
         {
             "id": 63,
@@ -372,7 +401,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 130
+            "_id": 132
         },
         {
             "id": 64,
@@ -392,7 +421,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 131
+            "_id": 133
         },
         {
             "id": 76,
@@ -408,7 +437,7 @@
             "use": [
                 "web"
             ],
-            "_id": 132
+            "_id": 134
         },
         {
             "id": 77,
@@ -425,7 +454,7 @@
                 "api",
                 "web"
             ],
-            "_id": 133
+            "_id": 135
         },
         {
             "id": 65,
@@ -442,7 +471,7 @@
                 "api",
                 "web"
             ],
-            "_id": 134
+            "_id": 136
         },
         {
             "id": 66,
@@ -456,7 +485,7 @@
             "is_page": "是",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 135
+            "_id": 137
         },
         {
             "id": 67,
@@ -473,7 +502,7 @@
                 "api",
                 "web"
             ],
-            "_id": 136
+            "_id": 138
         },
         {
             "id": 68,
@@ -490,7 +519,7 @@
                 "api",
                 "web"
             ],
-            "_id": 137
+            "_id": 139
         },
         {
             "id": 69,
@@ -504,7 +533,7 @@
             "is_page": "是",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 138
+            "_id": 140
         },
         {
             "id": 70,
@@ -517,7 +546,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 139
+            "_id": 141
         },
         {
             "id": 71,
@@ -530,7 +559,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 140
+            "_id": 142
         },
         {
             "id": 72,
@@ -542,7 +571,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 141
+            "_id": 143
         },
         {
             "id": 73,
@@ -555,7 +584,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 142
+            "_id": 144
         },
         {
             "id": 74,
@@ -568,7 +597,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 143
+            "_id": 145
         },
         {
             "id": 75,
@@ -585,7 +614,7 @@
                 "api",
                 "web"
             ],
-            "_id": 144
+            "_id": 146
         },
         {
             "id": 79,
@@ -598,7 +627,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 145
+            "_id": 147
         }
     ],
     "resource": [
@@ -716,7 +745,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "_id": 47,
+            "_id": 49,
             "end_id": 56
         },
         {
@@ -729,7 +758,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "_id": 65,
+            "_id": 67,
             "end_id": 98
         },
         {
@@ -742,7 +771,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "_id": 73,
+            "_id": 75,
             "end_id": 106
         },
         {
@@ -756,7 +785,7 @@
             "status": "显示",
             "group": "admin",
             "item_name": "银行",
-            "_id": 81,
+            "_id": 83,
             "end_id": 90
         },
         {
@@ -769,7 +798,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "_id": 89,
+            "_id": 91,
             "end_id": 114
         },
         {
@@ -782,7 +811,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "_id": 97,
+            "_id": 99,
             "end_id": 122
         },
         {
@@ -795,7 +824,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "_id": 105,
+            "_id": 107,
             "end_id": 130
         },
         {
@@ -808,7 +837,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "_id": 114,
+            "_id": 116,
             "end_id": 138
         }
     ],
