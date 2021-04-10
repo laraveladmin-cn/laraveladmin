@@ -34,6 +34,10 @@ export default {
         path:'',
         keywords:'',
         loading:true, //加载中
+        last_menu_show:{ //最后一个菜单显示
+            name:'',
+            description:''
+        }
     },
     mutations:{
         //更新state状态
