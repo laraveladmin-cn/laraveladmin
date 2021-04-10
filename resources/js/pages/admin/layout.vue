@@ -230,8 +230,8 @@
                     </transition>
                     <section class="content-header" :class="{'my-content-header':downloading}">
                         <h1>
-                            {{current_menu_name}}
-                            <small>{{current_menu_description}}</small>
+                            {{current_menu['name']}}
+                            <small>{{current_menu['description']}}</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li :class="{active:navbar.active}" v-for="navbar in navbars">
@@ -241,7 +241,7 @@
                                 </router-link>
                                 <span v-else>
                                  <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                {{last_menu_show_name || navbar['name']}}
+                                {{navbar['name']}}
                             </span>
                             </li>
                         </ol>
@@ -589,7 +589,6 @@
             ...mapState('menu',{
                 menus:state => state.menus,
                 loadingMenu:state => state.loading,
-                last_menu_show:state => state.last_menu_show
             }),
             ...mapState('user',{
                 user:state => state.user,
@@ -633,21 +632,6 @@
                     setTimeout(()=>{this.load()},50)
                 }
                 return !loading;
-            },
-            last_menu_show_name(){
-                if(this.last_menu_show && this.last_menu_show.name){
-                    return this.last_menu_show.name;
-                }
-                return '';
-            },
-            current_menu_name(){
-                return this.last_menu_show_name || this.current_menu['name'];
-            },
-            current_menu_description(){
-                if(this.last_menu_show && this.last_menu_show.description ){
-                    return this.last_menu_show.description
-                }
-                return this.current_menu['description'];
             }
         },
         watch: {
