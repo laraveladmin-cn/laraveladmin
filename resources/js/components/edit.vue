@@ -90,6 +90,9 @@
                 refreshToken: 'refreshToken',
                 pushMessage: 'pushMessage',
             }),
+            ...mapMutations({
+                menuSet:'menu/set',  //设置当前路由,用于菜单选中
+            }),
             //提交表单
             submitForm(invalid,validate) {
                 //防止重复提交
@@ -163,8 +166,20 @@
                     }
                     this.back_data = copyObj(response.data);
                     this.loading = false;
+                    let id = array_get(this.data,'row.'+this.primary_key,0);
+                    this.setLastMenuShow(id);
                 }).catch((error) => {
                     this.loading = false;
+                });
+            },
+            setLastMenuShow(id){
+                let key = (id?'edit':'new')+'_title.';
+                this.menuSet({
+                    key:'last_menu_show',
+                    last_menu_show:{
+                        name:array_get(this.options,key+'name',''),
+                        description:array_get(this.options,key+'description','')
+                    }
                 });
             },
             //开发环境布局保存
@@ -190,6 +205,12 @@
             }
         },
         created() {
+            let url = this.options.url || this.$router.currentRoute.path;
+            let id = collect(url.split('/')).last();
+            if(id && !isNaN(id)){
+                id = id-0;
+            }
+            this.setLastMenuShow(id);
             //获取数据
             let params = this.options.params || this.$router.currentRoute.query;
             this.getData(params);
@@ -218,6 +239,15 @@
                     });
                 });
             }
+        },
+        destroyed() {
+            this.menuSet({
+                key:'last_menu_show',
+                last_menu_show:{
+                    name:'',
+                    description:''
+                }
+            });
         }
     }
 </script>
