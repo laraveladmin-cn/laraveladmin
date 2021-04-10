@@ -181,7 +181,7 @@
                     items[items.length] = items_group;
                 });
                 let data = {
-                    path: this.options.componentPath || '/pages'+path_arr.join('/'), //修改的布局页面组件
+                    path: (this.options.componentPath || '/pages'+path_arr.join('/')).replace(/-/g,'_'), //修改的布局页面组件
                     items:items
                 };
                 axios.post(this.use_url+'/admin/developments/layout', data).then( (response)=>{

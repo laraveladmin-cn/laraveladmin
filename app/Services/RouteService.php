@@ -194,7 +194,7 @@ class RouteService
                         }
                         if($value){
                             $action = Arr::get($item,'action','')?:
-                                ucfirst(Str::camel(str_replace('-','_',$value))).'Controller@'.
+                                self::getClass($value).'@'.
                                 Str::camel(str_replace('-','_',Arr::get($path_arr,3,'index')));
                             $method = Arr::get($item,'method',0);
                             $route = [];
@@ -227,7 +227,7 @@ class RouteService
                     ->map(function ($item){
                         $value = Arr::get(explode('/',Arr::get($item,'url','')),2,'');
                         if($value){
-                            $class = ucfirst(Str::singular(Str::camel(str_replace('-','_',$value)))).'Controller';
+                            $class = self::getClass($value);
                             $options = Arr::get($item,'options',[]);
                             $only = Arr::get($options, 'only');
                             if($only){
@@ -247,6 +247,14 @@ class RouteService
 
             });
         });
+    }
+
+    protected static function getClass($value){
+        $str = Str::singular(Str::camel(str_replace('-','_',$value)));
+        if(Str::endsWith($str,'ss')){
+            $str = Str::replaceLast('ss','s',$str);
+        }
+        return ucfirst($str).'Controller';
     }
 
     /**
@@ -297,7 +305,7 @@ class RouteService
                         }
                         if($value){
                             $action = Arr::get($item,'action','')?:
-                                ucfirst(Str::camel(str_replace('-','_',$value))).'Controller@'.
+                                self::getClass($value).'@'.
                                 Str::camel(str_replace('-','_',Arr::get($path_arr,3,'index')));
                             $method = Arr::get($item,'method',0);
                             $route = [];
