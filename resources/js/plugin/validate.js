@@ -31,7 +31,7 @@ collect(regexs).each((item,key) => {
 let required = {
     validate:(value,{ type }) => {
         let value_type = typeof value;
-        if(type=='number' && value_type=="string"){
+        if((type=='number' || type=='zero') && value_type=="string"){ //强转为数字
             value = value-0;
         }
         if(Array.isArray(value)){ //数组判断
@@ -39,6 +39,8 @@ let required = {
         }else if(value_type=='object'){ //对象判断
             let json_str = JSON.stringify(value);
             return json_str != "{}" && json_str !='null';
+        }else if(value_type=='number' && type!='zero' && !value){
+            return value===0;
         }
         return !!value;
     },

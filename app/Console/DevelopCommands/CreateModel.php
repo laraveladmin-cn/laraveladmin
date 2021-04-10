@@ -29,7 +29,7 @@ class CreateModel extends BaseCreate
     protected $baseNamespace = 'App\Models';
 
     protected function getOutputPath(){
-        $this->outputPath = app_path('Models/'.Str::studly(Str::singular($this->argument('table'))));
+        $this->outputPath = app_path('Models/'.Str::studly($this->getClassName($this->argument('table'))));
     }
 
     /**
@@ -100,7 +100,7 @@ class CreateModel extends BaseCreate
         $data['php'] = '<?php'; //模板代码
         $data['table'] = $name;
         $data['namespace']  = $this->baseNamespace; //生成代码命名空间
-        $data['name'] = Str::studly(Str::singular($name)); //模型名称
+        $data['name'] = Str::studly($this->getClassName($name)); //模型名称
         $connection = $this->option('connection') ?: config('database.default');
         $data['connection'] = $connection==config('database.default') ? '': $connection;
         $data['tableInfo'] = $this->getTableInfo($name,$connection); //数据表信息
@@ -131,7 +131,7 @@ class CreateModel extends BaseCreate
         $data['delete'] = $data['delete'] ? "'".$data['delete']."'":'';
 
         $data['fieldsShowMaps'] = $this->formatShow(collect($table_fields)->filter(function ($item) {
-            return in_array($item['showType'], ['radio', 'checkbox','select']);
+            return in_array($item['showType'], ['radio', 'checkbox','select','label']);
         })->keyBy('Field')->map(function ($item, $key) {
             $res = "        '" . $key . "'"  . '=>[' . $this->formatShow(collect($item['values'])->map(function ($value, $key) {
                     return '            "' . $key . '"' . "=>'" . $value . "'";

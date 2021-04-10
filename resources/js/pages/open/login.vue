@@ -202,7 +202,7 @@
                                 cancelText:'登录',
                                 affirmText:'注册',
                                 callback:()=>{
-                                    this.$router.push({ path: '/open/register?other='+this.other });
+                                    this.$router.push({ path: '/open/register?other='+this.other }).catch(()=>{});
                                 },
                                 cancel:()=>{ //取消
 

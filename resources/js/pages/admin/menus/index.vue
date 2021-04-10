@@ -69,7 +69,7 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-body">
-                                <menu-tree :callback="callback"></menu-tree>
+                                <menu-tree :callback="callback" ref="menuTree" ></menu-tree>
                             </div>
                         </div>
                     </div>
@@ -163,6 +163,8 @@
                 this.modal = false;
                 //刷新页面
                 this.$refs['table'].refresh();
+                //刷新布局
+                this.$refs['menuTree'].refresh();
             },
             updateUrl(){
                 if(!this.$refs['table'] || !this.$refs['table'].data){

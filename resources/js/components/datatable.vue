@@ -84,6 +84,7 @@
                                        <button type="button" title="导出数据" class="btn btn-primary" @click="download" v-if="data.configUrl['exportUrl']">
                                             <i class="glyphicon glyphicon-download-alt"></i>
                                         </button>
+                                        <slot name="input_group_add_btn" :data="data"></slot>
                                     </div>
                                 </div>
                             </div>
@@ -304,6 +305,7 @@
                     </div>
                 </slot>
             </div>
+            <slot name="end" :data="data"></slot>
         </div>
     </div>
 </template>
@@ -448,7 +450,7 @@
                         }
                         //添加历史记录
                         if(!options['get_count'] && !flog){
-                            this.$router.push({ path: this.$router.currentRoute.path, query: { options: options_str }});
+                            this.$router.push({ path: this.$router.currentRoute.path, query: { options: options_str }}).catch(()=>{});
                         }
                     }else {
                         for (let i in response.data ) {
@@ -620,7 +622,10 @@
                             this.importData({
                                 file:file,
                                 sheet:this.data.excel.sheet,
-                                url:this.data.configUrl.importUrl
+                                url:this.data.configUrl.importUrl,
+                                callback:()=>{
+                                    this.refresh();
+                                }
                             });
                         },
                         cancel:()=>{ //取消

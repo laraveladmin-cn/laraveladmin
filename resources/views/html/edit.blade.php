@@ -76,6 +76,11 @@
             'path' => 'common_components/passwordEdit.vue',
             'info' => '密码输入框组件'
         ],
+        'label'=>[
+            'name' => 'label-edit',
+            'path' => 'common_components/labelEdit.vue',
+            'info' => '标签选项组件'
+        ],
         'date' =>$datePicker,
         'datetime'=>$datePicker,
         'month'=>$datePicker
@@ -245,6 +250,13 @@
                                                    placeholder="请输入{{$table_field['info']}}"
                                                    :disabled="!props.url">
                                     </password-edit>
+                                </template>
+@elseif($table_field['showType']=='label')
+                                <template slot="input-item">
+                                    <label-edit v-model="props.data.row['{{$table_field['Field']}}']"
+                                                :disabled="!props.url"
+                                                :map="props.data.maps['{{$table_field['Field']}}']">
+                                    </label-edit>
                                 </template>
 @elseif($table_field['showType']=='markdown')
                                     <template slot="input-item">
