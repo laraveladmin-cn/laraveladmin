@@ -276,7 +276,11 @@ trait ResourceController
         }
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data);
-        return Response::returns(['alert' => alert(['message' => '新增成功!'])], 201);
+        $primaryKey = $this->newBindModel()->getKeyName()?:'id';
+        return Response::returns([
+            $primaryKey=>$item[$primaryKey],
+            'alert' => alert(['message' => '新增成功!'])
+        ], 201);
     }
 
     /**

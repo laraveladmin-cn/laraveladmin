@@ -189,9 +189,9 @@ class MenuController extends Controller
                     Menu::where('resource_id',$id)->whereNotIn('item_name',Arr::get($data,'_options',[]))->delete(); //去掉没有的
                 }
                 $_options = Menu::where('resource_id',$id)->where('id','>',0)->pluck('item_name')->toArray();
-                $only = collect($data['_options'])->except($_options)->map(function ($val){
+                $only = collect($data['_options'])->diff($_options)->map(function ($val){
                     return str_replace('_','',$val);
-                })->toArray();
+                })->values()->toArray();
                 $name = Arr::get($item,'item_name')?:Arr::get($item,'name','');
                 $options = $only?['only'=>$only]:[];
                 $only and (new MenuTableSeeder)->createResourceMenu($item,$name,$options);
