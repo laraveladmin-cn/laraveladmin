@@ -563,7 +563,7 @@ trait ResourceController
         });
         $res = collect($res)->map(function ($value, $key) use ($model) {
             if (is_array($value) && $key != '$index') {
-                return $this->relationName($value, $model->$key(), true);
+                return $this->relationName($value, $model->$key()->getModel(), true);
             } else {
                 return $value;
             }
