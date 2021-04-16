@@ -101,7 +101,7 @@
                 <div class="collapse sizer_more in">
                     <slot name="sizer-more" :data="data" :where="data.options.where" :maps="data.maps">
                     </slot>
-                    <div class="row">
+                    <div class="row" v-show="btnSizerMore">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <button type="button" class="btn btn-primary pull-right sizer-tool-btn" @click="search">搜索</button>
                         </div>
@@ -161,16 +161,18 @@
                 <slot name="table" :data="data">
                     <table class="table table-hover table-bordered table-striped text-center dataTable">
                         <thead>
-                            <tr>
-                                <th class="id" v-if="checkbox">
-                                   <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
-                                    <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
-                                </th>
-                                <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
-                                    {{field['name']}}
-                                </th>
-                                <th class="operate" v-if="operation">操作</th>
-                            </tr>
+                            <slot name="thead" :select-all="select_all" :operation="operation" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :show-fields="show_fields">
+                                <tr>
+                                    <th class="id" v-if="checkbox">
+                                       <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
+                                        <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
+                                    </th>
+                                    <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
+                                        {{field['name']}}
+                                    </th>
+                                    <th class="operate" v-if="operation">操作</th>
+                                </tr>
+                            </slot>
                         </thead>
                         <tbody>
                             <tr v-for="(row,i) in (data.list?data.list.data:[])">
