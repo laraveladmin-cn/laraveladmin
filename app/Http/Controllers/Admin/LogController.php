@@ -14,7 +14,7 @@ class LogController extends Controller
     public function __construct()
     {
         $this->sizerDefault=[
-            'created_at'=>[Carbon::now()->toDateString(),'']
+            'created_at'=>[Carbon::now()->startOfDay()->toDateTimeString(),'']
         ];
     }
 
