@@ -3,6 +3,34 @@
         <div class="row">
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
+                    <template slot="thead" slot-scope="props">
+                        <tr>
+                            <th class="id" v-if="props.checkbox" rowspan="2">
+                                <icheck v-model="props.selectAll" @change="props.selectAllMethod" :option="1" :disabled-label="true"></icheck>
+                            </th>
+                            <th v-for="(field,index) in props.showFields"
+                                :class="field['class']"
+                                @click="props.orderBy(index)"
+                                v-if="index!='classify2.name'"
+                                :rowspan="index=='classify.name'?1:2"
+                                :colspan="index=='classify.name'?2:1">
+                                <span v-if="index=='classify.name'">
+                                     分类
+                                </span>
+                                <span v-else>
+                                     {{field['name']}}
+                                </span>
+
+                            </th>
+                            <th class="operate" v-if="props.operation" rowspan="2">操作</th>
+                        </tr>
+                        <tr>
+                            <th v-for="(field,index) in props.showFields" :class="field['class']" @click="props.orderBy(index)"
+                                v-if="index=='classify.name' || index=='classify2.name'">
+                                {{field['name']}}
+                            </th>
+                        </tr>
+                    </template>
                     <template slot="sizer-more" slot-scope="props">
                         <div class="row" >
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
@@ -47,6 +75,8 @@
             "select2":function(resolve){
                 require(['common_components/select2.vue'], resolve);
             },
+            "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+
         },
         props: {
         },
@@ -87,7 +117,9 @@
 
     };
 </script>
-<style lang="scss">
-
+<style lang="scss" scoped>
+    div table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after{
+        top: 28px;
+    }
 
 </style>

@@ -237,9 +237,6 @@
             },
             "hide-more": function (resolve) {
                 require(['common_components/hideMore'], resolve);
-            },
-            "pdf-js":function (resolve) {
-                require(['common_components/pdfJs'], resolve);
             }
         },
         props: {
