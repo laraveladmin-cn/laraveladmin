@@ -673,6 +673,7 @@
                     }else {
                         if(typeof this.$route.query.options=="undefined"){
                             options = {where:{},order:{}};
+                            this.data.configUrl['listUrl'] = '';
                         }else {
                             options = copyObj(this.back_options);
                         }

@@ -5,23 +5,8 @@
                 <data-table class="box box-primary" :options="options">
                     <template slot="sizer-more" slot-scope="props">
                         <div class="row" >
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item" v-if="props.where['created_at']">
-                                <el-date-picker v-model="props.where['created_at'][0]"
-                                                class="w-100"
-                                                value-format="yyyy-MM-dd 00:00:00"
-                                                placeholder="开始日期"
-                                                type="date"
-                                                :editable="false">
-                                </el-date-picker>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item" v-if="props.where['created_at']">
-                                <el-date-picker v-model="props.where['created_at'][1]"
-                                                class="w-100"
-                                                value-format="yyyy-MM-dd 23:59:59"
-                                                placeholder="结束日期"
-                                                type="date"
-                                                :editable="false">
-                                </el-date-picker>
+                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 sizer-item">
+                                <date-sizer v-model="props.where['created_at']"></date-sizer>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                 <select2 v-model="props.where['menu_id']"
@@ -46,7 +31,6 @@
                                          :is-ajax="true" >
                                 </select2>
                             </div>
-
                         </div>
                     </template>
                 </data-table>
@@ -61,7 +45,7 @@
         components:{
             'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
-            "el-date-picker": ()=>import(/* webpackChunkName: "element-ui/lib/date-picker" */ 'element-ui/lib/date-picker'),
+            "dateSizer":()=>import(/* webpackChunkName: "common_components/dateSizer.vue" */ 'common_components/dateSizer.vue'),
         },
         props: {
         },
@@ -89,14 +73,23 @@
                         "created_at": {"name": "创建时间", "order": true},
                         //"updated_at": {"name": "修改时间", "order": true},
                     },
+                },
+                pickerOptions: {
+                    disabledDate(time) {
+                        return time.getTime() > Date.now();
+                    }
                 }
-            };
+            }
         },
         computed:{
             ...mapState([
                 'use_url'
             ])
+        },
+        methods:{
+
         }
+
     };
 </script>
 <style lang="scss">

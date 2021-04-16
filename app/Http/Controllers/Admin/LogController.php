@@ -4,11 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Request;
 
 class LogController extends Controller
 {
     use ResourceController;
+
+    public function __construct()
+    {
+        $this->sizerDefault=[
+            'created_at'=>[Carbon::now()->startOfDay()->toDateTimeString(),'']
+        ];
+    }
+
     /**
      * 资源模型
      * @var  string

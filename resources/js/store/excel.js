@@ -325,7 +325,7 @@ export default {
                         collect(title).each((name,key)=>{
                             if(typeof item[key]=="undefined"){
                                 item[key] = '';
-                            }else if((item[key].startsWith('{') && item[key].endsWith('}')) || (item[key].startsWith('[') && item[key].endsWith(']'))){
+                            }else if(typeof(item[key])=='string' && ((item[key].startsWith('{') && item[key].endsWith('}')) || (item[key].startsWith('[') && item[key].endsWith(']')))){
                                 try {
                                     let value = JSON.parse(item[key]);
                                     item[key] = value;
