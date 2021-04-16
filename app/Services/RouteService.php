@@ -417,7 +417,7 @@ class RouteService
     public static function upRouteJson(){
         $methods = RouteService::getResourceRoutes(['except'=>['index']]);
         $methods_count = collect($methods)->count();
-        $fillable = collect(Menu::getFillables())->prepend('id')->unique()->toArray();
+        $fillable = collect(Menu::getFillables())->prepend('id')->prepend('deleted_at')->unique()->toArray();
         $default = collect(Menu::getFieldsDefault())->toArray();
         $maps = Menu::getFieldsMap();
         $_id = 1; //存储创建顺序
@@ -466,7 +466,9 @@ class RouteService
                     }
                     return $row;
                 });
-                $children_count = $children->count();
+                $children_count = $children->filter(function ($children){
+                    return !Arr::get($children,'_is_deleted');
+                })->count();
                 $id = $menu['id'];
                 $end_id = $id+$children_count;
                 if($children_count!=$methods_count ||
