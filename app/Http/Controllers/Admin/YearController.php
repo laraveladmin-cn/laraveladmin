@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Request;
 class YearController extends Controller
 {
     use ResourceController;
+
+    /**
+     * 默认每页取多少条
+     * @var int
+     */
+    protected $per_page = 16;
     /**
      * 资源模型
      * @var  string

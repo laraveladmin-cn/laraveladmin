@@ -158,7 +158,7 @@
                 </slot>
             </div>
             <div class="box-body table-responsive">
-                <slot name="table" :data="data">
+                <slot name="table" :data="data" :check_ids="check_ids" :remove="remove">
                     <table class="table table-hover table-bordered table-striped text-center dataTable">
                         <thead>
                             <slot name="thead" :select-all="select_all" :operation="operation" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :show-fields="show_fields">

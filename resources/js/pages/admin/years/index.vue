@@ -3,7 +3,44 @@
         <div class="row">
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
-                    <template slot="col" slot-scope="props">
+                    <template slot="table" slot-scope="props">
+                        <div>
+                            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6" v-for="(row,i) in (props.data.list?props.data.list.data:[])">
+                                <div class="thumbnail">
+                                    <div class="caption text-center">
+                                        <h3>{{row.value}}</h3>
+                                        <p>
+
+                                            {{row.name}}
+                                        </p>
+                                        <div>
+                                            <icheck v-model="props.check_ids"
+                                                    class="ids"
+                                                    :disabled-label="true"
+                                                    :option="row.id">
+                                            </icheck>
+                                            <div class="operation-item">
+                                                <button v-show="props.data.configUrl['deleteUrl']"
+                                                        title="删除选中"
+                                                        type="button"
+                                                        class="btn btn-danger btn-xs"
+                                                        @click="props.remove([row.id])">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </button>
+                                                <router-link class="btn btn-info btn-xs"
+                                                             title="编辑"
+                                                             :to="props.data.configUrl['showUrl'].replace('{id}',row.id)"
+                                                             v-if="props.data.configUrl['showUrl']">
+                                                    <i class="fa fa-edit"></i>
+                                                </router-link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <!--<template slot="col" slot-scope="props">
                         <span v-if="props.field.type =='label'">
                             <span class="label" :class="'label-'+statusClass[props.row[props.k]%statusClass.length]">
                                 {{ props.data.maps[props.k] | array_get(props.row[props.k]) }}
@@ -17,7 +54,7 @@
                         <span v-else>
                             {{props.row | array_get(props.k)}}
                         </span>
-                    </template>
+                    </template>-->
                 </data-table>
             </div>
         </div>
@@ -28,7 +65,9 @@
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     export default {
         components:{
-            'data-table':function(resolve){require(['common_components/datatable.vue'], resolve);}
+            'data-table':function(resolve){require(['common_components/datatable.vue'], resolve);},
+            "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+
         },
         props: {
         },
@@ -46,6 +85,7 @@
                     keywordPlaceholder:'请输入名称',
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
+                    hideTopPagerTool:true,
                     fields: {
                         "id": {"name": "ID", "order": true},
                         "value": {"name": "值", "order": true},
@@ -53,6 +93,7 @@
                         "created_at": {"name": "创建时间", "order": true},
                         "updated_at": {"name": "修改时间", "order": true},
                     },
+                    per_page_options:[16,40,120],
                 }
             };
         },
@@ -61,7 +102,10 @@
         }
     };
 </script>
-<style lang="scss">
-
+<style lang="scss" scoped>
+.operation-item{
+    margin-bottom: 5px;
+    display: inline-block;
+}
 
 </style>

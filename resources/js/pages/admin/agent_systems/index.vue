@@ -77,13 +77,13 @@
                 if(this.submiting){
                     return;
                 }
-                this.submiting = true;
                 this.set({
                     key:'modal',
                     modal:{
                         title:'提示',
                         content: '您确定要删除吗?',
                         callback:()=>{
+                            this.submiting = true;
                             axios['delete'](this.use_url+this.$refs.table.data.configUrl.conditionDeleteUrl, {data:options}).then( (response)=>{
                                 this.submiting = false;
                                 this.$refs.table.refresh();
@@ -103,7 +103,7 @@
                                     });
                                 }
                             });
-                        }}
+                        }},
                 });
 
             }
