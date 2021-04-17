@@ -275,6 +275,20 @@
             "_id": 115
         },
         {
+            "id": 148,
+            "name": "条件删除合作公司",
+            "icons": "fa-trash",
+            "description": "条件删除合作公司",
+            "url": "/admin/agent-systems/condition-delete",
+            "parent_id": 131,
+            "method": [
+                "delete"
+            ],
+            "group": "admin",
+            "action": "AgentSystemController@conditionDelete",
+            "_id": 124
+        },
+        {
             "id": 3,
             "name": "主页",
             "icons": "fa-user",
@@ -287,7 +301,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "home",
-            "_id": 124
+            "_id": 125
         },
         {
             "id": 78,
@@ -301,7 +315,7 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 125
+            "_id": 126
         },
         {
             "id": 139,
@@ -316,7 +330,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "home",
-            "_id": 126
+            "_id": 127
         },
         {
             "id": 140,
@@ -330,7 +344,7 @@
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 127
+            "_id": 128
         },
         {
             "id": 141,
@@ -344,7 +358,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 128
+            "_id": 129
         },
         {
             "id": 4,
@@ -357,7 +371,7 @@
             "is_page": "是",
             "status": "显示",
             "group": "open",
-            "_id": 129
+            "_id": 130
         },
         {
             "id": 61,
@@ -370,7 +384,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 130
+            "_id": 131
         },
         {
             "id": 62,
@@ -386,7 +400,7 @@
             "use": [
                 "web"
             ],
-            "_id": 131
+            "_id": 132
         },
         {
             "id": 63,
@@ -401,7 +415,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 132
+            "_id": 133
         },
         {
             "id": 64,
@@ -421,7 +435,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 133
+            "_id": 134
         },
         {
             "id": 76,
@@ -437,7 +451,7 @@
             "use": [
                 "web"
             ],
-            "_id": 134
+            "_id": 135
         },
         {
             "id": 77,
@@ -454,7 +468,7 @@
                 "api",
                 "web"
             ],
-            "_id": 135
+            "_id": 136
         },
         {
             "id": 65,
@@ -471,7 +485,7 @@
                 "api",
                 "web"
             ],
-            "_id": 136
+            "_id": 137
         },
         {
             "id": 66,
@@ -485,7 +499,7 @@
             "is_page": "是",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 137
+            "_id": 138
         },
         {
             "id": 67,
@@ -502,7 +516,7 @@
                 "api",
                 "web"
             ],
-            "_id": 138
+            "_id": 139
         },
         {
             "id": 68,
@@ -519,7 +533,7 @@
                 "api",
                 "web"
             ],
-            "_id": 139
+            "_id": 140
         },
         {
             "id": 69,
@@ -533,7 +547,7 @@
             "is_page": "是",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 140
+            "_id": 141
         },
         {
             "id": 70,
@@ -546,7 +560,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 141
+            "_id": 142
         },
         {
             "id": 71,
@@ -559,7 +573,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 142
+            "_id": 143
         },
         {
             "id": 72,
@@ -571,7 +585,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 143
+            "_id": 144
         },
         {
             "id": 73,
@@ -584,7 +598,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 144
+            "_id": 145
         },
         {
             "id": 74,
@@ -597,7 +611,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 145
+            "_id": 146
         },
         {
             "id": 75,
@@ -614,7 +628,7 @@
                 "api",
                 "web"
             ],
-            "_id": 146
+            "_id": 147
         },
         {
             "id": 79,
@@ -627,7 +641,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 147
+            "_id": 148
         }
     ],
     "resource": [

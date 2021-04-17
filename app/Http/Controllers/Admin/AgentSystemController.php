@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
+use App\Models\PuserUser;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Response;
 
 class AgentSystemController extends Controller
 {
@@ -52,6 +55,33 @@ class AgentSystemController extends Controller
             'full_name'=>'required|alpha|unique:banks,full_name,'.$id.',id,deleted_at,NULL',
         ];
         return $validate;
+    }
+
+
+    /**
+     * 列表页面返回数据前对数据处理
+     * @param $data
+     * @return mixed
+     */
+    protected function handleIndexReturn(&$data)
+    {
+        $conditionDeleteUrl = '/admin/agent-systems/condition-delete';
+        $data['configUrl']['conditionDeleteUrl'] = Menu::hasPermission($conditionDeleteUrl, 'delete')?$conditionDeleteUrl:'';
+        return $data;
+    }
+
+    /**
+     * 指定筛选条件删除
+     */
+    public function conditionDelete()
+    {
+        $this->bindModel OR $this->bindModel();
+        $options = $this->getOptions(); //筛选项+排序项
+        $res = $this->bindModel()->options($options)->delete();
+        if ($res === false) {
+            return Response::returns(['alert' => alert(['message' => '操作失败!'], 500)]);
+        }
+        return Response::returns(['alert' => alert(['message' => '操作成功!'])]);
     }
 
 }

@@ -2,7 +2,7 @@
     <div class="admin_user_index">
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box box-primary" :options="options">
+                <data-table class="box box-primary" ref="table" :options="options">
                     <template slot="col" slot-scope="props">
                         <span v-if="props.field.type =='label'">
                             <span class="label" :class="'label-'+statusClass[props.row[props.k]%statusClass.length]">
@@ -17,6 +17,11 @@
                         <span v-else>
                             {{props.row | array_get(props.k)}}
                         </span>
+                    </template>
+                    <template slot="input_group_add_btn" slot-scope="props">
+                        <button type="button" title="条件内删除" v-if="props.data.configUrl.conditionDeleteUrl" class="btn btn-primary" @click="conditionDelete(props.data.options)">
+                            <i class="glyphicon glyphicon glyphicon-trash"></i>
+                        </button>
                     </template>
                 </data-table>
             </div>
@@ -59,7 +64,49 @@
             };
         },
         computed:{
+            ...mapState([
+                'use_url'
+            ]),
+        },
+        methods:{
+            //全局数据设置,设置弹窗提示
+            ...mapMutations({
+                set:'set'
+            }),
+            conditionDelete(options){
+                if(this.submiting){
+                    return;
+                }
+                this.submiting = true;
+                this.set({
+                    key:'modal',
+                    modal:{
+                        title:'提示',
+                        content: '您确定要删除吗?',
+                        callback:()=>{
+                            axios['delete'](this.use_url+this.$refs.table.data.configUrl.conditionDeleteUrl, {data:options}).then( (response)=>{
+                                this.submiting = false;
+                                this.$refs.table.refresh();
+                            }).catch((error) =>{
+                                this.submiting = false;
+                                if(error.response && error.response.status==422){
+                                    this.pushMessage({
+                                        'showClose':true,
+                                        'title':'操作失败!',
+                                        'message':'',
+                                        'type':'danger',
+                                        'position':'top',
+                                        'iconClass':'fa-warning',
+                                        'customClass':'',
+                                        'duration':3000,
+                                        'show':true
+                                    });
+                                }
+                            });
+                        }}
+                });
 
+            }
         }
     };
 </script>
