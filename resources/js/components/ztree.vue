@@ -117,7 +117,7 @@
                             ztree.expandAll(true); //全部展开
                         },500);
                     }
-                    if(!this.multiple){
+                    if(!this.multiple && typeof this.val!="object"){
                         this.ztree.selectNode(this.ztree.getNodeByParam("id", this.val));
                     }
                     this.disabledChange(this.disabled);
@@ -147,8 +147,10 @@
                     if(value==this.val){ //值未改变
                         return;
                     }
-                    this.ztree.cancelSelectedNode(this.ztree.getNodeByParam("id", oldValue));
-                    this.ztree.selectNode(this.ztree.getNodeByParam("id", value));
+                    if(this.ztree){
+                        this.ztree.cancelSelectedNode(this.ztree.getNodeByParam("id", oldValue));
+                        this.ztree.selectNode(this.ztree.getNodeByParam("id", value));
+                    }
                     this.val = value;
                 }else {
                     let valueObj = collect(value).sort();
@@ -167,11 +169,13 @@
                         }
                     });
                     valueObj.map((val)=>{
-                        let node = this.ztree.getNodeByParam("id",val);
-                        if(node){
-                            this.ztree.setChkDisabled(node, false);
-                            this.ztree.checkNode(node,true,false);
-                            this.disabled && this.ztree.setChkDisabled(node, this.disabled);
+                        if(this.ztree){
+                            let node = this.ztree.getNodeByParam("id",val);
+                            if(node){
+                                this.ztree.setChkDisabled(node, false);
+                                this.ztree.checkNode(node,true,false);
+                                this.disabled && this.ztree.setChkDisabled(node, this.disabled);
+                            }
                         }
                     });
                     this.val = valueObj.all();
@@ -182,10 +186,11 @@
             },
             data(value){
                 this.init();
-                this.init();
             },
             chkboxType(value){
-                this.ztree.setting.check.chkboxType = value;
+                if(this.ztree && this.ztree.setting){
+                    this.ztree.setting.check.chkboxType = value;
+                }
             }
         },
         computed:{
