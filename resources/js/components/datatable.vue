@@ -54,6 +54,11 @@
                                 <i class="fa" :class="show_export_fields?'fa-angle-double-up':'fa-angle-double-down'"></i>
                                 导出字段
                             </button>
+                            <button type="button" title="导入数据" class="btn btn-default import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                                <i class="fa fa-folder-open-o"></i>
+                                批量导入
+                                <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
+                            </button>
                             <slot name="add_btn"></slot>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item pull-right" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
@@ -77,10 +82,10 @@
                                         <button type="button" title="重置" class="btn btn-primary " @click="reset">
                                             <i class="fa fa-repeat"></i>
                                         </button>
-                                        <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                                      <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                             <i class="glyphicon glyphicon-folder-open"></i>
                                             <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
-                                        </button>
+                                        </button>-->
                                        <button type="button" title="导出数据" class="btn btn-primary" @click="download" v-if="data.configUrl['exportUrl']">
                                             <i class="glyphicon glyphicon-download-alt"></i>
                                         </button>
