@@ -388,7 +388,7 @@
             "sidebar-items": SidebarItems,
             "message":Message,
             "modal":Modal,
-            "user-menu":userMenu
+            "user-menu":userMenu,
             "language":()=>import(/* webpackChunkName: "common_components/language/language.vue" */ 'common_components/language/language.vue'),
         },
         props: {},
