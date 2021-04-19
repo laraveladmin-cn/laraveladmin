@@ -276,7 +276,11 @@ trait ResourceController
         }
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data);
-        return Response::returns(['alert' => alert(['message' => '新增成功!'])], 201);
+        $primaryKey = $this->newBindModel()->getKeyName()?:'id';
+        return Response::returns([
+            $primaryKey=>$item[$primaryKey],
+            'alert' => alert(['message' => '新增成功!'])
+        ], 201);
     }
 
     /**
@@ -559,7 +563,7 @@ trait ResourceController
         });
         $res = collect($res)->map(function ($value, $key) use ($model) {
             if (is_array($value) && $key != '$index') {
-                return $this->relationName($value, $model->$key(), true);
+                return $this->relationName($value, $model->$key()->getModel(), true);
             } else {
                 return $value;
             }

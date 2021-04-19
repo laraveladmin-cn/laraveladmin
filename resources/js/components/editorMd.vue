@@ -148,14 +148,33 @@
                                               if($input.length){
                                                   if(!this.onSubmit){
                                                       this.onSubmit = true;
-                                                      $(this.$el).find('.editormd-dialog-container form').submit((event)=>{
-                                                          setTimeout(()=>{
+                                                      $input.attr('name','file');
+                                                      $(this.$el).find('.editormd-file-input').append($(this.$refs['token']));
+                                                      let form = $(this.$el).find('.editormd-dialog-container form')[0];
+                                                      let iframe = $(this.$el).find('#editormd-image-iframe')[0];
+                                                      form.onsubmit = (e)=>{
+                                                          e.preventDefault(e);
+                                                          //上传文件信息
+                                                          let formData = new FormData(form);
+                                                          let body = (iframe.contentWindow ? iframe.contentWindow : iframe.contentDocument).document.body;
+                                                          axios.post(options.imageUploadURL, formData,this.headers).then( (response)=>{
                                                               this.refreshToken();
-                                                          },1000);
-                                                      });
+                                                              let res_str = JSON.stringify(response.data);
+                                                              body.innerHTML = res_str;
+                                                              iframe.onload();
+                                                          }).catch((error) =>{
+                                                              let res_str = JSON.stringify({
+                                                                  success : 0,
+                                                                  message : "上传文件出错!",
+                                                                  url     : ""
+                                                              });
+                                                              body.innerHTML = res_str;
+                                                              dd(error);
+                                                              iframe.onload();
+                                                          });
+                                                          return false;
+                                                      };
                                                   }
-                                                  $input.attr('name','file');
-                                                  $(this.$el).find('.editormd-file-input').append($(this.$refs['token']));
                                                   break;
                                               }
                                               await this.sleep(500);

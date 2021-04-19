@@ -194,7 +194,7 @@ class RouteService
                         }
                         if($value){
                             $action = Arr::get($item,'action','')?:
-                                ucfirst(Str::camel(str_replace('-','_',$value))).'Controller@'.
+                                self::getClass($value).'@'.
                                 Str::camel(str_replace('-','_',Arr::get($path_arr,3,'index')));
                             $method = Arr::get($item,'method',0);
                             $route = [];
@@ -227,7 +227,7 @@ class RouteService
                     ->map(function ($item){
                         $value = Arr::get(explode('/',Arr::get($item,'url','')),2,'');
                         if($value){
-                            $class = ucfirst(Str::singular(Str::camel(str_replace('-','_',$value)))).'Controller';
+                            $class = self::getClass($value);
                             $options = Arr::get($item,'options',[]);
                             $only = Arr::get($options, 'only');
                             if($only){
@@ -247,6 +247,14 @@ class RouteService
 
             });
         });
+    }
+
+    protected static function getClass($value){
+        $str = Str::singular(Str::camel(str_replace('-','_',$value)));
+        if(Str::endsWith($str,'ss')){
+            $str = Str::replaceLast('ss','s',$str);
+        }
+        return ucfirst($str).'Controller';
     }
 
     /**
@@ -297,7 +305,7 @@ class RouteService
                         }
                         if($value){
                             $action = Arr::get($item,'action','')?:
-                                ucfirst(Str::camel(str_replace('-','_',$value))).'Controller@'.
+                                self::getClass($value).'@'.
                                 Str::camel(str_replace('-','_',Arr::get($path_arr,3,'index')));
                             $method = Arr::get($item,'method',0);
                             $route = [];
@@ -409,7 +417,7 @@ class RouteService
     public static function upRouteJson(){
         $methods = RouteService::getResourceRoutes(['except'=>['index']]);
         $methods_count = collect($methods)->count();
-        $fillable = collect(Menu::getFillables())->prepend('id')->unique()->toArray();
+        $fillable = collect(Menu::getFillables())->prepend('id')->prepend('deleted_at')->unique()->toArray();
         $default = collect(Menu::getFieldsDefault())->toArray();
         $maps = Menu::getFieldsMap();
         $_id = 1; //存储创建顺序
@@ -458,7 +466,9 @@ class RouteService
                     }
                     return $row;
                 });
-                $children_count = $children->count();
+                $children_count = $children->filter(function ($children){
+                    return !Arr::get($children,'_is_deleted');
+                })->count();
                 $id = $menu['id'];
                 $end_id = $id+$children_count;
                 if($children_count!=$methods_count ||

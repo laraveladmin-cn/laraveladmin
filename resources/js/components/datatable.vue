@@ -54,6 +54,11 @@
                                 <i class="fa" :class="show_export_fields?'fa-angle-double-up':'fa-angle-double-down'"></i>
                                 导出字段
                             </button>
+                            <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                                <i class="fa fa-folder-open-o"></i>
+                                批量导入
+                                <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
+                            </button>
                             <slot name="add_btn"></slot>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item pull-right" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
@@ -77,13 +82,14 @@
                                         <button type="button" title="重置" class="btn btn-primary " @click="reset">
                                             <i class="fa fa-repeat"></i>
                                         </button>
-                                        <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                                      <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                             <i class="glyphicon glyphicon-folder-open"></i>
                                             <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
-                                        </button>
+                                        </button>-->
                                        <button type="button" title="导出数据" class="btn btn-primary" @click="download" v-if="data.configUrl['exportUrl']">
                                             <i class="glyphicon glyphicon-download-alt"></i>
                                         </button>
+                                        <slot name="input_group_add_btn" :data="data"></slot>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +106,7 @@
                 <div class="collapse sizer_more in">
                     <slot name="sizer-more" :data="data" :where="data.options.where" :maps="data.maps">
                     </slot>
-                    <div class="row">
+                    <div class="row" v-show="btnSizerMore">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <button type="button" class="btn btn-primary pull-right sizer-tool-btn" @click="search">搜索</button>
                         </div>
@@ -157,19 +163,21 @@
                 </slot>
             </div>
             <div class="box-body table-responsive">
-                <slot name="table" :data="data">
+                <slot name="table" :data="data" :check_ids="check_ids" :remove="remove">
                     <table class="table table-hover table-bordered table-striped text-center dataTable">
                         <thead>
-                            <tr>
-                                <th class="id" v-if="checkbox">
-                                   <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
-                                    <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
-                                </th>
-                                <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
-                                    {{field['name']}}
-                                </th>
-                                <th class="operate" v-if="operation">操作</th>
-                            </tr>
+                            <slot name="thead" :select-all="select_all" :operation="operation" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :show-fields="show_fields">
+                                <tr>
+                                    <th class="id" v-if="checkbox">
+                                       <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
+                                        <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
+                                    </th>
+                                    <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
+                                        {{field['name']}}
+                                    </th>
+                                    <th class="operate" v-if="operation">操作</th>
+                                </tr>
+                            </slot>
                         </thead>
                         <tbody>
                             <tr v-for="(row,i) in (data.list?data.list.data:[])">
@@ -304,6 +312,7 @@
                     </div>
                 </slot>
             </div>
+            <slot name="end" :data="data"></slot>
         </div>
     </div>
 </template>
@@ -448,7 +457,7 @@
                         }
                         //添加历史记录
                         if(!options['get_count'] && !flog){
-                            this.$router.push({ path: this.$router.currentRoute.path, query: { options: options_str }});
+                            this.$router.push({ path: this.$router.currentRoute.path, query: { options: options_str }}).catch(()=>{});
                         }
                     }else {
                         for (let i in response.data ) {
@@ -620,7 +629,10 @@
                             this.importData({
                                 file:file,
                                 sheet:this.data.excel.sheet,
-                                url:this.data.configUrl.importUrl
+                                url:this.data.configUrl.importUrl,
+                                callback:()=>{
+                                    this.refresh();
+                                }
                             });
                         },
                         cancel:()=>{ //取消
@@ -668,6 +680,7 @@
                     }else {
                         if(typeof this.$route.query.options=="undefined"){
                             options = {where:{},order:{}};
+                            this.data.configUrl['listUrl'] = '';
                         }else {
                             options = copyObj(this.back_options);
                         }

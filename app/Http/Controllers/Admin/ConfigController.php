@@ -39,7 +39,7 @@ class ConfigController extends Controller
             'name' => 'required',
             'key' => 'required|alpha_dash|unique:configs,key,'.$id.',id,deleted_at,NULL',
             'type'=>'required|in:1,2,3',
-            'itype'=>'required|in:1,2,3'
+            'itype'=>'required|in:1,2,3,4,5'
         ];
     }
 

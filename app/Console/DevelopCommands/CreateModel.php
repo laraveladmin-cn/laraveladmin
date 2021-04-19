@@ -29,7 +29,7 @@ class CreateModel extends BaseCreate
     protected $baseNamespace = 'App\Models';
 
     protected function getOutputPath(){
-        $this->outputPath = app_path('Models/'.Str::studly(Str::singular($this->argument('table'))));
+        $this->outputPath = app_path('Models/'.Str::studly($this->getClassName($this->argument('table'))));
     }
 
     /**
@@ -76,7 +76,7 @@ class CreateModel extends BaseCreate
                 $item->showType = in_array($item->Field,['created_at','updated_at']) ? 'time' : Arr::get($comment,'1',''); //字段显示类型
                 $item->showType = in_array($item->Field,['deleted_at','left_margin','right_margin','level','remember_token']) ? 'hidden' :  $item->showType;
                 $comment = explode(':',$comment[0]);
-                $info = ['created_at'=>'创建时间','updated_at'=>'修改时间'];
+                $info = ['created_at'=>'创建时间','updated_at'=>'修改时间','deleted_at'=>'删除时间'];
                 $item->info = isset($info[$item->Field]) ? $info[$item->Field]: $comment[0]; //字段说明
                 $item->info =  $item->info ?: $item->Field;
                 $comment = explode(',',Arr::get($comment,'1',''));
@@ -100,7 +100,7 @@ class CreateModel extends BaseCreate
         $data['php'] = '<?php'; //模板代码
         $data['table'] = $name;
         $data['namespace']  = $this->baseNamespace; //生成代码命名空间
-        $data['name'] = Str::studly(Str::singular($name)); //模型名称
+        $data['name'] = Str::studly($this->getClassName($name)); //模型名称
         $connection = $this->option('connection') ?: config('database.default');
         $data['connection'] = $connection==config('database.default') ? '': $connection;
         $data['tableInfo'] = $this->getTableInfo($name,$connection); //数据表信息
@@ -131,7 +131,7 @@ class CreateModel extends BaseCreate
         $data['delete'] = $data['delete'] ? "'".$data['delete']."'":'';
 
         $data['fieldsShowMaps'] = $this->formatShow(collect($table_fields)->filter(function ($item) {
-            return in_array($item['showType'], ['radio', 'checkbox','select']);
+            return in_array($item['showType'], ['radio', 'checkbox','select','label']);
         })->keyBy('Field')->map(function ($item, $key) {
             $res = "        '" . $key . "'"  . '=>[' . $this->formatShow(collect($item['values'])->map(function ($value, $key) {
                     return '            "' . $key . '"' . "=>'" . $value . "'";

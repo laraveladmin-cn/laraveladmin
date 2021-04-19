@@ -91,7 +91,7 @@ class CreateAll extends Command
         }
 
         $module = $this->argument('module')?:'admin';
-        $modelName = Str::studly($module).'/'.Str::studly(Str::singular($table));
+        $modelName = Str::studly($module).'/'.Str::studly($this->getClassName(Str::singular($table)));
         //生成控制器
         if($this->hasOnly('controller')){
             $this->call('create:controller',[
@@ -119,5 +119,16 @@ class CreateAll extends Command
             app('composer')->dumpAutoloads(); //自动加载文件
         }
 
+    }
+
+    /**
+     * 处理ss表名结尾问题
+     * @param $value
+     */
+    protected function getClassName($value){
+        if(Str::endsWith($value,'ss')){
+            $value = Str::replaceLast('ss','s',$value);
+        }
+        return Str::singular($value);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Console\DevelopCommands\Bases;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 abstract class BaseCreate extends Command
 {
@@ -73,5 +74,16 @@ abstract class BaseCreate extends Command
      * @return mixed
      */
     abstract protected function readyDatas();
+
+    /**
+     * 处理ss表名结尾问题
+     * @param $value
+     */
+    protected function getClassName($value){
+        if(Str::endsWith($value,'ss')){
+            $value = Str::replaceLast('ss','s',$value);
+        }
+        return Str::singular($value);
+    }
 
 }

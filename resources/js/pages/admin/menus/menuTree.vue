@@ -135,7 +135,10 @@
         methods: {
             ...mapActions({
                 getMenus:'menu/getMenus', //更新菜单
-            })
+            }),
+            refresh(){
+                this.$refs['menuTree'].getData({});
+            }
         }
 
     };
