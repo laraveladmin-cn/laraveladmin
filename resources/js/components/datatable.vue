@@ -54,7 +54,7 @@
                                 <i class="fa" :class="show_export_fields?'fa-angle-double-up':'fa-angle-double-down'"></i>
                                 导出字段
                             </button>
-                            <button type="button" title="导入数据" class="btn btn-default import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                            <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                 <i class="fa fa-folder-open-o"></i>
                                 批量导入
                                 <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
