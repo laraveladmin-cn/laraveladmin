@@ -79,9 +79,9 @@ class AgentSystemController extends Controller
         $options = $this->getOptions(); //筛选项+排序项
         $res = $this->bindModel()->options($options)->delete();
         if ($res === false) {
-            return Response::returns(['alert' => alert(['message' => '操作失败!'], 500)]);
+            return Response::returns(['alert' => alert(['message' => trans('The operation failure!')], 500)]);
         }
-        return Response::returns(['alert' => alert(['message' => '操作成功!'])]);
+        return Response::returns(['alert' => alert(['message' => trans('The operation successful!')])]);
     }
 
 }

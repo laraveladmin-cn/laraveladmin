@@ -92,7 +92,7 @@
                                 if(error.response && error.response.status==422){
                                     this.pushMessage({
                                         'showClose':true,
-                                        'title':'操作失败!',
+                                        'title':trans('The operation failure!'),
                                         'message':'',
                                         'type':'danger',
                                         'position':'top',
