@@ -42,25 +42,25 @@
                     {
                         value:"zh-CN",
                         name:"中国",
-                        en_name:"Chinese",
+                        en_name:"China",
                         country:"cn",
                     },
                     {
                         value:"zh-TW",
                         name: "中國(台灣)",
-                        en_name:"Traditional Chinese",
+                        en_name:"China (Taiwan)",
                         country: "tw",
                     },
                     {
                         value:"zh-HK",
                         name: "中國(香港)",
-                        en_name:"Traditional Chinese",
+                        en_name:"China (Hong Kong)",
                         country: "hk",
                     },
                     {
                         value:"en",
                         name:"English",
-                        en_name:"",
+                        en_name:"Britain",
                         country:"gb",
                     }
                 ],

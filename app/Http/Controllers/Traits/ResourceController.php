@@ -783,7 +783,7 @@ trait ResourceController
             $this->handlePostEdit($item, $row);
         }
         return [
-            "message" => '导入成功',
+            "message" => trans('Import success!'),//'导入成功',
             "errors" => $errors,
         ];
     }

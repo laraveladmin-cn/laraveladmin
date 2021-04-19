@@ -121,6 +121,9 @@ return [
     'array_keys_in_array'  => 'The :attribute field does not exist in :other.',
     'array_in_array'       => 'The :attribute field does not exist in :other.',
     'sting_or_array'       => 'The :attribute field does not exist in :other.',
+    'geetest'=>':attribute validation failed.',
+    'captcha'=>':attribute validation failed.',
+    "send_code"=>':attribute verification failed.',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +188,8 @@ return [
         'file'                  =>'file',
         'order'                 =>'order',
         'where'                 =>'where',
+        'uname'                 => 'user name',
+        'verify'                => 'captcha'
     ],
 
 ];

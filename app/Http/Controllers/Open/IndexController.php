@@ -87,7 +87,7 @@ class IndexController extends Controller
             'type'=>'geetest',
             'dataUrl'=>config('geetest.url'),
             'data'=>[
-                'client_fail_alert'=>config('geetest.client_fail_alert', '验证失败!'),
+                'client_fail_alert'=>config('geetest.client_fail_alert',trans('Validation fails!')),
                 'lang'=>config('geetest.lang', 'zh-cn'),
                 'product'=>'float',
                 'http'=>'http://'

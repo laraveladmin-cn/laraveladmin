@@ -25,6 +25,6 @@ class ThrottleRequests extends \Illuminate\Routing\Middleware\ThrottleRequests
             return sha1($route->getDomain().'|'.$ip);
         }
 
-        throw new \RuntimeException('Unable to generate the request signature. Route unavailable.');
+        throw new \RuntimeException(trans('Unable to generate the request signature. Route unavailable.'));
     }
 }

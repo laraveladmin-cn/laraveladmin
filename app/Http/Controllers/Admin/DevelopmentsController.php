@@ -100,7 +100,7 @@ class DevelopmentsController extends Controller
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
         $connection = $request->input('connection')?:config('database.default');
@@ -132,20 +132,20 @@ class DevelopmentsController extends Controller
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
         $data = Request::all();
         $errors = [];
         $path = resource_path('js'.$data['path']);
         if(str_contains($data['path'],'..')){
-            $errors[] = '路径中不能包含".."';
+            $errors[] = trans('Cannot be included in the path').'".."';
         }elseif(!file_exists($path)){
-            $errors[] = '代码文件不存在!';
+            $errors[] = trans('Code file does not exist!');//'代码文件不存在!';
         }
         if($errors){
             return Response::returns([
-                'message' => '参数错误',
+                'message' => trans('Parameter error!'),//参数错误
                 'errors' => [
                     'path' => $errors
                 ]
