@@ -140,9 +140,15 @@
                                     </li>
                                 </ul>
                             </li>
+                            <!--<li>
+                                <a>
+                                    <language></language>
+                                </a>
+                            </li>-->
                             <li>
                                 <a data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                             </li>
+
                         </ul>
                     </div>
                 </nav>
@@ -413,7 +419,8 @@
         components: {
             "sidebar-items": SidebarItems,
             "message":Message,
-            "modal":Modal
+            "modal":Modal,
+            "language":()=>import(/* webpackChunkName: "common_components/language/language.vue" */ 'common_components/language/language.vue'),
         },
         props: {},
         data(){
