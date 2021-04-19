@@ -41,15 +41,21 @@
                 languages:[
                     {
                         value:"zh-CN",
-                        name:"中文",
+                        name:"中国",
                         en_name:"Chinese",
                         country:"cn",
                     },
                     {
                         value:"zh-TW",
-                        name: "繁體中文",
+                        name: "中國(台灣)",
                         en_name:"Traditional Chinese",
                         country: "tw",
+                    },
+                    {
+                        value:"zh-HK",
+                        name: "中國(香港)",
+                        en_name:"Traditional Chinese",
+                        country: "hk",
                     },
                     {
                         value:"en",
@@ -1306,11 +1312,11 @@
     .flag.gy{
         height:12px;
         background-position:-2149px 0px
-    }
+    }*/
     .flag.hk{
         height:14px;
         background-position:-2171px 0px
-    }
+    }/*
     .flag.hm{
         height:10px;
         background-position:-2193px 0px

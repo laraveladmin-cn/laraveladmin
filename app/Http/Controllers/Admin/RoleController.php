@@ -141,7 +141,7 @@ class RoleController extends Controller
             $item = $this->bindModel->find($id);
             $res = $item->update($data);
             if ($res === false) {
-                return Response::returns(['alert' => alert(['message' => '修改失败!'], 500)]);
+                return Response::returns(['alert' => alert(['message' => trans('Modify the failure!')], 500)]);
             }
             //修改菜单-角色关系
             if($id!=1){
@@ -182,13 +182,13 @@ class RoleController extends Controller
             }
             $this->saveRelation($item,$data);
             $this->handlePostEdit($item,$data);
-            return Response::returns(['alert' => alert(['message' => '修改成功!'])]);
+            return Response::returns(['alert' => alert(['message' => trans('Modify the success!')])]);
         }
         $data['updated_at'] = date('Y-m-d H:i:s');
         //新增
         $item = $this->bindModel->create($data);
         if ($item === false) {
-            return Response::returns(['alert' => alert(['message' => '新增失败!'], 500)]);
+            return Response::returns(['alert' => alert(['message' => trans('Create a failure!')], 500)]);
         }
         //所有父节点添加对应权限
         Role::parents($item,true)->each(function($item)use($new_permissions){
@@ -198,7 +198,7 @@ class RoleController extends Controller
         });
         $this->saveRelation($item,$data);
         $this->handlePostEdit($item,$data);
-        return Response::returns(['alert' => alert(['message' => '新增成功!'])]);
+        return Response::returns(['alert' => alert(['message' => trans('Create a successful!')])]);
     }
 
     protected function handleDestroyReturn(&$data){

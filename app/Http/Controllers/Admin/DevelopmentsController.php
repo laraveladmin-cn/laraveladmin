@@ -75,12 +75,16 @@ class DevelopmentsController extends Controller
         $exitCode = Artisan::call($request->input('_exec'));
         if($exitCode){
             return Response::returns([
-                'alert' => alert(['message' => '执行失败!'],500),
+                'alert' => alert([
+                    'message' => trans("On failure!")//'执行失败!'
+                ],500),
                 'output'=>Artisan::output()
             ],500);
         }
         return Response::returns([
-            'alert' => alert(['message' => '执行成功!']),
+            'alert' => alert([
+                'message' => trans("Execute successfully!")//'执行成功!'
+        ]),
             'output'=>Artisan::output()
         ]);
     }
@@ -183,9 +187,13 @@ class DevelopmentsController extends Controller
         $content = preg_replace('/\s+<script>/', "\n<script>",trim($dom->outertext));
         $res = file_put_contents($path, $content );
         if($res===false){
-            return Response::returns(['alert' => alert(['message' => '代码写入文件失败!'])],500);
+            return Response::returns(['alert' => alert([
+                'message' =>trans("Code failed to write to file!") //'代码写入文件失败!'
+            ])],500);
         }
-        return Response::returns(['alert' => alert(['message' => '代码已更新成功!'])],200);
+        return Response::returns(['alert' => alert([
+            'message' => trans("The code has been updated successfully!")//'代码已更新成功!'
+        ])],200);
     }
 
     /**

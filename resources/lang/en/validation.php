@@ -116,6 +116,11 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'ckeck_password'       => ':attribute error。',
+    'mobile_phone'       => ':attribute error。',
+    'array_keys_in_array'  => 'The :attribute field does not exist in :other.',
+    'array_in_array'       => 'The :attribute field does not exist in :other.',
+    'sting_or_array'       => 'The :attribute field does not exist in :other.',
 
     /*
     |--------------------------------------------------------------------------
@@ -145,6 +150,41 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name'                  => 'name',
+        'username'              => 'user name',
+        'email'                 => 'email',
+        'first_name'            => 'first name',
+        'last_name'             => 'last name',
+        'password'              => 'password',
+        'password_confirmation' => 'password confirmation',
+        'city'                  => 'city',
+        'country'               => 'country',
+        'address'               => 'address',
+        'phone'                 => 'phone',
+        'mobile'                => 'mobile',
+        'age'                   => 'age',
+        'sex'                   => 'sex',
+        'gender'                => 'gender',
+        'day'                   => 'day',
+        'month'                 => 'month',
+        'year'                  => 'year',
+        'hour'                  => 'hour',
+        'minute'                => 'minute',
+        'second'                => 'second',
+        'title'                 => 'title',
+        'content'               => 'content',
+        'description'           => 'description',
+        'excerpt'               => 'excerpt',
+        'date'                  => 'date',
+        'time'                  => 'time',
+        'available'             => 'available',
+        'size'                  => 'size',
+        'mobile_phone'          =>'mobile phone',
+        'old_password'          =>'old password',
+        'file'                  =>'file',
+        'order'                 =>'order',
+        'where'                 =>'where',
+    ],
 
 ];

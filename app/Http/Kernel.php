@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\ActivatedMiddleware;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\LanguageMiddleware;
 use App\Http\Middleware\LogMiddleware;
 use App\Http\Middleware\ThrottleRequests;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -26,6 +27,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         EnsureFrontendRequestsAreStateful::class,
         //\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        LanguageMiddleware::class,
     ];
 
     /**

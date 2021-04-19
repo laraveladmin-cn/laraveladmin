@@ -81,7 +81,9 @@ trait ResourceController
         try {
             $data['row'] = $this->one($id);
         } catch (\Exception $exception) {
-            return Response::returns(['alert' => alert(['message' => '数据不存在!'], 404)], 404);
+            return Response::returns(['alert' => alert(['message' =>
+                trans('Data does not exist!')//'数据不存在!'
+            ], 404)], 404);
         }
         //关系数据处理
         collect($this->editFields)->map(function ($item, $key) use ($id, &$data) {
@@ -243,9 +245,13 @@ trait ResourceController
             $res = $this->bindModel->whereIn('id', $ids)->delete();
         }
         if ($res === false) {
-            return Response::returns(['alert' => alert(['message' => '删除失败!'], 500)], 500);
+            return Response::returns(['alert' => alert([
+                'message' => trans('Delete failed!')//'删除失败!'
+            ], 500)], 500);
         }
-        return Response::returns(['alert' => alert(['message' => '删除成功!'])]);
+        return Response::returns(['alert' => alert([
+            'message' => trans('Delete the success!')//'删除成功!'
+        ])]);
     }
 
     /**
@@ -258,7 +264,7 @@ trait ResourceController
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.') //提交数据无效
             ], 422);
         }
         $id = $request->get('id');
@@ -272,14 +278,18 @@ trait ResourceController
         //新增
         $item = $this->bindModel->create($data);
         if ($item === false) {
-            return Response::returns(['alert' => alert(['message' => '新增失败!'], 500)], 500);
+            return Response::returns(['alert' => alert([
+                'message' => trans('Create a failure!') //创建失败
+            ], 500)], 500);
         }
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data);
         $primaryKey = $this->newBindModel()->getKeyName()?:'id';
         return Response::returns([
             $primaryKey=>$item[$primaryKey],
-            'alert' => alert(['message' => '新增成功!'])
+            'alert' => alert([
+                'message' => trans('Creating a successful!') //创建成功
+            ])
         ], 201);
     }
 
@@ -294,7 +304,7 @@ trait ResourceController
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
         $id = $id ?: $request->get('id', 0);
@@ -306,15 +316,21 @@ trait ResourceController
         $data = $this->handlePostEditReturn($data);
         $item = $this->bindModel->find($id);
         if (!$item) {
-            return Response::returns(['alert' => alert(['message' => '数据不存在!'], 404)], 404);
+            return Response::returns(['alert' => alert([
+                'message' => trans('Data does not exist!')//'数据不存在!'
+            ], 404)], 404);
         }
         $res = $item->update($data);
         if ($res === false) {
-            return Response::returns(['alert' => alert(['message' => '修改失败!'], 500)], 500);
+            return Response::returns(['alert' => alert([
+                'message' => trans('Modify the failure!') //修改失败
+            ], 500)], 500);
         }
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data);
-        return Response::returns(['alert' => alert(['message' => '修改成功!'])]);
+        return Response::returns(['alert' => alert([
+            'message' => trans('Modify the success!') //修改成功
+        ])]);
     }
 
 

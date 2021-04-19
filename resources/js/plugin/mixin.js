@@ -99,6 +99,10 @@ export default {
             if(token){
                 config.headers.Authorization= decodeURIComponent(token);
             }
+            let language = localStorage.getItem('language');
+            if(language){
+                config.headers.Language= decodeURIComponent(language);
+            }
             config.paramsSerializer = function (params) {
                 params = JSON.parse(JSON.stringify(params));
                 params['json'] = 1;

@@ -133,7 +133,7 @@
                             this.submiting= false;
                             this.pushMessage({
                                 'showClose':true,
-                                'title':'操作成功!',
+                                'title':trans('The operation successful!'),
                                 'message':'',
                                 'type':'success',
                                 'position':'top',

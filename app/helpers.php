@@ -23,7 +23,7 @@ function alert($data = [], $status = 200)
     $defult = [
         200 => [
             'showClose' => true, //显示关闭按钮
-            'title' => '操作成功!', //消息内容
+            'title' => trans('The operation successful!'), //消息内容
             'message' => '', //消息内容
             'type' => 'success', //消息类型
             'position' => 'top',
@@ -34,7 +34,7 @@ function alert($data = [], $status = 200)
         ],
         'other' => [
             'showClose' => true, //显示关闭按钮
-            'title' => '操作失败!', //消息内容
+            'title' => trans('The operation failure!'), //消息内容
             'message' => '', //消息内容
             'type' => 'danger', //消息类型
             'position' => 'top',

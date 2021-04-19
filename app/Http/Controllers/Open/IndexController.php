@@ -57,6 +57,7 @@ class IndexController extends Controller
         $data['lifetime']= config('session.lifetime');
         $data['verify'] = config('laravel_admin.verify.type')=='captcha' ? $this->captcha() : $this->geetest(); //验证配置
         $data['client_id'] = ClientAuth::getClient();
+        $data['default_language'] = config('app.locale');
         $data['version'] = 'V1.0.0';
         $max_age = 3600*24;
         $response = Response::returns($data)

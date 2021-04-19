@@ -124,7 +124,7 @@ class ForgotPasswordController extends Controller
             ], 422);
         }
         if($user->update(['password'=> $request->input('password')])===false){
-            return Response::returns(['alert' => alert(['message' => '操作失败!'], 500)],500);
+            return Response::returns(['alert' => alert(['message' => trans('The operation failure!')], 500)],500);
         };
         return orRedirect('/open/login');
     }

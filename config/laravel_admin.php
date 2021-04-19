@@ -65,6 +65,6 @@ return [
         'get'
     ],
     'log_id_key'=>'_log_id',
-    'disabled_menus'=>env('DISABLED_MENUS', '')
+    'disabled_menus'=>env('DISABLED_MENUS', ''),
 
 ];

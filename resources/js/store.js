@@ -38,8 +38,13 @@ export default {
         //更新state状态
         set (state,payload) {
             state[payload.key] = payload[payload.key];
+        },
+        //设置语言
+        setLanguage(state,payload){
+            state['language'] = payload;
+            localStorage.setItem('language',payload);
+            setCookie('Language',payload,365*10);
         }
-
     },
     actions:{
         //刷新token
@@ -89,7 +94,7 @@ export default {
                 }).catch( (error)=> {
                 });
             }
-        }
+        },
 
     }
 };

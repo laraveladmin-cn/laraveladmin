@@ -142,7 +142,7 @@ class RegisterController extends Controller
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
         $data = $request->all();
@@ -155,7 +155,7 @@ class RegisterController extends Controller
             return $this->sendLoginResponse($request);
         }else{
             return Response::returns([
-                'alert' => alert(['message' => '注册成功!']),
+                'alert' => alert(['message' => trans('Registered successfully!')]),//注册成功
                 'redirect' => $this->redirectAfterLogout
             ],200);
         }
