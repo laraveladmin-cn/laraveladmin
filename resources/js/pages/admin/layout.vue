@@ -260,13 +260,13 @@
                 </div>
                 <footer class="main-footer">
                     <div class="pull-right hidden-xs">
-                        <b>系统版本：</b> {{version}}
+                        <b>{{$t('System version:')}}</b> {{version}}
                     </div>
                     <strong>Copyright &copy; 2020
                         <a target="_blank" href="http://www.laraveladmin.cn">Laravel Admin</a>
                     </strong>
                     <span v-if="icp">
-                         <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 备案号:{{icp}}
+                         <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> {{$t('The record number:')}}{{icp}}
                     </span>
                 </footer>
             </div>

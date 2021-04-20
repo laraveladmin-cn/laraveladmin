@@ -9,7 +9,7 @@
             </span>
                 <label class="control-label pull-right" v-show="errors.length>0">
                     <i class="fa fa-warning"></i>
-                    <span v-for="error in errors">{{error.replace('is not valid','不是有效的')}}</span>
+                    <span v-for="error in errors">{{error}}</span>
                 </label>
                 <div class="ignore-move-item-content">
                     <slot name="input-item">

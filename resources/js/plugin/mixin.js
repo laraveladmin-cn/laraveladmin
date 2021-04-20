@@ -1,4 +1,5 @@
 import { mapState, mapActions } from 'vuex';
+import config from '../config.js';
 export default {
     computed:{
         ...mapState([
@@ -22,6 +23,8 @@ export default {
         }
     },
     created(){
+        //默认语言包
+        this.$i18n.locale = config.language;
         //添加弹窗拦截器
         window.axios.interceptors.response.use((response)=>{
             //跳转

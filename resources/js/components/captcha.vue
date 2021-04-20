@@ -4,7 +4,12 @@
             <img :src="url+'&time='+time" @click="switchImg">
         </div>
         <div class="col-sm-6">
-            <input type="text" name="verify" v-model="captcha" @blur="$emit('blur')" class="form-control" placeholder="请输入验证码">
+            <input type="text"
+                   name="verify"
+                   v-model="captcha"
+                   @blur="$emit('blur')"
+                   class="form-control"
+                   :placeholder="$t('enter',{name:$t('captcha')})">
         </div>
     </div>
 </template>

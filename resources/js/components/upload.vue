@@ -127,7 +127,7 @@
                 let errors = JSON.parse(res.message);
                 this.pushMessage({
                     'showClose':true,
-                    'title':'上传失败!',
+                    'title':this.$t('{action} failed!',{action:this.$t('Upload')}),
                     'message':array_get(errors,'errors.file.0') || '',
                     'type':'danger',
                     'position':'top',

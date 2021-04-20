@@ -131,7 +131,7 @@
                                                 type="text"
                                                 v-model.trim="inputCommand"
                                                 class="form-control"
-                                                :placeholder="'请输入'">
+                                                :placeholder="$t('Please enter')">
                                             <div class="input-group-addon" v-clipboard:copy="inputCommand"  v-clipboard:success="onCopy" >
                                                 <i class="fa fa-copy"></i>
                                             </div>
@@ -276,7 +276,7 @@
             onCopy:  (e)=> {
                 $this.pushMessage({
                     'showClose':true,
-                    'title':e.text+' 命令复制成功!',
+                    'title':e.text+' '+this.$t('{action} successfully!',{action:this.$t('Command copy')}),
                     'message':'',
                     'type':'success',
                     'position':'top',

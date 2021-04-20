@@ -37,7 +37,7 @@
                   return  {
                       id: this.id || "editormd",
                       delay: 500,
-                      placeholder:'请输入',
+                      placeholder:'Please enter',
                       autoFocus : false,
                       //autoHeight : true,
                       width   : "100%",
@@ -130,6 +130,7 @@
                   if(typeof editormd=="function"){
                       clearInterval(this.intervalTime);
                       let options = copyObj(this.options);
+                      options.placeholder = this.$t(options.placeholder);
                       options.markdown = this.value || '';
                       options.readOnly = this.disabled;
                       options.imageUploadURL = this.use_url+ options.imageUploadURL;

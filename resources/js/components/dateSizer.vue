@@ -5,7 +5,7 @@
                             class="w-100"
                             :picker-options="{disabledDate:disabledDateStart}"
                             value-format="yyyy-MM-dd 00:00:00"
-                            placeholder="开始日期"
+                            :placeholder="$t('Start date')"
                             type="date"
                             :editable="false">
             </el-date-picker>
@@ -15,7 +15,7 @@
                             class="w-100"
                             :picker-options="{disabledDate:disabledDateEnd}"
                             value-format="yyyy-MM-dd 23:59:59"
-                            placeholder="结束日期"
+                            :placeholder="$t('End date')"
                             type="date"
                             :editable="false">
             </el-date-picker>

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use EasyWeChat\Kernel\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -22,15 +23,31 @@ class LanguageMiddleware{
     {
         $key = 'Language';
         $default = config('app.locale');
-        $language = $request->header($key,$request->cookie($key))?:collect(explode(',',$request->header('Accept-Language','')))
-            ->first();
+        $language = $request->header($key,$request->cookie($key))?:$this->preferredLanguage($request);
         $language = $language?:$default;
-        if(!in_array($language,config('app.locales'))){
-            $language = $default;
-        }
         app('translator')->setLocale($language);
         $response = $next($request);
         //后置操作
         return $response;
+    }
+
+    /**
+     * 客户端期望语言
+     * @param Request $request
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAcceptLanguage(Request $request){
+        return collect(explode(',',$request->header('Accept-Language','')))->map(function ($value){
+            return Arr::get(explode(';',$value),'0');
+        });
+    }
+
+    /**
+     * 首选语言
+     */
+    public function preferredLanguage(Request $request){
+        return $this->getAcceptLanguage($request)->first(function ($language){
+            return in_array($language,config('app.locales'));
+        });
     }
 }

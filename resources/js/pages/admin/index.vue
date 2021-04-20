@@ -11,7 +11,7 @@
                         <i class="fa" :class="item['icon']"></i>
                     </div>
                     <router-link :to="item['url']" class="small-box-footer">
-                        更多<i class="fa fa-arrow-circle-right"></i>
+                        {{$t('More')}} <i class="fa fa-arrow-circle-right"></i>
                     </router-link>
                 </div>
             </div>

@@ -133,7 +133,7 @@
                             this.submiting= false;
                             this.pushMessage({
                                 'showClose':true,
-                                'title':trans('The operation successful!'),
+                                'title':e.text+' '+this.$t('{action} successfully!',{action:this.$t('Operation')}),
                                 'message':'',
                                 'type':'success',
                                 'position':'top',

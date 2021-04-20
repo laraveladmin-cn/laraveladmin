@@ -6,7 +6,7 @@
                     <div class="flag" :class="country"></div>
                 </div>
                 <i class="fa fa-globe" v-else></i>
-                <span class="country-name">{{country_name || '语言选择'}}</span>
+                <span class="country-name">{{country_name || $t('Language')}}</span>
             </div>
             <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item :command="item.value" v-for="(item,index) in languages" v-bind:key="index">

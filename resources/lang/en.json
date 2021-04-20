@@ -218,5 +218,7 @@
     "The user name already exists!": "The user name already exists!",
     "E-mail is already in use!": "E-mail is already in use!",
     "Please activate it through the user's registered email!": "Please activate it through the user's registered email!",
-    "Unable to generate the request signature. Route unavailable.": "Unable to generate the request signature. Route unavailable."
+    "Unable to generate the request signature. Route unavailable.": "Unable to generate the request signature. Route unavailable.",
+    "Check that the user connected to the database has access to the schema database!": "Check that the user connected to the database has access to the schema database!",
+    "Failed to create :attribute database!": "Failed to create :attribute database!"
 }

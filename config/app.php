@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'zh-CN',
+    'locale' => env('APP_LOCALE','zh-CN'),
     'locales'=>['zh-CN','zh-TW','zh-HK','en'],
 
     /*

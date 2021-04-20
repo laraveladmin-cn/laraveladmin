@@ -3,7 +3,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    快速填写
+                    {{$t('Quickly fill in')}}
                 </h3>
             </div>
             <div class="box-body">

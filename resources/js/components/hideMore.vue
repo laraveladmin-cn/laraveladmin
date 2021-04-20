@@ -7,8 +7,8 @@
             </div>
         </div>
         <div class="box-footer text-center" v-show="tool">
-            <a href="javascript:void(0)" @click="showMore" class="uppercase" v-show="!show_more">显示全部</a>
-            <a href="javascript:void(0)" @click="showMore" class="uppercase" v-show="show_more">隐藏更多</a>
+            <a href="javascript:void(0)" @click="showMore" class="uppercase" v-show="!show_more">{{$t('Reveal all')}}</a>
+            <a href="javascript:void(0)" @click="showMore" class="uppercase" v-show="show_more">{{$t('Hidden more')}}</a>
         </div>
     </div>
 </template>

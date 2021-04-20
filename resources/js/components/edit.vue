@@ -7,11 +7,11 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="button" class="btn btn-primary pull-right" :disabled="!url"  @click="submitForm(invalid,validate)">提交</button>
+                    <button type="button" class="btn btn-primary pull-right" :disabled="!url"  @click="submitForm(invalid,validate)">{{$t('Submit')}}</button>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="button" class="btn btn-default pull-left" @click="resetForm">重置</button>
-                    <button type="button" class="btn btn-success pull-right" v-if="is_local" @click="saveLayout">保存布局</button>
+                    <button type="button" class="btn btn-default pull-left" @click="resetForm">{{$t('Reset')}}</button>
+                    <button type="button" class="btn btn-success pull-right" v-if="is_local" @click="saveLayout">{{$t('Save the layout')}}</button>
                 </div>
             </div>
         </validation-observer>
@@ -122,7 +122,7 @@
                         if(error.response && error.response.status==422){
                             this.pushMessage({
                                 'showClose':true,
-                                'title':'提交失败!',
+                                'title':this.$t('{action} failed!',{action:this.$t('Submission')}),
                                 'message':'',
                                 'type':'danger',
                                 'position':'top',
