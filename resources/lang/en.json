@@ -193,7 +193,7 @@
     "Registered successfully!": "Registered successfully!",
     "Import success!": "Import success!",
     "Parameter error!": "Parameter error!",
-    "Cannot be included in the path": "Cannot be included in the path",
+    "Cannot be included in the path": "The path cannot contain ':content'.",
     "Code file does not exist!": "Code file does not exist!",
     "File does not exist!": "File does not exist!",
     "You have no right to modify this role!": "You have no right to modify this role!",
@@ -220,5 +220,6 @@
     "Please activate it through the user's registered email!": "Please activate it through the user's registered email!",
     "Unable to generate the request signature. Route unavailable.": "Unable to generate the request signature. Route unavailable.",
     "Check that the user connected to the database has access to the schema database!": "Check that the user connected to the database has access to the schema database!",
-    "Failed to create :attribute database!": "Failed to create :attribute database!"
+    "Failed to create :attribute database!": "Failed to create :attribute database!",
+    "Superadministrator": "Superadministrator"
 }

@@ -21,7 +21,7 @@ class ActivatedMiddleware{
     {
         $user = Auth::user();
         if(User::where('id',$user['id'])->value('status')==0){
-            dd(trans('Please activate it through the user\'s registered email!'));
+            dd(trans('Please activate it through the user\'s registered email!'));//请使用用户注册的邮箱进行激活！
         }
         $response = $next($request);
         //后置操作

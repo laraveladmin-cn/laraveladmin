@@ -139,7 +139,7 @@ class DevelopmentsController extends Controller
         $errors = [];
         $path = resource_path('js'.$data['path']);
         if(str_contains($data['path'],'..')){
-            $errors[] = trans('Cannot be included in the path').'".."';
+            $errors[] = trans('Cannot be included in the path',['content'=>'..']);
         }elseif(!file_exists($path)){
             $errors[] = trans('Code file does not exist!');//'代码文件不存在!';
         }

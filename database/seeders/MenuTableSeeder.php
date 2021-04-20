@@ -141,7 +141,9 @@ class MenuTableSeeder extends Seeder
         $hash = md5(config('app.env').$routes_json.$disabled_menus);
         //判断菜单是否改变
         if($hash==Cache::get($this->cache_key, '') && config('app.env')!='local'){
-            $this->command->line('菜单未改变!');
+            $this->command->line(
+                trans('Menu unchanged!')//'菜单未改变!'
+            );
             return true;
         }
         //初始化数据表
