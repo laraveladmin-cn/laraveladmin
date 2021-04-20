@@ -64,7 +64,7 @@ class IndexController extends Controller
         }
         $file = storage_path('/logs/'.$file);
         if(!file_exists($file)){
-            return '文件不存在';
+            return trans('File does not exist!');
         }
         return response()->download($file);
     }

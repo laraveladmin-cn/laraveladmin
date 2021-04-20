@@ -32,7 +32,9 @@ class UploadController extends Controller
         $path = $map['base_path'].date($map['path']);
         $path_file = Storage::disk($disk)->putFile($path,$file);
         if(!$path_file){
-            return Response::returns(['alert' => alert(['message' => '上传失败!','success'=>0], 500)],500);
+            return Response::returns(['alert' => alert([
+                'message' => trans('Upload failed!'),
+                'success'=>0], 500)],500);
         };
         return Response::returns([
             'url'=>Storage::disk($disk)->url($path_file),
@@ -40,7 +42,7 @@ class UploadController extends Controller
             'save_name'=>basename($path_file),
             'state'=>'SUCCESS',
             'success'=>1,
-            'message'=>'成功'
+            'message'=>trans("Uploaded successfully!")
         ]);
 
     }

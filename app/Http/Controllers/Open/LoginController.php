@@ -117,7 +117,9 @@ class LoginController extends Controller
                 $ouser = collect(Socialite::driver($type)->user());
             }
         }catch (\Exception $exception){
-            throw ValidationException::withMessages(['username'=>['三方登录授权失败']]);
+            throw ValidationException::withMessages(['username'=>[
+                trans('Tripartite login authorization failed!')//'三方登录授权失败'
+            ]]);
         };
         //三方登录类型
         $ouser_type = Ouser::getFieldsMap('type')->flip()->get($type,0);
@@ -192,23 +194,18 @@ class LoginController extends Controller
         $login_num++;
         $this->setLoginFailedNum($login_num);
         $validator = Validator::make($request->all(), $validate, [
-            $uname . '.required' => '请填写用户名',
-            $uname . '.exists' => '用户名或密码错误',
-            'password.required' => '请填写密码',
-            'verify.required' => '验证码必填',
-            'verify.geetest' => '验证码验证失败',
-            'verify.captcha' => '验证码验证失败'
-        ], [
-            'verify' => '验证码'
+            $uname . '.exists' => trans('Incorrect user name or password!')//'用户名或密码错误',
         ]);
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
             if(!isset($errors['verify']) && $this->mustVerify()){
-                $errors['verify'] = ['验证码必填'];
+                $errors['verify'] = [
+                    trans('Captcha code required!')//'验证码必填'
+                ];
             }
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
     }
@@ -371,7 +368,9 @@ class LoginController extends Controller
             $this->username() => [trans('auth.failed')],
         ];
         if($this->mustVerify()){
-            $data['verify'] = ['验证码必填'];
+            $data['verify'] = [
+                trans('Captcha code required!')//'验证码必填'
+            ];
         }
         throw ValidationException::withMessages($data);
     }

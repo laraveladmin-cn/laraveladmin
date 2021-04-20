@@ -140,11 +140,11 @@
                                     </li>
                                 </ul>
                             </li>
-                            <!--<li>
+                            <li>
                                 <a>
-                                    <language></language>
+                                    <language :value="language" @change="setLanguage"></language>
                                 </a>
-                            </li>-->
+                            </li>
                             <li>
                                 <a data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                             </li>
@@ -260,13 +260,13 @@
                 </div>
                 <footer class="main-footer">
                     <div class="pull-right hidden-xs">
-                        <b>系统版本：</b> {{version}}
+                        <b>{{$t('System version:')}}</b> {{version}}
                     </div>
                     <strong>Copyright &copy; 2020
                         <a target="_blank" href="http://www.laraveladmin.cn">Laravel Admin</a>
                     </strong>
                     <span v-if="icp">
-                         <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 备案号:{{icp}}
+                         <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> {{$t('The record number:')}}{{icp}}
                     </span>
                 </footer>
             </div>
@@ -429,7 +429,8 @@
                 keywords:'',
                 timer:null,
                 skin:localStorage.getItem('skin') || 'skin-blue',
-                skins: [{
+                skins: [
+                    {
                     "name": "Blue",
                     "class": "skin-blue",
                     "background1": "#367fa9",
@@ -539,6 +540,7 @@
             }),
             ...mapMutations({
                 menuSet:'menu/set',  //设置当前路由,用于菜单选中
+                setLanguage:'setLanguage',
             }),
             search(){
                 this.menuSet({
@@ -591,7 +593,8 @@
                 'name_short',
                 'version',
                 'icp',
-                'alerts'
+                'alerts',
+                'language'
             ]),
             ...mapState('menu',{
                 menus:state => state.menus,

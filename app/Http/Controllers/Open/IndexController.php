@@ -57,6 +57,7 @@ class IndexController extends Controller
         $data['lifetime']= config('session.lifetime');
         $data['verify'] = config('laravel_admin.verify.type')=='captcha' ? $this->captcha() : $this->geetest(); //验证配置
         $data['client_id'] = ClientAuth::getClient();
+        $data['default_language'] = app('translator')->getLocale();
         $data['version'] = 'V1.0.0';
         $max_age = 3600*24;
         $response = Response::returns($data)
@@ -86,7 +87,7 @@ class IndexController extends Controller
             'type'=>'geetest',
             'dataUrl'=>config('geetest.url'),
             'data'=>[
-                'client_fail_alert'=>config('geetest.client_fail_alert', '验证失败!'),
+                'client_fail_alert'=>config('geetest.client_fail_alert',trans('Validation fails!')),
                 'lang'=>config('geetest.lang', 'zh-cn'),
                 'product'=>'float',
                 'http'=>'http://'

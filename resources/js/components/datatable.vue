@@ -18,21 +18,21 @@
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
                             <slot name="add" :url="data.configUrl['createUrl']?data.configUrl['createUrl']+'/0':''">
                                 <router-link :to="data.configUrl['createUrl']+'/0'" class="btn btn-info" v-if="data.configUrl['createUrl']">
-                                    <i class="fa fa-plus"></i> 新建
+                                    <i class="fa fa-plus"></i> {{$t("New")}}
                                 </router-link>
                             </slot>
                             <slot name="refresh">
                                 <button class="btn btn-success"
                                         type="button"
                                         @click="refresh">
-                                    <i class="fa fa-refresh"></i> 刷新
+                                    <i class="fa fa-refresh"></i> {{$t("Refresh")}}
                                 </button>
                             </slot>
                             <button class="btn btn-danger"
                                     type="button"
                                     @click="remove(check_ids)"
                                     v-show="checkbox && data.configUrl['deleteUrl']">
-                                <i class="fa fa-trash-o"></i> 删除选中
+                                <i class="fa fa-trash-o"></i> {{$t("Delete selected")}}
                             </button>
                             <button class="btn btn-primary"
                                     type="button"
@@ -42,7 +42,7 @@
                                     :data-target="'#'+id+' .sizer_more'"
                                     aria-expanded="false">
                                 <i class="fa" :class="sizer_more?'fa-angle-double-up':'fa-angle-double-down'"></i>
-                                更多筛选
+                                {{$t("More screening")}}
                             </button>
                             <button class="btn btn-warning"
                                     type="button"
@@ -52,11 +52,11 @@
                                     :data-target="'#'+id+' .export_excel'"
                                     aria-expanded="false">
                                 <i class="fa" :class="show_export_fields?'fa-angle-double-up':'fa-angle-double-down'"></i>
-                                导出字段
+                                {{$t("Export fields")}}
                             </button>
-                            <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                            <button type="button" :title="$t('Import data')" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                 <i class="fa fa-folder-open-o"></i>
-                                批量导入
+                                {{$t("Bulk import")}}
                                 <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
                             </button>
                             <slot name="add_btn"></slot>
@@ -73,20 +73,20 @@
                                                 <li v-for="(value,index) in data.keywordsMap" @click="changeKeywords(index)"><a>{{value}}</a></li>
                                             </ul>
                                         </div>
-                                        <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" placeholder="请输入关键字" class="form-control"  type="text">
-                                    <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="options.keywordPlaceholder || '请输入关键字'" type="text" class="form-control">
+                                        <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="$t('Please enter keywords')" class="form-control"  type="text">
+                                    <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="options.keywordPlaceholder || $t('Please enter keywords')" type="text" class="form-control">
                                     <div class="input-group-btn">
-                                        <button type="button" title="搜索" class="btn btn-primary" @click="search">
+                                        <button type="button" :title="$t('Search')" class="btn btn-primary" @click="search">
                                             <i class="fa fa-search"></i>
                                         </button>
-                                        <button type="button" title="重置" class="btn btn-primary " @click="reset">
+                                        <button type="button" :title="$t('Reset')" class="btn btn-primary " @click="reset">
                                             <i class="fa fa-repeat"></i>
                                         </button>
                                       <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                             <i class="glyphicon glyphicon-folder-open"></i>
                                             <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
                                         </button>-->
-                                       <button type="button" title="导出数据" class="btn btn-primary" @click="download" v-if="data.configUrl['exportUrl']">
+                                       <button type="button" :title="$t('Export data')" class="btn btn-primary" @click="download" v-if="data.configUrl['exportUrl']">
                                             <i class="glyphicon glyphicon-download-alt"></i>
                                         </button>
                                         <slot name="input_group_add_btn" :data="data"></slot>
@@ -108,10 +108,10 @@
                     </slot>
                     <div class="row" v-show="btnSizerMore">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <button type="button" class="btn btn-primary pull-right sizer-tool-btn" @click="search">搜索</button>
+                            <button type="button" class="btn btn-primary pull-right sizer-tool-btn" @click="search">{{$t('Search')}}</button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
-                            <button type="button" class="btn btn-default sizer-tool-btn" @click="reset">重置</button>
+                            <button type="button" class="btn btn-default sizer-tool-btn" @click="reset">{{$t('Reset')}}</button>
                         </div>
                     </div>
                 </div>
@@ -121,20 +121,20 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <span class="count m-top">
-                                共 {{data | array_get('list.total',0)}} 条，
+                                {{$t('Article {number}',{number:array_get(data,'list.total',0)})}}，
                                 <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page+''">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
-                                条/页
+                                {{$t('article')}}/{{$t('page')}}
                             </span>
-                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
+                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;{{$t('Skip to')}}&nbsp;&nbsp;
                                 <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
-                                &nbsp;&nbsp;页
+                                &nbsp;&nbsp;{{$t('page')}}
                             </span>
                             <ul class="pagination pagination-sm no-margin pull-right m-top">
                                 <li :class="{ disabled: data.list['current_page']<=1 }">
                                     <a aria-label="Previous" @click="toPage(data.list['current_page']-1)">
-                                        <span aria-hidden="true">上一页</span>
+                                        <span aria-hidden="true">{{$t('Previous')}}</span>
                                     </a>
                                 </li>
                                 <li v-show="data.list['current_page']>(pageLength+1)">
@@ -154,7 +154,7 @@
                                 </li>
                                 <li :class="{ disabled: data.list['current_page']==data.list['last_page'] }">
                                     <a aria-label="Next" @click="toPage(data.list['current_page']+1)">
-                                        <span aria-hidden="true">下一页</span>
+                                        <span aria-hidden="true">{{$t('Next')}}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -175,7 +175,7 @@
                                     <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
                                         {{field['name']}}
                                     </th>
-                                    <th class="operate" v-if="operation">操作</th>
+                                    <th class="operate" v-if="operation">{{$t('Operation')}}</th>
                                 </tr>
                             </slot>
                         </thead>
@@ -237,10 +237,10 @@
                                 </td>
                                 <td class="operate" v-if="operation">
                                     <slot name="col-operation" :data="data" :row="row" :remove="remove">
-                                        <button v-show="data.configUrl['deleteUrl']" title="删除选中" type="button" class="btn btn-danger btn-xs" @click="remove([row[options.primaryKey]])">
+                                        <button v-show="data.configUrl['deleteUrl']" :title="$t('Delete selected')" type="button" class="btn btn-danger btn-xs" @click="remove([row[options.primaryKey]])">
                                             <i class="fa fa-trash-o"></i>
                                         </button>
-                                        <router-link class="btn btn-info btn-xs" title="编辑"  :to="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])" v-if="data.configUrl['showUrl']">
+                                        <router-link class="btn btn-info btn-xs" :title="$t('Edit')"  :to="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])" v-if="data.configUrl['showUrl']">
                                             <i class="fa fa-edit"></i>
                                         </router-link>
                                     </slot>
@@ -248,7 +248,7 @@
                             </tr>
                             <tr v-show="is_empty">
                                 <td :colspan="col_num" class="empty">
-                                    暂无数据
+                                    {{$t('Temporarily no data')}}
                                 </td>
                             </tr>
                         </tbody>
@@ -258,7 +258,7 @@
                                     <div class="fa">
                                         <i class="fa fa-refresh fa-spin"></i>
                                         <div class="explain">
-                                            加载中...
+                                            {{$t('Loading')}}...
                                         </div>
                                     </div>
                                 </td>
@@ -271,20 +271,21 @@
                 <slot name="pager" :data="data">
                     <div class="row">
                         <div class="col-lg-12">
-                            <span class="count m-top">共 {{data | array_get('list.total',0)}} 条，
+                            <span class="count m-top">
+                                {{$t('Article {number}',{number:array_get(data,'list.total',0)})}}，
                                 <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page+''">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
-                                条/页
+                                {{$t('article')}}/{{$t('page')}}
                             </span>
-                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
-                                 <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
-                                &nbsp;&nbsp;页
+                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;{{$t('Skip to')}}&nbsp;&nbsp;
+                                <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
+                                &nbsp;&nbsp;{{$t('page')}}
                             </span>
                             <ul class="pagination pagination-sm no-margin pull-right m-top">
                                 <li :class="{ disabled: data.list['current_page']<=1 }">
                                     <a aria-label="Previous" @click="toPage(data.list['current_page']-1)">
-                                        <span aria-hidden="true">上一页</span>
+                                        <span aria-hidden="true">{{$t('Previous')}}</span>
                                     </a>
                                 </li>
                                 <li v-show="data.list['current_page']>(pageLength+1)">
@@ -296,7 +297,7 @@
                                 <li class="active">
                                     <a>{{data.list['current_page'] || 1}}</a>
                                 </li>
-                               <li v-for="v in pageLength" v-show="data.list['current_page']+v<=data.list['last_page']">
+                                <li v-for="v in pageLength" v-show="data.list['current_page']+v<=data.list['last_page']">
                                     <a @click="toPage(data.list['current_page']+v)">{{data.list['current_page']+v}}</a>
                                 </li>
                                 <li v-show="data.list['current_page']+pageLength<data.list['last_page']">
@@ -304,7 +305,7 @@
                                 </li>
                                 <li :class="{ disabled: data.list['current_page']==data.list['last_page'] }">
                                     <a aria-label="Next" @click="toPage(data.list['current_page']+1)">
-                                        <span aria-hidden="true">下一页</span>
+                                        <span aria-hidden="true">{{$t('Next')}}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -496,8 +497,8 @@
                 this.set({
                     key:'modal',
                     modal:{
-                        title:'提示',
-                        content: '您确定要删除吗?',
+                        title:this.$t('Prompt'),
+                        content: this.$t('Are you sure you want to delete it?'),
                         callback:()=>{
                             axios.delete(this.use_url+this.data.configUrl['deleteUrl'], {data:{ids: ids}}).then((response)=>{
                                 this.refresh();
@@ -507,7 +508,7 @@
                             }).catch((error)=>{
                                 this.pushMessage({
                                     'showClose':true,
-                                    'title':'删除失败!',
+                                    'title':this.$t('{action} failed!',{action:this.$t('Delete')}),
                                     'message':'',
                                     'type':'danger',
                                     'position':'top',

@@ -11,6 +11,7 @@ import Vuex from 'vuex'; //数据存储插件
 Vue.use(Vuex);
 import VueClipboard from 'vue-clipboard2';//复制到粘贴板组件
 Vue.use(VueClipboard);
+import i18n from './i18n' //语言插件
 import './plugin/index.js'; //自定义插件
 //路由注册
 import routes from './routes.js';
@@ -30,6 +31,7 @@ const store = new Vuex.Store(storeData);
  */
 const app = new Vue({
     mixins: [mixin],
+    i18n,
     router,
     store
 }).$mount('#app');

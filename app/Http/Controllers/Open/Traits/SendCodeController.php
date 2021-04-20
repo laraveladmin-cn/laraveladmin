@@ -112,7 +112,7 @@ trait SendCodeController
         $email = $request->input($this->email_key);
         $user = User::where('email',$email)->first();
         $code = $this->getCode($request,$email);
-        return new SendMessage('找回密码','emails.forgot_password',['user'=>$user, 'code'=>$code]);
+        return new SendMessage(trans('Retrieve password'),'emails.forgot_password',['user'=>$user, 'code'=>$code]);
     }
 
     /**
@@ -126,12 +126,14 @@ trait SendCodeController
         if($uname){
             $email = User::where('uname',$email)->value('email');
             if(!$email){
-                throw ValidationException::withMessages(['username'=>['电子邮箱未设置']]);
+                throw ValidationException::withMessages(['username'=>[
+                    trans('The email address is not set!')//'电子邮箱未设置'
+                ]]);
             }
         }
         Mail::to($email)->queue($this->getSendMessage($request)->onQueue('send_message'));
         return Response::returns([
-            'title' => '邮件正在发送...',
+            'title' => trans('Email is being sent...'),//'邮件正在发送...',
             'countdown' => config($this->forbidden)
         ]);
     }
@@ -153,7 +155,7 @@ trait SendCodeController
         $job = (new SendSms($sms))->onQueue('send_message');
         $this->dispatch($job);
         return Response::returns([
-            'title' => '短信正在发送...',
+            'title' => trans('Text is being sent...'),//'短信正在发送...',
             'countdown' => config($this->forbidden)
         ]);
     }
@@ -173,38 +175,32 @@ trait SendCodeController
         $now = time();
         if (count(Arr::get($codes, 'values',[])) >= config($this->refuse_num, 1) && Arr::get($codes,'time') + config($this->refuse_time) > $now) {
             return Response::returns([
-                'message' => '拒绝发送'.Arr::get($this->map,$type),
+                'message' => $type=='email'?trans('Refuse to send email!'):trans('Refusing to send text messages!'),//'拒绝发送'.Arr::get($this->map,$type),
                 'errors' => [
-                    $type.'_code' => ['你操作太频繁,请稍后再试']
+                    $type.'_code' => [
+                            trans('You are operating too often. Please try again later!')//'你操作太频繁,请稍后再试'
+                    ]
                 ]
             ], 422);
         }
         //正在发送短信验证码
         if ($codes && $codes['time'] + config($this->forbidden) > $now) {
             return Response::returns([
-                'title' => Arr::get($this->map,$type).'正在发送...',
+                'title' => $type=='email'?trans('Email is being sent...'):trans('Text is being sent...'),
                 'countdown' => $codes['time'] + config($this->forbidden) - $now
             ]);
         }
 
         //验证
         $validator = Validator::make($request->all(), $validate, [
-            'verify.required' => '验证码必填',
-            'verify.geetest' => '验证码验证失败',
-            'verify.captcha' => '验证码验证失败',
-            'email.exists'=>'邮箱地址错误',
-            'mobile_phone.exists'=>'手机号码错误',
-            'mobile_phone.mobile_phone' => '请正确填写手机号',
-            'mobile_phone.unique' => '该手机号已经注册过了'
-        ], [
-            'verify' => '验证码',
-            'uname'=>'用户名',
-            'mobile_phone'=>'手机号码'
+            'email.exists'=>trans('Email address error!'),//'邮箱地址错误',
+            'mobile_phone.exists'=>trans('Wrong phone number!'),//'手机号码错误',
+            'mobile_phone.unique' => trans('The phone number has already been registered!')//该手机号已经注册过了
         ]);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
 

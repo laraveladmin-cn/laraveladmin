@@ -242,7 +242,7 @@ class MenuController extends Controller
         });
         //更新路由数据
         RouteService::upRouteJson();
-        return Response::returns(['alert' => alert(['message' => '修改成功!'])]);
+        return Response::returns(['alert' => alert(['message' => trans('Modify the success!')])]);
     }
 
 

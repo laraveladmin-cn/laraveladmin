@@ -6,7 +6,7 @@
                     <div class="flag" :class="country"></div>
                 </div>
                 <i class="fa fa-globe" v-else></i>
-                <span class="country-name">{{country_name || '语言选择'}}</span>
+                <span class="country-name">{{country_name || $t('Language')}}</span>
             </div>
             <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item :command="item.value" v-for="(item,index) in languages" v-bind:key="index">
@@ -41,20 +41,26 @@
                 languages:[
                     {
                         value:"zh-CN",
-                        name:"中文",
-                        en_name:"Chinese",
+                        name:"中国",
+                        en_name:"China",
                         country:"cn",
                     },
                     {
                         value:"zh-TW",
-                        name: "繁體中文",
-                        en_name:"Traditional Chinese",
+                        name: "中國(台灣)",
+                        en_name:"China (Taiwan)",
                         country: "tw",
+                    },
+                    {
+                        value:"zh-HK",
+                        name: "中國(香港)",
+                        en_name:"China (Hong Kong)",
+                        country: "hk",
                     },
                     {
                         value:"en",
                         name:"English",
-                        en_name:"",
+                        en_name:"Britain",
                         country:"gb",
                     }
                 ],
@@ -1306,11 +1312,11 @@
     .flag.gy{
         height:12px;
         background-position:-2149px 0px
-    }
+    }*/
     .flag.hk{
         height:14px;
         background-position:-2171px 0px
-    }
+    }/*
     .flag.hm{
         height:10px;
         background-position:-2193px 0px

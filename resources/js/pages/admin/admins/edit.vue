@@ -2,7 +2,7 @@
     <div class="admin_user_edit">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">快速填写</h3>
+                <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
             </div>
             <div class="box-body">
                 <edit :options="options" ref="edit">

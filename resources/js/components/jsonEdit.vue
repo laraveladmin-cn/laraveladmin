@@ -8,7 +8,7 @@
                     rows="14"
                     :disabled="disabled"
                     @blur="$emit('blur')"
-                    :placeholder="placeholder">
+                    :placeholder="$t(placeholder)">
                 </textarea>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -30,7 +30,7 @@
             placeholder:{
                 type:[String],
                 default: function () {
-                    return '请输入';
+                    return 'Please enter';
                 }
             },
             value:{

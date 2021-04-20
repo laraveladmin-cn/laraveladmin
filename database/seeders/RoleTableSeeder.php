@@ -17,8 +17,8 @@ class RoleTableSeeder extends Seeder
         DB::table('roles')->truncate(); //角色表
         //ID:1
         Role::create([
-            'name'=>'超级管理员',
-            'description' => 'Admin(拥有所有操作权限)'
+            'name'=>trans('Superadministrator'), //超级管理员
+            'description' => trans('Have all operation permissions.') //拥有所有操作权限。
         ]);
     }
 }

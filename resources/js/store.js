@@ -4,7 +4,8 @@ import user from './store/user.js';
 import notification from './store/menu.js';
 import excel from './store/excel.js';
 import config from './config.js';
-
+import i18n from './i18n' //语言插件
+import { localeChanged } from 'vee-validate';
 export default {
     modules:{
         menu:menu,
@@ -38,8 +39,15 @@ export default {
         //更新state状态
         set (state,payload) {
             state[payload.key] = payload[payload.key];
+        },
+        //设置语言
+        setLanguage(state,payload){
+            state['language'] = payload;
+            localStorage.setItem('language',payload);
+            setCookie('Language',payload,365*10);
+            i18n.locale = payload;
+            localeChanged();
         }
-
     },
     actions:{
         //刷新token
@@ -89,7 +97,7 @@ export default {
                 }).catch( (error)=> {
                 });
             }
-        }
+        },
 
     }
 };

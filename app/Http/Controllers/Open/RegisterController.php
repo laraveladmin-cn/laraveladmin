@@ -80,7 +80,7 @@ class RegisterController extends Controller
 
     protected function getSendMessage($request){
         $code = $this->getCode($request,$request->input($this->email_key));
-        return new SendMessage('用户注册','emails.register',['code'=>$code]);
+        return new SendMessage(trans('User registration'),'emails.register',['code'=>$code]);
     }
 
 
@@ -108,16 +108,8 @@ class RegisterController extends Controller
             $validate['verify'] = 'required|'.config($this->verify_type); //验证码
         }
         return Validator::make($request->all(), $validator, [
-            'username.unique' => '用户名已存在',
-            'email.unique' => '电子邮箱已被使用了',
-            'mobile_phone.mobile_phone' => '请正确填写手机号',
-            'verify.geetest' => '验证码验证失败',
-            'verify.captcha' => '验证码验证失败'
-        ], [
-            'uname' => '用户名',
-            'email' => '电子邮箱',
-            'mobile_phone' => '手机号',
-            'verify'=>'验证码'
+            'username.unique' => trans('The user name already exists!'),//'用户名已存在',
+            'email.unique' => trans('E-mail is already in use!'),//'电子邮箱已被使用了',
         ]);
     }
 
@@ -137,12 +129,12 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [
             'message_code' => 'required|send_code:'.$model.','.config($this->send_code_key)
         ], [
-            'message_code.send_code' => $model_name.'验证码验证失败'
-        ], ['message_code' => $model_name.'验证码']);
+            'message_code.send_code' => $model_name=='邮箱'?trans('Email verification code verification failed!'):trans('SMS verification code verification failed!')
+        ]);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
         $data = $request->all();
@@ -155,7 +147,7 @@ class RegisterController extends Controller
             return $this->sendLoginResponse($request);
         }else{
             return Response::returns([
-                'alert' => alert(['message' => '注册成功!']),
+                'alert' => alert(['message' => trans('Registered successfully!')]),//注册成功
                 'redirect' => $this->redirectAfterLogout
             ],200);
         }
