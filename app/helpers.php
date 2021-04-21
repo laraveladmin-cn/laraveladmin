@@ -308,7 +308,29 @@ if (! function_exists('menv')) {
         return is_null($value) ? value($default) : $value;
     }
 }
-
+if (! function_exists('trans_path')) {
+    /**
+     * Translate the given message.
+     *
+     * @param  string|null  $key
+     * @param  array  $replace
+     * @param  string|null  $locale
+     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+     */
+    function trans_path($key = null,$path='', $replace = [], $locale = null)
+    {
+        $prefix = '';
+        if($path && !is_null($key)){
+            $prefix = $path.'.';
+            $key = $prefix.$key;
+        }
+        $res = trans($key,$replace,$locale);
+        if($prefix && !is_null($key) && \Illuminate\Support\Str::startsWith($res,$prefix)){
+            return \Illuminate\Support\Str::replaceFirst($prefix,'',$res);
+        }
+        return $res;
+    }
+}
 
 
 

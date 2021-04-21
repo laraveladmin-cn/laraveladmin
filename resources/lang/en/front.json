@@ -68,11 +68,12 @@
     "Temporarily no data": "Temporarily no data",
     "article": "article",
     "page": "page",
-    "Article {number}": "Article {number}",
+    "Article {number}": "no items | {number} item | A total of {number} items,",
     "Please enter keywords": "Please enter keywords",
     "Loading": "Loading",
     "Import data": "Import data",
-    "Skip to": "Skip to",
+    "Skip to": "Jump to page",
+    "page(jump)": "",
     "Edit": "Edit",
     "The record number:": "The record number:",
     "Language": "Language",
@@ -90,6 +91,7 @@
     "Loading CAPTCHA": "Loading CAPTCHA",
     "Reveal all": "Reveal all",
     "Hidden more": "Hidden more",
-    "Please enter": "Please enter"
+    "Please enter": "Please enter",
+    "{number} items per page": "no items | {number} item per page | {number} items per page"
 
 }

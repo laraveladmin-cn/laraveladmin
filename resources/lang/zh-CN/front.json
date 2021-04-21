@@ -49,7 +49,10 @@
                 "username":"用户昵称"
             },
             "developments_index": {
-                "Console commands": "控制台命令"
+                "Console commands": "控制台命令",
+                "Menu routing": "菜单路由",
+                "Plug-in installation":"插件安装",
+                "Relevant documentation": "相关文档"
 
             }
         }
@@ -100,11 +103,12 @@
     "Temporarily no data": "暂无数据",
     "article": "条",
     "page": "页",
-    "Article {number}": "共 {number} 条",
+    "Article {number}": "共 {number} 条，",
     "Please enter keywords": "请输入关键字",
     "Loading": "加载中",
     "Import data": "导入数据",
     "Skip to": "跳至",
+    "page(jump)": "页",
     "Edit": "编辑",
     "The record number:": "备案号：",
     "Language": "语言",
@@ -140,6 +144,7 @@
     "Please select the file": "请选择文件",
     "The upload component failed to get toke, the file will not be uploaded!": "上传组件获取toke失败,将无法上传文件！",
     "Close": "关闭",
-    "Confirm": "确认"
+    "Confirm": "确认",
+    "{number} items per page": "条每页。"
 
 }

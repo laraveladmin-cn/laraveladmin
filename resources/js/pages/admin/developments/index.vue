@@ -4,16 +4,16 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs ui-sortable-handle">
                     <li class="active">
-                        <a href="#console" data-toggle="tab" @click="switchTag(0)">控制台命令</a>
+                        <a href="#console" data-toggle="tab" @click="switchTag(0)">{{$tp('Console commands')}}</a>
                     </li>
                     <li>
-                        <a href="#menus" data-toggle="tab" @click="switchTag(1)">菜单路由</a>
+                        <a href="#menus" data-toggle="tab" @click="switchTag(1)">{{$tp('Menu routing')}}</a>
                     </li>
                     <li>
-                        <a href="#plug_in" data-toggle="tab" @click="switchTag(2)">插件安装</a>
+                        <a href="#plug_in" data-toggle="tab" @click="switchTag(2)">{{$tp('Plug-in installation')}}</a>
                     </li>
                     <li>
-                        <a href="#docs" data-toggle="tab" @click="switchTag(3)">相关文档</a>
+                        <a href="#docs" data-toggle="tab" @click="switchTag(3)">{{$tp('Relevant documentation')}}</a>
                     </li>
                 </ul>
                 <div class="tab-content">
