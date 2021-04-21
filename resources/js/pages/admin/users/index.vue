@@ -69,6 +69,7 @@
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                "{lang_path}":'admin.users',
                 modal:false,
                 edit_url:'',
                 options:{
@@ -79,7 +80,9 @@
                     btnSizerMore:true, //更多筛选条件按钮
                     keywordKey:'name|uname|mobile_phone|email', //关键字查询key
                     keywordGroup:false, //是否为选项组
-                    keywordPlaceholder:'请输入用户昵称',
+                    keywordPlaceholder:()=>{
+                        return this.$t('enter',{name:this.$tp('username')});
+                    },
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     fields: {

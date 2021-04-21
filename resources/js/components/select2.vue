@@ -1,7 +1,7 @@
 <template>
     <span class="main-select2" :class="{'placeholder-show':placeholder_show}">
         <select class="form-control" :disabled="disabled" :multiple="multiple" style="width: 100%;">
-            <option v-if="!multiple && placeholder" :value="placeholderValue" :selected="placeholderValue===value?'selected':null">{{placeholderShow}}</option>
+            <option v-if="!multiple && placeholder" :value="placeholderValue" :selected="placeholderValue===value?'selected':null">{{_placeholder}}</option>
             <option v-for="option in options" :value="option['id']" :selected="selected(option['id'])">
                 {{option['text']}}
             </option>
@@ -89,9 +89,9 @@
                 }
             },
             placeholderShow:{
-                type:[String],
+                type:[String,Function],
                 default: function () {
-                    return '请选择';
+                    return 'Please select';
                 }
             },
             disabled:{
@@ -153,6 +153,12 @@
             },
             placeholder_show(){
                 return !this.multiple && this.placeholder && this.value===this.placeholderValue;
+            },
+            _placeholder(){
+                if(typeof this.placeholderShow=="function"){
+                    return this.placeholderShow();
+                }
+                return this.$t(this.placeholderShow);
             }
         },
         methods:{
@@ -166,7 +172,7 @@
                 }
                 if(this.isAjax){
                     $(this.$el).find('select').select2({
-                        placeholder:$this.placeholderShow,
+                        placeholder:$this._placeholder,
                         maximumSelectionLength: 10,
                         minimumResultsForSearch:9,
                         language: "zh-CN",
@@ -222,7 +228,7 @@
                                 if(typeof data['current_page']=='undefined' || !data['current_page'] || data.current_page<=1){
                                     data.data.unshift({
                                         'id':$this.placeholderValue,
-                                        'text':$this.placeholderShow
+                                        'text':$this._placeholder
                                     });
                                 }
 
@@ -290,7 +296,7 @@
                     $select.val(this.placeholderValue);
                     setTimeout(()=>{
                         let $input = $(this.$el).find('.select2-selection--multiple .select2-search__field');
-                        $input.attr('placeholder',this.placeholderShow);
+                        $input.attr('placeholder',this._placeholder);
                         $input.css({
                             "width":"100%"
                         });
@@ -317,7 +323,7 @@
                         $this.$emit('blur');
                     });
                     let $input = $(this.$el).find('.select2-selection--multiple .select2-search__field');
-                    $input.attr('placeholder',this.placeholderShow);
+                    $input.attr('placeholder',this._placeholder);
                     $input.css({
                         "width":"100%"
                     });

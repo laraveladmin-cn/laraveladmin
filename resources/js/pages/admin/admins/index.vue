@@ -5,7 +5,7 @@
                 <data-table class="box box-primary" :options="options">
                     <template slot="col-operation" slot-scope="props">
                         <button v-show="props.data.configUrl['deleteUrl']"
-                                title="删除选中"
+                                :title="$t('Delete selected')"
                                 type="button"
                                 class="btn btn-danger btn-xs"
                                 :disabled="props.row[options.primaryKey]==1"
@@ -13,7 +13,7 @@
                             <i class="fa fa-trash-o"></i>
                         </button>
                         <router-link class="btn btn-info btn-xs"
-                                     title="编辑"
+                                     :title="$t('Edit')"
                                      :to="props.data.configUrl['showUrl'].replace('{id}',props.row[options.primaryKey])"
                                      v-if="props.data.configUrl['showUrl']">
                             <i class="fa fa-edit"></i>
@@ -52,7 +52,9 @@
                     btnSizerMore:false, //更多筛选条件按钮
                     keywordKey:'user.name|user.uname', //关键字查询key
                     keywordGroup:true, //是否为选项组
-                    keywordPlaceholder:'请输入名称',
+                    keywordPlaceholder:()=>{
+                        return this.$t('enter',{name:this.$t('name')});
+                    },//'请输入名称',
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     fields: {

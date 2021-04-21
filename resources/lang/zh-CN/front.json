@@ -39,6 +39,42 @@
             "qq": "QQ号码"
         }
     },
+    "pages": {
+        "admin": {
+            "Total number of back-end administrators": "后台管理员数",
+            "Total number of roles": "角色总数",
+            "Total number of users": "用户数",
+            "Total number of menus": "菜单总数",
+            "users": {
+                "username":"用户昵称"
+            }
+        }
+    },
+    "tables": {
+        "users": {
+            "fields": {
+                "uname" : "用户名",
+                "name" : "昵称",
+                "avatar" : "头像",
+                "email" : "电子邮箱",
+                "mobile_phone" : "手机号码",
+                "remember_token" : "记住登录",
+                "status" : "状态",
+                "description" : "备注",
+                "created_at" : "创建时间",
+                "updated_at" : "修改时间",
+                "deleted_at" : "删除时间",
+                "id" : "ID"
+            },
+            "maps":{
+                "status": [
+                    "注销",
+                    "有效",
+                    "停用"
+                ]
+            }
+        }
+    },
     "New": "新建",
     "Refresh": "刷新",
     "Delete selected": "删除选中",
@@ -82,5 +118,24 @@
     "Loading CAPTCHA": "正在加载验证码",
     "Reveal all": "显示全部",
     "Hidden more": "隐藏更多",
-    "Please enter": "请输入"
+    "Please enter": "请输入",
+    "Prompt message": "提示信息",
+    "name": "名称",
+    "Import of XLSX format files is only supported": "仅支持导入xlsx格式文件",
+    "Please check the field you want to export to export correctly.": "请勾选要导出的字段，才能正确导出。",
+    "Are you sure you want to import all the data in bulk?": "您确定要批量导入所有数据吗？",
+    "Error uploading file!": "上传文件出错！",
+    "Please complete the verification code correctly.":"请正确完成验证码操作。",
+    "Select the file": "选择文件",
+    "Reselect": "重新选择",
+    "Pause uploading": "暂停上传",
+    "Keep uploading": "继续上传",
+    "Upload completed": "上传完成",
+    "Start uploading": "开始上传",
+    "Please select": "请选择",
+    "Please select the file": "请选择文件",
+    "The upload component failed to get toke, the file will not be uploaded!": "上传组件获取toke失败,将无法上传文件！",
+    "Close": "关闭",
+    "Confirm": "确认"
+
 }

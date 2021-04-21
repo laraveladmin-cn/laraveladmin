@@ -53,7 +53,7 @@ export default Plugin = {
             }).catch((error) => {
                 this.loading = false;
             });
-        }
+        };
         Vue.prototype.toUrl = function(url,event){
             if(!url){
                 return
@@ -77,7 +77,25 @@ export default Plugin = {
                     dd(error.message);
                 });
             }
-        }
+        };
+        //指定路径翻译
+        Object.defineProperty(Vue.prototype, '$tp', {
+            get: function get () {
+                let $this = this;
+                return function (key) {
+                    let prefix = '';
+                    if($this['{lang_path}']){
+                        prefix = $this['{lang_path}']+'.';
+                    }
+                    let k = 'pages.'+prefix+key;
+                    let res = $this.$t(k);
+                    if(res.indexOf('pages.'+prefix)==0){
+                        return key;
+                    }
+                    return res;
+                }
+            }
+        });
 
     }
 };

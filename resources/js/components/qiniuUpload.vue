@@ -2,11 +2,11 @@
     <div>
         <input v-show="false" type="file" @change="changeFile" />
         <button class="btn btn-block btn-primary btn-sm" style="width: 90px" onclick="return false;" :disabled="file.name && uping==1" @click="selectFile">
-            {{uping==0?'选择文件':'重新选择'}}
+            {{button_show}}
         </button>
         <div class="progress-group" v-show="file.name">
-            <a class="progress-text name" @click="up" v-if="file.name && uping!=1">{{uping==0?'开始上传':(uping==3?'上传完成':'继续上传')}}</a>
-            <a class="progress-text name" @click="cancelUp" v-else-if="file.name && uping==1">暂停上传</a>
+            <a class="progress-text name" @click="up" v-if="file.name && uping!=1">{{operation_show}}</a>
+            <a class="progress-text name" @click="cancelUp" v-else-if="file.name && uping==1">{{$t('Pause uploading')}}</a>
             <span class="progress-number">{{percents.total.toFixed(2)}}%</span>
             <span>{{file.name}}</span>
             <div class="progress sm">
@@ -81,6 +81,9 @@
             };
         },
         methods:{
+            ...mapActions({
+                pushMessage: 'pushMessage',
+            }),
             //获取token
             getToken(){
                 let $this = this;
@@ -93,7 +96,7 @@
                     }).catch(function (error) {
                         $this.$store.commit('alert', {
                             'showClose': true,
-                            'title': '上传组件获取toke失败,将无法上传文件!',
+                            'title': this.$t('The upload component failed to get toke, the file will not be uploaded!'), //'上传组件获取toke失败,将无法上传文件!',
                             'position': 'top',
                             'message': '',
                             'type': 'danger',
@@ -143,7 +146,7 @@
                 if(!this.uptoken){
                     $this.$store.commit('alert', {
                         'showClose': true,
-                        'title': '上传组件获取toke失败,将无法上传文件!',
+                        'title': this.$t('The upload component failed to get toke, the file will not be uploaded!'),//'上传组件获取toke失败,将无法上传文件!',
                         'position': 'top',
                         'message': '',
                         'type': 'danger',
@@ -155,7 +158,17 @@
                     return;
                 }
                 if(typeof this.file.name =="undefined"){
-                    alert('请选选择文件');
+                    $this.$store.commit('alert', {
+                        'showClose': true,
+                        'title': this.$t('Please select the file'),
+                        'position': 'top',
+                        'message': '',
+                        'type': 'danger',
+                        'iconClass': '',
+                        'customClass': '',
+                        'duration': 3000,
+                        'show': true
+                    });
                     return ;
                 }
                 if(this.uping!=1 && this.uping!=3){ //没有上传时
@@ -169,7 +182,18 @@
                         },
                         error(err){
                             //console.log(err);
-                            alert('上传出错');
+                            //alert('上传出错');
+                            $this.$store.commit('alert', {
+                                'showClose': true,
+                                'title': this.$t('{action} failed!',{action:this.$t('Upload')}),
+                                'position': 'top',
+                                'message': '',
+                                'type': 'danger',
+                                'iconClass': '',
+                                'customClass': '',
+                                'duration': 3000,
+                                'show': true
+                            });
                         },
                         complete(res){
                             //console.log(res);
@@ -197,6 +221,14 @@
         },
         mounted() {
             this.getToken();
+        },
+        computed:{
+            button_show(){
+                return this.uping==0?this.$t('Select the file'):this.$t('Reselect');//'选择文件':'重新选择';
+            },
+            operation_show(){
+                return this.uping==0?this.$t('Start uploading'):(this.uping==3?this.$t('Upload completed'):this.$t('Keep uploading'));//'开始上传':(this.uping==3?'上传完成':'继续上传')
+            }
         }
 
     }
