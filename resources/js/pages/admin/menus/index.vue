@@ -46,7 +46,7 @@
                             </template>
                             <template slot="col-operation" slot-scope="props">
                                 <button v-show="props.data.configUrl['deleteUrl']"
-                                        title="删除选中"
+                                        :title="$t('Delete selected')"
                                         type="button"
                                         class="btn btn-danger btn-xs"
                                         :disabled="props.row[options.primaryKey]==1"
@@ -54,7 +54,7 @@
                                     <i class="fa fa-trash-o"></i>
                                 </button>
                                 <button class="btn btn-info btn-xs"
-                                        title="编辑"
+                                        :title="$t('Edit')"
                                         @click="openModal(props.data.configUrl['showUrl'].replace('{id}',props.row[options.primaryKey]))"
                                         v-if="props.data.configUrl['showUrl']">
                                     <i class="fa fa-edit"></i>

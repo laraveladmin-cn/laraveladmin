@@ -166,7 +166,7 @@
                 <slot name="table" :data="data" :check_ids="check_ids" :remove="remove">
                     <table class="table table-hover table-bordered table-striped text-center dataTable">
                         <thead>
-                            <slot name="thead" :select-all="select_all" :operation="operation" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :show-fields="show_fields">
+                            <slot name="thead" :select-all="select_all" :operation="operation" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :order-by="orderBy" :show-fields="show_fields">
                                 <tr>
                                     <th class="id" v-if="checkbox">
                                        <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->

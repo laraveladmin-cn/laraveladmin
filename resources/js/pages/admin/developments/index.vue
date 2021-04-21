@@ -225,6 +225,7 @@
         },
         data() {
             return {
+                "{lang_path}":'admin.developments_index',
                 options: {
                     id: 'edit', //多个组件同时使用时唯一标识
                     url: '/admin/developments/index', //数据表请求数据地址
