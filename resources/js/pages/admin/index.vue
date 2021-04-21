@@ -5,7 +5,7 @@
                 <div class="small-box" :class="item['class']">
                     <div class="inner">
                         <h3>{{item['value']}}</h3>
-                        <p>{{item['name']}}</p>
+                        <p>{{$tp(item['name'])}}</p>
                     </div>
                     <div class="icon">
                         <i class="fa" :class="item['icon']"></i>
@@ -28,11 +28,15 @@
         data(){
             return {
                 data:{},
-                loading:false
+                loading:false,
+                "{lang_path}":'admin'
             }
         },
         created() {
             this.getData({},'','data');
+        },
+        methods:{
+
         }
     };
 </script>

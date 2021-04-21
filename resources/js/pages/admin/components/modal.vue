@@ -15,8 +15,8 @@
                         <p v-html="modal['content']"></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" @click="close">{{modal['cancelText'] || '关闭'}}</button>
-                        <button type="button" class="btn btn-primary" @click="affirm">{{modal['affirmText'] || '确定'}}</button>
+                        <button type="button" class="btn btn-default pull-left" @click="close">{{modal['cancelText'] || $t('Close')}}</button>
+                        <button type="button" class="btn btn-primary" @click="affirm">{{modal['affirmText'] || $t('Confirm')}}</button>
                     </div>
                 </div>
             </div>

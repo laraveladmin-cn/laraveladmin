@@ -39,6 +39,42 @@
             "qq": "QQ号码"
         }
     },
+    "pages": {
+        "admin": {
+            "Total number of back-end administrators": "后台管理员数",
+            "Total number of roles": "角色总数",
+            "Total number of users": "用户数",
+            "Total number of menus": "菜单总数",
+            "users": {
+                "username":"用户昵称"
+            }
+        }
+    },
+    "tables": {
+        "users": {
+            "fields": {
+                "uname" : "用户名",
+                "name" : "昵称",
+                "avatar" : "头像",
+                "email" : "电子邮箱",
+                "mobile_phone" : "手机号码",
+                "remember_token" : "记住登录",
+                "status" : "状态",
+                "description" : "备注",
+                "created_at" : "创建时间",
+                "updated_at" : "修改时间",
+                "deleted_at" : "删除时间",
+                "id" : "ID"
+            },
+            "maps":{
+                "status": [
+                    "注销",
+                    "有效",
+                    "停用"
+                ]
+            }
+        }
+    },
     "New": "新建",
     "Refresh": "刷新",
     "Delete selected": "删除选中",
@@ -98,6 +134,8 @@
     "Start uploading": "开始上传",
     "Please select": "请选择",
     "Please select the file": "请选择文件",
-    "The upload component failed to get toke, the file will not be uploaded!": "上传组件获取toke失败,将无法上传文件！"
+    "The upload component failed to get toke, the file will not be uploaded!": "上传组件获取toke失败,将无法上传文件！",
+    "Close": "关闭",
+    "Confirm": "确认"
 
 }

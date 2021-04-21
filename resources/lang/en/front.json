@@ -39,6 +39,14 @@
             "qq": "QQ account"
         }
     },
+    "pages": {
+        "admin_index": {
+            "Total number of back-end administrators": "Total number of back-end administrators",
+            "Total number of roles": "Total number of roles",
+            "Total number of users": "Total number of users",
+            "Total number of menus": "Total number of menus"
+        }
+    },
     "New": "New",
     "Refresh": "Refresh",
     "Delete selected": "Delete selected",

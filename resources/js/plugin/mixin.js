@@ -1,4 +1,4 @@
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions,mapMutations} from 'vuex';
 import config from '../config.js';
 export default {
     computed:{
@@ -15,6 +15,9 @@ export default {
             pushMessage: 'pushMessage',
             refreshClientId: 'refreshClientId',
         }),
+        ...mapMutations({
+            setLanguage:'setLanguage',
+        }),
         upCookie(){
             let authorization = getCookie('Authorization');
             if(authorization){
@@ -24,7 +27,7 @@ export default {
     },
     created(){
         //默认语言包
-        this.$i18n.locale = config.language;
+        this.setLanguage(config.language);
         //添加弹窗拦截器
         window.axios.interceptors.response.use((response)=>{
             //跳转
