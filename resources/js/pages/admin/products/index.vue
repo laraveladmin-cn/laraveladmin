@@ -25,7 +25,7 @@
                             <th class="operate" v-if="props.operation" rowspan="2">操作</th>
                         </tr>
                         <tr>
-                            <th v-for="(field,index) in props.showFields" :class="field['class']" @click="props.orderBy(index)"
+                            <th v-for="(field,index) in props.showFields" :class="field['class']" @click="props.orderByMethod(index)"
                                 v-if="index=='classify.name' || index=='classify2.name'">
                                 {{field['name']}}
                             </th>
