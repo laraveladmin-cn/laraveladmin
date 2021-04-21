@@ -73,8 +73,8 @@
                                                 <li v-for="(value,index) in data.keywordsMap" @click="changeKeywords(index)"><a>{{value}}</a></li>
                                             </ul>
                                         </div>
-                                        <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="$t('Please enter keywords')" class="form-control"  type="text">
-                                    <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="options.keywordPlaceholder || $t('Please enter keywords')" type="text" class="form-control">
+                                        <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="_placeholder" class="form-control"  type="text">
+                                    <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="_placeholder" type="text" class="form-control">
                                     <div class="input-group-btn">
                                         <button type="button" :title="$t('Search')" class="btn btn-primary" @click="search">
                                             <i class="fa fa-search"></i>
@@ -586,8 +586,8 @@
                     this.set({
                         key:'modal',
                         modal:{
-                            title:'提示',
-                            content: '请勾选要导出的字段,才能正确导出!'
+                            title:this.$t('Prompt'),//'提示',
+                            content: this.$t('Please check the field you want to export to export correctly.')//'请勾选要导出的字段,才能正确导出!'
                         }
                     });
                     return false;
@@ -614,8 +614,8 @@
                     this.set({
                         key:'modal',
                         modal:{
-                            title:'提示',
-                            content: '仅支持导入xlsx格式文件'
+                            title:this.$t('Prompt'), //提示
+                            content: this.$t('Import of XLSX format files is only supported')//'仅支持导入xlsx格式文件'
                         }
                     });
                     return;
@@ -623,8 +623,8 @@
                 this.set({
                     key:'modal',
                     modal:{
-                        title:'提示',
-                        content: '您确定要批量导入所有数据吗?',
+                        title:this.$t('Prompt'), //提示
+                        content: this.$t('Are you sure you want to import all the data in bulk?'), //'您确定要批量导入所有数据吗?',
                         callback:()=>{
                             $(this.$el).find('.import input:file').val('');
                             this.importData({
@@ -697,6 +697,12 @@
                 'use_url',
                 'statusClass'
             ]),
+            _placeholder(){
+                if(typeof this.options.keywordPlaceholder=="function"){
+                    return this.options.keywordPlaceholder();
+                }
+                return this.options.keywordPlaceholder || $t('Please enter keywords');
+            },
             //组件唯一标识
             id(){
                 return this.options.id || 'data-table';

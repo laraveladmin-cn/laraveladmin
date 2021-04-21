@@ -5,7 +5,7 @@
                 <label><span class="required" v-show="_required">*</span>{{options.name}}</label>
                 <span class="help-block title pull-right" v-show="options.title && !errors.length">
                 <i class="fa fa-info-circle"></i>
-                <span>{{options.title || '提示信息'}}</span>
+                <span>{{_title}}</span>
             </span>
                 <label class="control-label pull-right" v-show="errors.length>0">
                     <i class="fa fa-warning"></i>
@@ -20,7 +20,7 @@
                             @change="$emit('change',itemObj[_key])"
                             class="form-control"
                             :disabled="!datas.url || options.disabled"
-                            :placeholder="options.placeholder || '请输入'+options.name">
+                            :placeholder="_placeholder">
                         <input
                             v-else-if="options.type=='email'"
                             type="email"
@@ -28,7 +28,7 @@
                             @change="$emit('change',itemObj[_key])"
                             class="form-control"
                             :disabled="!datas.url || options.disabled"
-                            :placeholder="options.placeholder || '请输入'+options.name">
+                            :placeholder="_placeholder">
                         <textarea
                             v-else-if="options.type=='textarea'"
                             v-model="itemObj[_key]"
@@ -36,7 +36,7 @@
                             class="form-control"
                             rows="6"
                             :disabled="!datas.url || options.disabled"
-                            :placeholder="options.placeholder || '请输入'+options.name">
+                            :placeholder="_placeholder">
                     </textarea>
                         <select v-else-if="options.type=='select'"
                                 class="form-control"
@@ -71,7 +71,7 @@
                                 @change="$emit('change',itemObj[_key])"
                                 class="form-control"
                                 :disabled="!datas.url || options.disabled"
-                                :placeholder="options.placeholder || '请输入'+options.name">
+                                :placeholder="_placeholder">
                             <div class="input-group-addon">
                                 <i class="fa" :class="itemObj[_key]"></i>
                             </div>
@@ -83,7 +83,7 @@
                                 @change="$emit('change',itemObj[_key])"
                                 class="form-control"
                                 :disabled="!datas.url || options.disabled"
-                                :placeholder="options.placeholder || '请输入'+options.name">
+                                :placeholder="_placeholder">
                             <div class="input-group-addon">
                                 <a v-if="itemObj[_key]" :href="itemObj[_key]" target="_blank">
                                     <i class="fa fa-link"></i>
@@ -155,6 +155,15 @@
                     return this.options.required;
                 }
                return this.options.required || (this.options.rules || '').indexOf('required')!=-1
+            },
+            _placeholder(){
+                if(typeof this.options.placeholder=="function"){
+                    return this.options.placeholder();
+                }
+                return this.options.placeholder || this.$t('enter',{name:this.options.name});
+            },
+            _title(){
+                return this.options.title || this.$t('Prompt message');//'提示信息'
             }
         },
         watch:{
