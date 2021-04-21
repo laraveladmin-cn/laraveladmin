@@ -112,7 +112,11 @@ trait ResourceController
         $this->bindModel OR $this->bindModel();
         //搜集模型表内所有字段
         $model = $this->bindModel->getModel();
-        $allow_order = collect($this->bindModel->getFieldsName())->keys()->push($model->getKeyName());
+        $allow_order = collect($this->bindModel->getFieldsName())->keys();
+        if(!$allow_order->count()){
+            $allow_order = $allow_order->merge($this->bindModel->getFillables());
+        }
+        $allow_order = $allow_order->push($model->getKeyName()); //主键
         $class = get_class($model);
         if(isset($class::$isTreeModel)){
             $allow_order = $allow_order->merge(collect($this->bindModel->getTreeField())->values());
@@ -153,7 +157,7 @@ trait ResourceController
         $allow_order = $allow_order?':'.$allow_order:'';
         $validate_rules = [
             'where'=>'sometimes|nullable|array',
-            'order'=>['sometimes','nullable','array','array_keys_in_array'.$allow_order]
+            'order'=>'sometimes|nullable|array|array_keys_in_array'.$allow_order
         ];
         $order = Request::input('order',[]);
         if($order && is_array($order)){
@@ -184,6 +188,7 @@ trait ResourceController
             }
             return $item;
         })->toArray();
+
         $validator = Validator::make($data, $validate_rules);
         if ($validator->fails()) {
             throw ValidationException::withMessages($validator->errors()->toArray());
