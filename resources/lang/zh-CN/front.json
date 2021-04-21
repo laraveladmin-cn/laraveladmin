@@ -47,6 +47,10 @@
             "Total number of menus": "菜单总数",
             "users": {
                 "username":"用户昵称"
+            },
+            "developments_index": {
+                "Console commands": "控制台命令"
+
             }
         }
     },
