@@ -63,9 +63,12 @@
             },
             "menus": {
                 "Drag shift":"拖拽移位",
-                "Data list": "数据列表",
-                "(Request parameters)": "（请求参数）"
+                "Data list": "数据列表"
 
+
+            },
+            "logs": {
+                "(Request parameters)": "（请求参数）"
             },
             "layout": {
                 "Backend systems": "后台系统",
