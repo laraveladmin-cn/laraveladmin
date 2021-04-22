@@ -3,7 +3,7 @@
         <div class="register-box">
             <logo></logo>
             <div class="register-box-body">
-                <p class="login-box-msg">注册用户</p>
+                <p class="login-box-msg">{{$tp('Registered user')}}</p>
                 <validation-observer ref="register" v-slot="{invalid,validate}">
                     <form method="post">
                         <form-item v-model="username" :options="{key:'username',name:'账号',rules:'required|min:5|max:18',icon:'fa-user',placeholder:'请输入账号'}"></form-item>
@@ -48,9 +48,9 @@
                 </validation-observer>
                 <div class="social-auth-links row">
                     <router-link class="pull-left" to="/open/password">
-                        忘记密码
+                        {{$tp('Forget your password')}}
                     </router-link>
-                    <router-link class="pull-right" to="/open/login">直接登录</router-link>
+                    <router-link class="pull-right" to="/open/login">{{$tp('To log in')}}</router-link>
                 </div>
             </div>
             <icp></icp>
@@ -78,6 +78,7 @@
         },
         data(){
             return {
+                "{lang_path}":'open',
                 errors:{},
                 verifyCode:'',
                 username:'',

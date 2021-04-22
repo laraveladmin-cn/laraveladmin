@@ -3,7 +3,7 @@
         <div class="register-box">
             <logo></logo>
             <div class="register-box-body">
-                <p class="login-box-msg">忘记密码</p>
+                <p class="login-box-msg"> {{$tp('Forget your password')}}</p>
                 <validation-observer ref="password" v-slot="{invalid,validate}">
                     <form method="post">
                         <form-item v-model="username" :options="{key:'username',name:'账号',rules:'required|min:5|max:18',icon:'fa-user',placeholder:'请输入邮箱/手机号码/用户名'}"></form-item>
@@ -35,9 +35,9 @@
                 </validation-observer>
                 <div class="social-auth-links row">
                     <router-link class="pull-left" to="/open/register">
-                        用户注册
+                        {{$tp('Registered user')}}
                     </router-link>
-                    <router-link class="pull-right" to="/open/login">直接登录</router-link>
+                    <router-link class="pull-right" to="/open/login">{{$tp('To log in')}}</router-link>
                 </div>
             </div>
             <icp></icp>
@@ -63,6 +63,7 @@
         },
         data(){
             return {
+                "{lang_path}":'open',
                 username:'', //用户名
                 password:'', //密码
                 confirm_password:'', //确认密码

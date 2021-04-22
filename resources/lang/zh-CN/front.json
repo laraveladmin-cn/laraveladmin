@@ -29,7 +29,7 @@
             "size": "{_field_} 必须小于{size}KB",
             "double": "{_field_}字段必须为有效的小数",
             "mobile": "{_field_} 不格式正确",
-            "digits_between": "{_field_} 长度必须是介于{_min_}和{_max_}位之间。"
+            "digits_between": "{_field_} 长度必须是介于{_min_}和{_max_}位之间"
         },
         "attributes": {
             "mobile": "手机号码",
@@ -47,9 +47,19 @@
                 "Front desk home page": "前台首页"
             },
 
-            "register": {
-                "": "注册用户"
-            }
+            "Registered user": "注册用户",
+            "Forget your password": "忘记密码",
+            "To log in": "直接登录",
+            "Other login methods": "其它登录方式",
+            "Remember to log in": "记住登录",
+            "You do not have an account, jump to the registration page to register and bind": "您还没有账号,跳转到注册页面进行注册并绑定?",
+            "User login": "用户登录",
+            "User binding": "用户绑定",
+            "Log in": "登录中...",
+            "Please enter your account/email/mobile phone number": "请输入账号/邮箱/手机号码",
+            "Account": "账号",
+            "Password": "密码",
+            "{_field_} must be verified": "{_field_} 必须验证"
         },
         "home": {
             "index":{
@@ -254,8 +264,8 @@
     "Percentage of tasks": "任务百分比",
     "Progress": "进度",
     "Section": "栏目一 | 栏目二 | 栏目三 | 栏目四",
-    "Email": "电子邮箱"
-
-
-
+    "Email": "电子邮箱",
+    "Login":"登录",
+    "Register": "注册",
+    "password": "密码"
 }
