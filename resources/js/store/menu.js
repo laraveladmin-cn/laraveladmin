@@ -1,7 +1,6 @@
 //菜单数据存储
 //把返回的数据集转换成Tree
 import {retrieveColumnLayout} from "echarts/src/layout/barGrid";
-
 let list_to_tree = function(data, pk='id', pid = 'parent_id', child = 'childs'){
     // 删除 所有 children,以防止多次调用
     data.forEach(function (item) {
@@ -123,11 +122,11 @@ export default {
                 let last = collect(navbars).last() || {};
                 last.icons = 'fa-warning';
                 if(state.path.indexOf('500')!=-1){
-                    last.name = '500页面';
+                    last.name = '500 page';//'500页面';
                 }else if(state.path.indexOf('403')!=-1){
-                    last.name = '403页面';
+                    last.name = '403 page';//'403页面';
                 }else {
-                    last.name = '404页面';
+                    last.name = '404 page';//'404页面';
                 }
             }
             return navbars;

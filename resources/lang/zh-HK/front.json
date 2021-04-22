@@ -60,7 +60,7 @@
     "Temporarily no data": "戰無數據",
     "article": "條",
     "page": "頁",
-    "Article {number}": "共 {number} 條",
+    "Article {number}": "共 {number} 條，",
     "Please enter keywords": "請輸入關鍵字",
     "Loading": "加載中",
     "Import data": "導入數據",

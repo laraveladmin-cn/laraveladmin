@@ -31,20 +31,20 @@
                                     <span class="label label-success">1</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">你有1条消息</li>
+                                    <li class="header">{{$tp('You have {number} messages',1,{number:1})}}</li>
                                     <li>
                                         <ul class="menu">
                                             <li>
                                                 <a>
                                                     <div class="pull-left">
                                                         <img src="/dist/img/user2-160x160.jpg" class="img-circle"
-                                                             alt="用户头像">
+                                                             :alt="$tp('User avatars')">
                                                     </div>
                                                     <h4>
-                                                        系统
-                                                        <small><i class="fa fa-clock-o"></i> 5分钟前</small>
+                                                        {{$t('System')}}
+                                                        <small><i class="fa fa-clock-o"></i> 5 minutes ago</small>
                                                     </h4>
-                                                    <p>你好!</p>
+                                                    <p>{{$t('Hello')}}</p>
                                                 </a>
                                             </li>
                                         </ul>
@@ -58,12 +58,12 @@
                                     <span class="label label-warning">1</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">你有1个提醒</li>
+                                    <li class="header">{{$tp('You have {number} reminders',{number:1})}}</li>
                                     <li>
                                         <ul class="menu">
                                             <li>
                                                 <a>
-                                                    <i class="fa fa-users text-aqua"></i> 今天有5个用户加入
+                                                    <i class="fa fa-users text-aqua"></i> {{$tp('{number} users joined today',5,{number:5})}}
                                                 </a>
                                             </li>
                                         </ul>
@@ -77,20 +77,20 @@
                                     <span class="label label-danger">1</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">你有1个任务</li>
+                                    <li class="header">{{$tp('You have {number} tasks',{number:1})}}</li>
                                     <li>
                                         <ul class="menu">
                                             <li>
                                                 <a>
                                                     <h3>
-                                                        任务百分比
+                                                        {{$t('Percentage of tasks')}}
                                                         <small class="pull-right">20%</small>
                                                     </h3>
                                                     <div class="progress xs">
                                                         <div class="progress-bar progress-bar-aqua" style="width: 20%"
                                                              role="progressbar"
                                                              aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                            <span class="sr-only">完成 20%</span>
+                                                            <span class="sr-only">{{$t('Progress')}} 20%</span>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -105,28 +105,28 @@
                             </li>
                             <li class="dropdown user user-menu">
                                 <a class="dropdown-toggle" data-toggle="dropdown">
-                                    <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="user-image" alt="用户头像">
+                                    <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="user-image" :alt="$t('User avatars')">
                                     <span class="hidden-xs">{{user['name']}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="user-header">
-                                        <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" alt="用户头像">
+                                        <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" :alt="$t('User avatars')">
 
                                         <p>
                                             {{user['name']}} - {{roleName}}
-                                            <small>入职日期:2019-08-01</small>
+                                            <small>{{$tp('Date of entry : {date}',{date:'2019-08-01'})}}</small>
                                         </p>
                                     </li>
                                     <li class="user-body">
                                         <div class="row">
                                             <div class="col-xs-4 text-center">
-                                                <a>栏目一</a>
+                                                <a>{{$tc('Section',0)}}</a>
                                             </div>
                                             <div class="col-xs-4 text-center">
-                                                <a>栏目二</a>
+                                                <a>{{$tc('Section',1)}}</a>
                                             </div>
                                             <div class="col-xs-4 text-center">
-                                                <a>栏目三</a>
+                                                <a>{{$tc('Section',2)}}</a>
                                             </div>
                                         </div>
                                     </li>
@@ -158,7 +158,7 @@
                     <section class="sidebar">
                         <div class="user-panel">
                             <div class="pull-left image">
-                                <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" alt="用户图片">
+                                <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" :alt="$t('User avatars')">
                             </div>
                             <div class="pull-left info">
                                 <p>{{user['name']}}</p>
@@ -212,7 +212,7 @@
                             <div class="progress my-progress" :class="{active:(download_progress<100 && !download_pauseing)}" :style="{width:download_progress+'%'}">
                                 <div class="progress-bar progress-bar-striped my-progress-bar" role="progressbar" :aria-valuenow="download_progress" :aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                     <span v-show="download_progress<100">{{download_progress}}%</span>
-                                    <span v-show="download_progress>=100">{{$t('Has been completed.')}}</span>
+                                    <span v-show="download_progress>=100">{{$t('Has been completed')}}</span>
                                 </div>
                             </div>
                             <div class="pull-right progress-tool" v-show="downloading && download_progress<100" style="margin-right: 10px">
@@ -286,14 +286,14 @@
                 <div class="tab-content">
                     <!-- Home tab content -->
                     <div class="tab-pane active" id="control-sidebar-home-tab">
-                        <h3 class="control-sidebar-heading">最近活动</h3>
+                        <h3 class="control-sidebar-heading">{{$tp('Recent Activities')}}</h3>
                         <ul class="control-sidebar-menu">
                             <li>
                                 <a href="javascript:void(0)">
                                     <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
                                     <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">我的生日</h4>
+                                        <h4 class="control-sidebar-subheading">{{$tp('My birthday')}}</h4>
                                         <p>2019-01-01</p>
                                     </div>
                                 </a>
@@ -303,7 +303,7 @@
                                     <i class="menu-icon fa fa-user bg-yellow"></i>
 
                                     <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">你的生日</h4>
+                                        <h4 class="control-sidebar-subheading">{{$tp('Your birthday')}}</h4>
 
                                         <p>2019-01-01</p>
                                     </div>
@@ -314,7 +314,7 @@
                                     <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
 
                                     <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">活动一</h4>
+                                        <h4 class="control-sidebar-subheading">{{$t('Email')}}</h4>
 
                                         <p>nora@example.com</p>
                                     </div>
@@ -325,19 +325,19 @@
                                     <i class="menu-icon fa fa-file-code-o bg-green"></i>
 
                                     <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">活动二</h4>
+                                        <h4 class="control-sidebar-subheading">{{$tc('Section',0)}}</h4>
 
                                         <p>Execution time 5 seconds</p>
                                     </div>
                                 </a>
                             </li>
                         </ul>
-                        <h3 class="control-sidebar-heading">任务进度</h3>
+                        <h3 class="control-sidebar-heading">{{$t('Progress')}}</h3>
                         <ul class="control-sidebar-menu">
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        任务一
+                                        {{$tc('Section',0)}}
                                         <span class="label label-danger pull-right">70%</span>
                                     </h4>
 
@@ -349,7 +349,7 @@
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        任务二
+                                        {{$tc('Section',1)}}
                                         <span class="label label-success pull-right">95%</span>
                                     </h4>
 
@@ -361,7 +361,7 @@
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        任务三
+                                        {{$tc('Section',2)}}
                                         <span class="label label-warning pull-right">50%</span>
                                     </h4>
 
@@ -373,7 +373,7 @@
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        任务四
+                                        {{$tc('Section',3)}}
                                         <span class="label label-primary pull-right">68%</span>
                                     </h4>
 
@@ -398,7 +398,7 @@
                                         <span class="span4" :style="{background: item.background4}"></span>
                                     </div>
                                 </a>
-                                <p class="text-center no-margin">{{item.name}}</p>
+                                <p class="text-center no-margin">{{$tp(item.name)}}</p>
                             </li>
                         </ul>
                     </div>
@@ -439,7 +439,7 @@
                     "background3": "#222d32",
                     "background4": "#f4f5f7"
                 }, {
-                    "name": "Black",
+                    "name": "White",
                     "class": "skin-black",
                     "background1": "#fefefe",
                     "background2": " #fefefe",
@@ -481,7 +481,7 @@
                     "background3": "#f9fafc",
                     "background4": "#f4f5f7"
                 }, {
-                    "name": "Black Light",
+                    "name": "All White",
                     "class": "skin-black-light",
                     "background1": "#fefefe",
                     "background2": " #fefefe",
