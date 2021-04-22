@@ -1,8 +1,11 @@
 <template>
     <div class="admin_index">
-        后台主页
-        <router-link to="/admin">后台</router-link>
-        <router-link to="/">官网</router-link>
+        {{$tp('Front desk home page')}}
+        <br>
+        <router-link to="/admin">{{$tp('Backstage home page')}}</router-link>
+        <br>
+        <router-link to="/">{{$tp('Home page of official website')}}</router-link>
+        <br>
         {{user}}
 
     </div>
@@ -18,6 +21,11 @@
                 user:state => state.user,
                 loadingUser:state => state.loading
             }),
+        },
+        data(){
+            return {
+                "{lang_path}":'home.index',
+            };
         }
     };
 </script>

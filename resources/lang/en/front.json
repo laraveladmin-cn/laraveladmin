@@ -74,6 +74,18 @@
                 "Backend systems": "Systems",
                 "Toggle navigation": "Toggle navigation"
             }
+        },
+        "errors": {
+            "Page not found": "Oops! Page not found.",
+            "We could not find the page you were looking for Meanwhile, you may return to": "We could not find the page you were looking for. Meanwhile, you may return to ",
+            "dashboard": "Home",
+            "or try using the search form": " or try using the search form.",
+            "You have no access to this page": "You have no access to this page!",
+            "You do not have access to this page, please contact relevant personnel": "You do not have access to this page, please contact relevant personnel! Meanwhile, you may return to ",
+            "Please try again later, the system is under maintenance": "Please try again later, the system is under maintenance...",
+            "System maintenance": "System maintenance",
+            "Server internal error": "Oops! Server internal error.",
+            "Server internal error, please contact the developer for processing": "Server internal error, please contact the developer for processing! Meanwhile, you may return to "
         }
     },
     "New": "New",

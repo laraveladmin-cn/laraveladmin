@@ -1,8 +1,8 @@
 <template>
     <div class="open_index">
-        官网首页
-        <router-link to="/admin">后台</router-link>
-        <router-link to="/home">前台</router-link>
+        {{$tp('Home page of official website')}}
+        <router-link to="/admin">{{$tp('Backstage home page')}}</router-link>
+        <router-link to="/home">{{$tp('Front desk home page')}}</router-link>
     </div>
 </template>
 
@@ -10,5 +10,10 @@
     export default {
         props: {
         },
+        data(){
+            return {
+                "{lang_path}":'open.index',
+            };
+        }
     };
 </script>

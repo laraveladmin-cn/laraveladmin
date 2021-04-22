@@ -1,7 +1,7 @@
 <template>
     <p class="text-center icp" v-show="icp">
         <span class="wangjing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        备案号:{{icp}}
+        {{$t('The record number:')}}{{icp}}
     </p>
 </template>
 

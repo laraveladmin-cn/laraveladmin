@@ -11,7 +11,7 @@
                 </span>
             </label>
             <slot>
-                <input :type="options.type || 'text'" :name="options.key" v-model="data" class="form-control" :placeholder="options.placeholder || ''">
+                <input :type="options.type || 'text'" :name="options.key" v-model="data" class="form-control" :placeholder="_placeholder">
             </slot>
             <span class="form-control-feedback" :class="icon" v-if="icon"></span>
         </div>
@@ -49,8 +49,13 @@
                     return 'glyphicon '+this.options.icon;
                 }
                 return 'fa '+this.options.icon;
-            }
-
+            },
+            _placeholder(){
+                if(typeof this.options.placeholder=="function"){
+                    return this.options.placeholder();
+                }
+                return this.options.placeholder || this.$t('enter',{name:this.options.name});
+            },
         },
         data(){
             return {

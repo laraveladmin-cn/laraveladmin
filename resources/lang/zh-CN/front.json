@@ -40,6 +40,31 @@
         }
     },
     "pages": {
+        "open": {
+            "index": {
+                "Home page of official website": "官网首页",
+                "Backstage home page": "后台首页",
+                "Front desk home page": "前台首页"
+            },
+
+            "register": {
+                "": "注册用户"
+            }
+        },
+        "home": {
+            "index":{
+                "Home page of official website": "官网首页",
+                "Backstage home page": "后台首页",
+                "Front desk home page": "前台首页"
+            },
+            "layout": {
+                "Footer":"脚部",
+                "Header": "头部",
+                "Menu field": "菜单栏位",
+                "Home page of official website": "官网首页"
+
+            }
+        },
         "admin": {
             "Total number of back-end administrators": "后台管理员数",
             "Total number of roles": "角色总数",
@@ -76,6 +101,18 @@
                 "Theme": "主题",
                 "Personal center": "个人中心"
             }
+        },
+        "errors": {
+            "Page not found": "出错了！页面不存在。",
+            "We could not find the page you were looking for Meanwhile, you may return to": "没有找到你想要的页面，你可以点击",
+            "dashboard": "首页",
+            "or try using the search form": "返回，或者使用搜索框。",
+            "You have no access to this page": "该页面你无权访问！",
+            "You do not have access to this page, please contact relevant personnel": "该页面你无权访问，请联系相关人员！你可以点击",
+            "Please try again later, the system is under maintenance": "请稍后再试，系统正在维护中。。。",
+            "System maintenance": "系统维护",
+            "Server internal error": "出错了! 服务器内部错误",
+            "Server internal error, please contact the developer for processing": "服务器内部错误，请联系开发人员进行处理！你可以点击"
         }
     },
     "tables": {
