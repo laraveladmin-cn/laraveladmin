@@ -28,7 +28,7 @@
                                         class="btn btn-primary btn-block btn-flat"
                                         :disabled="logining"
                                         @click="postLogin(invalid,validate)">
-                                    {{logining?$tp('Log in'):$t('Login')}}
+                                    {{logining?$tp('Loading in'):$t('Login')}}
                                 </button>
                             </div>
                         </div>

@@ -55,11 +55,36 @@
             "You do not have an account, jump to the registration page to register and bind": "您还没有账号,跳转到注册页面进行注册并绑定?",
             "User login": "用户登录",
             "User binding": "用户绑定",
-            "Log in": "登录中...",
+            "Loading in": "登录中...",
             "Please enter your account/email/mobile phone number": "请输入账号/邮箱/手机号码",
             "Account": "账号",
             "Password": "密码",
-            "{_field_} must be verified": "{_field_} 必须验证"
+            "{_field_} must be verified": "{_field_} 必须验证",
+            "Reset password": "重置密码",
+            "Resetting":"重置中…",
+            "Get the verification code": "获取验证码",
+            "Getting": "获取中...",
+            "Enter the received message verification code": "输入收到的消息验证码",
+            "seconds": "秒",
+            "new password": "新密码",
+            "confirm the new password": "确认新密码",
+            "Please enter a new password": "请输入新密码",
+            "Please enter to confirm your new password": "请输入确认新密码",
+            "Message authentication code": "消息验证码",
+            "Please fill in the verification code": "请填写验证码",
+            "The verification code is being sent": "验证码正在发送中…",
+            "Captcha validation failed": "验证码验证失败",
+            "Registration is underway": "注册中…",
+            "I have read and agree": "我已经阅读并同意",
+            "Protocol": "协议",
+            "protocol": "协议",
+            "Confirm password": "确认密码",
+            "Please reconfirm your password": "请再次确认密码",
+            "Please enter your password": "请输入密码",
+            "Enter the CAPTCHA you received": "输入收到的验证码",
+            "Please enter your mobile phone number": "请输入手机号码",
+            "Please enter email address": "请输入邮箱地址"
+
         },
         "home": {
             "index":{
@@ -267,5 +292,7 @@
     "Email": "电子邮箱",
     "Login":"登录",
     "Register": "注册",
-    "password": "密码"
+    "password": "密码",
+    "Password":"密码",
+    "Mobile phone number": "手机号码"
 }

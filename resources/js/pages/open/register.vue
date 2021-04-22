@@ -6,40 +6,40 @@
                 <p class="login-box-msg">{{$tp('Registered user')}}</p>
                 <validation-observer ref="register" v-slot="{invalid,validate}">
                     <form method="post">
-                        <form-item v-model="username" :options="{key:'username',name:'账号',rules:'required|min:5|max:18',icon:'fa-user',placeholder:'请输入账号'}"></form-item>
-                        <form-item v-model="email" :options="{key:'email',name:'邮箱',type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:'请输入邮箱地址'}"></form-item>
-                        <form-item v-model="mobile_phone" :options="{key:'mobile_phone',name:'手机号码',rules:email?'':'required|mobile',icon:'glyphicon-phone',placeholder:'请输入手机号码'}"></form-item>
-                        <form-item v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:'验证码',rules:'',label:false}">
+                        <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18',icon:'fa-user',placeholder:placeholderUsername}"></form-item>
+                        <form-item v-model="email" :options="{key:'email',name:$t('Email'),type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:$tp('Please enter email address')}"></form-item>
+                        <form-item v-model="mobile_phone" :options="{key:'mobile_phone',name:$t('Mobile phone number'),rules:email?'':'required|mobile',icon:'glyphicon-phone',placeholder:$tp('Please enter your mobile phone number')}"></form-item>
+                        <form-item v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'',label:false}">
                             <geetest style="width: 150px"  v-if="verify['type']=='geetest'" :url="web_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></geetest>
                             <captcha v-if="verify['type']=='captcha'" :url="verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></captcha>
                         </form-item>
-                        <form-item v-model="message_code" :options="{key:'message_code',name:'消息验证码',rules:'required|length:6|integer',icon:'glyphicon-envelope',placeholder:'输入收到的消息验证码'}">
+                        <form-item v-model="message_code" :options="{key:'message_code',name:$tp('Message authentication code'),rules:'required|length:6|integer',icon:'glyphicon-envelope',placeholder:$tp('Enter the received message verification code')}">
                             <label class="control-label pull-right" v-show="count_down>0">
-                                <span><span class="count-down">{{count_down}}</span>秒</span>
+                                <span><span class="count-down">{{count_down}}</span>{{$tp('seconds')}}</span>
                             </label>
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-primary btn-block btn-flat" :disabled="sendActive" @click="send">
-                                        {{sending?'获取中...':'获取验证码'}}
+                                        {{sending?$tp('Getting'):$tp('Get the verification code')}}
                                     </button>
                                 </div>
-                                <input type="text" v-model="message_code" class="form-control" placeholder="输入收到的验证码">
+                                <input type="text" v-model="message_code" class="form-control" :placeholder="$tp('Enter the CAPTCHA you received')">
                             </div>
                         </form-item>
-                        <form-item v-model="password" :options="{key:'password',type:'password',name:'密码',rules:'required|min:6|max:18',icon:'glyphicon-lock',placeholder:'请输入密码'}"></form-item>
-                        <form-item v-model="confirm_password" :options="{key:'confirm_password',type:'password',name:'确认密码',rules:'required|confirmed:password',icon:'glyphicon-log-in',placeholder:'请再次确认密码'}"></form-item>
-                        <form-item v-model="agree" :options="{key:'agree',name:'协议',rules:'required',label:false,messages:false}">
+                        <form-item v-model="password" :options="{key:'password',type:'password',name:$t('Password'),rules:'required|min:6|max:18',icon:'glyphicon-lock',placeholder:$tp('Please enter your password')}"></form-item>
+                        <form-item v-model="confirm_password" :options="{key:'confirm_password',type:'password',name:$tp('Confirm password'),rules:'required|confirmed:password',icon:'glyphicon-log-in',placeholder:$tp('Please reconfirm your password')}"></form-item>
+                        <form-item v-model="agree" :options="{key:'agree',name:$tp('protocol'),rules:'required',label:false,messages:false}">
                             <div class="social-auth-links row" :class="{'has-error':errors.length}">
                                 <div class="col-xs-8 row-col">
                                     <icheck v-model="agree" :option="true">
                                     <span class="checkbox-label">
-                                         我已经阅读并同意《<a href="#">协议</a>》
+                                         {{$tp('I have read and agree')}}《<a href="#">{{$tp('Protocol')}}</a>》
                                     </span>
                                     </icheck>
                                 </div>
                                 <div class="col-xs-4 row-col btn-register">
                                     <button type="button" class="btn btn-primary btn-block btn-flat" :disabled="loading" @click="postRegister(invalid,validate)">
-                                        {{loading?'注册中...':'注册'}}
+                                        {{loading?$tp('Registration is underway'):$t('Register')}}
                                     </button>
                                 </div>
                             </div>
@@ -96,6 +96,12 @@
             }
         },
         methods:{
+            placeholderUsername(){
+                return this.$tp('Please enter your account/email/mobile phone number');
+            },
+            placeholderPassword(){
+                return this.$t('enter',{name:this.$t('password')});
+            },
             //提交注册
             postRegister(invalid,validate){
                 let callback = ()=>{
@@ -104,7 +110,10 @@
                     }
                     let errors;
                     if (!this.message_code) {
-                        errors = {'message_code':['验证码验证失败']};
+                        errors = {'message_code':[
+                            this.$tp('Captcha validation failed')
+                            //'验证码验证失败'
+                            ]};
                         this.validation.setErrors(errors);
                         return false;
                     }
@@ -140,12 +149,18 @@
             send(){
                 let errors;
                 if (this.sending || this.count_down>0) {
-                    errors = {'message_code':['验证码正在发送...']};
+                    errors = {'message_code':[
+                            this.$tp('The verification code is being sent"')
+                        //'验证码正在发送...'
+                        ]};
                     this.validation.setErrors(errors);
                     return false;
                 }
                 if (!this.verifyCode) {
-                    errors = {'verify':['验证码验证失败']};
+                    errors = {'verify':[
+                            this.$tp('Captcha validation failed')
+                        //'验证码验证失败'
+                        ]};
                     this.validation.setErrors(errors);
                     return false;
                 }
