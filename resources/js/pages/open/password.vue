@@ -3,41 +3,41 @@
         <div class="register-box">
             <logo></logo>
             <div class="register-box-body">
-                <p class="login-box-msg">忘记密码</p>
+                <p class="login-box-msg"> {{$tp('Forget your password')}}</p>
                 <validation-observer ref="password" v-slot="{invalid,validate}">
                     <form method="post">
-                        <form-item v-model="username" :options="{key:'username',name:'账号',rules:'required|min:5|max:18',icon:'fa-user',placeholder:'请输入邮箱/手机号码/用户名'}"></form-item>
-                        <form-item  v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:'验证码',rules:'',label:false}">
+                        <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18',icon:'fa-user',placeholder:$tp('Please enter your account/email/mobile phone number')}"></form-item>
+                        <form-item  v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'',label:false}">
                             <geetest style="width: 150px"  v-if="verify['type']=='geetest'" :url="use_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></geetest>
                             <captcha v-if="verify['type']=='captcha'" :url="verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></captcha>
                         </form-item>
-                        <form-item v-model="message_code" :options="{key:'message_code',name:'消息验证码',rules:'required|length:6|integer',icon:'glyphicon-envelope',placeholder:'输入收到的消息验证码'}">
+                        <form-item v-model="message_code" :options="{key:'message_code',name:$tp('Message authentication code'),rules:'required|length:6|integer',icon:'glyphicon-envelope',placeholder:$tp('Enter the received message verification code')}">
                             <label class="control-label pull-right" v-show="count_down>0">
-                                <span><span class="count-down">{{count_down}}</span>秒</span>
+                                <span><span class="count-down">{{count_down}}</span>{{$tp('seconds')}}</span>
                             </label>
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-primary btn-block btn-flat" :disabled="sendActive" @click="send">
-                                        {{sending?'获取中...':'获取验证码'}}
+                                        {{sending?$tp('Getting'):$tp('Get the verification code')}}
                                     </button>
                                 </div>
-                                <input type="text" v-model="message_code" class="form-control" placeholder="输入收到的消息验证码">
+                                <input type="text" v-model="message_code" class="form-control" :placeholder="$tp('Enter the received message verification code')">
                             </div>
                         </form-item>
-                        <form-item v-model="password" :options="{key:'password',type:'password',name:'新密码',rules:'required|min:6|max:18',icon:'glyphicon-lock',placeholder:'请输入新密码'}"></form-item>
-                        <form-item v-model="confirm_password" :options="{key:'confirm_password',type:'password',name:'确认新密码',rules:'required|confirmed:password',icon:'glyphicon-log-in',placeholder:'请确认新密码'}"></form-item>
+                        <form-item v-model="password" :options="{key:'password',type:'password',name:$tp('new password'),rules:'required|min:6|max:18',icon:'glyphicon-lock',placeholder:$tp('Please enter a new password')}"></form-item>
+                        <form-item v-model="confirm_password" :options="{key:'confirm_password',type:'password',name:$tp('confirm the new password'),rules:'required|confirmed:password',icon:'glyphicon-log-in',placeholder:$tp('Please enter to confirm your new password')}"></form-item>
                         <div class="social-auth-links form-group">
                             <button type="button" class="btn btn-primary btn-block btn-flat" :disabled="submiting" @click="postPassword(invalid,validate)">
-                                {{submiting?'重置中...':'重置密码'}}
+                                {{submiting?$tp('Resetting'):$tp('Reset password')}}
                             </button>
                         </div>
                     </form>
                 </validation-observer>
                 <div class="social-auth-links row">
                     <router-link class="pull-left" to="/open/register">
-                        用户注册
+                        {{$tp('Registered user')}}
                     </router-link>
-                    <router-link class="pull-right" to="/open/login">直接登录</router-link>
+                    <router-link class="pull-right" to="/open/login">{{$tp('To log in')}}</router-link>
                 </div>
             </div>
             <icp></icp>
@@ -63,6 +63,7 @@
         },
         data(){
             return {
+                "{lang_path}":'open',
                 username:'', //用户名
                 password:'', //密码
                 confirm_password:'', //确认密码
@@ -118,7 +119,7 @@
                     }
                     if (!this.message_code) {
                         let errors = {};
-                        errors['message_code'] = ['请填写验证码'];
+                        errors['message_code'] = [this.$tp('Please fill in the verification code')];
                         this.validation.setErrors(errors);
                         return false;
                     }
@@ -172,12 +173,12 @@
             send(){
                 let errors;
                 if (this.sending || this.count_down>0) {
-                    errors = {'message_code':['验证码正在发送...']};
+                    errors = {'message_code':[this.$tp('The verification code is being sent"')]};
                     this.validation.setErrors(errors);
                     return false;
                 }
                 if (!this.verifyCode) {
-                    errors = {'verify':['验证码验证失败']};
+                    errors = {'verify':[this.$tp('Captcha validation failed')]};
                     this.validation.setErrors(errors);
                     return false;
                 }

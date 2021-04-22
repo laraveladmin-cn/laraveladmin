@@ -28,7 +28,7 @@
                 type: [Object],
                 default: function () {
                     return {
-                        client_fail_alert:this.$t('Please complete the verification code correctly.'),//请正确完成验证码操作。
+                        client_fail_alert:this.$t('Please complete the verification code correctly'),//请正确完成验证码操作。
                         lang:'zh-cn',
                         product:'float',
                         http:'http://'

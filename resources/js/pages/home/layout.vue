@@ -1,13 +1,11 @@
 <template>
     <div class="home_layout h100">
-
-        <div>头部</div>
-        <div>菜单栏位</div>
-        <router-link to="/">首页</router-link>
+        <div>{{$tp('Header')}}</div>
+        <div>{{$tp('Menu field')}}</div>
         <transition name="fade" enter-active-class="animated lightSpeedIn faster" mode="out-in" leave-active-class="animated lightSpeedOut faster">
             <router-view></router-view>
         </transition>
-        <div>脚部</div>
+        <div>{{$tp('Footer')}}</div>
     </div>
 </template>
 
@@ -41,6 +39,11 @@
             });
             this.getUser();
             this.getMenus();
+        },
+        data(){
+            return {
+                "{lang_path}":'home.layout',
+            };
         }
     };
 </script>

@@ -63,7 +63,7 @@
                 return this.disabled || this.disabled_val;
             },
             _placeholder(){
-                if(typeof this.placeholder){
+                if(typeof this.placeholder=="function"){
                     return this.placeholder();
                 }
                 return this.$t(this.placeholder);

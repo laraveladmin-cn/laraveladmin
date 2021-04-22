@@ -6,7 +6,7 @@
                @blur="$emit('blur')"
                @keydown.enter="$emit('keydown-enter')"
                class="form-control"
-               :placeholder="$t(placeholder)">
+               :placeholder="_placeholder">
         <div class="input-group-addon">
             <i class="fa fa-eye" v-show="type=='password'" @click="toggle"></i>
             <i class="fa fa-eye-slash" v-show="type!='password'" @click="toggle"></i>
@@ -19,7 +19,7 @@
         name: "passwordEdit",
         props:{
             placeholder:{
-                type:[String],
+                type:[String,Function],
                 default: function () {
                     return 'Please enter';
                 }
@@ -55,6 +55,14 @@
         methods:{
             toggle(){
                 this.type = this.type=='password'?'text':'password';
+            }
+        },
+        computed:{
+            _placeholder(){
+                if(typeof this.placeholder=="function"){
+                    return this.placeholder();
+                }
+                return this.$t(this.placeholder);
             }
         }
     }

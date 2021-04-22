@@ -40,15 +40,15 @@
                             </edit-item>
                         </div>
                         <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                                    <edit-item key-name="options" :options="{name: '组件属性', required: false,type:'textarea'}"  :datas="props">
-                                        <template slot="input-item">
-                                            <json-edit
-                                                v-model="props.data.row['options']"
-                                                :disabled="!props.url"
-                                                :placeholder="'请输入组件属性'">
-                                            </json-edit>
-                                        </template>
-                                    </edit-item>
+                            <edit-item key-name="options" :options="{name: '组件属性', required: false,type:'textarea'}"  :datas="props">
+                                <template slot="input-item">
+                                    <json-edit
+                                        v-model="props.data.row['options']"
+                                        :disabled="!props.url"
+                                        :placeholder="'请输入组件属性'">
+                                    </json-edit>
+                                </template>
+                            </edit-item>
                             <edit-item key-name="value" :options="{name: '值', required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <input
@@ -57,14 +57,14 @@
                                         v-model="props.data.row['value']"
                                         class="form-control"
                                         :disabled="!props.url"
-                                        :placeholder="'请输入'">
+                                        :placeholder="$t('Please enter')">
                                     <textarea
                                         v-else-if="props.data.row['itype']==2"
                                         v-model="props.data.row['value']"
                                         class="form-control"
                                         rows="6"
                                         :disabled="!props.url"
-                                        :placeholder="'请输入'">
+                                        :placeholder="$t('Please enter')">
                                     </textarea>
                                     <div v-else-if="props.data.row['itype']==3">
                                         <editor-md
@@ -76,14 +76,14 @@
                                         <json-edit
                                             v-model="props.data.row['value']"
                                             :disabled="!props.url"
-                                            :placeholder="'请输入'">
+                                            :placeholder="$t('Please enter')">
                                         </json-edit>
                                     </div>
                                     <div class="edit-item-content" v-else-if="props.data.row['itype']==5">
                                         <el-switch v-model="props.data.row['value']"
                                                    :disabled="!props.url"
-                                                   active-text="开"
-                                                   inactive-text="关"
+                                                   :active-text="$t('Closed')"
+                                                   :inactive-text="$t('Open')"
                                                    :active-value="1"
                                                    :inactive-value="0">
                                         </el-switch>

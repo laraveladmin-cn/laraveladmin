@@ -121,15 +121,15 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <span class="count m-top">
-                                {{$t('Article {number}',{number:array_get(data,'list.total',0)})}}，
+                                {{$tc('Article {number}',_total,{number:_total})}}
                                 <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page+''">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
-                                {{$t('article')}}/{{$t('page')}}
+                                {{$tc('{number} items per page',input_per_page,{number:input_per_page})}}
                             </span>
                             <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;{{$t('Skip to')}}&nbsp;&nbsp;
                                 <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
-                                &nbsp;&nbsp;{{$t('page')}}
+                                &nbsp;&nbsp;{{$t('page(jump)')}}
                             </span>
                             <ul class="pagination pagination-sm no-margin pull-right m-top">
                                 <li :class="{ disabled: data.list['current_page']<=1 }">
@@ -272,15 +272,15 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <span class="count m-top">
-                                {{$t('Article {number}',{number:array_get(data,'list.total',0)})}}，
+                                {{$tc('Article {number}',_total,{number:_total})}}
                                 <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page+''">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
-                                {{$t('article')}}/{{$t('page')}}
+                                {{$tc('{number} items per page',input_per_page,{number:input_per_page})}}
                             </span>
                             <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;{{$t('Skip to')}}&nbsp;&nbsp;
                                 <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
-                                &nbsp;&nbsp;{{$t('page')}}
+                                &nbsp;&nbsp;{{$t('page(jump)')}}
                             </span>
                             <ul class="pagination pagination-sm no-margin pull-right m-top">
                                 <li :class="{ disabled: data.list['current_page']<=1 }">
@@ -697,6 +697,9 @@
                 'use_url',
                 'statusClass'
             ]),
+            _total(){
+                return array_get(this.data,'list.total',0);
+            },
             _placeholder(){
                 if(typeof this.options.keywordPlaceholder=="function"){
                     return this.options.keywordPlaceholder();

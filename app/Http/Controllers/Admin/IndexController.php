@@ -19,7 +19,7 @@ class IndexController extends Controller
      */
     public function index(){
         $data = [];
-        $data['count'] = [ //统计
+        $data['count'] = collect([ //统计
             [
                 'name'=>'Total number of back-end administrators',
                 'value'=>Admin::count(),
@@ -48,7 +48,10 @@ class IndexController extends Controller
                 'icon'=>'fa-sitemap',
                 'url'=>'/admin/menus'
             ],
-        ];
+        ])->map(function ($item){
+            $item['_trans_name'] = trans_path('Total number of back-end administrators','pages.admin');
+            return $item;
+        })->toArray();
         return $data;
     }
 

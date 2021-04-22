@@ -82,13 +82,18 @@ export default Plugin = {
         Object.defineProperty(Vue.prototype, '$tp', {
             get: function get () {
                 let $this = this;
-                return function (key) {
+                return function (key,index,params) {
                     let prefix = '';
                     if($this['{lang_path}']){
                         prefix = $this['{lang_path}']+'.';
                     }
                     let k = 'pages.'+prefix+key;
-                    let res = $this.$t(k);
+                    let res;
+                    if(typeof params=="undefined"){
+                        res = $this.$t(k,index);
+                    }else {
+                        res = $this.$t(k,index,params);
+                    }
                     if(res.indexOf('pages.'+prefix)==0){
                         return key;
                     }

@@ -52,6 +52,7 @@
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                "{lang_path}":'admin.logs',
                 options:{
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
@@ -60,7 +61,9 @@
                     btnSizerMore:true, //更多筛选条件按钮
                     keywordKey:'parameters', //关键字查询key
                     keywordGroup:false, //是否为选项组
-                    keywordPlaceholder:'请输入关键字(请求参数)',
+                    keywordPlaceholder:()=>{
+                        return this.$t('Please enter keywords')+this.$tp('(Request parameters)');
+                    },//'请输入名称',
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     fields: {

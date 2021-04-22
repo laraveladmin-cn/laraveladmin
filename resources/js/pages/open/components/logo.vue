@@ -1,6 +1,6 @@
 <template>
     <div class="login-logo">
-        <router-link to="/"><b>{{name_short}}</b>后台系统</router-link>
+        <router-link to="/"><b>{{name_short}}</b>{{$tp('Backend systems')}}</router-link>
     </div>
 </template>
 
@@ -9,7 +9,9 @@
     export default {
         name: "logo",
         data(){
-            return {};
+            return {
+                "{lang_path}":'admin.layout',
+            };
         },
         computed:mapState([
            'name_short'

@@ -1,12 +1,16 @@
 <template>
     <div class="admin_index">
-        后台主页
-        <router-link to="/admin">后台</router-link>
-        <router-link to="/">官网</router-link>
-        <h3 style="color: red">请勿在本演示环境注册用户,本演示环境的注册,登录仅用于演示使用</h3>
+        {{$tp('Front desk home page')}}
+        <br>
+        <router-link to="/admin">{{$tp('Backstage home page')}}</router-link>
+        <br>
+        <router-link to="/">{{$tp('Home page of official website')}}</router-link>
+        <br>
+        <h3 style="color: red">{{$tp('Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use')}}</h3>
+        <br>
         {{user}}
         <h1>
-            <a href="https://www.laraveladmin.cn">正式环境官网:https://www.laraveladmin.cn</a>
+            <a href="https://www.laraveladmin.cn">{{$tp('Official environment official website')}}https://www.laraveladmin.cn</a>
         </h1>
     </div>
 </template>
@@ -21,6 +25,11 @@
                 user:state => state.user,
                 loadingUser:state => state.loading
             }),
+        },
+        data(){
+            return {
+                "{lang_path}":'home.index',
+            };
         }
     };
 </script>
