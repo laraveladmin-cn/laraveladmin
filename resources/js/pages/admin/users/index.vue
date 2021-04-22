@@ -8,7 +8,7 @@
                 <data-table class="box box-primary" :options="options" ref="table">
                     <template slot="add" slot-scope="props">
                         <button class="btn btn-info" @click="openModal(props.url)">
-                            <i class="fa fa-plus"></i> 新建
+                            <i class="fa fa-plus"></i> {{$t('New')}}
                         </button>
                     </template>
                         <template slot="sizer-more" slot-scope="props">
