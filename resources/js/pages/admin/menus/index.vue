@@ -4,7 +4,7 @@
             <edit :url="edit_url" :no-back="true" :callback="callback"></edit>
         </modal>
         <el-tabs v-model="active">
-            <el-tab-pane :label="tabs[0]" :name="0+''" :key="0">
+            <el-tab-pane :label="$tp(tabs[0])" :name="0+''" :key="0">
                 <div class="row" >
                     <div class="col-xs-12">
                         <data-table :options="options" ref="table" class="box">
@@ -41,7 +41,7 @@
                             </template>
                             <template slot="add" slot-scope="props">
                                 <button class="btn btn-info" @click="openModal(props.url)" v-if="props.url">
-                                    <i class="fa fa-plus"></i> 新建
+                                    <i class="fa fa-plus"></i> {{$t('New')}}
                                 </button>
                             </template>
                             <template slot="col-operation" slot-scope="props">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </el-tab-pane>
-            <el-tab-pane :label="tabs[1]" :name="1+''" :key="1" v-if="update_url">
+            <el-tab-pane :label="$tp(tabs[1])" :name="1+''" :key="1" v-if="update_url">
                 <div class="row" >
                     <div class="col-xs-12">
                         <div class="box">
@@ -104,10 +104,11 @@
         data() {
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                "{lang_path}":'admin.menus',
                 active: 0,
                 tabs:[
-                    '数据列表',
-                    '拖拽移位'
+                    'Data list',
+                    'Drag shift'
                 ],
                 edit_url:'',
                 modal:false,
@@ -120,7 +121,9 @@
                     btnSizerMore: true, //更多筛选条件按钮
                     keywordKey: 'name|url', //关键字查询key
                     keywordGroup: false, //是否为选项组
-                    keywordPlaceholder: '请输入名称',
+                    keywordPlaceholder:()=>{
+                        return this.$t('enter',{name:this.$t('name')});
+                    },//'请输入名称',
                     primaryKey: 'id', //数据唯一性主键
                     defOptions: def_options, //默认筛选条件
                     fields: {

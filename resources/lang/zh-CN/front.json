@@ -52,8 +52,26 @@
                 "Console commands": "控制台命令",
                 "Menu routing": "菜单路由",
                 "Plug-in installation":"插件安装",
-                "Relevant documentation": "相关文档"
+                "Relevant documentation": "相关文档",
+                "Command": "命令",
+                "Instructions": "说明",
+                "Execute results:": "执行结果：",
+                "Copy it to the paste board": "复制到粘贴板",
+                "Command:": "命令：",
+                "Enter the command manually:": "手动输入命令：",
+                "Command name:":"命令名称："
+            },
+            "menus": {
+                "Drag shift":"拖拽移位",
+                "Data list": "数据列表",
+                "(Request parameters)": "（请求参数）"
 
+            },
+            "layout": {
+                "Backend systems": "后台系统",
+                "Toggle navigation": "切换导航",
+                "Theme": "主题",
+                "Personal center": "个人中心"
             }
         }
     },
@@ -145,6 +163,18 @@
     "The upload component failed to get toke, the file will not be uploaded!": "上传组件获取toke失败,将无法上传文件！",
     "Close": "关闭",
     "Confirm": "确认",
-    "{number} items per page": "条每页。"
+    "{number} items per page": "条每页。",
+    "Yes": "是",
+    "No": "否",
+    "Open": "开",
+    "Closed": "关",
+    "Logout": "退出",
+    "Pause": "暂停",
+    "Continue": "继续",
+    "Cancel": "取消",
+    "Has been completed.": "完成。",
+    "See them all": "查看全部"
+
+
 
 }

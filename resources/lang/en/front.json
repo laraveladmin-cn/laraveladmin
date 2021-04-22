@@ -41,10 +41,39 @@
     },
     "pages": {
         "admin_index": {
+
+        },
+        "admin": {
             "Total number of back-end administrators": "Total number of back-end administrators",
             "Total number of roles": "Total number of roles",
             "Total number of users": "Total number of users",
-            "Total number of menus": "Total number of menus"
+            "Total number of menus": "Total number of menus",
+            "users": {
+                "username":"username"
+            },
+            "developments_index": {
+                "Console commands": "Console commands",
+                "Menu routing": "Menu routing",
+                "Plug-in installation":"Plug-in installation",
+                "Relevant documentation": "Relevant documentation",
+                "Command": "Command",
+                "Instructions": "Instructions",
+                "Execute results:": "Execute results:",
+                "Copy it to the paste board": "Copy it to the paste board",
+                "Command:": "Command:",
+                "Enter the command manually:": "Enter the command manually:",
+                "Command name:":"Command name:"
+            },
+            "menus": {
+                "Drag shift":"Drag shift",
+                "Data list": "Data list",
+                "(Request parameters)": "(Request parameters)"
+
+            },
+            "layout": {
+                "Backend systems": "Systems",
+                "Toggle navigation": "Toggle navigation"
+            }
         }
     },
     "New": "New",
@@ -68,7 +97,7 @@
     "Temporarily no data": "Temporarily no data",
     "article": "article",
     "page": "page",
-    "Article {number}": "no items | {number} item | A total of {number} items,",
+    "Article {number}": "no items ,| {number} item ,| A total of {number} items,",
     "Please enter keywords": "Please enter keywords",
     "Loading": "Loading",
     "Import data": "Import data",
@@ -92,6 +121,6 @@
     "Reveal all": "Reveal all",
     "Hidden more": "Hidden more",
     "Please enter": "Please enter",
-    "{number} items per page": "no items | {number} item per page | {number} items per page"
+    "{number} items per page": " items per page | item per page | items per page"
 
 }

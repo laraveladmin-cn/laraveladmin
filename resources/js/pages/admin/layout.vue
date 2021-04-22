@@ -8,11 +8,11 @@
                     <span class="logo-mini" style="display: inline-block">
                         <img :src="logo" width="40px" height="40px">
                     </span>
-                    <span class="logo-lg" style="display: inline-block"><b>{{name_short}}</b>后台系统</span>
+                    <span class="logo-lg" style="display: inline-block"><b>{{name_short}}</b>{{$tp('Backend systems')}}</span>
                 </router-link>
                 <nav class="navbar navbar-static-top">
                     <a class="sidebar-toggle" data-toggle="push-menu" role="button">
-                        <span class="sr-only">切换导航</span>
+                        <span class="sr-only">{{$tp('Toggle navigation')}}</span>
                     </a>
                     <div class="navbar-custom-menu pull-left">
                         <ul class="nav navbar-nav">
@@ -49,7 +49,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="footer"><a>查看全部</a></li>
+                                    <li class="footer"><a>{{$t('See them all')}}</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown notifications-menu">
@@ -68,7 +68,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="footer"><a>查看全部</a></li>
+                                    <li class="footer"><a>{{$t('See them all')}}</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown tasks-menu">
@@ -99,7 +99,7 @@
                                         </ul>
                                     </li>
                                     <li class="footer">
-                                        <a>查看全部</a>
+                                        <a>{{$t('See them all')}}</a>
                                     </li>
                                 </ul>
                             </li>
@@ -132,10 +132,10 @@
                                     </li>
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a class="btn btn-default btn-flat">个人中心</a>
+                                            <a class="btn btn-default btn-flat">{{$tp('Personal center')}}</a>
                                         </div>
                                         <div class="pull-right">
-                                            <a class="btn btn-default btn-flat" @click="logout">退出</a>
+                                            <a class="btn btn-default btn-flat" @click="logout">{{$t('Logout')}}</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -212,23 +212,23 @@
                             <div class="progress my-progress" :class="{active:(download_progress<100 && !download_pauseing)}" :style="{width:download_progress+'%'}">
                                 <div class="progress-bar progress-bar-striped my-progress-bar" role="progressbar" :aria-valuenow="download_progress" :aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                     <span v-show="download_progress<100">{{download_progress}}%</span>
-                                    <span v-show="download_progress>=100">完成!</span>
+                                    <span v-show="download_progress>=100">{{$t('Has been completed.')}}</span>
                                 </div>
                             </div>
                             <div class="pull-right progress-tool" v-show="downloading && download_progress<100" style="margin-right: 10px">
-                                <button v-show="!download_pauseing"  @click="downloadPause" type="button" title="取消"  class="btn btn-box-tool my-progress-cancel">
+                                <button v-show="!download_pauseing"  @click="downloadPause" type="button" :title="$t('Pause')"  class="btn btn-box-tool my-progress-cancel">
                                         <span class="text-primary">
-                                              暂停 <i class="fa fa-pause"></i>
+                                              {{$t('Pause')}} <i class="fa fa-pause"></i>
                                         </span>
                                 </button>
-                                <button v-show="download_pauseing"  @click="downloadStart" type="button" title="取消"  class="btn btn-box-tool my-progress-cancel">
+                                <button v-show="download_pauseing"  @click="downloadStart" type="button" :title="$t('Continue')"  class="btn btn-box-tool my-progress-cancel">
                                         <span class="text-primary">
-                                              继续 <i class="fa fa-play"></i>
+                                              {{$t('Continue')}} <i class="fa fa-play"></i>
                                         </span>
                                 </button>
-                                <button @click="downloadCancel" type="button" title="取消"  class="btn btn-box-tool my-progress-cancel">
+                                <button @click="downloadCancel" type="button" :title="$t('Cancel')"  class="btn btn-box-tool my-progress-cancel">
                                          <span class="text-danger">
-                                             取消 <i class="fa fa-times"></i>
+                                             {{$t('Cancel')}} <i class="fa fa-times"></i>
                                          </span>
                                 </button>
                             </div>
@@ -385,7 +385,7 @@
                         </ul>
                     </div>
                     <div class="tab-pane" id="control-sidebar-settings-tab">
-                        <h3 class="control-sidebar-heading">主题</h3>
+                        <h3 class="control-sidebar-heading">{{$tp('Theme')}}</h3>
                         <ul class="list-unstyled clearfix">
                             <li class="skin-item" v-for="(item,index) in skins">
                                 <a href="javascript:void(0)" class="clearfix full-opacity-hover" @click="setSkin(item.class)">
@@ -425,6 +425,7 @@
         props: {},
         data(){
             return {
+                "{lang_path}":'admin.layout',
                 loading:true,
                 keywords:'',
                 timer:null,

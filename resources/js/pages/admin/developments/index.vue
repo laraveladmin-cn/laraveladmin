@@ -22,7 +22,7 @@
                             <template slot="content" slot-scope="props">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <h3 class="text-center">
-                                        命令名称: {{props.data.row.chinese}}
+                                        {{$tp('Command name:')}} {{props.data.row.chinese}}
                                     </h3>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -33,7 +33,7 @@
                                             <div class="edit-item-content">
                                                 <select2 v-model="props.data.index"
                                                          :default-options="commands"
-                                                         :placeholder-show="'请选择'"
+                                                         :placeholder-show="$t('Please select')"
                                                          :placeholder-value="0"
                                                          :primary-key="'_id'"
                                                          @change="changeCommand(props.data)"
@@ -58,7 +58,7 @@
                                                                  :show="['TABLE_NAME']"
                                                                  :disabled="!props.url"
                                                                  :primary-key="'TABLE_NAME'"
-                                                                 :placeholder-show="item.placeholder || '请选择'"
+                                                                 :placeholder-show="item.placeholder || $t('Please select')"
                                                                  :placeholder-value="''"
                                                                  @change="clearInput"
                                                                  :params="{connection:connection_value(props.data.row.parameters)}"
@@ -76,7 +76,7 @@
                                                     <div class="edit-item-content">
                                                         <select2 v-model="item.value"
                                                                  :default-options="item.map || array_get(props,'data.maps.'+item.map_key,[])"
-                                                                 :placeholder-show="item.placeholder || '请选择'"
+                                                                 :placeholder-show="item.placeholder || $t('Please select')"
                                                                  :disabled="!props.url"
                                                                  :placeholder-value="''"
                                                                  @change="clearInput"
@@ -106,8 +106,8 @@
                                                 <template slot="input-item">
                                                     <div class="edit-item-content">
                                                         <el-switch v-model="item.value"
-                                                                   active-text="是"
-                                                                   inactive-text="否"
+                                                                   :active-text="$t('Yes')"
+                                                                   :inactive-text="$t('No')"
                                                                    :active-value="1"
                                                                    :inactive-value="0">
                                                         </el-switch>
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                                     <div class="form-group" :class="{'has-error':inputError(props)}">
-                                        <label>手动输入命令:</label>
+                                        <label>{{$tp('Enter the command manually:')}}</label>
                                         <div class="input-group">
                                             <input
                                                 type="text"
@@ -138,11 +138,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>命令:</label>
+                                        <label>{{$tp('Command:')}}</label>
                                         <div v-clipboard:copy="command(props.data.row)"  v-clipboard:success="onCopy" class="snippet command">
                                             <button class="btn">
-                                                <img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="复制到粘贴板">
-                                                复制到粘贴板
+                                                <img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" :alt="$tp('Copy it to the paste board')">
+                                                {{$tp('Copy it to the paste board')}}
                                             </button>
                                             <code>
                                                 {{command(props.data.row)}}
@@ -158,7 +158,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" v-show="output">
                                     <div class="box">
                                         <div class="box-header with-border">
-                                            <h3 class="box-title">执行结果:</h3>
+                                            <h3 class="box-title">{{$tp('Execute results:')}}}</h3>
                                             <div class="box-tools pull-right">
                                                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                                     <i class="fa fa-minus"></i>
@@ -176,8 +176,8 @@
                             <table class="table table-hover table-bordered table-striped text-center dataTable">
                                 <thead>
                                 <tr>
-                                    <th>命令</th>
-                                    <th>说明</th>
+                                    <th>{{$tp('Command')}}</th>
+                                    <th>{{$tp('Instructions')}}</th>
                                     <!--     <th>English</th>-->
                                 </tr>
                                 </thead>
@@ -198,10 +198,10 @@
                         <menus v-if="tag==1"></menus>
                     </div>
                     <div class="chart tab-pane" id="plug_in">
-                        安装应用插件
+                        {{$tp('Install the application plug-in')}}
                     </div>
                     <div class="chart tab-pane" id="docs">
-                        相关文档
+                        {{$tp('Relevant documentation')}}
                     </div>
                 </div>
             </div>
