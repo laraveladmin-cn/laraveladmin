@@ -44,9 +44,10 @@
             "index": {
                 "Home page of official website": "官网首页",
                 "Backstage home page": "后台首页",
-                "Front desk home page": "前台首页"
+                "Front desk home page": "前台首页",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "请勿在本演示环境注册用户,本演示环境的注册,登录仅用于演示使用",
+                "Official environment official website": "正式环境官网:"
             },
-
             "Registered user": "注册用户",
             "Forget your password": "忘记密码",
             "To log in": "直接登录",
@@ -83,15 +84,15 @@
             "Please enter your password": "请输入密码",
             "Enter the CAPTCHA you received": "输入收到的验证码",
             "Please enter your mobile phone number": "请输入手机号码",
-            "Please enter email address": "请输入邮箱地址",
-            "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "请勿在本演示环境注册用户,本演示环境的注册,登录仅用于演示使用",
-            "Official environment official website": "正式环境官网:"
+            "Please enter email address": "请输入邮箱地址"
         },
         "home": {
             "index":{
                 "Home page of official website": "官网首页",
                 "Backstage home page": "后台首页",
-                "Front desk home page": "前台首页"
+                "Front desk home page": "前台首页",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "请勿在本演示环境注册用户,本演示环境的注册,登录仅用于演示使用",
+                "Official environment official website": "正式环境官网:"
             },
             "layout": {
                 "Footer":"脚部",

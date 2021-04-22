@@ -44,7 +44,9 @@
             "index": {
                 "Home page of official website": "Home page of official website",
                 "Backstage home page": "Backstage home page",
-                "Front desk home page": "Front desk home page"
+                "Front desk home page": "Front desk home page",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use.",
+                "Official environment official website": "Official environment official website:"
             },
             "Registered user": "Registered user",
             "Forget your password": "Forget your password",
@@ -89,7 +91,9 @@
             "index":{
                 "Home page of official website": "Home page of official website",
                 "Backstage home page": "Backstage home page",
-                "Front desk home page": "Front desk home page"
+                "Front desk home page": "Front desk home page",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use.",
+                "Official environment official website": "Official environment official website:"
             },
             "layout": {
                 "Footer":"Footer",
