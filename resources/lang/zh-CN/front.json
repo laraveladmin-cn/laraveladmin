@@ -62,7 +62,7 @@
             "Password": "密码",
             "{_field_} must be verified": "{_field_} 必须验证",
             "Reset password": "重置密码",
-            "Resetting":"重置中…",
+            "Resetting": "重置中…",
             "Get the verification code": "获取验证码",
             "Getting": "获取中...",
             "Enter the received message verification code": "输入收到的消息验证码",
@@ -87,7 +87,7 @@
             "Please enter email address": "请输入邮箱地址"
         },
         "home": {
-            "index":{
+            "index": {
                 "Home page of official website": "官网首页",
                 "Backstage home page": "后台首页",
                 "Front desk home page": "前台首页",
@@ -95,11 +95,10 @@
                 "Official environment official website": "正式环境官网:"
             },
             "layout": {
-                "Footer":"脚部",
+                "Footer": "脚部",
                 "Header": "头部",
                 "Menu field": "菜单栏位",
                 "Home page of official website": "官网首页"
-
             }
         },
         "admin": {
@@ -107,13 +106,50 @@
             "Total number of roles": "角色总数",
             "Total number of users": "用户数",
             "Total number of menus": "菜单总数",
+            "Bar charts": "柱状图",
+            "Sales": "销量",
+            "Shirt": "衬衫",
+            "Cardigan": "羊毛衫",
+            "Chiffon": "雪纺衫",
+            "Trousers": "裤子",
+            "High heels": "高跟鞋",
+            "Socks": "袜子",
+            "Direct": "直达",
+            "Marketing Advertising": "营销广告",
+            "Search engines": "搜索引擎",
+            "Email Marketing": "邮件营销",
+            "Alliance advertising": "联盟广告",
+            "Video Ads": "视频广告",
+            "Baidu": "百度",
+            "Google": "谷歌",
+            "Bing": "必应",
+            "Other": "其他",
+            "Visit source": "访问来源",
+            "Custom radar chart": "自定义雷达图",
+            "Figure 1": "图一",
+            "Figure 2": "图二",
+            "Zhang SAN": "张三",
+            "Li SI": "李四",
+            "Measure 1": "指标一",
+            "Measure 2": "指标二 ",
+            "Measure 3": "指标三 ",
+            "Measure 4": "指标四 ",
+            "Measure 5": "指标五",
+            "Language": "语文",
+            "Mathematics": "数学 ",
+            "English": "英语 ",
+            "Physical": "物理 ",
+            "Chemistry": "化学 ",
+            "Biology": "生物 ",
+            "Radar map": "雷达图",
+            "Transcript": "成绩单",
             "users": {
-                "username":"用户昵称"
+                "username": "用户昵称"
             },
             "developments_index": {
                 "Console commands": "控制台命令",
                 "Menu routing": "菜单路由",
-                "Plug-in installation":"插件安装",
+                "Plug-in installation": "插件安装",
                 "Relevant documentation": "相关文档",
                 "Command": "命令",
                 "Instructions": "说明",
@@ -121,13 +157,11 @@
                 "Copy it to the paste board": "复制到粘贴板",
                 "Command:": "命令：",
                 "Enter the command manually:": "手动输入命令：",
-                "Command name:":"命令名称："
+                "Command name:": "命令名称："
             },
             "menus": {
-                "Drag shift":"拖拽移位",
+                "Drag shift": "拖拽移位",
                 "Data list": "数据列表"
-
-
             },
             "logs": {
                 "(Request parameters)": "（请求参数）"
@@ -149,7 +183,7 @@
                 "Green": "绿色",
                 "Red": "红色",
                 "Yellow": "黄色",
-                "Blue Light":"蓝白",
+                "Blue Light": "蓝白",
                 "All White": "全白",
                 "Purple Light": "紫白",
                 "Green Light": "绿白",
@@ -176,20 +210,20 @@
     "tables": {
         "users": {
             "fields": {
-                "uname" : "用户名",
-                "name" : "昵称",
-                "avatar" : "头像",
-                "email" : "电子邮箱",
-                "mobile_phone" : "手机号码",
-                "remember_token" : "记住登录",
-                "status" : "状态",
-                "description" : "备注",
-                "created_at" : "创建时间",
-                "updated_at" : "修改时间",
-                "deleted_at" : "删除时间",
-                "id" : "ID"
+                "uname": "用户名",
+                "name": "昵称",
+                "avatar": "头像",
+                "email": "电子邮箱",
+                "mobile_phone": "手机号码",
+                "remember_token": "记住登录",
+                "status": "状态",
+                "description": "备注",
+                "created_at": "创建时间",
+                "updated_at": "修改时间",
+                "deleted_at": "删除时间",
+                "id": "ID"
             },
-            "maps":{
+            "maps": {
                 "status": [
                     "注销",
                     "有效",
@@ -249,7 +283,7 @@
     "Please check the field you want to export to export correctly.": "请勾选要导出的字段，才能正确导出。",
     "Are you sure you want to import all the data in bulk?": "您确定要批量导入所有数据吗？",
     "Error uploading file!": "上传文件出错！",
-    "Please complete the verification code correctly":"请正确完成验证码操作。",
+    "Please complete the verification code correctly": "请正确完成验证码操作。",
     "Select the file": "选择文件",
     "Reselect": "重新选择",
     "Pause uploading": "暂停上传",
@@ -275,7 +309,7 @@
     "An error occurred while requesting the server, please contact the developer in time": "请求服务器时发生错误，请及时联系开发人员！",
     "Token has expired, please try again": "token过期，请重试！",
     "{type} page": "{type}页面",
-    "Download successfully":"下载成功！",
+    "Download successfully": "下载成功！",
     "The XLSX plug-in has not been loaded yet, please try again later": "XLSX插件还未加载成功，请稍后再试！",
     "The import or export task already exists": "导入或导出任务已存在！",
     "Export link address does not exist": "导出链接地址不存在",
@@ -292,9 +326,9 @@
     "Progress": "进度",
     "Section": "栏目一 | 栏目二 | 栏目三 | 栏目四",
     "Email": "电子邮箱",
-    "Login":"登录",
+    "Login": "登录",
     "Register": "注册",
     "password": "密码",
-    "Password":"密码",
+    "Password": "密码",
     "Mobile phone number": "手机号码"
 }
