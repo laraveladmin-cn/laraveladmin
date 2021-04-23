@@ -84,7 +84,11 @@ export default Plugin = {
                 let $this = this;
                 return function (key,index,params) {
                     let prefix = '';
-                    if($this['{lang_path}']){
+                    if(typeof index=="object" && index['{lang_path}']){
+                        prefix = index['{lang_path}']+'.';
+                    }else if(typeof params=="object" && params['{lang_path}']){
+                        prefix = params['{lang_path}']+'.';
+                    }else if($this['{lang_path}']){
                         prefix = $this['{lang_path}']+'.';
                     }
                     let k = 'pages.'+prefix+key;

@@ -25,5 +25,9 @@ return [
     'Deleted At'=>'删除时间',
     'Custom template model generation'=>'自定义模板模型生成',
     'Custom template data fill file generation'=>'自定义模板数据填充文件生成',
-    'Custom template front-end view generation'=>'自定义模板前端视图生成'
+    'Custom template front-end view generation'=>'自定义模板前端视图生成',
+    'The application language is not set to English to execute'=>'应用的语言不是设置为英语时才可执行',
+    'From ":old" to ":new"'=>'从":old"至":new"',
+    'Failed to translate ":old"'=>'翻译":old"失败'
+
 ];

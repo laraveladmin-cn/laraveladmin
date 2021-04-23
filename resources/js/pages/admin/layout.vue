@@ -18,7 +18,8 @@
                         <ul class="nav navbar-nav">
                             <li :class="{active:module['active']}" v-for="module in modules">
                                 <a @click="toUrl(module['url'],$event)" :href="module['url']?module['url']:null">
-                                    <i class="fa" :class="module['icons']"></i> {{module['name']}}
+                                    <i class="fa" :class="module['icons']"></i>
+                                    {{$tp(module['name'],{'{lang_path}':'menus'})}}
                                 </a>
                             </li>
                         </ul>
@@ -167,7 +168,7 @@
                         </div>
                         <div class="sidebar-form">
                               <div class="input-group">
-                                  <input @keydown.enter="search" @keyup="waitSearch" v-model="keywords" type="text" name="keywords" class="form-control" placeholder="菜单搜索">
+                                  <input @keydown.enter="search" @keyup="waitSearch" v-model="keywords" type="text" name="keywords" class="form-control" :placeholder="$tp('Search menu')">
                                   <span class="input-group-btn">
                                   <button @click="search" type="button" class="btn btn-flat">
                                       <i class="fa fa-search"></i>
@@ -236,18 +237,20 @@
                     </transition>
                     <section class="content-header" :class="{'my-content-header':downloading}">
                         <h1>
-                            {{current_menu_name}}
-                            <small>{{current_menu_description}}</small>
+                            {{$tp(current_menu_name,{'{lang_path}':'menus'})}}
+                            <small>
+                                {{$tp(current_menu_description,{'{lang_path}':'menus'})}}
+                            </small>
                         </h1>
                         <ol class="breadcrumb">
                             <li :class="{active:navbar.active}" v-for="navbar in navbars">
                                 <router-link :to="navbar['url']" v-if="!navbar.active && navbar['url']">
                                     <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                    {{navbar['name']}}
+                                    {{$tp(navbar['name'],{'{lang_path}':'menus'})}}
                                 </router-link>
                                 <span v-else>
                                  <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                {{last_menu_show_name || navbar['name']}}
+                                    {{$tp(last_menu_show_name || navbar['name'],{'{lang_path}':'menus'})}}
                             </span>
                             </li>
                         </ol>
