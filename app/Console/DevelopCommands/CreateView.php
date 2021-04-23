@@ -22,7 +22,11 @@ class CreateView extends BaseCreate
      * @var string
      */
     protected $description = '自定义模板视图生成';
-    protected $confirmName = '视图';
+    public function __construct()
+    {
+        parent::__construct();
+        $this->description = trans_path('Custom template front-end view generation',$this->transPath);
+    }
     protected $type = 'vue';
     protected $tpl = 'html/edit';
     protected $baseNamespace = '';
@@ -83,7 +87,6 @@ class CreateView extends BaseCreate
         $data['table_fields'] = collect($data['table_fields'])->keyBy('Field')->toArray();
         $data['path'] = Str::singular($this->bindModel->getTable());
         if ($this->argument('template') == 'index') {
-            $this->confirmName = '列表视图';
             $fields = $controller->selectFields($controller->showIndexFields); //需要显示的字段
             $data['show_fields'] = collect($data['table_fields'])
                 ->filter(function ($item) use ($fields) {
@@ -101,7 +104,6 @@ class CreateView extends BaseCreate
                     return $data;
                 });
         } else {
-            $this->confirmName = '编辑视图';
             $class = get_class($this->bindModel);
             $data['tableInfo'] = $class::getTableInfo(); //数据表信息
             $data['validates'] = collect($data['tableInfo']['table_fields'])->map(function ($item) {

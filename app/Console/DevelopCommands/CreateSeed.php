@@ -20,7 +20,11 @@ class CreateSeed extends BaseCreate
      * @var string
      */
     protected $description = '自定义模板填充文件生成';
-    protected $confirmName='填充';
+    public function __construct()
+    {
+        parent::__construct();
+        $this->description = trans_path('Custom template data fill file generation',$this->transPath);
+    }
     protected $type='php';
     protected $tpl = 'php/seed';
     protected $baseNamespace = '';
