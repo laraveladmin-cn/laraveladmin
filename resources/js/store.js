@@ -9,12 +9,16 @@ import { localeChanged } from 'vee-validate';
 
 const loadedLanguages = ['en']; // 我们的预装默认语言
 function setI18nLanguage(state,payload){
+    document.body.classList.remove(i18n.locale);
     state['language'] = payload;
     localStorage.setItem('language',payload);
     setCookie('Language',payload,365*10);
     i18n.locale = payload;
     localeChanged();
     document.querySelector('html').setAttribute('lang', payload);
+    //修改验证码语言
+    config.verify.data.lang = payload;
+    document.body.classList.add(payload);
     return payload;
 }
 export default {
