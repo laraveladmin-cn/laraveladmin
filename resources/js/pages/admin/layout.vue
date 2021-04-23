@@ -42,7 +42,7 @@
                                                     </div>
                                                     <h4>
                                                         {{$t('System')}}
-                                                        <small><i class="fa fa-clock-o"></i> 5 minutes ago</small>
+                                                        <small><i class="fa fa-clock-o"></i> {{$tp('{number} minutes ago',{number:5})}}</small>
                                                     </h4>
                                                     <p>{{$t('Hello')}}</p>
                                                 </a>
@@ -373,7 +373,7 @@
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        {{$tc('Section',3)}}
+                                        {{$tc('Section',4)}}
                                         <span class="label label-primary pull-right">68%</span>
                                     </h4>
 
