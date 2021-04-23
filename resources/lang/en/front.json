@@ -156,7 +156,8 @@
                 "Yellow Light": "Yellow Light",
                 "My birthday": "My birthday",
                 "Your birthday": "Your birthday",
-                "Recent Activities": "Recent Activities"
+                "Recent Activities": "Recent Activities",
+                "{number} minutes ago": "{number} minutes ago"
             }
         },
         "errors": {

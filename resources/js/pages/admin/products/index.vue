@@ -91,7 +91,9 @@
                     btnSizerMore:true, //更多筛选条件按钮
                     keywordKey:'name', //关键字查询key
                     keywordGroup:false, //是否为选项组
-                    keywordPlaceholder:'请输入名称',
+                    keywordPlaceholder:()=>{
+                        return this.$t('enter',{name:this.$t('name')});
+                    },//'请输入名称'',
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     fields: {

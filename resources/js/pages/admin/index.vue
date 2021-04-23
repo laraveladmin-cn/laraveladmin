@@ -177,7 +177,7 @@
                             text: this.$tp('Custom radar chart')//'自定义雷达图'
                         },
                         legend: {
-                            data: collect(['Graph one','Figure 2', 'Zhang SAN', 'Li SI'])
+                            data: collect(['Figure 1','Figure 2', 'Zhang San', 'Li Si'])
                                 .map( (value)=> {
                                     return this.$tp(value);
                                 }).all()
@@ -276,7 +276,7 @@
                                 data: [
                                     {
                                         value: [120, 118, 130, 100, 99, 70],
-                                        name: this.$tp('Zhang SAN'),//'张三',
+                                        name: this.$tp('Zhang San'),//'张三',
                                         label: {
                                             show: true,
                                             formatter: function(params) {

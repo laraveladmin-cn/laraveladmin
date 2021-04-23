@@ -128,8 +128,8 @@
             "Custom radar chart": "自定义雷达图",
             "Figure 1": "图一",
             "Figure 2": "图二",
-            "Zhang SAN": "张三",
-            "Li SI": "李四",
+            "Zhang San": "张三",
+            "Li Si": "李四",
             "Measure 1": "指标一",
             "Measure 2": "指标二 ",
             "Measure 3": "指标三 ",
@@ -191,7 +191,8 @@
                 "Yellow Light": "黄白",
                 "My birthday": "我的生日",
                 "Your birthday": "你的生日",
-                "Recent Activities": "最近活动"
+                "Recent Activities": "最近活动",
+                "{number} minutes ago": "{number}分钟前"
             }
         },
         "errors": {
