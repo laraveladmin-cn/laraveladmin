@@ -3236,4 +3236,8 @@ div table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:aft
 .sizer .el-input__icon{
     line-height:34px
 }
+.login-box,
+.register-box {
+    width: 400px;
+}
 
