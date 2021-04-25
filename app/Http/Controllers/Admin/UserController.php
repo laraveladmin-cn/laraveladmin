@@ -10,10 +10,11 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     use ResourceController;
+
     //默认排序
     protected $orderDefault = [
         'updated_at' => 'desc',
-        'id'=>'asc'
+        'id' => 'asc',
     ];
 
 
@@ -31,16 +32,16 @@ class UserController extends Controller
         'status' => '=',
         'created_at' => [
             '>=',
-            '<='
+            '<=',
         ],
-        'admin'=>'has',
-        'name|uname'=>'like',
+        'admin' => 'has',
+        'name|uname' => 'like',
         'name|uname|mobile_phone|email' => 'like',
-        'id'=>'or',
+        'id' => 'or',
     ];
 
-    protected $keywordsMap=[
-        'name|uname|mobile_phone|email'=>'用户'
+    protected $keywordsMap = [
+        'name|uname|mobile_phone|email' => '用户',
     ];
 
 
@@ -56,7 +57,7 @@ class UserController extends Controller
         'email',
         'status',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
@@ -69,22 +70,25 @@ class UserController extends Controller
 
     /**
      * 添加或修改时数据验证规则
-     * @return  array
+     *
+     * @param Request $request
+     * @return array
      */
-    protected function getValidateRule()
+    protected function getValidateRule(Request $request)
     {
-        $id = Request::input('id',0);
+        $id = $request->input('id', 0);
         //没有密码值不对密码进行修改
-        if(!Request::input('password')){
-            Request::offsetUnset('password');
+        if ( ! $request->password ) {
+            $request->offsetUnset('password');
         }
+
         return [
-            'uname' => 'sometimes|required|alpha_dash|between:5,18|unique:users,uname,'.$id.',id,deleted_at,NULL',
-            'password' => ($id?'sometimes|':'').'required|between:6,18',
+            'uname' => 'sometimes|required|alpha_dash|between:5,18|unique:users,uname,' . $id . ',id,deleted_at,NULL',
+            'password' => ($id ? 'sometimes|' : '') . 'required|between:6,18',
             'name' => 'required',
-            'email' => 'sometimes|required|email|unique:users,email,'.$id.',id,deleted_at,NULL',
-            'mobile_phone' => 'sometimes|required|mobile_phone|unique:users,mobile_phone,'.$id.',id,deleted_at,NULL',
-            'status'=>'nullable|in:0,1,2'
+            'email' => 'sometimes|required|email|unique:users,email,' . $id . ',id,deleted_at,NULL',
+            'mobile_phone' => 'sometimes|required|mobile_phone|unique:users,mobile_phone,' . $id . ',id,deleted_at,NULL',
+            'status' => 'nullable|in:0,1,2',
         ];
     }
 
@@ -97,29 +101,34 @@ class UserController extends Controller
     {
         $this->bindModel OR $this->bindModel();
         $obj = $this->bindModel->with($this->selectWithFields())
-            ->withCount(collect($this->getShowIndexFieldsCount())->filter(function($item,$key){
+            ->withCount(collect($this->getShowIndexFieldsCount())->filter(function ($item) {
                 return !is_array($item);
             })->toArray())
-            ->whereDoesntHave('admin') //不显后台用户
+            ->whereDoesntHave('admin') // 不显后台用户
             ->options($this->getOptions());
+
         return $obj;
     }
 
-    protected function handlePostEditReturn(&$data){
-        if(Arr::get($data,'id')==1){
+    protected function handlePostEditReturn(&$data)
+    {
+        if( Arr::get($data, 'id') === 1 ){
             unset($data['status']);
         }
+
         return $data;
     }
-    protected function handleDestroyReturn(&$data){
-        $data = collect($data)->filter(function ($id){
-            return $id>1;
+
+    /**
+     * @param $data
+     * @return array
+     */
+    protected function handleDestroyReturn(&$data)
+    {
+        $data = collect($data)->filter(function ($id) {
+            return $id > 1;
         })->toArray();
+
         return $data;
     }
-
-
-
-
-
 }
