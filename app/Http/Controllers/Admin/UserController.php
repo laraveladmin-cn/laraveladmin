@@ -14,9 +14,8 @@ class UserController extends Controller
     //默认排序
     protected $orderDefault = [
         'updated_at' => 'desc',
-        'id' => 'asc',
+        'id' => 'asc'
     ];
-
 
     /**
      * 资源模型
@@ -34,12 +33,16 @@ class UserController extends Controller
             '>=',
             '<=',
         ],
+
         'admin' => 'has',
         'name|uname' => 'like',
         'name|uname|mobile_phone|email' => 'like',
         'id' => 'or',
     ];
 
+    /**
+     * @var array
+     */
     protected $keywordsMap = [
         'name|uname|mobile_phone|email' => '用户',
     ];
@@ -70,25 +73,23 @@ class UserController extends Controller
 
     /**
      * 添加或修改时数据验证规则
-     *
-     * @param Request $request
      * @return array
      */
-    protected function getValidateRule(Request $request)
+    protected function getValidateRule()
     {
-        $id = $request->input('id', 0);
+        $id = Request::input('id',0);
         //没有密码值不对密码进行修改
-        if ( ! $request->password ) {
-            $request->offsetUnset('password');
+        if ( ! Request::input('password') ) {
+            Request::offsetUnset('password');
         }
 
         return [
             'uname' => 'sometimes|required|alpha_dash|between:5,18|unique:users,uname,' . $id . ',id,deleted_at,NULL',
-            'password' => ($id ? 'sometimes|' : '') . 'required|between:6,18',
+            'password' => ($id ? 'sometimes|' : '').'required|between:6,18',
             'name' => 'required',
             'email' => 'sometimes|required|email|unique:users,email,' . $id . ',id,deleted_at,NULL',
             'mobile_phone' => 'sometimes|required|mobile_phone|unique:users,mobile_phone,' . $id . ',id,deleted_at,NULL',
-            'status' => 'nullable|in:0,1,2',
+            'status'=>'nullable|in:0,1,2',
         ];
     }
 
@@ -101,18 +102,22 @@ class UserController extends Controller
     {
         $this->bindModel OR $this->bindModel();
         $obj = $this->bindModel->with($this->selectWithFields())
-            ->withCount(collect($this->getShowIndexFieldsCount())->filter(function ($item) {
+            ->withCount(collect($this->getShowIndexFieldsCount())->filter(function($item,$key){
                 return !is_array($item);
             })->toArray())
-            ->whereDoesntHave('admin') // 不显后台用户
+            ->whereDoesntHave('admin') //不显后台用户
             ->options($this->getOptions());
 
         return $obj;
     }
 
+    /**
+     * @param $data
+     * @return mixed
+     */
     protected function handlePostEditReturn(&$data)
     {
-        if( Arr::get($data, 'id') === 1 ){
+        if ( Arr::get($data,'id') == 1 ) {
             unset($data['status']);
         }
 
