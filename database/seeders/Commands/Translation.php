@@ -58,7 +58,7 @@ class Translation extends Seeder
         $this->frontJsonPath = resource_path('lang/'.config('app.locale','en').'/front.json');
         $routes_json = file_get_contents($this->routeJsonPath);
         $front_json = json_decode(file_get_contents($this->frontJsonPath),true);
-        $this->outMenus = Arr::get($front_json,'pages.menus',[]);
+        $this->outMenus = Arr::get($front_json,'_shared.menus',[]);
         $this->routesConfig = json_decode($routes_json,true);
         collect(['menus','resource'])->each(function ($key){
             $this->routesConfig[$key] = collect(Arr::get($this->routesConfig,$key,[]))->map(function ($item){
@@ -88,7 +88,10 @@ class Translation extends Seeder
         if(!Arr::get($front_json,'pages')){
             $front_json['pages'] = [];
         }
-        $front_json['pages']['menus'] = $this->outMenus;
+        if(!Arr::get($front_json,'_shared')){
+            $front_json['_shared'] = [];
+        }
+        $front_json['_shared']['menus'] = $this->outMenus;
         $res = file_put_contents($this->frontJsonPath,json_encode( $front_json ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         if($res===false){
             $this->command->error(trans('On failure!'));
