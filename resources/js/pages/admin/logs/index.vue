@@ -33,6 +33,22 @@
                             </div>
                         </div>
                     </template>
+                    <template slot="col" slot-scope="props">
+                       <span v-if="props.field.type =='code'">
+                            <code v-if="props.field.limit">
+                                {{props.row | array_get(props.k) | str_limit(props.field.limit)}}
+                            </code>
+                            <code v-else>
+                                  {{props.row | array_get(props.k)}}
+                            </code>
+                        </span>
+                        <span v-else-if="props.k =='menu.name'">
+                            {{$tp(array_get(props.row ,props.k),shared)}}
+                        </span>
+                        <span v-else>
+                            {{props.row | array_get(props.k)}}
+                        </span>
+                    </template>
                 </data-table>
             </div>
         </div>
@@ -53,6 +69,10 @@
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
                 "{lang_path}":'admin.logs',
+                shared:{
+                    "{lang_path}":'_shared.menus',
+                    '{lang_root}':''
+                },
                 options:{
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
