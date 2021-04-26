@@ -6,6 +6,7 @@ use Closure;
 use EasyWeChat\Kernel\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
 
 class LanguageMiddleware{
 
@@ -25,7 +26,10 @@ class LanguageMiddleware{
         $default = config('app.locale');
         $language = $request->header($key,$request->cookie($key))?:$this->preferredLanguage($request);
         $language = $language?:$default;
-        app('translator')->setLocale($language);
+        app('translator')->setLocale(
+            str_replace('-','_',$language)
+            //$language
+        );
         $response = $next($request);
         //后置操作
         return $response;
@@ -47,7 +51,7 @@ class LanguageMiddleware{
      */
     public function preferredLanguage(Request $request){
         return $this->getAcceptLanguage($request)->first(function ($language){
-            return in_array($language,config('app.locales'));
+            return in_array($language,config('laravel_admin.locales'));
         });
     }
 }

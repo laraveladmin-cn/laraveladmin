@@ -101,7 +101,7 @@
     <div class="{{$class}}_edit">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
+                <h3 class="box-title">{{$startSymbol}}$t('Quickly fill in'){{$endSymbol}}</h3>
             </div>
             <div class="box-body">
                 <edit :options="options" ref="edit">

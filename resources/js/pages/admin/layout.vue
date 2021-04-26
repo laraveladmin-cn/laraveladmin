@@ -19,7 +19,7 @@
                             <li :class="{active:module['active']}" v-for="module in modules">
                                 <a @click="toUrl(module['url'],$event)" :href="module['url']?module['url']:null">
                                     <i class="fa" :class="module['icons']"></i>
-                                    {{$tp(module['name'],{'{lang_path}':'menus'})}}
+                                    {{$tp(module['name'],shared)}}
                                 </a>
                             </li>
                         </ul>
@@ -237,20 +237,20 @@
                     </transition>
                     <section class="content-header" :class="{'my-content-header':downloading}">
                         <h1>
-                            {{$tp(current_menu_name,{'{lang_path}':'menus'})}}
+                            {{$tp(current_menu_name,shared)}}
                             <small>
-                                {{$tp(current_menu_description,{'{lang_path}':'menus'})}}
+                                {{$tp(current_menu_description,shared)}}
                             </small>
                         </h1>
                         <ol class="breadcrumb">
                             <li :class="{active:navbar.active}" v-for="navbar in navbars">
                                 <router-link :to="navbar['url']" v-if="!navbar.active && navbar['url']">
                                     <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                    {{$tp(navbar['name'],{'{lang_path}':'menus'})}}
+                                    {{$tp(navbar['name'],shared)}}
                                 </router-link>
                                 <span v-else>
                                  <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                    {{$tp(last_menu_show_name || navbar['name'],{'{lang_path}':'menus'})}}
+                                    {{$tp(last_menu_show_name || navbar['name'],shared)}}
                             </span>
                             </li>
                         </ol>
@@ -428,6 +428,10 @@
         props: {},
         data(){
             return {
+                shared:{
+                    '{lang_path}':'_shared.menus',
+                    '{lang_root}':''
+                },
                 "{lang_path}":'admin.layout',
                 loading:true,
                 keywords:'',

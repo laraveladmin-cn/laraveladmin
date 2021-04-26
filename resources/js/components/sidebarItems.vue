@@ -43,7 +43,8 @@
         },
         data(){
             return {
-                "{lang_path}":'menus',
+                "{lang_path}":'_shared.menus',
+                "{lang_root}":'',
             };
         },
         methods: {

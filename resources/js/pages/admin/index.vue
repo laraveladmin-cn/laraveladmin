@@ -29,7 +29,8 @@
             return {
                 data:{},
                 loading:false,
-                "{lang_path}":'admin'
+                "{lang_path}":'_shared.pages.admin',
+                '{lang_root}':''
             }
         },
         created() {

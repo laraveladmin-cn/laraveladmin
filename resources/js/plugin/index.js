@@ -91,14 +91,22 @@ export default Plugin = {
                     }else if($this['{lang_path}']){
                         prefix = $this['{lang_path}']+'.';
                     }
-                    let k = 'pages.'+prefix+key;
+                    let root = 'pages.';
+                    if(typeof index=="object" && typeof index['{lang_root}']=="string"){
+                        root = index['{lang_root}'];
+                    }else if(typeof params=="object" && typeof params['{lang_root}']=="string"){
+                        root = params['{lang_root}'];
+                    }else if(typeof $this['{lang_root}']=="string"){
+                        root = $this['{lang_root}'];
+                    }
+                    let k = root+prefix+key;
                     let res;
                     if(typeof params=="undefined"){
                         res = $this.$t(k,index);
                     }else {
                         res = $this.$t(k,index,params);
                     }
-                    if(res.indexOf('pages.'+prefix)==0){
+                    if(res.indexOf(root+prefix)==0){
                         return key;
                     }
                     return res;

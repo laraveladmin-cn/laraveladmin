@@ -49,7 +49,7 @@ class IndexController extends Controller
                 'url'=>'/admin/menus'
             ],
         ])->map(function ($item){
-            $item['_trans_name'] = trans_path('Total number of back-end administrators','pages.admin');
+            $item[config('laravel_admin.trans_prefix').'name'] = trans_path($item['name'],'_shared.pages.admin');
             return $item;
         })->toArray();
         return $data;
