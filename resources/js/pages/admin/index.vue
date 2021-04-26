@@ -5,7 +5,7 @@
                 <div class="small-box" :class="item['class']">
                     <div class="inner">
                         <h3>{{item['value']}}</h3>
-                        <p>{{$tp(item['name'])}}</p>
+                        <p>{{$tp(item['name'],shared)}}</p>
                     </div>
                     <div class="icon">
                         <i class="fa" :class="item['icon']"></i>
@@ -48,8 +48,11 @@
         },
         data(){
             return {
-                "{lang_path}":'_shared.pages.admin',
-                '{lang_root}':'',
+                shared:{
+                    "{lang_path}":'_shared.pages.admin',
+                    '{lang_root}':''
+                },
+                "{lang_path}":'admin',
                 data:{},
                 loading:false,
                 option1:()=>{

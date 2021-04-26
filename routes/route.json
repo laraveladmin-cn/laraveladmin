@@ -28,16 +28,16 @@
     "menus": [
         {
             "id": 1,
-            "name": "菜单列表",
-            "description": "根节点,所有菜单的父节点",
+            "name": "Menu list",
+            "description": "Root node, the parent node of all menus",
             "method": [],
             "_id": 1
         },
         {
             "id": 2,
-            "name": "运营",
+            "name": "Operate",
             "icons": "fa-dashboard",
-            "description": "运营模块",
+            "description": "Operation module",
             "url": "/admin/index",
             "parent_id": 1,
             "method": [],
@@ -46,9 +46,9 @@
         },
         {
             "id": 5,
-            "name": "后台主页",
+            "name": "Backstage home page",
             "icons": "fa-home",
-            "description": "后台主页",
+            "description": "Backstage home page",
             "url": "/admin/index",
             "parent_id": 2,
             "method": [
@@ -61,8 +61,8 @@
         },
         {
             "id": 80,
-            "name": "错误日志下载",
-            "description": "错误日志下载",
+            "name": "Error log Download",
+            "description": "Error log Download",
             "url": "/admin/down-log",
             "parent_id": 5,
             "method": [
@@ -77,9 +77,9 @@
         },
         {
             "id": 6,
-            "name": "用户管理",
+            "name": "User management",
             "icons": "fa-users",
-            "description": "用户管理组",
+            "description": "User management group",
             "parent_id": 2,
             "method": [],
             "status": "显示",
@@ -87,9 +87,9 @@
         },
         {
             "id": 7,
-            "name": "其它设置",
+            "name": "Other settings",
             "icons": "fa-gears",
-            "description": "其它设置组",
+            "description": "Other settings group",
             "parent_id": 2,
             "method": [],
             "status": "显示",
@@ -97,9 +97,9 @@
         },
         {
             "id": 146,
-            "name": "菜单拖拽",
+            "name": "Menu drag",
             "icons": "fa-mouse-pointer",
-            "description": "菜单拖拽页面数据",
+            "description": "Menu drag page data",
             "url": "/admin/menus/tree",
             "parent_id": 41,
             "method": [
@@ -111,9 +111,9 @@
         },
         {
             "id": 147,
-            "name": "提交菜单位置修改",
+            "name": "Submit menu location modification",
             "icons": "fa-edit",
-            "description": "提交菜单位置修改",
+            "description": "Submit menu location modification",
             "url": "/admin/menus/update-position",
             "parent_id": 146,
             "method": [
@@ -126,9 +126,9 @@
         },
         {
             "id": 142,
-            "name": "开发辅助",
+            "name": "Development assistance",
             "icons": "fa-wrench",
-            "description": "开发辅助功能页面",
+            "description": "Development assistant function page",
             "url": "/admin/developments/index",
             "parent_id": 7,
             "method": [
@@ -143,9 +143,9 @@
         },
         {
             "id": 143,
-            "name": "编辑页面布局保存",
+            "name": "Edit page layout save",
             "icons": "fa-save",
-            "description": "提交编辑页面布局保存",
+            "description": "Submit edit page layout save",
             "url": "/admin/developments/layout",
             "parent_id": 142,
             "method": [
@@ -158,9 +158,9 @@
         },
         {
             "id": 144,
-            "name": "数据表查询",
+            "name": "Data table query",
             "icons": "fa-table",
-            "description": "数据表名称联想查询",
+            "description": "Data table name association query",
             "url": "/admin/developments/tables",
             "parent_id": 142,
             "method": [
@@ -173,9 +173,9 @@
         },
         {
             "id": 145,
-            "name": "命令执行",
+            "name": "Command execution",
             "icons": "fa-code",
-            "description": "提交命令进行执行",
+            "description": "Submit the command for execution",
             "url": "/admin/developments/command",
             "parent_id": 142,
             "method": [
@@ -188,9 +188,9 @@
         },
         {
             "id": 8,
-            "name": "个人中心",
+            "name": "Personal Center",
             "icons": "fa-user",
-            "description": "个人中心组",
+            "description": "Personal Center Group",
             "parent_id": 2,
             "method": [],
             "status": "显示",
@@ -198,9 +198,9 @@
         },
         {
             "id": 57,
-            "name": "个人资料",
+            "name": "Personal data",
             "icons": "fa-heart",
-            "description": "个人资料",
+            "description": "Personal data",
             "url": "/admin/personage/index",
             "parent_id": 8,
             "method": [
@@ -213,9 +213,9 @@
         },
         {
             "id": 58,
-            "name": "提交编辑个人资料",
+            "name": "Submit and edit personal data",
             "icons": "fa-heart",
-            "description": "提交编辑个人资料",
+            "description": "Submit and edit personal data",
             "url": "/admin/personage/index",
             "parent_id": 57,
             "method": [
@@ -227,9 +227,9 @@
         },
         {
             "id": 59,
-            "name": "修改密码",
+            "name": "Change Password",
             "icons": "fa-lock",
-            "description": "修改密码",
+            "description": "Change Password",
             "url": "/admin/personage/password",
             "parent_id": 8,
             "method": [
@@ -242,9 +242,9 @@
         },
         {
             "id": 60,
-            "name": "提交编辑修改密码",
+            "name": "Submit to edit to change password",
             "icons": "fa-lock",
-            "description": "提交编辑修改密码",
+            "description": "Submit to edit to change password",
             "url": "/admin/personage/password",
             "parent_id": 59,
             "method": [
@@ -256,9 +256,9 @@
         },
         {
             "id": 81,
-            "name": "保险管理",
+            "name": "Insurance management",
             "icons": "fa-cubes",
-            "description": "保险管理",
+            "description": "Insurance management",
             "parent_id": 2,
             "method": [],
             "status": "显示",
@@ -266,9 +266,9 @@
         },
         {
             "id": 82,
-            "name": "合作渠道",
+            "name": "Cooperation channel",
             "icons": "fa-globe",
-            "description": "保险管理",
+            "description": "Insurance management",
             "parent_id": 2,
             "method": [],
             "status": "显示",
@@ -276,9 +276,9 @@
         },
         {
             "id": 148,
-            "name": "条件删除合作公司",
+            "name": "Conditions delete partner company",
             "icons": "fa-trash",
-            "description": "条件删除合作公司",
+            "description": "Conditions delete partner company",
             "url": "/admin/agent-systems/condition-delete",
             "parent_id": 131,
             "method": [
@@ -290,9 +290,9 @@
         },
         {
             "id": 3,
-            "name": "主页",
+            "name": "Homepage",
             "icons": "fa-user",
-            "description": "主页模块",
+            "description": "Home module",
             "url": "/home/index",
             "parent_id": 1,
             "method": [
@@ -305,9 +305,9 @@
         },
         {
             "id": 78,
-            "name": "提交编辑修改密码",
+            "name": "Submit to edit to change password",
             "icons": "fa-lock",
-            "description": "提交编辑修改密码",
+            "description": "Submit to edit to change password",
             "url": "/home/personage/password",
             "parent_id": 3,
             "method": [
@@ -319,9 +319,9 @@
         },
         {
             "id": 139,
-            "name": "个人资料",
+            "name": "Personal data",
             "icons": "fa-heart",
-            "description": "个人资料",
+            "description": "Personal data",
             "url": "/home/personage/index",
             "parent_id": 3,
             "method": [
@@ -334,9 +334,9 @@
         },
         {
             "id": 140,
-            "name": "提交编辑修改个人资料",
+            "name": "Submit and edit personal data",
             "icons": "fa-lock",
-            "description": "提交编辑修改密码",
+            "description": "Submit to edit to change password",
             "url": "/home/personage/index",
             "parent_id": 139,
             "method": [
@@ -348,9 +348,9 @@
         },
         {
             "id": 141,
-            "name": "文件上传",
+            "name": "File upload",
             "icons": "fa-upload",
-            "description": "文件上传",
+            "description": "File upload",
             "url": "/home/upload/index",
             "parent_id": 3,
             "method": [
@@ -362,9 +362,9 @@
         },
         {
             "id": 4,
-            "name": "官网",
+            "name": "Official website",
             "icons": "fa-home",
-            "description": "官网模块",
+            "description": "Official website module",
             "url": "/open/index",
             "parent_id": 1,
             "method": [],
@@ -375,8 +375,8 @@
         },
         {
             "id": 61,
-            "name": "获取配置信息",
-            "description": "获取配置信息",
+            "name": "Get configuration information",
+            "description": "Get configuration information",
             "url": "/open/config",
             "parent_id": 4,
             "method": [
@@ -388,8 +388,8 @@
         },
         {
             "id": 62,
-            "name": "更新token",
-            "description": "获取配置信息",
+            "name": "Update token",
+            "description": "Get configuration information",
             "url": "/open/token",
             "parent_id": 4,
             "method": [
@@ -404,8 +404,8 @@
         },
         {
             "id": 63,
-            "name": "登录页面",
-            "description": "登录页面",
+            "name": "Login page",
+            "description": "Login page",
             "url": "/open/login",
             "parent_id": 4,
             "method": [
@@ -419,8 +419,8 @@
         },
         {
             "id": 64,
-            "name": "提交登录",
-            "description": "提交登录",
+            "name": "Submit login",
+            "description": "Submit login",
             "url": "/open/login",
             "parent_id": 63,
             "method": [
@@ -439,8 +439,8 @@
         },
         {
             "id": 76,
-            "name": "三方登录",
-            "description": "三方登录",
+            "name": "Three party login",
+            "description": "Three party login",
             "url": "/open/other-login/{type}",
             "parent_id": 63,
             "method": [
@@ -455,8 +455,8 @@
         },
         {
             "id": 77,
-            "name": "三方登录后回调",
-            "description": "三方登录",
+            "name": "Callback after three party login",
+            "description": "Three party login",
             "url": "/open/other-login-callback/{type}",
             "parent_id": 76,
             "method": [
@@ -472,8 +472,8 @@
         },
         {
             "id": 65,
-            "name": "退出登录",
-            "description": "退出登录",
+            "name": "Log out",
+            "description": "Log out",
             "url": "/open/logout",
             "parent_id": 4,
             "method": [
@@ -489,8 +489,8 @@
         },
         {
             "id": 66,
-            "name": "注册页面",
-            "description": "注册页面",
+            "name": "Registration page",
+            "description": "Registration page",
             "url": "/open/register",
             "parent_id": 4,
             "method": [
@@ -503,8 +503,8 @@
         },
         {
             "id": 67,
-            "name": "发送注册短信",
-            "description": "发送注册短信",
+            "name": "Send sign up SMS",
+            "description": "Send sign up SMS",
             "url": "/open/register/send",
             "parent_id": 66,
             "method": [
@@ -520,8 +520,8 @@
         },
         {
             "id": 68,
-            "name": "提交注册",
-            "description": "提交注册",
+            "name": "Submit for registration",
+            "description": "Submit for registration",
             "url": "/open/register",
             "parent_id": 66,
             "method": [
@@ -537,8 +537,8 @@
         },
         {
             "id": 69,
-            "name": "忘记页面",
-            "description": "忘记页面",
+            "name": "Forget page",
+            "description": "Forget page",
             "url": "/open/password",
             "parent_id": 4,
             "method": [
@@ -551,8 +551,8 @@
         },
         {
             "id": 70,
-            "name": "忘记密码邮件发送",
-            "description": "忘记密码邮件发送",
+            "name": "Forget password email",
+            "description": "Forget password email",
             "url": "/open/forgot-password/send",
             "parent_id": 69,
             "method": [
@@ -564,8 +564,8 @@
         },
         {
             "id": 71,
-            "name": "忘记密码短信发送",
-            "description": "忘记密码短信发送",
+            "name": "Forget password SMS sending",
+            "description": "Forget password SMS sending",
             "url": "/open/forgot-password/send-sms",
             "parent_id": 69,
             "method": [
@@ -577,8 +577,8 @@
         },
         {
             "id": 72,
-            "name": "忘记密码提交重置密码",
-            "description": "忘记密码提交重置密码",
+            "name": "Forget password submit reset password",
+            "description": "Forget password submit reset password",
             "url": "/open/forgot-password/reset-password",
             "parent_id": 69,
             "method": [
@@ -589,8 +589,8 @@
         },
         {
             "id": 73,
-            "name": "获取用户信息",
-            "description": "获取用户信息",
+            "name": "Get user information",
+            "description": "Get user information",
             "url": "/open/user",
             "parent_id": 4,
             "method": [
@@ -602,8 +602,8 @@
         },
         {
             "id": 74,
-            "name": "获取菜单信息",
-            "description": "获取菜单信息",
+            "name": "Get menu information",
+            "description": "Get menu information",
             "url": "/open/menu",
             "parent_id": 4,
             "method": [
@@ -615,8 +615,8 @@
         },
         {
             "id": 75,
-            "name": "极验验证",
-            "description": "极验验证",
+            "name": "Polar verification",
+            "description": "Polar verification",
             "url": "/open/geetest",
             "parent_id": 4,
             "method": [
@@ -632,8 +632,8 @@
         },
         {
             "id": 79,
-            "name": "获取连接唯一标识",
-            "description": "获取连接唯一标识",
+            "name": "Get the unique identity of the connection",
+            "description": "Get the unique identity of the connection",
             "url": "/open/client-id",
             "parent_id": 4,
             "method": [
@@ -647,9 +647,9 @@
     "resource": [
         {
             "id": 9,
-            "name": "普通用户",
+            "name": "Ordinary users",
             "icons": "fa-user",
-            "description": "普通用户",
+            "description": "Ordinary users",
             "url": "/admin/users",
             "parent_id": 6,
             "is_page": "是",
@@ -660,37 +660,37 @@
         },
         {
             "id": 17,
-            "name": "权限管理",
+            "name": "Authority management",
             "icons": "fa-sitemap",
-            "description": "角色列表",
+            "description": "Role list",
             "url": "/admin/roles",
             "parent_id": 6,
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "item_name": "角色",
+            "item_name": "Role",
             "_id": 14,
             "end_id": 24
         },
         {
             "id": 25,
-            "name": "操作日志",
+            "name": "Operation log",
             "icons": "fa-mouse-pointer",
-            "description": "日志列表",
+            "description": "Log list",
             "url": "/admin/logs",
             "parent_id": 6,
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "item_name": "日志",
+            "item_name": "Journal",
             "_id": 22,
             "end_id": 32
         },
         {
             "id": 33,
-            "name": "后台用户",
+            "name": "Background users",
             "icons": "fa-user-secret",
-            "description": "后台用户",
+            "description": "Background users",
             "url": "/admin/admins",
             "parent_id": 6,
             "is_page": "是",
@@ -701,15 +701,15 @@
         },
         {
             "id": 41,
-            "name": "菜单设置",
+            "name": "Menu settings",
             "icons": "fa-bars",
-            "description": "菜单列表",
+            "description": "Menu list",
             "url": "/admin/menus",
             "parent_id": 7,
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "item_name": "菜单",
+            "item_name": "Menu",
             "_id": 39,
             "options": {
                 "only": [
@@ -751,9 +751,9 @@
         },
         {
             "id": 49,
-            "name": "系统设置",
+            "name": "System settings",
             "icons": "fa-gear",
-            "description": "系统设置",
+            "description": "System settings",
             "url": "/admin/configs",
             "parent_id": 7,
             "is_page": "是",
@@ -764,9 +764,9 @@
         },
         {
             "id": 91,
-            "name": "保险公司",
+            "name": "Insurance company",
             "icons": "fa-hand-pointer-o",
-            "description": "保险公司",
+            "description": "Insurance company",
             "url": "/admin/firms",
             "parent_id": 81,
             "is_page": "是",
@@ -777,9 +777,9 @@
         },
         {
             "id": 99,
-            "name": "保险产品",
+            "name": "Insurance products",
             "icons": "fa-cubes",
-            "description": "保险产品",
+            "description": "Insurance products",
             "url": "/admin/products",
             "parent_id": 81,
             "is_page": "是",
@@ -790,23 +790,23 @@
         },
         {
             "id": 83,
-            "name": "银行管理",
+            "name": "Bank management",
             "icons": "fa-bank",
-            "description": "银行管理",
+            "description": "Bank management",
             "url": "/admin/banks",
             "parent_id": 81,
             "is_page": "是",
             "status": "显示",
             "group": "admin",
-            "item_name": "银行",
+            "item_name": "Bank",
             "_id": 83,
             "end_id": 90
         },
         {
             "id": 107,
-            "name": "险种分类",
+            "name": "Insurance classification",
             "icons": "fa-map",
-            "description": "险种分类",
+            "description": "Insurance classification",
             "url": "/admin/classifys",
             "parent_id": 81,
             "is_page": "是",
@@ -817,9 +817,9 @@
         },
         {
             "id": 115,
-            "name": "险种分组",
+            "name": "Insurance grouping",
             "icons": "fa-object-group",
-            "description": "险种分组",
+            "description": "Insurance grouping",
             "url": "/admin/pclassifys",
             "parent_id": 81,
             "is_page": "是",
@@ -830,9 +830,9 @@
         },
         {
             "id": 123,
-            "name": "交费年期",
+            "name": "Payment period",
             "icons": "fa-clock-o",
-            "description": "交费年期",
+            "description": "Payment period",
             "url": "/admin/years",
             "parent_id": 81,
             "is_page": "是",
@@ -843,9 +843,9 @@
         },
         {
             "id": 131,
-            "name": "合作公司",
+            "name": "Cooperative company",
             "icons": "fa-sitemap",
-            "description": "合作公司",
+            "description": "Cooperative company",
             "url": "/admin/agent-systems",
             "parent_id": 82,
             "is_page": "是",
