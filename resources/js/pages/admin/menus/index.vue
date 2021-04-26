@@ -60,6 +60,7 @@
                                     <i class="fa fa-edit"></i>
                                 </button>
                             </template>
+
                         </data-table>
                     </div>
                 </div>
