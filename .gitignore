@@ -20,3 +20,4 @@ docker-compose.yml
 __MACOSX
 .idea
 composer.lock
+*.DS_Store

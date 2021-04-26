@@ -18,25 +18,28 @@ class MenuController extends Controller
 
     /**
      * 绑定模型
+     *
      * @return mixed
      */
     protected function bindModel()
     {
-        if (!$this->bindModel) {
+        if ( ! $this->bindModel ) {
             $this->bindModel = $this->newBindModel()->usable();
         }
+
         return $this->bindModel;
     }
 
     /**
      * 资源模型
+     *
      * @var  string
      */
     protected $resourceModel = 'Menu';
 
-    protected $orderDefault=[
-        'left_margin'=>'asc',
-        'id'=>'asc'
+    protected $orderDefault = [
+        'left_margin' => 'asc',
+        'id' => 'asc',
     ];
 
     protected $sizer = [
@@ -45,11 +48,12 @@ class MenuController extends Controller
         'method' => '&',
         'name' => 'like',
         'name|url' => 'like',
-        'resource_id'=>'='
+        'resource_id' => '=',
     ];
 
     /**
      * Index页面字段名称显示
+     *
      * @var array
      */
     public $showIndexFields = [
@@ -64,7 +68,11 @@ class MenuController extends Controller
         'status',
         'created_at',
         'updated_at',
-        'parent' => ['name', 'id']
+
+        'parent' => [
+            'name',
+            'id',
+        ],
     ];
 
     /**
@@ -83,7 +91,11 @@ class MenuController extends Controller
         'status',
         'created_at',
         'updated_at',
-        'parent' => ['name', 'id']
+
+        'parent' => [
+            'name',
+            'id',
+        ],
     ];
 
     //字段导出
@@ -103,11 +115,16 @@ class MenuController extends Controller
     ];
 
     public $editFields = [
-        'resource'=>[
-            'id','name'
+        'resource' => [
+            'id',
+            'name',
         ],
-        'resources'=>[
-            'id','name','resource_id','item_name'
+
+        'resources' => [
+            'id',
+            'name',
+            'resource_id',
+            'item_name',
         ]
     ];
 
@@ -125,34 +142,37 @@ class MenuController extends Controller
             'is_page' => 'in:0,1',
             'status' => 'in:1,2',
         ];
-        if($_type!=0){
+        if ( $_type ) {
             $validate['url'] = 'required|url_path';
             $validate['method'] = 'required|array';
-            if(!Str::is('_*',Request::input('item_name'))){
+            if ( !Str::is('_*', Request::input('item_name')) ) {
                 $validate['group'] = 'required';
             }
         }
+
         return $validate;
     }
 
     /**
      * 编辑页面数据返回处理
+     *
      * @param $id
      * @param $data
      * @return mixed
      */
-    protected function handleEditReturn($id,&$data){
+    protected function handleEditReturn($id, &$data)
+    {
         $resource_id = Arr::get($data, 'row.resource_id', 0);
         $data['row']['_type'] = 0;
         $data['row']['_options'] = []; //资源
         $data['maps']['_options_name'] = [];
-        if ($resource_id == -1) {
+        if ( $resource_id == -1) {
             $data['row']['_type'] = 1;
             $data['row']['_options'] = collect(Arr::get($data,'row.resources',[]))->pluck('item_name')->toArray();
             $data['maps']['_options_name'] = collect(Arr::get($data,'row.resources',[]))->pluck('name','item_name')->toArray();
-        }elseif($data['row']['id'] && $data['row']['method']){
+        } else if ( $data['row']['id'] && $data['row']['method'] ) {
             $data['row']['_type'] = 2;
-        }else{
+        } else {
             $data['row']['method'] = [];
         }
         //树状结构可选数据
@@ -163,7 +183,7 @@ class MenuController extends Controller
         $data['maps']['_type'] = [
             '普通链接',
             '资源',
-            '单独路由'
+            '单独路由',
         ];
         $data['maps']['_options']=collect(RouteService::getResourceRoutes(['except'=>['index']]))
             ->keys()
@@ -177,10 +197,12 @@ class MenuController extends Controller
 
     /**
      * 保存数据后对返回数据处理
+     *
      * @param $item
      * @param $data
      */
-    public function handlePostEdit($item, $data){
+    public function handlePostEdit($item, $data)
+    {
         $id = Arr::get($item,'id',0)?:0;
         if(isset($data['_options'])){
             if($data['resource_id']==-1){ //资源
@@ -206,25 +228,29 @@ class MenuController extends Controller
 
     /**
      * 拖拽位置页面数据准备
+     *
      * @return mixed
      */
-    public function tree(){
+    public function tree()
+    {
        $data['tree'] =  collect(Menu::optionalParent(null)
             ->usable()
             ->orderBy('left_margin', 'asc')
             ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin','item_name']))
            ->map(function ($item){
                $item = collect($item)->toArray();
-               if(Str::is('_*',$item['item_name']) || $item['level']<=1){
+               if( Str::is('_*', $item['item_name']) || $item['level'] <= 1 ){
                    $item['drag'] = false;
                }
                $item['_parent_id'] = $item['parent_id'];
                $item['_level'] = $item['level'];
+
                return $item;
            });
        $data['row']['update_position'] = [];
        $createUrl = '/admin/menus/update-position';
        $data['configUrl']['createUrl'] = Menu::hasPermission($createUrl,'post') ? $createUrl : '';
+
        return Response::returns($data);
     }
 
@@ -232,18 +258,18 @@ class MenuController extends Controller
      * 布局位置修改
      * @return mixed
      */
-    public function updatePosition(){
+    public function updatePosition()
+    {
         collect(Request::input('update_position',[]))->map(function ($item){
-            if($item['type']=='update'){
+            if( $item['type'] == 'update' ) {
                 Menu::find($item['from'])->update(['parent_id'=>$item['to']]);
-            }else{
+            } else {
                 Menu::find($item['from'])->moveNear($item['to'],$item['type']);
             }
         });
         //更新路由数据
         RouteService::upRouteJson();
+
         return Response::returns(['alert' => alert(['message' => trans('Modify the success!')])]);
     }
-
-
 }
