@@ -1,10 +1,112 @@
 {
+    "_shared":{
+        "menus": {
+            "Menu list": "Menu list",
+            "Root node, the parent node of all menus": "Root node, the parent node of all menus",
+            "Operate": "Operate",
+            "Operation module": "Operation module",
+            "Homepage": "Homepage",
+            "Home module": "Home module",
+            "Official website": "Official website",
+            "Official website module": "Official website module",
+            "Backstage home page": "Backstage home page",
+            "User management ": "User management ",
+            "User management group": "User management group",
+            "Other settings": "Other settings",
+            "Other settings group": "Other settings group",
+            "Personal Center": "Personal Center",
+            "Personal Center Group": "Personal Center Group",
+            "personal data": "personal data",
+            "Submit and edit personal data": "Submit and edit personal data",
+            "Change Password": "Change Password",
+            "Submit to edit to change password": "Submit to edit to change password",
+            "Get configuration information": "Get configuration information",
+            "Update token": "Update token",
+            "Login page": "Login page",
+            "Submit login": "Submit login",
+            "Log out": "Log out",
+            "Registration page": "Registration page",
+            "Send sign up SMS": "Send sign up SMS",
+            "Submit for registration": "Submit for registration",
+            "Forget page": "Forget page",
+            "Forget password email": "Forget password email",
+            "Forget password SMS sending": "Forget password SMS sending",
+            "Forget password submit reset password": "Forget password submit reset password",
+            "Get user information": "Get user information",
+            "Get menu information": "Get menu information",
+            "Polar verification": "Polar verification",
+            "Three party login": "Three party login",
+            "Callback after three party login": "Callback after three party login",
+            "Get the unique identity of the connection": "Get the unique identity of the connection",
+            "Error log Download": "Error log Download",
+            "File upload": "File upload",
+            "Development assistance": "Development assistance",
+            "Development assistant function page": "Development assistant function page",
+            "Edit page layout save": "Edit page layout save",
+            "Submit edit page layout save": "Submit edit page layout save",
+            "Data table query": "Data table query",
+            "Data table name association query": "Data table name association query",
+            "Command execution": "Command execution",
+            "Submit the command for execution": "Submit the command for execution",
+            "Menu drag": "Menu drag",
+            "Menu drag page data": "Menu drag page data",
+            "Submit menu location modification": "Submit menu location modification",
+            "Ordinary users": "Ordinary users",
+            "Authority management": "Authority management",
+            "Role list": "Role list",
+            "Operation log": "Operation log",
+            "Log list": "Log list",
+            "journal": "journal",
+            "Background users": "Background users",
+            "Menu settings": "Menu settings",
+            "menu": "menu",
+            "System settings": "System settings",
+            "User management": "User management",
+            "Personal data": "Personal data",
+            "Role": "Role",
+            "Journal": "Journal",
+            "Menu": "Menu"
+        },
+        "tables": {
+            "users": {
+                "fields": {
+                    "uname": "Username",
+                    "name": "Nickname",
+                    "avatar": "Avatar",
+                    "email": "Email address",
+                    "mobile_phone": "Mobile phone number",
+                    "remember_token": "Remember to log in",
+                    "status": "Status",
+                    "description": "Description",
+                    "created_at": "Created At",
+                    "updated_at": "Updated At",
+                    "deleted_at": "Deleted At",
+                    "id": "ID"
+                },
+                "maps": {
+                    "status": [
+                        "Cancellation",
+                        "Effective",
+                        "Disable"
+                    ]
+                }
+            }
+        },
+        "pages": {
+            "admin":{
+                "Total number of back-end administrators": "Total number of back-end administrators",
+                "Total number of roles": "Total number of roles",
+                "Total number of users": "Total number of users",
+                "Total number of menus": "Total number of menus"
+            }
+        }
+    },
     "validations": {
         "code": "en",
         "messages": {
             "alpha": "The {_field_} field may only contain alphabetic characters",
-            "alpha_num": "The {_field_} field may only contain alpha-numeric characters",
             "alpha_dash": "The {_field_} field may contain alpha-numeric characters as well as dashes and underscores",
+            "alpha_num": "The {_field_} field may only contain alpha-numeric characters",
             "alpha_spaces": "The {_field_} field may only contain alphabetic characters as well as spaces",
             "between": "The {_field_} field must be between {min} and {max}",
             "confirmed": "The {_field_} field confirmation does not match",
@@ -14,18 +116,18 @@
             "excluded": "The {_field_} field is not a valid value",
             "ext": "The {_field_} field is not a valid file",
             "image": "The {_field_} field must be an image",
+            "oneOf": "The {_field_} field is not a valid value",
             "integer": "The {_field_} field must be an integer",
-	    "oneOf": "The {_field_} field is not a valid value",
             "length": "The {_field_} field must be {length} long",
-            "max_value": "The {_field_} field must be {max} or less",
             "max": "The {_field_} field may not be greater than {length} characters",
+            "max_value": "The {_field_} field must be {max} or less",
             "mimes": "The {_field_} field must have a valid file type",
-            "min_value": "The {_field_} field must be {min} or more",
             "min": "The {_field_} field must be at least {length} characters",
+            "min_value": "The {_field_} field must be {min} or more",
             "numeric": "The {_field_} field may only contain numeric characters",
             "regex": "The {_field_} field format is invalid",
-            "required_if": "The {_field_} field is required",
             "required": "The {_field_} field is required",
+            "required_if": "The {_field_} field is required",
             "size": "The {_field_} field size must be less than {size}KB",
             "double": "The {_field_} field must be a valid decimal",
             "mobile": "The {_field_} is not properly formed",
@@ -85,10 +187,9 @@
             "Enter the CAPTCHA you received": "Enter the code you received",
             "Please enter your mobile phone number": "Please enter your mobile phone number",
             "Please enter email address": "Please enter email address"
-
         },
         "home": {
-            "index":{
+            "index": {
                 "Home page of official website": "Home page of official website",
                 "Backstage home page": "Backstage home page",
                 "Front desk home page": "Front desk home page",
@@ -96,25 +197,20 @@
                 "Official environment official website": "Official environment official website:"
             },
             "layout": {
-                "Footer":"Footer",
+                "Footer": "Footer",
                 "Header": "Header",
                 "Menu field": "Menu field",
                 "Home page of official website": "Home page of official website"
-
             }
         },
         "admin": {
-            "Total number of back-end administrators": "Total number of back-end administrators",
-            "Total number of roles": "Total number of roles",
-            "Total number of users": "Total number of users",
-            "Total number of menus": "Total number of menus",
             "users": {
-                "username":"username"
+                "username": "username"
             },
             "developments_index": {
                 "Console commands": "Console commands",
                 "Menu routing": "Menu routing",
-                "Plug-in installation":"Plug-in installation",
+                "Plug-in installation": "Plug-in installation",
                 "Relevant documentation": "Relevant documentation",
                 "Command": "Command",
                 "Instructions": "Instructions",
@@ -122,16 +218,17 @@
                 "Copy it to the paste board": "Copy it to the paste board",
                 "Command:": "Command:",
                 "Enter the command manually:": "Enter the command manually:",
-                "Command name:":"Command name:"
+                "Command name:": "Command name:"
             },
             "menus": {
-                "Drag shift":"Drag shift",
+                "Drag shift": "Drag shift",
                 "Data list": "Data list"
             },
             "logs": {
-               "(Request parameters)": "(Request parameters)"
+                "(Request parameters)": "(Request parameters)"
             },
             "layout": {
+                "Search menu": "Search menu",
                 "Backend systems": "Systems",
                 "Toggle navigation": "Toggle navigation",
                 "Theme": "Theme",
@@ -148,7 +245,7 @@
                 "Green": "Green",
                 "Red": "Red",
                 "Yellow": "Yellow",
-                "Blue Light":"Blue Light",
+                "Blue Light": "Blue Light",
                 "All White": "All White",
                 "Purple Light": "Purple Light",
                 "Green Light": "Green Light",
@@ -171,31 +268,6 @@
             "System maintenance": "System maintenance",
             "Server internal error": "Oops! Server internal error.",
             "Server internal error, please contact the developer for processing": "Server internal error, please contact the developer for processing! Meanwhile, you may return to "
-        }
-    },
-    "tables": {
-        "users": {
-            "fields": {
-                "uname" : "Username",
-                "name" : "Nickname",
-                "avatar" : "Avatar",
-                "email" : "Email address",
-                "mobile_phone" : "Mobile phone number",
-                "remember_token" : "Remember to log in",
-                "status" : "Status",
-                "description" : "Description",
-                "created_at" : "Created At",
-                "updated_at" : "Updated At",
-                "deleted_at" : "Deleted At",
-                "id" : "ID"
-            },
-            "maps":{
-                "status": [
-                    "Cancellation",
-                    "Effective",
-                    "Disable"
-                ]
-            }
         }
     },
     "New": "New",
@@ -224,7 +296,7 @@
     "Loading": "Loading",
     "Import data": "Import data",
     "Skip to": "Jump to page",
-    "page(jump)": "",
+    "page(jump)": "page(jump)",
     "Edit": "Edit",
     "The record number:": "The record number:",
     "Language": "Language",
@@ -249,7 +321,7 @@
     "Please check the field you want to export to export correctly.": "Please check the field you want to export to export correctly.",
     "Are you sure you want to import all the data in bulk?": "Are you sure you want to import all the data in bulk?",
     "Error uploading file!": "Error uploading file!",
-    "Please complete the verification code correctly":"Please complete the verification code correctly.",
+    "Please complete the verification code correctly": "Please complete the verification code correctly.",
     "Select the file": "Select the file",
     "Reselect": "Reselect",
     "Pause uploading": "Pause uploading",
@@ -275,7 +347,7 @@
     "An error occurred while requesting the server, please contact the developer in time": "An error occurred while requesting the server, please contact the developer in time!",
     "Token has expired, please try again": "Token has expired, please try again!",
     "{type} page": "{type} page",
-    "Download successfully":"Download successfully!",
+    "Download successfully": "Download successfully!",
     "The XLSX plug-in has not been loaded yet, please try again later": "The XLSX plug-in has not been loaded yet, please try again later!",
     "The import or export task already exists": "The import or export task already exists!",
     "Export link address does not exist": "Export link address does not exist",
@@ -292,9 +364,9 @@
     "Progress": "Progress",
     "Section": "Section one | Section two | Section three | Section four",
     "Email": "Email",
-    "Login":"Login",
+    "Login": "Login",
     "Register": "Register",
     "password": "password",
-    "Password":"Password",
+    "Password": "Password",
     "Mobile phone number": "Mobile phone number"
 }

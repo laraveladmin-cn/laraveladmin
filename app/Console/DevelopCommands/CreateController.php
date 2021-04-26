@@ -23,7 +23,11 @@ class CreateController extends BaseCreate
      * @var string
      */
     protected $description = '自定义模板控制器生成';
-    protected $confirmName='控制器';
+    public function __construct()
+    {
+        parent::__construct();
+        $this->description = trans_path('Custom template controller generation',$this->transPath);
+    }
 
     protected $type='php';
     protected $tpl = 'php/controller';
@@ -82,7 +86,10 @@ class CreateController extends BaseCreate
                 $item->showType = in_array($item->Field,['created_at','updated_at']) ? 'time' : Arr::get($comment,'1',''); //字段显示类型
                 $item->showType = in_array($item->Field,['deleted_at','left_margin','right_margin','level','remember_token']) ? 'hidden' :  $item->showType;
                 $comment = explode(':',$comment[0]);
-                $info = ['created_at'=>'创建时间','updated_at'=>'修改时间'];
+                $info = [
+                    'created_at'=>trans_path('Created At',$this->transPath),//'创建时间',
+                    'updated_at'=>trans_path('Updated At',$this->transPath)//'修改时间'
+                ];
                 $item->info = isset($info[$item->Field]) ? $info[$item->Field]: $comment[0]; //字段说明
                 $item->info =  $item->info ?: $item->Field;
                 $comment = explode(',',Arr::get($comment,'1',''));

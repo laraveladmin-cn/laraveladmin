@@ -11,38 +11,49 @@ class LogController extends Controller
 {
     use ResourceController;
 
+    /**
+     * LogController constructor.
+     */
     public function __construct()
     {
-        $this->sizerDefault=[
-            'created_at'=>[Carbon::now()->startOfDay()->toDateTimeString(),'']
+        $this->sizerDefault = [
+            'created_at' => [
+                Carbon::now()->startOfDay()->toDateTimeString(),
+                '',
+            ],
         ];
     }
 
     /**
      * 资源模型
+     *
      * @var  string
      */
     protected $resourceModel = 'Log';
 
-
-    protected $sizer=[
-        'menu_id'=>'=',
-        'user_id'=>'=',
-        'parameters'=>'like',
-        'created_at'=>[
+    protected $sizer = [
+        'menu_id' => '=',
+        'user_id' => '=',
+        'parameters' => 'like',
+        'created_at' => [
             '>=',
-            '<='
-        ]
+            '<=',
+        ],
     ];
 
-    protected $mapsWhereFields=[
-        'menu_id'=>['id','name','url']
+    protected $mapsWhereFields = [
+        'menu_id' => [
+            'id',
+            'name',
+            'url',
+        ],
     ];
     /**
      * Index页面字段名称显示
+     *
      * @var array
      */
-    public $showIndexFields=[
+    public $showIndexFields = [
         'id',
         'user_id',
         'menu_id',
@@ -50,16 +61,34 @@ class LogController extends Controller
         'ip',
         'parameters',
         'created_at',
-        'user'=>['id','name','uname'],
-        'menu'=>['id','name']
+
+        'user' => [
+            'id',
+            'name',
+            'uname',
+        ],
+
+        'menu' => [
+            'id',
+            'name',
+        ],
     ];
     /**
      * excel导出数据字段
+     *
      * @var array
      */
     public $exportFields = [
-        'user'=>['id','name','uname'],
-        'menu'=>['id','name']
+        'user' => [
+            'id',
+            'name',
+            'uname',
+        ],
+
+        'menu' => [
+            'id',
+            'name',
+        ],
     ];
 
 
@@ -79,8 +108,16 @@ class LogController extends Controller
      * @var array
      */
     public $editFields = [
-        'menu'=>['id','name','url'],
-        'user'=>['id','name']
+        'menu' => [
+            'id',
+            'name',
+            'url',
+        ],
+
+        'user' => [
+            'id',
+            'name',
+        ],
     ];
 
 
@@ -88,38 +125,52 @@ class LogController extends Controller
      * 验证规则
      * @return  array
      */
-    protected function getValidateRule(){
+    protected function getValidateRule()
+    {
         $id = Request::input('id',0);
-        return [
-        ];
+
+        return [];
     }
 
-    protected function getImportValidateRule($id,$item){
-        $validate = [
-        ];
+    /**
+     * @param $id
+     * @param $item
+     * @return array
+     */
+    protected function getImportValidateRule($id, $item)
+    {
+        $validate = [];
+
         return $validate;
     }
 
     /**
      * 列表页面返回数据处理
+     *
      * @param $data
      * @return mixed
      */
-    protected function handleIndexReturn(&$data){
+    protected function handleIndexReturn(&$data)
+    {
         $data['configUrl']['createUrl'] = '';
         $data['configUrl']['updateUrl'] = '';
         $data['configUrl']['importUrl'] = ''; //不需要导入数据
+
         return $data;
     }
+
     /**
      * 编辑页面数据返回处理
+     *
      * @param $id
      * @param $data
      * @return mixed
      */
-    protected function handleEditReturn($id,&$data){
+    protected function handleEditReturn($id, &$data)
+    {
         $data['configUrl']['createUrl'] = '';
         $data['configUrl']['updateUrl'] = '';
+
         return $data;
     }
 

@@ -40,7 +40,7 @@ let AppConfig = {
     default_language:'',
     ...(window.AppConfig || {})
 };
-AppConfig.language = localStorage.getItem('language') || AppConfig.default_language;
+AppConfig.language = (localStorage.getItem('language') || AppConfig.default_language).replace(/\_/g,'-');
 //使用请求地址
 AppConfig.use_url = AppConfig.api_url_model=='web'? AppConfig.web_url: AppConfig.api_url;
 window.AppConfig = AppConfig;

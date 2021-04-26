@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 
 class BuildIndexHtml extends Command
 {
+
     /**
      * The name and signature of the console command.
      *
@@ -22,6 +23,7 @@ class BuildIndexHtml extends Command
     protected $description = '编译生成前端入口文件index.html';
 
     protected $fileName = 'index.html';
+    protected $transPath='commands';
 
     /**
      * Create a new command instance.
@@ -31,6 +33,7 @@ class BuildIndexHtml extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->description = trans_path('Compile and generate the front-end entry file "index.html"',$this->transPath);
     }
 
     /**

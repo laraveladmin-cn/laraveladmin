@@ -12,6 +12,14 @@ use Illuminate\Support\Str;
 
 class CreateAll extends Command
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->description = trans_path('Generate all resources',$this->transPath);
+    }
+    protected $transPath='commands';
+
     /**
      * The name and signature of the console command.
      *
@@ -53,9 +61,15 @@ class CreateAll extends Command
             if($migration &&
                 file_exists($migration_file = $this->migrationPath($migration)) &&
                 (!$in_console ||
-                    !$this->confirm('迁移文件已经存在,是否继续生成? [y|N]'))
+                    !$this->confirm(
+                        trans_path('Is the ":file" file already overwritten?',$this->transPath,['file'=>$migration_file])
+                        //'迁移文件已经存在,是否继续生成? [y|N]'
+                    ))
             ){
-                $this->info($migration_file.'文件已经存在!');
+                $this->info(
+                    trans_path('The ":file" file already exists',$this->transPath,['file'=>$migration_file])
+                    //$migration_file.'文件已经存在!'
+                );
             }else{
                 if($migration){
                     Migration::where('migration',$migration)->delete();
@@ -78,7 +92,10 @@ class CreateAll extends Command
                 })));
                 $migration_file and Migration::firstOrCreate(['migration'=>$migration_file],['migration'=>$migration_file,'batch'=>0]);
                 $migration = Migration::query()->latest('id')->value('migration');
-                $this->info( $this->migrationPath($migration).' 创建成功');
+                $this->info(
+                    trans_path('File ":file" created successfully',$this->transPath,['file'=>$this->migrationPath($migration)])
+                    //$this->migrationPath($migration).' 创建成功'
+                );
             }
         }
 

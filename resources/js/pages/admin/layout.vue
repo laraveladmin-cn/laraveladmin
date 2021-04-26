@@ -18,7 +18,8 @@
                         <ul class="nav navbar-nav">
                             <li :class="{active:module['active']}" v-for="module in modules">
                                 <a @click="toUrl(module['url'],$event)" :href="module['url']?module['url']:null">
-                                    <i class="fa" :class="module['icons']"></i> {{module['name']}}
+                                    <i class="fa" :class="module['icons']"></i>
+                                    {{$tp(module['name'],shared)}}
                                 </a>
                             </li>
                         </ul>
@@ -42,7 +43,7 @@
                                                     </div>
                                                     <h4>
                                                         {{$t('System')}}
-                                                        <small><i class="fa fa-clock-o"></i> 5 minutes ago</small>
+                                                        <small><i class="fa fa-clock-o"></i> {{$tp('{number} minutes ago',{number:5})}}</small>
                                                     </h4>
                                                     <p>{{$t('Hello')}}</p>
                                                 </a>
@@ -167,7 +168,7 @@
                         </div>
                         <div class="sidebar-form">
                               <div class="input-group">
-                                  <input @keydown.enter="search" @keyup="waitSearch" v-model="keywords" type="text" name="keywords" class="form-control" placeholder="菜单搜索">
+                                  <input @keydown.enter="search" @keyup="waitSearch" v-model="keywords" type="text" name="keywords" class="form-control" :placeholder="$tp('Search menu')">
                                   <span class="input-group-btn">
                                   <button @click="search" type="button" class="btn btn-flat">
                                       <i class="fa fa-search"></i>
@@ -236,18 +237,20 @@
                     </transition>
                     <section class="content-header" :class="{'my-content-header':downloading}">
                         <h1>
-                            {{current_menu_name}}
-                            <small>{{current_menu_description}}</small>
+                            {{$tp(current_menu_name,shared)}}
+                            <small>
+                                {{$tp(current_menu_description,shared)}}
+                            </small>
                         </h1>
                         <ol class="breadcrumb">
                             <li :class="{active:navbar.active}" v-for="navbar in navbars">
                                 <router-link :to="navbar['url']" v-if="!navbar.active && navbar['url']">
                                     <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                    {{navbar['name']}}
+                                    {{$tp(navbar['name'],shared)}}
                                 </router-link>
                                 <span v-else>
                                  <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                {{last_menu_show_name || navbar['name']}}
+                                    {{$tp(last_menu_show_name || navbar['name'],shared)}}
                             </span>
                             </li>
                         </ol>
@@ -373,7 +376,7 @@
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        {{$tc('Section',3)}}
+                                        {{$tc('Section',4)}}
                                         <span class="label label-primary pull-right">68%</span>
                                     </h4>
 
@@ -425,6 +428,10 @@
         props: {},
         data(){
             return {
+                shared:{
+                    '{lang_path}':'_shared.menus',
+                    '{lang_root}':''
+                },
                 "{lang_path}":'admin.layout',
                 loading:true,
                 keywords:'',

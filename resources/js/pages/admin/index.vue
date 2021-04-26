@@ -48,7 +48,8 @@
         },
         data(){
             return {
-                "{lang_path}":'admin',
+                "{lang_path}":'_shared.pages.admin',
+                '{lang_root}':'',
                 data:{},
                 loading:false,
                 option1:()=>{
@@ -295,7 +296,8 @@
                             }
                         ]
                     };
-                }
+                },
+
             }
         },
         created() {

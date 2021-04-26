@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class MigrateAllCommand extends Command
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->description = trans_path('Execute all migration files',$this->transPath);
+    }
+    protected $transPath='commands';
     /**
      * The name and signature of the console command.
      *
@@ -20,7 +26,7 @@ class MigrateAllCommand extends Command
      *
      * @var string
      */
-    protected $description = '迁移所有文件';
+    protected $description = '执行所有迁移文件';
 
     /**
      * Execute the console command.
