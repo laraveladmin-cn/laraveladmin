@@ -68,10 +68,12 @@ class MenuController extends Controller
         'status',
         'created_at',
         'updated_at',
-
+        'resource_id',
         'parent' => [
-            'name',
             'id',
+            'name',
+            'item_name'
+
         ],
     ];
 

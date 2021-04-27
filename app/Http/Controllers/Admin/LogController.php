@@ -71,6 +71,13 @@ class LogController extends Controller
         'menu' => [
             'id',
             'name',
+            'parent_id',
+            'resource_id',
+            'parent'=>[
+                'id',
+                'name',
+                'item_name'
+            ]
         ],
     ];
     /**

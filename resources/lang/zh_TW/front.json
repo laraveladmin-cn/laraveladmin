@@ -1,6 +1,19 @@
 {
-    "_shared":{
+    "_shared": {
         "menus": {
+            "{name} pagination": "{name}分頁",
+            "{name} paging data": "{name}分頁數據",
+            "Edit view {l_name}": "編輯查看{l_name}",
+            "{name} Edit Page": "{name}編輯頁面",
+            "Create {l_name}": "創建{l_name}",
+            "Submit create {l_name} request": "提交創建{l_name}請求",
+            "Update {l_name}": "更新{l_name}",
+            "Submit update {l_name} request": "提交更新{l_name}請求",
+            "Delete {l_name}": "删除{l_name}",
+            "Delete {l_name} data": "删除{l_name}數據",
+            "Export {l_name}": "匯出{l_name}",
+            "Import {l_name}": "導入{l_name}",
+            "Import {l_name} data in Excel": "Excel導入{l_name}數據",
             "Menu list": "選單清單",
             "Root node, the parent node of all menus": "根節點，所有選單的父節點",
             "Operate": "運營",
@@ -98,6 +111,24 @@
                 "Total number of roles": "角色總數",
                 "Total number of users": "用戶數",
                 "Total number of menus": "選單總數"
+            }
+        },
+        "datas": {
+            "configs": {
+                "name": {
+                    "Common password configuration": "通用密碼配寘"
+                },
+                "description": {
+                    "Common password for all users, please set a relatively complex password": "所有用戶通用密碼，請設定相對複雜密碼。"
+                }
+            },
+            "roles": {
+                "name": {
+                    "Superadministrator": "超級管理員"
+                },
+                "description": {
+                    "Have all operation permissions": "擁有所有操作許可權。"
+                }
             }
         }
     },
@@ -265,8 +296,8 @@
             "Server internal error": "出錯了！服務器內部錯誤",
             "Server internal error, please contact the developer for processing": "服務器內部錯誤，請聯系開發人員進行處理！你可以點擊"
         }
-
     },
+    "Console commands": [],
     "New": "新建",
     "Refresh": "重繪",
     "Delete selected": "删除選中",

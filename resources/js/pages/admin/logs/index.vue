@@ -43,7 +43,7 @@
                             </code>
                         </span>
                         <span v-else-if="props.k =='menu.name'">
-                            {{$tp(array_get(props.row ,props.k),shared)}}
+                            {{translation(props.row ,props.k)}}
                         </span>
                         <span v-else>
                             {{props.row | array_get(props.k)}}
@@ -110,7 +110,25 @@
             ])
         },
         methods:{
-
+            translation(item,key){
+                let value = array_get(item,key,'');
+                let resource_id = array_get(item,'menu.resource_id',0);
+                let res = this.$tp(value , this.shared);
+                if(resource_id && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                    let parent_name = array_get(item,'menu.parent.item_name','') || array_get(item,'menu.parent.name','') || '';
+                    let key = value.replace(parent_name,'{name}');
+                    let shared = copyObj(this.shared);
+                    if(key.indexOf('{name}')==0){
+                        shared.name=this.$tp(parent_name,shared);
+                    }else {
+                        key = value.replace(parent_name.toLowerCase(),'{name}');
+                        shared.l_name=this.$tp(parent_name,shared);
+                        key = key.replace('{name}','{l_name}');
+                    }
+                    res = this.$tp(key , shared);
+                }
+                return res;
+            }
         }
 
     };

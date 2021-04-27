@@ -4,7 +4,13 @@
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
                     <template slot="col" slot-scope="props">
-                        <span v-if="props.field.type =='label'">
+                        <span v-if="props.k =='name'">
+                            {{$tp(array_get(props.row ,props.k),shared_name)}}
+                        </span>
+                        <span v-else-if="props.k =='description'">
+                            {{$tp(array_get(props.row ,props.k),shared_description) | str_limit(80,'...')}}
+                        </span>
+                        <span v-else-if="props.field.type =='label'">
                             <span class="label" :class="'label-'+statusClass[props.row[props.k]%statusClass.length]">
                                 {{ props.data.maps[props.k] | array_get(props.row[props.k]) }}
                             </span>
@@ -62,6 +68,14 @@
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                shared_name:{
+                    "{lang_path}":'_shared.datas.roles.name',
+                    '{lang_root}':''
+                },
+                shared_description:{
+                    "{lang_path}":'_shared.datas.roles.description',
+                    '{lang_root}':''
+                },
                 options:{
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址

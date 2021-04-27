@@ -17,6 +17,17 @@ class MenuTableSeeder extends Seeder
     protected $del_ids = [];
 
     /**
+     * 判断字符串是否为英语
+     * @param $str
+     * @return string
+     */
+    public function isEnglish($str){
+        $mb = mb_strlen($str,'utf-8');
+        $st = strlen($str);
+        return $st==$mb;
+    }
+
+    /**
      * ID+5
      * 创建资源菜单
      */
@@ -73,38 +84,42 @@ class MenuTableSeeder extends Seeder
             }else{
                 $data['id'] = $add_id;
             }
+            $l_name = $name;//小写名字
+            if($this->isEnglish($name)){
+                $l_name = strtolower($name);
+            }
             if($key=='list'){
-                $data['name'] = $name.'分页';
+                $data['name'] = "{$name} pagination";//$name.'分页';
                 $data['icons'] = 'fa-list';
-                $data['description'] = $name.'分页数据';
+                $data['description'] = "{$name} paging data";//$name.'分页数据';
             }elseif($key=='show'){
-                $data['name'] = '编辑查看'.$name;
+                $data['name'] = "Edit view {$l_name}";//'编辑查看'.$name;
                 $data['icons'] = 'fa-edit';
-                $data['description'] = $name.'编辑页面';
+                $data['description'] = "{$name} Edit Page";//$name.'编辑页面';
             }elseif($key=='create'){
-                $data['name'] = '创建'.$name;
+                $data['name'] = "Create {$l_name}";//'创建'.$name;
                 $data['icons'] = 'fa-edit';
-                $data['description'] = '提交创建'.$name.'请求';
+                $data['description'] = "Submit create {$l_name} request";//'提交创建'.$name.'请求';
             }elseif($key=='update'){
-                $data['name'] = '更新'.$name;
+                $data['name'] = "Update {$l_name}";//'更新'.$name;
                 $data['icons'] = 'fa-edit';
-                $data['description'] = '提交更新'.$name.'请求';
+                $data['description'] = "Submit update {$l_name} request";//'提交更新'.$name.'请求';
             }elseif($key=='destroy'){
-                $data['name'] = '删除'.$name;
+                $data['name'] = "Delete {$l_name}";//'删除'.$name;
                 $data['icons'] = 'fa-trash-o';
-                $data['description'] =  '删除'.$name.'数据';
+                $data['description'] =  "Delete {$l_name} data";//'删除'.$name.'数据';
             }elseif($key=='export'){
-                $data['name'] = '导出'.$name;
+                $data['name'] = "Export {$l_name}";//'导出'.$name;
                 $data['icons'] = 'fa-file-excel-o';
-                $data['description'] = 'Excel导出'.$name.'数据';
+                $data['description'] = "Exporting {$l_name} data in Excel mode";//'Excel导出'.$name.'数据';
             }elseif($key=='import'){
-                $data['name'] = '导入'.$name;
+                $data['name'] = "Import {$l_name}";//'导入'.$name;
                 $data['icons'] = 'fa-database';
-                $data['description'] = 'Excel导入'.$name.'数据';
+                $data['description'] = "Import {$l_name} data in Excel";//'Excel导入'.$name.'数据';
             }else{
-                $data['name'] = '删除'.$name;
+                $data['name'] = "Delete {$l_name}";//'删除'.$name;
                 $data['icons'] = 'fa-trash-o';
-                $data['description'] = '删除'.$name.'数据';
+                $data['description'] =  "Delete {$l_name} data";//'删除'.$name.'数据';
             }
             Menu::create($data);
         });

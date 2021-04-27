@@ -93,9 +93,5 @@
     "Unable to generate the request signature. Route unavailable.": "无法生成签名，路由不可用。",
     "Check that the user connected to the database has access to the schema database!": "请检查连接数据库用户是否有读取schema数据库权限！",
     "Failed to create :attribute database!": "创建数据库 :attribute 失败!",
-    "Superadministrator": "超级管理员",
-    "Have all operation permissions.": "拥有所有操作权限。",
-    "Common password configuration": "通用密码配置",
-    "Common password for all users, please set a relatively complex password.": "所有用户通用密码，请设置相对复杂密码。",
     "Menu unchanged!": "菜单未改变!"
 }

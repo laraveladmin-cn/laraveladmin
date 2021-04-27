@@ -114,7 +114,7 @@
                                         <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" :alt="$t('User avatars')">
 
                                         <p>
-                                            {{user['name']}} - {{roleName}}
+                                            {{user['name']}} - {{$tp(roleName,shared_roule)}}
                                             <small>{{$tp('Date of entry : {date}',{date:'2019-08-01'})}}</small>
                                         </p>
                                     </li>
@@ -163,7 +163,7 @@
                             </div>
                             <div class="pull-left info">
                                 <p>{{user['name']}}</p>
-                                <a>{{roleName}}</a>
+                                <a>{{$tp(roleName,shared_roule)}}</a>
                             </div>
                         </div>
                         <div class="sidebar-form">
@@ -433,6 +433,10 @@
                     '{lang_root}':''
                 },
                 "{lang_path}":'admin.layout',
+                shared_roule:{
+                    '{lang_path}':'_shared.datas.roles.name',
+                    '{lang_root}':''
+                },
                 loading:true,
                 keywords:'',
                 timer:null,

@@ -1,6 +1,19 @@
 {
-    "_shared":{
+    "_shared": {
         "menus": {
+            "{name} pagination": "{name} pagination",
+            "{name} paging data": "{name} paging data",
+            "Edit view {l_name}": "Edit view {l_name}",
+            "{name} Edit Page": "{name} Edit Page",
+            "Create {l_name}": "Create {l_name}",
+            "Submit create {l_name} request": "Submit create {l_name} request",
+            "Update {l_name}": "Update {l_name}",
+            "Submit update {l_name} request": "Submit update {l_name} request",
+            "Delete {l_name}": "Delete {l_name}",
+            "Delete {l_name} data": "Delete {l_name} data",
+            "Export {l_name}": "Export {l_name}",
+            "Import {l_name}": "Import {l_name}",
+            "Import {l_name} data in Excel": "Import {l_name} data in Excel",
             "Menu list": "Menu list",
             "Root node, the parent node of all menus": "Root node, the parent node of all menus",
             "Operate": "Operate",
@@ -93,11 +106,29 @@
             }
         },
         "pages": {
-            "admin":{
+            "admin": {
                 "Total number of back-end administrators": "Total number of back-end administrators",
                 "Total number of roles": "Total number of roles",
                 "Total number of users": "Total number of users",
                 "Total number of menus": "Total number of menus"
+            }
+        },
+        "datas": {
+            "configs": {
+                "name": {
+                    "Common password configuration": "Common password configuration"
+                },
+                "description": {
+                    "Common password for all users, please set a relatively complex password": "Common password for all users, please set a relatively complex password"
+                }
+            },
+            "roles": {
+                "name": {
+                    "Superadministrator": "Superadministrator"
+                },
+                "description": {
+                    "Have all operation permissions": "Have all operation permissions"
+                }
             }
         }
     },
@@ -266,6 +297,7 @@
             "Server internal error, please contact the developer for processing": "Server internal error, please contact the developer for processing! Meanwhile, you may return to "
         }
     },
+    "Console commands": [],
     "New": "New",
     "Refresh": "Refresh",
     "Delete selected": "Delete selected",

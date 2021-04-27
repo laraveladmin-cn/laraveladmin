@@ -87,10 +87,10 @@
                                 <span v-else-if="props.field.type =='level'">
                                     {{ props.row[props.field.levelName || 'level'] | deep}}
                                      <span v-if="props.field.limit" :title="array_get(props.row,props.k,'')">
-                                         {{$tp(array_get(props.row ,props.k) , shared) | str_limit(props.field.limit)}}
+                                         {{translation(props.row,props.k) | str_limit(props.field.limit)}}
                                      </span>
                                     <span v-else>
-                                          {{$tp(array_get(props.row,props.k) , shared)}}
+                                          {{translation(props.row,props.k)}}
                                     </span>
                                 </span>
                                 <span v-else>
@@ -119,6 +119,7 @@
 
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
+    import i18n from "../../../i18n";
 
     export default {
         components: {
@@ -217,6 +218,25 @@
                 } else {
                     this.update_url = this.$refs['table'].data.configUrl.updateUrl;
                 }
+            },
+            translation(item,key){
+                let value = array_get(item,key,'');
+                let resource_id = item['resource_id'];
+                let res = this.$tp(value , this.shared);
+                if(resource_id && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                    let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
+                    let key = value.replace(parent_name,'{name}');
+                    let shared = copyObj(this.shared);
+                    if(key.indexOf('{name}')==0){
+                        shared.name=this.$tp(parent_name,shared);
+                    }else {
+                        key = value.replace(parent_name.toLowerCase(),'{name}');
+                        shared.l_name=this.$tp(parent_name,shared);
+                        key = key.replace('{name}','{l_name}');
+                    }
+                    res = this.$tp(key , shared);
+                }
+                return res;
             }
         },
         mounted() {

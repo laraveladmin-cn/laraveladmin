@@ -64,7 +64,7 @@
     {
         "command": "migrate:generate",
         "chinese": "生成数据表对应的迁移文件",
-        "english": "",
+        "english": "Generate migration file corresponding to data table",
         "parameters": [
             {
                 "key": "tables",
@@ -178,7 +178,7 @@
     {
         "command": "create:model",
         "chinese": "创建模型",
-        "english": "",
+        "english": "Create the model",
         "parameters": [
             {
                 "key": "table",
@@ -326,8 +326,8 @@
             {
                 "key": "model",
                 "value": "",
-                "rules": "",
-                "title": "模型(不填自动使用控制器名称)",
+                "rules": "required",
+                "title": "模型类名",
                 "name": "模型",
                 "placeholder": "Models\\\\User"
             },

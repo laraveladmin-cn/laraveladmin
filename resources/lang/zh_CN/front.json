@@ -1,6 +1,19 @@
 {
-    "_shared":{
+    "_shared": {
         "menus": {
+            "{name} pagination": "{name}分页",
+            "{name} paging data": "{name}分页数据",
+            "Edit view {l_name}": "编辑查看{l_name}",
+            "{name} Edit Page": "{name}编辑页面",
+            "Create {l_name}": "创建{l_name}",
+            "Submit create {l_name} request": "提交创建{l_name}请求",
+            "Update {l_name}": "更新{l_name}",
+            "Submit update {l_name} request": "提交更新{l_name}请求",
+            "Delete {l_name}": "删除{l_name}",
+            "Delete {l_name} data": "删除{l_name}数据",
+            "Export {l_name}": "导出{l_name}",
+            "Import {l_name}": "导入{l_name}",
+            "Import {l_name} data in Excel": "Excel导入{l_name}数据",
             "Menu list": "菜单列表",
             "Root node, the parent node of all menus": "根节点,所有菜单的父节点",
             "Operate": "运营",
@@ -98,6 +111,24 @@
                 "Total number of roles": "角色总数",
                 "Total number of users": "用户数",
                 "Total number of menus": "菜单总数"
+            }
+        },
+        "datas": {
+            "configs": {
+                "name": {
+                    "Common password configuration": "通用密码配置"
+                },
+                "description": {
+                    "Common password for all users, please set a relatively complex password": "所有用户通用密码，请设置相对复杂密码。"
+                }
+            },
+            "roles": {
+                "name": {
+                    "Superadministrator": "超级管理员"
+                },
+                "description": {
+                    "Have all operation permissions": "拥有所有操作权限。"
+                }
             }
         }
     },
@@ -265,8 +296,8 @@
             "Server internal error": "出错了! 服务器内部错误",
             "Server internal error, please contact the developer for processing": "服务器内部错误，请联系开发人员进行处理！你可以点击"
         }
-
     },
+    "Console commands": [],
     "New": "新建",
     "Refresh": "刷新",
     "Delete selected": "删除选中",

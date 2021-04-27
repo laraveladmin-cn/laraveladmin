@@ -35,7 +35,7 @@ class Translation extends Seeder
     public function run()
     {
         $this->transMenu();
-        //$this->TransAll();
+        $this->TransAll();
     }
 
     public function transMenu(){
