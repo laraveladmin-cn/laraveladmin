@@ -251,7 +251,14 @@ class MenuController extends Controller
        $data['tree'] =  collect(Menu::optionalParent(null)
             ->usable()
             ->orderBy('left_margin', 'asc')
-            ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin','item_name']))
+           ->with(['parent'=>function($q){
+               $q->select([
+                   'id',
+                   'name',
+                   'item_name'
+               ]);
+           }])
+            ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin','item_name','resource_id']))
            ->map(function ($item){
                $item = collect($item)->toArray();
                if( Str::is('_*', $item['item_name']) || $item['level'] <= 1 ){
