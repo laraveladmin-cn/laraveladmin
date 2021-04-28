@@ -1,6 +1,7 @@
 //菜单数据存储
 //把返回的数据集转换成Tree
 import {retrieveColumnLayout} from "echarts/src/layout/barGrid";
+import i18n from '../i18n';
 let list_to_tree = function(data, pk='id', pid = 'parent_id', child = 'childs'){
     // 删除 所有 children,以防止多次调用
     data.forEach(function (item) {
@@ -25,7 +26,50 @@ let list_to_tree = function(data, pk='id', pid = 'parent_id', child = 'childs'){
     });
     return val;
 };
-
+let $tp = function (key,index,params) {
+    let prefix = '';
+    if(typeof index=="object" && index['{lang_path}']){
+        prefix = index['{lang_path}']+'.';
+    }else if(typeof params=="object" && params['{lang_path}']){
+        prefix = params['{lang_path}']+'.';
+    }
+    let root = 'pages.';
+    if(typeof index=="object" && typeof index['{lang_root}']=="string"){
+        root = index['{lang_root}'];
+    }else if(typeof params=="object" && typeof params['{lang_root}']=="string"){
+        root = params['{lang_root}'];
+    }
+    let k = root+prefix+key;
+    let res;
+    if(typeof params=="undefined"){
+        res = i18n.t(k,index);
+    }else {
+        res = i18n.t(k,index,params);
+    }
+    if(res.indexOf(root+prefix)==0){
+        return key;
+    }
+    return res;
+};
+let translation = function (item,key,shared){
+    let $this = i18n.vm;
+    let value = array_get(item,key,'');
+    let resource_id = item['resource_id'];
+    let res = $tp(value , shared);
+    if(resource_id && res==value && ($this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+        let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
+        let key = value.replace(parent_name,'{name}');
+        if(key.indexOf('{name}')==0){
+            shared.name=$tp(parent_name,shared);
+        }else {
+            key = value.replace(parent_name.toLowerCase(),'{name}');
+            shared.l_name=$tp(parent_name,shared);
+            key = key.replace('{name}','{l_name}');
+        }
+        res = $tp(key , shared);
+    }
+    return res;
+};
 export default {
     namespaced: true,
     state:{
@@ -36,7 +80,11 @@ export default {
         last_menu_show:{ //最后一个菜单显示
             name:'',
             description:''
-        }
+        },
+        shared: {
+            "{lang_path}": '_shared.menus',
+            '{lang_root}': ''
+        },
     },
     mutations:{
         //更新state状态
@@ -163,7 +211,7 @@ export default {
             });
             if(state.keywords){
                 let filter_menus = menus.filter(function (menu) {
-                    return menu['name'].indexOf(state.keywords)!=-1;
+                    return menu['name'].indexOf(state.keywords)!=-1 || translation(menu,'name',state.shared).indexOf(state.keywords)!=-1;
                 });
                 menus = menus.filter(function (menu) {
                     let flog = false;
