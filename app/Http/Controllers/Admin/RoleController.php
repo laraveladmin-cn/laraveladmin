@@ -135,8 +135,20 @@ class RoleController extends Controller
             ->orderBy('left_margin', 'asc')
             ->get(['id','name','parent_id','level','left_margin','right_margin']);
         //所有权限菜单
-        $data['maps']['permissions'] = Menu::mainAdmin()
-            ->get(['id','name','parent_id']);
+        $data['maps']['permissions'] = collect(Menu::mainAdmin()
+            ->with(['parent'=>function($q){
+                $q->select([
+                    'id',
+                    'name',
+                    'item_name'
+                ]);
+            }])
+            ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin','resource_id']))
+            ->map(function ($item){
+            $item = collect($item)->toArray();
+            $item[config('laravel_admin.trans_prefix').'name'] = Menu::trans($item,'name');//trans_path($item['name'],'_shared.menus');
+            return $item;
+        });;
         if ( $id == 1 ) {
             $data['menu_ids'] = collect($data['maps']['permissions'])->pluck('id')->toArray();
         }

@@ -191,6 +191,9 @@
                 if(this.ztree && this.ztree.setting){
                     this.ztree.setting.check.chkboxType = value;
                 }
+            },
+            '_i18n.locale'(){
+                this.init();
             }
         },
         computed:{

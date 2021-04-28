@@ -5,7 +5,7 @@
                 <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
             </div>
             <div class="box-body">
-                <edit :options="options">
+                <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="name" :options="{name: '名称', required: true,rules:'required',disabled:props.data.row['id']==1}"  :datas="props"></edit-item>
@@ -74,7 +74,7 @@
                                                :disabled="!props.url || props.data.row['tmp_id']>0 || props.data.row['id']==1"
                                                :id="'menus'"
                                                :chkbox-type='cancel_children?{"Y": "ps", "N": "s"}:{"Y": "ps", "N": ""}'
-                                               :data="props.data.maps['permissions']">
+                                               :data="map_permissions()">
                                         </ztree>
                                     </div>
                                 </template>
@@ -101,6 +101,10 @@
         },
         data(){
             return {
+                shared: {
+                    "{lang_path}": '_shared.menus',
+                    '{lang_root}': ''
+                },
                 options:{
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
@@ -117,6 +121,38 @@
         watch:{
         },
         methods:{
+            map_permissions(){
+                let data = collect(array_get(this.$refs,'edit.data.maps.permissions',[])).each((item)=>{
+                    if(typeof item._back_name=="undefined"){
+                        item._back_name = item.name;
+                    }
+                    if(item._language!=this._i18n.locale){
+                        item._language = this._i18n.locale;
+                        item.name = this.translation(item,'_back_name');
+                    }
+                    return item;
+                }).all();
+                return data;
+            },
+            translation(item,key){
+                let value = array_get(item,key,'');
+                let resource_id = item['resource_id'];
+                let res = this.$tp(value , this.shared);
+                if(resource_id && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                    let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
+                    let key = value.replace(parent_name,'{name}');
+                    let shared = copyObj(this.shared);
+                    if(key.indexOf('{name}')==0){
+                        shared.name=this.$tp(parent_name,shared);
+                    }else {
+                        key = value.replace(parent_name.toLowerCase(),'{name}');
+                        shared.l_name=this.$tp(parent_name,shared);
+                        key = key.replace('{name}','{l_name}');
+                    }
+                    res = this.$tp(key , shared);
+                }
+                return res;
+            },
             changeTmp(row,permissions){
                 if(row['tmp_id']>0){
                     axios.get(this.use_url+'/admin/role/edit',{params:{'id':row['tmp_id']}}).then( (response)=> {

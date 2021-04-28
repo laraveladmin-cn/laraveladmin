@@ -222,7 +222,7 @@
                             </edit-item>
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="parent_id" :options='{"name": "所属父级选择", rules:props.data.row.id>1?"required":""}'
+                           <edit-item key-name="parent_id" :options='{"name": "所属父级选择", rules:props.data.row.id>1?"required":""}'
                                        :datas="props">
                                 <template slot="input-item">
                                     <div>
@@ -232,7 +232,7 @@
                                                :disabled="!props.url || props.data.row['resource_id']>0"
                                                :id="'menus_edit_parent'"
                                                :chkbox-type='{ "Y" : "", "N" : "" }'
-                                               :data="props.data.maps['optional_parents']">
+                                               :data="map_optional_parents()">
                                         </ztree>
                                     </div>
                                 </template>
@@ -281,6 +281,10 @@
         data() {
             return {
                 modal: false,
+                shared: {
+                    "{lang_path}": '_shared.menus',
+                    '{lang_root}': ''
+                },
                 options: {
                     id: 'edit', //多个组件同时使用时唯一标识
                     url: this.url || '', //数据表请求数据地址
@@ -312,12 +316,47 @@
         watch: {
             url(val) {
                 this.options.url = val;
+            },
+            '$refs.edit.data'(data){
+                dd(data);
             }
         },
         methods: {
             ...mapActions({
                 getMenus:'menu/getMenus', //更新菜单
             }),
+            map_optional_parents(){
+                let data = collect(array_get(this.$refs,'edit.data.maps.optional_parents',[])).each((item)=>{
+                    if(typeof item._back_name=="undefined"){
+                        item._back_name = item.name;
+                    }
+                    if(item._language!=this._i18n.locale){
+                        item._language = this._i18n.locale;
+                        item.name = this.translation(item,'_back_name');
+                    }
+                    return item;
+                }).all();
+                return data;
+            },
+            translation(item,key){
+                let value = array_get(item,key,'');
+                let resource_id = item['resource_id'];
+                let res = this.$tp(value , this.shared);
+                if(resource_id && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                    let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
+                    let key = value.replace(parent_name,'{name}');
+                    let shared = copyObj(this.shared);
+                    if(key.indexOf('{name}')==0){
+                        shared.name=this.$tp(parent_name,shared);
+                    }else {
+                        key = value.replace(parent_name.toLowerCase(),'{name}');
+                        shared.l_name=this.$tp(parent_name,shared);
+                        key = key.replace('{name}','{l_name}');
+                    }
+                    res = this.$tp(key , shared);
+                }
+                return res;
+            },
             openModal() {
                 this.modal = true;
             },
@@ -387,9 +426,10 @@
         computed: {
             ...mapState([
                 'use_url'
-            ])
+            ]),
 
-        }
+        },
+
 
     };
 </script>

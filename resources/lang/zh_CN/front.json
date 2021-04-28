@@ -6,6 +6,8 @@
             "Edit view {l_name}": "编辑查看{l_name}",
             "{name} Edit Page": "{name}编辑页面",
             "Create {l_name}": "创建{l_name}",
+            "New {l_name}": "新建{l_name}",
+            "New {l_name} page": "新建{l_name}页面",
             "Submit create {l_name} request": "提交创建{l_name}请求",
             "Update {l_name}": "更新{l_name}",
             "Submit update {l_name} request": "提交更新{l_name}请求",

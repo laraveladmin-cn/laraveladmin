@@ -93,10 +93,11 @@ class MenuController extends Controller
         'status',
         'created_at',
         'updated_at',
-
+        'resource_id',
         'parent' => [
             'name',
             'id',
+            'item_name'
         ],
     ];
 
@@ -178,10 +179,22 @@ class MenuController extends Controller
             $data['row']['method'] = [];
         }
         //树状结构可选数据
-        $data['maps']['optional_parents'] = Menu::optionalParent($id ? $data['row'] : null)
+        $data['maps']['optional_parents'] = collect(Menu::optionalParent($id ? $data['row'] : null)
             ->usable()
             ->orderBy('left_margin', 'asc')
-            ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin']);
+            ->with(['parent'=>function($q){
+                $q->select([
+                    'id',
+                    'name',
+                    'item_name'
+                ]);
+            }])
+            ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin','resource_id']))
+            ->map(function ($item){
+                $item = collect($item)->toArray();
+                $item[config('laravel_admin.trans_prefix').'name'] = Menu::trans($item,'name');//trans_path($item['name'],'_shared.menus');
+                return $item;
+            });
         $data['maps']['_type'] = [
             '普通链接',
             '资源',

@@ -482,6 +482,26 @@ class Menu extends Model
         return $item;
     }
 
+    public function scopeTrans($q, $item, $key)
+    {
+        $value = Arr::get($item, $key, '');
+        $resource_id = Arr::get($item, 'resource_id', 0);
+        $res = trans_path($value, '_shared.menus');
+        if ($resource_id && $res == $value && (str_contains($value, '{') || app('translator')->getLocale() != 'en')) { //没有翻译成功
+            $parent_name = Arr::get($item, 'parent.item_name', '') ?: Arr::get($item, 'parent.name', '');
+            $key = str_replace($parent_name, '{name}', $value);
+            $data = [];
+            if (Str::startsWith($key, '{name}')) {
+                $data['name'] = trans_path($parent_name, '_shared.menus');
+            } else {
+                $key = str_replace(strtolower($parent_name), '{name}', $value);
+                $key = str_replace('{name}', '{l_name}', $key);
+                $data['l_name'] = trans_path($parent_name, '_shared.menus');
+            }
+            $res = trans_path($key, '_shared.menus',$data);
+        }
+        return $res;
+    }
 
 
 }
