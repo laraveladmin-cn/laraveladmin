@@ -3,6 +3,19 @@
         <div class="row">
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
+                    <template slot="col" slot-scope="props">
+                        <span v-if="props.k =='roles_name'">
+                            {{rolesName(props.row['roles'])}}
+                        </span>
+                        <span v-else-if="props.field.type =='label'">
+                            <span class="label" :class="'label-'+statusClass[props.row[props.k]%statusClass.length]">
+                                {{ props.data.maps[props.k] | array_get(props.row[props.k]) }}
+                            </span>
+                        </span>
+                        <span v-else>
+                            {{props.row | array_get(props.k)}}
+                        </span>
+                    </template>
                     <template slot="col-operation" slot-scope="props">
                         <button v-show="props.data.configUrl['deleteUrl']"
                                 :title="$t('Delete selected')"
@@ -44,6 +57,10 @@
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                shared_rule_name: {
+                    "{lang_path}": '_shared.datas.roles.name',
+                    '{lang_root}': ''
+                },
                 options:{
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
@@ -71,7 +88,20 @@
             };
         },
         computed:{
-
+            ...mapState([
+                'statusClass'
+            ]),
+        },
+        methods:{
+            rolesName(roles){
+                return collect(roles).map((role)=>{
+                    if(typeof role._back_name=="undefined"){
+                        role._back_name = role.name;
+                    }
+                    role.name = this.$tp(role._back_name,this.shared_rule_name);
+                    return role;
+                }).pluck('name').implode(',');
+            }
         }
     };
 </script>

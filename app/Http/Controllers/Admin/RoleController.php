@@ -131,9 +131,14 @@ class RoleController extends Controller
      */
     protected function handleEditReturn($id, &$data){
         //树状结构可选数据
-        $data['maps']['optional_parents'] = Role::optionalParent($id ? $data['row'] : null)
+        $data['maps']['optional_parents'] = collect(Role::optionalParent($id ? $data['row'] : null)
             ->orderBy('left_margin', 'asc')
-            ->get(['id','name','parent_id','level','left_margin','right_margin']);
+            ->get(['id','name','parent_id','level','left_margin','right_margin']))
+            ->map(function ($item){
+                $item = collect($item)->toArray();
+                $item[config('laravel_admin.trans_prefix').'name'] = trans_path($item['name'],'_shared.datas.roles.name');
+                return $item;
+        });
         //所有权限菜单
         $data['maps']['permissions'] = collect(Menu::mainAdmin()
             ->with(['parent'=>function($q){
@@ -148,7 +153,7 @@ class RoleController extends Controller
             $item = collect($item)->toArray();
             $item[config('laravel_admin.trans_prefix').'name'] = Menu::trans($item,'name');//trans_path($item['name'],'_shared.menus');
             return $item;
-        });;
+        });
         if ( $id == 1 ) {
             $data['menu_ids'] = collect($data['maps']['permissions'])->pluck('id')->toArray();
         }

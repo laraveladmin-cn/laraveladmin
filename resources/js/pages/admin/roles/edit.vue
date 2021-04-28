@@ -49,7 +49,7 @@
                                                :disabled="!props.url"
                                                :id="'parent'"
                                                :chkbox-type='{ "Y" : "", "N" : "" }'
-                                               :data="props.data.maps['optional_parents']">
+                                               :data="map_optional_parents()">
                                         </ztree>
                                     </div>
                                 </template>
@@ -105,6 +105,10 @@
                     "{lang_path}": '_shared.menus',
                     '{lang_root}': ''
                 },
+                shared_rule_name: {
+                    "{lang_path}": '_shared.datas.roles.name',
+                    '{lang_root}': ''
+                },
                 options:{
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
@@ -121,6 +125,19 @@
         watch:{
         },
         methods:{
+            map_optional_parents(){
+                let data = collect(array_get(this.$refs,'edit.data.maps.optional_parents',[])).each((item)=>{
+                    if(typeof item._back_name=="undefined"){
+                        item._back_name = item.name;
+                    }
+                    if(item._language!=this._i18n.locale){
+                        item._language = this._i18n.locale;
+                        item.name = this.$tp(item['_back_name'],this.shared_rule_name);
+                    }
+                    return item;
+                }).all();
+                return data;
+            },
             map_permissions(){
                 let data = collect(array_get(this.$refs,'edit.data.maps.permissions',[])).each((item)=>{
                     if(typeof item._back_name=="undefined"){

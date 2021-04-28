@@ -150,8 +150,15 @@ class IndexController extends Controller
      */
     public function menu(){
         $data['menus'] = collect(Menu::main()
-            ->select(['id','name','icons','description','url','parent_id','status','level','left_margin','right_margin','method'])
+            ->select(['id','name','icons','description','url','parent_id','resource_id','status','level','left_margin','right_margin','method'])
             ->orderBy('left_margin','asc')
+            ->with(['parent'=>function($q){
+                $q->select([
+                    'id',
+                    'name',
+                    'item_name'
+                ]);
+            }])
             ->get())
             ->map(function ($item){
                 $item[config('laravel_admin.trans_prefix').'name'] = trans_path($item['name'],'_shared.menus');

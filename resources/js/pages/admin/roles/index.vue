@@ -102,7 +102,9 @@
             };
         },
         computed:{
-
+            ...mapState([
+                'statusClass'
+            ]),
         }
     };
 </script>

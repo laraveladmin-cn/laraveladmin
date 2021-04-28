@@ -88,7 +88,7 @@
                                                :disabled="!props.url || props.data.row['id']==1"
                                                :id="'roles'"
                                                :chkbox-type='{"Y": "", "N": "s"}'
-                                               :data="props.data.maps['roles']">
+                                               :data="map_roles()">
                                         </ztree>
                                     </div>
                                 </template>
@@ -117,6 +117,10 @@
         },
         data(){
             return {
+                shared_rule_name: {
+                    "{lang_path}": '_shared.datas.roles.name',
+                    '{lang_root}': ''
+                },
                 options:{
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
@@ -133,6 +137,19 @@
             ...mapActions({
                 getUser:'user/getUser', //获取用户数据
             }),
+            map_roles(){
+                let data = collect(array_get(this.$refs,'edit.data.maps.roles',[])).each((item)=>{
+                    if(typeof item._back_name=="undefined"){
+                        item._back_name = item.name;
+                    }
+                    if(item._language!=this._i18n.locale){
+                        item._language = this._i18n.locale;
+                        item.name = this.$tp(item['_back_name'],this.shared_rule_name);
+                    }
+                    return item;
+                }).all();
+                return data;
+            },
             changeBindUser(val){
                 if(!val){
                     this.$refs.edit.data.row.user_id = 0;
