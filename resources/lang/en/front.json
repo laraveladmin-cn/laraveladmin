@@ -6,6 +6,8 @@
             "Edit view {l_name}": "Edit view {l_name}",
             "{name} Edit Page": "{name} Edit Page",
             "Create {l_name}": "Create {l_name}",
+            "New {l_name}": "New {l_name}",
+            "New {l_name} page": "New {l_name} page",
             "Submit create {l_name} request": "Submit create {l_name} request",
             "Update {l_name}": "Update {l_name}",
             "Submit update {l_name} request": "Submit update {l_name} request",
@@ -83,25 +85,25 @@
         "tables": {
             "users": {
                 "fields": {
-                    "uname": "Username",
-                    "name": "Nickname",
-                    "avatar": "Avatar",
-                    "email": "Email address",
-                    "mobile_phone": "Mobile phone number",
-                    "remember_token": "Remember to log in",
-                    "status": "Status",
-                    "description": "Description",
-                    "created_at": "Created At",
-                    "updated_at": "Updated At",
-                    "deleted_at": "Deleted At",
-                    "id": "ID"
+                    "Username": "Username",
+                    "Name": "Name",
+                    "Avatars": "Avatars",
+                    "Email": "Email",
+                    "Mobile phone number": "Mobile phone number",
+                    "Remember to log in": "Remember to log in",
+                    "Status": "Status",
+                    "Note": "Note",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "ID": "ID"
                 },
                 "maps": {
-                    "status": [
-                        "Cancellation",
-                        "Effective",
-                        "Disable"
-                    ]
+                    "status": {
+                        "Cancellation": "Cancellation",
+                        "Effective": "Effective",
+                        "Stop using": "Stop using"
+                    }
                 }
             }
         },
@@ -324,7 +326,7 @@
     "Loading": "Loading",
     "Import data": "Import data",
     "Skip to": "Jump to page",
-    "page(jump)": "page(jump)",
+    "page(jump)": " ",
     "Edit": "Edit",
     "The record number:": "The record number:",
     "Language": "Language",

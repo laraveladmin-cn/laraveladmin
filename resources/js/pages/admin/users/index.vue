@@ -8,7 +8,7 @@
                                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                     <select2 v-model="props.where['status']"
                                              :default-options="props.maps['status']"
-                                             :placeholder-show="'状态'"
+                                             :placeholder-show="props.transField('Status')"
                                              :placeholder-value="''"
                                              :is-ajax="false" >
                                     </select2>
@@ -72,12 +72,13 @@
                     },
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
+                    lang_table:'users',
                     fields: {
-                        "uname": {"name": "用户名","order": true},
-                        "name": {"name": "昵称", "order": true},
-                        "mobile_phone": {"name": "手机号码", "order": true},
-                        "email": {"name": "电子邮箱", "order": true},
-                        "status": {"name": "状态", "order": true,type:'label'},
+                        "uname": {"name": "Username","order": true},
+                        "name": {"name": "Name", "order": true},
+                        "mobile_phone": {"name": "Mobile phone number", "order": true},
+                        "email": {"name": "Email", "order": true},
+                        "status": {"name": "Status", "order": true,type:'label'},
                     },
                 }
             };

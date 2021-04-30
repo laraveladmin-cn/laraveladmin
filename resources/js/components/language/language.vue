@@ -51,12 +51,12 @@
                         en_name:"China (Taiwan)",
                         country: "tw",
                     },
-                    {
+           /*         {
                         value:"zh-HK",
                         name: "中國(香港)",
                         en_name:"China (Hong Kong)",
                         country: "hk",
-                    },
+                    },*/
                     {
                         value:"en",
                         name:"English",

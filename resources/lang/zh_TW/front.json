@@ -6,6 +6,8 @@
             "Edit view {l_name}": "編輯查看{l_name}",
             "{name} Edit Page": "{name}編輯頁面",
             "Create {l_name}": "創建{l_name}",
+            "New {l_name}": "新建{l_name}",
+            "New {l_name} page": "新建{l_name}頁面",
             "Submit create {l_name} request": "提交創建{l_name}請求",
             "Update {l_name}": "更新{l_name}",
             "Submit update {l_name} request": "提交更新{l_name}請求",
@@ -83,25 +85,25 @@
         "tables": {
             "users": {
                 "fields": {
-                    "uname": "用戶名",
-                    "name": "昵稱",
-                    "avatar": "頭像",
-                    "email": "電子郵箱",
-                    "mobile_phone": "手機號碼",
-                    "remember_token": "記住登入",
-                    "status": "狀態",
-                    "description": "備註",
-                    "created_at": "創建時間",
-                    "updated_at": "修改時間",
-                    "deleted_at": "删除時間",
-                    "id": "ID"
+                    "Username": "用戶名",
+                    "Name": "昵稱",
+                    "Avatars": "頭像",
+                    "Email": "電子郵箱",
+                    "Mobile phone number": "手機號碼",
+                    "Remember to log in": "記住登入",
+                    "Status": "狀態",
+                    "Note": "備註",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "ID": "ID"
                 },
                 "maps": {
-                    "status": [
-                        "註銷",
-                        "有效",
-                        "停用"
-                    ]
+                    "status": {
+                        "Cancellation": "註銷",
+                        "Effective": "有效",
+                        "Stop using": "停用"
+                    }
                 }
             }
         },

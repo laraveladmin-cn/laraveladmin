@@ -34,17 +34,74 @@ class Translation extends Seeder
      */
     public function run()
     {
-        $this->transMenu();
-        $this->TransAll();
-    }
-
-    public function transMenu(){
         if(app()->environment() != 'local'){ //仅开发环境执行
             $this->command->info(
                 trans_path('This command can only be executed in the development environment',$this->transPath)
             );
             return ;
         }
+        //$this->transMenu();
+        $this->transModels();
+        //$this->TransAll();
+    }
+
+    /**
+     * 翻译转换所有模型
+     */
+    public function transModels(){
+        $model_path = base_path('/app/Models');
+        $files = scandir($model_path);
+        $local = config('app.locale','en');
+        $local = str_replace('_','-',$local);
+        $this->frontJsonPath = resource_path('lang/'.config('app.locale','en').'/front.json');
+        $front_json = json_decode(file_get_contents($this->frontJsonPath),true);
+        $tables = Arr::get($front_json,'_shared.tables',[]);
+        collect($files)->map(function ($file)use($model_path,$local,&$tables){
+            $file_path = $model_path.'/'.$file;
+            if(is_file($file_path) && Str::endsWith($file,'.php')){
+                $model_class = 'App\Models\\'.Str::replaceLast('.php','',$file);
+                $model = new $model_class();
+                $table = $model->getTable();
+                $fields_name = $model_class::getFieldsName();
+                $file_content = file_get_contents($file_path); //代码内容
+                $table_data = Arr::get($tables,$table,[]);
+                $fields = Arr::get($table_data,'fields',[]);
+                $maps = Arr::get($table_data,'maps',[]);
+                if(collect($fields_name)->count()){
+                    collect($fields_name)->each(function ($key,$name)use($local,&$file_content,&$fields,&$maps){
+                        if($name && !$this->isEnglish($name)){
+                            while (true) {
+                                try {
+                                    $new = Str::ucfirst(trim(Translate::setFromAndTo($local,'en')->translate($name)));
+                                    break;
+                                }catch (\Exception $exception){
+                                    $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
+                                    sleep(1);
+                                }
+                            }
+                            $this->command->info(trans_path('From ":old" to ":new"',$this->transPath,['old'=>$name,'new'=>$new]));
+                            //替换代码内容
+                            $file_content = str_replace($name,$new,$file_content);
+                            //翻译内容设置
+                            if(!Arr::get($fields,$new)){
+                                $fields[$new] = $name;
+                            }
+                        }
+                    });
+                }
+                $table_data['fields']=$fields;
+                $table_data['maps']=$maps;
+                $tables[$table]=$table_data;
+                file_put_contents($file_path,$file_content);
+            }
+        });
+
+
+    }
+    /**
+     * 翻译菜单
+     */
+    public function transMenu(){
         $this->local = str_replace('_','-',config('app.locale','en'));//当前默认设置使用地区语言
         /*if($this->local=='en'){ //默认是英文跳过翻译
             $this->command->info(
@@ -140,7 +197,8 @@ class Translation extends Seeder
                     if(in_array($file,['_shared.php'])){
                         $this->outPutFileCopy($file_path,$file,$local);
                     }else{
-
+                        $data = trans(Str::replaceLast('.php','',$file));
+                        $this->outPutPhpFile($data,$file,$local);
                     }
                 }elseif(Str::endsWith($file,'.json')){
                     $data = json_decode(file_get_contents($file_path),true)?:[];
@@ -152,6 +210,51 @@ class Translation extends Seeder
         $data = json_decode(file_get_contents($local_path1),true)?:[];
         $this->outPutData($data,'',$local,false);
     }
+
+    /**
+     * 输出PHP文件
+     * @param $data
+     * @param $file
+     * @param $local
+     * @param bool $lang_prefix
+     */
+    public function outPutPhpFile($data,$file,$local,$lang_prefix=true){
+        collect(config('laravel_admin.locales',[]))
+            ->filter(function ($value)use($local){ //排除本地文件
+                return str_replace('_','-',$value)!=$local;
+            })->map(function ($lang)use($data,$file,$local,$lang_prefix){
+                $lang = str_replace('_','-',$lang);
+                if($lang_prefix){
+                    $file_path = resource_path(str_replace('-','_',"lang/{$lang}")."/{$file}");
+                }else{
+                    $file_path = resource_path(str_replace('-','_',"lang/{$file}"));
+                }
+                $data_back = array_merge(array(), $data);
+                if(file_exists($file_path)){
+                    $old_data = trans(Str::replaceLast('.php','',$file),[],str_replace('-','_',$lang));;
+                }else{
+                    $old_data = [];
+                }
+                $_lang = Arr::get($this->langMap,$lang,explode('-',$lang)[0]);
+                $_local = Arr::get($this->langMap,$local,explode('-',$local)[0]);
+                $data_back = $this->handelData($data_back,$old_data,$_lang,$_local);
+                $res = json_encode( $data_back ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT)?:'{}';
+                $str = '$str';
+                $res = "<?php \n$str = <<<'str'\n{$res}\nstr;\nreturn json_decode($str,true);";
+                file_put_contents($file_path,$res);
+            });
+    }
+
+
+
+
+
+    /**
+     * 直接拷贝文件
+     * @param $file_path
+     * @param $file
+     * @param $local
+     */
     public function outPutFileCopy($file_path,$file,$local){
         collect(config('laravel_admin.locales',[]))
             ->filter(function ($value)use($local){ //排除本地文件
@@ -165,6 +268,12 @@ class Translation extends Seeder
             });
     }
 
+    /**
+     * @param $data
+     * @param $file
+     * @param $local
+     * @param bool $lang_prefix
+     */
     public function outPutData($data,$file,$local,$lang_prefix=true){
         collect(config('laravel_admin.locales',[]))
             ->filter(function ($value)use($local){ //排除本地文件
@@ -189,6 +298,14 @@ class Translation extends Seeder
         });
     }
 
+    /**
+     * 翻译数据
+     * @param $data
+     * @param $old_data
+     * @param $lang
+     * @param $local
+     * @return mixed
+     */
     public function handelData(&$data,&$old_data,&$lang,&$local){
         if(is_array($data)){
             foreach ($data as $key=>&$value){

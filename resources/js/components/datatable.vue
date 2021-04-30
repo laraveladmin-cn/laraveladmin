@@ -13,6 +13,7 @@
                       :sizer_more="sizer_more"
                       :id="id"
                       :show_export_fields="show_export_fields"
+                      :trans-field="transField"
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
@@ -104,7 +105,7 @@
                     </slot>
                 </div>
                 <div class="collapse sizer_more in">
-                    <slot name="sizer-more" :data="data" :where="data.options.where" :maps="data.maps">
+                    <slot name="sizer-more" :data="data" :where="data.options.where" :maps="data.maps"  :trans-field="transField">
                     </slot>
                     <div class="row" v-show="btnSizerMore">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -166,14 +167,14 @@
                 <slot name="table" :data="data" :check_ids="check_ids" :remove="remove">
                     <table class="table table-hover table-bordered table-striped text-center dataTable">
                         <thead>
-                            <slot name="thead" :select-all="select_all" :operation="operation" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :order-by="orderBy" :show-fields="show_fields">
+                            <slot name="thead" :select-all="select_all" :operation="operation" :trans-field="transField" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :order-by="orderBy" :show-fields="show_fields">
                                 <tr>
                                     <th class="id" v-if="checkbox">
                                        <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
                                         <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
                                     </th>
                                     <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
-                                        {{field['name']}}
+                                        {{transField(field.name,index)}}
                                     </th>
                                     <th class="operate" v-if="operation">{{$t('Operation')}}</th>
                                 </tr>
@@ -395,6 +396,23 @@
             ...mapMutations({
                 set:'set'
             }),
+            transField(name,key,table){
+                if(!this.options.lang_table && !this.data.excel.sheet){
+                    return name;
+                }
+                if(!table){
+                    if(!key || key.indexOf('.')==-1){
+                        table = this.options.lang_table || this.data.excel.sheet;
+                    }else {
+                        let arr = key.split('.');
+                        table = arr[arr.length-2];
+                    }
+                }
+                return this.$tp(name,{
+                    "{lang_path}": '_shared.tables.'+table+'.fields',
+                    '{lang_root}': ''
+                });
+            },
             getItems(item,key){
                 if(key.indexOf('$index')!=-1){
                     let keys = key.split('.$index.');

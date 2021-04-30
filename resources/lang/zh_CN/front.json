@@ -85,26 +85,55 @@
         "tables": {
             "users": {
                 "fields": {
-                    "uname": "用户名",
-                    "name": "昵称",
-                    "avatar": "头像",
-                    "email": "电子邮箱",
-                    "mobile_phone": "手机号码",
-                    "remember_token": "记住登录",
-                    "status": "状态",
-                    "description": "备注",
-                    "created_at": "创建时间",
-                    "updated_at": "修改时间",
-                    "deleted_at": "删除时间",
-                    "id": "ID"
+                    "Username": "用户名",
+                    "Name": "昵称",
+                    "Avatars": "头像",
+                    "Email": "电子邮箱",
+                    "Mobile phone number": "手机号码",
+                    "Remember to log in": "记住登录",
+                    "Status": "状态",
+                    "Note": "备注",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "ID": "ID"
                 },
                 "maps": {
-                    "status": [
-                        "注销",
-                        "有效",
-                        "停用"
-                    ]
+                    "status": {
+                        "Cancellation": "注销",
+                        "Effective":"有效",
+                        "Stop using":"停用"
+                    }
                 }
+            },
+            "logs": {
+                "fields": {
+                    "Menu ID" : "菜单ID",
+                    "User ID" : "用户ID",
+                    "Address" : "位置",
+                    "IP address" : "IP地址",
+                    "Request parameters" : "请求参数",
+                    "Return data" : "返回数据",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "ID" : "ID"
+                }
+            },
+            "menus": {
+                "fields": {}
+            },
+            "configs": {
+                "fields": {}
+            },
+            "ousers": {
+                "fields": {}
+            },
+            "params": {
+
+            },
+            "roles": {
+
             }
         },
         "pages": {
