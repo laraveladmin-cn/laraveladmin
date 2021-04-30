@@ -62,8 +62,8 @@ class Config extends Model
     protected $fieldsName = [
         'type'=>'Type',
         'name'=>'Name',
-        'key'=>'键Name',
-        'itype'=>'输入框Type',
+        'key'=>'Key name',
+        'itype'=>'Input box type',
         'options'=>'Component properties',
         'description'=>'Describe',
         //'created_at' => 'Created At',

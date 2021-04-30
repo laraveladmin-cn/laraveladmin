@@ -143,7 +143,7 @@
                         if(!(d>=0 && table1.lastIndexOf('s')==d)){
                             table1 = table1+'s'
                         };
-                        table = array_get(this.data,'mapsRelations.'+key1,'');
+                        table = array_get(this.data,'mapsRelations.'+key1,'') || table1;
                     }
                 }
                 return this.$tp(name,{

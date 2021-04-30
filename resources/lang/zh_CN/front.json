@@ -240,7 +240,9 @@
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
                     "Deleted At": "删除时间",
-                    "Have roles": "拥有角色"
+                    "Have roles": "拥有角色",
+                    "Bind an existing account": "绑定已有账户",
+                    "User role selection": "用户角色选择"
                 },
                 "maps": []
             },

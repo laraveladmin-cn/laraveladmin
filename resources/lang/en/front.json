@@ -103,7 +103,8 @@
                     "E-mail": "E-mail",
                     "Phone number": "Phone number",
                     "State": "State",
-                    "Remarks": "Remarks"
+                    "Remarks": "Remarks",
+                    "Password": "Password"
                 },
                 "maps": {
                     "status": {
@@ -235,7 +236,14 @@
                 }
             },
             "admins": {
-                "fields": [],
+                "fields": {
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "Have roles": "Have roles",
+                    "Bind an existing account": "Bind an existing account",
+                    "User role selection": "User role selection"
+                },
                 "maps": []
             },
             "admin_role": {

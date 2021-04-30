@@ -103,7 +103,8 @@
                     "E-mail": "電子郵箱",
                     "Phone number": "手機號碼",
                     "State": "狀態",
-                    "Remarks": "備註"
+                    "Remarks": "備註",
+                    "Password": "密碼"
                 },
                 "maps": {
                     "status": {
@@ -235,7 +236,14 @@
                 }
             },
             "admins": {
-                "fields": [],
+                "fields": {
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Have roles": "擁有角色",
+                    "Bind an existing account": "綁定已有帳戶",
+                    "User role selection": "用戶角色選擇"
+                },
                 "maps": []
             },
             "admin_role": {
