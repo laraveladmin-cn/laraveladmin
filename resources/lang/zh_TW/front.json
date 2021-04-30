@@ -86,7 +86,7 @@
             "users": {
                 "fields": {
                     "Username": "用戶名",
-                    "Name": "昵稱",
+                    "Name": "姓名",
                     "Avatars": "頭像",
                     "Email": "電子郵箱",
                     "Mobile phone number": "手機號碼",
@@ -98,7 +98,7 @@
                     "Deleted At": "删除時間",
                     "ID": "ID",
                     "User name": "用戶名",
-                    "Nickname?": "昵稱",
+                    "Nickname": "昵稱",
                     "Head portrait": "頭像",
                     "E-mail": "電子郵箱",
                     "Phone number": "手機號碼",

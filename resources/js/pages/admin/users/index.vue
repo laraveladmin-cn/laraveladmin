@@ -73,6 +73,7 @@
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     lang_table:'users',
+                    mapsRelations:{"user":'users',"roles":"roles"},
                     fields: {
                         "uname": {"name": "Username","order": true},
                         "name": {"name": "Name", "order": true},

@@ -8,8 +8,8 @@
                             {{rolesName(props.row['roles'])}}
                         </span>
                         <span v-else-if="props.field.type =='label'">
-                            <span class="label" :class="'label-'+statusClass[props.row[props.k]%statusClass.length]">
-                                {{ props.data.maps[props.k] | array_get(props.row[props.k]) }}
+                            <span class="label" :class="props.labelClass(props.row,props.k)">
+                                {{ props.maps | array_get(props.k,[]) | array_get(array_get(props.row,props.k)) }}
                             </span>
                         </span>
                         <span v-else>
@@ -77,13 +77,13 @@
                     defOptions:def_options, //默认筛选条件
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "user.uname": {"name": "用户名", "order": false},
-                        "user.name": {"name": "昵称", "order": false},
-                        "roles_name": {"name": "拥有角色", "order": false},
-                        "user.mobile_phone": {"name": "电话", "order": false},
-                        "user.status": {"name": "状态", "order": false,type:'label'},
-                        //"created_at": {"name": "创建时间", "order": true},
-                        "updated_at": {"name": "修改时间", "order": true},
+                        "user.uname": {"name": "Username", "order": false},
+                        "user.name": {"name": "Name", "order": false},
+                        "roles_name": {"name": "Have roles", "order": false},
+                        "user.mobile_phone": {"name": "Mobile phone number", "order": false},
+                        "user.status": {"name": "Status", "order": false,type:'label'},
+                        //"created_at": {"name": "Created At", "order": true},
+                        "updated_at": {"name": "Updated At", "order": true},
                     },
                 }
             };

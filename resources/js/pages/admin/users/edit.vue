@@ -10,14 +10,14 @@
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="uname" :options="{name: props.transField('User name'), required: true, rules:'required|alpha_dash|min:5|max:18',title:'必须是5-18位的非中文字符'}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="password" :options="{name: '密码', required: !props.data.row['id'],rules:!props.data.row['id']?'required|min:6|max:18':'min:6|max:18',title:'必须是6-18位的字符'}"  :datas="props">
+                            <edit-item key-name="password" :options="{name: props.transField('Password'), required: !props.data.row['id'],rules:!props.data.row['id']?'required|min:6|max:18':'min:6|max:18',title:'必须是6-18位的字符'}"  :datas="props">
                                 <template slot="input-item">
                                     <password-edit v-model="props.data.row['password']"
                                                    :disabled="!props.url">
                                     </password-edit>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="name" :options="{name: '姓名', required: true,rules:'required'}"  :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'), required: true,rules:'required'}"  :datas="props">
                             </edit-item>
                             <edit-item key-name="description" :options="{name: props.transField('Remarks'), required: false,type:'textarea'}"  :datas="props">
                             </edit-item>

@@ -149,7 +149,7 @@
                                     <ztree v-model="props.data.row['{{$table_field['Field']}}']"
                                            :check-enable="false" :multiple="false" :id="'parent'"
                                            :chkbox-type='{ "Y" : "", "N" : "" }'
-                                           :data="props.data.maps['optional_parents']" :disabled="!props.url"></ztree>
+                                           :data="props.maps['optional_parents']" :disabled="!props.url"></ztree>
                                 </template>
 @elseif($table_field['showType']=='ueditor')
                                 <template slot="input-item">
@@ -161,7 +161,7 @@
                                 <template slot="input-item">
 @if(str_contains($table_field['Field'],'_id'))
                                         <select2 v-model="props.data.row['{{$table_field['Field']}}']"
-                                                 :default-options="props.data.maps['{{$table_field['Field']}}']"
+                                                 :default-options="props.maps['{{$table_field['Field']}}']"
                                                  :url="use_url+'{{$prefix}}/{{str_replace('_','-',str_replace('_id','',$table_field['Field']))}}s/list'"
                                                  :keyword-key="'name'"
                                                  :show="['name']"
@@ -172,7 +172,7 @@
                                         </select2>
 @else
                                         <select2 v-model="props.data.row['{{$table_field['Field']}}']"
-                                                 :default-options="props.data.maps['{{$table_field['Field']}}']"
+                                                 :default-options="props.maps['{{$table_field['Field']}}']"
                                                  :disabled="!props.url"
                                                  :placeholder="false"
                                                  :is-ajax="false">
@@ -255,7 +255,7 @@
                                 <template slot="input-item">
                                     <label-edit v-model="props.data.row['{{$table_field['Field']}}']"
                                                 :disabled="!props.url"
-                                                :map="props.data.maps['{{$table_field['Field']}}']">
+                                                :map="props.maps['{{$table_field['Field']}}']">
                                     </label-edit>
                                 </template>
 @elseif($table_field['showType']=='markdown')

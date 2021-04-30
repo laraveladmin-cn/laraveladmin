@@ -86,7 +86,7 @@
             "users": {
                 "fields": {
                     "Username": "用户名",
-                    "Name": "昵称",
+                    "Name": "姓名",
                     "Avatars": "头像",
                     "Email": "电子邮箱",
                     "Mobile phone number": "手机号码",
@@ -98,12 +98,13 @@
                     "Deleted At": "删除时间",
                     "ID": "ID",
                     "User name": "用户名",
-                    "Nickname?": "昵称",
+                    "Nickname": "昵称",
                     "Head portrait": "头像",
                     "E-mail": "电子邮箱",
                     "Phone number": "手机号码",
                     "State": "状态",
-                    "Remarks": "备注"
+                    "Remarks": "备注",
+                    "Password": "密码"
                 },
                 "maps": {
                     "status": {
@@ -235,7 +236,12 @@
                 }
             },
             "admins": {
-                "fields": [],
+                "fields": {
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Have roles": "拥有角色"
+                },
                 "maps": []
             },
             "admin_role": {

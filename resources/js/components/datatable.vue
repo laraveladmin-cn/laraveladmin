@@ -189,7 +189,7 @@
                                     </slot>
                                 </td>
                                 <td v-for="(field,k) in show_fields" :class="field['class']">
-                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass">
+                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass">
                                         <span v-if="field.type =='label' || field.type =='radio'">
                                             <span class="label" :class="labelClass(row,k)">
                                                 {{ _maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
@@ -406,7 +406,14 @@
                         table = this.options.lang_table || this.data.excel.sheet;
                     }else {
                         let arr = key.split('.');
-                        table = arr[arr.length-2];
+                        arr.pop();
+                        let key1 = arr.join('.');
+                        let table1 = arr.pop();
+                        let d=table1.length-1;
+                        if(!(d>=0 && table1.lastIndexOf('s')==d)){
+                            table1 = table1+'s'
+                        };
+                        table = array_get(this.data,'mapsRelations.'+key1,'') || table1;
                     }
                 }
                 return this.$tp(name,{
@@ -432,8 +439,8 @@
                         return this.transMap(value,field,table);
                     }else if(value && typeof value=="object"){
                         let key1 = prefix ? prefix+'.'+key:key;
-                        table = array_get(this.data,'mapsRelations.'+key1,'');
-                        return this.mapEach(value,key,table,key1);
+                        let table1 = array_get(this.data,'mapsRelations.'+key1,'');
+                        return this.mapEach(value,key,table1 || table,key1);
                     }else {
                         return value;
                     }
