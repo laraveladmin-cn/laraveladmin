@@ -105,7 +105,73 @@
                         "Stop using": "停用"
                     }
                 }
-            }
+            },
+            "logs": {
+                "fields": {
+                    "Menu ID": "選單ID",
+                    "User ID": "用戶ID",
+                    "Address": "位置",
+                    "IP address": "IP地址",
+                    "Request parameters": "請求參數",
+                    "Return data": "返回數據",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "ID": "ID"
+                }
+            },
+            "menus": {
+                "fields": {
+                    "Name": "名稱",
+                    "Icon": "圖標",
+                    "Describe": "描述",
+                    "URL path": "URL路徑",
+                    "Parent ID": "父級ID",
+                    "Request method": "請求管道",
+                    "Is it a page": "是否為頁面",
+                    "Functional status": "功能狀態",
+                    "State": "狀態",
+                    "Hierarchy": "層級",
+                    "Resource ID": "所屬資源ID",
+                    "Group": "所屬組",
+                    "Binding controller method": "綁定控制器方法",
+                    "Use environment": "使用環境",
+                    "Plug in menu unique ID": "挿件選單唯一標識",
+                    "Route usage": "路由使用地方",
+                    "Routing alias": "路由別名",
+                    "Using middleware alone": "單獨使用中介軟體",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": {
+                    "method": [],
+                    "is_page": {
+                        "No": "否",
+                        "Yes": "是"
+                    },
+                    "status": {
+                        "Display": "顯示",
+                        "No display": "不顯示"
+                    },
+                    "disabled": {
+                        "Enable": "啟用",
+                        "Disable": "禁用"
+                    },
+                    "use": [],
+                    "env": [],
+                    "group": [],
+                    "middleware": []
+                }
+            },
+            "configs": {
+                "fields": []
+            },
+            "ousers": {
+                "fields": []
+            },
+            "params": [],
+            "roles": []
         },
         "pages": {
             "admin": {

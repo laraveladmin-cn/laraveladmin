@@ -41,6 +41,7 @@ trait ResourceController
         $data['list'] = $this->list();
         //数据字段映射信息
         $data['maps'] = $this->getFieldsMap($this->showIndexFields, $model);
+        $data['mapsRelations'] = $this->mapsRelations($this->showIndexFields, $model);
         //增删改查URL地址
         $data['configUrl'] = $this->getConfigUrl();
         $data['keywordsMap'] = $this->keywordsMap ?: [];
@@ -99,6 +100,7 @@ trait ResourceController
         });
         //数据字段映射信息
         $data['maps'] = $this->getFieldsMap($this->editFields, $this->newBindModel());
+        $data['mapsRelations'] = $this->mapsRelations($this->editFields, $this->newBindModel());
         //增删改查URL地址
         $data['configUrl'] = $this->getConfigUrl('edit');
         //$data['configUrl']['indexUrl'] = '';
@@ -386,6 +388,19 @@ trait ResourceController
             }
         }
 
+        return $res;
+    }
+
+
+    protected function mapsRelations($showFields, $model,$prefix='', &$res = [])
+    {
+        foreach ( $showFields as $k => $showField ) {
+            if ( is_array($showField) ) {
+                $key = $prefix?$prefix.'.'.$k:$k;
+                $res[$key] = $model->$k()->getModel()->getTable();
+                $this->mapsRelations($showField, $model->$k()->getRelated());
+            }
+        }
         return $res;
     }
 

@@ -105,7 +105,73 @@
                         "Stop using": "Stop using"
                     }
                 }
-            }
+            },
+            "logs": {
+                "fields": {
+                    "Menu ID": "Menu ID",
+                    "User ID": "User ID",
+                    "Address": "Address",
+                    "IP address": "IP address",
+                    "Request parameters": "Request parameters",
+                    "Return data": "Return data",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "ID": "ID"
+                }
+            },
+            "menus": {
+                "fields": {
+                    "Name": "Name",
+                    "Icon": "Icon",
+                    "Describe": "Describe",
+                    "URL path": "URL path",
+                    "Parent ID": "Parent ID",
+                    "Request method": "Request method",
+                    "Is it a page": "Is it a page",
+                    "Functional status": "Functional status",
+                    "State": "State",
+                    "Hierarchy": "Hierarchy",
+                    "Resource ID": "Resource ID",
+                    "Group": "Group",
+                    "Binding controller method": "Binding controller method",
+                    "Use environment": "Use environment",
+                    "Plug in menu unique ID": "Plug in menu unique ID",
+                    "Route usage": "Route usage",
+                    "Routing alias": "Routing alias",
+                    "Using middleware alone": "Using middleware alone",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": {
+                    "method": [],
+                    "is_page": {
+                        "No": "No",
+                        "Yes": "Yes"
+                    },
+                    "status": {
+                        "Display": "Display",
+                        "No display": "Hidden"
+                    },
+                    "disabled": {
+                        "Enable": "Enable",
+                        "Disable": "Disable"
+                    },
+                    "use": [],
+                    "env": [],
+                    "group": [],
+                    "middleware": []
+                }
+            },
+            "configs": {
+                "fields": []
+            },
+            "ousers": {
+                "fields": []
+            },
+            "params": [],
+            "roles": []
         },
         "pages": {
             "admin": {

@@ -17,7 +17,7 @@
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                         <select2 v-model="props.where['method']"
                                                  :default-options="props.maps['method']"
-                                                 :placeholder-show="'请求方式'"
+                                                 :placeholder-show="props.transField('Request method')"
                                                  :placeholder-value="''"
                                                  :is-ajax="false">
                                         </select2>
@@ -25,7 +25,7 @@
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                         <select2 v-model="props.where['status']"
                                                  :default-options="props.maps['status']"
-                                                 :placeholder-show="'状态'"
+                                                 :placeholder-show="props.transField('State')"
                                                  :placeholder-value="''"
                                                  :is-ajax="false">
                                         </select2>
@@ -33,7 +33,7 @@
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                         <select2 v-model="props.where['is_page']"
                                                  :default-options="props.maps['is_page']"
-                                                 :placeholder-show="'是否为页面'"
+                                                 :placeholder-show="props.transField('Is it a page')"
                                                  :placeholder-value="''"
                                                  :is-ajax="false">
                                         </select2>
@@ -65,13 +65,13 @@
                                 <span v-if="props.field.type =='label'">
                                     <span class="label"
                                           :class="'label-'+statusClass[props.row[props.k]%statusClass.length]">
-                                        {{ props.data.maps[props.k] | array_get(props.row[props.k]) }}
+                                        {{ props.maps[props.k] | array_get(props.row[props.k]) }}
                                     </span>
                                 </span>
                                 <span v-else-if="props.field.type =='labels' || props.field.type =='checkbox'">
                                     <span v-for="value in props.getItems(props.row,props.k)" class="label labels-m"
                                           :class="props.checkboxClass(value,2,statusClass,props.k)">
-                                        {{ props.data.maps| array_get(props.k.replace('.$index','')) | array_get(value) }}
+                                        {{ props.maps| array_get(props.k.replace('.$index','')) | array_get(value) }}
                                     </span>
                                 </span>
                                 <span v-else-if="props.field.type =='icon'">
@@ -156,7 +156,8 @@
                 edit_url: '',
                 modal: false,
                 update_url: false,
-                options: {
+                options:{
+                    lang_table:'menus',
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: this.url || '', //数据表请求数据地址
                     operation: true, //操作列
@@ -166,19 +167,19 @@
                     keywordGroup: false, //是否为选项组
                     keywordPlaceholder: () => {
                         return this.$t('enter', {name: this.$t('name')});
-                    },//'请输入名称',
+                    },//'请输入Name',
                     primaryKey: 'id', //数据唯一性主键
                     defOptions: def_options, //默认筛选条件
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "icons": {"name": '图标', "order": true, type: 'icon'},
-                        "name": {"name": "名称", "order": true, type: 'level', levelName: 'level', class: 'text-left'},
-                        "url": {"name": "URL路径", "order": true, class: 'text-left'},
-                        "method": {"name": "请求方式", "order": true, type: 'labels'},
-                        "is_page": {"name": "是否为页面", "order": true, type: 'label'},
-                        "status": {"name": "状态", "order": true, type: 'label'},
-                        //"created_at": {"name": "创建时间", "order": true},
-                        "updated_at": {"name": "修改时间", "order": true},
+                        "icons": {"name": 'Icon', "order": true, type: 'icon'},
+                        "name": {"name": "Name", "order": true, type: 'level', levelName: 'level', class: 'text-left'},
+                        "url": {"name": "URL path", "order": true, class: 'text-left'},
+                        "method": {"name": "Request method", "order": true, type: 'labels'},
+                        "is_page": {"name": "Is it a page", "order": true, type: 'label'},
+                        "status": {"name": "State", "order": true, type: 'label'},
+                        //"created_at": {"name": "Created At", "order": true},
+                        "updated_at": {"name": "Updated At", "order": true},
                     },
                     removeCallback: () => {
                         this.getMenus();

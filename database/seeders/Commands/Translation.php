@@ -43,9 +43,9 @@ class Translation extends Seeder
         $this->local = str_replace('_','-',config('app.locale','en'));//当前默认设置使用地区语言
         $this->lang = Arr::get($this->langMap,$this->local,explode('-',$this->local)[0]);//语言代码
         $this->frontJsonPath = resource_path('lang/'.config('app.locale','en').'/front.json');
-        //$this->transMenu();
+        $this->transMenu();
         $this->transModels();
-        //$this->TransAll();
+        $this->TransAll();
     }
 
     /**
@@ -75,12 +75,14 @@ class Translation extends Seeder
                     $index_content = file_get_contents($index_path);
                     if(!Str::contains($index_content,"lang_table:'{$table}'")){
                         $index_content = str_replace('options:{',"options:{\n                    lang_table:'{$table}',",$index_content);
+                        $index_content = str_replace('options: {',"options:{\n                    lang_table:'{$table}',",$index_content);
                     }
                 }
                 if(file_exists($edit_path)){
                     $edit_content = file_get_contents($edit_path);
                     if(!Str::contains($edit_content,"lang_table:'{$table}'")){
                         $edit_content = str_replace('options:{',"options:{\n                    lang_table:'{$table}',",$edit_content);
+                        $edit_content = str_replace('options: {',"options:{\n                    lang_table:'{$table}',",$edit_content);
                     }
                 }
                 $at = [
@@ -115,10 +117,13 @@ class Translation extends Seeder
                             //列表页面视图翻译
                             if($index_content){
                                 $index_content = str_replace("\"'{$name}'\"","\"props.transField('{$new}')\"",$index_content);
+                                $index_content = str_replace("props.data.maps","props.maps",$index_content);
                                 $index_content = str_replace($name,$new,$index_content);
                             }
                             if($edit_content){
-                                $edit_content = str_replace($name,$new,$edit_content);
+                                $edit_content = str_replace("'{$name}'","props.transField('{$new}')",$edit_content);
+                                $edit_content = str_replace("\"{$name}\"","props.transField(\"{$new}\")",$edit_content);
+                                $edit_content = str_replace("props.data.maps","props.maps",$edit_content);
                             }
                             //翻译内容设置
                             if(!Arr::get($fields,$new)){

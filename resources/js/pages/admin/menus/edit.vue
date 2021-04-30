@@ -15,7 +15,7 @@
                                     <label-edit v-model="props.data.row['_type']"
                                                 :disabled="!props.url || props.data.row.resource_id>0"
                                                 @change="changeType(props.data.row['_type'],props)"
-                                                :map="props.data.maps['_type']">
+                                                :map="props.maps['_type']">
                                     </label-edit>
                                 </template>
                             </edit-item>
@@ -79,7 +79,7 @@
                                 </template>
                             </edit-item>
                             <edit-item key-name="description"
-                                       :options='{"name": "描述", "required": false,"type":"textarea",placeholder:getTitle("description",props)}'
+                                       :options='{"name": props.transField("Describe"), "required": false,"type":"textarea",placeholder:getTitle("description",props)}'
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="plug_in_key"
@@ -104,7 +104,7 @@
                                 :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
-                                        <div v-for="(item,index) in props.data.maps['_options']"
+                                        <div v-for="(item,index) in props.maps['_options']"
                                              class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                             <icheck v-model="props.data.row['_options']"
                                                     :title="getMapName(item,props.data.row['item_name'])"
@@ -124,7 +124,7 @@
                             >
                                 <template slot="input-item">
                                     <div class="row">
-                                        <div v-for="(item,index) in props.data.maps['method']"
+                                        <div v-for="(item,index) in props.maps['method']"
                                              class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                             <icheck v-model="props.data.row['method']"
                                                     :title="item"
@@ -139,7 +139,7 @@
                             <edit-item key-name="is_page" :options="{name: '是否为页面', required: false}" :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
-                                        <div v-for="(item,index) in props.data.maps['is_page']"
+                                        <div v-for="(item,index) in props.maps['is_page']"
                                              class="col-lg-3 col-md-3 col-sm-3 col-xs-2">
                                             <icheck v-model="props.data.row['is_page']"
                                                     type="radio"
@@ -154,7 +154,7 @@
                             <edit-item key-name="status" :options="{name: '状态', required: false}" :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
-                                        <div v-for="(item,index) in props.data.maps['status']"
+                                        <div v-for="(item,index) in props.maps['status']"
                                              class="col-lg-4 col-md-4 col-sm-4 col-xs-3">
                                             <icheck v-model="props.data.row['status']"
                                                     type="radio"
@@ -173,7 +173,7 @@
                                        :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
-                                        <div v-for="(item,index) in props.data.maps['use']"
+                                        <div v-for="(item,index) in props.maps['use']"
                                              class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                             <icheck v-model="props.data.row['use']" :option="index"
                                                     :disabled="!props.url"> {{item}}
@@ -187,7 +187,7 @@
                                        v-show="props.data.row['resource_id']==2" :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
-                                        <div v-for="(item,index) in props.data.maps['middleware']"
+                                        <div v-for="(item,index) in props.maps['middleware']"
                                              class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                             <icheck v-model="props.data.row['middleware']" :option="index"
                                                     :title="item"
@@ -202,7 +202,7 @@
                                        :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
-                                        <div v-for="(item,index) in props.data.maps['env']"
+                                        <div v-for="(item,index) in props.maps['env']"
                                              class="col-lg-4 col-md-4 col-sm-6 col-xs-4">
                                             <icheck v-model="props.data.row['env']" type="radio" :title="item"
                                                     :option="index" :disabled="!props.url"> {{item}}
@@ -285,7 +285,8 @@
                     "{lang_path}": '_shared.menus',
                     '{lang_root}': ''
                 },
-                options: {
+                options:{
+                    lang_table:'menus',
                     id: 'edit', //多个组件同时使用时唯一标识
                     url: this.url || '', //数据表请求数据地址
                     params: {},
@@ -377,7 +378,7 @@
                     row.action = '';
                     row.is_page = 1;
                     row.status = 1;
-                    row._options = copyObj(props.data.maps['_options']);
+                    row._options = copyObj(props.maps['_options']);
                 } else if(val == 0){ //普通链接
                     row.resource_id = 0;
                     row.method = [];

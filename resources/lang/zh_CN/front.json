@@ -101,40 +101,77 @@
                 "maps": {
                     "status": {
                         "Cancellation": "注销",
-                        "Effective":"有效",
-                        "Stop using":"停用"
+                        "Effective": "有效",
+                        "Stop using": "停用"
                     }
                 }
             },
             "logs": {
                 "fields": {
-                    "Menu ID" : "菜单ID",
-                    "User ID" : "用户ID",
-                    "Address" : "位置",
-                    "IP address" : "IP地址",
-                    "Request parameters" : "请求参数",
-                    "Return data" : "返回数据",
+                    "Menu ID": "菜单ID",
+                    "User ID": "用户ID",
+                    "Address": "位置",
+                    "IP address": "IP地址",
+                    "Request parameters": "请求参数",
+                    "Return data": "返回数据",
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
                     "Deleted At": "删除时间",
-                    "ID" : "ID"
+                    "ID": "ID"
                 }
             },
             "menus": {
-                "fields": {}
+                "fields": {
+                    "Name": "名称",
+                    "Icon": "图标",
+                    "Describe": "描述",
+                    "URL path": "URL路径",
+                    "Parent ID": "父级ID",
+                    "Request method": "请求方式",
+                    "Is it a page": "是否为页面",
+                    "Functional status": "功能状态",
+                    "State": "状态",
+                    "Hierarchy": "层级",
+                    "Resource ID": "所属资源ID",
+                    "Group": "所属组",
+                    "Binding controller method": "绑定控制器方法",
+                    "Use environment": "使用环境",
+                    "Plug in menu unique ID": "插件菜单唯一标识",
+                    "Route usage": "路由使用地方",
+                    "Routing alias": "路由别名",
+                    "Using middleware alone": "单独使用中间件",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": {
+                    "method": [],
+                    "is_page": {
+                        "No": "否",
+                        "Yes": "是"
+                    },
+                    "status": {
+                        "Display": "显示",
+                        "No display": "不显示"
+                    },
+                    "disabled": {
+                        "Enable": "启用",
+                        "Disable": "禁用"
+                    },
+                    "use": [],
+                    "env": [],
+                    "group": [],
+                    "middleware": []
+                }
             },
             "configs": {
-                "fields": {}
+                "fields": []
             },
             "ousers": {
-                "fields": {}
+                "fields": []
             },
-            "params": {
-
-            },
-            "roles": {
-
-            }
+            "params": [],
+            "roles": []
         },
         "pages": {
             "admin": {

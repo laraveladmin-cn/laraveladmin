@@ -92,10 +92,10 @@ class Menu extends Model
             2=>'web'
         ],
         'env'=>[
-            'local'=>'local',
-            'testing'=>'testing',
-            'staging'=>'staging',
-            'production'=>'production'
+            'local'=>'开发环境',
+            'testing'=>'测试环境',
+            'staging'=>'预上线环境',
+            'production'=>'正式环境'
         ]
     ];
 
