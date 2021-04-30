@@ -12,7 +12,7 @@ class Config extends Model
 {
     use SoftDeletes,BaseModel; //软删除
 
-    protected $table = 'configs'; //数据表名称
+    protected $table = 'configs'; //数据表Name
     //批量赋值白名单
     protected $fillable = [
         'name',
@@ -35,9 +35,9 @@ class Config extends Model
     //字段值map
     protected $fieldsShowMaps = [
         'type'=>[
-            '1'=>'字符串',
+            '1'=>'Character string',
             '2'=>'json',
-            '3'=>'数字'
+            '3'=>'Number'
         ],
         'itype'=>[
             '1'=>'input',
@@ -60,20 +60,20 @@ class Config extends Model
 
     //字段说明值
     protected $fieldsName = [
-        'type'=>'类型',
-        'name'=>'名称',
-        'key'=>'键名称',
-        'itype'=>'输入框类型',
-        'options'=>'组件属性',
-        'description'=>'描述',
-        //'created_at' => '创建时间',
-        //'updated_at' => '修改时间',
-        //'deleted_at' => '删除时间'
+        'type'=>'Type',
+        'name'=>'Name',
+        'key'=>'键Name',
+        'itype'=>'输入框Type',
+        'options'=>'Component properties',
+        'description'=>'Describe',
+        //'created_at' => 'Created At',
+        //'updated_at' => 'Updated At',
+        //'deleted_at' => 'Deleted At'
         'id' => 'ID',
     ];
 
     /**
-     * 组件属性
+     * Component properties
      * @param $value
      * @return bool|string
      */
@@ -94,7 +94,7 @@ class Config extends Model
         if($type==2){
             return json_decode($value,true);
         }elseif ($type==3){
-            return $value-0; //数字类型
+            return $value-0; //NumberType
         }
         return $value;
     }

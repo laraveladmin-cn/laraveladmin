@@ -38,13 +38,13 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="location" :options="{name: '位置', required: true}"  :datas="props">
+                            <edit-item key-name="location" :options="{name: props.transField('Position'), required: true}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="ip" :options="{name: 'IP地址', required: true}"  :datas="props">
+                            <edit-item key-name="ip" :options="{name: props.transField('IP address'), required: true}"  :datas="props">
                             </edit-item>
                         </div>
                         <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="parameters" :options="{name: '请求参数', required: true}"  :datas="props">
+                            <edit-item key-name="parameters" :options="{name: props.transField('Request parameters'), required: true}"  :datas="props">
                                 <template slot="input-item">
                                     <json-view :deep="3" style="height: 295px;overflow: scroll" :closed="false" :theme="'one-dark'"  :data="JSON.parse(array_get(props,'data.row.parameters','{}'))"/>
                                 </template>
@@ -52,7 +52,7 @@
 
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <edit-item key-name="return" :options="{name: '返回数据', required: true}"  :datas="props">
+                            <edit-item key-name="return" :options="{name: props.transField('Return data'), required: true}"  :datas="props">
                                 <template slot="input-item">
                                     <json-view :deep="3" style="height: 500px;overflow: scroll"  :closed="false" :theme="'one-dark'"  :data="JSON.parse(array_get(props,'data.row.return','{}'))"/>
                                 </template>
@@ -79,6 +79,7 @@
         data(){
             return {
                 options:{
+                    lang_table:'logs',
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}

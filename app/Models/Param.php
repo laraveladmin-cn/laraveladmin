@@ -21,7 +21,7 @@ class Param extends Model
     //日期字段
     protected $dates = ['created_at','updated_at','deleted_at'];
     //字段值map
-    protected $fieldsShowMaps = ['type'=>["1"=>'字符串',"2"=>'数字',"3"=>'布尔值']];
+    protected $fieldsShowMaps = ['type'=>["1"=>'Character string',"2"=>'Number',"3"=>'Boolean value']];
     //字段默认值
     protected $fieldsDefault = ['menu_id' => 0,'name' => '','type' => 1,'title' => '','description' => '','example' => '','validate' => ''];
 

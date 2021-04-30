@@ -20,7 +20,7 @@
                                 </template>
                             </edit-item>
                             <edit-item key-name="name"
-                                       :options="{name: '名称', rules:'required',placeholder:getTitle('name',props)}"
+                                       :options="{name: props.transField('Name'), rules:'required',placeholder:getTitle('name',props)}"
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="url"
@@ -49,13 +49,13 @@
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="action"
-                                       :options="{name: '绑定控制器方法',type:'text', rules:'',placeholder:getTitle('action',props),title:'默认根据URL进行识别'}"
+                                       :options="{name: props.transField('Binding controller method'),type:'text', rules:'',placeholder:getTitle('action',props),title:'默认根据URL进行识别'}"
                                        v-show="props.data.row['_type']==2 && props.data.row['resource_id']<1"
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="as"
                                        v-show="props.data.row['_type']==2 && props.data.row['resource_id']<1"
-                                       :options="{name: '路由别名',type:'text', rules:'',placeholder:getTitle('as',props),disabled: props.data.row['resource_id']==-1}"
+                                       :options="{name: props.transField('Routing alias'),type:'text', rules:'',placeholder:getTitle('as',props),disabled: props.data.row['resource_id']==-1}"
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="resource_id"
@@ -83,12 +83,12 @@
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="plug_in_key"
-                                       :options="{name: '插件菜单唯一标识',type:'text', rules:'',title:'',disabled:true}"
+                                       :options="{name: props.transField('Plug in menu unique ID'),type:'text', rules:'',title:'',disabled:true}"
                                        :datas="props">
                             </edit-item>
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="icons" :options="{name: '图标',title:'双击图标即可选中'}" :datas="props">
+                            <edit-item key-name="icons" :options="{name: props.transField('Icon'),title:'双击图标即可选中'}" :datas="props">
                                 <template slot="input-item">
                                     <icon-edit
                                         v-model="props.data.row['icons']"
@@ -118,7 +118,7 @@
                             </edit-item>
                             <edit-item
                                 key-name="method"
-                                :options="{name: '请求方式', rules:props.data.row['_type']==2?'required':''}"
+                                :options="{name: props.transField('Request method'), rules:props.data.row['_type']==2?'required':''}"
                                 :datas="props"
                                 v-show="props.data.row['_type']!=0"
                             >
@@ -136,7 +136,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="is_page" :options="{name: '是否为页面', required: false}" :datas="props">
+                            <edit-item key-name="is_page" :options="{name: props.transField('Is it a page'), required: false}" :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
                                         <div v-for="(item,index) in props.maps['is_page']"
@@ -151,7 +151,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="status" :options="{name: '状态', required: false}" :datas="props">
+                            <edit-item key-name="status" :options="{name: props.transField('State'), required: false}" :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
                                         <div v-for="(item,index) in props.maps['status']"
@@ -183,7 +183,7 @@
                                 </template>
                             </edit-item>
                             <edit-item key-name="middleware"
-                                       :options="{name: '单独使用中间件',type:'text', rules:'',title:''}"
+                                       :options="{name: props.transField('Using middleware alone'),type:'text', rules:'',title:''}"
                                        v-show="props.data.row['resource_id']==2" :datas="props">
                                 <template slot="input-item">
                                     <div class="row">

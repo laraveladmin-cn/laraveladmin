@@ -74,6 +74,7 @@
                     '{lang_root}':''
                 },
                 options:{
+                    lang_table:'logs',
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     operation:true, //操作列
@@ -90,11 +91,11 @@
                         "id": {"name": "ID", "order": true},
                         "menu.name": {"name": "操作菜单", "order": true},
                         "user.name": {"name": "操作者", "order": true},
-                        "location": {"name": "位置", "order": true},
-                        "ip": {"name": "IP地址", "order": true},
-                        "parameters": {"name": "请求参数", "order": true,type:"code",limit:30},
-                        "created_at": {"name": "创建时间", "order": true},
-                        //"updated_at": {"name": "修改时间", "order": true},
+                        "location": {"name": "Position", "order": true},
+                        "ip": {"name": "IP address", "order": true},
+                        "parameters": {"name": "Request parameters", "order": true,type:"code",limit:30},
+                        "created_at": {"name": "Created At", "order": true},
+                        //"updated_at": {"name": "Updated At", "order": true},
                     },
                 },
                 pickerOptions: {

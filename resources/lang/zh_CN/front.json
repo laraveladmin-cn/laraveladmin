@@ -96,13 +96,21 @@
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
                     "Deleted At": "删除时间",
-                    "ID": "ID"
+                    "ID": "ID",
+                    "User name": "用户名",
+                    "Nickname?": "昵称",
+                    "Head portrait": "头像",
+                    "E-mail": "电子邮箱",
+                    "Phone number": "手机号码",
+                    "State": "状态",
+                    "Remarks": "备注"
                 },
                 "maps": {
                     "status": {
                         "Cancellation": "注销",
                         "Effective": "有效",
-                        "Stop using": "停用"
+                        "Stop using": "停用",
+                        "Out of service": "停用"
                     }
                 }
             },
@@ -117,8 +125,10 @@
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
                     "Deleted At": "删除时间",
-                    "ID": "ID"
-                }
+                    "ID": "ID",
+                    "Position": "位置"
+                },
+                "maps": []
             },
             "menus": {
                 "fields": {
@@ -159,19 +169,95 @@
                         "Disable": "禁用"
                     },
                     "use": [],
-                    "env": [],
+                    "env": {
+                        "Development environment": "开发环境",
+                        "Testing environment": "测试环境",
+                        "Pre launch environment": "预上线环境",
+                        "Formal environment": "正式环境"
+                    },
                     "group": [],
                     "middleware": []
                 }
             },
             "configs": {
-                "fields": []
+                "fields": {
+                    "Type": "类型",
+                    "Name": "名称",
+                    "Key name": "键名称",
+                    "Input box type": "输入框类型",
+                    "Component properties": "组件属性",
+                    "Describe": "描述",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": {
+                    "type": {
+                        "Character string": "字符串",
+                        "Number": "数字"
+                    },
+                    "itype": []
+                }
             },
             "ousers": {
-                "fields": []
+                "fields": [],
+                "maps": {
+                    "type": [],
+                    "type_show": []
+                }
             },
-            "params": [],
-            "roles": []
+            "params": {
+                "fields": [],
+                "maps": {
+                    "type": {
+                        "Character string": "字符串",
+                        "Number": "数字",
+                        "Boolean value": "布尔值"
+                    }
+                }
+            },
+            "roles": {
+                "fields": {
+                    "Template ID": "模板ID",
+                    "Name": "名称",
+                    "Template": "是否模板",
+                    "Describe": "描述",
+                    "Parent ID": "父级ID",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": {
+                    "is_tmp": {
+                        "No": "否",
+                        "Yes": "是"
+                    }
+                }
+            },
+            "admins": {
+                "fields": [],
+                "maps": []
+            },
+            "admin_role": {
+                "fields": [],
+                "maps": []
+            },
+            "menu_role": {
+                "fields": [],
+                "maps": []
+            },
+            "migrations": {
+                "fields": [],
+                "maps": []
+            },
+            "responses": {
+                "fields": [],
+                "maps": []
+            },
+            "tables": {
+                "fields": [],
+                "maps": []
+            }
         },
         "pages": {
             "admin": {

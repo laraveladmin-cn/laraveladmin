@@ -32,15 +32,15 @@ class Log extends Model
         'ip' => ''
     ];
     protected $fieldsName = [
-        'menu_id' => '菜单ID',
-        'user_id' => '用户ID',
-        'location' => '位置',
-        'ip' => 'IP地址',
-        'parameters' => '请求参数',
-        'return' => '返回数据',
-        //'created_at' => '创建时间',
-        //'updated_at' => '修改时间',
-        //'deleted_at' => '删除时间',
+        'menu_id' => 'Menu ID',
+        'user_id' => 'User ID',
+        'location' => 'Position',
+        'ip' => 'IP address',
+        'parameters' => 'Request parameters',
+        'return' => 'Return data',
+        //'created_at' => 'Created At',
+        //'updated_at' => 'Updated At',
+        //'deleted_at' => 'Deleted At',
         'id' => 'ID',
     ];
     //输出隐藏字段

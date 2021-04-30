@@ -96,13 +96,21 @@
                     "Created At": "Created At",
                     "Updated At": "Updated At",
                     "Deleted At": "Deleted At",
-                    "ID": "ID"
+                    "ID": "ID",
+                    "User name": "User name",
+                    "Nickname?": "Nickname?",
+                    "Head portrait": "Head portrait",
+                    "E-mail": "E-mail",
+                    "Phone number": "Phone number",
+                    "State": "State",
+                    "Remarks": "Remarks"
                 },
                 "maps": {
                     "status": {
                         "Cancellation": "Cancellation",
                         "Effective": "Effective",
-                        "Stop using": "Stop using"
+                        "Stop using": "Stop using",
+                        "Out of service": "Out of service"
                     }
                 }
             },
@@ -117,8 +125,10 @@
                     "Created At": "Created At",
                     "Updated At": "Updated At",
                     "Deleted At": "Deleted At",
-                    "ID": "ID"
-                }
+                    "ID": "ID",
+                    "Position": "Position"
+                },
+                "maps": []
             },
             "menus": {
                 "fields": {
@@ -159,19 +169,95 @@
                         "Disable": "Disable"
                     },
                     "use": [],
-                    "env": [],
+                    "env": {
+                        "Development environment": "Development environment",
+                        "Testing environment": "Testing environment",
+                        "Pre launch environment": "Pre launch environment",
+                        "Formal environment": "Formal environment"
+                    },
                     "group": [],
                     "middleware": []
                 }
             },
             "configs": {
-                "fields": []
+                "fields": {
+                    "Type": "Type",
+                    "Name": "Name",
+                    "Key name": "Key name",
+                    "Input box type": "Input box type",
+                    "Component properties": "Component properties",
+                    "Describe": "Describe",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": {
+                    "type": {
+                        "Character string": "Character string",
+                        "Number": "Number"
+                    },
+                    "itype": []
+                }
             },
             "ousers": {
-                "fields": []
+                "fields": [],
+                "maps": {
+                    "type": [],
+                    "type_show": []
+                }
             },
-            "params": [],
-            "roles": []
+            "params": {
+                "fields": [],
+                "maps": {
+                    "type": {
+                        "Character string": "Character string",
+                        "Number": "Number",
+                        "Boolean value": "Boolean value"
+                    }
+                }
+            },
+            "roles": {
+                "fields": {
+                    "Template ID": "Template ID",
+                    "Name": "Name",
+                    "Template": "Template",
+                    "Describe": "Describe",
+                    "Parent ID": "Parent ID",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": {
+                    "is_tmp": {
+                        "No": "No",
+                        "Yes": "Yes"
+                    }
+                }
+            },
+            "admins": {
+                "fields": [],
+                "maps": []
+            },
+            "admin_role": {
+                "fields": [],
+                "maps": []
+            },
+            "menu_role": {
+                "fields": [],
+                "maps": []
+            },
+            "migrations": {
+                "fields": [],
+                "maps": []
+            },
+            "responses": {
+                "fields": [],
+                "maps": []
+            },
+            "tables": {
+                "fields": [],
+                "maps": []
+            }
         },
         "pages": {
             "admin": {

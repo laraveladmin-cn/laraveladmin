@@ -40,6 +40,7 @@
                     '{lang_root}':''
                 },
                 options:{
+                    lang_table:'configs',
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     operation:true, //操作列
@@ -49,17 +50,17 @@
                     keywordGroup:false, //是否为选项组
                     keywordPlaceholder:()=>{
                         return this.$t('enter',{name:this.$t('name')});
-                    },//'请输入名称',
+                    },//'请输入Name',
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "name": {"name": "配置名称", "order": true},
-                        "description": {"name": "描述", "order": true},
+                        "name": {"name": "配置Name", "order": true},
+                        "description": {"name": "Describe", "order": true},
                         "key": {"name": "配置键", "order": true},
                         "value": {"name": "值", "order": true},
-                        //"created_at": {"name": "创建时间", "order": true},
-                        "updated_at": {"name": "修改时间", "order": true},
+                        //"created_at": {"name": "Created At", "order": true},
+                        "updated_at": {"name": "Updated At", "order": true},
                     },
                 }
             };

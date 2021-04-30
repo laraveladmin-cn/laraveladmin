@@ -8,13 +8,13 @@
                 <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '名称', required: true,rules:'required',disabled:props.data.row['id']==1}"  :datas="props"></edit-item>
+                            <edit-item key-name="name" :options="{name: props.transField('Name'), required: true,rules:'required',disabled:props.data.row['id']==1}"  :datas="props"></edit-item>
                             <edit-item key-name="is_tmp" :options='{"name": "设置为模板", "type":"select"}' :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['is_tmp']"
                                                  :disabled="!props.url"
-                                                 :default-options="props.data.maps['is_tmp']"
+                                                 :default-options="props.maps['is_tmp']"
                                                  :placeholder="false"
                                                  :is-ajax="false" >
                                         </select2>
@@ -25,7 +25,7 @@
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['tmp_id']"
-                                                 @change="changeTmp(props.data.row,props.data.maps['permissions'])"
+                                                 @change="changeTmp(props.data.row,props.maps['permissions'])"
                                                  :disabled="!props.url || props.data.row['id']==1"
                                                  :default-options="array_get(props,'data.row.tmp.id',0)?[array_get(props,'data.row.tmp')]:[]"
                                                  :url="use_url+'/admin/roles/list?where[is_tmp]=1'"
@@ -37,9 +37,9 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="description" :options="{name: '描述', required: false,type:'textarea'}"  :datas="props"></edit-item>
+                            <edit-item key-name="description" :options="{name: props.transField('Describe'), required: false,type:'textarea'}"  :datas="props"></edit-item>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" v-show="(props.data.maps['optional_parents'] || []).length">
+                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" v-show="(props.maps['optional_parents'] || []).length">
                             <edit-item key-name="parent_id" :options='{"name": "所属父级选择", "required": true,rules:"required"}' :datas="props">
                                 <template slot="input-item">
                                     <div>
@@ -110,6 +110,7 @@
                     '{lang_root}': ''
                 },
                 options:{
+                    lang_table:'roles',
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}

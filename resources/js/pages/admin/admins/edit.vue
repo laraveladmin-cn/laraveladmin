@@ -122,6 +122,7 @@
                     '{lang_root}': ''
                 },
                 options:{
+                    lang_table:'admins',
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {},

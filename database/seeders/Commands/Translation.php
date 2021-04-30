@@ -58,7 +58,9 @@ class Translation extends Seeder
         $tables = Arr::get($front_json,'_shared.tables',[]);
         collect($files)->map(function ($file)use($model_path,&$tables){
             $file_path = $model_path.'/'.$file;
-            if(is_file($file_path) && Str::endsWith($file,'.php') && $file=='Menu.php'){
+            if(is_file($file_path) && Str::endsWith($file,'.php')
+               // && $file=='Menu.php'
+            ){
                 $model_class = 'App\Models\\'.Str::replaceLast('.php','',$file);
                 $model = new $model_class();
                 $table = $model->getTable();
