@@ -75,10 +75,10 @@
                     lang_table:'users',
                     mapsRelations:{"user":'users',"roles":"roles"},
                     fields: {
-                        "uname": {"name": "Username","order": true},
+                        "uname": {"name": "User name","order": true},
                         "name": {"name": "Name", "order": true},
-                        "mobile_phone": {"name": "Mobile phone number", "order": true},
-                        "email": {"name": "Email", "order": true},
+                        "mobile_phone": {"name": "Phone number", "order": true},
+                        "email": {"name": "E-mail", "order": true},
                         "status": {"name": "Status", "order": true,type:'label'},
                     },
                 }

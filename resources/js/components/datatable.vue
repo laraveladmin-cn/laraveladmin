@@ -100,7 +100,7 @@
                 <div class="collapse export_excel row">
                     <slot name="export-excel">
                         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" v-for="(field,key) in data.excel.exportFields">
-                            <icheck v-model="export_fileds" :option="key">{{field}}</icheck>
+                            <icheck v-model="export_fileds" :option="key">{{transField(field,key)}}</icheck>
                         </div>
                     </slot>
                 </div>

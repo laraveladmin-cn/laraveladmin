@@ -116,7 +116,7 @@
                 return maps;
             },
             transMap(name,field,table){
-                if(!this.options.lang_table && !this.data.excel.sheet){
+                if(!this.options.lang_table && !array_get(this.data,'excel.sheet')){
                     return name;
                 }
                 if(!table){

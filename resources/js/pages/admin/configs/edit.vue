@@ -10,7 +10,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="name" :options="{name: props.transField('Name'), required: true,disabled:true}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="key" :options="{name: '键', required: true,disabled:true}"  :datas="props">
+                            <edit-item key-name="key" :options="{name: props.transField('Key name'), required: true,disabled:true}"  :datas="props">
                             </edit-item>
                             <edit-item key-name="type" :options='{"name": props.transField("Type"), "required": false,"type":"select"}' :datas="props">
                                 <template slot="input-item">
@@ -49,7 +49,7 @@
                                     </json-edit>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="value" :options="{name: '值', required: false}"  :datas="props">
+                            <edit-item key-name="value" :options="{name: props.transField('Value'), required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <input
                                         v-if="props.data.row['itype']==1"

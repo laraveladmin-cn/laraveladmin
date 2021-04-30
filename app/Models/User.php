@@ -89,7 +89,7 @@ class User extends Authenticatable
     //字段默认值
     protected $fieldsName = [
         'uname' => 'User name',
-        'name' => 'Nickname',
+        'name' => 'Name',
         'avatar' => 'Head portrait',
         'email' => 'E-mail',
         'mobile_phone' => 'Phone number',

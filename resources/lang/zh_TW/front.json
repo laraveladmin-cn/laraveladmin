@@ -104,7 +104,13 @@
                     "Phone number": "手機號碼",
                     "State": "狀態",
                     "Remarks": "備註",
-                    "Password": "密碼"
+                    "Password": "密碼",
+                    "Operator": "操作者",
+                    "Personality signature": "個性簽名",
+                    "Old password": "舊密碼",
+                    "New password": "新密碼",
+                    "Confirm the new password": "確認新密碼",
+                    "Tripartite login": "三方登入"
                 },
                 "maps": {
                     "status": {
@@ -127,7 +133,9 @@
                     "Updated At": "修改時間",
                     "Deleted At": "删除時間",
                     "ID": "ID",
-                    "Position": "位置"
+                    "Position": "位置",
+                    "Operation menu": "操作選單",
+                    "Operator": "操作者"
                 },
                 "maps": []
             },
@@ -153,7 +161,18 @@
                     "Using middleware alone": "單獨使用中介軟體",
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
-                    "Deleted At": "删除時間"
+                    "Deleted At": "删除時間",
+                    "Operation menu": "操作選單",
+                    "Parent name": "父級名稱",
+                    "Parent selection": "所屬父級選擇",
+                    "Menu type": "選單類型",
+                    "Url path": "URL路徑",
+                    "Group to which the route belongs": "路由所屬組",
+                    "Resource Name": "資源名稱",
+                    "Resources": "所屬資源",
+                    "Restricted use environment": "限制使用環境",
+                    "Specify where the route is used": "指定路由使用地方",
+                    "Resources included": "包含資源"
                 },
                 "maps": {
                     "method": [],
@@ -190,7 +209,9 @@
                     "Describe": "描述",
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
-                    "Deleted At": "删除時間"
+                    "Deleted At": "删除時間",
+                    "Configuration name": "配寘名稱",
+                    "Value": "值"
                 },
                 "maps": {
                     "type": {
@@ -226,7 +247,14 @@
                     "Parent ID": "父級ID",
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
-                    "Deleted At": "删除時間"
+                    "Deleted At": "删除時間",
+                    "Parent name": "父級名稱",
+                    "Administrator number": "管理員數",
+                    "Parent selection": "所屬父級選擇",
+                    "Set as template": "設定為範本",
+                    "Template selection": "範本選擇",
+                    "Allocation of permissions": "許可權分配",
+                    "Whether or not to associate the cancellation privilege assignment child node": "是否關聯取消許可權分配子節點"
                 },
                 "maps": {
                     "is_tmp": {
@@ -242,7 +270,9 @@
                     "Deleted At": "删除時間",
                     "Have roles": "擁有角色",
                     "Bind an existing account": "綁定已有帳戶",
-                    "User role selection": "用戶角色選擇"
+                    "User role selection": "用戶角色選擇",
+                    "User ID": "用戶ID",
+                    "ID": "ID"
                 },
                 "maps": []
             },

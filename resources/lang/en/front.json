@@ -104,7 +104,13 @@
                     "Phone number": "Phone number",
                     "State": "State",
                     "Remarks": "Remarks",
-                    "Password": "Password"
+                    "Password": "Password",
+                    "Operator": "Operator",
+                    "Personality signature": "Personality signature",
+                    "Old password": "Old password",
+                    "New password": "New password",
+                    "Confirm the new password": "Confirm the new password",
+                    "Tripartite login": "Tripartite login"
                 },
                 "maps": {
                     "status": {
@@ -127,7 +133,9 @@
                     "Updated At": "Updated At",
                     "Deleted At": "Deleted At",
                     "ID": "ID",
-                    "Position": "Position"
+                    "Position": "Position",
+                    "Operation menu": "Operation menu",
+                    "Operator": "Operator"
                 },
                 "maps": []
             },
@@ -153,7 +161,18 @@
                     "Using middleware alone": "Using middleware alone",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
-                    "Deleted At": "Deleted At"
+                    "Deleted At": "Deleted At",
+                    "Operation menu": "Operation menu",
+                    "Parent name": "Parent name",
+                    "Parent selection": "Parent selection",
+                    "Menu type": "Menu type",
+                    "Url path": "Url path",
+                    "Group to which the route belongs": "Group to which the route belongs",
+                    "Resource Name": "Resource Name",
+                    "Resources": "Resources",
+                    "Restricted use environment": "Restricted use environment",
+                    "Specify where the route is used": "Specify where the route is used",
+                    "Resources included": "Resources included"
                 },
                 "maps": {
                     "method": [],
@@ -190,7 +209,9 @@
                     "Describe": "Describe",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
-                    "Deleted At": "Deleted At"
+                    "Deleted At": "Deleted At",
+                    "Configuration name": "Configuration name",
+                    "Value": "Value"
                 },
                 "maps": {
                     "type": {
@@ -226,7 +247,14 @@
                     "Parent ID": "Parent ID",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
-                    "Deleted At": "Deleted At"
+                    "Deleted At": "Deleted At",
+                    "Parent name": "Parent name",
+                    "Administrator number": "Administrator number",
+                    "Parent selection": "Parent selection",
+                    "Set as template": "Set as template",
+                    "Template selection": "Template selection",
+                    "Allocation of permissions": "Allocation of permissions",
+                    "Whether or not to associate the cancellation privilege assignment child node": "Whether or not to associate the cancellation privilege assignment child node"
                 },
                 "maps": {
                     "is_tmp": {
@@ -242,7 +270,9 @@
                     "Deleted At": "Deleted At",
                     "Have roles": "Have roles",
                     "Bind an existing account": "Bind an existing account",
-                    "User role selection": "User role selection"
+                    "User role selection": "User role selection",
+                    "User ID": "User ID",
+                    "ID": "ID"
                 },
                 "maps": []
             },

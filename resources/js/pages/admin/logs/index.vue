@@ -14,7 +14,7 @@
                                          :url="use_url+'/admin/menus/list'"
                                          :keyword-key="'name|url'"
                                          :show="['name','url']"
-                                         :placeholder-show="'操作名称'"
+                                         :placeholder-show="props.transField('Operation menu','menu.name')"
                                          :placeholder-value="''"
                                          :is-ajax="true" >
                                 </select2>
@@ -24,7 +24,7 @@
                                          :default-options="array_get(props,'maps.user_id',[])"
                                          :url="use_url+'/admin/admins/list'"
                                          :keyword-key="'name|uname'"
-                                         :placeholder-show="'操作者'"
+                                         :placeholder-show="props.transField('Operator','user.name')"
                                          :placeholder-value="''"
                                          :primary-key="'user_id'"
                                          :show="['user.name']"
@@ -89,8 +89,8 @@
                     defOptions:def_options, //默认筛选条件
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "menu.name": {"name": "操作菜单", "order": true},
-                        "user.name": {"name": "操作者", "order": true},
+                        "menu.name": {"name": "Operation menu", "order": true},
+                        "user.name": {"name": "Operator", "order": true},
                         "location": {"name": "Position", "order": true},
                         "ip": {"name": "IP address", "order": true},
                         "parameters": {"name": "Request parameters", "order": true,type:"code",limit:30},

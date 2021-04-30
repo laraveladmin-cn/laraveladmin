@@ -10,7 +10,7 @@
                 <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="_type" :options="{name: '菜单类型'}" :datas="props">
+                            <edit-item key-name="_type" :options="{name: props.transField('Menu type')}" :datas="props">
                                 <template slot="input-item">
                                     <label-edit v-model="props.data.row['_type']"
                                                 :disabled="!props.url || props.data.row.resource_id>0"
@@ -24,19 +24,18 @@
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="url"
-                                       :options="{name: 'RUL路径',rules:requiredUrl(props,'url'),placeholder:getTitle('url',props),disabled:props.data.row['resource_id']>1}"
+                                       :options="{name: props.transField('Url path'),rules:requiredUrl(props,'url'),placeholder:getTitle('url',props),disabled:props.data.row['resource_id']>1}"
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="group"
                                        v-if="props.data.row['_type']!=0 && props.data.row['resource_id']<1"
-                                       :options="{name: '路由所属组',type:'text',rules:requiredUrl(props,'group'),placeholder:getTitle('group',props)}"
+                                       :options="{name: props.transField('Group to which the route belongs'),type:'text',rules:requiredUrl(props,'group'),placeholder:getTitle('group',props)}"
                                        :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['group']"
                                                  :disabled="!props.url"
                                                  :default-options="array_get(props,'data.maps.group',[])"
-                                                 :placeholder-show="'请选择'"
                                                  :placeholder-value="''"
                                                  :is-ajax="false">
                                         </select2>
@@ -45,7 +44,7 @@
                             </edit-item>
                             <edit-item key-name="item_name"
                                        v-if="props.data.row['resource_id']==-1"
-                                       :options="{name: '资源名称',type:'text', rules:'',placeholder:getTitle('item_name',props),title:'用于生成下级资源名称,不填默认是名称'}"
+                                       :options="{name: props.transField('Resource Name'),type:'text', rules:'',placeholder:getTitle('item_name',props),title:'用于生成下级资源名称,不填默认是名称'}"
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="action"
@@ -59,7 +58,7 @@
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="resource_id"
-                                       :options="{name: '所属资源', rules:'',placeholder:getTitle('resource_id',props)}"
+                                       :options="{name: props.transField('Resources'), rules:'',placeholder:getTitle('resource_id',props)}"
                                        v-show="props.data.row['_type']==2"
                                        :datas="props">
                                 <template slot="input-item">
@@ -69,7 +68,6 @@
                                                  :url="use_url+'/admin/menus/list'"
                                                  :keyword-key="'name'"
                                                  :disabled="true"
-                                                 :placeholder-show="'请选择所属资源'"
                                                  :placeholder-value="'0'"
                                                  :params="{where:{resource_id:-1}}"
                                                  :show="['name','id']"
@@ -100,7 +98,7 @@
                             <edit-item
                                 key-name="method"
                                 v-show="props.data.row['resource_id']==-1"
-                                :options="{name: '包含资源', required: false}"
+                                :options="{name: props.transField('Resources included'), required: false}"
                                 :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
@@ -168,7 +166,7 @@
                                 </template>
                             </edit-item>
                             <edit-item key-name="use"
-                                       :options="{name: '指定路由使用地方',type:'checkbox', rules:'',title:'不选时根据API模式自动识别'}"
+                                       :options="{name: props.transField('Specify where the route is used'),type:'checkbox', rules:'',title:'不选时根据API模式自动识别'}"
                                        v-show="props.data.row['_type']!=0"
                                        :datas="props">
                                 <template slot="input-item">
@@ -198,7 +196,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="env" :options="{name: '限制使用环境',type:'text', rules:'',title:''}"
+                            <edit-item key-name="env" :options="{name: props.transField('Restricted use environment'),type:'text', rules:'',title:''}"
                                        :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
@@ -222,7 +220,7 @@
                             </edit-item>
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                           <edit-item key-name="parent_id" :options='{"name": "所属父级选择", rules:props.data.row.id>1?"required":""}'
+                           <edit-item key-name="parent_id" :options='{"name": props.transField("Parent selection"), rules:props.data.row.id>1?"required":""}'
                                        :datas="props">
                                 <template slot="input-item">
                                     <div>

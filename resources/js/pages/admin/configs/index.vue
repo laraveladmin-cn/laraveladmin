@@ -55,10 +55,10 @@
                     defOptions:def_options, //默认筛选条件
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "name": {"name": "配置Name", "order": true},
+                        "name": {"name": "Configuration name", "order": true},
                         "description": {"name": "Describe", "order": true},
-                        "key": {"name": "配置键", "order": true},
-                        "value": {"name": "值", "order": true},
+                        "key": {"name": "Key name", "order": true},
+                        "value": {"name": "Value", "order": true},
                         //"created_at": {"name": "Created At", "order": true},
                         "updated_at": {"name": "Updated At", "order": true},
                     },

@@ -8,7 +8,7 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="menu_id" :options="{name: '操作菜单', required: false}"  :datas="props">
+                            <edit-item key-name="menu_id" :options="{name: props.transField('Operation menu'), required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['menu_id']"
@@ -16,14 +16,13 @@
                                                  :url="use_url+'/admin/menus/list'"
                                                  :keyword-key="'name|url'"
                                                  :disabled="!props.url"
-                                                 :placeholder-show="'请选择操作菜单'"
                                                  :placeholder-value="'0'"
                                                  :is-ajax="true" >
                                         </select2>
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="menu_id" :options="{name: '操作者', required: false}"  :datas="props">
+                            <edit-item key-name="menu_id" :options="{name: props.transField('Operator'), required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['user_id']"
@@ -31,7 +30,6 @@
                                                  :url="use_url+'/admin/users/list'"
                                                  :keyword-key="'name'"
                                                  :disabled="!props.url"
-                                                 :placeholder-show="'请选择操作者'"
                                                  :placeholder-value="'0'"
                                                  :is-ajax="true" >
                                         </select2>

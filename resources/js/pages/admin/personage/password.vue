@@ -8,35 +8,35 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="old_password" :options="{name: '旧密码',rules:'required|min:6|max:18'}"  :datas="props">
+                            <edit-item key-name="old_password" :options="{name: props.transField('Old password'),rules:'required|min:6|max:18'}"  :datas="props">
                                 <template slot="input-item">
                                     <password-edit v-model="props.data.row['old_password']"
                                                    :disabled="!props.url">
                                     </password-edit>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="password" :options="{name: '新密码',rules:'min:6|max:18'}"  :datas="props">
+                            <edit-item key-name="password" :options="{name: props.transField('New password'),rules:'min:6|max:18'}"  :datas="props">
                                 <template slot="input-item">
                                     <password-edit v-model="props.data.row['password']"
                                                    :disabled="!props.url">
                                     </password-edit>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="password_confirmation" :options="{name: '确认新密码',rules:props.data.row['password']?'required|confirmed:password':''}"  :datas="props">
+                            <edit-item key-name="password_confirmation" :options="{name: props.transField('Confirm the new password'),rules:props.data.row['password']?'required|confirmed:password':''}"  :datas="props">
                                 <template slot="input-item">
                                     <password-edit v-model="props.data.row['password_confirmation']"
                                                    :disabled="!props.url">
                                     </password-edit>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="email" :options="{name: '电子邮箱',rules:props.data.row.mobile_phone?'':'required|email'}"  :datas="props">
+                            <edit-item key-name="email" :options="{name: props.transField('Email'),rules:props.data.row.mobile_phone?'':'required|email'}"  :datas="props">
                                 <template slot="input-item">
                                     <lock-edit v-model="props.data.row['email']"
                                                :disabled="!props.url">
                                     </lock-edit>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="mobile_phone" :options="{name: '手机号码',rules:props.data.row.email?'':'required|mobile'}"  :datas="props">
+                            <edit-item key-name="mobile_phone" :options="{name: props.transField('Phone number'),rules:props.data.row.email?'':'required|mobile'}"  :datas="props">
                                 <template slot="input-item">
                                     <lock-edit v-model="props.data.row['mobile_phone']"
                                                :disabled="!props.url">
@@ -45,7 +45,7 @@
                             </edit-item>
                         </div>
                         <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item v-if="array_get(props,'data.row.ousers',[]).length" key-name="unbind_ids" :options="{name: '三方登录'}"  :datas="props">
+                            <edit-item v-if="array_get(props,'data.row.ousers',[]).length" key-name="unbind_ids" :options="{name:  props.transField('Tripartite login')}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="social-auth-links text-center other-login">
                                         <div class="row">
@@ -90,6 +90,7 @@
         data(){
             return {
                 options:{
+                    lang_table:'users',
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}

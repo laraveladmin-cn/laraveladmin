@@ -9,7 +9,7 @@
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="name" :options="{name: props.transField('Name'), required: true,rules:'required',disabled:props.data.row['id']==1}"  :datas="props"></edit-item>
-                            <edit-item key-name="is_tmp" :options='{"name": "设置为模板", "type":"select"}' :datas="props">
+                            <edit-item key-name="is_tmp" :options='{"name": props.transField("Set as template"), "type":"select"}' :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['is_tmp']"
@@ -21,7 +21,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="is_tmp" :options='{"name": "模板选择", "type":"select"}' :datas="props">
+                            <edit-item key-name="is_tmp" :options='{"name": props.transField("Template selection"), "type":"select"}' :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['tmp_id']"
@@ -31,7 +31,6 @@
                                                  :url="use_url+'/admin/roles/list?where[is_tmp]=1'"
                                                  :keyword-key="'name'"
                                                  :placeholder-value="0"
-                                                 :placeholder-show="'请选择模板'"
                                                  :is-ajax="true" >
                                         </select2>
                                     </div>
@@ -40,7 +39,7 @@
                             <edit-item key-name="description" :options="{name: props.transField('Describe'), required: false,type:'textarea'}"  :datas="props"></edit-item>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" v-show="(props.maps['optional_parents'] || []).length">
-                            <edit-item key-name="parent_id" :options='{"name": "所属父级选择", "required": true,rules:"required"}' :datas="props">
+                            <edit-item key-name="parent_id" :options='{"name": props.transField("Parent selection"), "required": true,rules:"required"}' :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <ztree v-model="props.data.row['parent_id']"
@@ -56,18 +55,18 @@
                             </edit-item>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="_menu_ids" :options='{"name": "是否关联取消权限分配子节点"}' :datas="props">
+                            <edit-item key-name="_menu_ids" :options='{"name": props.transField("Whether or not to associate the cancellation privilege assignment child node")}' :datas="props">
                                 <template slot="input-item">
                                     <el-switch v-model="cancel_children"
                                                :disabled="!props.url"
-                                               active-text="是"
-                                               inactive-text="否"
+                                               :active-text="$t('Yes')"
+                                               :inactive-text="$t('No')"
                                                :active-value="1"
                                                :inactive-value="0">
                                     </el-switch>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="menu_ids" :options="{name: '权限分配',rules:'required'}"  :datas="props">
+                            <edit-item key-name="menu_ids" :options="{name: props.transField('Allocation of permissions'),rules:'required'}"  :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <ztree v-model="props.data.row['menu_ids']"

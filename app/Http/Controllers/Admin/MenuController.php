@@ -103,17 +103,17 @@ class MenuController extends Controller
 
     //字段导出
     public $exportFieldsName = [
-        'name' => '名称',
-        'icons' => '图标',
-        'description' => '描述',
-        'url' => 'URL路径',
-        'parent.name' => '父级名称',
-        'method' => '请求方式',
-        'is_page' => '是否为页面',
-        'disabled' => '功能状态',
-        'status' => '状态',
-        'level' => '层级',
-        'parent_id' => '父级ID',
+        'name' => 'Name',
+        'icons' => 'Icon',
+        'description' => 'Describe',
+        'url' => 'URL path',
+        'parent.name' => 'Parent name',
+        'method' => 'Request method',
+        'is_page' => 'Is it a page',
+        'disabled' => 'Functional status',
+        'status' => 'State',
+        'level' => 'Hierarchy',
+        'parent_id' => 'Parent ID',
         'id' => 'ID',
     ];
 
