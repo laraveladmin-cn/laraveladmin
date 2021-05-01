@@ -445,7 +445,6 @@
                 "Command:": "命令：",
                 "Enter the command manually:": "手动输入命令：",
                 "Command name:": "命令名称："
-
             },
             "menus": {
                 "Drag shift": "拖拽移位",
@@ -460,7 +459,7 @@
                 "The default recognition is based on the URL": "默认根据URL进行识别",
                 "Please enter the icon style": "请输入图标样式",
                 "For example: background home page": "例如:后台主页",
-                "For example: admin index":"例如:'/admin/index'",
+                "For example: admin index": "例如:'/admin/index'",
                 "For example: IndexController@index": "例如:'IndexController@index'",
                 "For example: admin_index": "例如:'admin_index'"
             },

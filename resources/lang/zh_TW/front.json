@@ -188,6 +188,11 @@
                         "Enable": "啟用",
                         "Disable": "禁用"
                     },
+                    "_type": {
+                        "Common links": "普通連結",
+                        "Resources": "資源",
+                        "Single route": "單獨路由"
+                    },
                     "use": [],
                     "env": {
                         "Development environment": "開發環境",
@@ -424,7 +429,9 @@
         },
         "admin": {
             "users": {
-                "username": "用戶昵稱"
+                "username": "用戶昵稱",
+                "Must be {min}-{max} non-Chinese characters": "必須是{min}-{max}比特的非中文字元",
+                "Must be {min}-{max} characters long": "必須是{min}-{max}個的字元"
             },
             "developments_index": {
                 "Console commands": "控制台命令",
@@ -441,7 +448,20 @@
             },
             "menus": {
                 "Drag shift": "拖拽移位",
-                "Data list": "數據清單"
+                "Data list": "數據清單",
+                "Double-click the icon to select it": "按兩下圖標即可選中",
+                "For example: Menu settings": "例如：選單設定",
+                "For example:Menu": "例如：選單",
+                "For example:Menu lists": "例如：選單清單",
+                "For example: will automatically bind to": "例如：'/admin/menus'將自動綁定到'Admin\\MenuController'",
+                "Use to generate the name of the subordinate resource, Default is name": "用於生成下級資源名稱，不填默認是名稱",
+                "Automatic recognition according to API mode when not selected": "不選時根據API模式自動識別",
+                "The default recognition is based on the URL": "默認根據URL進行識別",
+                "Please enter the icon style": "請輸入圖標樣式",
+                "For example: background home page": "例如：後臺主頁",
+                "For example: admin index": "例如：'/admin/index'",
+                "For example: IndexController@index": "例如：'IndexController@index'",
+                "For example: admin_index": "例如：'admin_index'"
             },
             "logs": {
                 "(Request parameters)": "（請求參數）"
@@ -588,5 +608,6 @@
     "Register": "注册",
     "password": "密碼",
     "Password": "密碼",
-    "Mobile phone number": "手機號碼"
+    "Mobile phone number": "手機號碼",
+    "Empty": "清空"
 }

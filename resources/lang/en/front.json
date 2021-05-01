@@ -188,6 +188,11 @@
                         "Enable": "Enable",
                         "Disable": "Disable"
                     },
+                    "_type": {
+                        "Common links": "Common links",
+                        "Resources": "Resources",
+                        "Single route": "Single route"
+                    },
                     "use": [],
                     "env": {
                         "Development environment": "Development environment",
@@ -424,7 +429,9 @@
         },
         "admin": {
             "users": {
-                "username": "username"
+                "username": "username",
+                "Must be {min}-{max} non-Chinese characters": "Must be {min}-{max} non-Chinese characters",
+                "Must be {min}-{max} characters long": "Must be {min}-{max} characters long"
             },
             "developments_index": {
                 "Console commands": "Console commands",
@@ -441,7 +448,20 @@
             },
             "menus": {
                 "Drag shift": "Drag shift",
-                "Data list": "Data list"
+                "Data list": "Data list",
+                "Double-click the icon to select it": "Double-click the icon to select it",
+                "For example: Menu settings": "For example: Menu settings",
+                "For example:Menu": "For example:Menu",
+                "For example:Menu lists": "For example:Menu lists",
+                "For example: will automatically bind to": "For example: will automatically bind to",
+                "Use to generate the name of the subordinate resource, Default is name": "Use to generate the name of the subordinate resource, Default is name",
+                "Automatic recognition according to API mode when not selected": "Automatic recognition according to API mode when not selected",
+                "The default recognition is based on the URL": "The default recognition is based on the URL",
+                "Please enter the icon style": "Please enter the icon style",
+                "For example: background home page": "For example: background home page",
+                "For example: admin index": "For example: admin index",
+                "For example: IndexController@index": "For example: IndexController@index",
+                "For example: admin_index": "For example: admin_index"
             },
             "logs": {
                 "(Request parameters)": "(Request parameters)"
@@ -588,5 +608,6 @@
     "Register": "Register",
     "password": "password",
     "Password": "Password",
-    "Mobile phone number": "Mobile phone number"
+    "Mobile phone number": "Mobile phone number",
+    "Empty": "Empty"
 }
