@@ -188,6 +188,11 @@
                         "Enable": "启用",
                         "Disable": "禁用"
                     },
+                    "_type": {
+                        "Common links": "普通链接",
+                        "Resources": "资源",
+                        "Single route": "单独路由"
+                    },
                     "use": [],
                     "env": {
                         "Development environment": "开发环境",
@@ -424,7 +429,9 @@
         },
         "admin": {
             "users": {
-                "username": "用户昵称"
+                "username": "用户昵称",
+                "Must be {min}-{max} non-Chinese characters": "必须是{min}-{max}位的非中文字符",
+                "Must be {min}-{max} characters long": "必须是{min}-{max}个的字符"
             },
             "developments_index": {
                 "Console commands": "控制台命令",
@@ -438,10 +445,24 @@
                 "Command:": "命令：",
                 "Enter the command manually:": "手动输入命令：",
                 "Command name:": "命令名称："
+
             },
             "menus": {
                 "Drag shift": "拖拽移位",
-                "Data list": "数据列表"
+                "Data list": "数据列表",
+                "Double-click the icon to select it": "双击图标即可选中",
+                "For example: Menu settings": "例如:菜单设置",
+                "For example:Menu": "例如:菜单",
+                "For example:Menu lists": "例如:菜单列表",
+                "For example: will automatically bind to": "例如:'/admin/menus'将自动绑定到'Admin\\MenuController'",
+                "Use to generate the name of the subordinate resource, Default is name": "用于生成下级资源名称,不填默认是名称",
+                "Automatic recognition according to API mode when not selected": "不选时根据API模式自动识别",
+                "The default recognition is based on the URL": "默认根据URL进行识别",
+                "Please enter the icon style": "请输入图标样式",
+                "For example: background home page": "例如:后台主页",
+                "For example: admin index":"例如:'/admin/index'",
+                "For example: IndexController@index": "例如:'IndexController@index'",
+                "For example: admin_index": "例如:'admin_index'"
             },
             "logs": {
                 "(Request parameters)": "（请求参数）"
@@ -588,5 +609,6 @@
     "Register": "注册",
     "password": "密码",
     "Password": "密码",
-    "Mobile phone number": "手机号码"
+    "Mobile phone number": "手机号码",
+    "Empty": "清空"
 }

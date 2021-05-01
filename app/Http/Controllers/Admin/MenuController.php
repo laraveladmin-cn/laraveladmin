@@ -196,9 +196,9 @@ class MenuController extends Controller
                 return $item;
             });
         $data['maps']['_type'] = [
-            '普通链接',
-            '资源',
-            '单独路由',
+            'Common links',
+            'Resources',
+            'Single route',
         ];
         $data['maps']['_options']=collect(RouteService::getResourceRoutes(['except'=>['index']]))
             ->keys()

@@ -19,6 +19,7 @@ class Translation extends Seeder
     protected $local=''; //本地语言默认设置
     protected $routeJsonPath = '';//路由文件位置
     protected $frontJsonPath = '';//输出翻译文件位置
+    protected $commandsJsonPath = '';//控制台命令描述
     protected $langMap = [ //地区语言对应语种代码
         'zh-TW'=>'hk', //繁体中文
         'zh-HK'=>'hk',//繁体中文
@@ -43,9 +44,51 @@ class Translation extends Seeder
         $this->local = str_replace('_','-',config('app.locale','en'));//当前默认设置使用地区语言
         $this->lang = Arr::get($this->langMap,$this->local,explode('-',$this->local)[0]);//语言代码
         $this->frontJsonPath = resource_path('lang/'.config('app.locale','en').'/front.json');
+        $this->commandsJsonPath = storage_path('/developments/commands.json');
         $this->transMenu();
         $this->transModels();
+        $this->transCommands();
         $this->TransAll();
+    }
+
+    /**
+     * 翻译控制台命令说明
+     */
+    public function transCommands(){
+        if(file_exists($this->commandsJsonPath)){
+            $data = json_decode(file_get_contents($this->commandsJsonPath),true)?:[];
+            $front_json = json_decode(file_get_contents($this->frontJsonPath),true);
+            $old_data = Arr::get($front_json,'pages.admin.developments_index',[]);
+            $data = collect($data)->map(function ($item)use(&$old_data){
+                $name = $chinese = Arr::get($item,'name',Arr::get($item,'chinese'));
+                if($name && !$this->isEnglish($name)){
+                    $english = Arr::get($item,'english');
+                    if(!$english){
+                        while (true) {
+                            try {
+                                $new = Str::ucfirst(trim(Translate::setFromAndTo($this->lang,'en')->translate($name)));
+                                break;
+                            }catch (\Exception $exception){
+                                $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
+                                sleep(1);
+                            }
+                        }
+                        $this->command->info(trans_path('From ":old" to ":new"',$this->transPath,['old'=>$name,'new'=>$new]));
+                        $name = $new;
+                    }
+                    if(!isset($old_data,$name)){
+                        $old_data[$name] = $chinese;
+                    }
+                }
+                unset($item['chinese']);
+                unset($item['english']);
+                $item['name'] = $name;
+                return $item;
+            })->toArray();
+            $front_json['pages']['admin']['developments_index'] = $old_data;
+            file_put_contents($this->frontJsonPath,json_encode( $front_json ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+            file_put_contents($this->commandsJsonPath,json_encode( $data ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+        }
     }
 
     /**

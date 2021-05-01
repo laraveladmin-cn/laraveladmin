@@ -44,11 +44,11 @@
                             </edit-item>
                             <edit-item key-name="item_name"
                                        v-if="props.data.row['resource_id']==-1"
-                                       :options="{name: props.transField('Resource Name'),type:'text', rules:'',placeholder:getTitle('item_name',props),title:'用于生成下级资源名称,不填默认是名称'}"
+                                       :options="{name: props.transField('Resource Name'),type:'text', rules:'',placeholder:getTitle('item_name',props),title:$tp('Use to generate the name of the subordinate resource, Default is name')}"
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="action"
-                                       :options="{name: props.transField('Binding controller method'),type:'text', rules:'',placeholder:getTitle('action',props),title:'默认根据URL进行识别'}"
+                                       :options="{name: props.transField('Binding controller method'),type:'text', rules:'',placeholder:getTitle('action',props),title:$tp('The default recognition is based on the URL')}"
                                        v-show="props.data.row['_type']==2 && props.data.row['resource_id']<1"
                                        :datas="props">
                             </edit-item>
@@ -86,12 +86,12 @@
                             </edit-item>
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="icons" :options="{name: props.transField('Icon'),title:'双击图标即可选中'}" :datas="props">
+                            <edit-item key-name="icons" :options="{name: props.transField('Icon'),title:$tp('Double-click the icon to select it')}" :datas="props">
                                 <template slot="input-item">
                                     <icon-edit
                                         v-model="props.data.row['icons']"
                                         :disabled="!props.url"
-                                        :placeholder="'请输入图标样式'">
+                                        :placeholder="$tp('Please enter the icon style')">
                                     </icon-edit>
                                 </template>
                             </edit-item>
@@ -166,7 +166,7 @@
                                 </template>
                             </edit-item>
                             <edit-item key-name="use"
-                                       :options="{name: props.transField('Specify where the route is used'),type:'checkbox', rules:'',title:'不选时根据API模式自动识别'}"
+                                       :options="{name: props.transField('Specify where the route is used'),type:'checkbox', rules:'',title:$tp('Automatic recognition according to API mode when not selected')}"
                                        v-show="props.data.row['_type']!=0"
                                        :datas="props">
                                 <template slot="input-item">
@@ -207,12 +207,12 @@
                                             </icheck>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-4">
-                                            <button title="清除"
+                                            <button :title="$t('Empty')"
                                                     type="button"
                                                     :disabled="!props.url"
                                                     class="btn btn-danger btn-xs"
                                                     @click="props.data.row['env']=''">
-                                                <i class="fa fa-trash-o"></i>清除
+                                                <i class="fa fa-trash-o"></i> {{$t('Empty')}}
                                             </button>
                                         </div>
                                     </div>
@@ -278,6 +278,7 @@
         },
         data() {
             return {
+                "{lang_path}": 'admin.menus',
                 modal: false,
                 shared: {
                     "{lang_path}": '_shared.menus',
@@ -297,17 +298,17 @@
                 title_map: [
                     {},
                     {
-                        name: '例如:菜单设置',
-                        item_name: '例如:菜单',
-                        url: '例如:/admin/menus,将自动绑定到Admin\\MenuController',
-                        description: '例如:菜单列表'
+                        name: 'For example: Menu settings',//'例如:菜单设置',
+                        item_name: 'For example:Menu',//'例如:菜单',
+                        url: "For example: will automatically bind to",//'例如:/admin/menus,将自动绑定到Admin\\MenuController',
+                        description: 'For example:Menu lists'//'例如:菜单列表'
                     },
                     {
-                        name: '例如:后台主页',
-                        url: '例如:/admin/index',
-                        description: '例如:后台主页',
-                        action:'例如:IndexController@index',
-                        as:'例如:admin_index'
+                        name: "For example: background home page",//'例如:后台主页',
+                        url:  "For example: admin index",//'例如:/admin/index',
+                        description: "For example: background home page",//'例如:后台主页',
+                        action:"For example: IndexController@index",//'例如:IndexController@index',
+                        as:"For example: admin_index"//'例如:admin_index'
                     }
                 ]
             };
@@ -317,7 +318,6 @@
                 this.options.url = val;
             },
             '$refs.edit.data'(data){
-                dd(data);
             }
         },
         methods: {
@@ -395,28 +395,36 @@
             },
             getTitle(key, props) {
                 let row = props.data.row;
-                return array_get(this.title_map, row._type + '.' + key, '');
+                let value = array_get(this.title_map, row._type + '.' + key, '');
+                return this.$tp(value);
             },
             getMapName(key,name){
                 let _name;
                 if(key=='_list'){
-                    _name = name+'分页';
+                    _name = '{name} pagination';//name+'分页';
                 }else if(key=='_show'){
-                    _name = '编辑查看'+name;
+                    _name = 'Edit view {l_name}';//'编辑查看'+name;
                 }else if(key=='_create'){
-                    _name = '创建'+name;
+                    _name = 'Create {l_name}';//'创建'+name;
                 }else if(key=='_update'){
-                    _name = '更新'+name;
+                    _name = 'Update {l_name}';//'更新'+name;
                 }else if(key=='_destroy'){
-                    _name = '删除'+name;
+                    _name = 'Delete {l_name}';//'删除'+name;
                 }else if(key=='_export'){
-                    _name = '导出'+name;
+                    _name = 'Export {l_name}';//'导出'+name;
                 }else if(key=='_import'){
-                    _name = '导入'+name;
+                    _name = 'Import {l_name}';//'导入'+name;
                 }else{
-                    _name = '删除'+name;
+                    _name = 'Delete {l_name}';//'删除'+name;
                 }
-                return array_get(this.$refs['edit'].data.maps._options_name,key,_name);
+                let value = array_get(this.$refs['edit'].data.maps._options_name,key,_name);
+                let shared = {
+                    "{lang_path}": '_shared.menus',
+                    '{lang_root}': '',
+                    'name':name.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase()),
+                    'l_name':name.toLowerCase()
+                };
+                return this.$tp(value,shared);
             }
 
         },
@@ -426,6 +434,11 @@
             ...mapState([
                 'use_url'
             ]),
+            maps_type(){
+                return collect(array_get(this.$refs['edit'],'data.maps._type',[])).map((value)=>{
+                    this.$tp(value);
+                }).all();
+            }
 
         },
 
