@@ -45,10 +45,10 @@ class Translation extends Seeder
         $this->lang = Arr::get($this->langMap,$this->local,explode('-',$this->local)[0]);//语言代码
         $this->frontJsonPath = resource_path('lang/'.config('app.locale','en').'/front.json');
         $this->commandsJsonPath = storage_path('/developments/commands.json');
-        $this->transMenu();
-        $this->transModels();
+        //$this->transMenu();
+        //$this->transModels();
         $this->transCommands();
-        $this->TransAll();
+        //$this->TransAll();
     }
 
     /**
@@ -74,15 +74,19 @@ class Translation extends Seeder
                             }
                         }
                         $this->command->info(trans_path('From ":old" to ":new"',$this->transPath,['old'=>$name,'new'=>$new]));
-                        $name = $new;
+                        $english = $new;
                     }
-                    if(!isset($old_data,$name)){
-                        $old_data[$name] = $chinese;
+                    if(!isset($old_data[$english])){
+                        $old_data[$english] = $name;
                     }
+                }else{
+                    $english = $name;
                 }
                 unset($item['chinese']);
                 unset($item['english']);
-                $item['name'] = $name;
+                $item['name'] = $english;
+                //翻译参数处理
+
                 return $item;
             })->toArray();
             $front_json['pages']['admin']['developments_index'] = $old_data;

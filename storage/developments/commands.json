@@ -1,8 +1,6 @@
 [
     {
         "command": "create:all",
-        "chinese": "生成所有资源",
-        "english": "",
         "parameters": [
             {
                 "key": "table",
@@ -59,12 +57,11 @@
                     "edit": "编辑页面"
                 }
             }
-        ]
+        ],
+        "name": "Generate all resources"
     },
     {
         "command": "migrate:generate",
-        "chinese": "生成数据表对应的迁移文件",
-        "english": "Generate migration file corresponding to data table",
         "parameters": [
             {
                 "key": "tables",
@@ -173,12 +170,11 @@
                 "is_option": true,
                 "is_boolean": true
             }
-        ]
+        ],
+        "name": "Generate migration file corresponding to data table"
     },
     {
         "command": "create:model",
-        "chinese": "创建模型",
-        "english": "Create the model",
         "parameters": [
             {
                 "key": "table",
@@ -210,12 +206,11 @@
                 "is_option": true,
                 "is_boolean": true
             }
-        ]
+        ],
+        "name": "Create the model"
     },
     {
         "command": "create:controller",
-        "chinese": "创建控制器",
-        "english": "",
         "parameters": [
             {
                 "key": "name",
@@ -253,12 +248,11 @@
                 "is_option": true,
                 "is_boolean": true
             }
-        ]
+        ],
+        "name": "Create controller"
     },
     {
         "command": "create:view",
-        "chinese": "创建视图",
-        "english": "",
         "parameters": [
             {
                 "key": "controller",
@@ -298,12 +292,11 @@
                 "is_option": true,
                 "is_boolean": true
             }
-        ]
+        ],
+        "name": "Create view"
     },
     {
         "command": "build:index.html",
-        "chinese": "前端入口页面index.html生成",
-        "english": "",
         "parameters": [
             {
                 "key": "force",
@@ -316,12 +309,11 @@
                 "is_boolean": true,
                 "key_as": "f"
             }
-        ]
+        ],
+        "name": "Front end entry page index html generation"
     },
     {
         "command": "create:seed",
-        "chinese": "创建数据填充",
-        "english": "",
         "parameters": [
             {
                 "key": "model",
@@ -340,7 +332,8 @@
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
-            },{
+            },
+            {
                 "key": "no_dump",
                 "value": 1,
                 "rules": "",
@@ -350,17 +343,15 @@
                 "is_option": true,
                 "is_boolean": true
             }
-        ]
+        ],
+        "name": "Create data fill"
     },
     {
         "command": "migrate:all",
-        "chinese": "执行所有目录迁移文件",
-        "english": ""
+        "name": "Perform all directory migration files"
     },
     {
         "command": "db:seed",
-        "chinese": "填充数据库",
-        "english": "Seed the database with records",
         "parameters": [
             {
                 "key": "class",
@@ -392,132 +383,107 @@
                 "is_option": true,
                 "is_boolean": true
             }
-        ]
+        ],
+        "name": "Seed the database with records"
     },
     {
         "command": "clear-compiled",
-        "chinese": "删除已编译的类文件",
-        "english": "Remove the compiled class file"
+        "name": "Remove the compiled class file"
     },
     {
         "command": "down",
-        "chinese": "将应用程序置于维护模式",
-        "english": "Put the application into maintenance mode"
+        "name": "Put the application into maintenance mode"
     },
     {
         "command": "dump-server",
-        "chinese": "启动转储服务器以收集转储信息。",
-        "english": "Start the dump server to collect dump information."
+        "name": "Start the dump server to collect dump information"
     },
     {
         "command": "env",
-        "chinese": "显示当前的框架环境",
-        "english": "Display the current framework environment"
+        "name": "Display the current framework environment"
     },
     {
         "command": "help",
-        "chinese": "显示命令的帮助",
-        "english": "Displays help for a command"
+        "name": "Displays help for a command"
     },
     {
         "command": "inspire",
-        "chinese": "---",
-        "english": "Display an inspiring quote"
+        "name": "---"
     },
     {
         "command": "list",
-        "chinese": "列出命令",
-        "english": "Lists commands"
+        "name": "Lists commands"
     },
     {
         "command": "migrate",
-        "chinese": "运行数据库迁移",
-        "english": "Run the database migrations"
+        "name": "Run the database migrations"
     },
     {
         "command": "optimize",
-        "chinese": "缓存框架引导程序文件",
-        "english": "Cache the framework bootstrap files"
+        "name": "Cache the framework bootstrap files"
     },
     {
         "command": "preset",
-        "chinese": "为应用程序交换前端脚手架",
-        "english": "Swap the front-end scaffolding for the application"
+        "name": "Swap the front-end scaffolding for the application"
     },
     {
         "command": "serve",
-        "chinese": "在 PHP 开发服务器上提供应用程序",
-        "english": "Serve the application on the PHP development server"
+        "name": "Serve the application on the PHP development server"
     },
     {
         "command": "tinker",
-        "chinese": "与您的应用程序互动",
-        "english": "Interact with your application"
+        "name": "Interact with your application"
     },
     {
         "command": "up",
-        "chinese": "使应用程序退出维护模式",
-        "english": "Bring the application out of maintenance mode"
+        "name": "Bring the application out of maintenance mode"
     },
     {
         "command": "app:name",
-        "chinese": "设置应用程序命名空间",
-        "english": "Set the application namespace"
+        "name": "Set the application namespace"
     },
     {
         "command": "auth:clear-resets",
-        "chinese": "刷新过期的密码重置令牌",
-        "english": "Flush expired password reset tokens"
+        "name": "Flush expired password reset tokens"
     },
     {
         "command": "cache:clear",
-        "chinese": "刷新应用程序缓存",
-        "english": "Flush the application cache"
+        "name": "Flush the application cache"
     },
     {
         "command": "cache:forget",
-        "chinese": "从缓存中删除项目",
-        "english": "Remove an item from the cache"
+        "name": "Remove an item from the cache"
     },
     {
         "command": "cache:table",
-        "chinese": "为缓存数据库表创建迁移",
-        "english": "Create a migration for the cache database table"
+        "name": "Create a migration for the cache database table"
     },
     {
         "command": "config:cache",
-        "chinese": "创建缓存文件以加快配置速度",
-        "english": "Create a cache file for faster configuration loading"
+        "name": "Create a cache file for faster configuration loading"
     },
     {
         "command": "config:clear",
-        "chinese": "删除配置缓存文件",
-        "english": "Remove the configuration cache file"
+        "name": "Remove the configuration cache file"
     },
     {
         "command": "event:generate",
-        "chinese": "根据注册生成缺少的事件和侦听器",
-        "english": "Generate the missing events and listeners based on registration"
+        "name": "Generate the missing events and listeners based on registration"
     },
     {
         "command": "key:generate",
-        "chinese": "生成应用程序 key",
-        "english": "Set the application key"
+        "name": "Set the application key"
     },
     {
         "command": "lang:publish",
-        "chinese": "将语言文件发布到资源目录",
-        "english": "publish language files to resources directory."
+        "name": "publish language"
     },
     {
         "command": "make:auth",
-        "chinese": "---",
-        "english": "Scaffold basic login and registration views and routes"
+        "name": "---"
     },
     {
         "command": "make:channel",
-        "chinese": "创建一个新的 channel 类",
-        "english": "Create a new channel class",
         "parameters": [
             {
                 "key": "name",
@@ -527,12 +493,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new channel class"
     },
     {
         "command": "make:command",
-        "chinese": "创建一个新的 Artisan 命令",
-        "english": "Create a new Artisan command",
         "parameters": [
             {
                 "key": "name",
@@ -542,12 +507,11 @@
                 "name": "命令类名",
                 "placeholder": "SendEmails"
             }
-        ]
+        ],
+        "name": "Create a new Artisan command"
     },
     {
         "command": "make:controller",
-        "chinese": "创建一个新的控制器类",
-        "english": "Create a new controller class",
         "parameters": [
             {
                 "key": "name",
@@ -567,12 +531,11 @@
                 "is_option": true,
                 "is_boolean": true
             }
-        ]
+        ],
+        "name": "Create a new controller class"
     },
     {
         "command": "make:event",
-        "chinese": "创建一个新的 event 类",
-        "english": "",
         "parameters": [
             {
                 "key": "name",
@@ -582,12 +545,11 @@
                 "name": "名称",
                 "placeholder": "PodcastProcessed"
             }
-        ]
+        ],
+        "name": "Create a new event class"
     },
     {
         "command": "make:exception",
-        "chinese": "创建一个新的自定义异常类",
-        "english": "Create a new custom exception class",
         "parameters": [
             {
                 "key": "name",
@@ -597,12 +559,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new custom exception class"
     },
     {
         "command": "make:factory",
-        "chinese": "创建一个新的模型工厂",
-        "english": "Create a new model factory",
         "parameters": [
             {
                 "key": "name",
@@ -612,12 +573,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new model factory"
     },
     {
         "command": "make:job",
-        "chinese": "创建一个新的工作类",
-        "english": "Create a new job class",
         "parameters": [
             {
                 "key": "name",
@@ -627,12 +587,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new job class"
     },
     {
         "command": "make:listener",
-        "chinese": "创建一个新的事件监听器类",
-        "english": "Create a new event listener class",
         "parameters": [
             {
                 "key": "name",
@@ -651,12 +610,11 @@
                 "placeholderValue": "PodcastProcessed",
                 "is_option": true
             }
-        ]
+        ],
+        "name": "Create a new event listener class"
     },
     {
         "command": "make:mail",
-        "chinese": "创建一个新的电子邮件类",
-        "english": "Create a new email class",
         "parameters": [
             {
                 "key": "name",
@@ -666,12 +624,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new email class"
     },
     {
         "command": "make:middleware",
-        "chinese": "创建一个新的中间件类",
-        "english": "Create a new middleware class",
         "parameters": [
             {
                 "key": "name",
@@ -681,12 +638,11 @@
                 "name": "名称",
                 "placeholder": "Activity"
             }
-        ]
+        ],
+        "name": "Create a new middleware class"
     },
     {
         "command": "make:migration",
-        "chinese": "创建一个新的迁移文件",
-        "english": "Create a new migration file",
         "parameters": [
             {
                 "key": "name",
@@ -696,12 +652,11 @@
                 "name": "名称",
                 "placeholder": "create_student_table"
             }
-        ]
+        ],
+        "name": "Create a new migration file"
     },
     {
         "command": "make:model",
-        "chinese": "创建一个新的 Eloquent 模型类",
-        "english": "Create a new Eloquent model class",
         "parameters": [
             {
                 "key": "name",
@@ -711,12 +666,11 @@
                 "name": "名称",
                 "placeholder": "Models/Activity"
             }
-        ]
+        ],
+        "name": "Create a new Eloquent model class"
     },
     {
         "command": "make:notification",
-        "chinese": "创建一个新的通知类",
-        "english": "Create a new notification class",
         "parameters": [
             {
                 "key": "name",
@@ -726,12 +680,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new notification class"
     },
     {
         "command": "make:observer",
-        "chinese": "创建一个新的观察者类",
-        "english": "Create a new observer class",
         "parameters": [
             {
                 "key": "name",
@@ -741,12 +694,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new observer class"
     },
     {
         "command": "make:policy",
-        "chinese": "创建一个新的策略类",
-        "english": "Create a new policy class",
         "parameters": [
             {
                 "key": "name",
@@ -756,12 +708,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new policy class"
     },
     {
         "command": "make:provider",
-        "chinese": "创建一个新的服务提供者类",
-        "english": "Create a new service provider class",
         "parameters": [
             {
                 "key": "name",
@@ -771,12 +722,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new service provider class"
     },
     {
         "command": "make:request",
-        "chinese": "创建一个新的表单请求类",
-        "english": "Create a new form request class",
         "parameters": [
             {
                 "key": "name",
@@ -786,12 +736,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new form request class"
     },
     {
         "command": "make:resource",
-        "chinese": "创建一个新资源",
-        "english": "Create a new resource",
         "parameters": [
             {
                 "key": "name",
@@ -801,12 +750,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new resource"
     },
     {
         "command": "make:rule",
-        "chinese": "创建新的验证规则",
-        "english": "Create a new validation rule",
         "parameters": [
             {
                 "key": "name",
@@ -816,12 +764,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new validation rule"
     },
     {
         "command": "make:scaffold",
-        "chinese": "代码生成器 —— Laravel5.x Scaffold Generator",
-        "english": "Create a laralib scaffold",
         "parameters": [
             {
                 "key": "name",
@@ -831,12 +778,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a laralib scaffold"
     },
     {
         "command": "make:seeder",
-        "chinese": "创建一个新的 seeder 类",
-        "english": "Create a new seeder class",
         "parameters": [
             {
                 "key": "name",
@@ -846,12 +792,11 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new seeder class"
     },
     {
         "command": "make:test",
-        "chinese": "创建一个新的测试类",
-        "english": "Create a new test class",
         "parameters": [
             {
                 "key": "name",
@@ -861,132 +806,107 @@
                 "name": "名称",
                 "placeholder": ""
             }
-        ]
+        ],
+        "name": "Create a new test class"
     },
     {
         "command": "migrate:fresh",
-        "chinese": "删除所有表并重新运行所有迁移",
-        "english": "Drop all tables and re-run all migrations"
+        "name": "Drop all tables and re-run all migrations"
     },
     {
         "command": "migrate:install",
-        "chinese": "创建迁移存储库",
-        "english": "Create the migration repository"
+        "name": "Create the migration repository"
     },
     {
         "command": "migrate:refresh",
-        "chinese": "重置并重新运行所有迁移",
-        "english": "Reset and re-run all migrations"
+        "name": "Reset and re-run all migrations"
     },
     {
         "command": "migrate:reset",
-        "chinese": "回滚所有数据库迁移",
-        "english": "Rollback all database migrations"
+        "name": "Rollback all database migrations"
     },
     {
         "command": "migrate:rollback",
-        "chinese": "回滚上次数据库迁移",
-        "english": "Rollback the last database migration"
+        "name": "Rollback the last database migration"
     },
     {
         "command": "migrate:status",
-        "chinese": "显示每次迁移的状态",
-        "english": "Show the status of each migration"
+        "name": "Show the status of each migration"
     },
     {
         "command": "notifications:table",
-        "chinese": "为通知表创建迁移",
-        "english": "Create a migration for the notifications table"
+        "name": "Create a migration for the notifications table"
     },
     {
         "command": "optimize:clear",
-        "chinese": "删除缓存的引导程序文件",
-        "english": "Remove the cached bootstrap files"
+        "name": "Remove the cached bootstrap files"
     },
     {
         "command": "package:discover",
-        "chinese": "重建缓存的包清单",
-        "english": "Rebuild the cached package manifest"
+        "name": "Rebuild the cached package manifest"
     },
     {
         "command": "queue:failed",
-        "chinese": "列出所有 failed 队列工作",
-        "english": "List all of the failed queue jobs"
+        "name": "List all of the failed queue jobs"
     },
     {
         "command": "queue:failed-table",
-        "chinese": "为 failed 队列工作数据库表创建迁移",
-        "english": "Create a migration for the failed queue jobs database table"
+        "name": "Create a migration for the failed queue jobs database table"
     },
     {
         "command": "queue:flush",
-        "chinese": "刷新所有 failed 队列工作",
-        "english": "Flush all of the failed queue jobs"
+        "name": "Flush all of the failed queue jobs"
     },
     {
         "command": "queue:forget",
-        "chinese": "删除 failed 队列工作",
-        "english": "Delete a failed queue job"
+        "name": "Delete a failed queue job"
     },
     {
         "command": "queue:listen",
-        "chinese": "监听一个给定的队列",
-        "english": "Listen to a given queue"
+        "name": "Listen to a given queue"
     },
     {
         "command": "queue:restart",
-        "chinese": "在当前工作之后重新启动队列工作器守护程序",
-        "english": "Restart queue worker daemons after their current job"
+        "name": "Restart queue worker daemons after their current job"
     },
     {
         "command": "queue:retry",
-        "chinese": "重试 failed 队列作业",
-        "english": "Retry a failed queue job"
+        "name": "Retry a failed queue job"
     },
     {
         "command": "queue:table",
-        "chinese": "为队列工作数据库表创建迁移",
-        "english": "Create a migration for the queue jobs database table"
+        "name": "Create a migration for the queue jobs database table"
     },
     {
         "command": "queue:work",
-        "chinese": "开始将队列上的工作作为守护程序处理",
-        "english": "Start processing jobs on the queue as a daemon"
+        "name": "Start processing jobs on the queue as a daemon"
     },
     {
         "command": "route:cache",
-        "chinese": "创建路由缓存文件以加快路由注册速度",
-        "english": "Create a route cache file for faster route registration"
+        "name": "Create a route cache file for faster route registration"
     },
     {
         "command": "route:clear",
-        "chinese": "删除路由缓存文件",
-        "english": "Remove the route cache file"
+        "name": "Remove the route cache file"
     },
     {
         "command": "route:list",
-        "chinese": "列出所有注册的路由",
-        "english": "List all registered routes"
+        "name": "List all registered routes"
     },
     {
         "command": "schedule:run",
-        "chinese": "运行预定的命令",
-        "english": "Run the scheduled commands"
+        "name": "Run the scheduled commands"
     },
     {
         "command": "session:table",
-        "chinese": "为会话数据库表创建迁移",
-        "english": "Create a migration for the session database table"
+        "name": "Create a migration for the session database table"
     },
     {
         "command": "storage:link",
-        "chinese": "创建从 “公共 / 存储” 到 “存储 / 应用 / 公共” 的符号链接",
-        "english": "Create a symbolic link from \"public/storage\" to \"storage/app/public\"                                            "
+        "name": "Create a symbolic link"
     },
     {
         "command": "vendor:publish",
-        "chinese": "从供应商包中发布任何可发布的资产",
-        "english": "Publish any publishable assets from vendor packages",
         "parameters": [
             {
                 "key": "provider",
@@ -997,16 +917,15 @@
                 "placeholderValue": "Laravel\\Tinker\\TinkerServiceProvider",
                 "is_option": true
             }
-        ]
+        ],
+        "name": "Publish any publishable assets from vendor packages"
     },
     {
         "command": "view:cache",
-        "chinese": "编译所有应用程序的 Blade 模板",
-        "english": "Compile all of the application's Blade templates"
+        "name": "Compile all of the applications Blade templates"
     },
     {
         "command": "view:clear",
-        "chinese": "清除所有编译的视图文件",
-        "english": "Clear all compiled view files"
+        "name": "Clear all compiled view files"
     }
 ]

@@ -27,17 +27,17 @@
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                     <edit-item :key-name="'index'"
-                                               :options="{name:'选择命令',rules:'required',title:'需要执行的命令'}"
+                                               :options="{name:$tp('Select the command'),rules:'required',title:$tp('Command that needs to be executed')}"
                                                :datas="props">
                                         <template slot="input-item">
                                             <div class="edit-item-content">
                                                 <select2 v-model="props.data.index"
-                                                         :default-options="commands"
+                                                         :default-options="_commands"
                                                          :placeholder-show="$t('Please select')"
                                                          :placeholder-value="0"
                                                          :primary-key="'_id'"
                                                          @change="changeCommand(props.data)"
-                                                         :show="['command','chinese']" >
+                                                         :show="['command','_name']" >
                                                 </select2>
                                             </div>
                                         </template>
@@ -182,13 +182,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="item in commands">
+                                <tr v-for="item in _commands">
                                     <td v-clipboard:copy="'php artisan '+item.command"  v-clipboard:success="onCopy" class="snippet">
                                         <button class="btn" data-clipboard-snippet=""><img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="Copy to clipboard"></button>
                                         <code>{{item.command}}</code>
                                     </td>
-                                    <td>{{item.chinese}}</td>
-                                    <!--   <td>{{item.english}}</td>-->
+                                    <td>{{item._name}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -263,7 +262,13 @@
         computed:{
             ...mapState([
                 'use_url'
-            ])
+            ]),
+            _commands(){
+                return collect(this.commands).map((item)=>{
+                    item._name = this.$tp(item.name);
+                    return item;
+                }).all();
+            }
         },
         methods:{
             ...mapActions({

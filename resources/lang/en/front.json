@@ -444,7 +444,9 @@
                 "Copy it to the paste board": "Copy it to the paste board",
                 "Command:": "Command:",
                 "Enter the command manually:": "Enter the command manually:",
-                "Command name:": "Command name:"
+                "Command name:": "Command name:",
+                "publish language": "Publish language files to resources directory",
+                "Compile all of the applications Blade templates": "Compile all of the application's Blade templates"
             },
             "menus": {
                 "Drag shift": "Drag shift",
