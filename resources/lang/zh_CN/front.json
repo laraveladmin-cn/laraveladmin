@@ -1,6 +1,21 @@
 {
     "_shared": {
         "menus": {
+            "{name} pagination": "{name}分页",
+            "{name} paging data": "{name}分页数据",
+            "Edit view {l_name}": "编辑查看{l_name}",
+            "{name} Edit Page": "{name}编辑页面",
+            "Create {l_name}": "创建{l_name}",
+            "New {l_name}": "新建{l_name}",
+            "New {l_name} page": "新建{l_name}页面",
+            "Submit create {l_name} request": "提交创建{l_name}请求",
+            "Update {l_name}": "更新{l_name}",
+            "Submit update {l_name} request": "提交更新{l_name}请求",
+            "Delete {l_name}": "删除{l_name}",
+            "Delete {l_name} data": "删除{l_name}数据",
+            "Export {l_name}": "导出{l_name}",
+            "Import {l_name}": "导入{l_name}",
+            "Import {l_name} data in Excel": "Excel导入{l_name}数据",
             "Menu list": "菜单列表",
             "Root node, the parent node of all menus": "根节点,所有菜单的父节点",
             "Operate": "运营",
@@ -77,26 +92,221 @@
         "tables": {
             "users": {
                 "fields": {
-                    "uname": "用户名",
-                    "name": "昵称",
-                    "avatar": "头像",
-                    "email": "电子邮箱",
-                    "mobile_phone": "手机号码",
-                    "remember_token": "记住登录",
-                    "status": "状态",
-                    "description": "备注",
-                    "created_at": "创建时间",
-                    "updated_at": "修改时间",
-                    "deleted_at": "删除时间",
-                    "id": "ID"
+                    "Username": "用户名",
+                    "Name": "姓名",
+                    "Avatars": "头像",
+                    "Email": "电子邮箱",
+                    "Mobile phone number": "手机号码",
+                    "Remember to log in": "记住登录",
+                    "Status": "状态",
+                    "Note": "备注",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "ID": "ID",
+                    "User name": "用户名",
+                    "Nickname": "昵称",
+                    "Head portrait": "头像",
+                    "E-mail": "电子邮箱",
+                    "Phone number": "手机号码",
+                    "State": "状态",
+                    "Remarks": "备注",
+                    "Password": "密码",
+                    "Operator": "操作者",
+                    "Personality signature": "个性签名",
+                    "Old password": "旧密码",
+                    "New password": "新密码",
+                    "Confirm the new password": "确认新密码",
+                    "Tripartite login": "三方登录"
                 },
                 "maps": {
-                    "status": [
-                        "注销",
-                        "有效",
-                        "停用"
-                    ]
+                    "status": {
+                        "Cancellation": "注销",
+                        "Effective": "有效",
+                        "Stop using": "停用",
+                        "Out of service": "停用"
+                    }
                 }
+            },
+            "logs": {
+                "fields": {
+                    "Menu ID": "菜单ID",
+                    "User ID": "用户ID",
+                    "Address": "位置",
+                    "IP address": "IP地址",
+                    "Request parameters": "请求参数",
+                    "Return data": "返回数据",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "ID": "ID",
+                    "Position": "位置",
+                    "Operation menu": "操作菜单",
+                    "Operator": "操作者"
+                },
+                "maps": []
+            },
+            "menus": {
+                "fields": {
+                    "Name": "名称",
+                    "Icon": "图标",
+                    "Describe": "描述",
+                    "URL path": "URL路径",
+                    "Parent ID": "父级ID",
+                    "Request method": "请求方式",
+                    "Is it a page": "是否为页面",
+                    "Functional status": "功能状态",
+                    "State": "状态",
+                    "Hierarchy": "层级",
+                    "Resource ID": "所属资源ID",
+                    "Group": "所属组",
+                    "Binding controller method": "绑定控制器方法",
+                    "Use environment": "使用环境",
+                    "Plug in menu unique ID": "插件菜单唯一标识",
+                    "Route usage": "路由使用地方",
+                    "Routing alias": "路由别名",
+                    "Using middleware alone": "单独使用中间件",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Operation menu": "操作菜单",
+                    "Parent name": "父级名称",
+                    "Parent selection": "所属父级选择",
+                    "Menu type": "菜单类型",
+                    "Url path": "URL路径",
+                    "Group to which the route belongs": "路由所属组",
+                    "Resource Name": "资源名称",
+                    "Resources": "所属资源",
+                    "Restricted use environment": "限制使用环境",
+                    "Specify where the route is used": "指定路由使用地方",
+                    "Resources included": "包含资源"
+                },
+                "maps": {
+                    "method": [],
+                    "is_page": {
+                        "No": "否",
+                        "Yes": "是"
+                    },
+                    "status": {
+                        "Display": "显示",
+                        "No display": "不显示"
+                    },
+                    "disabled": {
+                        "Enable": "启用",
+                        "Disable": "禁用"
+                    },
+                    "_type": {
+                        "Common links": "普通链接",
+                        "Resources": "资源",
+                        "Single route": "单独路由"
+                    },
+                    "use": [],
+                    "env": {
+                        "Development environment": "开发环境",
+                        "Testing environment": "测试环境",
+                        "Pre launch environment": "预上线环境",
+                        "Formal environment": "正式环境"
+                    },
+                    "group": [],
+                    "middleware": []
+                }
+            },
+            "configs": {
+                "fields": {
+                    "Type": "类型",
+                    "Name": "名称",
+                    "Key name": "键名称",
+                    "Input box type": "输入框类型",
+                    "Component properties": "组件属性",
+                    "Describe": "描述",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Configuration name": "配置名称",
+                    "Value": "值"
+                },
+                "maps": {
+                    "type": {
+                        "Character string": "字符串",
+                        "Number": "数字"
+                    },
+                    "itype": []
+                }
+            },
+            "ousers": {
+                "fields": [],
+                "maps": {
+                    "type": [],
+                    "type_show": []
+                }
+            },
+            "params": {
+                "fields": [],
+                "maps": {
+                    "type": {
+                        "Character string": "字符串",
+                        "Number": "数字",
+                        "Boolean value": "布尔值"
+                    }
+                }
+            },
+            "roles": {
+                "fields": {
+                    "Template ID": "模板ID",
+                    "Name": "名称",
+                    "Template": "是否模板",
+                    "Describe": "描述",
+                    "Parent ID": "父级ID",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Parent name": "父级名称",
+                    "Administrator number": "管理员数",
+                    "Parent selection": "所属父级选择",
+                    "Set as template": "设置为模板",
+                    "Template selection": "模板选择",
+                    "Allocation of permissions": "权限分配",
+                    "Whether or not to associate the cancellation privilege assignment child node": "是否关联取消权限分配子节点"
+                },
+                "maps": {
+                    "is_tmp": {
+                        "No": "否",
+                        "Yes": "是"
+                    }
+                }
+            },
+            "admins": {
+                "fields": {
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Have roles": "拥有角色",
+                    "Bind an existing account": "绑定已有账户",
+                    "User role selection": "用户角色选择",
+                    "User ID": "用户ID",
+                    "ID": "ID"
+                },
+                "maps": []
+            },
+            "admin_role": {
+                "fields": [],
+                "maps": []
+            },
+            "menu_role": {
+                "fields": [],
+                "maps": []
+            },
+            "migrations": {
+                "fields": [],
+                "maps": []
+            },
+            "responses": {
+                "fields": [],
+                "maps": []
+            },
+            "tables": {
+                "fields": [],
+                "maps": []
             }
         },
         "pages": {
@@ -105,6 +315,24 @@
                 "Total number of roles": "角色总数",
                 "Total number of users": "用户数",
                 "Total number of menus": "菜单总数"
+            }
+        },
+        "datas": {
+            "configs": {
+                "name": {
+                    "Common password configuration": "通用密码配置"
+                },
+                "description": {
+                    "Common password for all users, please set a relatively complex password": "所有用户通用密码，请设置相对复杂密码。"
+                }
+            },
+            "roles": {
+                "name": {
+                    "Superadministrator": "超级管理员"
+                },
+                "description": {
+                    "Have all operation permissions": "拥有所有操作权限。"
+                }
             }
         }
     },
@@ -249,9 +477,13 @@
             "Radar map": "雷达图",
             "Transcript": "成绩单",
             "users": {
-                "username": "用户昵称"
+                "username": "用户昵称",
+                "Must be {min}-{max} non-Chinese characters": "必须是{min}-{max}位的非中文字符",
+                "Must be {min}-{max} characters long": "必须是{min}-{max}个的字符"
             },
             "developments_index": {
+                "Select the command": "选择命令",
+                "Command that needs to be executed": "需要执行的命令",
                 "Console commands": "控制台命令",
                 "Menu routing": "菜单路由",
                 "Plug-in installation": "插件安装",
@@ -262,11 +494,153 @@
                 "Copy it to the paste board": "复制到粘贴板",
                 "Command:": "命令：",
                 "Enter the command manually:": "手动输入命令：",
-                "Command name:": "命令名称："
+                "Command name:": "命令名称：",
+                "Generate all resources": "生成所有资源",
+                "Generate migration file corresponding to data table": "生成数据表对应的迁移文件",
+                "Create the model": "创建模型",
+                "Create controller": "创建控制器",
+                "Create view": "创建视图",
+                "Front end entry page index html generation": "前端入口页面index.html生成",
+                "Create data fill": "创建数据填充",
+                "Perform all directory migration files": "执行所有目录迁移文件",
+                "Seed the database with records": "填充数据库",
+                "Remove the compiled class file": "删除已编译的类文件",
+                "Put the application into maintenance mode": "将应用程序置于维护模式",
+                "Start the dump server to collect dump information": "启动转储服务器以收集转储信息。",
+                "Display the current framework environment": "显示当前的框架环境",
+                "Displays help for a command": "显示命令的帮助",
+                "Lists commands": "列出命令",
+                "Run the database migrations": "运行数据库迁移",
+                "Cache the framework bootstrap files": "缓存框架引导程序文件",
+                "Swap the front-end scaffolding for the application": "为应用程序交换前端脚手架",
+                "Serve the application on the PHP development server": "在 PHP 开发服务器上提供应用程序",
+                "Interact with your application": "与您的应用程序互动",
+                "Bring the application out of maintenance mode": "使应用程序退出维护模式",
+                "Set the application namespace": "设置应用程序命名空间",
+                "Flush expired password reset tokens": "刷新过期的密码重置令牌",
+                "Flush the application cache": "刷新应用程序缓存",
+                "Remove an item from the cache": "从缓存中删除项目",
+                "Create a migration for the cache database table": "为缓存数据库表创建迁移",
+                "Create a cache file for faster configuration loading": "创建缓存文件以加快配置速度",
+                "Remove the configuration cache file": "删除配置缓存文件",
+                "Generate the missing events and listeners based on registration": "根据注册生成缺少的事件和侦听器",
+                "Set the application key": "生成应用程序 key",
+                "publish language": "将语言文件发布到资源目录",
+                "Create a new channel class": "创建一个新的 channel 类",
+                "Create a new Artisan command": "创建一个新的 Artisan 命令",
+                "Create a new controller class": "创建一个新的控制器类",
+                "Create a new event class": "创建一个新的 event 类",
+                "Create a new custom exception class": "创建一个新的自定义异常类",
+                "Create a new model factory": "创建一个新的模型工厂",
+                "Create a new job class": "创建一个新的工作类",
+                "Create a new event listener class": "创建一个新的事件监听器类",
+                "Create a new email class": "创建一个新的电子邮件类",
+                "Create a new middleware class": "创建一个新的中间件类",
+                "Create a new migration file": "创建一个新的迁移文件",
+                "Create a new Eloquent model class": "创建一个新的 Eloquent 模型类",
+                "Create a new notification class": "创建一个新的通知类",
+                "Create a new observer class": "创建一个新的观察者类",
+                "Create a new policy class": "创建一个新的策略类",
+                "Create a new service provider class": "创建一个新的服务提供者类",
+                "Create a new form request class": "创建一个新的表单请求类",
+                "Create a new resource": "创建一个新资源",
+                "Create a new validation rule": "创建新的验证规则",
+                "Create a laralib scaffold": "代码生成器",
+                "Create a new seeder class": "创建一个新的 seeder 类",
+                "Create a new test class": "创建一个新的测试类",
+                "Drop all tables and re-run all migrations": "删除所有表并重新运行所有迁移",
+                "Create the migration repository": "创建迁移存储库",
+                "Reset and re-run all migrations": "重置并重新运行所有迁移",
+                "Rollback all database migrations": "回滚所有数据库迁移",
+                "Rollback the last database migration": "回滚上次数据库迁移",
+                "Show the status of each migration": "显示每次迁移的状态",
+                "Create a migration for the notifications table": "为通知表创建迁移",
+                "Remove the cached bootstrap files": "删除缓存的引导程序文件",
+                "Rebuild the cached package manifest": "重建缓存的包清单",
+                "List all of the failed queue jobs": "列出所有失败队列工作",
+                "Create a migration for the failed queue jobs database table": "为失败队列工作数据库表创建迁移",
+                "Flush all of the failed queue jobs": "刷新所有失败队列工作",
+                "Delete a failed queue job": "删除失败队列工作",
+                "Listen to a given queue": "监听一个给定的队列",
+                "Restart queue worker daemons after their current job": "在当前工作之后重新启动队列工作器守护程序",
+                "Retry a failed queue job": "重试失败队列作业",
+                "Create a migration for the queue jobs database table": "为队列工作数据库表创建迁移",
+                "Start processing jobs on the queue as a daemon": "开始将队列上的工作作为守护程序处理",
+                "Create a route cache file for faster route registration": "创建路由缓存文件以加快路由注册速度",
+                "Remove the route cache file": "删除路由缓存文件",
+                "List all registered routes": "列出所有注册的路由",
+                "Run the scheduled commands": "运行预定的命令",
+                "Create a migration for the session database table": "为会话数据库表创建迁移",
+                "Create a symbolic link": "创建从'/public/storage'到'storage/app/public'的软链接",
+                "Publish any publishable assets from vendor packages": "从供应商包中发布任何可发布的资产",
+                "Compile all of the applications Blade templates": "编译所有应用程序的 Blade 模板",
+                "Clear all compiled view files": "清除所有编译的视图文件",
+                "Data table name": "数据表名称",
+                "Data sheet": "数据表",
+                "In which module the corresponding code is generated, the default is admin": "生成对应代码在哪个模块,默认Admin",
+                "Modular": "模块",
+                "Database connection": "数据库连接",
+                "Automatic loading is not checked after code generation": "生成代码后不检查自动加载",
+                "Do not load automatically": "不自动加载",
+                "Generate only": "仅生成",
+                "Migration files": "迁移文件",
+                "Model": "模型",
+                "Controller": "控制器",
+                "List page": "列表页面",
+                "Edit page": "编辑页面",
+                "Data table name (eg: users, posts, comments)": "数据表名称(eg:users,posts,comments)",
+                "Ignore data table name (eg: users, posts, comments)": "忽略数据表名称(eg:users,posts,comments)",
+                "Ignore data table": "忽略数据表",
+                "Specify the directory to generate the migration file (eg: database / migrations / 2021)": "指定迁移文件生成的目录(eg:database/migrations/2021)",
+                "Build directory": "生成目录",
+                "Use local template to generate migration document": "使用本地模板进行生成迁移文档",
+                "Using templates": "使用模板",
+                "Do not use database index names when migrating": "不要在迁移时使用数据库索引名",
+                "No index": "不用索引",
+                "Do not use DB foreign key names when migrating": "不要在迁移时使用db外键名",
+                "No foreign keys": "不用外键",
+                "Ignore": "忽略",
+                "No interaction": "不交互",
+                "Controller name": "控制器名称",
+                "Model (controller name is not filled in)": "模型(不填自动使用控制器名称)",
+                "The model does not use the namespace under 'app'": "模型不使用'APP'下的命名空间",
+                "Do not use app namespace": "不使用APP命名空间",
+                "Generate code template": "生成代码模板",
+                "Template": "模板",
+                "Generate code output location": "生成代码输出位置",
+                "Output location": "输出位置",
+                "Do not use default namespace": "不使用默认命名空间",
+                "No namespace": "不用命名空间",
+                "Forced generation (development environment does not generate by default)": "强制生成(开发环境默认不进行生成)",
+                "Force generation": "强制生成",
+                "Model class name": "模型类名",
+                "The default is databaseseeder": "默认是DatabaseSeeder",
+                "Filling class": "填充类",
+                "Enforcement (in non local environment)": "强制执行(非本地环境时)",
+                "Enforcement": "强制执行",
+                "Name": "名称",
+                "Command class name": "命令类名",
+                "Class name": "类名",
+                "It is also generated when it exists": "存在时也生成",
+                "Event class name": "事件类名",
+                "Service provider": "服务提供者"
             },
             "menus": {
                 "Drag shift": "拖拽移位",
-                "Data list": "数据列表"
+                "Data list": "数据列表",
+                "Double-click the icon to select it": "双击图标即可选中",
+                "For example: Menu settings": "例如:菜单设置",
+                "For example:Menu": "例如:菜单",
+                "For example:Menu lists": "例如:菜单列表",
+                "For example: will automatically bind to": "例如:'/admin/menus'将自动绑定到'Admin\\MenuController'",
+                "Use to generate the name of the subordinate resource, Default is name": "用于生成下级资源名称,不填默认是名称",
+                "Automatic recognition according to API mode when not selected": "不选时根据API模式自动识别",
+                "The default recognition is based on the URL": "默认根据URL进行识别",
+                "Please enter the icon style": "请输入图标样式",
+                "For example: background home page": "例如:后台主页",
+                "For example: admin index": "例如:'/admin/index'",
+                "For example: IndexController@index": "例如:'IndexController@index'",
+                "For example: admin_index": "例如:'admin_index'"
             },
             "logs": {
                 "(Request parameters)": "（请求参数）"
@@ -313,8 +687,8 @@
             "Server internal error": "出错了! 服务器内部错误",
             "Server internal error, please contact the developer for processing": "服务器内部错误，请联系开发人员进行处理！你可以点击"
         }
-
     },
+    "Console commands": [],
     "New": "新建",
     "Refresh": "刷新",
     "Delete selected": "删除选中",
@@ -413,5 +787,6 @@
     "Register": "注册",
     "password": "密码",
     "Password": "密码",
-    "Mobile phone number": "手机号码"
+    "Mobile phone number": "手机号码",
+    "Empty": "清空"
 }

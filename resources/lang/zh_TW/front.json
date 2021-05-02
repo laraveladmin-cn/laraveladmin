@@ -1,6 +1,21 @@
 {
     "_shared": {
         "menus": {
+            "{name} pagination": "{name}分頁",
+            "{name} paging data": "{name}分頁數據",
+            "Edit view {l_name}": "編輯查看{l_name}",
+            "{name} Edit Page": "{name}編輯頁面",
+            "Create {l_name}": "創建{l_name}",
+            "New {l_name}": "新建{l_name}",
+            "New {l_name} page": "新建{l_name}頁面",
+            "Submit create {l_name} request": "提交創建{l_name}請求",
+            "Update {l_name}": "更新{l_name}",
+            "Submit update {l_name} request": "提交更新{l_name}請求",
+            "Delete {l_name}": "删除{l_name}",
+            "Delete {l_name} data": "删除{l_name}數據",
+            "Export {l_name}": "匯出{l_name}",
+            "Import {l_name}": "導入{l_name}",
+            "Import {l_name} data in Excel": "Excel導入{l_name}數據",
             "Menu list": "選單清單",
             "Root node, the parent node of all menus": "根節點，所有選單的父節點",
             "Operate": "運營",
@@ -77,26 +92,221 @@
         "tables": {
             "users": {
                 "fields": {
-                    "uname": "用戶名",
-                    "name": "昵稱",
-                    "avatar": "頭像",
-                    "email": "電子郵箱",
-                    "mobile_phone": "手機號碼",
-                    "remember_token": "記住登入",
-                    "status": "狀態",
-                    "description": "備註",
-                    "created_at": "創建時間",
-                    "updated_at": "修改時間",
-                    "deleted_at": "删除時間",
-                    "id": "ID"
+                    "Username": "用戶名",
+                    "Name": "姓名",
+                    "Avatars": "頭像",
+                    "Email": "電子郵箱",
+                    "Mobile phone number": "手機號碼",
+                    "Remember to log in": "記住登入",
+                    "Status": "狀態",
+                    "Note": "備註",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "ID": "ID",
+                    "User name": "用戶名",
+                    "Nickname": "昵稱",
+                    "Head portrait": "頭像",
+                    "E-mail": "電子郵箱",
+                    "Phone number": "手機號碼",
+                    "State": "狀態",
+                    "Remarks": "備註",
+                    "Password": "密碼",
+                    "Operator": "操作者",
+                    "Personality signature": "個性簽名",
+                    "Old password": "舊密碼",
+                    "New password": "新密碼",
+                    "Confirm the new password": "確認新密碼",
+                    "Tripartite login": "三方登入"
                 },
                 "maps": {
-                    "status": [
-                        "註銷",
-                        "有效",
-                        "停用"
-                    ]
+                    "status": {
+                        "Cancellation": "註銷",
+                        "Effective": "有效",
+                        "Stop using": "停用",
+                        "Out of service": "停用"
+                    }
                 }
+            },
+            "logs": {
+                "fields": {
+                    "Menu ID": "選單ID",
+                    "User ID": "用戶ID",
+                    "Address": "位置",
+                    "IP address": "IP地址",
+                    "Request parameters": "請求參數",
+                    "Return data": "返回數據",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "ID": "ID",
+                    "Position": "位置",
+                    "Operation menu": "操作選單",
+                    "Operator": "操作者"
+                },
+                "maps": []
+            },
+            "menus": {
+                "fields": {
+                    "Name": "名稱",
+                    "Icon": "圖標",
+                    "Describe": "描述",
+                    "URL path": "URL路徑",
+                    "Parent ID": "父級ID",
+                    "Request method": "請求管道",
+                    "Is it a page": "是否為頁面",
+                    "Functional status": "功能狀態",
+                    "State": "狀態",
+                    "Hierarchy": "層級",
+                    "Resource ID": "所屬資源ID",
+                    "Group": "所屬組",
+                    "Binding controller method": "綁定控制器方法",
+                    "Use environment": "使用環境",
+                    "Plug in menu unique ID": "挿件選單唯一標識",
+                    "Route usage": "路由使用地方",
+                    "Routing alias": "路由別名",
+                    "Using middleware alone": "單獨使用中介軟體",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Operation menu": "操作選單",
+                    "Parent name": "父級名稱",
+                    "Parent selection": "所屬父級選擇",
+                    "Menu type": "選單類型",
+                    "Url path": "URL路徑",
+                    "Group to which the route belongs": "路由所屬組",
+                    "Resource Name": "資源名稱",
+                    "Resources": "所屬資源",
+                    "Restricted use environment": "限制使用環境",
+                    "Specify where the route is used": "指定路由使用地方",
+                    "Resources included": "包含資源"
+                },
+                "maps": {
+                    "method": [],
+                    "is_page": {
+                        "No": "否",
+                        "Yes": "是"
+                    },
+                    "status": {
+                        "Display": "顯示",
+                        "No display": "不顯示"
+                    },
+                    "disabled": {
+                        "Enable": "啟用",
+                        "Disable": "禁用"
+                    },
+                    "_type": {
+                        "Common links": "普通連結",
+                        "Resources": "資源",
+                        "Single route": "單獨路由"
+                    },
+                    "use": [],
+                    "env": {
+                        "Development environment": "開發環境",
+                        "Testing environment": "測試環境",
+                        "Pre launch environment": "預上線環境",
+                        "Formal environment": "正式環境"
+                    },
+                    "group": [],
+                    "middleware": []
+                }
+            },
+            "configs": {
+                "fields": {
+                    "Type": "類型",
+                    "Name": "名稱",
+                    "Key name": "鍵名稱",
+                    "Input box type": "輸入框類型",
+                    "Component properties": "組件内容",
+                    "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Configuration name": "配寘名稱",
+                    "Value": "值"
+                },
+                "maps": {
+                    "type": {
+                        "Character string": "字串",
+                        "Number": "數位"
+                    },
+                    "itype": []
+                }
+            },
+            "ousers": {
+                "fields": [],
+                "maps": {
+                    "type": [],
+                    "type_show": []
+                }
+            },
+            "params": {
+                "fields": [],
+                "maps": {
+                    "type": {
+                        "Character string": "字串",
+                        "Number": "數位",
+                        "Boolean value": "布林值"
+                    }
+                }
+            },
+            "roles": {
+                "fields": {
+                    "Template ID": "範本ID",
+                    "Name": "名稱",
+                    "Template": "是否範本",
+                    "Describe": "描述",
+                    "Parent ID": "父級ID",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Parent name": "父級名稱",
+                    "Administrator number": "管理員數",
+                    "Parent selection": "所屬父級選擇",
+                    "Set as template": "設定為範本",
+                    "Template selection": "範本選擇",
+                    "Allocation of permissions": "許可權分配",
+                    "Whether or not to associate the cancellation privilege assignment child node": "是否關聯取消許可權分配子節點"
+                },
+                "maps": {
+                    "is_tmp": {
+                        "No": "否",
+                        "Yes": "是"
+                    }
+                }
+            },
+            "admins": {
+                "fields": {
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Have roles": "擁有角色",
+                    "Bind an existing account": "綁定已有帳戶",
+                    "User role selection": "用戶角色選擇",
+                    "User ID": "用戶ID",
+                    "ID": "ID"
+                },
+                "maps": []
+            },
+            "admin_role": {
+                "fields": [],
+                "maps": []
+            },
+            "menu_role": {
+                "fields": [],
+                "maps": []
+            },
+            "migrations": {
+                "fields": [],
+                "maps": []
+            },
+            "responses": {
+                "fields": [],
+                "maps": []
+            },
+            "tables": {
+                "fields": [],
+                "maps": []
             }
         },
         "pages": {
@@ -105,6 +315,24 @@
                 "Total number of roles": "角色總數",
                 "Total number of users": "用戶數",
                 "Total number of menus": "選單總數"
+            }
+        },
+        "datas": {
+            "configs": {
+                "name": {
+                    "Common password configuration": "通用密碼配寘"
+                },
+                "description": {
+                    "Common password for all users, please set a relatively complex password": "所有用戶通用密碼，請設定相對複雜密碼。"
+                }
+            },
+            "roles": {
+                "name": {
+                    "Superadministrator": "超級管理員"
+                },
+                "description": {
+                    "Have all operation permissions": "擁有所有操作許可權。"
+                }
             }
         }
     },
@@ -249,9 +477,13 @@
             "Radar map": "雷達圖",
             "Transcript": "成績單",
             "users": {
-                "username": "用戶昵稱"
+                "username": "用戶昵稱",
+                "Must be {min}-{max} non-Chinese characters": "必須是{min}-{max}比特的非中文字元",
+                "Must be {min}-{max} characters long": "必須是{min}-{max}個的字元"
             },
             "developments_index": {
+                "Select the command": "選擇命令",
+                "Command that needs to be executed": "需要執行的命令",
                 "Console commands": "控制台命令",
                 "Menu routing": "選單路由",
                 "Plug-in installation": "挿件安裝",
@@ -262,11 +494,153 @@
                 "Copy it to the paste board": "複製到粘貼板",
                 "Command:": "命令：",
                 "Enter the command manually:": "手動輸入命令：",
-                "Command name:": "命令名稱："
+                "Command name:": "命令名稱：",
+                "Generate all resources": "生成所有資源",
+                "Generate migration file corresponding to data table": "生成資料表對應的遷移檔案",
+                "Create the model": "創建模型",
+                "Create controller": "創建控制器",
+                "Create view": "創建視圖",
+                "Front end entry page index html generation": "前端入口頁面index.html生成",
+                "Create data fill": "創建數據填充",
+                "Perform all directory migration files": "執行所有目錄遷移檔案",
+                "Seed the database with records": "填充資料庫",
+                "Remove the compiled class file": "删除已編譯的類檔案",
+                "Put the application into maintenance mode": "將應用程序置於維護模式",
+                "Start the dump server to collect dump information": "啟動轉儲服務器以收集轉儲資訊。",
+                "Display the current framework environment": "顯示當前的框架環境",
+                "Displays help for a command": "顯示命令的幫助",
+                "Lists commands": "列出命令",
+                "Run the database migrations": "運行資料庫遷移",
+                "Cache the framework bootstrap files": "緩存框架引導程式檔案",
+                "Swap the front-end scaffolding for the application": "為應用程序交換前端脚手架",
+                "Serve the application on the PHP development server": "在PHP開發服務器上提供應用程序",
+                "Interact with your application": "與您的應用程序互動",
+                "Bring the application out of maintenance mode": "使應用程序退出維護模式",
+                "Set the application namespace": "設定應用程序命名空間",
+                "Flush expired password reset tokens": "重繪過期的密碼重置權杖",
+                "Flush the application cache": "重繪應用程序緩存",
+                "Remove an item from the cache": "從緩存中删除項目",
+                "Create a migration for the cache database table": "為緩存資料庫錶創建遷移",
+                "Create a cache file for faster configuration loading": "創建緩存檔案以加快配寘速度",
+                "Remove the configuration cache file": "删除配寘緩存檔案",
+                "Generate the missing events and listeners based on registration": "根據注册生成缺少的事件和偵聽器",
+                "Set the application key": "生成應用程序key",
+                "publish language": "將語言檔案發佈到資源目錄",
+                "Create a new channel class": "創建一個新的channel類",
+                "Create a new Artisan command": "創建一個新的Artisan命令",
+                "Create a new controller class": "創建一個新的控制器類",
+                "Create a new event class": "創建一個新的event類",
+                "Create a new custom exception class": "創建一個新的自定義异常類",
+                "Create a new model factory": "創建一個新的模型工廠",
+                "Create a new job class": "創建一個新的工作類",
+                "Create a new event listener class": "創建一個新的事件監聽器類",
+                "Create a new email class": "創建一個新的電子郵件類",
+                "Create a new middleware class": "創建一個新的中介軟體類",
+                "Create a new migration file": "創建一個新的遷移檔案",
+                "Create a new Eloquent model class": "創建一個新的Eloquent模型類",
+                "Create a new notification class": "創建一個新的通知類",
+                "Create a new observer class": "創建一個新的觀察者類",
+                "Create a new policy class": "創建一個新的策略類",
+                "Create a new service provider class": "創建一個新的服務提供者類",
+                "Create a new form request class": "創建一個新的表單請求類",
+                "Create a new resource": "創建一個新資源",
+                "Create a new validation rule": "創建新的驗證規則",
+                "Create a laralib scaffold": "代碼生成器",
+                "Create a new seeder class": "創建一個新的seeder類",
+                "Create a new test class": "創建一個新的測試類",
+                "Drop all tables and re-run all migrations": "删除所有錶並重新運行所有遷移",
+                "Create the migration repository": "創建遷移存儲庫",
+                "Reset and re-run all migrations": "重置並重新運行所有遷移",
+                "Rollback all database migrations": "回滾所有資料庫遷移",
+                "Rollback the last database migration": "回滾上次資料庫遷移",
+                "Show the status of each migration": "顯示每次遷移的狀態",
+                "Create a migration for the notifications table": "為通知錶創建遷移",
+                "Remove the cached bootstrap files": "删除緩存的引導程式檔案",
+                "Rebuild the cached package manifest": "重建緩存的包清單",
+                "List all of the failed queue jobs": "列出所有失敗隊列工作",
+                "Create a migration for the failed queue jobs database table": "為失敗隊列工作資料庫錶創建遷移",
+                "Flush all of the failed queue jobs": "重繪所有失敗隊列工作",
+                "Delete a failed queue job": "删除失敗隊列工作",
+                "Listen to a given queue": "監聽一個給定的隊列",
+                "Restart queue worker daemons after their current job": "在當前工作之後重新啟動隊列工作器守護程式",
+                "Retry a failed queue job": "重試失敗隊列工作",
+                "Create a migration for the queue jobs database table": "為隊列工作資料庫錶創建遷移",
+                "Start processing jobs on the queue as a daemon": "開始將隊列上的工作作為守護程式處理",
+                "Create a route cache file for faster route registration": "創建路由緩存檔案以加快路由注册速度",
+                "Remove the route cache file": "删除路由緩存檔案",
+                "List all registered routes": "列出所有注册的路由",
+                "Run the scheduled commands": "運行預定的命令",
+                "Create a migration for the session database table": "為會話資料庫錶創建遷移",
+                "Create a symbolic link": "創建從'/public/storage'到'storage/app/public'的軟連結",
+                "Publish any publishable assets from vendor packages": "從供應商包中發佈任何可發佈的資產",
+                "Compile all of the applications Blade templates": "編譯所有應用程序的Blade範本",
+                "Clear all compiled view files": "清除所有編譯的視圖檔案",
+                "Data table name": "資料表名稱",
+                "Data sheet": "資料表",
+                "In which module the corresponding code is generated, the default is admin": "生成對應程式碼在哪個模塊，默認Admin",
+                "Modular": "模塊",
+                "Database connection": "資料庫連接",
+                "Automatic loading is not checked after code generation": "生成程式碼後不檢查自動加載",
+                "Do not load automatically": "不自動加載",
+                "Generate only": "僅生成",
+                "Migration files": "遷移檔案",
+                "Model": "模型",
+                "Controller": "控制器",
+                "List page": "清單頁面",
+                "Edit page": "編輯頁面",
+                "Data table name (eg: users, posts, comments)": "資料表名稱（eg:users，posts，comments）",
+                "Ignore data table name (eg: users, posts, comments)": "忽略資料表名稱（eg:users，posts，comments）",
+                "Ignore data table": "忽略資料表",
+                "Specify the directory to generate the migration file (eg: database / migrations / 2021)": "指定遷移檔案生成的目錄（eg:database/migrations/2021）",
+                "Build directory": "生成目錄",
+                "Use local template to generate migration document": "使用本地範本進行生成遷移檔案",
+                "Using templates": "使用範本",
+                "Do not use database index names when migrating": "不要在遷移時使用資料庫索引名",
+                "No index": "不用索引",
+                "Do not use DB foreign key names when migrating": "不要在遷移時使用db外鍵名",
+                "No foreign keys": "不用外鍵",
+                "Ignore": "忽略",
+                "No interaction": "不互動",
+                "Controller name": "控制器名稱",
+                "Model (controller name is not filled in)": "模型（不填自動使用控制器名稱）",
+                "The model does not use the namespace under 'app'": "模型不使用'APP'下的命名空間",
+                "Do not use app namespace": "不使用APP命名空間",
+                "Generate code template": "生成程式碼範本",
+                "Template": "範本",
+                "Generate code output location": "生成程式碼輸出位置",
+                "Output location": "輸出位置",
+                "Do not use default namespace": "不使用默認命名空間",
+                "No namespace": "不用命名空間",
+                "Forced generation (development environment does not generate by default)": "強制生成（開發環境默認不進行生成）",
+                "Force generation": "強制生成",
+                "Model class name": "模型類名",
+                "The default is databaseseeder": "默認是DatabaseSeeder",
+                "Filling class": "填充類",
+                "Enforcement (in non local environment)": "強制執行（非本地環境時）",
+                "Enforcement": "強制執行",
+                "Name": "名稱",
+                "Command class name": "命令類名",
+                "Class name": "類名",
+                "It is also generated when it exists": "存在時也生成",
+                "Event class name": "事件類名",
+                "Service provider": "服務提供者"
             },
             "menus": {
                 "Drag shift": "拖拽移位",
-                "Data list": "數據清單"
+                "Data list": "數據清單",
+                "Double-click the icon to select it": "按兩下圖標即可選中",
+                "For example: Menu settings": "例如：選單設定",
+                "For example:Menu": "例如：選單",
+                "For example:Menu lists": "例如：選單清單",
+                "For example: will automatically bind to": "例如：'/admin/menus'將自動綁定到'Admin\\MenuController'",
+                "Use to generate the name of the subordinate resource, Default is name": "用於生成下級資源名稱，不填默認是名稱",
+                "Automatic recognition according to API mode when not selected": "不選時根據API模式自動識別",
+                "The default recognition is based on the URL": "默認根據URL進行識別",
+                "Please enter the icon style": "請輸入圖標樣式",
+                "For example: background home page": "例如：後臺主頁",
+                "For example: admin index": "例如：'/admin/index'",
+                "For example: IndexController@index": "例如：'IndexController@index'",
+                "For example: admin_index": "例如：'admin_index'"
             },
             "logs": {
                 "(Request parameters)": "（請求參數）"
@@ -313,8 +687,8 @@
             "Server internal error": "出錯了！服務器內部錯誤",
             "Server internal error, please contact the developer for processing": "服務器內部錯誤，請聯系開發人員進行處理！你可以點擊"
         }
-
     },
+    "Console commands": [],
     "New": "新建",
     "Refresh": "重繪",
     "Delete selected": "删除選中",
@@ -413,5 +787,6 @@
     "Register": "注册",
     "password": "密碼",
     "Password": "密碼",
-    "Mobile phone number": "手機號碼"
+    "Mobile phone number": "手機號碼",
+    "Empty": "清空"
 }

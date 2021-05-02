@@ -68,10 +68,12 @@ class MenuController extends Controller
         'status',
         'created_at',
         'updated_at',
-
+        'resource_id',
         'parent' => [
-            'name',
             'id',
+            'name',
+            'item_name'
+
         ],
     ];
 
@@ -91,26 +93,27 @@ class MenuController extends Controller
         'status',
         'created_at',
         'updated_at',
-
+        'resource_id',
         'parent' => [
             'name',
             'id',
+            'item_name'
         ],
     ];
 
     //字段导出
     public $exportFieldsName = [
-        'name' => '名称',
-        'icons' => '图标',
-        'description' => '描述',
-        'url' => 'URL路径',
-        'parent.name' => '父级名称',
-        'method' => '请求方式',
-        'is_page' => '是否为页面',
-        'disabled' => '功能状态',
-        'status' => '状态',
-        'level' => '层级',
-        'parent_id' => '父级ID',
+        'name' => 'Name',
+        'icons' => 'Icon',
+        'description' => 'Describe',
+        'url' => 'URL path',
+        'parent.name' => 'Parent name',
+        'method' => 'Request method',
+        'is_page' => 'Is it a page',
+        'disabled' => 'Functional status',
+        'status' => 'State',
+        'level' => 'Hierarchy',
+        'parent_id' => 'Parent ID',
         'id' => 'ID',
     ];
 
@@ -176,14 +179,26 @@ class MenuController extends Controller
             $data['row']['method'] = [];
         }
         //树状结构可选数据
-        $data['maps']['optional_parents'] = Menu::optionalParent($id ? $data['row'] : null)
+        $data['maps']['optional_parents'] = collect(Menu::optionalParent($id ? $data['row'] : null)
             ->usable()
             ->orderBy('left_margin', 'asc')
-            ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin']);
+            ->with(['parent'=>function($q){
+                $q->select([
+                    'id',
+                    'name',
+                    'item_name'
+                ]);
+            }])
+            ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin','resource_id']))
+            ->map(function ($item){
+                $item = collect($item)->toArray();
+                $item[config('laravel_admin.trans_prefix').'name'] = Menu::trans($item,'name');//trans_path($item['name'],'_shared.menus');
+                return $item;
+            });
         $data['maps']['_type'] = [
-            '普通链接',
-            '资源',
-            '单独路由',
+            'Common links',
+            'Resources',
+            'Single route',
         ];
         $data['maps']['_options']=collect(RouteService::getResourceRoutes(['except'=>['index']]))
             ->keys()
@@ -236,7 +251,14 @@ class MenuController extends Controller
        $data['tree'] =  collect(Menu::optionalParent(null)
             ->usable()
             ->orderBy('left_margin', 'asc')
-            ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin','item_name']))
+           ->with(['parent'=>function($q){
+               $q->select([
+                   'id',
+                   'name',
+                   'item_name'
+               ]);
+           }])
+            ->get(['id', 'name', 'icons', 'parent_id', 'level', 'left_margin', 'right_margin','item_name','resource_id']))
            ->map(function ($item){
                $item = collect($item)->toArray();
                if( Str::is('_*', $item['item_name']) || $item['level'] <= 1 ){

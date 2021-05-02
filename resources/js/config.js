@@ -38,6 +38,7 @@ let AppConfig = {
     env:'',
     language:'',
     default_language:'',
+    locales:[],
     ...(window.AppConfig || {})
 };
 AppConfig.language = (localStorage.getItem('language') || AppConfig.default_language).replace(/\_/g,'-');

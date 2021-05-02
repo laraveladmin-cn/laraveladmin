@@ -13,6 +13,7 @@
                       :sizer_more="sizer_more"
                       :id="id"
                       :show_export_fields="show_export_fields"
+                      :trans-field="transField"
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
@@ -99,12 +100,12 @@
                 <div class="collapse export_excel row">
                     <slot name="export-excel">
                         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" v-for="(field,key) in data.excel.exportFields">
-                            <icheck v-model="export_fileds" :option="key">{{field}}</icheck>
+                            <icheck v-model="export_fileds" :option="key">{{transField(field,key)}}</icheck>
                         </div>
                     </slot>
                 </div>
                 <div class="collapse sizer_more in">
-                    <slot name="sizer-more" :data="data" :where="data.options.where" :maps="data.maps">
+                    <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps"  :trans-field="transField">
                     </slot>
                     <div class="row" v-show="btnSizerMore">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -166,14 +167,14 @@
                 <slot name="table" :data="data" :check_ids="check_ids" :remove="remove">
                     <table class="table table-hover table-bordered table-striped text-center dataTable">
                         <thead>
-                            <slot name="thead" :select-all="select_all" :operation="operation" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :order-by="orderBy" :show-fields="show_fields">
+                            <slot name="thead" :select-all="select_all" :operation="operation" :trans-field="transField" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :order-by="orderBy" :show-fields="show_fields">
                                 <tr>
                                     <th class="id" v-if="checkbox">
                                        <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
                                         <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
                                     </th>
                                     <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
-                                        {{field['name']}}
+                                        {{transField(field.name,index)}}
                                     </th>
                                     <th class="operate" v-if="operation">{{$t('Operation')}}</th>
                                 </tr>
@@ -188,15 +189,15 @@
                                     </slot>
                                 </td>
                                 <td v-for="(field,k) in show_fields" :class="field['class']">
-                                    <slot name="col" :field="field" :data="data" :row="row" :k="k">
+                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass">
                                         <span v-if="field.type =='label' || field.type =='radio'">
                                             <span class="label" :class="labelClass(row,k)">
-                                                {{ data.maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
+                                                {{ _maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
                                             </span>
                                         </span>
                                         <span v-else-if="field.type =='labels' || field.type =='checkbox'">
                                             <span v-for="value in getItems(row,k)" class="label labels-m" :class="checkboxClass(value,2,statusClass,k)">
-                                                {{ data.maps| array_get(k.replace('.$index','')) | array_get(value) }}
+                                                {{ _maps | array_get(k.replace('.$index','')) | array_get(value) }}
                                             </span>
                                         </span>
                                         <span v-else-if="field.type =='icon'">
@@ -367,7 +368,8 @@
                         sheet:'',
                         fileName:'',
                         exportFields:{}
-                    }
+                    },
+                    mapsRelations:{}
                 }, //数据源
                 back_options:undefined, //筛选条件+排序备份
                 affirm_options:undefined, //执行搜索后确认选项
@@ -395,6 +397,56 @@
             ...mapMutations({
                 set:'set'
             }),
+            transField(name,key,table){
+                if(!this.options.lang_table && !this.data.excel.sheet){
+                    return name;
+                }
+                if(!table){
+                    if(!key || key.indexOf('.')==-1){
+                        table = this.options.lang_table || this.data.excel.sheet;
+                    }else {
+                        let arr = key.split('.');
+                        arr.pop();
+                        let key1 = arr.join('.');
+                        let table1 = arr.pop();
+                        let d=table1.length-1;
+                        if(!(d>=0 && table1.lastIndexOf('s')==d)){
+                            table1 = table1+'s'
+                        };
+                        table = array_get(this.data,'mapsRelations.'+key1,'') || table1;
+                    }
+                }
+                return this.$tp(name,{
+                    "{lang_path}": '_shared.tables.'+table+'.fields',
+                    '{lang_root}': ''
+                });
+            },
+            transMap(name,field,table){
+                if(!this.options.lang_table && !this.data.excel.sheet){
+                    return name;
+                }
+                if(!table){
+                    table = this.options.lang_table || this.data.excel.sheet;
+                }
+                return this.$tp(name,{
+                    "{lang_path}": '_shared.tables.'+table+'.maps.'+field,
+                    '{lang_root}': ''
+                });
+            },
+            mapEach(maps,field,table,prefix){
+                maps = collect(maps).map((value,key)=>{
+                    if(value && typeof value=="string"){
+                        return this.transMap(value,field,table);
+                    }else if(value && typeof value=="object"){
+                        let key1 = prefix ? prefix+'.'+key:key;
+                        let table1 = array_get(this.data,'mapsRelations.'+key1,'');
+                        return this.mapEach(value,key,table1 || table,key1);
+                    }else {
+                        return value;
+                    }
+                }).all();
+                return maps;
+            },
             getItems(item,key){
                 if(key.indexOf('$index')!=-1){
                     let keys = key.split('.$index.');
@@ -761,7 +813,14 @@
                     return this.options.per_page_options;
                 }
                 return this.per_page_options;
-            }
+            },
+            //翻译后的显示数据项
+            _maps(){
+                let maps = copyObj(this.data.maps);
+                return this.mapEach(maps);
+            },
+
+
         },
         created() {
             //动态加载js文件

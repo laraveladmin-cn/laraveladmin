@@ -8,7 +8,7 @@
                            :disabled="!props.url || props.data.row['resource_id']>0"
                            :id="'menus_tree'"
                            :config="config"
-                           :data="props.data.tree">
+                           :data="tree()">
                     </ztree>
                 </div>
             </template>
@@ -36,6 +36,10 @@
         },
         data:()=>{
             return {
+                shared: {
+                    "{lang_path}": '_shared.menus',
+                    '{lang_root}': ''
+                },
                 config:{
                     edit:{
                         drag: {
@@ -136,6 +140,38 @@
             ...mapActions({
                 getMenus:'menu/getMenus', //更新菜单
             }),
+            tree(){
+                let data = collect(array_get(this.$refs,'menuTree.data.tree',[])).each((item)=>{
+                    if(typeof item._back_name=="undefined"){
+                        item._back_name = item.name;
+                    }
+                    if(item._language!=this._i18n.locale){
+                        item._language = this._i18n.locale;
+                        item.name = this.translation(item,'_back_name');
+                    }
+                    return item;
+                }).all();
+                return data;
+            },
+            translation(item,key){
+                let value = array_get(item,key,'');
+                let resource_id = item['resource_id'];
+                let res = this.$tp(value , this.shared);
+                if(resource_id && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                    let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
+                    let key = value.replace(parent_name,'{name}');
+                    let shared = copyObj(this.shared);
+                    if(key.indexOf('{name}')==0){
+                        shared.name=this.$tp(parent_name,shared);
+                    }else {
+                        key = value.replace(parent_name.toLowerCase(),'{name}');
+                        shared.l_name=this.$tp(parent_name,shared);
+                        key = key.replace('{name}','{l_name}');
+                    }
+                    res = this.$tp(key , shared);
+                }
+                return res;
+            },
             refresh(){
                 this.$refs['menuTree'].getData({});
             }

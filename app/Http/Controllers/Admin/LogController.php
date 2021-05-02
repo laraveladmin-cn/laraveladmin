@@ -71,6 +71,13 @@ class LogController extends Controller
         'menu' => [
             'id',
             'name',
+            'parent_id',
+            'resource_id',
+            'parent'=>[
+                'id',
+                'name',
+                'item_name'
+            ]
         ],
     ];
     /**
@@ -94,13 +101,13 @@ class LogController extends Controller
 
     //字段导出
     public $exportFieldsName = [
-        'menu.name' => '操作菜单',
-        'user.name' => '操作者',
-        'location' => '位置',
-        'ip' => 'IP地址',
-        'parameters' => '请求参数',
-        'return' => '返回数据',
-        'id' => 'ID',
+        'menu.name' => 'Operation menu',
+        'user.name' => 'Operator',
+        'location' => 'Position',
+        'ip' => 'IP address',
+        'parameters' => 'Request parameters',
+        'return' => 'Return data',
+        'id' => 'ID'
     ];
 
     /**

@@ -93,9 +93,8 @@
     "Unable to generate the request signature. Route unavailable.": "Unable to generate the request signature. Route unavailable.",
     "Check that the user connected to the database has access to the schema database!": "Check that the user connected to the database has access to the schema database!",
     "Failed to create :attribute database!": "Failed to create :attribute database!",
-    "Superadministrator": "Superadministrator",
-    "Have all operation permissions.": "Have all operation permissions.",
-    "Common password configuration": "Common password configuration",
-    "Common password for all users, please set a relatively complex password.": "Common password for all users, please set a relatively complex password.",
-    "Menu unchanged!": "Menu unchanged!"
+    "Menu unchanged!": "Menu unchanged!",
+    "Created At": "Created At",
+    "Updated At": "Updated At",
+    "Deleted At": "Deleted At"
 }

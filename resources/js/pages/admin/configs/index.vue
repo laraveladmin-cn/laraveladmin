@@ -3,6 +3,17 @@
         <div class="row">
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
+                    <template slot="col" slot-scope="props">
+                        <span v-if="props.k =='name'">
+                            {{$tp(array_get(props.row ,props.k),shared_name)}}
+                        </span>
+                        <span v-else-if="props.k =='description'">
+                            {{$tp(array_get(props.row ,props.k),shared_description) | str_limit(80,'...')}}
+                        </span>
+                        <span v-else>
+                            {{props.row | array_get(props.k)}}
+                        </span>
+                    </template>
                 </data-table>
             </div>
         </div>
@@ -20,7 +31,16 @@
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                shared_name:{
+                    "{lang_path}":'_shared.datas.configs.name',
+                    '{lang_root}':''
+                },
+                shared_description:{
+                    "{lang_path}":'_shared.datas.configs.description',
+                    '{lang_root}':''
+                },
                 options:{
+                    lang_table:'configs',
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     operation:true, //操作列
@@ -30,17 +50,17 @@
                     keywordGroup:false, //是否为选项组
                     keywordPlaceholder:()=>{
                         return this.$t('enter',{name:this.$t('name')});
-                    },//'请输入名称',
+                    },//'请输入Name',
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "name": {"name": "配置名称", "order": true},
-                        "description": {"name": "描述", "order": true},
-                        "key": {"name": "配置键", "order": true},
-                        "value": {"name": "值", "order": true},
-                        //"created_at": {"name": "创建时间", "order": true},
-                        "updated_at": {"name": "修改时间", "order": true},
+                        "name": {"name": "Configuration name", "order": true},
+                        "description": {"name": "Describe", "order": true},
+                        "key": {"name": "Key name", "order": true},
+                        "value": {"name": "Value", "order": true},
+                        //"created_at": {"name": "Created At", "order": true},
+                        "updated_at": {"name": "Updated At", "order": true},
                     },
                 }
             };

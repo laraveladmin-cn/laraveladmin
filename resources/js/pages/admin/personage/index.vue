@@ -8,7 +8,7 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="avatar" :options="{name: '头像'}"  :datas="props">
+                            <edit-item key-name="avatar" :options="{name: props.transField('Head portrait')}"  :datas="props">
                                 <template slot="input-item">
                                     <upload v-model="props.data.row['avatar']"
                                             :placeholder-value="'/dist/img/user_default_180.gif'"
@@ -16,11 +16,11 @@
                                     </upload>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="uname" :options="{name: '用户名',disabled:true, rules:'required|alpha_dash|min:5|max:18'}"  :datas="props">
+                            <edit-item key-name="uname" :options="{name: props.transField('User name'),disabled:true, rules:'required|alpha_dash|min:5|max:18'}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="name" :options="{name: '姓名',rules:'required|min:2'}"  :datas="props">
+                            <edit-item key-name="name" :options="{name:props.transField('Name') ,rules:'required|min:2'}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="description" :options="{name: '个性签名',type:'textarea'}"  :datas="props">
+                            <edit-item key-name="description" :options="{name: props.transField('Personality signature'),type:'textarea'}"  :datas="props">
                             </edit-item>
                         </div>
                     </template>
@@ -43,6 +43,7 @@
         data(){
             return {
                 options:{
+                    lang_table:'users',
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {},

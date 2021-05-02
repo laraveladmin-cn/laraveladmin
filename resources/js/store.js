@@ -4,7 +4,7 @@ import user from './store/user.js';
 import notification from './store/menu.js';
 import excel from './store/excel.js';
 import config from './config.js';
-import i18n from './i18n' //语言插件
+import i18n from './i18n'; //语言插件
 import { localeChanged } from 'vee-validate';
 
 const loadedLanguages = ['en']; // 我们的预装默认语言

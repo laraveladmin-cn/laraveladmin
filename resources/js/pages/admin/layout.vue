@@ -114,7 +114,7 @@
                                         <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" :alt="$t('User avatars')">
 
                                         <p>
-                                            {{user['name']}} - {{roleName}}
+                                            {{user['name']}} - {{$tp(roleName,shared_roule)}}
                                             <small>{{$tp('Date of entry : {date}',{date:'2019-08-01'})}}</small>
                                         </p>
                                     </li>
@@ -163,7 +163,7 @@
                             </div>
                             <div class="pull-left info">
                                 <p>{{user['name']}}</p>
-                                <a>{{roleName}}</a>
+                                <a>{{$tp(roleName,shared_roule)}}</a>
                             </div>
                         </div>
                         <div class="sidebar-form">
@@ -237,20 +237,20 @@
                     </transition>
                     <section class="content-header" :class="{'my-content-header':downloading}">
                         <h1>
-                            {{$tp(current_menu_name,shared)}}
+                            {{current_menu_name}}
                             <small>
-                                {{$tp(current_menu_description,shared)}}
+                                {{current_menu_description}}
                             </small>
                         </h1>
                         <ol class="breadcrumb">
                             <li :class="{active:navbar.active}" v-for="navbar in navbars">
                                 <router-link :to="navbar['url']" v-if="!navbar.active && navbar['url']">
                                     <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                    {{$tp(navbar['name'],shared)}}
+                                    {{translation(navbar,'name')}}
                                 </router-link>
                                 <span v-else>
                                  <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                    {{$tp(last_menu_show_name || navbar['name'],shared)}}
+                                    {{last_menu_show_name ? last_menu_show_name:translation(navbar,'name')}}
                             </span>
                             </li>
                         </ol>
@@ -433,6 +433,10 @@
                     '{lang_root}':''
                 },
                 "{lang_path}":'admin.layout',
+                shared_roule:{
+                    '{lang_path}':'_shared.datas.roles.name',
+                    '{lang_root}':''
+                },
                 loading:true,
                 keywords:'',
                 timer:null,
@@ -529,6 +533,25 @@
 
         },
         methods:{
+            translation(item,key){
+                let value = array_get(item,key,'');
+                let resource_id = item['resource_id'];
+                let res = this.$tp(value , this.shared);
+                if(resource_id && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                    let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
+                    let key = value.replace(parent_name,'{name}');
+                    let shared = copyObj(this.shared);
+                    if(key.indexOf('{name}')==0){
+                        shared.name=this.$tp(parent_name,shared);
+                    }else {
+                        key = value.replace(parent_name.toLowerCase(),'{name}');
+                        shared.l_name=this.$tp(parent_name,shared);
+                        key = key.replace('{name}','{l_name}');
+                    }
+                    res = this.$tp(key , shared);
+                }
+                return res;
+            },
             //设置主题
             setSkin(value){
                 this.skin = value;
@@ -654,18 +677,18 @@
             },
             last_menu_show_name(){
                 if(this.last_menu_show && this.last_menu_show.name){
-                    return this.last_menu_show.name;
+                    return this.translation(this.last_menu_show,'name');
                 }
                 return '';
             },
             current_menu_name(){
-                return this.last_menu_show_name || this.current_menu['name'];
+                return this.last_menu_show_name || this.translation(this.current_menu,'name');
             },
             current_menu_description(){
                 if(this.last_menu_show && this.last_menu_show.description ){
                     return this.last_menu_show.description
                 }
-                return this.current_menu['description'];
+                return this.translation(this.current_menu,'description');
             }
         },
         watch: {

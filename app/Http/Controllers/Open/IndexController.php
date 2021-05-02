@@ -59,6 +59,14 @@ class IndexController extends Controller
         $data['verify'] = config('laravel_admin.verify.type')=='captcha' ? $this->captcha() : $this->geetest(); //验证配置
         $data['client_id'] = ClientAuth::getClient();
         $data['default_language'] = str_replace('_','-',app('translator')->getLocale());
+        $data['locales'] = collect(config('laravel_admin.locales',[]))
+            ->prepend(config('app.locale'))
+            ->filter()
+            ->unique()
+            ->map(function ($value){
+                return str_replace('_','-',$value);
+            })
+            ->toArray();
         $data['version'] = 'V1.0.0';
         $max_age = 3600*24;
         $response = Response::returns($data)
@@ -150,8 +158,15 @@ class IndexController extends Controller
      */
     public function menu(){
         $data['menus'] = collect(Menu::main()
-            ->select(['id','name','icons','description','url','parent_id','status','level','left_margin','right_margin','method'])
+            ->select(['id','name','icons','description','url','parent_id','resource_id','status','level','left_margin','right_margin','method'])
             ->orderBy('left_margin','asc')
+            ->with(['parent'=>function($q){
+                $q->select([
+                    'id',
+                    'name',
+                    'item_name'
+                ]);
+            }])
             ->get())
             ->map(function ($item){
                 $item[config('laravel_admin.trans_prefix').'name'] = trans_path($item['name'],'_shared.menus');

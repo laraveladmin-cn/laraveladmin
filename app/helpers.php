@@ -10,6 +10,7 @@
 use \Illuminate\Support\Arr;
 use \Illuminate\Support\Facades\Lang;
 use \Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
 
 /**
  * 前端弹窗参数返回
@@ -329,6 +330,30 @@ if (! function_exists('trans_path')) {
             return \Illuminate\Support\Str::replaceFirst($prefix,'',$res);
         }
         return $res;
+    }
+}
+
+if (! function_exists('trans_conversion')) {
+    /**
+     * Translate the given message.
+     *
+     * @param  string|null  $key
+     * @param  array  $replace
+     * @param  string|null  $locale
+     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+     */
+    function front_trans_conversion(&$data)
+    {
+        if(is_array($data)){
+            foreach ($data as $key=>&$value){
+                if(is_array($value)){
+                    front_trans_conversion($value);
+                }else{
+                    $value = str_replace('}','',str_replace('{',':',$value));
+                }
+            }
+        }
+        return $data;
     }
 }
 

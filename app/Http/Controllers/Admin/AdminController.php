@@ -101,19 +101,20 @@ class AdminController extends Controller
      * @var array
      */
     public $exportFieldsName = [
-        'user.uname' => '用户名',
-        'user.name' => '昵称',
-        'user.avatar' => '头像',
-        'user.email' => '电子邮箱',
-        'user.mobile_phone' => '手机号码',
-        'user.status' => '状态',
-        'user.description' => '备注',
-        //'created_at' => '创建时间',
-        //'updated_at' => '修改时间',
-        //'deleted_at' => '删除时间',
-        'user_id' => '用户ID',
-        'id' => 'ID',
+        'user.uname' => 'User name',
+        'user.name' => 'Name',
+        'user.avatar' => 'Head portrait',
+        'user.email' => 'E-mail',
+        'user.mobile_phone' => 'Phone number',
+        'user.status' => 'State',
+        'user.description' => 'Remarks',
+        //'created_at' => 'Created At',
+        //'updated_at' => 'Updated At',
+        //'deleted_at' => 'Deleted At',
+        'user_id' => 'User ID',
+        'id' => 'ID'
     ];
+
 
 
 
