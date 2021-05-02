@@ -22,9 +22,10 @@ class Translation extends Seeder
     protected $commandsJsonPath = '';//控制台命令描述
     protected $langMap = [ //地区语言对应语种代码
         'zh-TW'=>'hk', //繁体中文
-        'zh-HK'=>'hk',//繁体中文
+        'zh-HK'=>'yue',//粤语中文
         'zh-CN'=>'zh',//简体中文
         'zh'=>'zh',//简体中文
+        'ja'=>'jp',//日文
     ];
     protected $lang = 'en'; //当前语言
     protected $outMenus = [];
