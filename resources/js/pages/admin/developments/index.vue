@@ -46,7 +46,7 @@
                                         <div v-for="(item,index) in props.data.row.parameters">
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-if="item.type=='select2tables'"
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                                 <template slot="input-item">
@@ -69,7 +69,7 @@
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else-if="item.type=='select2'"
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                                 <template slot="input-item">
@@ -87,20 +87,20 @@
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else-if="item.type=='checkbox'"
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                                 <template slot="input-item">
                                                     <div class="row">
                                                         <div v-for="(item1,index) in (item.map || array_get(props,'data.maps.'+item.map_key,[]))" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                            <icheck v-model="item.value" :option="index" :disabled="!props.url" :label="item1"> {{item1}}</icheck>
+                                                            <icheck v-model="item.value" :option="index" :disabled="!props.url" :label="$tp(item1)"> {{$tp(item1)}}</icheck>
                                                         </div>
                                                     </div>
                                                 </template>
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else-if="item.type=='switch'"
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                                 <template slot="input-item">
@@ -116,7 +116,7 @@
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                             </edit-item>
@@ -282,7 +282,7 @@
             onCopy:  (e)=> {
                 $this.pushMessage({
                     'showClose':true,
-                    'title':e.text+' '+this.$t('{action} successfully!',{action:this.$t('Command copy')}),
+                    'title':e.text+' '+$this.$t('{action} successfully!',{action:$this.$t('Command copy')}),
                     'message':'',
                     'type':'success',
                     'position':'top',
@@ -310,11 +310,11 @@
                         return ' '+parameter.value;
                     }
                 }).implode('');
-                let _exec = command.command+parm_str;
+                let _exec = (command.command  || '')+parm_str;
                 if(this.$refs['edit'] && this.$refs['edit'].data && this.$refs['edit'].data.row._exec != _exec){
                     this.$refs['edit'].data.row._exec = _exec;
                 }
-                return 'php artisan '+_exec;
+                return 'php artisan '+(_exec || '');
             },
             //连接参数
             connection_value(parms){
@@ -357,6 +357,24 @@
                 let inputCommand1 = this.command(props.data.row);
                 inputCommand1 = collect(inputCommand1.split(' ')).sort().implode(' ');
                return inputCommand1!=inputCommand;
+            },
+            transItem(item){
+                let item1 = copyObj(item);
+                 collect(['name','title','map']).each((key)=>{
+                     let value = item1[key];
+                    if(value && typeof value=="object"){
+                        item1[key] = collect(value).map((v)=>{
+                            if(typeof v=="string"){
+                                return this.$tp(v);
+                            }else {
+                                return v;
+                            }
+                        }).all();
+                    }else if(value && typeof value=="string"){
+                        item1[key] = this.$tp(value);
+                    }
+                });
+                 return item1;
             }
         },
         watch:{

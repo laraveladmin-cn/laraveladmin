@@ -45,10 +45,10 @@ class Translation extends Seeder
         $this->lang = Arr::get($this->langMap,$this->local,explode('-',$this->local)[0]);//语言代码
         $this->frontJsonPath = resource_path('lang/'.config('app.locale','en').'/front.json');
         $this->commandsJsonPath = storage_path('/developments/commands.json');
-        //$this->transMenu();
-        //$this->transModels();
+        $this->transMenu();
+        $this->transModels();
         $this->transCommands();
-        //$this->TransAll();
+        $this->TransAll();
     }
 
     /**
@@ -86,13 +86,52 @@ class Translation extends Seeder
                 unset($item['english']);
                 $item['name'] = $english;
                 //翻译参数处理
-
+                if($parameters = Arr::get($item,'parameters',[])){
+                    $item['parameters'] = collect($parameters)->map(function ($parameter)use(&$old_data){
+                        collect(['title','name','map'])->map(function ($key)use(&$parameter,&$old_data){
+                            $name = Arr::get($parameter,$key,'');
+                            if($name && is_array($name)){
+                                $parameter[$key] = collect($name)->map(function ($name)use(&$old_data){
+                                    if($name && is_string($name)){
+                                        $item = $this->transValue($name,$old_data);
+                                    }
+                                    return $item;
+                                })->toArray();
+                            }elseif($name && is_string($name)){
+                                $parameter[$key] = $this->transValue($name,$old_data);
+                            }
+                        });
+                        return $parameter;
+                    })->toArray();
+                }
                 return $item;
             })->toArray();
             $front_json['pages']['admin']['developments_index'] = $old_data;
             file_put_contents($this->frontJsonPath,json_encode( $front_json ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
             file_put_contents($this->commandsJsonPath,json_encode( $data ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         }
+    }
+
+    public function transValue($name,&$old_data){
+        if($name && !$this->isEnglish($name)){
+            while (true) {
+                try {
+                    $new = Str::ucfirst(trim(Translate::setFromAndTo($this->lang,'en')->translate($name)));
+                    break;
+                }catch (\Exception $exception){
+                    $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
+                    sleep(1);
+                }
+            }
+            $this->command->info(trans_path('From ":old" to ":new"',$this->transPath,['old'=>$name,'new'=>$new]));
+            $english = $new;
+            if(!isset($old_data[$english])){
+                $old_data[$english] = $name;
+            }
+        }else{
+            $english = $name;
+        }
+        return $english;
     }
 
     /**

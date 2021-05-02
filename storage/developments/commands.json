@@ -6,8 +6,8 @@
                 "key": "table",
                 "value": "",
                 "rules": "required",
-                "title": "数据表名称",
-                "name": "数据表",
+                "title": "Data table name",
+                "name": "Data sheet",
                 "type": "select2tables",
                 "placeholderValue": ""
             },
@@ -15,16 +15,16 @@
                 "key": "module",
                 "value": "",
                 "rules": "",
-                "title": "生成对应代码在哪个模块,默认Admin",
-                "name": "模块",
+                "title": "In which module the corresponding code is generated, the default is admin",
+                "name": "Modular",
                 "placeholder": "Admin"
             },
             {
                 "key": "connection",
                 "value": "",
                 "rules": "",
-                "title": "数据库连接",
-                "name": "数据库连接",
+                "title": "Database connection",
+                "name": "Database connection",
                 "type": "select2",
                 "map_key": "database",
                 "placeholderValue": "",
@@ -35,8 +35,8 @@
                 "key": "no_dump",
                 "value": 1,
                 "rules": "",
-                "title": "生成代码后不检查自动加载",
-                "name": "不自动加载",
+                "title": "Automatic loading is not checked after code generation",
+                "name": "Do not load automatically",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -46,15 +46,15 @@
                 "value": [],
                 "rules": "",
                 "title": "",
-                "name": "仅生成",
+                "name": "Generate only",
                 "type": "checkbox",
                 "is_option": true,
                 "map": {
-                    "migration": "迁移文件",
-                    "model": "模型",
-                    "controller": "控制器",
-                    "index": "列表页面",
-                    "edit": "编辑页面"
+                    "migration": "Migration files",
+                    "model": "Model",
+                    "controller": "Controller",
+                    "index": "List page",
+                    "edit": "Edit page"
                 }
             }
         ],
@@ -67,8 +67,8 @@
                 "key": "tables",
                 "value": "",
                 "rules": "required",
-                "title": "数据表名称(eg:users,posts,comments)",
-                "name": "数据表",
+                "title": "Data table name (eg: users, posts, comments)",
+                "name": "Data sheet",
                 "type": "select2tables",
                 "placeholderValue": "",
                 "placeholder": "users"
@@ -77,8 +77,8 @@
                 "key": "connection",
                 "value": "",
                 "rules": "",
-                "title": "数据库连接",
-                "name": "数据库连接",
+                "title": "Database connection",
+                "name": "Database connection",
                 "type": "select2",
                 "map_key": "database",
                 "placeholderValue": "",
@@ -89,8 +89,8 @@
                 "key": "tables",
                 "value": "",
                 "rules": "",
-                "title": "数据表名称(eg:users,posts,comments)",
-                "name": "数据表",
+                "title": "Data table name (eg: users, posts, comments)",
+                "name": "Data sheet",
                 "type": "select2tables",
                 "placeholderValue": "",
                 "is_option": true,
@@ -101,8 +101,8 @@
                 "key": "ignore",
                 "value": "",
                 "rules": "",
-                "title": "忽略数据表名称(eg:users,posts,comments)",
-                "name": "忽略数据表",
+                "title": "Ignore data table name (eg: users, posts, comments)",
+                "name": "Ignore data table",
                 "type": "select2tables",
                 "placeholderValue": "",
                 "is_option": true,
@@ -113,8 +113,8 @@
                 "key": "path",
                 "value": "",
                 "rules": "",
-                "title": "指定迁移文件生成的目录(eg:database/migrations/2021)",
-                "name": "生成目录",
+                "title": "Specify the directory to generate the migration file (eg: database / migrations / 2021)",
+                "name": "Build directory",
                 "placeholderValue": "",
                 "is_option": true,
                 "key_as": "p",
@@ -124,8 +124,8 @@
                 "key": "templatePath",
                 "value": "",
                 "rules": "",
-                "title": "使用本地模板进行生成迁移文档",
-                "name": "使用模板",
+                "title": "Use local template to generate migration document",
+                "name": "Using templates",
                 "placeholderValue": "",
                 "is_option": true,
                 "key_as": "tp"
@@ -134,8 +134,8 @@
                 "key": "defaultIndexNames",
                 "value": 0,
                 "rules": "",
-                "title": "不要在迁移时使用数据库索引名",
-                "name": "不用索引",
+                "title": "Do not use database index names when migrating",
+                "name": "No index",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -144,8 +144,8 @@
                 "key": "defaultFKNames",
                 "value": 0,
                 "rules": "",
-                "title": "不要在迁移时使用db外键名",
-                "name": "不用外键",
+                "title": "Do not use DB foreign key names when migrating",
+                "name": "No foreign keys",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -155,7 +155,7 @@
                 "value": 1,
                 "rules": "",
                 "title": "",
-                "name": "忽略",
+                "name": "Ignore",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -165,7 +165,7 @@
                 "value": 1,
                 "rules": "",
                 "title": "",
-                "name": "不交互",
+                "name": "No interaction",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -180,8 +180,8 @@
                 "key": "table",
                 "value": "",
                 "rules": "required",
-                "title": "数据表名称",
-                "name": "数据表",
+                "title": "Data table name",
+                "name": "Data sheet",
                 "type": "select2tables",
                 "placeholderValue": ""
             },
@@ -189,8 +189,8 @@
                 "key": "connection",
                 "value": "",
                 "rules": "",
-                "title": "数据库连接",
-                "name": "数据库连接",
+                "title": "Database connection",
+                "name": "Database connection",
                 "type": "select2",
                 "map_key": "database",
                 "placeholderValue": "",
@@ -200,8 +200,8 @@
                 "key": "no_dump",
                 "value": 0,
                 "rules": "",
-                "title": "生成代码后不检查自动加载",
-                "name": "不自动加载",
+                "title": "Automatic loading is not checked after code generation",
+                "name": "Do not load automatically",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -216,24 +216,24 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "控制器名称",
-                "name": "控制器",
+                "title": "Controller name",
+                "name": "Controller",
                 "placeholder": "Admin/User"
             },
             {
                 "key": "model",
                 "value": "",
                 "rules": "",
-                "title": "模型(不填自动使用控制器名称)",
-                "name": "模型",
+                "title": "Model (controller name is not filled in)",
+                "name": "Model",
                 "placeholder": "Admin/User"
             },
             {
                 "key": "namespace",
                 "value": 0,
                 "rules": "",
-                "title": "模型不使用'APP'下的命名空间",
-                "name": "不使用APP命名空间",
+                "title": "The model does not use the namespace under 'app'",
+                "name": "Do not use app namespace",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -242,8 +242,8 @@
                 "key": "no_dump",
                 "value": 0,
                 "rules": "",
-                "title": "生成代码后不检查自动加载",
-                "name": "不自动加载",
+                "title": "Automatic loading is not checked after code generation",
+                "name": "Do not load automatically",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -258,36 +258,36 @@
                 "key": "controller",
                 "value": "",
                 "rules": "required",
-                "title": "控制器名称",
-                "name": "控制器",
+                "title": "Controller name",
+                "name": "Controller",
                 "placeholder": "Admin/User"
             },
             {
                 "key": "template",
                 "value": "",
                 "rules": "required",
-                "title": "生成代码模板",
-                "name": "模板",
+                "title": "Generate code template",
+                "name": "Template",
                 "type": "select2",
                 "map": {
-                    "index": "列表页面",
-                    "edit": "编辑页面"
+                    "index": "List page",
+                    "edit": "Edit page"
                 }
             },
             {
                 "key": "output",
                 "value": "",
                 "rules": "",
-                "title": "生成代码输出位置",
-                "name": "输出位置",
+                "title": "Generate code output location",
+                "name": "Output location",
                 "placeholder": "admin/users/index"
             },
             {
                 "key": "namespace",
                 "value": 0,
                 "rules": "",
-                "title": "不使用默认命名空间",
-                "name": "不用命名空间",
+                "title": "Do not use default namespace",
+                "name": "No namespace",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -302,8 +302,8 @@
                 "key": "force",
                 "value": 0,
                 "rules": "",
-                "title": "强制生成(开发环境默认不进行生成)",
-                "name": "强制生成",
+                "title": "Forced generation (development environment does not generate by default)",
+                "name": "Force generation",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true,
@@ -319,16 +319,16 @@
                 "key": "model",
                 "value": "",
                 "rules": "required",
-                "title": "模型类名",
-                "name": "模型",
+                "title": "Model class name",
+                "name": "Model",
                 "placeholder": "Models\\\\User"
             },
             {
                 "key": "namespace",
                 "value": 0,
                 "rules": "",
-                "title": "不使用默认命名空间",
-                "name": "不用命名空间",
+                "title": "Do not use default namespace",
+                "name": "No namespace",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -337,8 +337,8 @@
                 "key": "no_dump",
                 "value": 1,
                 "rules": "",
-                "title": "生成代码后不检查自动加载",
-                "name": "不自动加载",
+                "title": "Automatic loading is not checked after code generation",
+                "name": "Do not load automatically",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -357,8 +357,8 @@
                 "key": "class",
                 "value": "VersionSeeder",
                 "rules": "",
-                "title": "默认是DatabaseSeeder",
-                "name": "填充类",
+                "title": "The default is databaseseeder",
+                "name": "Filling class",
                 "placeholder": "VersionSeeder",
                 "is_option": true
             },
@@ -366,8 +366,8 @@
                 "key": "database",
                 "value": "",
                 "rules": "",
-                "title": "数据库连接",
-                "name": "数据库连接",
+                "title": "Database connection",
+                "name": "Database connection",
                 "type": "select2",
                 "map_key": "database",
                 "placeholderValue": "",
@@ -377,8 +377,8 @@
                 "key": "force",
                 "value": 0,
                 "rules": "",
-                "title": "强制执行(非本地环境时)",
-                "name": "强制执行",
+                "title": "Enforcement (in non local environment)",
+                "name": "Enforcement",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -489,8 +489,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -503,8 +503,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "命令类名",
-                "name": "命令类名",
+                "title": "Command class name",
+                "name": "Command class name",
                 "placeholder": "SendEmails"
             }
         ],
@@ -517,16 +517,16 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "类名",
-                "name": "类名",
+                "title": "Class name",
+                "name": "Class name",
                 "placeholder": "StudentController"
             },
             {
                 "key": "force",
                 "value": 0,
                 "rules": "",
-                "title": "存在时也生成",
-                "name": "强制生成",
+                "title": "It is also generated when it exists",
+                "name": "Force generation",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -541,8 +541,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": "PodcastProcessed"
             }
         ],
@@ -555,8 +555,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -569,8 +569,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -583,8 +583,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -597,8 +597,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": "SendPodcastNotification"
             },
             {
@@ -606,7 +606,7 @@
                 "value": "",
                 "rules": "",
                 "title": "",
-                "name": "事件类名",
+                "name": "Event class name",
                 "placeholderValue": "PodcastProcessed",
                 "is_option": true
             }
@@ -620,8 +620,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -634,8 +634,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": "Activity"
             }
         ],
@@ -648,8 +648,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": "create_student_table"
             }
         ],
@@ -662,8 +662,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": "Models/Activity"
             }
         ],
@@ -676,8 +676,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -690,8 +690,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -704,8 +704,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -718,8 +718,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -732,8 +732,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -746,8 +746,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -760,8 +760,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -774,8 +774,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -788,8 +788,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -802,8 +802,8 @@
                 "key": "name",
                 "value": "",
                 "rules": "required",
-                "title": "名称",
-                "name": "名称",
+                "title": "Name",
+                "name": "Name",
                 "placeholder": ""
             }
         ],
@@ -913,7 +913,7 @@
                 "value": "",
                 "rules": "",
                 "title": "",
-                "name": "服务提供者",
+                "name": "Service provider",
                 "placeholderValue": "Laravel\\Tinker\\TinkerServiceProvider",
                 "is_option": true
             }

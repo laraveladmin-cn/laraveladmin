@@ -5,14 +5,14 @@
                 <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
             </div>
             <div class="box-body">
-                <edit :options="options">
+                <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="menu_id" :options="{name: props.transField('Operation menu'), required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['menu_id']"
-                                                 :default-options="array_get(props,'data.row.menu.id',0)?[array_get(props,'data.row.menu')]:[]"
+                                                 :default-options="mapMenuId(props)"
                                                  :url="use_url+'/admin/menus/list'"
                                                  :keyword-key="'name|url'"
                                                  :disabled="!props.url"
@@ -76,6 +76,10 @@
         },
         data(){
             return {
+                shared: {
+                    "{lang_path}": '_shared.menus',
+                    '{lang_root}': ''
+                },
                 options:{
                     lang_table:'logs',
                     id:'edit', //多个组件同时使用时唯一标识
@@ -83,10 +87,23 @@
                     params:this.$router.currentRoute.query || {}
                 }
             };
-        },computed:{
+        },
+        methods:{
+            mapMenuId(props){
+                let map = array_get(props,'data.row.menu.id',0)?[array_get(props,'data.row.menu')]:[];
+                return collect(copyObj(map))
+                    .map((item)=>{
+                        item.name = this.$tp(item.name,this.shared);
+                        return item;
+                    })
+                    .all();
+            }
+        },
+        computed:{
             ...mapState([
                 'use_url'
-            ])
+            ]),
+
         }
     };
 </script>
