@@ -9,7 +9,7 @@
                 <span class="country-name">{{country_name || $t('Language')}}</span>
             </div>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item :command="item.value" v-for="(item,index) in languages" v-bind:key="index">
+                <el-dropdown-item :command="item.value" v-for="(item,index) in _languages" v-bind:key="index">
                     <div class="country">
                         <div class="flag" :class="item.country"></div>
                     </div>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     export default {
         name: "language",
         components:{
@@ -828,6 +829,14 @@
             },
             language(){
                 return collect(this.languages).keyBy('value').get(this.val) || {};
+            },
+            ...mapState([
+               'locales'
+            ]),
+            _languages(){
+                return collect(this.languages).filter((item)=>{
+                    return collect(this.locales).contains(item.value);
+                }).all();
             }
 
 
