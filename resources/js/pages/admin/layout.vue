@@ -8,17 +8,18 @@
                     <span class="logo-mini" style="display: inline-block">
                         <img :src="logo" width="40px" height="40px">
                     </span>
-                    <span class="logo-lg" style="display: inline-block"><b>{{name_short}}</b>后台系统</span>
+                    <span class="logo-lg" style="display: inline-block"><b>{{name_short}}</b>{{$tp('Backend systems')}}</span>
                 </router-link>
                 <nav class="navbar navbar-static-top">
                     <a class="sidebar-toggle" data-toggle="push-menu" role="button">
-                        <span class="sr-only">切换导航</span>
+                        <span class="sr-only">{{$tp('Toggle navigation')}}</span>
                     </a>
                     <div class="navbar-custom-menu pull-left">
                         <ul class="nav navbar-nav">
                             <li :class="{active:module['active']}" v-for="module in modules">
                                 <a @click="toUrl(module['url'],$event)" :href="module['url']?module['url']:null">
-                                    <i class="fa" :class="module['icons']"></i> {{module['name']}}
+                                    <i class="fa" :class="module['icons']"></i>
+                                    {{$tp(module['name'],shared)}}
                                 </a>
                             </li>
                         </ul>
@@ -31,25 +32,25 @@
                                     <span class="label label-success">1</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">你有1条消息</li>
+                                    <li class="header">{{$tp('You have {number} messages',1,{number:1})}}</li>
                                     <li>
                                         <ul class="menu">
                                             <li>
                                                 <a>
                                                     <div class="pull-left">
                                                         <img src="/dist/img/user2-160x160.jpg" class="img-circle"
-                                                             alt="用户头像">
+                                                             :alt="$tp('User avatars')">
                                                     </div>
                                                     <h4>
-                                                        系统
-                                                        <small><i class="fa fa-clock-o"></i> 5分钟前</small>
+                                                        {{$t('System')}}
+                                                        <small><i class="fa fa-clock-o"></i> {{$tp('{number} minutes ago',{number:5})}}</small>
                                                     </h4>
-                                                    <p>你好!</p>
+                                                    <p>{{$t('Hello')}}</p>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="footer"><a>查看全部</a></li>
+                                    <li class="footer"><a>{{$t('See them all')}}</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown notifications-menu">
@@ -58,17 +59,17 @@
                                     <span class="label label-warning">1</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">你有1个提醒</li>
+                                    <li class="header">{{$tp('You have {number} reminders',{number:1})}}</li>
                                     <li>
                                         <ul class="menu">
                                             <li>
                                                 <a>
-                                                    <i class="fa fa-users text-aqua"></i> 今天有5个用户加入
+                                                    <i class="fa fa-users text-aqua"></i> {{$tp('{number} users joined today',5,{number:5})}}
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="footer"><a>查看全部</a></li>
+                                    <li class="footer"><a>{{$t('See them all')}}</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown tasks-menu">
@@ -77,20 +78,20 @@
                                     <span class="label label-danger">1</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">你有1个任务</li>
+                                    <li class="header">{{$tp('You have {number} tasks',{number:1})}}</li>
                                     <li>
                                         <ul class="menu">
                                             <li>
                                                 <a>
                                                     <h3>
-                                                        任务百分比
+                                                        {{$t('Percentage of tasks')}}
                                                         <small class="pull-right">20%</small>
                                                     </h3>
                                                     <div class="progress xs">
                                                         <div class="progress-bar progress-bar-aqua" style="width: 20%"
                                                              role="progressbar"
                                                              aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                            <span class="sr-only">完成 20%</span>
+                                                            <span class="sr-only">{{$t('Progress')}} 20%</span>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -99,16 +100,16 @@
                                         </ul>
                                     </li>
                                     <li class="footer">
-                                        <a>查看全部</a>
+                                        <a>{{$t('See them all')}}</a>
                                     </li>
                                 </ul>
                             </li>
                             <user-menu></user-menu>
-                            <!--<li>
+                            <li>
                                 <a>
-                                    <language></language>
+                                    <language :value="language" @change="setLanguage"></language>
                                 </a>
-                            </li>-->
+                            </li>
                             <li>
                                 <a data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                             </li>
@@ -122,16 +123,16 @@
                     <section class="sidebar">
                         <div class="user-panel">
                             <div class="pull-left image">
-                                <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" alt="用户图片">
+                                <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" :alt="$t('User avatars')">
                             </div>
                             <div class="pull-left info">
                                 <p>{{user['name']}}</p>
-                                <a>{{roleName}}</a>
+                                <a>{{$tp(roleName,shared_roule)}}</a>
                             </div>
                         </div>
                         <div class="sidebar-form">
                               <div class="input-group">
-                                  <input @keydown.enter="search" @keyup="waitSearch" v-model="keywords" type="text" name="keywords" class="form-control" placeholder="菜单搜索">
+                                  <input @keydown.enter="search" @keyup="waitSearch" v-model="keywords" type="text" name="keywords" class="form-control" :placeholder="$tp('Search menu')">
                                   <span class="input-group-btn">
                                   <button @click="search" type="button" class="btn btn-flat">
                                       <i class="fa fa-search"></i>
@@ -176,23 +177,23 @@
                             <div class="progress my-progress" :class="{active:(download_progress<100 && !download_pauseing)}" :style="{width:download_progress+'%'}">
                                 <div class="progress-bar progress-bar-striped my-progress-bar" role="progressbar" :aria-valuenow="download_progress" :aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                     <span v-show="download_progress<100">{{download_progress}}%</span>
-                                    <span v-show="download_progress>=100">完成!</span>
+                                    <span v-show="download_progress>=100">{{$t('Has been completed')}}</span>
                                 </div>
                             </div>
                             <div class="pull-right progress-tool" v-show="downloading && download_progress<100" style="margin-right: 10px">
-                                <button v-show="!download_pauseing"  @click="downloadPause" type="button" title="取消"  class="btn btn-box-tool my-progress-cancel">
+                                <button v-show="!download_pauseing"  @click="downloadPause" type="button" :title="$t('Pause')"  class="btn btn-box-tool my-progress-cancel">
                                         <span class="text-primary">
-                                              暂停 <i class="fa fa-pause"></i>
+                                              {{$t('Pause')}} <i class="fa fa-pause"></i>
                                         </span>
                                 </button>
-                                <button v-show="download_pauseing"  @click="downloadStart" type="button" title="取消"  class="btn btn-box-tool my-progress-cancel">
+                                <button v-show="download_pauseing"  @click="downloadStart" type="button" :title="$t('Continue')"  class="btn btn-box-tool my-progress-cancel">
                                         <span class="text-primary">
-                                              继续 <i class="fa fa-play"></i>
+                                              {{$t('Continue')}} <i class="fa fa-play"></i>
                                         </span>
                                 </button>
-                                <button @click="downloadCancel" type="button" title="取消"  class="btn btn-box-tool my-progress-cancel">
+                                <button @click="downloadCancel" type="button" :title="$t('Cancel')"  class="btn btn-box-tool my-progress-cancel">
                                          <span class="text-danger">
-                                             取消 <i class="fa fa-times"></i>
+                                             {{$t('Cancel')}} <i class="fa fa-times"></i>
                                          </span>
                                 </button>
                             </div>
@@ -201,17 +202,19 @@
                     <section class="content-header" :class="{'my-content-header':downloading}">
                         <h1>
                             {{current_menu_name}}
-                            <small>{{current_menu_description}}</small>
+                            <small>
+                                {{current_menu_description}}
+                            </small>
                         </h1>
                         <ol class="breadcrumb">
                             <li :class="{active:navbar.active}" v-for="navbar in navbars">
                                 <router-link :to="navbar['url']" v-if="!navbar.active && navbar['url']">
                                     <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                    {{navbar['name']}}
+                                    {{translation(navbar,'name')}}
                                 </router-link>
                                 <span v-else>
                                  <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                {{last_menu_show_name || navbar['name']}}
+                                    {{last_menu_show_name ? last_menu_show_name:translation(navbar,'name')}}
                             </span>
                             </li>
                         </ol>
@@ -227,13 +230,13 @@
                 </div>
                 <footer class="main-footer">
                     <div class="pull-right hidden-xs">
-                        <b>系统版本：</b> {{version}}
+                        <b>{{$t('System version:')}}</b> {{version}}
                     </div>
                     <strong>Copyright &copy; 2020
                         <a target="_blank" href="http://www.laraveladmin.cn">{{name}}</a>
                     </strong>
                     <span v-if="icp">
-                         <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 备案号:{{icp}}
+                         <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> {{$t('The record number:')}}{{icp}}
                     </span>
                 </footer>
             </div>
@@ -253,14 +256,14 @@
                 <div class="tab-content">
                     <!-- Home tab content -->
                     <div class="tab-pane active" id="control-sidebar-home-tab">
-                        <h3 class="control-sidebar-heading">最近活动</h3>
+                        <h3 class="control-sidebar-heading">{{$tp('Recent Activities')}}</h3>
                         <ul class="control-sidebar-menu">
                             <li>
                                 <a href="javascript:void(0)">
                                     <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
                                     <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">我的生日</h4>
+                                        <h4 class="control-sidebar-subheading">{{$tp('My birthday')}}</h4>
                                         <p>2019-01-01</p>
                                     </div>
                                 </a>
@@ -270,7 +273,7 @@
                                     <i class="menu-icon fa fa-user bg-yellow"></i>
 
                                     <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">你的生日</h4>
+                                        <h4 class="control-sidebar-subheading">{{$tp('Your birthday')}}</h4>
 
                                         <p>2019-01-01</p>
                                     </div>
@@ -281,7 +284,7 @@
                                     <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
 
                                     <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">活动一</h4>
+                                        <h4 class="control-sidebar-subheading">{{$t('Email')}}</h4>
 
                                         <p>nora@example.com</p>
                                     </div>
@@ -292,19 +295,19 @@
                                     <i class="menu-icon fa fa-file-code-o bg-green"></i>
 
                                     <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">活动二</h4>
+                                        <h4 class="control-sidebar-subheading">{{$tc('Section',0)}}</h4>
 
                                         <p>Execution time 5 seconds</p>
                                     </div>
                                 </a>
                             </li>
                         </ul>
-                        <h3 class="control-sidebar-heading">任务进度</h3>
+                        <h3 class="control-sidebar-heading">{{$t('Progress')}}</h3>
                         <ul class="control-sidebar-menu">
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        任务一
+                                        {{$tc('Section',0)}}
                                         <span class="label label-danger pull-right">70%</span>
                                     </h4>
 
@@ -316,7 +319,7 @@
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        任务二
+                                        {{$tc('Section',1)}}
                                         <span class="label label-success pull-right">95%</span>
                                     </h4>
 
@@ -328,7 +331,7 @@
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        任务三
+                                        {{$tc('Section',2)}}
                                         <span class="label label-warning pull-right">50%</span>
                                     </h4>
 
@@ -340,7 +343,7 @@
                             <li>
                                 <a href="javascript:void(0)">
                                     <h4 class="control-sidebar-subheading">
-                                        任务四
+                                        {{$tc('Section',4)}}
                                         <span class="label label-primary pull-right">68%</span>
                                     </h4>
 
@@ -352,7 +355,7 @@
                         </ul>
                     </div>
                     <div class="tab-pane" id="control-sidebar-settings-tab">
-                        <h3 class="control-sidebar-heading">主题</h3>
+                        <h3 class="control-sidebar-heading">{{$tp('Theme')}}</h3>
                         <ul class="list-unstyled clearfix">
                             <li class="skin-item" v-for="(item,index) in skins">
                                 <a href="javascript:void(0)" class="clearfix full-opacity-hover" @click="setSkin(item.class)">
@@ -365,7 +368,7 @@
                                         <span class="span4" :style="{background: item.background4}"></span>
                                     </div>
                                 </a>
-                                <p class="text-center no-margin">{{item.name}}</p>
+                                <p class="text-center no-margin">{{$tp(item.name)}}</p>
                             </li>
                         </ul>
                     </div>
@@ -394,11 +397,21 @@
         props: {},
         data(){
             return {
+                shared:{
+                    '{lang_path}':'_shared.menus',
+                    '{lang_root}':''
+                },
+                "{lang_path}":'admin.layout',
+                shared_roule:{
+                    '{lang_path}':'_shared.datas.roles.name',
+                    '{lang_root}':''
+                },
                 loading:true,
                 keywords:'',
                 timer:null,
                 skin:localStorage.getItem('skin') || 'skin-blue',
-                skins: [{
+                skins: [
+                    {
                     "name": "Blue",
                     "class": "skin-blue",
                     "background1": "#367fa9",
@@ -406,7 +419,7 @@
                     "background3": "#222d32",
                     "background4": "#f4f5f7"
                 }, {
-                    "name": "Black",
+                    "name": "White",
                     "class": "skin-black",
                     "background1": "#fefefe",
                     "background2": " #fefefe",
@@ -448,7 +461,7 @@
                     "background3": "#f9fafc",
                     "background4": "#f4f5f7"
                 }, {
-                    "name": "Black Light",
+                    "name": "All White",
                     "class": "skin-black-light",
                     "background1": "#fefefe",
                     "background2": " #fefefe",
@@ -489,6 +502,25 @@
 
         },
         methods:{
+            translation(item,key){
+                let value = array_get(item,key,'');
+                let resource_id = item['resource_id'];
+                let res = this.$tp(value , this.shared);
+                if(resource_id && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                    let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
+                    let key = value.replace(parent_name,'{name}');
+                    let shared = copyObj(this.shared);
+                    if(key.indexOf('{name}')==0){
+                        shared.name=this.$tp(parent_name,shared);
+                    }else {
+                        key = value.replace(parent_name.toLowerCase(),'{name}');
+                        shared.l_name=this.$tp(parent_name,shared);
+                        key = key.replace('{name}','{l_name}');
+                    }
+                    res = this.$tp(key , shared);
+                }
+                return res;
+            },
             //设置主题
             setSkin(value){
                 this.skin = value;
@@ -508,6 +540,7 @@
             }),
             ...mapMutations({
                 menuSet:'menu/set',  //设置当前路由,用于菜单选中
+                setLanguage:'setLanguage',
             }),
             search(){
                 this.menuSet({
@@ -561,7 +594,8 @@
                 'version',
                 'icp',
                 'alerts',
-                'name'
+                'name',
+                'language'
             ]),
             ...mapState('menu',{
                 menus:state => state.menus,
@@ -613,18 +647,18 @@
             },
             last_menu_show_name(){
                 if(this.last_menu_show && this.last_menu_show.name){
-                    return this.last_menu_show.name;
+                    return this.translation(this.last_menu_show,'name');
                 }
                 return '';
             },
             current_menu_name(){
-                return this.last_menu_show_name || this.current_menu['name'];
+                return this.last_menu_show_name || this.translation(this.current_menu,'name');
             },
             current_menu_description(){
                 if(this.last_menu_show && this.last_menu_show.description ){
                     return this.last_menu_show.description
                 }
-                return this.current_menu['description'];
+                return this.translation(this.current_menu,'description');
             }
         },
         watch: {

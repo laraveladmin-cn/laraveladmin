@@ -64,9 +64,9 @@ class User extends Authenticatable
      */
     protected $fieldsShowMaps = [
         'status'=>[
-            '注销',
-            '有效',
-            '停用'
+            'Cancellation',
+            'Effective',
+            'Out of service'
         ]
     ];
 
@@ -88,17 +88,17 @@ class User extends Authenticatable
 
     //字段默认值
     protected $fieldsName = [
-        'uname' => '用户名',
-        'name' => '昵称',
-        'avatar' => '头像',
-        'email' => '电子邮箱',
-        'mobile_phone' => '手机号码',
+        'uname' => 'User name',
+        'name' => 'Name',
+        'avatar' => 'Head portrait',
+        'email' => 'E-mail',
+        'mobile_phone' => 'Phone number',
         //'remember_token' => '记住登录',
-        'status' => '状态',
-        'description' => '备注',
-        //'created_at' => '创建时间',
-        //'updated_at' => '修改时间',
-        //'deleted_at' => '删除时间',
+        'status' => 'State',
+        'description' => 'Remarks',
+        //'created_at' => 'Created At',
+        //'updated_at' => 'Updated At',
+        //'deleted_at' => 'Deleted At',
         'id' => 'ID',
     ];
 

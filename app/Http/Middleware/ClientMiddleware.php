@@ -58,7 +58,7 @@ class ClientMiddleware{
             $auth = ClientAuth::auth();
             if(!$auth){
                 return Response::returns([
-                    'message'=>'Unauthenticated.',
+                    'message'=>trans('Unauthenticated.'),
                     'type'=>'app_client'
                 ],401);
             }

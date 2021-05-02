@@ -6,13 +6,13 @@
         data(){
             return {
                 chart:null,
-                initing:true,
+                initing:false,
                 intervalTime:null
             };
         },
         props:{
             options:{
-                type: [Object]
+                type: [Object,Function]
             },
             resize:{
                 type: [Boolean],
@@ -32,10 +32,17 @@
                 this.intervalTime = setInterval(()=>{
                     if(typeof echarts!="undefined"){
                         clearInterval(this.intervalTime);
+                        if(this.initing){
+                            return ;
+                        }
                         this.initing = true;
                         this.$el.style.display = 'block'; //显示节点
                         this.chart = echarts.init(this.$el);
-                        this.chart.setOption(this.options);
+                        let options = this.options;
+                        if(typeof this.options=="function"){
+                            options = this.options();
+                        }
+                        this.chart.setOption(options);
                         this.$el.style.display = null; //删除节点样式
                         this.initing = false;
                     }
@@ -81,6 +88,9 @@
                 editormdJs.src = 'https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js';
                 document.body.appendChild(editormdJs);
             }
+            this.i
         },
+        watch:{
+        }
     }
 </script>

@@ -90,7 +90,7 @@ class PersonageController extends Controller
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
         $user = Auth::user();
@@ -104,7 +104,7 @@ class PersonageController extends Controller
                 ->whereIn('id',$unbind_ids)
                 ->update(['user_id'=>0]);
         }
-        return ['alert'=>alert(['message'=>'操作成功!'])];
+        return ['alert'=>alert(['message'=>trans('The operation successful!')])];
     }
 
     /**
@@ -136,15 +136,15 @@ class PersonageController extends Controller
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
         $user = Auth::user();
         $res = $user->update($request->only(['name','avatar','description'])); //修改个人资料
         if ($res === false) {
-            return Response::returns(['alert' => alert(['message' => '修改失败!'], 500)]);
+            return Response::returns(['alert' => alert(['message' => trans('Modify the failure!')], 500)]);
         }
-        return Response::returns(['alert' => alert(['message' => '修改成功!'])]);
+        return Response::returns(['alert' => alert(['message' => trans('Modify the success!')])]);
     }
 
 

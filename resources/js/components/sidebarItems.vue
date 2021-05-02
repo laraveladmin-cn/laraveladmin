@@ -2,7 +2,7 @@
     <li class="treeview">
         <a @click="toUrl(menu['url'],$event)" :href="menu['url']?menu['url']:null">
             <i class="fa" :class="menu['icons']"></i>
-            <span>{{menu['name']}}</span>
+            <span>{{$tp(menu['name'])}}</span>
             <span class="pull-right-container" v-if="menu['childrens']">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -42,7 +42,10 @@
             }
         },
         data(){
-            return {};
+            return {
+                "{lang_path}":'_shared.menus',
+                "{lang_root}":'',
+            };
         },
         methods: {
 

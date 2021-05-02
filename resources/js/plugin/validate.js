@@ -1,9 +1,6 @@
 //自定义验证
 import {configure,extend,localize,validate} from 'vee-validate'; //表单验证
 import * as rules from 'vee-validate/dist/rules'; //验证规则
-import zh_CN from './vee-validate/zh_CN'; //验证语言包
-
-
 Object.keys(rules).forEach(rule => {
     extend(rule, {
         ...rules[rule]
@@ -115,7 +112,3 @@ extend('boolean', {
     params: [],
     computesRequired: false
 });
-configure({
-    locale: 'zh_CN'
-});
-localize('zh_CN', zh_CN);

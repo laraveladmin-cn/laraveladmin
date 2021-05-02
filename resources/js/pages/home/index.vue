@@ -13,6 +13,7 @@
         },
         data(){
             return {
+                "{lang_path}":'home.index',
                 intervalObj:null
             };
         },

@@ -19,36 +19,39 @@ class IndexController extends Controller
      */
     public function index(){
         $data = [];
-        $data['count'] = [ //统计
+        $data['count'] = collect([ //统计
             [
-                'name'=>'后台管理员数',
+                'name'=>'Total number of back-end administrators',
                 'value'=>Admin::count(),
                 'class'=>'bg-aqua',
                 'icon'=>'fa-hand-pointer-o',
                 'url'=>'/admin/admins'
             ],
             [
-                'name'=>'角色总数',
+                'name'=>'Total number of roles',
                 'value'=>Role::count(),
                 'class'=>'bg-green',
                 'icon'=>'fa-cubes',
                 'url'=>'/admin/roles'
             ],
             [
-                'name'=>'用户数',
+                'name'=>'Total number of users',
                 'value'=>User::query()->whereDoesntHave('admin')->count(),
                 'class'=>'bg-yellow',
                 'icon'=>'fa-users',
                 'url'=>'/admin/users'
             ],
             [
-                'name'=>'菜单总数',
+                'name'=>'Total number of menus',
                 'value'=>Menu::count(),
                 'class'=>'bg-red',
                 'icon'=>'fa-sitemap',
                 'url'=>'/admin/menus'
             ],
-        ];
+        ])->map(function ($item){
+            $item[config('laravel_admin.trans_prefix').'name'] = trans_path($item['name'],'_shared.pages.admin');
+            return $item;
+        })->toArray();
         return $data;
     }
 
@@ -64,7 +67,7 @@ class IndexController extends Controller
         }
         $file = storage_path('/logs/'.$file);
         if(!file_exists($file)){
-            return '文件不存在';
+            return trans('File does not exist!');
         }
         return response()->download($file);
     }

@@ -4,16 +4,16 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs ui-sortable-handle">
                     <li class="active">
-                        <a href="#console" data-toggle="tab" @click="switchTag(0)">控制台命令</a>
+                        <a href="#console" data-toggle="tab" @click="switchTag(0)">{{$tp('Console commands')}}</a>
                     </li>
                     <li>
-                        <a href="#menus" data-toggle="tab" @click="switchTag(1)">菜单路由</a>
+                        <a href="#menus" data-toggle="tab" @click="switchTag(1)">{{$tp('Menu routing')}}</a>
                     </li>
                     <li>
-                        <a href="#plug_in" data-toggle="tab" @click="switchTag(2)">插件安装</a>
+                        <a href="#plug_in" data-toggle="tab" @click="switchTag(2)">{{$tp('Plug-in installation')}}</a>
                     </li>
                     <li>
-                        <a href="#docs" data-toggle="tab" @click="switchTag(3)">相关文档</a>
+                        <a href="#docs" data-toggle="tab" @click="switchTag(3)">{{$tp('Relevant documentation')}}</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -22,22 +22,22 @@
                             <template slot="content" slot-scope="props">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <h3 class="text-center">
-                                        命令名称: {{props.data.row.chinese}}
+                                        {{$tp('Command name:')}} {{props.data.row.chinese}}
                                     </h3>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                     <edit-item :key-name="'index'"
-                                               :options="{name:'选择命令',rules:'required',title:'需要执行的命令'}"
+                                               :options="{name:$tp('Select the command'),rules:'required',title:$tp('Command that needs to be executed')}"
                                                :datas="props">
                                         <template slot="input-item">
                                             <div class="edit-item-content">
                                                 <select2 v-model="props.data.index"
-                                                         :default-options="commands"
-                                                         :placeholder-show="'请选择'"
+                                                         :default-options="_commands"
+                                                         :placeholder-show="$t('Please select')"
                                                          :placeholder-value="0"
                                                          :primary-key="'_id'"
                                                          @change="changeCommand(props.data)"
-                                                         :show="['command','chinese']" >
+                                                         :show="['command','_name']" >
                                                 </select2>
                                             </div>
                                         </template>
@@ -46,7 +46,7 @@
                                         <div v-for="(item,index) in props.data.row.parameters">
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-if="item.type=='select2tables'"
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                                 <template slot="input-item">
@@ -58,7 +58,7 @@
                                                                  :show="['TABLE_NAME']"
                                                                  :disabled="!props.url"
                                                                  :primary-key="'TABLE_NAME'"
-                                                                 :placeholder-show="item.placeholder || '请选择'"
+                                                                 :placeholder-show="item.placeholder || $t('Please select')"
                                                                  :placeholder-value="''"
                                                                  @change="clearInput"
                                                                  :params="{connection:connection_value(props.data.row.parameters)}"
@@ -69,14 +69,14 @@
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else-if="item.type=='select2'"
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                                 <template slot="input-item">
                                                     <div class="edit-item-content">
                                                         <select2 v-model="item.value"
                                                                  :default-options="item.map || array_get(props,'data.maps.'+item.map_key,[])"
-                                                                 :placeholder-show="item.placeholder || '请选择'"
+                                                                 :placeholder-show="item.placeholder || $t('Please select')"
                                                                  :disabled="!props.url"
                                                                  :placeholder-value="''"
                                                                  @change="clearInput"
@@ -87,27 +87,27 @@
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else-if="item.type=='checkbox'"
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                                 <template slot="input-item">
                                                     <div class="row">
                                                         <div v-for="(item1,index) in (item.map || array_get(props,'data.maps.'+item.map_key,[]))" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                            <icheck v-model="item.value" :option="index" :disabled="!props.url" :label="item1"> {{item1}}</icheck>
+                                                            <icheck v-model="item.value" :option="index" :disabled="!props.url" :label="$tp(item1)"> {{$tp(item1)}}</icheck>
                                                         </div>
                                                     </div>
                                                 </template>
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else-if="item.type=='switch'"
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                                 <template slot="input-item">
                                                     <div class="edit-item-content">
                                                         <el-switch v-model="item.value"
-                                                                   active-text="是"
-                                                                   inactive-text="否"
+                                                                   :active-text="$t('Yes')"
+                                                                   :inactive-text="$t('No')"
                                                                    :active-value="1"
                                                                    :inactive-value="0">
                                                         </el-switch>
@@ -116,7 +116,7 @@
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else
-                                                       :options="item"
+                                                       :options="transItem(item)"
                                                        :datas="props"
                                                        :key="index">
                                             </edit-item>
@@ -125,24 +125,24 @@
                                 </div>
                                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                                     <div class="form-group" :class="{'has-error':inputError(props)}">
-                                        <label>手动输入命令:</label>
+                                        <label>{{$tp('Enter the command manually:')}}</label>
                                         <div class="input-group">
                                             <input
                                                 type="text"
                                                 v-model.trim="inputCommand"
                                                 class="form-control"
-                                                :placeholder="'请输入'">
+                                                :placeholder="$t('Please enter')">
                                             <div class="input-group-addon" v-clipboard:copy="inputCommand"  v-clipboard:success="onCopy" >
                                                 <i class="fa fa-copy"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>命令:</label>
+                                        <label>{{$tp('Command:')}}</label>
                                         <div v-clipboard:copy="command(props.data.row)"  v-clipboard:success="onCopy" class="snippet command">
                                             <button class="btn">
-                                                <img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="复制到粘贴板">
-                                                复制到粘贴板
+                                                <img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" :alt="$tp('Copy it to the paste board')">
+                                                {{$tp('Copy it to the paste board')}}
                                             </button>
                                             <code>
                                                 {{command(props.data.row)}}
@@ -158,7 +158,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" v-show="output">
                                     <div class="box">
                                         <div class="box-header with-border">
-                                            <h3 class="box-title">执行结果:</h3>
+                                            <h3 class="box-title">{{$tp('Execute results:')}}}</h3>
                                             <div class="box-tools pull-right">
                                                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                                     <i class="fa fa-minus"></i>
@@ -176,19 +176,18 @@
                             <table class="table table-hover table-bordered table-striped text-center dataTable">
                                 <thead>
                                 <tr>
-                                    <th>命令</th>
-                                    <th>说明</th>
+                                    <th>{{$tp('Command')}}</th>
+                                    <th>{{$tp('Instructions')}}</th>
                                     <!--     <th>English</th>-->
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="item in commands">
+                                <tr v-for="item in _commands">
                                     <td v-clipboard:copy="'php artisan '+item.command"  v-clipboard:success="onCopy" class="snippet">
                                         <button class="btn" data-clipboard-snippet=""><img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="Copy to clipboard"></button>
                                         <code>{{item.command}}</code>
                                     </td>
-                                    <td>{{item.chinese}}</td>
-                                    <!--   <td>{{item.english}}</td>-->
+                                    <td>{{item._name}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -198,10 +197,10 @@
                         <menus v-if="tag==1"></menus>
                     </div>
                     <div class="chart tab-pane" id="plug_in">
-                        安装应用插件
+                        {{$tp('Install the application plug-in')}}
                     </div>
                     <div class="chart tab-pane" id="docs">
-                        相关文档
+                        {{$tp('Relevant documentation')}}
                     </div>
                 </div>
             </div>
@@ -225,6 +224,7 @@
         },
         data() {
             return {
+                "{lang_path}":'admin.developments_index',
                 options: {
                     id: 'edit', //多个组件同时使用时唯一标识
                     url: '/admin/developments/index', //数据表请求数据地址
@@ -262,7 +262,13 @@
         computed:{
             ...mapState([
                 'use_url'
-            ])
+            ]),
+            _commands(){
+                return collect(this.commands).map((item)=>{
+                    item._name = this.$tp(item.name);
+                    return item;
+                }).all();
+            }
         },
         methods:{
             ...mapActions({
@@ -276,7 +282,7 @@
             onCopy:  (e)=> {
                 $this.pushMessage({
                     'showClose':true,
-                    'title':e.text+' 命令复制成功!',
+                    'title':e.text+' '+$this.$t('{action} successfully!',{action:$this.$t('Command copy')}),
                     'message':'',
                     'type':'success',
                     'position':'top',
@@ -304,11 +310,11 @@
                         return ' '+parameter.value;
                     }
                 }).implode('');
-                let _exec = command.command+parm_str;
+                let _exec = (command.command  || '')+parm_str;
                 if(this.$refs['edit'] && this.$refs['edit'].data && this.$refs['edit'].data.row._exec != _exec){
                     this.$refs['edit'].data.row._exec = _exec;
                 }
-                return 'php artisan '+_exec;
+                return 'php artisan '+(_exec || '');
             },
             //连接参数
             connection_value(parms){
@@ -351,6 +357,24 @@
                 let inputCommand1 = this.command(props.data.row);
                 inputCommand1 = collect(inputCommand1.split(' ')).sort().implode(' ');
                return inputCommand1!=inputCommand;
+            },
+            transItem(item){
+                let item1 = copyObj(item);
+                 collect(['name','title','map']).each((key)=>{
+                     let value = item1[key];
+                    if(value && typeof value=="object"){
+                        item1[key] = collect(value).map((v)=>{
+                            if(typeof v=="string"){
+                                return this.$tp(v);
+                            }else {
+                                return v;
+                            }
+                        }).all();
+                    }else if(value && typeof value=="string"){
+                        item1[key] = this.$tp(value);
+                    }
+                });
+                 return item1;
             }
         },
         watch:{

@@ -3,15 +3,15 @@
         <div class="login-box center-block" :style="{height:(otherLogin.length && !other)? '455px':'390px'}">
             <logo></logo>
             <div class="login-box-body">
-                <p class="login-box-msg">{{other ? '用户绑定':'用户登录'}}</p>
+                <p class="login-box-msg">{{other ? $t('User binding'):$tp('User login')}}</p>
                 <validation-observer ref="login" v-slot="{invalid,validate}">
                     <form method="post">
-                        <form-item v-model="username" :options="{key:'username',name:'账号',rules:'required|min:5|max:18',icon:'glyphicon-envelope',placeholder:'请输入账号/邮箱/手机号码'}"></form-item>
-                        <form-item v-model="password" :options="{key:'password',name:'密码',rules:'required|min:6|max:18'}">
-                            <password-edit v-model="password" :placeholder="'请输入密码'" @keydown-enter="postLogin(invalid,validate)">
+                        <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18',icon:'glyphicon-envelope',placeholder:placeholderUsername}"></form-item>
+                        <form-item v-model="password" :options="{key:'password',name:$tp('Password'),rules:'required|min:6|max:18'}">
+                            <password-edit v-model="password" :placeholder="placeholderPassword" @keydown-enter="postLogin(invalid,validate)">
                             </password-edit>
                         </form-item>
-                        <form-item v-if="mustVerify" v-model="verifyCode" :options="{key:'verify',name:'验证码',rules:'required',messages:{required:'{_field_} 必须验证'}}">
+                        <form-item v-if="mustVerify" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'required',messages:{required:$tp('{_field_} must be verified')}}">
                             <geetest v-if="verify['type']=='geetest' && mustVerify" :url="web_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']" class="geetest-code"></geetest>
                             <captcha v-if="verify['type']=='captcha' && mustVerify" :url="verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></captcha>
                         </form-item>
@@ -19,7 +19,7 @@
                             <div class="col-xs-8">
                                 <div class="checkbox icheck">
                                     <icheck v-model="remember" option="1">
-                                        记住登录
+                                        {{$tp('Remember to log in')}}
                                     </icheck>
                                 </div>
                             </div>
@@ -28,14 +28,14 @@
                                         class="btn btn-primary btn-block btn-flat"
                                         :disabled="logining"
                                         @click="postLogin(invalid,validate)">
-                                    {{logining?'登录中...':'登录'}}
+                                    {{logining?$tp('Loading in'):$t('Login')}}
                                 </button>
                             </div>
                         </div>
                   </form>
                 </validation-observer>
                 <div class="social-auth-links text-center other-login" v-if="otherLogin.length && !other">
-                    <p>---------------- 其它登录方式 ----------------</p>
+                    <p>---------------- {{$tp('Other login methods')}} ----------------</p>
                     <div class="row">
                         <div :class="'col-xs-'+other_col" v-for="item in otherLogin">
                             <a :href="web_url+item['url']">
@@ -48,9 +48,9 @@
                 </div>
                 <div class="social-auth-links row">
                     <router-link class="pull-left" to="/open/password">
-                        忘记密码
+                        {{$tp('Forget your password')}}
                     </router-link>
-                    <router-link class="pull-right" to="/open/register">注册账号</router-link>
+                    <router-link class="pull-right" to="/open/register">{{$tp('Registered user')}}</router-link>
                 </div>
             </div>
            <!-- <icp></icp>-->
@@ -80,6 +80,7 @@
         props: {},
         data() {
             return {
+                "{lang_path}":'open',
                 username:'',
                 remember:false,
                 mustVerify:false,
@@ -94,6 +95,12 @@
             }
         },
         methods:{
+            placeholderUsername(){
+                return this.$tp('Please enter your account/email/mobile phone number');
+            },
+            placeholderPassword(){
+              return this.$t('enter',{name:this.$t('password')});
+            },
             //登录成功后处理
             loginSucces(res){
                 this.refreshToken();
@@ -199,10 +206,10 @@
                         this.set({
                             key:'modal',
                             modal:{
-                                title:'提示',
-                                content: '您还没有账号,跳转到注册页面进行注册并绑定?',
-                                cancelText:'登录',
-                                affirmText:'注册',
+                                title:this.$t('Prompt'),
+                                content: this.$tp('You do not have an account, jump to the registration page to register and bind'),//您还没有账号,跳转到注册页面进行注册并绑定?
+                                cancelText:this.$t('Login'), //登录
+                                affirmText:this.$t('Register'),//注册
                                 callback:()=>{
                                     this.$router.push({ path: '/open/register?other='+this.other }).catch(()=>{});
                                 },

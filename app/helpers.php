@@ -10,6 +10,7 @@
 use \Illuminate\Support\Arr;
 use \Illuminate\Support\Facades\Lang;
 use \Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
 
 /**
  * 前端弹窗参数返回
@@ -23,7 +24,7 @@ function alert($data = [], $status = 200)
     $defult = [
         200 => [
             'showClose' => true, //显示关闭按钮
-            'title' => '操作成功!', //消息内容
+            'title' => trans('The operation successful!'), //消息内容
             'message' => '', //消息内容
             'type' => 'success', //消息类型
             'position' => 'top',
@@ -34,7 +35,7 @@ function alert($data = [], $status = 200)
         ],
         'other' => [
             'showClose' => true, //显示关闭按钮
-            'title' => '操作失败!', //消息内容
+            'title' => trans('The operation failure!'), //消息内容
             'message' => '', //消息内容
             'type' => 'danger', //消息类型
             'position' => 'top',
@@ -306,6 +307,53 @@ if (! function_exists('menv')) {
             $value = $_SERVER[$key];
         }
         return is_null($value) ? value($default) : $value;
+    }
+}
+if (! function_exists('trans_path')) {
+    /**
+     * Translate the given message.
+     *
+     * @param  string|null  $key
+     * @param  array  $replace
+     * @param  string|null  $locale
+     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+     */
+    function trans_path($key = null,$path='', $replace = [], $locale = null)
+    {
+        $prefix = '';
+        if($path && !is_null($key)){
+            $prefix = $path.'.';
+            $key = $prefix.$key;
+        }
+        $res = trans($key,$replace,$locale);
+        if($prefix && !is_null($key) && \Illuminate\Support\Str::startsWith($res,$prefix)){
+            return \Illuminate\Support\Str::replaceFirst($prefix,'',$res);
+        }
+        return $res;
+    }
+}
+
+if (! function_exists('trans_conversion')) {
+    /**
+     * Translate the given message.
+     *
+     * @param  string|null  $key
+     * @param  array  $replace
+     * @param  string|null  $locale
+     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+     */
+    function front_trans_conversion(&$data)
+    {
+        if(is_array($data)){
+            foreach ($data as $key=>&$value){
+                if(is_array($value)){
+                    front_trans_conversion($value);
+                }else{
+                    $value = str_replace('}','',str_replace('{',':',$value));
+                }
+            }
+        }
+        return $data;
     }
 }
 

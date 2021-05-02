@@ -1,7 +1,7 @@
 <template>
     <div @mouseout="$emit('blur')" class="geetest-div">
         <div class="geetest-captcha"></div>
-        <p v-show="show">正在加载验证码...</p>
+        <p v-show="show">{{$t('Loading CAPTCHA')}}...</p>
     </div>
 </template>
 <script>
@@ -28,7 +28,7 @@
                 type: [Object],
                 default: function () {
                     return {
-                        client_fail_alert:'请正确完成验证码操作',
+                        client_fail_alert:this.$t('Please complete the verification code correctly'),//请正确完成验证码操作。
                         lang:'zh-cn',
                         product:'float',
                         http:'http://'

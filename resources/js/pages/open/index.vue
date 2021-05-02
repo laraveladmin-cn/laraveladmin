@@ -70,6 +70,7 @@
         },
         data(){
           return {
+              "{lang_path}":'open.index',
               features:[],
               technologys:[]
           }
@@ -91,7 +92,6 @@
         methods:{
 
         }
-
     };
 </script>
 <style scoped>

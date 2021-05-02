@@ -36,8 +36,12 @@ let AppConfig = {
     api_url_model:'api',
     use_url:'',
     env:'',
+    language:'',
+    default_language:'',
+    locales:[],
     ...(window.AppConfig || {})
 };
+AppConfig.language = (localStorage.getItem('language') || AppConfig.default_language).replace(/\_/g,'-');
 //使用请求地址
 AppConfig.use_url = AppConfig.api_url_model=='web'? AppConfig.web_url: AppConfig.api_url;
 window.AppConfig = AppConfig;

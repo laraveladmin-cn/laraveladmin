@@ -97,34 +97,27 @@ class ForgotPasswordController extends Controller
         }
         $model_name = Arr::get($this->map,$model); //模式名称
         //验证
-        $validator = Validator::make($request->all(), $validate, [
-            'verify.required' => '验证码必填',
-            'verify.geetest' => '验证码验证失败',
-            'verify.captcha' => '验证码验证失败'
-        ], [
-            'verify' => '验证码',
-            'username'=>'用户'
-        ]);
+        $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
         //最后验证短信码
         $validator = Validator::make($request->all(),[
             'message_code' => 'required|send_code:username,'.config($this->send_code_key)
         ], [
-            'message_code.send_code' => $model_name.'验证码验证失败'
-        ], ['message_code' => $model_name.'验证码']);
+            'message_code.send_code' => $model_name=='邮箱'?trans('Email verification code verification failed!'):trans('SMS verification code verification failed!')
+        ]);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
-                'message' => 'The given data was invalid.'
+                'message' => trans('The given data was invalid.')
             ], 422);
         }
         if($user->update(['password'=> $request->input('password')])===false){
-            return Response::returns(['alert' => alert(['message' => '操作失败!'], 500)],500);
+            return Response::returns(['alert' => alert(['message' => trans('The operation failure!')], 500)],500);
         };
         return orRedirect('/open/login');
     }

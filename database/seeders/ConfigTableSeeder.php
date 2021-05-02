@@ -19,8 +19,8 @@ class ConfigTableSeeder extends Seeder
         //系统用户通用密码
         Config::create([
             'key' => 'common_password',
-            'name' => '通用密码配置',
-            'description' => '所有用户通用密码,请设置相对复杂密码',
+            'name' => 'Common password configuration',//'通用密码配置',
+            'description' => 'Common password for all users, please set a relatively complex password',//'所有用户通用密码,请设置相对复杂密码',
             'value' => config('laravel_admin.admin_password')
         ]);
 

@@ -28,7 +28,9 @@
                     btnSizerMore:false, //更多筛选条件按钮
                     keywordKey:'name', //关键字查询key
                     keywordGroup:false, //是否为选项组
-                    keywordPlaceholder:'请输入关键字',
+                    keywordPlaceholder:()=>{
+                        return this.$t('Please enter keywords');
+                    },
                     primaryKey:'id', //数据唯一性主键
                     defOptions:null, //默认筛选条件
                     fields: {!! str_replace(',"',',',str_replace('":',':',str_replace('{"','{',json_encode($show_fields,JSON_UNESCAPED_UNICODE)))) !!},

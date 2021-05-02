@@ -28,7 +28,7 @@ class Menu extends Model
         })->toArray();
     }
 
-    protected $table = 'menus'; //数据表名称
+    protected $table = 'menus'; //数据表Name
     //软删除,树状结构
     use SoftDeletes,TreeModel,ExcludeTop,BaseModel;
     protected $openRoot = [4]; //游客访问
@@ -76,26 +76,26 @@ class Menu extends Model
             256=>'patch'
         ],
         'is_page'=>[
-            '否',
-            '是'
+            'No',
+            'Yes'
         ],
         'status'=>[
-            1=>'显示',
-            2=>'不显示'
+            1=>'Display',
+            2=>'No display'
         ],
         'disabled'=>[
-            0=>'启用',
-            1=>'禁用'
+            0=>'Enable',
+            1=>'Disable'
         ],
         'use'=>[
             1=>'api',
             2=>'web'
         ],
         'env'=>[
-            'local'=>'local',
-            'testing'=>'testing',
-            'staging'=>'staging',
-            'production'=>'production'
+            'local'=>'Development environment',
+            'testing'=>'Testing environment',
+            'staging'=>'Pre launch environment',
+            'production'=>'Formal environment'
         ]
     ];
 
@@ -126,29 +126,29 @@ class Menu extends Model
 
     //字段默认值
     protected $fieldsName = [
-        'name' => '名称',
-        'icons' => '图标',
-        'description' => '描述',
-        'url' => 'URL路径',
-        'parent_id' => '父级ID',
-        'method' => '请求方式',
-        'is_page' => '是否为页面',
-        'disabled' => '功能状态',
-        'status' => '状态',
-        'level' => '层级',
-        'resource_id'=>'所属资源ID',
-        'group'=>'所属组',
-        'action'=>'绑定控制器方法',
-        'env'=>'使用环境',
-        'plug_in_key'=>'插件菜单唯一标识',
-        'use'=>'路由使用地方',
-        'as'=>'路由别名',
-        'middleware'=>'单独使用中间件',
+        'name' => 'Name',
+        'icons' => 'Icon',
+        'description' => 'Describe',
+        'url' => 'URL path',
+        'parent_id' => 'Parent ID',
+        'method' => 'Request method',
+        'is_page' => 'Is it a page',
+        'disabled' => 'Functional status',
+        'status' => 'State',
+        'level' => 'Hierarchy',
+        'resource_id'=>'Resource ID',
+        'group'=>'Group',
+        'action'=>'Binding controller method',
+        'env'=>'Use environment',
+        'plug_in_key'=>'Plug in menu unique ID',
+        'use'=>'Route usage',
+        'as'=>'Routing alias',
+        'middleware'=>'Using middleware alone',
         //'left_margin' => '左边界',
         //'right_margin' => '右边界',
-        //'created_at' => '创建时间',
-        //'updated_at' => '修改时间',
-        //'deleted_at' => '删除时间',
+        //'created_at' => 'Created At',
+        //'updated_at' => 'Updated At',
+        //'deleted_at' => 'Deleted At',
         'id' => 'ID',
     ];
 
@@ -282,7 +282,7 @@ class Menu extends Model
     }
 
     /**
-     * 请求方式对应数据值
+     * Request method对应数据值
      * @param $query
      * @param $method
      * @return mixed
@@ -410,7 +410,7 @@ class Menu extends Model
 
 
     /**
-     * 判断当前用户是否拥有某权限
+     * 判断当前用户YesNo拥有某权限
      * @param $url
      * @return bool
      */
@@ -437,7 +437,7 @@ class Menu extends Model
     }
 
     /**
-     * 判断url是否在菜单目录里
+     * 判断urlYesNo在菜单目录里
      * @param $url
      * @param $menus
      * @return bool
@@ -486,6 +486,26 @@ class Menu extends Model
         return $item;
     }
 
+    public function scopeTrans($q, $item, $key)
+    {
+        $value = Arr::get($item, $key, '');
+        $resource_id = Arr::get($item, 'resource_id', 0);
+        $res = trans_path($value, '_shared.menus');
+        if ($resource_id && $res == $value && (str_contains($value, '{') || app('translator')->getLocale() != 'en')) { //没有翻译成功
+            $parent_name = Arr::get($item, 'parent.item_name', '') ?: Arr::get($item, 'parent.name', '');
+            $key = str_replace($parent_name, '{name}', $value);
+            $data = [];
+            if (Str::startsWith($key, '{name}')) {
+                $data['name'] = trans_path($parent_name, '_shared.menus');
+            } else {
+                $key = str_replace(strtolower($parent_name), '{name}', $value);
+                $key = str_replace('{name}', '{l_name}', $key);
+                $data['l_name'] = trans_path($parent_name, '_shared.menus');
+            }
+            $res = trans_path($key, '_shared.menus',$data);
+        }
+        return $res;
+    }
 
 
 }

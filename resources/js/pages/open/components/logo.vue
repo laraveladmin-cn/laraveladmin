@@ -9,7 +9,9 @@
     export default {
         name: "logo",
         data(){
-            return {};
+            return {
+                "{lang_path}":'admin.layout',
+            };
         },
         computed:mapState([
            'name_short',

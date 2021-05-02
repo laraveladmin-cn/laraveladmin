@@ -1,3 +1,4 @@
+import i18n from '../i18n' //语言插件
 let downloadChunk = function(options,url,callback,fail){
     axios.get(url,{params:options}).then(callback).catch(fail);
 };
@@ -135,13 +136,13 @@ export default {
                 'show':true
             };
             if(typeof XLSX=="undefined"){
-                message.title = 'XLSX还未加载成功,请稍后再试!';
+                message.title = i18n.t('The XLSX plug-in has not been loaded yet, please try again later');//'XLSX还未加载成功,请稍后再试!';
             }
             if(state.downloading){
-                message.title = '导入或导出任务已存在!';
+                message.title = i18n.t('The import or export task already exists');//'导入或导出任务已存在!';
             }
             if(!url1){
-                message.title = '导出地址不存在!';
+                message.title = i18n.t('Export link address does not exist');//'导出地址不存在!';
             }
             if(typeof XLSX=="undefined" || state.downloading || !url1){
                 dispatch('pushMessage', message, { root: true }); //消息提醒
@@ -195,7 +196,7 @@ export default {
                             data = []; //清空数据
                             let message = {
                                 'showClose' : true, //显示关闭按钮
-                                'title' : '下载成功!', //消息内容
+                                'title' : i18n.t('Download successfully'),//'下载成功!', //消息内容
                                 'message' : '', //消息内容
                                 'type' : 'success', //消息类型
                                 'position' : 'top',
@@ -242,7 +243,7 @@ export default {
                             key:'pauseing',
                             pauseing: true
                         });
-                        message.title = '下载出错,已暂停下载!';
+                        message.title = i18n.t('Download error, download suspended');//'下载出错,已暂停下载!';
                         dispatch('pushMessage', message, { root: true }); //消息提醒
                     }
                 };
@@ -252,7 +253,7 @@ export default {
                         key:'pauseing',
                         pauseing: true
                     });
-                    message.title = '下载出错,已暂停下载!';
+                    message.title = i18n.t('Download error, download suspended');//'下载出错,已暂停下载!';
                     dispatch('pushMessage', message, { root: true }); //消息提醒
                     if(options['page']>0){
                         options['page']--;
@@ -275,13 +276,13 @@ export default {
                 'show':true
             };
             if(typeof XLSX=="undefined"){
-                message.title = 'XLSX还未加载成功,请稍后再试!';
+                message.title = i18n.t('The XLSX plug-in has not been loaded yet, please try again later')//;'XLSX还未加载成功,请稍后再试!';
             }
             if(state.downloading){
-                message.title = '导入或导出任务已存在!';
+                message.title = i18n.t('The import or export task already exists');//'导入或导出任务已存在!';
             }
             if(!parms.url){
-                message.title = '导出地址不存在!';
+                message.title = i18n.t('Export link address does not exist');//'导出地址不存在!';
             }
             if(typeof XLSX=="undefined" || state.downloading || !parms.url){
                 dispatch('pushMessage', message, { root: true }); //消息提醒
@@ -294,7 +295,7 @@ export default {
                 reader.onload = function(e) {
                     let workbook = XLSX.read(e.target.result, {type: 'binary'});
                     if(parms.sheet!=workbook.SheetNames[0]){
-                        message.title = '导入模板错误,请使用正确的导入模板!';
+                        message.title = i18n.t('Import template error, please use the correct import template');//'导入模板错误,请使用正确的导入模板!';
                         dispatch('pushMessage', message, { root: true }); //消息提醒
                         return;
                     }
@@ -346,7 +347,7 @@ export default {
                                 key:'pauseing',
                                 pauseing: true
                             });
-                            message.title = '导入出错,已暂停导入!';
+                            message.title = i18n.t('Import error, import has been suspended');//'导入出错,已暂停导入!';
                             dispatch('pushMessage', message, { root: true }); //消息提醒
                             datas.prepend(data);//将导入提交数据还原
                         };
@@ -380,13 +381,17 @@ export default {
                                         modal:{
                                             title:'提示',
                                             type : 'warning', //消息类型
-                                            content: '成功导入'+(total-errors.length)+'条数据,导入失败'+errors.length+'数据!是否下载错误数据?',
+                                            content: i18n.t('Import {success_number} data successfully, import {error_number} data failed! Did you download wrong data',
+                                                {
+                                                    success_number:total-errors.length,
+                                                    error_number:errors.length
+                                                }),//'成功导入'+(total-errors.length)+'条数据,导入失败'+errors.length+'数据!是否下载错误数据?',
                                             callback:()=>{
-                                                title.put('error','错误信息'); //错误信息
+                                                title.put('error',i18n.t('Error message')); //错误信息
                                                 let data = collect(errors)
                                                     .prepend(title.values().all())
                                                     .prepend(title.keys().all()).all();
-                                                exportExcel(data,parms.sheet,'错误数据');
+                                                exportExcel(data,parms.sheet,i18n.t('Wrong data'));//错误数据
                                                 errors = [];
                                                 if(typeof parms.callback=="function"){
                                                     parms.callback();
@@ -404,7 +409,7 @@ export default {
                                 }else { //全部导入成功
                                     let message = {
                                         'showClose' : true, //显示关闭按钮
-                                        'title' : '全部导入成功!', //消息内容
+                                        'title' : i18n.t('All imported successfully'),//'全部导入成功!', //消息内容
                                         'message' : '', //消息内容
                                         'type' : 'success', //消息类型
                                         'position' : 'top',

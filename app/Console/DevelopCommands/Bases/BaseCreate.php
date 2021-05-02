@@ -21,6 +21,8 @@ abstract class BaseCreate extends Command
     //输出路径
     protected $outputPath='';
 
+    protected $transPath='commands';
+
     //生成后自动加载
     protected $composer_dump = true;
 
@@ -40,15 +42,27 @@ abstract class BaseCreate extends Command
         is_dir(dirname($file)) OR mkdir(dirname($file),0755,true); //创建目录
         if(file_exists($file)){ //如果文件存在
             $in_console = app()->runningInConsole();
-            if(!$in_console || !$this->confirm($this->confirmName.'文件已存在是否覆盖? [y|N]')){
-                $this->info($file.'文件已经存在!');
+            if(!$in_console || !$this->confirm(
+                trans_path('Is the ":file" file already overwritten?',$this->transPath,['file'=>$file])
+                //$this->confirmName.'文件已存在是否覆盖? [y|N]'
+                )){
+                $this->info(
+                    trans_path('The ":file" file already exists',$this->transPath,['file'=>$file])
+                    //$file.'文件已经存在!'
+                );
                 return ;
             }
         }
         if(file_put_contents($file, $this->render())){ //写入文件
-            $this->info($file.' 创建成功');
+            $this->info(
+                trans_path('File ":file" created successfully',$this->transPath,['file'=>$file])
+                //$file.' 创建成功'
+            );
         }else{
-            $this->info($file.' 创建失败');
+            $this->info(
+             trans_path('Failed to create file ":file"',$this->transPath,['file'=>$file])
+                //$file.' 创建失败'
+            );
         };
         $this->composer_dump and app('composer')->dumpAutoloads(); //自动加载文件
     }

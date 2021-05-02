@@ -13,26 +13,27 @@
                       :sizer_more="sizer_more"
                       :id="id"
                       :show_export_fields="show_export_fields"
+                      :trans-field="transField"
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
                             <slot name="add" :url="data.configUrl['createUrl']?data.configUrl['createUrl']+'/0':''">
                                 <router-link :to="data.configUrl['createUrl']+'/0'" class="btn btn-info" v-if="data.configUrl['createUrl']">
-                                    <i class="fa fa-plus"></i> 新建
+                                    <i class="fa fa-plus"></i> {{$t("New")}}
                                 </router-link>
                             </slot>
                             <slot name="refresh">
                                 <button class="btn btn-success"
                                         type="button"
                                         @click="refresh">
-                                    <i class="fa fa-refresh"></i> 刷新
+                                    <i class="fa fa-refresh"></i> {{$t("Refresh")}}
                                 </button>
                             </slot>
                             <button class="btn btn-danger"
                                     type="button"
                                     @click="remove(check_ids)"
                                     v-show="checkbox && data.configUrl['deleteUrl']">
-                                <i class="fa fa-trash-o"></i> 删除选中
+                                <i class="fa fa-trash-o"></i> {{$t("Delete selected")}}
                             </button>
                             <button class="btn btn-primary"
                                     type="button"
@@ -42,7 +43,7 @@
                                     :data-target="'#'+id+' .sizer_more'"
                                     aria-expanded="false">
                                 <i class="fa" :class="sizer_more?'fa-angle-double-up':'fa-angle-double-down'"></i>
-                                更多筛选
+                                {{$t("More screening")}}
                             </button>
                             <button class="btn btn-warning"
                                     type="button"
@@ -52,11 +53,11 @@
                                     :data-target="'#'+id+' .export_excel'"
                                     aria-expanded="false">
                                 <i class="fa" :class="show_export_fields?'fa-angle-double-up':'fa-angle-double-down'"></i>
-                                导出字段
+                                {{$t("Export fields")}}
                             </button>
-                            <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                            <button type="button" :title="$t('Import data')" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                 <i class="fa fa-folder-open-o"></i>
-                                批量导入
+                                {{$t("Bulk import")}}
                                 <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
                             </button>
                             <slot name="add_btn"></slot>
@@ -73,20 +74,20 @@
                                                 <li v-for="(value,index) in data.keywordsMap" @click="changeKeywords(index)"><a>{{value}}</a></li>
                                             </ul>
                                         </div>
-                                        <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" placeholder="请输入关键字" class="form-control"  type="text">
-                                    <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="options.keywordPlaceholder || '请输入关键字'" type="text" class="form-control">
+                                        <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="_placeholder" class="form-control"  type="text">
+                                    <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="_placeholder" type="text" class="form-control">
                                     <div class="input-group-btn">
-                                        <button type="button" title="搜索" class="btn btn-primary" @click="search">
+                                        <button type="button" :title="$t('Search')" class="btn btn-primary" @click="search">
                                             <i class="fa fa-search"></i>
                                         </button>
-                                        <button type="button" title="重置" class="btn btn-primary " @click="reset">
+                                        <button type="button" :title="$t('Reset')" class="btn btn-primary " @click="reset">
                                             <i class="fa fa-repeat"></i>
                                         </button>
                                       <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                             <i class="glyphicon glyphicon-folder-open"></i>
                                             <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
                                         </button>-->
-                                       <button type="button" title="导出数据" class="btn btn-primary" @click="download" v-if="data.configUrl['exportUrl']">
+                                       <button type="button" :title="$t('Export data')" class="btn btn-primary" @click="download" v-if="data.configUrl['exportUrl']">
                                             <i class="glyphicon glyphicon-download-alt"></i>
                                         </button>
                                         <slot name="input_group_add_btn" :data="data"></slot>
@@ -99,19 +100,19 @@
                 <div class="collapse export_excel row">
                     <slot name="export-excel">
                         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" v-for="(field,key) in data.excel.exportFields">
-                            <icheck v-model="export_fileds" :option="key">{{field}}</icheck>
+                            <icheck v-model="export_fileds" :option="key">{{transField(field,key)}}</icheck>
                         </div>
                     </slot>
                 </div>
                 <div class="collapse sizer_more in">
-                    <slot name="sizer-more" :data="data" :where="data.options.where" :maps="data.maps">
+                    <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps"  :trans-field="transField">
                     </slot>
                     <div class="row" v-show="btnSizerMore">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <button type="button" class="btn btn-primary pull-right sizer-tool-btn" @click="search">搜索</button>
+                            <button type="button" class="btn btn-primary pull-right sizer-tool-btn" @click="search">{{$t('Search')}}</button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
-                            <button type="button" class="btn btn-default sizer-tool-btn" @click="reset">重置</button>
+                            <button type="button" class="btn btn-default sizer-tool-btn" @click="reset">{{$t('Reset')}}</button>
                         </div>
                     </div>
                 </div>
@@ -121,20 +122,20 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <span class="count m-top">
-                                共 {{data | array_get('list.total',0)}} 条，
+                                {{$tc('Article {number}',_total,{number:_total})}}
                                 <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page+''">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
-                                条/页
+                                {{$tc('{number} items per page',input_per_page,{number:input_per_page})}}
                             </span>
-                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
+                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;{{$t('Skip to')}}&nbsp;&nbsp;
                                 <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
-                                &nbsp;&nbsp;页
+                                &nbsp;&nbsp;{{$t('page(jump)')}}
                             </span>
                             <ul class="pagination pagination-sm no-margin pull-right m-top">
                                 <li :class="{ disabled: data.list['current_page']<=1 }">
                                     <a aria-label="Previous" @click="toPage(data.list['current_page']-1)">
-                                        <span aria-hidden="true">上一页</span>
+                                        <span aria-hidden="true">{{$t('Previous')}}</span>
                                     </a>
                                 </li>
                                 <li v-show="data.list['current_page']>(pageLength+1)">
@@ -154,7 +155,7 @@
                                 </li>
                                 <li :class="{ disabled: data.list['current_page']==data.list['last_page'] }">
                                     <a aria-label="Next" @click="toPage(data.list['current_page']+1)">
-                                        <span aria-hidden="true">下一页</span>
+                                        <span aria-hidden="true">{{$t('Next')}}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -166,16 +167,16 @@
                 <slot name="table" :data="data" :check_ids="check_ids" :remove="remove">
                     <table class="table table-hover table-bordered table-striped text-center dataTable">
                         <thead>
-                            <slot name="thead" :select-all="select_all" :operation="operation" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :show-fields="show_fields">
+                            <slot name="thead" :select-all="select_all" :operation="operation" :trans-field="transField" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :order-by="orderBy" :show-fields="show_fields">
                                 <tr>
                                     <th class="id" v-if="checkbox">
                                        <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
                                         <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
                                     </th>
                                     <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
-                                        {{field['name']}}
+                                        {{transField(field.name,index)}}
                                     </th>
-                                    <th class="operate" v-if="operation">操作</th>
+                                    <th class="operate" v-if="operation">{{$t('Operation')}}</th>
                                 </tr>
                             </slot>
                         </thead>
@@ -188,15 +189,15 @@
                                     </slot>
                                 </td>
                                 <td v-for="(field,k) in show_fields" :class="field['class']">
-                                    <slot name="col" :field="field" :data="data" :row="row" :k="k">
+                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass">
                                         <span v-if="field.type =='label' || field.type =='radio'">
                                             <span class="label" :class="labelClass(row,k)">
-                                                {{ data.maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
+                                                {{ _maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
                                             </span>
                                         </span>
                                         <span v-else-if="field.type =='labels' || field.type =='checkbox'">
                                             <span v-for="value in getItems(row,k)" class="label labels-m" :class="checkboxClass(value,2,statusClass,k)">
-                                                {{ data.maps| array_get(k.replace('.$index','')) | array_get(value) }}
+                                                {{ _maps | array_get(k.replace('.$index','')) | array_get(value) }}
                                             </span>
                                         </span>
                                         <span v-else-if="field.type =='icon'">
@@ -237,10 +238,10 @@
                                 </td>
                                 <td class="operate" v-if="operation">
                                     <slot name="col-operation" :data="data" :row="row" :remove="remove">
-                                        <button v-show="data.configUrl['deleteUrl']" title="删除选中" type="button" class="btn btn-danger btn-xs" @click="remove([row[options.primaryKey]])">
+                                        <button v-show="data.configUrl['deleteUrl']" :title="$t('Delete selected')" type="button" class="btn btn-danger btn-xs" @click="remove([row[options.primaryKey]])">
                                             <i class="fa fa-trash-o"></i>
                                         </button>
-                                        <router-link class="btn btn-info btn-xs" title="编辑"  :to="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])" v-if="data.configUrl['showUrl']">
+                                        <router-link class="btn btn-info btn-xs" :title="$t('Edit')"  :to="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])" v-if="data.configUrl['showUrl']">
                                             <i class="fa fa-edit"></i>
                                         </router-link>
                                     </slot>
@@ -248,7 +249,7 @@
                             </tr>
                             <tr v-show="is_empty">
                                 <td :colspan="col_num" class="empty">
-                                    暂无数据
+                                    {{$t('Temporarily no data')}}
                                 </td>
                             </tr>
                         </tbody>
@@ -258,7 +259,7 @@
                                     <div class="fa">
                                         <i class="fa fa-refresh fa-spin"></i>
                                         <div class="explain">
-                                            加载中...
+                                            {{$t('Loading')}}...
                                         </div>
                                     </div>
                                 </td>
@@ -271,20 +272,21 @@
                 <slot name="pager" :data="data">
                     <div class="row">
                         <div class="col-lg-12">
-                            <span class="count m-top">共 {{data | array_get('list.total',0)}} 条，
+                            <span class="count m-top">
+                                {{$tc('Article {number}',_total,{number:_total})}}
                                 <el-select v-model="input_per_page" size="mini" class="per_page" @change="perPage" :placeholder="input_per_page+''">
                                     <el-option v-for="per_page in perPageOptions" :key="per_page" :label="per_page+''" :value="per_page"></el-option>
                                 </el-select>
-                                条/页
+                                {{$tc('{number} items per page',input_per_page,{number:input_per_page})}}
                             </span>
-                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;跳至&nbsp;&nbsp;
-                                 <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
-                                &nbsp;&nbsp;页
+                            <span class="pager-input pull-right m-top">&nbsp;&nbsp;&nbsp;&nbsp;{{$t('Skip to')}}&nbsp;&nbsp;
+                                <el-input-number v-model.number="input_page" size="mini" controls-position="right" @change="changePage" :min="1" :max="data.list['last_page'] || 1" class="topage1" ></el-input-number>
+                                &nbsp;&nbsp;{{$t('page(jump)')}}
                             </span>
                             <ul class="pagination pagination-sm no-margin pull-right m-top">
                                 <li :class="{ disabled: data.list['current_page']<=1 }">
                                     <a aria-label="Previous" @click="toPage(data.list['current_page']-1)">
-                                        <span aria-hidden="true">上一页</span>
+                                        <span aria-hidden="true">{{$t('Previous')}}</span>
                                     </a>
                                 </li>
                                 <li v-show="data.list['current_page']>(pageLength+1)">
@@ -296,7 +298,7 @@
                                 <li class="active">
                                     <a>{{data.list['current_page'] || 1}}</a>
                                 </li>
-                               <li v-for="v in pageLength" v-show="data.list['current_page']+v<=data.list['last_page']">
+                                <li v-for="v in pageLength" v-show="data.list['current_page']+v<=data.list['last_page']">
                                     <a @click="toPage(data.list['current_page']+v)">{{data.list['current_page']+v}}</a>
                                 </li>
                                 <li v-show="data.list['current_page']+pageLength<data.list['last_page']">
@@ -304,7 +306,7 @@
                                 </li>
                                 <li :class="{ disabled: data.list['current_page']==data.list['last_page'] }">
                                     <a aria-label="Next" @click="toPage(data.list['current_page']+1)">
-                                        <span aria-hidden="true">下一页</span>
+                                        <span aria-hidden="true">{{$t('Next')}}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -366,7 +368,8 @@
                         sheet:'',
                         fileName:'',
                         exportFields:{}
-                    }
+                    },
+                    mapsRelations:{}
                 }, //数据源
                 back_options:undefined, //筛选条件+排序备份
                 affirm_options:undefined, //执行搜索后确认选项
@@ -394,6 +397,56 @@
             ...mapMutations({
                 set:'set'
             }),
+            transField(name,key,table){
+                if(!this.options.lang_table && !this.data.excel.sheet){
+                    return name;
+                }
+                if(!table){
+                    if(!key || key.indexOf('.')==-1){
+                        table = this.options.lang_table || this.data.excel.sheet;
+                    }else {
+                        let arr = key.split('.');
+                        arr.pop();
+                        let key1 = arr.join('.');
+                        let table1 = arr.pop();
+                        let d=table1.length-1;
+                        if(!(d>=0 && table1.lastIndexOf('s')==d)){
+                            table1 = table1+'s'
+                        };
+                        table = array_get(this.data,'mapsRelations.'+key1,'') || table1;
+                    }
+                }
+                return this.$tp(name,{
+                    "{lang_path}": '_shared.tables.'+table+'.fields',
+                    '{lang_root}': ''
+                });
+            },
+            transMap(name,field,table){
+                if(!this.options.lang_table && !this.data.excel.sheet){
+                    return name;
+                }
+                if(!table){
+                    table = this.options.lang_table || this.data.excel.sheet;
+                }
+                return this.$tp(name,{
+                    "{lang_path}": '_shared.tables.'+table+'.maps.'+field,
+                    '{lang_root}': ''
+                });
+            },
+            mapEach(maps,field,table,prefix){
+                maps = collect(maps).map((value,key)=>{
+                    if(value && typeof value=="string"){
+                        return this.transMap(value,field,table);
+                    }else if(value && typeof value=="object"){
+                        let key1 = prefix ? prefix+'.'+key:key;
+                        let table1 = array_get(this.data,'mapsRelations.'+key1,'');
+                        return this.mapEach(value,key,table1 || table,key1);
+                    }else {
+                        return value;
+                    }
+                }).all();
+                return maps;
+            },
             getItems(item,key){
                 if(key.indexOf('$index')!=-1){
                     let keys = key.split('.$index.');
@@ -496,8 +549,8 @@
                 this.set({
                     key:'modal',
                     modal:{
-                        title:'提示',
-                        content: '您确定要删除吗?',
+                        title:this.$t('Prompt'),
+                        content: this.$t('Are you sure you want to delete it?'),
                         callback:()=>{
                             axios.delete(this.use_url+this.data.configUrl['deleteUrl'], {data:{ids: ids}}).then((response)=>{
                                 this.refresh();
@@ -507,7 +560,7 @@
                             }).catch((error)=>{
                                 this.pushMessage({
                                     'showClose':true,
-                                    'title':'删除失败!',
+                                    'title':this.$t('{action} failed!',{action:this.$t('Delete')}),
                                     'message':'',
                                     'type':'danger',
                                     'position':'top',
@@ -585,8 +638,8 @@
                     this.set({
                         key:'modal',
                         modal:{
-                            title:'提示',
-                            content: '请勾选要导出的字段,才能正确导出!'
+                            title:this.$t('Prompt'),//'提示',
+                            content: this.$t('Please check the field you want to export to export correctly.')//'请勾选要导出的字段,才能正确导出!'
                         }
                     });
                     return false;
@@ -613,8 +666,8 @@
                     this.set({
                         key:'modal',
                         modal:{
-                            title:'提示',
-                            content: '仅支持导入xlsx格式文件'
+                            title:this.$t('Prompt'), //提示
+                            content: this.$t('Import of XLSX format files is only supported')//'仅支持导入xlsx格式文件'
                         }
                     });
                     return;
@@ -622,8 +675,8 @@
                 this.set({
                     key:'modal',
                     modal:{
-                        title:'提示',
-                        content: '您确定要批量导入所有数据吗?',
+                        title:this.$t('Prompt'), //提示
+                        content: this.$t('Are you sure you want to import all the data in bulk?'), //'您确定要批量导入所有数据吗?',
                         callback:()=>{
                             $(this.$el).find('.import input:file').val('');
                             this.importData({
@@ -696,6 +749,15 @@
                 'use_url',
                 'statusClass'
             ]),
+            _total(){
+                return array_get(this.data,'list.total',0);
+            },
+            _placeholder(){
+                if(typeof this.options.keywordPlaceholder=="function"){
+                    return this.options.keywordPlaceholder();
+                }
+                return this.options.keywordPlaceholder || $t('Please enter keywords');
+            },
             //组件唯一标识
             id(){
                 return this.options.id || 'data-table';
@@ -751,7 +813,14 @@
                     return this.options.per_page_options;
                 }
                 return this.per_page_options;
-            }
+            },
+            //翻译后的显示数据项
+            _maps(){
+                let maps = copyObj(this.data.maps);
+                return this.mapEach(maps);
+            },
+
+
         },
         created() {
             //动态加载js文件

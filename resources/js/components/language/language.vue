@@ -6,10 +6,10 @@
                     <div class="flag" :class="country"></div>
                 </div>
                 <i class="fa fa-globe" v-else></i>
-                <span class="country-name">{{country_name || '语言选择'}}</span>
+                <span class="country-name">{{country_name || $t('Language')}}</span>
             </div>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item :command="item.value" v-for="(item,index) in languages" v-bind:key="index">
+                <el-dropdown-item :command="item.value" v-for="(item,index) in _languages" v-bind:key="index">
                     <div class="country">
                         <div class="flag" :class="item.country"></div>
                     </div>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     export default {
         name: "language",
         components:{
@@ -41,22 +42,65 @@
                 languages:[
                     {
                         value:"zh-CN",
-                        name:"中文",
-                        en_name:"Chinese",
+                        name:"中国",
+                        en_name:"China",
                         country:"cn",
                     },
                     {
                         value:"zh-TW",
-                        name: "繁體中文",
-                        en_name:"Traditional Chinese",
+                        name: "中國(台灣)",
+                        en_name:"China (Taiwan)",
                         country: "tw",
+                    },
+                    {
+                        value:"zh-HK",
+                        name: "中國(香港)",
+                        en_name:"China (Hong Kong)",
+                        country: "hk",
                     },
                     {
                         value:"en",
                         name:"English",
-                        en_name:"",
+                        en_name:"Britain",
                         country:"gb",
+                    },
+                    {
+                        value:"ja",
+                        name: "日本",
+                        country: "jp",
+                        en_name:"Japan"
+                    },
+                    {
+                        value:"ko",
+                        name: "대한민국",
+                        country: "kr",
+                        en_name:"South Korea"
+                    },
+                    {
+                        value:"fr",
+                        name: "La France",
+                        en_name: "France",
+                        country: "fr"
+                    },
+                    {
+                        value:"ru",
+                        name: "Россия",
+                        en_name: "Russia",
+                        country: "ru"
+                    },
+                    {
+                        value:"es",
+                        name: "España",
+                        en_name: "Spain",
+                        country: "es"
+                    },
+                    {
+                        value:"pt",
+                        name: "Portugal",
+                        en_name: "Portugal",
+                        country: "pt"
                     }
+
                 ],
              /*   countries_reference:[
                     {
@@ -822,6 +866,14 @@
             },
             language(){
                 return collect(this.languages).keyBy('value').get(this.val) || {};
+            },
+            ...mapState([
+               'locales'
+            ]),
+            _languages(){
+                return collect(this.languages).filter((item)=>{
+                    return collect(this.locales).contains(item.value);
+                }).all();
             }
 
 
@@ -1195,11 +1247,11 @@
         height:10px;
         background-position:-1533px 0px
     }
-    .flag.es{
+    */.flag.es{
         height:14px;
         background-position:-1555px 0px
     }
-    .flag.et{
+   /* .flag.et{
         height:10px;
         background-position:-1577px 0px
     }
@@ -1227,14 +1279,14 @@
         height:15px;
         background-position:-1709px 0px
     }
-    .flag.fr{
+    */.flag.fr{
         height:14px;
         background-position:-1731px 0px
     }
     .flag.ga{
         height:15px;
         background-position:-1753px 0px
-    }*/
+    }
     .flag.gb{
         height:10px;
         background-position:-1775px 0px
@@ -1306,11 +1358,11 @@
     .flag.gy{
         height:12px;
         background-position:-2149px 0px
-    }
+    }*/
     .flag.hk{
         height:14px;
         background-position:-2171px 0px
-    }
+    }/*
     .flag.hm{
         height:10px;
         background-position:-2193px 0px
@@ -1386,12 +1438,12 @@
     .flag.jo{
         height:10px;
         background-position:-2589px 0px
-    }
+    }*/
     .flag.jp{
         height:14px;
         background-position:-2611px 0px
     }
-    .flag.ke{
+    /*.flag.ke{
         height:14px;
         background-position:-2633px 0px
     }
@@ -1419,11 +1471,11 @@
         height:10px;
         background-position:-2765px 0px
     }
-    .flag.kr{
+    */.flag.kr{
         height:14px;
         background-position:-2787px 0px
     }
-    .flag.kw{
+    /*.flag.kw{
         height:10px;
         background-position:-2809px 0px
     }
@@ -1668,11 +1720,11 @@
         height:10px;
         background-position:-4119px 0px
     }
-    .flag.pt{
+    */.flag.pt{
         height:14px;
         background-position:-4141px 0px
     }
-    .flag.pw{
+    /*.flag.pw{
         height:13px;
         background-position:-4163px 0px
     }
@@ -1696,11 +1748,11 @@
         height:14px;
         background-position:-4273px 0px
     }
-    .flag.ru{
+    */.flag.ru{
         height:14px;
         background-position:-4295px 0px
     }
-    .flag.rw{
+    /*.flag.rw{
         height:14px;
         background-position:-4317px 0px
     }

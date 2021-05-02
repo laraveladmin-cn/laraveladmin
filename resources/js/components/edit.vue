@@ -2,16 +2,16 @@
     <div :id="id" :class="{'active-move':is_local}">
         <validation-observer :ref="id" v-slot="{invalid,validate}">
             <div class="row">
-                <slot name="content" :data="data" :url="url" :error="error">
+                <slot name="content" :data="data" :url="url" :maps="_maps" :error="error" :trans-field="transField">
                 </slot>
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="button" class="btn btn-primary pull-right" :disabled="!url"  @click="submitForm(invalid,validate)">提交</button>
+                    <button type="button" class="btn btn-primary pull-right" :disabled="!url"  @click="submitForm(invalid,validate)">{{$t('Submit')}}</button>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="button" class="btn btn-default pull-left" @click="resetForm">重置</button>
-                    <button type="button" class="btn btn-success pull-right" v-if="is_local" @click="saveLayout">保存布局</button>
+                    <button type="button" class="btn btn-default pull-left" @click="resetForm">{{$t('Reset')}}</button>
+                    <button type="button" class="btn btn-success pull-right" v-if="is_local" @click="saveLayout">{{$t('Save the layout')}}</button>
                 </div>
             </div>
         </validation-observer>
@@ -65,19 +65,26 @@
             },
             is_local(){
                 return this.env=='local' && (typeof this.options.fixed=="undefined" || !this.options.fixed);
-            }
+            },
+            //翻译后的显示数据项
+            _maps(){
+                let maps = copyObj(this.data.maps);
+                return this.mapEach(maps);
+            },
         },
         data(){
             return {
                 data: {
                     row:{},
                     maps:{},
-                    configUrl:{}
+                    configUrl:{},
+                    mapsRelations:{}
                 },
                 back_data: {
                     row:{},
                     maps:{},
-                    configUrl:{}
+                    configUrl:{},
+                    mapsRelations:{}
                 },
                 error: {},
                 submiting:false,
@@ -85,6 +92,7 @@
                 query_str:''
             };
         },
+
         methods: {
             ...mapActions({
                 refreshToken: 'refreshToken',
@@ -93,6 +101,56 @@
             ...mapMutations({
                 menuSet:'menu/set',  //设置当前路由,用于菜单选中
             }),
+            mapEach(maps,field,table,prefix){
+                maps = collect(maps).map((value,key)=>{
+                    if(value && typeof value=="string"){
+                        return this.transMap(value,field,table);
+                    }else if(value && typeof value=="object"){
+                        let key1 = prefix ? prefix+'.'+key:key;
+                        let table1 = array_get(this.data,'mapsRelations.'+key1,'');
+                        return this.mapEach(value,key,table1 || table,key1);
+                    }else {
+                        return value;
+                    }
+                }).all();
+                return maps;
+            },
+            transMap(name,field,table){
+                if(!this.options.lang_table && !array_get(this.data,'excel.sheet')){
+                    return name;
+                }
+                if(!table){
+                    table = this.options.lang_table || this.data.excel.sheet;
+                }
+                return this.$tp(name,{
+                    "{lang_path}": '_shared.tables.'+table+'.maps.'+field,
+                    '{lang_root}': ''
+                });
+            },
+            transField(name,key,table){
+                if(!this.options.lang_table && !this.data.excel.sheet){
+                    return name;
+                }
+                if(!table){
+                    if(!key || key.indexOf('.')==-1){
+                        table = this.options.lang_table || this.data.excel.sheet;
+                    }else {
+                        let arr = key.split('.');
+                        arr.pop();
+                        let key1 = arr.join('.');
+                        let table1 = arr.pop();
+                        let d=table1.length-1;
+                        if(!(d>=0 && table1.lastIndexOf('s')==d)){
+                            table1 = table1+'s'
+                        };
+                        table = array_get(this.data,'mapsRelations.'+key1,'') || table1;
+                    }
+                }
+                return this.$tp(name,{
+                    "{lang_path}": '_shared.tables.'+table+'.fields',
+                    '{lang_root}': ''
+                });
+            },
             //提交表单
             submitForm(invalid,validate) {
                 //防止重复提交
@@ -122,7 +180,7 @@
                         if(error.response && error.response.status==422){
                             this.pushMessage({
                                 'showClose':true,
-                                'title':'提交失败!',
+                                'title':this.$t('{action} failed!',{action:this.$t('Submission')}),
                                 'message':'',
                                 'type':'danger',
                                 'position':'top',

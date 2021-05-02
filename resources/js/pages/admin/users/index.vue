@@ -8,7 +8,7 @@
                                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                     <select2 v-model="props.where['status']"
                                              :default-options="props.maps['status']"
-                                             :placeholder-show="'状态'"
+                                             :placeholder-show="props.transField('Status')"
                                              :placeholder-value="''"
                                              :is-ajax="false" >
                                     </select2>
@@ -17,7 +17,7 @@
                         </template>
                     <template slot="col-operation" slot-scope="props">
                         <button v-show="props.data.configUrl['deleteUrl']"
-                                title="删除选中"
+                                :title="$t('Delete selected')"
                                 type="button"
                                 class="btn btn-danger btn-xs"
                                 :disabled="props.row[options.primaryKey]==1"
@@ -25,7 +25,7 @@
                             <i class="fa fa-trash-o"></i>
                         </button>
                         <router-link class="btn btn-info btn-xs"
-                                     title="编辑"
+                                     :title="$t('Edit')"
                                      :to="props.data.configUrl['showUrl'].replace('{id}',props.row[options.primaryKey])"
                                      v-if="props.data.configUrl['showUrl']">
                             <i class="fa fa-edit"></i>
@@ -58,6 +58,7 @@
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                "{lang_path}":'admin.users',
                 options:{
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
@@ -66,15 +67,19 @@
                     btnSizerMore:true, //更多筛选条件按钮
                     keywordKey:'name|uname|mobile_phone|email', //关键字查询key
                     keywordGroup:false, //是否为选项组
-                    keywordPlaceholder:'请输入用户昵称',
+                    keywordPlaceholder:()=>{
+                        return this.$t('enter',{name:this.$tp('username')});
+                    },
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
+                    lang_table:'users',
+                    mapsRelations:{"user":'users',"roles":"roles"},
                     fields: {
-                        "uname": {"name": "用户名","order": true},
-                        "name": {"name": "昵称", "order": true},
-                        "mobile_phone": {"name": "手机号码", "order": true},
-                        "email": {"name": "电子邮箱", "order": true},
-                        "status": {"name": "状态", "order": true,type:'label'},
+                        "uname": {"name": "User name","order": true},
+                        "name": {"name": "Name", "order": true},
+                        "mobile_phone": {"name": "Phone number", "order": true},
+                        "email": {"name": "E-mail", "order": true},
+                        "status": {"name": "Status", "order": true,type:'label'},
                     },
                 }
             };

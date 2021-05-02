@@ -19,3 +19,5 @@ docker-compose.yml
 /docker/mysql/init.sql
 __MACOSX
 .idea
+composer.lock
+*.DS_Store

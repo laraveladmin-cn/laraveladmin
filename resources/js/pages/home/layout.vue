@@ -186,6 +186,11 @@
             });
             this.getUser();
             this.getMenus();
+        },
+        data(){
+            return {
+                "{lang_path}":'home.layout',
+            };
         }
     };
 </script>

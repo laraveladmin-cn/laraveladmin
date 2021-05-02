@@ -1,4 +1,5 @@
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions,mapMutations} from 'vuex';
+import config from '../config.js';
 export default {
     computed:{
         ...mapState([
@@ -14,6 +15,9 @@ export default {
             pushMessage: 'pushMessage',
             refreshClientId: 'refreshClientId',
         }),
+        ...mapMutations({
+            setLanguage:'setLanguage',
+        }),
         upCookie(){
             let authorization = getCookie('Authorization');
             if(authorization){
@@ -22,6 +26,8 @@ export default {
         }
     },
     created(){
+        //默认语言包
+        this.setLanguage(config.language);
         //添加弹窗拦截器
         window.axios.interceptors.response.use((response)=>{
             //跳转
@@ -68,7 +74,7 @@ export default {
             }*/else if(!error.response || (error.response && error.response.status!=422 && error.response.status!=200)){
                 let message = {
                     'showClose' : true, //显示关闭按钮
-                    'title' : '请求服务器时发生错误,请及时联系开发人员!', //消息内容
+                    'title' : this.$t('An error occurred while requesting the server, please contact the developer in time'),//'请求服务器时发生错误,请及时联系开发人员!', //消息内容
                     'message' : '', //消息内容
                     'type' : 'danger', //消息类型
                     'position' : 'top',
@@ -79,7 +85,7 @@ export default {
                 };
                 if(error.response.status==419 && error.response.data.message.indexOf('token')!=-1){
                     this.refreshToken();
-                    message.title = 'token过期,请重试!';
+                    message.title = this.$t('Token has expired, please try again');
                 }
                 if(error.response.data.alert){
                     this.pushMessage(error.response.data.alert);
@@ -98,6 +104,10 @@ export default {
             let token = getCookie('Authorization');
             if(token){
                 config.headers.Authorization= decodeURIComponent(token);
+            }
+            let language = localStorage.getItem('language');
+            if(language){
+                config.headers.Language= decodeURIComponent(language);
             }
             config.paramsSerializer = function (params) {
                 params = JSON.parse(JSON.stringify(params));

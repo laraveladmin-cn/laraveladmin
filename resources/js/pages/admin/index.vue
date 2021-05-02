@@ -5,13 +5,13 @@
                 <div class="small-box" :class="item['class']">
                     <div class="inner">
                         <h3>{{item['value']}}</h3>
-                        <p>{{item['name']}}</p>
+                        <p>{{$tp(item['name'])}}</p>
                     </div>
                     <div class="icon">
                         <i class="fa" :class="item['icon']"></i>
                     </div>
                     <router-link :to="item['url']" class="small-box-footer">
-                        更多<i class="fa fa-arrow-circle-right"></i>
+                        {{$t('More')}} <i class="fa fa-arrow-circle-right"></i>
                     </router-link>
                 </div>
             </div>
@@ -28,11 +28,16 @@
         data(){
             return {
                 data:{},
-                loading:false
+                loading:false,
+                "{lang_path}":'_shared.pages.admin',
+                '{lang_root}':''
             }
         },
         created() {
             this.getData({},'','data');
+        },
+        methods:{
+
         }
     };
 </script>

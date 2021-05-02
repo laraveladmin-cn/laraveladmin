@@ -6,7 +6,7 @@
                @blur="$emit('blur')"
                @keydown.enter="$emit('keydown-enter')"
                class="form-control"
-               :placeholder="placeholder">
+               :placeholder="_placeholder">
         <div class="input-group-addon">
             <i class="fa fa-lock" v-show="disabled_status" @click="toggle"></i>
             <i class="fa fa-unlock" v-show="!disabled_status" @click="toggle"></i>
@@ -19,9 +19,9 @@
         name: "lockEdit",
         props:{
             placeholder:{
-                type:[String],
+                type:[String,Function],
                 default: function () {
-                    return '请输入密码';
+                    return 'Please enter';
                 }
             },
             value:{
@@ -61,6 +61,12 @@
         computed:{
             disabled_status(){
                 return this.disabled || this.disabled_val;
+            },
+            _placeholder(){
+                if(typeof this.placeholder=="function"){
+                    return this.placeholder();
+                }
+                return this.$t(this.placeholder);
             }
         }
     }

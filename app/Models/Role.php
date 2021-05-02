@@ -38,8 +38,8 @@ class Role extends Model
      */
     public $fieldsShowMaps = [
         'is_tmp' => [
-            "0" => '否',
-            "1" => '是'
+            "0" => 'No',
+            "1" => 'Yes'
         ]
     ];
 
@@ -51,17 +51,17 @@ class Role extends Model
         'is_tmp'=>0
     ];
     protected $fieldsName = [
-        'tmp_id' => '模板ID',
-        'name' => '名称',
-        'is_tmp' => '是否模板',
-        'description' => '描述',
-        'parent_id' => '父级ID',
+        'tmp_id' => 'Template ID',
+        'name' => 'Name',
+        'is_tmp' => 'Template',
+        'description' => 'Describe',
+        'parent_id' => 'Parent ID',
         //'level' => '层级',
         //'left_margin' => '左边界',
         //'right_margin' => '右边界',
-        //'created_at' => '创建时间',
-        //'updated_at' => '修改时间',
-        //'deleted_at' => '删除时间',
+        //'created_at' => 'Created At',
+        //'updated_at' => 'Updated At',
+        //'deleted_at' => 'Deleted At',
         'id' => 'ID',
     ];
 
@@ -117,7 +117,7 @@ class Role extends Model
     }
 
     /**
-     * 判断是否是超级管理员
+     * 判断YesNoYes超级管理员
      * @param $query
      * @return mixed
      */

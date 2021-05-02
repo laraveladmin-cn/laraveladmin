@@ -14,7 +14,7 @@
                                          :url="use_url+'/admin/menus/list'"
                                          :keyword-key="'name|url'"
                                          :show="['name','url']"
-                                         :placeholder-show="'操作名称'"
+                                         :placeholder-show="props.transField('Operation menu','menu.name')"
                                          :placeholder-value="''"
                                          :is-ajax="true" >
                                 </select2>
@@ -24,7 +24,7 @@
                                          :default-options="array_get(props,'maps.user_id',[])"
                                          :url="use_url+'/admin/admins/list'"
                                          :keyword-key="'name|uname'"
-                                         :placeholder-show="'操作者'"
+                                         :placeholder-show="props.transField('Operator','user.name')"
                                          :placeholder-value="''"
                                          :primary-key="'user_id'"
                                          :show="['user.name']"
@@ -32,6 +32,22 @@
                                 </select2>
                             </div>
                         </div>
+                    </template>
+                    <template slot="col" slot-scope="props">
+                       <span v-if="props.field.type =='code'">
+                            <code v-if="props.field.limit">
+                                {{props.row | array_get(props.k) | str_limit(props.field.limit)}}
+                            </code>
+                            <code v-else>
+                                  {{props.row | array_get(props.k)}}
+                            </code>
+                        </span>
+                        <span v-else-if="props.k =='menu.name'">
+                            {{translation(props.row ,props.k)}}
+                        </span>
+                        <span v-else>
+                            {{props.row | array_get(props.k)}}
+                        </span>
                     </template>
                 </data-table>
             </div>
@@ -52,7 +68,13 @@
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                "{lang_path}":'admin.logs',
+                shared:{
+                    "{lang_path}":'_shared.menus',
+                    '{lang_root}':''
+                },
                 options:{
+                    lang_table:'logs',
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     operation:true, //操作列
@@ -60,18 +82,20 @@
                     btnSizerMore:true, //更多筛选条件按钮
                     keywordKey:'parameters', //关键字查询key
                     keywordGroup:false, //是否为选项组
-                    keywordPlaceholder:'请输入关键字(请求参数)',
+                    keywordPlaceholder:()=>{
+                        return this.$t('Please enter keywords')+this.$tp('(Request parameters)');
+                    },//'请输入名称',
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "menu.name": {"name": "操作菜单", "order": true},
-                        "user.name": {"name": "操作者", "order": true},
-                        "location": {"name": "位置", "order": true},
-                        "ip": {"name": "IP地址", "order": true},
-                        "parameters": {"name": "请求参数", "order": true,type:"code",limit:30},
-                        "created_at": {"name": "创建时间", "order": true},
-                        //"updated_at": {"name": "修改时间", "order": true},
+                        "menu.name": {"name": "Operation menu", "order": true},
+                        "user.name": {"name": "Operator", "order": true},
+                        "location": {"name": "Position", "order": true},
+                        "ip": {"name": "IP address", "order": true},
+                        "parameters": {"name": "Request parameters", "order": true,type:"code",limit:30},
+                        "created_at": {"name": "Created At", "order": true},
+                        //"updated_at": {"name": "Updated At", "order": true},
                     },
                 },
                 pickerOptions: {
@@ -87,7 +111,25 @@
             ])
         },
         methods:{
-
+            translation(item,key){
+                let value = array_get(item,key,'');
+                let resource_id = array_get(item,'menu.resource_id',0);
+                let res = this.$tp(value , this.shared);
+                if(resource_id && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                    let parent_name = array_get(item,'menu.parent.item_name','') || array_get(item,'menu.parent.name','') || '';
+                    let key = value.replace(parent_name,'{name}');
+                    let shared = copyObj(this.shared);
+                    if(key.indexOf('{name}')==0){
+                        shared.name=this.$tp(parent_name,shared);
+                    }else {
+                        key = value.replace(parent_name.toLowerCase(),'{name}');
+                        shared.l_name=this.$tp(parent_name,shared);
+                        key = key.replace('{name}','{l_name}');
+                    }
+                    res = this.$tp(key , shared);
+                }
+                return res;
+            }
         }
 
     };

@@ -4,9 +4,15 @@
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
                     <template slot="col" slot-scope="props">
-                        <span v-if="props.field.type =='label'">
+                        <span v-if="props.k =='name'">
+                            {{$tp(array_get(props.row ,props.k),shared_name)}}
+                        </span>
+                        <span v-else-if="props.k =='description'">
+                            {{$tp(array_get(props.row ,props.k),shared_description) | str_limit(80,'...')}}
+                        </span>
+                        <span v-else-if="props.field.type =='label'">
                             <span class="label" :class="'label-'+statusClass[props.row[props.k]%statusClass.length]">
-                                {{ props.data.maps[props.k] | array_get(props.row[props.k]) }}
+                                {{ props.maps[props.k] | array_get(props.row[props.k]) }}
                             </span>
                         </span>
                         <div v-else-if="props.k =='name'" style="text-align: left">
@@ -23,7 +29,7 @@
                     </template>
                     <template slot="col-operation" slot-scope="props">
                         <button v-show="props.data.configUrl['deleteUrl']"
-                                title="删除选中"
+                                :title="$t('Delete selected')"
                                 type="button"
                                 class="btn btn-danger btn-xs"
                                 :disabled="props.row[options.primaryKey]==1"
@@ -31,7 +37,7 @@
                             <i class="fa fa-trash-o"></i>
                         </button>
                         <router-link class="btn btn-info btn-xs"
-                                     title="编辑"
+                                     :title="$t('Edit')"
                                      :to="props.data.configUrl['showUrl'].replace('{id}',props.row[options.primaryKey])"
                                      v-if="props.data.configUrl['showUrl']">
                             <i class="fa fa-edit"></i>
@@ -62,7 +68,16 @@
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                shared_name:{
+                    "{lang_path}":'_shared.datas.roles.name',
+                    '{lang_root}':''
+                },
+                shared_description:{
+                    "{lang_path}":'_shared.datas.roles.description',
+                    '{lang_root}':''
+                },
                 options:{
+                    lang_table:'roles',
                     id:'data-table', //多个data-table同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     operation:true, //操作列
@@ -70,23 +85,27 @@
                     btnSizerMore:false, //更多筛选条件按钮
                     keywordKey:'name', //关键字查询key
                     keywordGroup:false, //是否为选项组
-                    keywordPlaceholder:'请输入名称',
+                    keywordPlaceholder:()=>{
+                        return this.$t('enter',{name:this.$t('name')});
+                    },//'请输入Name',
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "name": {"name": "名称", "order": true,levelName:'level',class:'text-left'},
-                        "description": {"name": "描述", "order": true},
-                        "parent.name": {"name": "父级名称", "order": false},
-                        "admins_count": {"name": "管理员数量", "order": true},
-                        //"created_at": {"name": "创建时间", "order": true},
-                        "updated_at": {"name": "修改时间", "order": true},
+                        "name": {"name": "Name", "order": true,levelName:'level',class:'text-left'},
+                        "description": {"name": "Describe", "order": true},
+                        "parent.name": {"name": "Parent name", "order": false},
+                        "admins_count": {"name": "Administrator number", "order": true},
+                        //"created_at": {"name": "Created At", "order": true},
+                        "updated_at": {"name": "Updated At", "order": true},
                     },
                 }
             };
         },
         computed:{
-
+            ...mapState([
+                'statusClass'
+            ]),
         }
     };
 </script>

@@ -4,7 +4,23 @@ import user from './store/user.js';
 import notification from './store/menu.js';
 import excel from './store/excel.js';
 import config from './config.js';
+import i18n from './i18n'; //语言插件
+import { localeChanged } from 'vee-validate';
 
+const loadedLanguages = ['en']; // 我们的预装默认语言
+function setI18nLanguage(state,payload){
+    document.body.classList.remove(i18n.locale);
+    state['language'] = payload;
+    localStorage.setItem('language',payload);
+    setCookie('Language',payload,365*10);
+    i18n.locale = payload;
+    localeChanged();
+    document.querySelector('html').setAttribute('lang', payload);
+    //修改验证码语言
+    config.verify.data.lang = payload;
+    document.body.classList.add(payload);
+    return payload;
+}
 export default {
     modules:{
         menu:menu,
@@ -38,8 +54,28 @@ export default {
         //更新state状态
         set (state,payload) {
             state[payload.key] = payload[payload.key];
-        }
+        },
+        setLanguage(state,lang) {
+            // 如果语言相同
+            if (i18n.locale === lang) {
+                return Promise.resolve(setI18nLanguage(state,lang))
+            }
 
+            // 如果语言已经加载
+            if (loadedLanguages.includes(lang)) {
+                return Promise.resolve(setI18nLanguage(state,lang))
+            }
+            let lang_dir = lang.replace(/-/g,'_');
+
+            // 如果尚未加载语言
+            return import(/* webpackChunkName: "lang-[request]" */ `../lang/${lang_dir}/front.json`).then(
+                messages => {
+                    i18n.setLocaleMessage(lang, messages.default)
+                    loadedLanguages.push(lang)
+                    return setI18nLanguage(state,lang)
+                }
+            )
+        }
     },
     actions:{
         //刷新token
@@ -89,7 +125,7 @@ export default {
                 }).catch( (error)=> {
                 });
             }
-        }
+        },
 
     }
 };

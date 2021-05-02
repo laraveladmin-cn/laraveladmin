@@ -53,7 +53,7 @@ export default Plugin = {
             }).catch((error) => {
                 this.loading = false;
             });
-        }
+        };
         Vue.prototype.toUrl = function(url,event){
             if(!url){
                 return
@@ -77,7 +77,42 @@ export default Plugin = {
                     dd(error.message);
                 });
             }
-        }
+        };
+        //指定路径翻译
+        Object.defineProperty(Vue.prototype, '$tp', {
+            get: function get () {
+                let $this = this;
+                return function (key,index,params) {
+                    let prefix = '';
+                    if(typeof index=="object" && index['{lang_path}']){
+                        prefix = index['{lang_path}']+'.';
+                    }else if(typeof params=="object" && params['{lang_path}']){
+                        prefix = params['{lang_path}']+'.';
+                    }else if($this['{lang_path}']){
+                        prefix = $this['{lang_path}']+'.';
+                    }
+                    let root = 'pages.';
+                    if(typeof index=="object" && typeof index['{lang_root}']=="string"){
+                        root = index['{lang_root}'];
+                    }else if(typeof params=="object" && typeof params['{lang_root}']=="string"){
+                        root = params['{lang_root}'];
+                    }else if(typeof $this['{lang_root}']=="string"){
+                        root = $this['{lang_root}'];
+                    }
+                    let k = root+prefix+key;
+                    let res;
+                    if(typeof params=="undefined"){
+                        res = $this.$t(k,index);
+                    }else {
+                        res = $this.$t(k,index,params);
+                    }
+                    if(res.indexOf(root+prefix)==0){
+                        return key;
+                    }
+                    return res;
+                }
+            }
+        });
 
     }
 };

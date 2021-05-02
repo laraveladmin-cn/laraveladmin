@@ -10,7 +10,7 @@
                    @blur="$emit('blur')"
                    @keydown.enter="$emit('keydown-enter')"
                    class="form-control"
-                   :placeholder="placeholder">
+                   :placeholder="$t(placeholder)">
             <div class="input-group-addon" @click="openModal">
                 <i class="fa" :class="val"></i>
             </div>
@@ -29,7 +29,7 @@
             placeholder:{
                 type:[String],
                 default: function () {
-                    return '请输入';
+                    return 'Please enter';
                 }
             },
             value:{

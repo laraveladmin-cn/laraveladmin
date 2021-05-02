@@ -53,6 +53,7 @@ class IndexController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(){
+        //dd(trans_path('The application language is not set to English to execute','commands'));
         return view('index',$this->indexData());
     }
 
@@ -84,6 +85,15 @@ class IndexController extends Controller
         $data['lifetime']= config('session.lifetime');
         $data['verify'] = config('laravel_admin.verify.type')=='captcha' ? $this->captcha() : $this->geetest(); //验证配置
         $data['client_id'] = ClientAuth::getClient();
+        $data['default_language'] = str_replace('_','-',app('translator')->getLocale());
+        $data['locales'] = collect(config('laravel_admin.locales',[]))
+            ->prepend(config('app.locale'))
+            ->filter()
+            ->unique()
+            ->map(function ($value){
+                return str_replace('_','-',$value);
+            })
+            ->toArray();
         $data['version'] = 'V1.0.0';
         $max_age = 3600*24;
         $response = Response::returns($data)
@@ -113,8 +123,8 @@ class IndexController extends Controller
             'type'=>'geetest',
             'dataUrl'=>config('geetest.url'),
             'data'=>[
-                'client_fail_alert'=>config('geetest.client_fail_alert', '验证失败!'),
-                'lang'=>config('geetest.lang', 'zh-cn'),
+                'client_fail_alert'=>config('geetest.client_fail_alert',trans('Validation fails!')),
+                'lang'=> app('translator')->getLocale(),
                 'product'=>'float',
                 'http'=>'http://'
             ]
@@ -174,10 +184,22 @@ class IndexController extends Controller
      * 获取菜单信息
      */
     public function menu(){
-        $data['menus'] = Menu::main()
-            ->select(['id','name','icons','description','url','parent_id','status','level','left_margin','right_margin','method'])
+        $data['menus'] = collect(Menu::main()
+            ->select(['id','name','icons','description','url','parent_id','resource_id','status','level','left_margin','right_margin','method'])
             ->orderBy('left_margin','asc')
-            ->get();
+            ->with(['parent'=>function($q){
+                $q->select([
+                    'id',
+                    'name',
+                    'item_name'
+                ]);
+            }])
+            ->get())
+            ->map(function ($item){
+                $item[config('laravel_admin.trans_prefix').'name'] = trans_path($item['name'],'_shared.menus');
+                $item[config('laravel_admin.trans_prefix').'description'] = trans_path($item['description'],'_shared.menus');
+                return $item;
+        });
         return Response::returns($data);
     }
 

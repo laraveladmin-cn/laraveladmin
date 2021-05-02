@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
             ->dailyAt('01:10');
         if(config('app.env')!='local'){
             //数据库备份
-            $schedule->command("backup:run --only-db' --force")
+            $schedule->command("backup:run --only-db")
                 ->name('backup_db')
                 ->withoutOverlapping()
                 ->dailyAt('02:00');
