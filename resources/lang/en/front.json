@@ -369,7 +369,8 @@
                     "Insurance notice": "Insurance notice",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
-                    "Deleted At": "Deleted At"
+                    "Deleted At": "Deleted At",
+                    "Link rules template": "Link rules template"
                 },
                 "maps": {
                     "type": {

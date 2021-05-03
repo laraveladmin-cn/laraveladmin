@@ -369,7 +369,8 @@
                     "Insurance notice": "投保須知",
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
-                    "Deleted At": "删除時間"
+                    "Deleted At": "删除時間",
+                    "Link rules template": "Link rules範本"
                 },
                 "maps": {
                     "type": {

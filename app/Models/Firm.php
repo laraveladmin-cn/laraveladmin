@@ -96,7 +96,7 @@ class Firm extends Model
         'account_day_by_sign_at'=>'Business month calculated by signing date',
         'account_day_by_end_at'=>'Business month calculated by return receipt date',
         'url_rule'=>'Link rules',
-        'url_rule_tpl'=>'Link rules模板',
+        'url_rule_tpl'=>'Link rules template',
         'description'=>'Describe',
         'order'=>'Sort',
         'account_at_merge'=>'Consolidated expected settlement month',

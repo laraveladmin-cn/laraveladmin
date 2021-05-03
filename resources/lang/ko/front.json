@@ -202,10 +202,10 @@
                     },
                     "use": [],
                     "env": {
-                        "Development environment": "개발 환경",
-                        "Testing environment": "테스트 환경",
-                        "Pre launch environment": "선행 환경",
-                        "Formal environment": "공식 적 인 환경"
+                        "local": "개발 환경",
+                        "testing": "테스트 환경",
+                        "staging": "선행 환경",
+                        "production": "공식 적 인 환경"
                     },
                     "group": [],
                     "middleware": []
@@ -369,7 +369,8 @@
                     "Insurance notice": "보험 가입 안내 사항",
                     "Created At": "창설 시간",
                     "Updated At": "수정 시간",
-                    "Deleted At": "삭제 시간"
+                    "Deleted At": "삭제 시간",
+                    "Link rules template": "Link rules 템 플 릿"
                 },
                 "maps": {
                     "type": {

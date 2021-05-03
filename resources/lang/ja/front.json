@@ -202,10 +202,10 @@
                     },
                     "use": [],
                     "env": {
-                        "Development environment": "開発環境",
-                        "Testing environment": "テスト環境",
-                        "Pre launch environment": "プリライン環境",
-                        "Formal environment": "正式な環境"
+                        "local": "開発環境",
+                        "testing": "テスト環境",
+                        "staging": "プリライン環境",
+                        "production": "正式な環境"
                     },
                     "group": [],
                     "middleware": []
@@ -369,7 +369,8 @@
                     "Insurance notice": "保険に関する注意事項",
                     "Created At": "作成時間",
                     "Updated At": "変更時間",
-                    "Deleted At": "削除時間"
+                    "Deleted At": "削除時間",
+                    "Link rules template": "Link rulesテンプレート"
                 },
                 "maps": {
                     "type": {
