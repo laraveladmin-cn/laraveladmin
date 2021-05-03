@@ -213,6 +213,9 @@ class Translation extends Seeder
                                 $edit_content = str_replace("'{$name}'","props.transField('{$new}')",$edit_content);
                                 $edit_content = str_replace("\"{$name}\"","props.transField(\"{$new}\")",$edit_content);
                                 $edit_content = str_replace("props.data.maps","props.maps",$edit_content);
+                                $edit_content = str_replace('"提示信息"','$t("Prompt message")',$edit_content);
+                                $edit_content = str_replace("'提示信息'","\$t('Prompt message')",$edit_content);
+                                $edit_content = str_replace("快速填写","{{\$t('Quickly fill in')}}",$edit_content);
                             }
                             //翻译内容设置
                             if(!Arr::get($fields,$new)){

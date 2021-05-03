@@ -370,7 +370,16 @@
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
                     "Deleted At": "删除时间",
-                    "Link rules template": "Link rules模板"
+                    "Link rules template": "Link rules模板",
+                    "Number of insurance types": "险种数量",
+                    "Withholding Bank": "代扣银行",
+                    "Company official website": "公司官网网址",
+                    "Online Insurance Service Provider": "线上投保服务商",
+                    "Link address rules":"链接地址规则",
+                    "Link address rule template": "链接地址规则模板",
+                    "Return receipt input date Calculation business month": "回执录入日期计算业务月份",
+                    "Support bank selection": "支持银行选择",
+                    "Fixed default password":"固定默认密码"
                 },
                 "maps": {
                     "type": {
@@ -822,6 +831,9 @@
                 "Your birthday": "你的生日",
                 "Recent Activities": "最近活动",
                 "{number} minutes ago": "{number}分钟前"
+            },
+            "firms": {
+                "http or https begins": "'http://'或'https://‘开头"
             }
         },
         "errors": {

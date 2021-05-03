@@ -822,6 +822,9 @@
                 "Your birthday": "Your birthday",
                 "Recent Activities": "Recent Activities",
                 "{number} minutes ago": "{number} minutes ago"
+            },
+            "firms": {
+                "http or https begins": "'http://' or 'https://' begins"
             }
         },
         "errors": {

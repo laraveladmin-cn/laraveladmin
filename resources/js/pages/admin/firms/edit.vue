@@ -2,7 +2,7 @@
     <div class="admin_user_edit">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">快速填写</h3>
+                <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
             </div>
             <div class="box-body">
                 <edit :options="options">
@@ -12,15 +12,15 @@
                             </edit-item>
                             <edit-item key-name="full_name" :options='{"name": props.transField("Full name"), "required": true}' :datas="props">
                             </edit-item>
-                            <edit-item key-name="url" :options='{"name": "公司官网网址", "required": false,title:"http://或https://开头"}' :datas="props">
+                            <edit-item key-name="url" :options='{"name": props.transField("Company official website"), "required": false,title:$tp("http or https begins")}' :datas="props">
                                 <template slot="input-item">
                                     <div class="input-group">
                                         <input
                                             type="text"
                                             v-model="props.data.row['url']"
                                             class="form-control"
-                                            :disabled="!props.url"
-                                            :placeholder="'请输入公司官网网址'">
+                                            :placeholder="$t('Please enter')"
+                                            :disabled="!props.url">
                                         <div class="input-group-addon">
                                             <a v-if="props.data.row['url']" :href="props.data.row['url']" target="_blank">
                                                 <i class="fa fa-link"></i>
@@ -30,7 +30,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="service_api" :options='{"name": "线上投保服务商", "required": false,"type":"select","placeholderValue":""}' :datas="props">
+                            <edit-item key-name="service_api" :options='{"name": props.transField("Online Insurance Service Provider"), "required": false,"type":"select","placeholderValue":""}' :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['service_api']"
@@ -66,9 +66,9 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item v-show="props.data.row['password_rule']==2" key-name="default_password" :options='{"name": "固定默认密码", "required": true}' :datas="props">
+                            <edit-item v-show="props.data.row['password_rule']==2" key-name="default_password" :options='{"name": props.transField("Fixed default password"), "required": true}' :datas="props">
                             </edit-item>
-                            <edit-item key-name="url_rule" :options='{"name": "链接地址规则", "required": false,"type":"select"}' :datas="props">
+                            <edit-item key-name="url_rule" :options='{"name": props.transField("Link address rules", "required"), "required": false,"type":"select"}' :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['url_rule']"
@@ -80,7 +80,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item v-show="props.data.row['url_rule']==1" key-name="url_rule_tpl" :options='{"name": "链接地址规则模板", "required": true}' :datas="props">
+                            <edit-item v-show="props.data.row['url_rule']==1" key-name="url_rule_tpl" :options='{"name": props.transField("Link address rule template"), "required": true}' :datas="props">
                             </edit-item>
 
                         </div>
@@ -103,7 +103,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="account_day_by_end_at" :options='{"name": "回执录入日期计算业务月份", "required": false}' :datas="props">
+                            <edit-item key-name="account_day_by_end_at" :options='{"name": props.transField("Return receipt input date Calculation business month"), "required": false}' :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <el-input-number   class="w-100" :min="0" size="medium" :max="28" v-model="props.data.row['account_day_by_end_at']" :disabled="!props.url" :step="1">
@@ -126,8 +126,8 @@
                                     <div class="edit-item-content">
                                         <el-switch v-model="props.data.row['account_at_merge']"
                                                    :disabled="!props.url"
-                                                   active-text="开"
-                                                   inactive-text="关"
+                                                   :active-text="$t('Open')"
+                                                   :inactive-text="$t('Closed')"
                                                    :active-value="1"
                                                    :inactive-value="0">
                                         </el-switch>
@@ -136,7 +136,7 @@
                             </edit-item>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="bank_ids" :options='{"name": "支持银行选择", "required": false,type:"checkbox"}'  :datas="props">
+                            <edit-item key-name="bank_ids" :options='{"name": props.transField("Support bank selection"), "required": false,type:"checkbox"}'  :datas="props">
                                 <template slot="input-item">
                                     <hide-more :tool="count(array_get(props,'data.maps.bank_ids',[]))>33">
                                         <template>
@@ -152,10 +152,10 @@
                                     </hide-more>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="description" :options='{"name": props.transField("Describe"), "required": false,"type":"textarea","title":"提示信息"}' :datas="props">
+                            <edit-item key-name="description" :options='{"name": props.transField("Describe"), "required": false,"type":"textarea","title":$t("Prompt message")}' :datas="props">
                             </edit-item>
                         </div>
-                        <edit-item :options='{"name": props.transField("Insurance notice"), "required": false,"title":"提示信息"}' :key-name="'insure_notify'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <edit-item :options='{"name": props.transField("Insurance notice"), "required": false,"title":$t("Prompt message")}' :key-name="'insure_notify'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <template slot="input-item">
                                 <div>
                                     <editor-md v-model="props.data.row['insure_notify']" :disabled="!props.url">
@@ -212,6 +212,7 @@
         },
         data() {
             return {
+                "{lang_path}":'admin.firms',
                 options:{
                     lang_table:'firms',
                     id: 'edit', //多个组件同时使用时唯一标识

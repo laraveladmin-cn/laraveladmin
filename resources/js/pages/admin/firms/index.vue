@@ -54,6 +54,7 @@
         data() {
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                "{lang_path}":'admin.firms',
                 options:{
                     lang_table:'firms',
                     id: 'data-table', //多个data-table同时使用时唯一标识
@@ -74,8 +75,8 @@
                         "name": {"name": "Name", "order": true},
                         "logo": {"name": "Brand logo", "order": true},
                         "description": {"name": "Describe", "order": true},
-                        "products_count": {"name": "险种数量", "order": true},
-                        "banks_count": {"name": "代扣银行", "order": true},
+                        "products_count": {"name": "Number of insurance types", "order": true},
+                        "banks_count": {"name": "Withholding Bank", "order": true},
                         "updated_at": {"name": "Updated At", "order": true}
                     },
                 }
