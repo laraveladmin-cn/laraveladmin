@@ -331,7 +331,8 @@
                     "Created At": "作成時間",
                     "Updated At": "変更時間",
                     "Deleted At": "削除時間",
-                    "Withholding Bank": "銀行の掛け金をする"
+                    "Withholding Bank": "銀行の掛け金をする",
+                    "Number of contracted insurance companies": "契約保険会社数"
                 },
                 "maps": []
             },
@@ -345,7 +346,13 @@
                     "Right border": "右端",
                     "Created At": "作成時間",
                     "Updated At": "変更時間",
-                    "Deleted At": "削除時間"
+                    "Deleted At": "削除時間",
+                    "First-level classification": "一級の分類",
+                    "Second classification": "二級分類",
+                    "Classification": "カテゴリ",
+                    "Group of insurance types": "危険なグループ",
+                    "Parent name": "親の名前",
+                    "Parent selection": "親レベル選択"
                 },
                 "maps": []
             },
@@ -380,7 +387,8 @@
                     "Link address rule template": "リンク先規則テンプレート",
                     "Return receipt input date Calculation business month": "領収書の入力日は業務月を計算します。",
                     "Support bank selection": "銀行の選択をサポートします",
-                    "Fixed default password": "デフォルトのパスワードを固定"
+                    "Fixed default password": "デフォルトのパスワードを固定",
+                    "Insurance Company": "保険会社"
                 },
                 "maps": {
                     "type": {
@@ -417,7 +425,9 @@
                     "Right border": "右端",
                     "Created At": "作成時間",
                     "Updated At": "変更時間",
-                    "Deleted At": "削除時間"
+                    "Deleted At": "削除時間",
+                    "Parent name": "親の名前",
+                    "Parent selection": "親レベル選択"
                 },
                 "maps": []
             },
@@ -484,7 +494,8 @@
                     "Describe": "説明",
                     "Created At": "作成時間",
                     "Updated At": "変更時間",
-                    "Deleted At": "削除時間"
+                    "Deleted At": "削除時間",
+                    "Optional years": "任意年限"
                 },
                 "maps": []
             }

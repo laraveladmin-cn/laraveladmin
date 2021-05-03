@@ -331,7 +331,8 @@
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
                     "Deleted At": "删除時間",
-                    "Withholding Bank": "代扣銀行"
+                    "Withholding Bank": "代扣銀行",
+                    "Number of contracted insurance companies": "簽約保險公司數"
                 },
                 "maps": []
             },
@@ -345,7 +346,13 @@
                     "Right border": "右邊界",
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
-                    "Deleted At": "删除時間"
+                    "Deleted At": "删除時間",
+                    "First-level classification": "一級分類",
+                    "Second classification": "二級分類",
+                    "Classification": "分類",
+                    "Group of insurance types": "險種分組",
+                    "Parent name": "父級名稱",
+                    "Parent selection": "所屬父級選擇"
                 },
                 "maps": []
             },
@@ -380,7 +387,8 @@
                     "Link address rule template": "連結位址規則範本",
                     "Return receipt input date Calculation business month": "回執錄入日期計算業務月份",
                     "Support bank selection": "支持銀行選擇",
-                    "Fixed default password": "固定默認密碼"
+                    "Fixed default password": "固定默認密碼",
+                    "Insurance Company": "保險公司"
                 },
                 "maps": {
                     "type": {
@@ -417,7 +425,9 @@
                     "Right border": "右邊界",
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
-                    "Deleted At": "删除時間"
+                    "Deleted At": "删除時間",
+                    "Parent name": "父級名稱",
+                    "Parent selection": "所屬父級選擇"
                 },
                 "maps": []
             },
@@ -484,7 +494,8 @@
                     "Describe": "描述",
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
-                    "Deleted At": "删除時間"
+                    "Deleted At": "删除時間",
+                    "Optional years": "可選年期"
                 },
                 "maps": []
             }

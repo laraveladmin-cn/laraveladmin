@@ -331,7 +331,8 @@
                     "Created At": "Tempo de criação",
                     "Updated At": "Tempo de revisão",
                     "Deleted At": "Apagar tempo",
-                    "Withholding Bank": "Banco de retenção"
+                    "Withholding Bank": "Banco de retenção",
+                    "Number of contracted insurance companies": "Número de Companhias de seguros contratadas"
                 },
                 "maps": []
             },
@@ -345,7 +346,13 @@
                     "Right border": "Fronteira Direita",
                     "Created At": "Tempo de criação",
                     "Updated At": "Tempo de revisão",
-                    "Deleted At": "Apagar tempo"
+                    "Deleted At": "Apagar tempo",
+                    "First-level classification": "Classificação primária",
+                    "Second classification": "Classificação secundária",
+                    "Classification": "Classificação",
+                    "Group of insurance types": "Agrupamento de seguros",
+                    "Parent name": "Nome do Pai",
+                    "Parent selection": "Selecção de Pais"
                 },
                 "maps": []
             },
@@ -380,7 +387,8 @@
                     "Link address rule template": "Endereço de ligação Modelo de Regras",
                     "Return receipt input date Calculation business month": "Mês de negócios calculado PELA data De recepção",
                     "Support bank selection": "Selecção do Banco de apoio",
-                    "Fixed default password": "Senha padrão fixa"
+                    "Fixed default password": "Senha padrão fixa",
+                    "Insurance Company": "Companhia de seguros"
                 },
                 "maps": {
                     "type": {
@@ -417,7 +425,9 @@
                     "Right border": "Fronteira Direita",
                     "Created At": "Tempo de criação",
                     "Updated At": "Tempo de revisão",
-                    "Deleted At": "Apagar tempo"
+                    "Deleted At": "Apagar tempo",
+                    "Parent name": "Nome do Pai",
+                    "Parent selection": "Selecção de Pais"
                 },
                 "maps": []
             },
@@ -484,7 +494,8 @@
                     "Describe": "Descrever",
                     "Created At": "Tempo de criação",
                     "Updated At": "Tempo de revisão",
-                    "Deleted At": "Apagar tempo"
+                    "Deleted At": "Apagar tempo",
+                    "Optional years": "Termo opcional"
                 },
                 "maps": []
             }

@@ -331,7 +331,8 @@
                     "Created At": "время создания",
                     "Updated At": "время изменения",
                     "Deleted At": "время удаления",
-                    "Withholding Bank": "комиссионный банк"
+                    "Withholding Bank": "комиссионный банк",
+                    "Number of contracted insurance companies": "число компаний"
                 },
                 "maps": []
             },
@@ -345,7 +346,13 @@
                     "Right border": "правая граница",
                     "Created At": "время создания",
                     "Updated At": "время изменения",
-                    "Deleted At": "время удаления"
+                    "Deleted At": "время удаления",
+                    "First-level classification": "классификация первого порядка",
+                    "Second classification": "классификация второго порядка",
+                    "Classification": "классификация",
+                    "Group of insurance types": "классификация опасных видов",
+                    "Parent name": "родительское имя",
+                    "Parent selection": "родительский выбор"
                 },
                 "maps": []
             },
@@ -380,7 +387,8 @@
                     "Link address rule template": "шаблон правил ссылки",
                     "Return receipt input date Calculation business month": "дата выдачи",
                     "Support bank selection": "Поддержка выбора банка",
-                    "Fixed default password": "постоянный пароль по умолчанию"
+                    "Fixed default password": "постоянный пароль по умолчанию",
+                    "Insurance Company": "страховая компания"
                 },
                 "maps": {
                     "type": {
@@ -417,7 +425,9 @@
                     "Right border": "правая граница",
                     "Created At": "время создания",
                     "Updated At": "время изменения",
-                    "Deleted At": "время удаления"
+                    "Deleted At": "время удаления",
+                    "Parent name": "родительское имя",
+                    "Parent selection": "родительский выбор"
                 },
                 "maps": []
             },
@@ -484,7 +494,8 @@
                     "Describe": "описание",
                     "Created At": "время создания",
                     "Updated At": "время изменения",
-                    "Deleted At": "время удаления"
+                    "Deleted At": "время удаления",
+                    "Optional years": "необязательный период"
                 },
                 "maps": []
             }

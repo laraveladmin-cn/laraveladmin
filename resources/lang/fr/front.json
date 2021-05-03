@@ -331,7 +331,8 @@
                     "Created At": "Temps de création",
                     "Updated At": "Temps de modification",
                     "Deleted At": "Supprimer le temps",
-                    "Withholding Bank": "Banque de retenue"
+                    "Withholding Bank": "Banque de retenue",
+                    "Number of contracted insurance companies": "Nombre de compagnies d'assurance sous contrat"
                 },
                 "maps": []
             },
@@ -345,7 +346,13 @@
                     "Right border": "Limite droite",
                     "Created At": "Temps de création",
                     "Updated At": "Temps de modification",
-                    "Deleted At": "Supprimer le temps"
+                    "Deleted At": "Supprimer le temps",
+                    "First-level classification": "Catégorie I",
+                    "Second classification": "Classification secondaire",
+                    "Classification": "Classification",
+                    "Group of insurance types": "Groupe d'assurance",
+                    "Parent name": "Nom du parent",
+                    "Parent selection": "Sélection des parents"
                 },
                 "maps": []
             },
@@ -380,7 +387,8 @@
                     "Link address rule template": "Modèle de règle d'adresse de lien",
                     "Return receipt input date Calculation business month": "Date d'entrée du reçu calcul du mois d'affaires",
                     "Support bank selection": "Sélection des banques de soutien",
-                    "Fixed default password": "Mot de passe par défaut fixe"
+                    "Fixed default password": "Mot de passe par défaut fixe",
+                    "Insurance Company": "Compagnies d'assurance"
                 },
                 "maps": {
                     "type": {
@@ -417,7 +425,9 @@
                     "Right border": "Limite droite",
                     "Created At": "Temps de création",
                     "Updated At": "Temps de modification",
-                    "Deleted At": "Supprimer le temps"
+                    "Deleted At": "Supprimer le temps",
+                    "Parent name": "Nom du parent",
+                    "Parent selection": "Sélection des parents"
                 },
                 "maps": []
             },
@@ -484,7 +494,8 @@
                     "Describe": "Description",
                     "Created At": "Temps de création",
                     "Updated At": "Temps de modification",
-                    "Deleted At": "Supprimer le temps"
+                    "Deleted At": "Supprimer le temps",
+                    "Optional years": "Année facultative"
                 },
                 "maps": []
             }

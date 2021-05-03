@@ -331,7 +331,8 @@
                     "Created At": "Created At",
                     "Updated At": "Updated At",
                     "Deleted At": "Deleted At",
-                    "Withholding Bank": "Withholding Bank"
+                    "Withholding Bank": "Withholding Bank",
+                    "Number of contracted insurance companies": "Number of contracted insurance companies"
                 },
                 "maps": []
             },
@@ -345,7 +346,13 @@
                     "Right border": "Right border",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
-                    "Deleted At": "Deleted At"
+                    "Deleted At": "Deleted At",
+                    "First-level classification": "First-level classification",
+                    "Second classification": "Second classification",
+                    "Classification": "Classification",
+                    "Group of insurance types": "Group of insurance types",
+                    "Parent name": "Parent name",
+                    "Parent selection": "Parent selection"
                 },
                 "maps": []
             },
@@ -380,7 +387,8 @@
                     "Link address rule template": "Link address rule template",
                     "Return receipt input date Calculation business month": "Return receipt input date Calculation business month",
                     "Support bank selection": "Support bank selection",
-                    "Fixed default password": "Fixed default password"
+                    "Fixed default password": "Fixed default password",
+                    "Insurance Company": "Insurance Company"
                 },
                 "maps": {
                     "type": {
@@ -417,7 +425,9 @@
                     "Right border": "Right border",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
-                    "Deleted At": "Deleted At"
+                    "Deleted At": "Deleted At",
+                    "Parent name": "Parent name",
+                    "Parent selection": "Parent selection"
                 },
                 "maps": []
             },
@@ -484,7 +494,8 @@
                     "Describe": "Describe",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
-                    "Deleted At": "Deleted At"
+                    "Deleted At": "Deleted At",
+                    "Optional years": "Optional years"
                 },
                 "maps": []
             }
