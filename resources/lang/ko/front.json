@@ -330,7 +330,8 @@
                     "Sort": "정렬 하 다.",
                     "Created At": "창설 시간",
                     "Updated At": "수정 시간",
-                    "Deleted At": "삭제 시간"
+                    "Deleted At": "삭제 시간",
+                    "Withholding Bank": "할인 은행"
                 },
                 "maps": []
             },
@@ -370,7 +371,16 @@
                     "Created At": "창설 시간",
                     "Updated At": "수정 시간",
                     "Deleted At": "삭제 시간",
-                    "Link rules template": "Link rules 템 플 릿"
+                    "Link rules template": "Link rules 템 플 릿",
+                    "Number of insurance types": "보험 종 수량",
+                    "Withholding Bank": "할인 은행",
+                    "Company official website": "회사 홈 페이지 주소",
+                    "Online Insurance Service Provider": "온라인 보험 가입자",
+                    "Link address rules": "링크 주소 규칙",
+                    "Link address rule template": "링크 주소 규칙 템 플 릿",
+                    "Return receipt input date Calculation business month": "배달 기록 일 자 를 업무 월 로 계산 하 다.",
+                    "Support bank selection": "은행 선택 을 지지 하 다",
+                    "Fixed default password": "기본 비밀번호 고정"
                 },
                 "maps": {
                     "type": {
@@ -412,7 +422,28 @@
                 "maps": []
             },
             "products": {
-                "fields": [],
+                "fields": {
+                    "Unique identification": "유일한 표식",
+                    "Insurance company ID": "보험회사 ID",
+                    "First level classification ID": "1 레벨 분류 ID",
+                    "Secondary classification ID": "2 급 분류 ID",
+                    "Insurance group ID": "위험한 그룹 ID",
+                    "Name": "명칭.",
+                    "Long term insurance": "장기 보험 종",
+                    "Category": "분류.",
+                    "Purchase method": "구 매 방식",
+                    "Payment method": "요금 납부 방식",
+                    "Product attributes": "제품 속성",
+                    "Document address": "문서 주소",
+                    "Insurance company document number": "보험회사 서류 번호",
+                    "Document number": "문건 번호",
+                    "State": "상태.",
+                    "Release time": "발표 시간",
+                    "Closing date": "판매 정지 날짜",
+                    "Created At": "창설 시간",
+                    "Updated At": "수정 시간",
+                    "Deleted At": "삭제 시간"
+                },
                 "maps": {
                     "is_long_time": {
                         "Short-term": "단기",
@@ -822,6 +853,11 @@
                 "Your birthday": "너의 생일",
                 "Recent Activities": "최근 활동",
                 "{number} minutes ago": "{number} 분 전"
+            },
+            "firms": {
+                "http or https begins": "'http: /' 또는 'https: /' 로 시작 합 니 다.",
+                "The LOGO has not been set": "로고 아직 안 설 치 했 어 요.",
+                "Attachment Image": "첨부 사진"
             }
         },
         "errors": {

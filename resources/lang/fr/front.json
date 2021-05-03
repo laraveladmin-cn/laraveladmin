@@ -330,7 +330,8 @@
                     "Sort": "Trier",
                     "Created At": "Temps de création",
                     "Updated At": "Temps de modification",
-                    "Deleted At": "Supprimer le temps"
+                    "Deleted At": "Supprimer le temps",
+                    "Withholding Bank": "Banque de retenue"
                 },
                 "maps": []
             },
@@ -370,7 +371,16 @@
                     "Created At": "Temps de création",
                     "Updated At": "Temps de modification",
                     "Deleted At": "Supprimer le temps",
-                    "Link rules template": "Modèle de règles de liaison"
+                    "Link rules template": "Modèle de règles de liaison",
+                    "Number of insurance types": "Nombre de types d'assurance",
+                    "Withholding Bank": "Banque de retenue",
+                    "Company official website": "Site Web officiel de l'entreprise",
+                    "Online Insurance Service Provider": "Fournisseur de services d'assurance en ligne",
+                    "Link address rules": "Règle de l'adresse du lien",
+                    "Link address rule template": "Modèle de règle d'adresse de lien",
+                    "Return receipt input date Calculation business month": "Date d'entrée du reçu calcul du mois d'affaires",
+                    "Support bank selection": "Sélection des banques de soutien",
+                    "Fixed default password": "Mot de passe par défaut fixe"
                 },
                 "maps": {
                     "type": {
@@ -412,7 +422,28 @@
                 "maps": []
             },
             "products": {
-                "fields": [],
+                "fields": {
+                    "Unique identification": "Identification unique",
+                    "Insurance company ID": "Identification de la compagnie d'assurance",
+                    "First level classification ID": "Id de classification primaire",
+                    "Secondary classification ID": "Id de classification secondaire",
+                    "Insurance group ID": "ID du Groupe d'assurance",
+                    "Name": "Nom",
+                    "Long term insurance": "Assurance à long terme",
+                    "Category": "Catégorie",
+                    "Purchase method": "Mode d'achat",
+                    "Payment method": "Mode de paiement",
+                    "Product attributes": "Propriétés du produit",
+                    "Document address": "Adresse du document",
+                    "Insurance company document number": "Numéro du document de la compagnie d'assurance",
+                    "Document number": "Numéro du document",
+                    "State": "Statut",
+                    "Release time": "Date de publication",
+                    "Closing date": "Date de suspension",
+                    "Created At": "Temps de création",
+                    "Updated At": "Temps de modification",
+                    "Deleted At": "Supprimer le temps"
+                },
                 "maps": {
                     "is_long_time": {
                         "Short-term": "À court terme",
@@ -822,6 +853,11 @@
                 "Your birthday": "Ton anniversaire.",
                 "Recent Activities": "Activités récentes",
                 "{number} minutes ago": "{number} Il y a quelques minutes"
+            },
+            "firms": {
+                "http or https begins": "« http: / / » ou « https: / / »",
+                "The LOGO has not been set": "Logo non défini",
+                "Attachment Image": "Images jointes"
             }
         },
         "errors": {

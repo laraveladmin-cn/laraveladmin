@@ -72,16 +72,6 @@ class ProductController extends Controller
         ]
     ];
 
-    //字段导出
-    public $exportFieldsName = [
-        'firm.name'=>'保险公司',
-        'abbreviation'=>'简称',
-        'name'=>'全称',
-        'code'=>'代码',
-        'uid'=>'唯一标识',
-        'id'=>'ID',
-    ];
-
 
     /**
      * 验证规则

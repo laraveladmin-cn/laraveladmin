@@ -44,10 +44,10 @@ class ClassifyController extends Controller
 
     //字段导出
     public $exportFieldsName = [
-        'name' => '名称',
-        'parent.name' => '父级名称',
-        'description' => '备注',
-        'parent_id' => '父级ID',
+        'name' => 'Name',
+        'parent.name' => 'Parent name',
+        'description' => 'Remarks',
+        'parent_id' => 'Parent ID',
         'id'=>'ID',
     ];
 

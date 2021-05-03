@@ -11,7 +11,7 @@ class Product extends Model
 {
 
     use BaseModel,SoftDeletes; //基础模型
-    //数据表名称
+    //数据表Name
     protected $table = 'products';
     protected $tableComment = '险种';
     //批量赋值白名单
@@ -38,6 +38,30 @@ class Product extends Model
     protected $hidden = ['deleted_at'];
     //日期字段
     protected $dates = ['created_at','updated_at','deleted_at'];
+    //字段Name
+    protected $fieldsName = [
+        'id' => 'ID',
+        'uid' => 'Unique identification',
+        'firm_id' => 'Insurance company ID',
+        'classify_id' => 'First level classification ID',
+        'classify2_id' => 'Secondary classification ID',
+        'pclassify_id' => 'Insurance group ID',
+        'name' => 'Name',
+        'is_long_time' => 'Long term insurance',
+        'class' => 'Category',
+        'buy_type' => 'Purchase method',
+        'pay_type' => 'Payment method',
+        'attr' => 'Product attributes',
+        'pdf_url' => 'Document address',
+        'company_no' => 'Insurance company document number',
+        'no' => 'Document number',
+        'status' => 'State',
+        'issue_at' => 'Release time',
+        'stop_at' => 'Closing date',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        //'deleted_at' => 'Deleted At'
+    ];
     //字段值map
     protected $fieldsShowMaps = [
         'is_long_time'=>[

@@ -15,19 +15,20 @@
                                 :rowspan="index=='classify.name'?1:2"
                                 :colspan="index=='classify.name'?2:1">
                                 <span v-if="index=='classify.name'">
-                                     分类
+                                     {{props.transField('Classification','','classifys')}}
                                 </span>
                                 <span v-else>
-                                     {{field['name']}}
+                                     {{props.transField(field['name'],index)}}
                                 </span>
-
                             </th>
-                            <th class="operate" v-if="props.operation" rowspan="2">操作</th>
+                            <th class="operate" v-if="props.operation" rowspan="2">
+                                {{$t('Operation')}}
+                            </th>
                         </tr>
                         <tr>
                             <th v-for="(field,index) in props.showFields" :class="field['class']" @click="props.orderByMethod(index)"
                                 v-if="index=='classify.name' || index=='classify2.name'">
-                                {{field['name']}}
+                                {{props.transField(field['name'],index)}}
                             </th>
                         </tr>
                     </template>
@@ -36,7 +37,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                 <select2 v-model="props.where['status']"
                                          :default-options="props.maps['status']"
-                                         :placeholder-show="'状态'"
+                                         :placeholder-show="props.transField('State')"
                                          :placeholder-value="''"
                                          :is-ajax="false" >
                                 </select2>
@@ -46,7 +47,7 @@
                                          :default-options="array_get(props,'maps.firm_id',[])"
                                          :url="use_url+'/admin/firms/list'"
                                          :keyword-key="'name'"
-                                         :placeholder-show="'保险公司'"
+                                         :placeholder-show="props.transField('Insurance Company','','firms')"
                                          :placeholder-value="''"
                                          :is-ajax="true" >
                                 </select2>
@@ -54,7 +55,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                 <select2 v-model="props.where['is_long_time']"
                                          :default-options="props.maps['is_long_time']"
-                                         :placeholder-show="'是否长期险种'"
+                                         :placeholder-show="props.transField('Long term insurance')"
                                          :placeholder-value="''"
                                          :is-ajax="false" >
                                 </select2>
@@ -85,7 +86,7 @@
             return {
                 options:{
                     lang_table:'products',
-                    id:'data-table', //多个data-table同时使用时唯一标识
+                    id:'data-table', //多个data-table同时使用时Unique identification
                     url:'', //数据表请求数据地址
                     operation:true, //操作列
                     checkbox:true, //选择列
@@ -94,20 +95,19 @@
                     keywordGroup:false, //是否为选项组
                     keywordPlaceholder:()=>{
                         return this.$t('enter',{name:this.$t('name')});
-                    },//'请输入名称'',
+                    },//'请输入Name'',
                     primaryKey:'id', //数据唯一性主键
                     defOptions:def_options, //默认筛选条件
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "name": {"name": "名称", "order": true},
-                        "code": {"name": "代码", "order": false},
-                        "firm.name": {"name": "保险公司", "order": false},
-                        "classify.name": {"name": "一级分类", "order": false},
-                        "classify2.name": {"name": "二级分类", "order": false},
-                        "is_long_time": {"name": "是否长期险种", "order": true,type:'label'},
-                        "status": {"name": "状态", "order": true,type:'label'},
-                        //"created_at": {"name": "创建时间", "order": true},
-                        "updated_at": {"name": "修改时间", "order": true},
+                        "name": {"name": "Name", "order": true},
+                        "firm.name": {"name": "Insurance Company", "order": false},
+                        "classify.name": {"name": "First-level classification", "order": false},
+                        "classify2.name": {"name": "Second classification", "order": false},
+                        "is_long_time": {"name": "Long term insurance", "order": true,type:'label'},
+                        "status": {"name": "State", "order": true,type:'label'},
+                        //"created_at": {"name": "Created At", "order": true},
+                        "updated_at": {"name": "Updated At", "order": true},
                     },
                 }
             };

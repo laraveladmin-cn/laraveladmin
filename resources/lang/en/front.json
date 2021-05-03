@@ -330,7 +330,8 @@
                     "Sort": "Sort",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
-                    "Deleted At": "Deleted At"
+                    "Deleted At": "Deleted At",
+                    "Withholding Bank": "Withholding Bank"
                 },
                 "maps": []
             },
@@ -370,7 +371,16 @@
                     "Created At": "Created At",
                     "Updated At": "Updated At",
                     "Deleted At": "Deleted At",
-                    "Link rules template": "Link rules template"
+                    "Link rules template": "Link rules template",
+                    "Number of insurance types": "Number of insurance types",
+                    "Withholding Bank": "Withholding Bank",
+                    "Company official website": "Company official website",
+                    "Online Insurance Service Provider": "Online Insurance Service Provider",
+                    "Link address rules": "Link address rules",
+                    "Link address rule template": "Link address rule template",
+                    "Return receipt input date Calculation business month": "Return receipt input date Calculation business month",
+                    "Support bank selection": "Support bank selection",
+                    "Fixed default password": "Fixed default password"
                 },
                 "maps": {
                     "type": {
@@ -412,7 +422,28 @@
                 "maps": []
             },
             "products": {
-                "fields": [],
+                "fields": {
+                    "Unique identification": "Unique identification",
+                    "Insurance company ID": "Insurance company ID",
+                    "First level classification ID": "First level classification ID",
+                    "Secondary classification ID": "Secondary classification ID",
+                    "Insurance group ID": "Insurance group ID",
+                    "Name": "Name",
+                    "Long term insurance": "Long term insurance",
+                    "Category": "Category",
+                    "Purchase method": "Purchase method",
+                    "Payment method": "Payment method",
+                    "Product attributes": "Product attributes",
+                    "Document address": "Document address",
+                    "Insurance company document number": "Insurance company document number",
+                    "Document number": "Document number",
+                    "State": "State",
+                    "Release time": "Release time",
+                    "Closing date": "Closing date",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
                 "maps": {
                     "is_long_time": {
                         "Short-term": "Short-term",
@@ -824,7 +855,9 @@
                 "{number} minutes ago": "{number} minutes ago"
             },
             "firms": {
-                "http or https begins": "'http://' or 'https://' begins"
+                "http or https begins": "'http://' or 'https://' begins",
+                "The LOGO has not been set": "The LOGO has not been set",
+                "Attachment Image": "Attachment Image"
             }
         },
         "errors": {

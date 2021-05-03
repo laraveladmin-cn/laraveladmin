@@ -330,7 +330,8 @@
                     "Sort": "Ordenar",
                     "Created At": "Tiempo de creación",
                     "Updated At": "Tiempo de modificación",
-                    "Deleted At": "Tiempo de eliminación"
+                    "Deleted At": "Tiempo de eliminación",
+                    "Withholding Bank": "Banco de retención"
                 },
                 "maps": []
             },
@@ -370,7 +371,16 @@
                     "Created At": "Tiempo de creación",
                     "Updated At": "Tiempo de modificación",
                     "Deleted At": "Tiempo de eliminación",
-                    "Link rules template": "Plantilla de reglas de enlace"
+                    "Link rules template": "Plantilla de reglas de enlace",
+                    "Number of insurance types": "Número de especies de seguros",
+                    "Withholding Bank": "Banco de retención",
+                    "Company official website": "Sitio web oficial de la empresa",
+                    "Online Insurance Service Provider": "Proveedor de servicios de seguros en línea",
+                    "Link address rules": "Regla de dirección de enlace",
+                    "Link address rule template": "Plantilla de reglas de dirección de enlace",
+                    "Return receipt input date Calculation business month": "Fecha de entrada del recibo",
+                    "Support bank selection": "Apoyo a la selección bancaria",
+                    "Fixed default password": "Contraseña predeterminada fija"
                 },
                 "maps": {
                     "type": {
@@ -412,7 +422,28 @@
                 "maps": []
             },
             "products": {
-                "fields": [],
+                "fields": {
+                    "Unique identification": "Identificador único",
+                    "Insurance company ID": "Identificación de la compañía de seguros",
+                    "First level classification ID": "ID de clasificación primaria",
+                    "Secondary classification ID": "ID de clasificación secundaria",
+                    "Insurance group ID": "ID del Grupo de seguros",
+                    "Name": "Nombre",
+                    "Long term insurance": "Seguro a largo plazo",
+                    "Category": "Categoría",
+                    "Purchase method": "Método de compra",
+                    "Payment method": "Método de pago",
+                    "Product attributes": "Atributos del producto",
+                    "Document address": "Dirección del documento",
+                    "Insurance company document number": "Número de documento de la compañía de seguros",
+                    "Document number": "Número de documento",
+                    "State": "Estado",
+                    "Release time": "Tiempo de publicación",
+                    "Closing date": "Fecha de cierre",
+                    "Created At": "Tiempo de creación",
+                    "Updated At": "Tiempo de modificación",
+                    "Deleted At": "Tiempo de eliminación"
+                },
                 "maps": {
                     "is_long_time": {
                         "Short-term": "A corto plazo",
@@ -822,6 +853,11 @@
                 "Your birthday": "Tu cumpleaños",
                 "Recent Activities": "Actividades recientes",
                 "{number} minutes ago": "Hace minutos"
+            },
+            "firms": {
+                "http or https begins": "Inicio de « http: / / » o « https: / / »",
+                "The LOGO has not been set": "El logotipo aún no está configurado",
+                "Attachment Image": "Imagen adjunta"
             }
         },
         "errors": {

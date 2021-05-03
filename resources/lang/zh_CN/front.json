@@ -330,7 +330,9 @@
                     "Sort": "排序",
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
-                    "Deleted At": "删除时间"
+                    "Deleted At": "删除时间",
+                    "Withholding Bank": "代扣银行",
+                    "Number of contracted insurance companies": "签约保险公司数"
                 },
                 "maps": []
             },
@@ -344,7 +346,13 @@
                     "Right border": "右边界",
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
-                    "Deleted At": "删除时间"
+                    "Deleted At": "删除时间",
+                    "First-level classification": "一级分类",
+                    "Second classification": "二级分类",
+                    "Classification": "分类",
+                    "Group of insurance types": "险种分组",
+                    "Parent name": "父级名称",
+                    "Parent selection":"所属父级选择"
                 },
                 "maps": []
             },
@@ -370,16 +378,17 @@
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
                     "Deleted At": "删除时间",
-                    "Link rules template": "Link rules模板",
+                    "Link rules template": "链接规则模板",
                     "Number of insurance types": "险种数量",
                     "Withholding Bank": "代扣银行",
                     "Company official website": "公司官网网址",
                     "Online Insurance Service Provider": "线上投保服务商",
-                    "Link address rules":"链接地址规则",
+                    "Link address rules": "链接地址规则",
                     "Link address rule template": "链接地址规则模板",
                     "Return receipt input date Calculation business month": "回执录入日期计算业务月份",
                     "Support bank selection": "支持银行选择",
-                    "Fixed default password":"固定默认密码"
+                    "Fixed default password": "固定默认密码",
+                    "Insurance Company": "保险公司"
                 },
                 "maps": {
                     "type": {
@@ -416,12 +425,35 @@
                     "Right border": "右边界",
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
-                    "Deleted At": "删除时间"
+                    "Deleted At": "删除时间",
+                    "Parent name": "父级名称",
+                    "Parent selection":"所属父级选择"
                 },
                 "maps": []
             },
             "products": {
-                "fields": [],
+                "fields": {
+                    "Unique identification": "唯一标识",
+                    "Insurance company ID": "保险公司ID",
+                    "First level classification ID": "一级分类ID",
+                    "Secondary classification ID": "二级分类ID",
+                    "Insurance group ID": "险种分组ID",
+                    "Name": "名称",
+                    "Long term insurance": "长期险种",
+                    "Category": "类别",
+                    "Purchase method": "购买方式",
+                    "Payment method": "交费方式",
+                    "Product attributes": "产品属性",
+                    "Document address": "文档地址",
+                    "Insurance company document number": "保险公司文件编号",
+                    "Document number": "文件编号",
+                    "State": "状态",
+                    "Release time": "发布时间",
+                    "Closing date": "停售日期",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
                 "maps": {
                     "is_long_time": {
                         "Short-term": "短期",
@@ -462,7 +494,8 @@
                     "Describe": "描述",
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
-                    "Deleted At": "删除时间"
+                    "Deleted At": "删除时间",
+                    "Optional years":"可选年期"
                 },
                 "maps": []
             }
@@ -833,7 +866,9 @@
                 "{number} minutes ago": "{number}分钟前"
             },
             "firms": {
-                "http or https begins": "'http://'或'https://‘开头"
+                "http or https begins": "'http://'或'https://‘开头",
+                "The LOGO has not been set": "还没有设置LOGO",
+                "Attachment Image": "附件图片"
             }
         },
         "errors": {

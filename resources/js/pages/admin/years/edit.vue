@@ -2,7 +2,7 @@
     <div class="admin_user_edit">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">快速填写</h3>
+                <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
             </div>
             <div class="box-body">
                 <edit :options="options">
@@ -25,7 +25,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="description" :options='{"name": props.transField("Describe"), "required": false,"type":"textarea","title":"提示信息"}' :datas="props">
+                            <edit-item key-name="description" :options='{"name": props.transField("Describe"), "required": false,"type":"textarea","title":$t("Prompt message")}' :datas="props">
                             </edit-item>
                         </div>
                     </template>

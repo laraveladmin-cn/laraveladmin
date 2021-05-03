@@ -21,14 +21,14 @@
                                             </icheck>
                                             <div class="operation-item">
                                                 <button v-show="props.data.configUrl['deleteUrl']"
-                                                        title="删除选中"
+                                                        :title="$t('Delete selected')"
                                                         type="button"
                                                         class="btn btn-danger btn-xs"
                                                         @click="props.remove([row.id])">
                                                     <i class="fa fa-trash-o"></i>
                                                 </button>
                                                 <router-link class="btn btn-info btn-xs"
-                                                             title="编辑"
+                                                             :title="$t('Edit')"
                                                              :to="props.data.configUrl['showUrl'].replace('{id}',row.id)"
                                                              v-if="props.data.configUrl['showUrl']">
                                                     <i class="fa fa-edit"></i>

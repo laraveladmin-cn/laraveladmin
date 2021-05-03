@@ -51,7 +51,7 @@
                         "id": {"name": "ID", "order": true},
                         "name": {"name": "Name", "order": true},
                         "description": {"name": "Remarks", "order": true},
-                        "parent.name": {"name": "父级Name", "order": false},
+                        "parent.name": {"name": "Parent name", "order": false},
                         "created_at": {"name": "Created At", "order": true},
                         "updated_at": {"name": "Updated At", "order": true},
                     },

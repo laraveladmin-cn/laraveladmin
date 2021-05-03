@@ -119,24 +119,24 @@ class FirmController extends Controller
      * @var array
      */
     public $exportFieldsName = [
-        'name'=>'名称',
-        'full_name'=>'全称',
-        'type'=>'类型',
-        'url'=>'公司网站',
-        'logo'=>'品牌LOGO',
-        'uname_rule'=>'代理账号规则',
-        'password_rule'=>'代理账号密码规则',
-        'default_password'=>'固定密码值',
-        'account_day_by_sign_at'=>'签单日期计算业务月份',
-        'account_day_by_end_at'=>'交回执日期计算业务月份',
-        'url_rule'=>'链接规则',
-        'url_rule_tpl'=>'链接规则模板',
-        'description'=>'描述',
-        'order'=>'排序',
-        'account_at_merge'=>'合并预计结算月份开关',
-        'service_api'=>'对接服务',
-        'insure_notify'=>'投保须知',
-        'banks.$index.name'=>'代扣银行', //一对多属性获取
+        'name'=>'Name', //名称
+        'full_name'=>'Full name', //全称
+        'type'=>'Type', //类型
+        'url'=>'Company website', //公司网站
+        'logo'=>'Brand logo', //品牌LOGO
+        'uname_rule'=>'Agent account rules', //代理账号规则
+        'password_rule'=>'Proxy account password rules', //代理账号密码规则
+        'default_password'=>'Fixed password value', //固定密码值
+        'account_day_by_sign_at'=>'Business month calculated by signing date', //签单日期计算业务月份
+        'account_day_by_end_at'=>'Business month calculated by return receipt date', //交回执日期计算业务月份
+        'url_rule'=>'Link rules', //链接规则
+        'url_rule_tpl'=>'Link rules template', //链接规则模板
+        'description'=>'Describe', //描述
+        'order'=>'Sort', //排序
+        'account_at_merge'=>'Consolidated expected settlement month', //合并预计结算月份开关
+        'service_api'=>'Docking services', //对接服务
+        'insure_notify'=>'Insurance notice', //投保须知
+        'banks.$index.name'=>'Withholding Bank',//'代扣银行', //一对多属性获取
         'id'=>'ID',
     ];
 

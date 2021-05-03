@@ -53,7 +53,7 @@
                         "id": {"name": "ID", "order": true},
                         "name": {"name": "Name", "order": true},
                         "full_name": {"name": "Full name", "order": true},
-                        "firms_count": {"name": "签约保险公司数", "order": true},
+                        "firms_count": {"name": "Number of contracted insurance companies", "order": true},
                         "order": {"name": "Sort", "order": true},
                         //"created_at": {"name": "Created At", "order": true},
                         "updated_at": {"name": "Updated At", "order": true},

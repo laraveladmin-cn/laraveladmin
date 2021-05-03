@@ -2,7 +2,7 @@
     <div class="admin_user_edit">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">快速填写</h3>
+                <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
             </div>
             <div class="box-body">
                 <edit :options="options">
@@ -10,9 +10,9 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="name" :options="{name: props.transField('Name'), required: true}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="description" :options='{"name": "描述", "required": false,"type":"textarea","title":"提示信息"}' :datas="props">
+                            <edit-item key-name="description" :options='{"name":props.transField("Remarks"), "required": false,"type":"textarea","title":$t("Prompt message")}' :datas="props">
                             </edit-item>
-                            <edit-item key-name="parent_id" :options='{"name": "所属父级选择", "required": true}' :datas="props">
+                            <edit-item key-name="parent_id" :options='{"name":  props.transField("Parent selection"), "required": true}' :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <ztree v-model="props.data.row['parent_id']"

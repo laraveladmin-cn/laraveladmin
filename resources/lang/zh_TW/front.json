@@ -330,7 +330,8 @@
                     "Sort": "排序",
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
-                    "Deleted At": "删除時間"
+                    "Deleted At": "删除時間",
+                    "Withholding Bank": "代扣銀行"
                 },
                 "maps": []
             },
@@ -370,7 +371,16 @@
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
                     "Deleted At": "删除時間",
-                    "Link rules template": "Link rules範本"
+                    "Link rules template": "Link rules範本",
+                    "Number of insurance types": "險種數量",
+                    "Withholding Bank": "代扣銀行",
+                    "Company official website": "公司官網網址",
+                    "Online Insurance Service Provider": "線上投保服務商",
+                    "Link address rules": "連結位址規則",
+                    "Link address rule template": "連結位址規則範本",
+                    "Return receipt input date Calculation business month": "回執錄入日期計算業務月份",
+                    "Support bank selection": "支持銀行選擇",
+                    "Fixed default password": "固定默認密碼"
                 },
                 "maps": {
                     "type": {
@@ -412,7 +422,28 @@
                 "maps": []
             },
             "products": {
-                "fields": [],
+                "fields": {
+                    "Unique identification": "唯一標識",
+                    "Insurance company ID": "保險公司ID",
+                    "First level classification ID": "一級分類ID",
+                    "Secondary classification ID": "二級分類ID",
+                    "Insurance group ID": "險種分組ID",
+                    "Name": "名稱",
+                    "Long term insurance": "長期險種",
+                    "Category": "類別",
+                    "Purchase method": "購買管道",
+                    "Payment method": "交費方式",
+                    "Product attributes": "產品内容",
+                    "Document address": "檔案地址",
+                    "Insurance company document number": "保險公司檔案編號",
+                    "Document number": "檔案編號",
+                    "State": "狀態",
+                    "Release time": "發佈時間",
+                    "Closing date": "停售日期",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
                 "maps": {
                     "is_long_time": {
                         "Short-term": "短期",
@@ -822,6 +853,11 @@
                 "Your birthday": "你的生日",
                 "Recent Activities": "最近活動",
                 "{number} minutes ago": "{number}分鐘前"
+            },
+            "firms": {
+                "http or https begins": "'http://'或'https://‘開頭",
+                "The LOGO has not been set": "還沒有設定LOGO",
+                "Attachment Image": "附件圖片"
             }
         },
         "errors": {

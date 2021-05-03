@@ -25,8 +25,8 @@
                              </router-link>
                         </span>
                         <span v-else-if="props.k =='logo'">
-                            <img v-if="props.row['logo']" class="attachment-img" :src="props.row['logo']" alt="Attachment Image" />
-                            <div v-else class="img-rounded no-img" alt="还没有设置LOGO">
+                            <img v-if="props.row['logo']" class="attachment-img" :src="props.row['logo']" :alt="$tp('Attachment Image')" />
+                            <div v-else class="img-rounded no-img" :alt="$tp('The LOGO has not been set')">
                             </div>
                         </span>
                         <span v-else>

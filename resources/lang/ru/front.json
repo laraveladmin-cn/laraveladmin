@@ -330,7 +330,8 @@
                     "Sort": "сортировка",
                     "Created At": "время создания",
                     "Updated At": "время изменения",
-                    "Deleted At": "время удаления"
+                    "Deleted At": "время удаления",
+                    "Withholding Bank": "комиссионный банк"
                 },
                 "maps": []
             },
@@ -370,7 +371,16 @@
                     "Created At": "время создания",
                     "Updated At": "время изменения",
                     "Deleted At": "время удаления",
-                    "Link rules template": "Шаблоны: Link rules"
+                    "Link rules template": "Шаблоны: Link rules",
+                    "Number of insurance types": "количество видов опасности",
+                    "Withholding Bank": "комиссионный банк",
+                    "Company official website": "официальный сайт компании",
+                    "Online Insurance Service Provider": "сетевой страховщик",
+                    "Link address rules": "Правило адреса ссылки",
+                    "Link address rule template": "шаблон правил ссылки",
+                    "Return receipt input date Calculation business month": "дата выдачи",
+                    "Support bank selection": "Поддержка выбора банка",
+                    "Fixed default password": "постоянный пароль по умолчанию"
                 },
                 "maps": {
                     "type": {
@@ -412,7 +422,28 @@
                 "maps": []
             },
             "products": {
-                "fields": [],
+                "fields": {
+                    "Unique identification": "уникальный знак",
+                    "Insurance company ID": "идентификатор страховой компании",
+                    "First level classification ID": "идентификатор первой категории",
+                    "Secondary classification ID": "идентификатор второй категории",
+                    "Insurance group ID": "идентификатор группы риска",
+                    "Name": "имя",
+                    "Long term insurance": "виды долгосрочного риска",
+                    "Category": "категория",
+                    "Purchase method": "способ покупки",
+                    "Payment method": "порядок оплаты",
+                    "Product attributes": "свойства продукта",
+                    "Document address": "адрес документа",
+                    "Insurance company document number": "Номер документа страховой компании",
+                    "Document number": "номер файла",
+                    "State": "состояние",
+                    "Release time": "время публикации",
+                    "Closing date": "дата прекращения продажи",
+                    "Created At": "время создания",
+                    "Updated At": "время изменения",
+                    "Deleted At": "время удаления"
+                },
                 "maps": {
                     "is_long_time": {
                         "Short-term": "краткосрочный",
@@ -822,6 +853,11 @@
                 "Your birthday": "твой день рождения",
                 "Recent Activities": "Последние события",
                 "{number} minutes ago": "{number} минут назад"
+            },
+            "firms": {
+                "http or https begins": "'http: / / или' https / 'начало",
+                "The LOGO has not been set": "ещё не установлено LOGO",
+                "Attachment Image": "рисунок вложения"
             }
         },
         "errors": {

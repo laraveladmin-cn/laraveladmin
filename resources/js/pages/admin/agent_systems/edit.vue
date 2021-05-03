@@ -2,7 +2,7 @@
     <div class="admin_user_edit">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">快速填写</h3>
+                <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
             </div>
             <div class="box-body">
                 <edit :options="options">
@@ -20,7 +20,7 @@
                                             v-model="props.data.row['url']"
                                             class="form-control"
                                             :disabled="!props.url"
-                                            :placeholder="'请输入网站地址'">
+                                            :placeholder="$t('Please enter')">
                                         <div class="input-group-addon">
                                             <a v-if="props.data.row['url']" :href="props.data.row['url']" target="_blank">
                                                 <i class="fa fa-link"></i>
@@ -30,9 +30,9 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="ip" :options="{name: 'IP地址', required: true}"  :datas="props">
+                            <edit-item key-name="ip" :options="{name: props.transField('Binding IP'), required: true}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="mac" :options="{name: '唯一标识', required: true}"  :datas="props">
+                            <edit-item key-name="mac" :options="{name: props.transField('Server unique ID'), required: true}"  :datas="props">
                             </edit-item>
 
                         </div>
