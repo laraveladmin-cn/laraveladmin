@@ -12,7 +12,7 @@ class Bank extends Model
 
     use BaseModel; //基础模型
     use SoftDeletes; //软删除
-    //数据表名称
+    //数据表Name
     protected $table = 'banks';
     protected $tableComment = '银行';
 
@@ -41,11 +41,11 @@ class Bank extends Model
         'order' => 0
     ];
 
-    //字段名称
+    //字段Name
     protected $fieldsName = [
-        'name'=>'名称',
-        'full_name'=>'全称',
-        'order'=>'排序',
+        'name'=>'Name',
+        'full_name'=>'Full name',
+        'order'=>'Sort',
         'id'=>'ID',
     ];
 

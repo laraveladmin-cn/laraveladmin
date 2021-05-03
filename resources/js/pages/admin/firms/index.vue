@@ -6,7 +6,7 @@
                     <template slot="col" slot-scope="props">
                         <span v-if="props.field.type =='label'">
                             <span class="label" :class="'label-'+statusClass[props.row[props.k]%statusClass.length]">
-                                {{ props.data.maps[props.k] | array_get(props.row[props.k]) }}
+                                {{ props.maps[props.k] | array_get(props.row[props.k]) }}
                             </span>
                         </span>
                         <span v-else-if="props.k =='name' && props.row['url']">
@@ -54,7 +54,8 @@
         data() {
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
-                options: {
+                options:{
+                    lang_table:'firms',
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
                     operation: true, //操作列
@@ -64,18 +65,18 @@
                     keywordGroup: false, //是否为选项组
                     keywordPlaceholder:()=>{
                 return this.$t('enter',{name:this.$t('name')});
-            },//'请输入名称',
+            },//'请输入Name',
                     primaryKey: 'id', //数据唯一性主键
                     defOptions: def_options, //默认筛选条件
                     //hideTopPagerTool:true,
                     fields: {
                         "id": {"name": "ID", "order": true},
-                        "name": {"name": "名称", "order": true},
-                        "logo": {"name": "品牌LOGO", "order": true},
-                        "description": {"name": "描述", "order": true},
+                        "name": {"name": "Name", "order": true},
+                        "logo": {"name": "Brand logo", "order": true},
+                        "description": {"name": "Describe", "order": true},
                         "products_count": {"name": "险种数量", "order": true},
                         "banks_count": {"name": "代扣银行", "order": true},
-                        "updated_at": {"name": "修改时间", "order": true}
+                        "updated_at": {"name": "Updated At", "order": true}
                     },
                 }
             };

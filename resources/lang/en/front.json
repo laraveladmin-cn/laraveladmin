@@ -307,6 +307,154 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "agent_systems": {
+                "fields": {
+                    "Name": "Name",
+                    "Full name": "Full name",
+                    "Website address": "Website address",
+                    "User name": "User name",
+                    "Password": "Password",
+                    "Binding IP": "Binding IP",
+                    "Server unique ID": "Server unique ID",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "banks": {
+                "fields": {
+                    "Name": "Name",
+                    "Full name": "Full name",
+                    "Sort": "Sort",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "classifys": {
+                "fields": {
+                    "Name": "Name",
+                    "Remarks": "Remarks",
+                    "Parent ID": "Parent ID",
+                    "Hierarchy": "Hierarchy",
+                    "Left border": "Left border",
+                    "Right border": "Right border",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "firms": {
+                "fields": {
+                    "Name": "Name",
+                    "Full name": "Full name",
+                    "Type": "Type",
+                    "Company website": "Company website",
+                    "Brand logo": "Brand logo",
+                    "Agent account rules": "Agent account rules",
+                    "Proxy account password rules": "Proxy account password rules",
+                    "Fixed password value": "Fixed password value",
+                    "Business month calculated by signing date": "Business month calculated by signing date",
+                    "Business month calculated by return receipt date": "Business month calculated by return receipt date",
+                    "Link rules": "Link rules",
+                    "Link Rule Template": "Link Rule Template",
+                    "Describe": "Describe",
+                    "Sort": "Sort",
+                    "Consolidated expected settlement month": "Consolidated expected settlement month",
+                    "Docking services": "Docking services",
+                    "Insurance notice": "Insurance notice",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": {
+                    "type": {
+                        "Life insurance": "Life insurance",
+                        "Property insurance": "Property insurance"
+                    },
+                    "uname_rule": {
+                        "No rules": "No rules",
+                        "Agent number": "Agent number",
+                        "ID number": "ID number",
+                        "Phone number": "Phone number"
+                    },
+                    "password_rule": {
+                        "No rules": "No rules",
+                        "Last 6 digits of ID card": "Last 6 digits of ID card",
+                        "Fixed value": "Fixed value"
+                    },
+                    "url_rule": {
+                        "No rules": "No rules",
+                        "Account template rules": "Account template rules"
+                    },
+                    "service_api": {
+                        "National treasure": "National treasure"
+                    }
+                }
+            },
+            "pclassifys": {
+                "fields": {
+                    "Name": "Name",
+                    "Remarks": "Remarks",
+                    "Parent ID": "Parent ID",
+                    "Hierarchy": "Hierarchy",
+                    "Left border": "Left border",
+                    "Right border": "Right border",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "products": {
+                "fields": [],
+                "maps": {
+                    "is_long_time": {
+                        "Short-term": "Short-term",
+                        "Long-term": "Long-term"
+                    },
+                    "class": {
+                        "Traditional products": "Traditional products",
+                        "New products": "New products"
+                    },
+                    "buy_type": {
+                        "Personal": "Personal",
+                        "Group": "Group"
+                    },
+                    "pay_type": {
+                        "One time payment": "One time payment",
+                        "Payment by installments": "Payment by installments",
+                        "Flexible payment": "Flexible payment"
+                    },
+                    "attr": {
+                        "Nothing": "Nothing",
+                        "Student FPA": "Student FPA",
+                        "Exclusive products for women": "Exclusive products for women",
+                        "Exclusive products for children": "Exclusive products for children",
+                        "Exclusive products for the elderly": "Exclusive products for the elderly",
+                        "Aviation accident insurance": "Aviation accident insurance"
+                    },
+                    "status": {
+                        "Halt the sales": "Halt the sales",
+                        "On sale": "On sale",
+                        "Out of service": "Out of service"
+                    }
+                }
+            },
+            "years": {
+                "fields": {
+                    "Name": "Name",
+                    "Value": "Value",
+                    "Describe": "Describe",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
             }
         },
         "pages": {

@@ -12,7 +12,7 @@ class AgentSystem extends Model
 
     use BaseModel; //基础模型
     use SoftDeletes; //软删除
-    //数据表名称
+    //数据表Name
     protected $table = 'agent_systems';
     //批量赋值白名单
     protected $fillable = [
@@ -43,16 +43,16 @@ class AgentSystem extends Model
     //字段默认值
     protected $fieldsName = [
         'id' => 'ID',
-        'name' => '名称',
-        'full_name' => '全称',
-        'url' => '网站地址',
-        'user_name' => '用户名',
-        'password' => '密码',
-        'ip' => '绑定IP',
-        'mac' => '服务器唯一标识',
-        //'created_at' => '创建时间',
-        //'updated_at' => '修改时间',
-        //'deleted_at' => '删除时间'
+        'name' => 'Name',
+        'full_name' => 'Full name',
+        'url' => 'Website address',
+        'user_name' => 'User name',
+        'password' => 'Password',
+        'ip' => 'Binding IP',
+        'mac' => 'Server unique ID',
+        //'created_at' => 'Created At',
+        //'updated_at' => 'Updated At',
+        //'deleted_at' => 'Deleted At'
     ];
 
 

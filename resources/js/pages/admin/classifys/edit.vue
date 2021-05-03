@@ -8,7 +8,7 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '名称', required: true}"  :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'), required: true}"  :datas="props">
                             </edit-item>
                             <edit-item key-name="description" :options='{"name": "描述", "required": false,"type":"textarea","title":"提示信息"}' :datas="props">
                             </edit-item>
@@ -21,7 +21,7 @@
                                                :disabled="!props.url"
                                                :id="'parent'"
                                                :chkbox-type='{ "Y" : "", "N" : "" }'
-                                               :data="props.data.maps['optional_parents']">
+                                               :data="props.maps['optional_parents']">
                                         </ztree>
                                     </div>
                                 </template>
@@ -51,6 +51,7 @@
         data(){
             return {
                 options:{
+                    lang_table:'classifys',
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}

@@ -66,7 +66,14 @@ return [
     ],
     'log_id_key'=>'_log_id',
     'disabled_menus'=>env('DISABLED_MENUS', ''),
-    'locales'=>['zh_CN','zh_TW','en'], //支持语言
+    'locales'=>['zh_CN','zh_TW','en',
+        'ja',   //日文
+        'ko',  //韩文
+        //'fr',  //法语
+        //'ru',   //俄语
+        //'es',  //西班牙语
+        //'pt',  //葡萄牙语
+    ], //支持语言
     'trans_prefix'=>'_trans_' //翻译语言前缀
 
 ];

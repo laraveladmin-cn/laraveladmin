@@ -307,6 +307,154 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "agent_systems": {
+                "fields": {
+                    "Name": "名称",
+                    "Full name": "全称",
+                    "Website address": "网站地址",
+                    "User name": "用户名",
+                    "Password": "密码",
+                    "Binding IP": "绑定IP",
+                    "Server unique ID": "服务器唯一标识",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "banks": {
+                "fields": {
+                    "Name": "名称",
+                    "Full name": "全称",
+                    "Sort": "排序",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "classifys": {
+                "fields": {
+                    "Name": "名称",
+                    "Remarks": "备注",
+                    "Parent ID": "父级ID",
+                    "Hierarchy": "层级",
+                    "Left border": "左边界",
+                    "Right border": "右边界",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "firms": {
+                "fields": {
+                    "Name": "名称",
+                    "Full name": "全称",
+                    "Type": "类型",
+                    "Company website": "公司网站",
+                    "Brand logo": "品牌LOGO",
+                    "Agent account rules": "代理账号规则",
+                    "Proxy account password rules": "代理账号密码规则",
+                    "Fixed password value": "固定密码值",
+                    "Business month calculated by signing date": "签单日期计算业务月份",
+                    "Business month calculated by return receipt date": "交回执日期计算业务月份",
+                    "Link rules": "链接规则",
+                    "Link Rule Template": "链接规则模板",
+                    "Describe": "描述",
+                    "Sort": "排序",
+                    "Consolidated expected settlement month": "合并预计结算月份开关",
+                    "Docking services": "对接服务",
+                    "Insurance notice": "投保须知",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": {
+                    "type": {
+                        "Life insurance": "寿险",
+                        "Property insurance": "财险"
+                    },
+                    "uname_rule": {
+                        "No rules": "无规则",
+                        "Agent number": "代理人工号",
+                        "ID number": "身份证号",
+                        "Phone number": "手机号码"
+                    },
+                    "password_rule": {
+                        "No rules": "无规则",
+                        "Last 6 digits of ID card": "身份证后6位",
+                        "Fixed value": "固定值"
+                    },
+                    "url_rule": {
+                        "No rules": "无规则",
+                        "Account template rules": "账号模板规则"
+                    },
+                    "service_api": {
+                        "National treasure": "国宝"
+                    }
+                }
+            },
+            "pclassifys": {
+                "fields": {
+                    "Name": "名称",
+                    "Remarks": "备注",
+                    "Parent ID": "父级ID",
+                    "Hierarchy": "层级",
+                    "Left border": "左边界",
+                    "Right border": "右边界",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "products": {
+                "fields": [],
+                "maps": {
+                    "is_long_time": {
+                        "Short-term": "短期",
+                        "Long-term": "长期"
+                    },
+                    "class": {
+                        "Traditional products": "传统型产品",
+                        "New products": "新型产品"
+                    },
+                    "buy_type": {
+                        "Personal": "个人",
+                        "Group": "团体"
+                    },
+                    "pay_type": {
+                        "One time payment": "一次性交费",
+                        "Payment by installments": "分期交费",
+                        "Flexible payment": "灵活交费"
+                    },
+                    "attr": {
+                        "Nothing": "无",
+                        "Student FPA": "学生平安险",
+                        "Exclusive products for women": "女性专属产品",
+                        "Exclusive products for children": "少儿专属产品",
+                        "Exclusive products for the elderly": "老年专属产品",
+                        "Aviation accident insurance": "航空意外险"
+                    },
+                    "status": {
+                        "Halt the sales": "停售",
+                        "On sale": "在售",
+                        "Out of service": "停用"
+                    }
+                }
+            },
+            "years": {
+                "fields": {
+                    "Name": "名称",
+                    "Value": "值",
+                    "Describe": "描述",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
             }
         },
         "pages": {

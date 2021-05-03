@@ -41,34 +41,34 @@ class Product extends Model
     //字段值map
     protected $fieldsShowMaps = [
         'is_long_time'=>[
-            "0"=>'短期',
-            "1"=>'长期'
+            "0"=>'Short-term',
+            "1"=>'Long-term'
          ],
         'class'=>[
-            "0"=>'传统型产品',
-            "1"=>'新型产品'
+            "0"=>'Traditional products',
+            "1"=>'New products'
          ],
         'buy_type'=>[
-            "1"=>'个人',
-            "2"=>'团体'
+            "1"=>'Personal',
+            "2"=>'Group'
          ],
         'pay_type'=>[
-            "1"=>'一次性交费',
-            "2"=>'分期交费',
-            "4"=>'灵活交费'
+            "1"=>'One time payment',
+            "2"=>'Payment by installments',
+            "4"=>'Flexible payment'
          ],
         'attr'=>[
-            "0"=>'无',
-            "1"=>'学生平安险',
-            "2"=>'女性专属产品',
-            "3"=>'少儿专属产品',
-            "4"=>'老年专属产品',
-            "5"=>'航空意外险'
+            "0"=>'Nothing',
+            "1"=>'Student FPA',
+            "2"=>'Exclusive products for women',
+            "3"=>'Exclusive products for children',
+            "4"=>'Exclusive products for the elderly',
+            "5"=>'Aviation accident insurance'
          ],
         'status'=>[
-            "0"=>'停售',
-            "1"=>'在售',
-            "2"=>'停用'
+            "0"=>'Halt the sales',
+            "1"=>'On sale',
+            "2"=>'Out of service'
          ]
     ];
     //字段默认值

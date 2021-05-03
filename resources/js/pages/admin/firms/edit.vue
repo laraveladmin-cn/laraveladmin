@@ -8,9 +8,9 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '名称', required: true}"  :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'), required: true}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="full_name" :options='{"name": "全称", "required": true}' :datas="props">
+                            <edit-item key-name="full_name" :options='{"name": props.transField("Full name"), "required": true}' :datas="props">
                             </edit-item>
                             <edit-item key-name="url" :options='{"name": "公司官网网址", "required": false,title:"http://或https://开头"}' :datas="props">
                                 <template slot="input-item">
@@ -35,31 +35,31 @@
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['service_api']"
                                                  :disabled="!props.url"
-                                                 :default-options="props.data.maps['service_api']"
+                                                 :default-options="props.maps['service_api']"
                                                  :placeholder-value="''"
                                                  :is-ajax="false" >
                                         </select2>
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="uname_rule" :options='{"name": "代理账号规则", "required": false,"type":"select"}' :datas="props">
+                            <edit-item key-name="uname_rule" :options='{"name": props.transField("Agent account rules"), "required": false,"type":"select"}' :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['uname_rule']"
                                                  :disabled="!props.url"
-                                                 :default-options="props.data.maps['uname_rule']"
+                                                 :default-options="props.maps['uname_rule']"
                                                  :placeholder="false"
                                                  :is-ajax="false" >
                                         </select2>
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="password_rule" :options='{"name": "代理账号密码规则", "required": false,"type":"select"}' :datas="props">
+                            <edit-item key-name="password_rule" :options='{"name": props.transField("Proxy account password rules"), "required": false,"type":"select"}' :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['password_rule']"
                                                  :disabled="!props.url"
-                                                 :default-options="props.data.maps['password_rule']"
+                                                 :default-options="props.maps['password_rule']"
                                                  :placeholder="false"
                                                  :is-ajax="false" >
                                         </select2>
@@ -73,7 +73,7 @@
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['url_rule']"
                                                  :disabled="!props.url"
-                                                 :default-options="props.data.maps['url_rule']"
+                                                 :default-options="props.maps['url_rule']"
                                                  :placeholder="false"
                                                  :is-ajax="false" >
                                         </select2>
@@ -85,7 +85,7 @@
 
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="logo" :options='{"name": "品牌LOGO", "required": false}' :datas="props">
+                            <edit-item key-name="logo" :options='{"name": props.transField("Brand logo"), "required": false}' :datas="props">
                                 <template slot="input-item">
                                     <upload :width="370" :height="201"  v-model="props.data.row['logo']"
                                             :disabled="!props.url"
@@ -95,7 +95,7 @@
                             </edit-item>
 
 
-                            <edit-item key-name="account_day_by_sign_at" :options='{"name": "签单日期计算业务月份", "required": false}' :datas="props">
+                            <edit-item key-name="account_day_by_sign_at" :options='{"name": props.transField("Business month calculated by signing date"), "required": false}' :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <el-input-number   class="w-100" :min="0" :max="28" size="medium" v-model="props.data.row['account_day_by_sign_at']" :disabled="!props.url" :step="1">
@@ -111,7 +111,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="order" :options='{"name": "排序", "required": false}' :datas="props">
+                            <edit-item key-name="order" :options='{"name": props.transField("Sort"), "required": false}' :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <el-input-number class="w-100" :min="0" size="medium" v-model="props.data.row['order']"
@@ -120,7 +120,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="account_at_merge" :options='{"name": "合并预计结算月份开关", "required": false}'
+                            <edit-item key-name="account_at_merge" :options='{"name": props.transField("Consolidated expected settlement month"), "required": false}'
                                        :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
@@ -140,22 +140,22 @@
                                 <template slot="input-item">
                                     <hide-more :tool="count(array_get(props,'data.maps.bank_ids',[]))>33">
                                         <template>
-                                            <div v-for="(item,index) in props.data.maps['bank_ids']" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" v-if="index<=33">
+                                            <div v-for="(item,index) in props.maps['bank_ids']" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" v-if="index<=33">
                                                 <icheck v-model="props.data.row['bank_ids']" :option="index" :disabled="!props.url" :label="item"> {{item}}</icheck>
                                             </div>
                                         </template>
                                         <template slot="hide">
-                                            <div v-for="(item,index) in props.data.maps['bank_ids']" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" v-if="index>33">
+                                            <div v-for="(item,index) in props.maps['bank_ids']" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" v-if="index>33">
                                                 <icheck v-model="props.data.row['bank_ids']" :option="index" :disabled="!props.url" :label="item"> {{item}}</icheck>
                                             </div>
                                         </template>
                                     </hide-more>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="description" :options='{"name": "描述", "required": false,"type":"textarea","title":"提示信息"}' :datas="props">
+                            <edit-item key-name="description" :options='{"name": props.transField("Describe"), "required": false,"type":"textarea","title":"提示信息"}' :datas="props">
                             </edit-item>
                         </div>
-                        <edit-item :options='{"name": "投保须知", "required": false,"title":"提示信息"}' :key-name="'insure_notify'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <edit-item :options='{"name": props.transField("Insurance notice"), "required": false,"title":"提示信息"}' :key-name="'insure_notify'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <template slot="input-item">
                                 <div>
                                     <editor-md v-model="props.data.row['insure_notify']" :disabled="!props.url">
@@ -212,7 +212,8 @@
         },
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'firms',
                     id: 'edit', //多个组件同时使用时唯一标识
                     url: '', //数据表请求数据地址
                     params: this.$router.currentRoute.query || {}

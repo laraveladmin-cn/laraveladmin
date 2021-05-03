@@ -11,9 +11,9 @@ class Year extends Model
 {
 
     use BaseModel,SoftDeletes; //基础模型
-    //数据表名称
+    //数据表Name
     protected $table = 'years';
-    //批量赋值白名单
+    //批量赋Value白名单
     protected $fillable = [
        'name',
        'value',
@@ -23,22 +23,22 @@ class Year extends Model
     protected $hidden = ['deleted_at'];
     //日期字段
     protected $dates = ['created_at','updated_at','deleted_at'];
-    //字段值map
+    //字段Valuemap
     protected $fieldsShowMaps = [];
-    //字段默认值
+    //字段默认Value
     protected $fieldsDefault = [
         'name' => '',
         'value' => 0
     ];
-    //字段说明值
+    //字段说明Value
     protected $fieldsName = [
         'id' => 'ID',
-        'name' => '名称',
-        'value' => '值',
-        'description' => '描述',
-        //'created_at' => '创建时间',
-        //'updated_at' => '修改时间',
-        //'deleted_at' => '删除时间'
+        'name' => 'Name',
+        'value' => 'Value',
+        'description' => 'Describe',
+        //'created_at' => 'Created At',
+        //'updated_at' => 'Updated At',
+        //'deleted_at' => 'Deleted At'
     ];
 
     /**

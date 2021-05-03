@@ -8,11 +8,11 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '名称', required: true}"  :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'), required: true}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="full_name" :options="{name: '全称', required: true}"  :datas="props">
+                            <edit-item key-name="full_name" :options="{name: props.transField('Full name'), required: true}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="url" :options='{"name": "网站地址", "required": false,title:"http://或https://开头"}' :datas="props">
+                            <edit-item key-name="url" :options='{"name": props.transField("Website address"), "required": false,title:"http://或https://开头"}' :datas="props">
                                 <template slot="input-item">
                                     <div class="input-group">
                                         <input
@@ -60,6 +60,7 @@
         data(){
             return {
                 options:{
+                    lang_table:'agent_systems',
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}

@@ -307,6 +307,154 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "agent_systems": {
+                "fields": {
+                    "Name": "名稱",
+                    "Full name": "全稱",
+                    "Website address": "網站地址",
+                    "User name": "用戶名",
+                    "Password": "密碼",
+                    "Binding IP": "綁定IP",
+                    "Server unique ID": "服務器唯一標識",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "banks": {
+                "fields": {
+                    "Name": "名稱",
+                    "Full name": "全稱",
+                    "Sort": "排序",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "classifys": {
+                "fields": {
+                    "Name": "名稱",
+                    "Remarks": "備註",
+                    "Parent ID": "父級ID",
+                    "Hierarchy": "層級",
+                    "Left border": "左邊界",
+                    "Right border": "右邊界",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "firms": {
+                "fields": {
+                    "Name": "名稱",
+                    "Full name": "全稱",
+                    "Type": "類型",
+                    "Company website": "公司網站",
+                    "Brand logo": "品牌LOGO",
+                    "Agent account rules": "代理帳號規則",
+                    "Proxy account password rules": "代理帳號密碼規則",
+                    "Fixed password value": "固定密碼值",
+                    "Business month calculated by signing date": "簽單日期計算業務月份",
+                    "Business month calculated by return receipt date": "交回執日期計算業務月份",
+                    "Link rules": "連結規則",
+                    "Link Rule Template": "連結規則範本",
+                    "Describe": "描述",
+                    "Sort": "排序",
+                    "Consolidated expected settlement month": "合併預計結算月份開關",
+                    "Docking services": "對接服務",
+                    "Insurance notice": "投保須知",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": {
+                    "type": {
+                        "Life insurance": "壽險",
+                        "Property insurance": "財險"
+                    },
+                    "uname_rule": {
+                        "No rules": "無規則",
+                        "Agent number": "代理人工號",
+                        "ID number": "身份證號",
+                        "Phone number": "手機號碼"
+                    },
+                    "password_rule": {
+                        "No rules": "無規則",
+                        "Last 6 digits of ID card": "身份證後6比特",
+                        "Fixed value": "固定值"
+                    },
+                    "url_rule": {
+                        "No rules": "無規則",
+                        "Account template rules": "帳號範本規則"
+                    },
+                    "service_api": {
+                        "National treasure": "國寶"
+                    }
+                }
+            },
+            "pclassifys": {
+                "fields": {
+                    "Name": "名稱",
+                    "Remarks": "備註",
+                    "Parent ID": "父級ID",
+                    "Hierarchy": "層級",
+                    "Left border": "左邊界",
+                    "Right border": "右邊界",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "products": {
+                "fields": [],
+                "maps": {
+                    "is_long_time": {
+                        "Short-term": "短期",
+                        "Long-term": "長期"
+                    },
+                    "class": {
+                        "Traditional products": "傳統型產品",
+                        "New products": "新型產品"
+                    },
+                    "buy_type": {
+                        "Personal": "個人",
+                        "Group": "團體"
+                    },
+                    "pay_type": {
+                        "One time payment": "一次性交費",
+                        "Payment by installments": "分期交費",
+                        "Flexible payment": "靈活交費"
+                    },
+                    "attr": {
+                        "Nothing": "無",
+                        "Student FPA": "學生平安險",
+                        "Exclusive products for women": "女性專屬產品",
+                        "Exclusive products for children": "少兒專屬產品",
+                        "Exclusive products for the elderly": "老年專屬產品",
+                        "Aviation accident insurance": "航空意外險"
+                    },
+                    "status": {
+                        "Halt the sales": "停售",
+                        "On sale": "在售",
+                        "Out of service": "停用"
+                    }
+                }
+            },
+            "years": {
+                "fields": {
+                    "Name": "名稱",
+                    "Value": "值",
+                    "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
             }
         },
         "pages": {

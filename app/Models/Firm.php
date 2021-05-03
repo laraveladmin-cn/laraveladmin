@@ -12,7 +12,7 @@ class Firm extends Model
 
     use BaseModel; //基础模型
     use SoftDeletes; //软删除
-    //数据表名称
+    //数据表Name
     protected $table = 'firms';
     protected $tableComment = '保险公司';
     //批量赋值白名单
@@ -42,26 +42,26 @@ class Firm extends Model
     //字段值map
     protected $fieldsShowMaps = [
         'type'=>[
-            "1"=>'寿险',
-            "2"=>'财险'
+            "1"=>'Life insurance',
+            "2"=>'Property insurance'
          ],
         'uname_rule'=>[
-            "0"=>'无规则',
-            "1"=>'代理人工号',
-            "2"=>'身份证号',
-            "3"=>'手机号码'
+            "0"=>'No rules',
+            "1"=>'Agent number',
+            "2"=>'ID number',
+            "3"=>'Phone number'
          ],
         'password_rule'=>[
-            "0"=>'无规则',
-            "1"=>'身份证后6位',
-            "2"=>'固定值'
+            "0"=>'No rules',
+            "1"=>'Last 6 digits of ID card',
+            "2"=>'Fixed value'
          ],
         'url_rule'=>[
-            "0"=>'无规则',
-            "1"=>'账号模板规则'
+            "0"=>'No rules',
+            "1"=>'Account template rules'
          ],
         'service_api'=>[
-            "guobao"=>'国宝'
+            "guobao"=>'National treasure'
          ]
     ];
     //字段默认值
@@ -83,25 +83,25 @@ class Firm extends Model
         'insure_notify'=>''
     ];
 
-    //字段名称
+    //字段Name
     protected $fieldsName = [
-        'name'=>'名称',
-        'full_name'=>'全称',
-        'type'=>'类型',
-        'url'=>'公司网站',
-        'logo'=>'品牌LOGO',
-        'uname_rule'=>'代理账号规则',
-        'password_rule'=>'代理账号密码规则',
-        'default_password'=>'固定密码值',
-        'account_day_by_sign_at'=>'签单日期计算业务月份',
-        'account_day_by_end_at'=>'交回执日期计算业务月份',
-        'url_rule'=>'链接规则',
-        'url_rule_tpl'=>'链接规则模板',
-        'description'=>'描述',
-        'order'=>'排序',
-        'account_at_merge'=>'合并预计结算月份开关',
-        'service_api'=>'对接服务',
-        'insure_notify'=>'投保须知',
+        'name'=>'Name',
+        'full_name'=>'Full name',
+        'type'=>'Type',
+        'url'=>'Company website',
+        'logo'=>'Brand logo',
+        'uname_rule'=>'Agent account rules',
+        'password_rule'=>'Proxy account password rules',
+        'default_password'=>'Fixed password value',
+        'account_day_by_sign_at'=>'Business month calculated by signing date',
+        'account_day_by_end_at'=>'Business month calculated by return receipt date',
+        'url_rule'=>'Link rules',
+        'url_rule_tpl'=>'Link rules模板',
+        'description'=>'Describe',
+        'order'=>'Sort',
+        'account_at_merge'=>'Consolidated expected settlement month',
+        'service_api'=>'Docking services',
+        'insure_notify'=>'Insurance notice',
         'id'=>'ID',
     ];
 

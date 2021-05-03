@@ -8,9 +8,9 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '名称', required: true}"  :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'), required: true}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="value" :options="{name: '值', required: true}"  :datas="props">
+                            <edit-item key-name="value" :options="{name: props.transField('Value'), required: true}"  :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <el-input-number
@@ -25,7 +25,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="description" :options='{"name": "描述", "required": false,"type":"textarea","title":"提示信息"}' :datas="props">
+                            <edit-item key-name="description" :options='{"name": props.transField("Describe"), "required": false,"type":"textarea","title":"提示信息"}' :datas="props">
                             </edit-item>
                         </div>
                     </template>
@@ -52,6 +52,7 @@
         data(){
             return {
                 options:{
+                    lang_table:'years',
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}
