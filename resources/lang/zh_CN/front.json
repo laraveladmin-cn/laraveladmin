@@ -202,10 +202,10 @@
                     },
                     "use": [],
                     "env": {
-                        "Development environment": "开发环境",
-                        "Testing environment": "测试环境",
-                        "Pre launch environment": "预上线环境",
-                        "Formal environment": "正式环境"
+                        "local": "开发环境",
+                        "testing": "测试环境",
+                        "staging": "预上线环境",
+                        "production": "正式环境"
                     },
                     "group": [],
                     "middleware": []

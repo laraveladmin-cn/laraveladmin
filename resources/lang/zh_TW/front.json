@@ -202,10 +202,10 @@
                     },
                     "use": [],
                     "env": {
-                        "Development environment": "開發環境",
-                        "Testing environment": "測試環境",
-                        "Pre launch environment": "預上線環境",
-                        "Formal environment": "正式環境"
+                        "local": "開發環境",
+                        "testing": "測試環境",
+                        "staging": "預上線環境",
+                        "production": "正式環境"
                     },
                     "group": [],
                     "middleware": []

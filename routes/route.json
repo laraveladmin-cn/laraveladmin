@@ -41,7 +41,7 @@
             "url": "/admin/index",
             "parent_id": 1,
             "method": [],
-            "status": "显示",
+            "status": "Display",
             "_id": 2
         },
         {
@@ -54,8 +54,8 @@
             "method": [
                 "get"
             ],
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 3
         },
@@ -82,7 +82,7 @@
             "description": "User management group",
             "parent_id": 2,
             "method": [],
-            "status": "显示",
+            "status": "Display",
             "_id": 5
         },
         {
@@ -92,7 +92,7 @@
             "description": "Other settings group",
             "parent_id": 2,
             "method": [],
-            "status": "显示",
+            "status": "Display",
             "_id": 38
         },
         {
@@ -134,8 +134,8 @@
             "method": [
                 "get"
             ],
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "action": "DevelopmentsController@index",
             "env": "local",
@@ -193,7 +193,7 @@
             "description": "Personal Center Group",
             "parent_id": 2,
             "method": [],
-            "status": "显示",
+            "status": "Display",
             "_id": 61
         },
         {
@@ -206,8 +206,8 @@
             "method": [
                 "get"
             ],
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 62
         },
@@ -235,8 +235,8 @@
             "method": [
                 "get"
             ],
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 64
         },
@@ -298,8 +298,8 @@
             "method": [
                 "get"
             ],
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "home",
             "_id": 125
         },
@@ -327,8 +327,8 @@
             "method": [
                 "get"
             ],
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "home",
             "_id": 127
         },
@@ -368,8 +368,8 @@
             "url": "/open/index",
             "parent_id": 1,
             "method": [],
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "open",
             "_id": 130
         },
@@ -411,7 +411,7 @@
             "method": [
                 "get"
             ],
-            "is_page": "是",
+            "is_page": "Yes",
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
@@ -496,7 +496,7 @@
             "method": [
                 "get"
             ],
-            "is_page": "是",
+            "is_page": "Yes",
             "group": "open",
             "action": "RegisterController@index",
             "_id": 138
@@ -544,7 +544,7 @@
             "method": [
                 "get"
             ],
-            "is_page": "是",
+            "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
             "_id": 141
@@ -652,8 +652,8 @@
             "description": "Ordinary users",
             "url": "/admin/users",
             "parent_id": 6,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 6,
             "end_id": 16
@@ -665,8 +665,8 @@
             "description": "Role list",
             "url": "/admin/roles",
             "parent_id": 6,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "item_name": "Role",
             "_id": 14,
@@ -679,8 +679,8 @@
             "description": "Log list",
             "url": "/admin/logs",
             "parent_id": 6,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "item_name": "Journal",
             "_id": 22,
@@ -693,8 +693,8 @@
             "description": "Background users",
             "url": "/admin/admins",
             "parent_id": 6,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 30,
             "end_id": 40
@@ -706,8 +706,8 @@
             "description": "Menu list",
             "url": "/admin/menus",
             "parent_id": 7,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "item_name": "Menu",
             "_id": 39,
@@ -756,8 +756,8 @@
             "description": "System settings",
             "url": "/admin/configs",
             "parent_id": 7,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 49,
             "end_id": 56
