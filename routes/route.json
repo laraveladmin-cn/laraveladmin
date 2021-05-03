@@ -261,7 +261,7 @@
             "description": "Insurance management",
             "parent_id": 2,
             "method": [],
-            "status": "显示",
+            "status": "Display",
             "_id": 66
         },
         {
@@ -271,7 +271,7 @@
             "description": "Insurance management",
             "parent_id": 2,
             "method": [],
-            "status": "显示",
+            "status": "Display",
             "_id": 115
         },
         {
@@ -769,8 +769,8 @@
             "description": "Insurance company",
             "url": "/admin/firms",
             "parent_id": 81,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 67,
             "end_id": 98
@@ -782,8 +782,8 @@
             "description": "Insurance products",
             "url": "/admin/products",
             "parent_id": 81,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 75,
             "end_id": 106
@@ -795,8 +795,8 @@
             "description": "Bank management",
             "url": "/admin/banks",
             "parent_id": 81,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "item_name": "Bank",
             "_id": 83,
@@ -809,8 +809,8 @@
             "description": "Insurance classification",
             "url": "/admin/classifys",
             "parent_id": 81,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 91,
             "end_id": 114
@@ -822,8 +822,8 @@
             "description": "Insurance grouping",
             "url": "/admin/pclassifys",
             "parent_id": 81,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 99,
             "end_id": 122
@@ -835,8 +835,8 @@
             "description": "Payment period",
             "url": "/admin/years",
             "parent_id": 81,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 107,
             "end_id": 130
@@ -848,8 +848,8 @@
             "description": "Cooperative company",
             "url": "/admin/agent-systems",
             "parent_id": 82,
-            "is_page": "是",
-            "status": "显示",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
             "_id": 116,
             "end_id": 138
