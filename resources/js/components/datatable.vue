@@ -405,7 +405,7 @@
                     if(!key || key.indexOf('.')==-1){
                         table = this.options.lang_table || this.data.excel.sheet;
                     }else {
-                        let arr = key.split('.');
+                        let arr = key.replace('.$index','').split('.');
                         arr.pop();
                         let key1 = arr.join('.');
                         let table1 = arr.pop();
