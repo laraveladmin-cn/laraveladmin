@@ -195,10 +195,10 @@
                     },
                     "use": [],
                     "env": {
-                        "Development environment": "Development environment",
-                        "Testing environment": "Testing environment",
-                        "Pre launch environment": "Pre launch environment",
-                        "Formal environment": "Formal environment"
+                        "local": "Development environment",
+                        "testing": "Testing environment",
+                        "staging": "Pre launch environment",
+                        "production": "Formal environment"
                     },
                     "group": [],
                     "middleware": []
