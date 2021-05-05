@@ -60,7 +60,7 @@ trait ResourceController
             $model = '\App\Models\\' . Str::studly($val);
             $item = [];
             $relation_id = Request::input('where.' . $value, 0);
-            if ( $relation_id ) {
+            if ($relation_id) {
                 $fields = isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'];
                 $item = collect($model::select($fields)
                     ->find($relation_id))->toArray();
@@ -117,63 +117,63 @@ trait ResourceController
         //搜集模型表内所有字段
         $model = $this->bindModel->getModel();
         $allow_order = collect($this->bindModel->getFieldsName())->keys();
-        if ( ! $allow_order->count() ){
+        if (!$allow_order->count()) {
             $allow_order = $allow_order->merge($this->bindModel->getFillables());
         }
         $allow_order = $allow_order->push($model->getKeyName()); //主键
         $class = get_class($model);
-        if ( isset($class::$isTreeModel) ) {
+        if (isset($class::$isTreeModel)) {
             $allow_order = $allow_order->merge(collect($this->bindModel->getTreeField())->values());
         }
         //自动完成的日期字段
-        if ( isset($model->timestamps) && $model->timestamps ) {
-            $allow_order = $allow_order->merge([$model->getUpdatedAtColumn(),$model->getCreatedAtColumn()]);
+        if (isset($model->timestamps) && $model->timestamps) {
+            $allow_order = $allow_order->merge([$model->getUpdatedAtColumn(), $model->getCreatedAtColumn()]);
         }
         //软删除字段
-        if ( method_exists($model,'getDeletedAtColumn') ) {
+        if (method_exists($model, 'getDeletedAtColumn')) {
             $allow_order = $allow_order->merge([$model->getDeletedAtColumn()]);
         }
         //隐藏字段
-        if ( method_exists($model,'getHidden') ) {
+        if (method_exists($model, 'getHidden')) {
             $allow_order = $allow_order->merge($model->getHidden());
         }
         //统计字段可排序
-        if ( isset($this->showIndexFieldsCount) && $this->showIndexFieldsCount ) {
-            $showIndexFieldsCount = collect($this->showIndexFieldsCount)->map(function ($value,$key){
-                if ( is_string($value) ) {
+        if (isset($this->showIndexFieldsCount) && $this->showIndexFieldsCount) {
+            $showIndexFieldsCount = collect($this->showIndexFieldsCount)->map(function ($value, $key) {
+                if (is_string($value)) {
                     $str = $value;
                 } else {
                     $str = $key;
                 }
-                if ( Str::contains(strtolower($str),' as ') ) {
-                    return collect(explode($str,' '))->last();
+                if (Str::contains(strtolower($str), ' as ')) {
+                    return collect(explode($str, ' '))->last();
                 } else {
-                    return $str.'_count';
+                    return $str . '_count';
                 }
             })->toArray();
             $allow_order = $allow_order->merge($showIndexFieldsCount);
         }
         //自定义更多可排序字段
-        if ( isset($this->allowOrderMore) && $this->allowOrderMore ) {
-            $allow_order = $allow_order->merge(is_array($this->allowOrderMore)?$this->allowOrderMore:[$this->allowOrderMore]);
+        if (isset($this->allowOrderMore) && $this->allowOrderMore) {
+            $allow_order = $allow_order->merge(is_array($this->allowOrderMore) ? $this->allowOrderMore : [$this->allowOrderMore]);
         }
         $allow_order = $allow_order->filter()->unique()->implode(',');
-        $allow_order = $allow_order?':'.$allow_order:'';
+        $allow_order = $allow_order ? ':' . $allow_order : '';
         $validate_rules = [
-            'where'=>'sometimes|nullable|array',
-            'order'=>'sometimes|nullable|array|array_keys_in_array'.$allow_order
+            'where' => 'sometimes|nullable|array',
+            'order' => 'sometimes|nullable|array|array_keys_in_array' . $allow_order
         ];
-        $order = Request::input('order',[]);
-        if( $order && is_array($order) ) {
-            collect($order)->map(function ($value,$key)use(&$validate_rules){
+        $order = Request::input('order', []);
+        if ($order && is_array($order)) {
+            collect($order)->map(function ($value, $key) use (&$validate_rules) {
                 $validate_rules['order.' . $key] = 'in:asc,desc';
             });
         }
-        collect($this->sizer)->map(function ($value,$key)use(&$validate_rules){
-            $key = str_replace('.',' ',$key);
-            if ( is_array($value) ) {
+        collect($this->sizer)->map(function ($value, $key) use (&$validate_rules) {
+            $key = str_replace('.', ' ', $key);
+            if (is_array($value)) {
                 $validate_rules['where.' . $key] = 'sometimes|nullable|array';
-                collect($value)->map(function ($value ,$key1) use (&$validate_rules ,$key){
+                collect($value)->map(function ($value, $key1) use (&$validate_rules, $key) {
                     $key1 = str_replace('.', ' ', $key1);
                     $this->whereValidate($validate_rules, $value, $key . '.' . $key1);
                 });
@@ -181,8 +181,8 @@ trait ResourceController
                 $this->whereValidate($validate_rules, $value, $key);
             }
         });
-        $data = collect(Request::all())->map(function ($item,$key){
-            if ( $key == 'where' && $item && is_array($item) ) {
+        $data = collect(Request::all())->map(function ($item, $key) {
+            if ($key == 'where' && $item && is_array($item)) {
                 $item1 = [];
                 collect($item)->map(function ($value, $key1) use (&$item1) {
                     $key1 = str_replace('.', ' ', $key1);
@@ -195,23 +195,23 @@ trait ResourceController
         })->toArray();
 
         $validator = Validator::make($data, $validate_rules);
-        if ( $validator->fails() ) {
+        if ($validator->fails()) {
             throw ValidationException::withMessages($validator->errors()->toArray());
         }
     }
 
-    public function whereValidate(&$validate_rules, $value, $key )
+    public function whereValidate(&$validate_rules, $value, $key)
     {
-        if ( $value == 'between' ) {
-            $validate_rules['where.'.$key] = 'sometimes|nullable|array';
-            $validate_rules['where.'.$key.'.0'] = 'sometimes|nullable|string';
-            $validate_rules['where.'.$key.'.1'] = 'sometimes|nullable|string';
-        } else if ( $value == 'in' ) {
-            $validate_rules['where.'.$key] = 'sometimes|nullable|sting_or_array';
-        } else if ( in_array($value,['&','|']) ) {
-            $validate_rules['where.'.$key] = 'sometimes|nullable|numeric';
+        if ($value == 'between') {
+            $validate_rules['where.' . $key] = 'sometimes|nullable|array';
+            $validate_rules['where.' . $key . '.0'] = 'sometimes|nullable|string';
+            $validate_rules['where.' . $key . '.1'] = 'sometimes|nullable|string';
+        } else if ($value == 'in') {
+            $validate_rules['where.' . $key] = 'sometimes|nullable|sting_or_array';
+        } else if (in_array($value, ['&', '|'])) {
+            $validate_rules['where.' . $key] = 'sometimes|nullable|numeric';
         } else {
-            $validate_rules['where.'.$key] = 'sometimes|nullable|string';
+            $validate_rules['where.' . $key] = 'sometimes|nullable|string';
         }
     }
 
@@ -227,10 +227,10 @@ trait ResourceController
             ? $fields : array_merge([$this->newBindModel()->getKeyName()], $fields));
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel();
-        $perPage = Request::input('per_page',$this->per_page);
-        $perPage = $perPage>200?200:$perPage; //限制单页最大获取数据量
+        $perPage = Request::input('per_page', $this->per_page);
+        $perPage = $perPage > 200 ? 200 : $perPage; //限制单页最大获取数据量
         //获取分页数据
-        if ( !Request::input('page') || Request::input('get_count') ) {
+        if (!Request::input('page') || Request::input('get_count')) {
             $data = (clone $obj)->paginate($perPage);
         } else { //不统计条数
             $data = (clone $obj)->simplePaginate($perPage);
@@ -253,10 +253,10 @@ trait ResourceController
         $ids = is_array($ids) ? $ids : [$ids];
         $ids = $this->handleDestroyReturn($ids);
         $res = false;
-        if ( $ids ) {
+        if ($ids) {
             $res = $this->bindModel->whereIn('id', $ids)->delete();
         }
-        if ( $res === false ) {
+        if ($res === false) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Delete failed!')//'删除失败!'
             ], 500)], 500);
@@ -273,7 +273,7 @@ trait ResourceController
     {
         $validate = $this->getValidateRule();
         $validator = Validator::make($request->all(), $validate);
-        if ( $validator->fails() ) {
+        if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
                 'message' => trans('The given data was invalid.') //提交数据无效
@@ -289,7 +289,7 @@ trait ResourceController
         $data['updated_at'] = date('Y-m-d H:i:s');
         //新增
         $item = $this->bindModel->create($data);
-        if ( $item === false ) {
+        if ($item === false) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Create a failure!') //创建失败
             ], 500)], 500);
@@ -299,7 +299,7 @@ trait ResourceController
         $primaryKey = $this->newBindModel()->getKeyName() ?: 'id';
 
         return Response::returns([
-            $primaryKey=>$item[$primaryKey],
+            $primaryKey => $item[$primaryKey],
             'alert' => alert([
                 'message' => trans('Creating a successful!') //创建成功
             ])
@@ -314,7 +314,7 @@ trait ResourceController
         $request = Request::instance();
         $validate = $this->getValidateRule();
         $validator = Validator::make($request->all(), $validate);
-        if ( $validator->fails() ) {
+        if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
                 'message' => trans('The given data was invalid.')
@@ -328,13 +328,13 @@ trait ResourceController
         $data = $this->handDateFields($data, $this->importExcelDateFields);
         $data = $this->handlePostEditReturn($data);
         $item = $this->bindModel->find($id);
-        if ( ! $item ) {
+        if (!$item) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Data does not exist!')//'数据不存在!'
             ], 404)], 404);
         }
         $res = $item->update($data);
-        if ( $res === false ) {
+        if ($res === false) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Modify the failure!') //修改失败
             ], 500)], 500);
@@ -379,24 +379,23 @@ trait ResourceController
         return $obj;
     }
 
-    protected function getFieldsMap($showFields, $model, $decode = false)
+    protected function getFieldsMap($showFields, $model, $decode = false,$trans=false)
     {
-        $res = $model->getFieldsMap('', $decode);
-        foreach ( $showFields as $k => $showField ) {
-            if ( is_array($showField) ) {
-                $res[$k] = $this->getFieldsMap($showField, $model->$k()->getRelated(), $decode);
+        $res = $model->getFieldsMap('', $decode,$trans);
+        foreach ($showFields as $k => $showField) {
+            if (is_array($showField)) {
+                $res[$k] = $this->getFieldsMap($showField, $model->$k()->getRelated(), $decode,$trans);
             }
         }
-
         return $res;
     }
 
 
-    protected function mapsRelations($showFields, $model,$prefix='', &$res = [])
+    protected function mapsRelations($showFields, $model, $prefix = '', &$res = [])
     {
-        foreach ( $showFields as $k => $showField ) {
-            if ( is_array($showField) ) {
-                $key = $prefix?$prefix.'.'.$k:$k;
+        foreach ($showFields as $k => $showField) {
+            if (is_array($showField)) {
+                $key = $prefix ? $prefix . '.' . $k : $k;
                 $res[$key] = $model->$k()->getModel()->getTable();
                 $this->mapsRelations($showField, $model->$k()->getRelated());
             }
@@ -414,8 +413,8 @@ trait ResourceController
         $result = [];
         $defult = $this->getDefault($model);//默认值
         $fields = [];
-        foreach ( $data as $key => $row ) {
-            if ( is_array($row) ) {
+        foreach ($data as $key => $row) {
+            if (is_array($row)) {
                 $result[$key] = $this->editDefaultFields($row, $model->$key()->getRelated());
             } else {
                 $fields[] = $row;
@@ -569,13 +568,13 @@ trait ResourceController
     {
         $res = [];
         $select_fields = $this->selectFields($fields);
-        if ( ! $select_fields ) {
+        if (!$select_fields) {
             $res = $model->getKeyName() ? array_merge(array_merge($res, $model->getFillable()), [$model->getKeyName()]) : array_merge($res, $model->getFillable());
         } else {
             $res = (in_array($model->getKeyName(), $select_fields) || !$model->getKeyName()) ? $select_fields : array_merge($select_fields, [$model->getKeyName()]);
         }
-        foreach ( $fields as $key => $field ) {
-            if ( is_array($field) ) {
+        foreach ($fields as $key => $field) {
+            if (is_array($field)) {
                 $res[$key] = $this->getExportFields($field, $model->$key()->getRelated());
             }
         }
@@ -589,18 +588,18 @@ trait ResourceController
         $maps = $model->getFieldsName();//本表字段说明
         $tableComment = $tableCommentFlog ? $model->getTableComment() : ''; //表备注
         collect($names)->map(function ($value, $key) use (&$res, $maps, $tableComment) {
-            if ( Str::startsWith($key, '$index') ) {
+            if (Str::startsWith($key, '$index')) {
                 $key1 = str_replace('$index.', '', $key);
             } else {
                 $key1 = $key;
             }
-            if ( ! str_contains(str_replace('$index.', '', $key1), '.') ) {
-                if ( ! $value ) {
+            if (!str_contains(str_replace('$index.', '', $key1), '.')) {
+                if (!$value) {
                     $value1 = $tableComment . Arr::get($maps, $key1, $key);
                 } else {
                     $value1 = $value;
                 }
-                if ( $key1 != $key ) {
+                if ($key1 != $key) {
                     $res['$index'][$key1] = $value1;
                 } else {
                     $res[$key] = $value1;
@@ -608,14 +607,14 @@ trait ResourceController
             } else {
                 $relations = explode('.', $key);
                 $relation = array_shift($relations);
-                if ( !isset($res[$relation]) || !is_array($res[$relation]) ) {
+                if (!isset($res[$relation]) || !is_array($res[$relation])) {
                     $res[$relation] = [];
                 }
                 $res[$relation][implode('.', $relations)] = $value;
             }
         });
         $res = collect($res)->map(function ($value, $key) use ($model) {
-            if ( is_array($value) && $key != '$index' ) {
+            if (is_array($value) && $key != '$index') {
                 return $this->relationName($value, $model->$key()->getModel(), true);
             } else {
                 return $value;
@@ -630,12 +629,12 @@ trait ResourceController
      */
     protected function getExportFieldsName($fieldsName, $model)
     {
-        if ( ! $fieldsName ) {
+        if (!$fieldsName) {
             return $model->getFieldsName();
         }
         $names = []; //所有含有键名称字段
         collect($fieldsName)->map(function ($value, $key) use (&$names) {
-            if ( is_numeric($key) ) {
+            if (is_numeric($key)) {
                 $names[$value] = '';
             } else {
                 $names[$key] = $value;
@@ -649,6 +648,51 @@ trait ResourceController
         })->toArray();
     }
 
+    protected function transField($name, $table)
+    {
+        return trans_path($name, '_shared.tables.' . $table . '.fields');
+    }
+
+    protected function transMap($name,$field, $table)
+    {
+        return trans_path($name, '_shared.tables.' . $table . '.maps.'.$field);
+    }
+
+    protected function getTable($key,$mapsRelations=[])
+    {
+        $table = $this->newBindModel()->getTable();
+        if (!$key || Str::contains($key, '.')) {
+            $arr = collect(explode('.', str_replace('.$index', '', $key)));
+            $arr->pop();
+            $key1 = $arr->implode('.');
+            $table1 = $arr->pop();
+            if (!Str::endsWith($table1, 's')) {
+                $table1 = $table1 . 's';
+            };
+            $table = Arr::get($mapsRelations, $key1, '') ?: $table1;
+        }
+        return $table;
+    }
+
+    /**
+     * 翻译map
+     */
+    protected function transMaps($maps,$mapsRelations=[], $key = '')
+    {
+        $maps = collect($maps)->map(function ($value, $index) use ( $mapsRelations,$key) {
+            if ($value && is_string($value)) {
+                return $this->transMap($value, collect(explode('.',$key))->last(),$this->getTable($key,$mapsRelations));
+            } else if ($value && is_array($value)) {
+                $key1 = $key ? $key . '.' . $index : $index;
+                return $this->transMaps($value, $mapsRelations, $key1);
+            } else {
+                return $value;
+            }
+        })->toArray();
+        return $maps;
+
+    }
+
 
     /**
      * 导出数据
@@ -658,7 +702,7 @@ trait ResourceController
         $this->selectValidate();
         $model = $this->newBindModel();
         $exportFieldsName = $this->exportFieldsName;
-        if ( $exportFieldsName ) {
+        if ($exportFieldsName) {
             $exportFieldsName = $this->getExportFieldsName($this->exportFieldsName, $model);
             $all_titles = [];
             $keys = array_keys($exportFieldsName);
@@ -669,13 +713,16 @@ trait ResourceController
         }
         //指定查询字段
         $export_fileds = Request::get('export_fileds', []);
-        if ( $export_fileds ) {
+        if ($export_fileds) {
             $fields_key = collect($keys)->intersect($export_fileds)->values()->toArray();
         } else { //导出所有
             $fields_key = $keys;
         }
-        $title = collect($fields_key)->map(function ($item) use ($all_titles, $exportFieldsName) {
-            return isset($exportFieldsName[$item]) ? $exportFieldsName[$item] : Arr::get($all_titles, $item, '');
+        $mapsRelations = $this->mapsRelations($this->exportFields, $model);
+        $title = collect($fields_key)->map(function ($item) use ($all_titles, $exportFieldsName,$mapsRelations) {
+            $value = isset($exportFieldsName[$item]) ? $exportFieldsName[$item] : Arr::get($all_titles, $item, '');
+            $value = $this->transField($value, $this->getTable($item,$mapsRelations));
+            return $value;
         });
         $fields = $this->selectFields($this->exportFields);
         $fields and $this->bindModel = $this->bindModel()->select(in_array($model->getKeyName(), $fields)
@@ -683,13 +730,13 @@ trait ResourceController
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel('exportFields');
         //获取分页数据
-        if ( ! Request::input('page') ) {
+        if (!Request::input('page')) {
             $data = $obj->paginate(200)->toArray();
             //表头数据放入
         } else { //不统计条数
             $data = $obj->simplePaginate(200)->toArray();
         }
-        $maps = $this->getFieldsMap($this->exportFields, $model);
+        $maps = $this->getFieldsMap($this->exportFields, $model,false,true);
         $multipleFields = collect($this->exportFieldsName)->filter(function ($v, $k) {
             return str_contains($k, '$index');
         })->keys()->toArray();
@@ -710,8 +757,8 @@ trait ResourceController
                     }
                 }
                 $value = $this->handleExportValue($item, $key, $maps, $value);
-                if(is_array($value)){
-                    $value = json_encode($value,JSON_UNESCAPED_UNICODE);
+                if (is_array($value)) {
+                    $value = json_encode($value, JSON_UNESCAPED_UNICODE);
                 }
 
                 return $value;
@@ -719,7 +766,7 @@ trait ResourceController
 
             return $row;
         });
-        if ( ! Request::input('page') ) {
+        if (!Request::input('page')) {
             $data['data'] = $data['data']
                 ->prepend($title->toArray()) //标题
                 ->prepend($fields_key); //key
@@ -745,7 +792,7 @@ trait ResourceController
     public function import()
     {
         $model = $this->newBindModel();
-        $maps = $this->getFieldsMap($this->exportFields, $model, true);
+        $maps = $this->getFieldsMap($this->exportFields, $model, true,true);
         $multipleFields = collect($this->exportFieldsName)->filter(function ($v, $k) {
             return str_contains($k, '$index');
         })->keys()->toArray();
@@ -755,7 +802,7 @@ trait ResourceController
         $bindModel = $this->getModelNamespace() . $this->getResourceModel();
         $errors = []; //错误数据项
         $relation_keys = []; //关系数据
-        $maps1 = $this->getFieldsMap($this->exportFields, $model);
+        $maps1 = $this->getFieldsMap($this->exportFields, $model,false,true);
         $datas = collect(Request::input('datas', []) ?: [])->map(function ($row) use ($maps, $default, &$relation_keys, $model) { //数据解码
             $relation_row = [];
             $row = collect($row)->map(function ($item, $key) use ($maps, $default, &$relation_keys, $model, &$relation_row) {
@@ -788,7 +835,7 @@ trait ResourceController
             })->merge($relation_row)->toArray();
 
             return $row;
-        })->filter(function ($item) use (&$errors, $key_name, $relation_keys,$maps1, $multipleFields) { //数据验证
+        })->filter(function ($item) use (&$errors, $key_name, $relation_keys, $maps1, $multipleFields) { //数据验证
             $validator = Validator::make($item, $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
             $flog = !$validator->fails(); //验证状态
             if ($validator->fails()) {
@@ -799,7 +846,7 @@ trait ResourceController
                 $item = collect($item)->except($relation_keys)->toArray();
                 //数据转码
                 $item = collect($item)->except($relation_keys)->toArray();
-                $item = collect($item)->map(function ($value,$key) use ( $item,$maps1, $multipleFields) {
+                $item = collect($item)->map(function ($value, $key) use ($item, $maps1, $multipleFields) {
                     $map = Arr::get($maps1, $key);
                     if (in_array($key, $multipleFields)) {
                         $k_arr = explode('.$index.', $key);

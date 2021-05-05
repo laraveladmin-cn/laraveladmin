@@ -22,7 +22,7 @@
                             <template slot="content" slot-scope="props">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <h3 class="text-center">
-                                        {{$tp('Command name:')}} {{props.data.row.chinese}}
+                                        {{$tp('Command name:')}} {{$tp(props.data.row.name)}}
                                     </h3>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
