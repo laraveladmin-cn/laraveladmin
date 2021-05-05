@@ -843,10 +843,10 @@
                 "Theme": "Tema",
                 "Personal center": "Centro Pessoal",
                 "User avatars": "Perfil do utilizador",
-                "You have {number} messages": "Você TEM {número} mensagens",
-                "You have {number} reminders": "Você TEM {número} lembretes",
-                "You have {number} tasks": "Você TEM {número} tarefas",
-                "{number} users joined today": "Há {número} usuários se juntando hoje",
+                "You have {number} messages": "Você TEM {number} mensagens",
+                "You have {number} reminders": "Você TEM {number} lembretes",
+                "You have {number} tasks": "Você TEM {number} tarefas",
+                "{number} users joined today": "Há {number} usuários se juntando hoje",
                 "Date of entry : {date}": "Data de entrada: {data}",
                 "Blue": "Azul",
                 "White": "Branco",
@@ -863,7 +863,7 @@
                 "My birthday": "Meu aniversário.",
                 "Your birthday": "SEU aniversário",
                 "Recent Activities": "Atividades Recentes",
-                "{number} minutes ago": "{número} minutos atrás"
+                "{number} minutes ago": "{number} minutos atrás"
             },
             "firms": {
                 "http or https begins": "Comece com'http://'ou'HTTPS:/'",
@@ -906,7 +906,7 @@
     "Temporarily no data": "Não existem dados disponíveis",
     "article": "Tira",
     "page": "Página",
-    "Article {number}": "Há itens {número} no total,",
+    "Article {number}": "Há itens {number} no total,",
     "Please enter keywords": "Por favor, insira palavras-chave",
     "Loading": "Carregando",
     "Import data": "Importar dados",
