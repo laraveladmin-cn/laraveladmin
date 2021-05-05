@@ -282,15 +282,41 @@ trait BaseModel{
      * 获取字段显示映射信息
      * @return array
      */
-    public function scopeGetFieldsMap($query,$key='',$decode=false){
+    public function scopeGetFieldsMap($query,$key='',$decode=false,$trans=false){
         if(!isset($this->fieldsShowMaps)){
             $maps = [];
         }elseif($key){
-            $maps = $decode?array_flip(Arr::get($this->fieldsShowMaps,$key)):Arr::get($this->fieldsShowMaps,$key);
+            $maps = Arr::get($this->fieldsShowMaps,$key);
+            if($trans){
+                $maps = collect($maps)->map(function ($value)use($key){
+                    if($value && is_string($value)){
+                        return trans_path($value,'_shared.tables.'.$this->getTable().'.maps.'.$key);
+                    }else{
+                        return $value;
+                    }
+                })->toArray();
+            }
+            if($decode){
+                $maps = array_flip(collect($maps)->toArray());
+            }
         }else{
-            $maps = $decode?array_map(function ($map){
-                return array_flip($map);
-            },$this->fieldsShowMaps):$this->fieldsShowMaps;
+            $maps = $this->fieldsShowMaps;
+            if($trans){
+                $maps = collect($maps)->map(function ($map,$key){
+                    return collect($map)->map(function ($value)use($key){
+                        if($value && is_string($value)){
+                            return trans_path($value,'_shared.tables.'.$this->getTable().'.maps.'.$key);
+                        }else{
+                            return $value;
+                        }
+                    })->toArray();
+                })->toArray();
+            }
+            if($decode){
+                $maps = collect($maps)->map(function ($map){
+                    return array_flip($map);
+                })->toArray();
+            }
         }
         return collect($maps);
     }
