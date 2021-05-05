@@ -141,7 +141,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <li v-if="locales.length>1">
                                 <a>
                                     <language :value="language" @change="setLanguage"></language>
                                 </a>
@@ -625,7 +625,8 @@
                 'version',
                 'icp',
                 'alerts',
-                'language'
+                'language',
+                'locales'
             ]),
             ...mapState('menu',{
                 menus:state => state.menus,
