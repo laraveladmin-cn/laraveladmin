@@ -67,11 +67,13 @@
                                 <div class="input-group">
                                         <div class="input-group-btn" v-if="options.keywordGroup">
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                {{data.keywordsMap[data.options.where['_key']]}}
+                                                {{$tp(data.keywordsMap[data.options.where['_key']])}}
                                                 <span class="caret"></span>
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li v-for="(value,index) in data.keywordsMap" @click="changeKeywords(index)"><a>{{value}}</a></li>
+                                                <li v-for="(value,index) in data.keywordsMap" @click="changeKeywords(index)">
+                                                    <a>{{$tp(value)}}</a>
+                                                </li>
                                             </ul>
                                         </div>
                                         <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="_placeholder" class="form-control"  type="text">
@@ -339,7 +341,9 @@
             }
         },
         data(){
+            let langPath = this.options.langPath || {};
             return {
+                ...langPath,
                 show_shade:false,
                 sizer_more:false, //更多筛选条件显示隐藏
                 loading:false, //数据加载中状态

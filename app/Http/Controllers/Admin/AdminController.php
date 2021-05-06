@@ -46,8 +46,8 @@ class AdminController extends Controller
      * @var array
      */
     protected $keywordsMap = [
-        'user.name|user.uname' => '用户名称',
-        'roles.name' => '角色名称',
+        'user.name|user.uname' => 'User name',
+        'roles.name' => 'Role Name',
     ];
 
     /**
