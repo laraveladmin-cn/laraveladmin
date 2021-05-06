@@ -505,7 +505,11 @@
                 "Total number of back-end administrators": "Número de administradores de Fundo",
                 "Total number of roles": "Número total de papéis",
                 "Total number of users": "Número de utilizadores",
-                "Total number of menus": "Número total de menus"
+                "Total number of menus": "Número total de menus",
+                "admins": {
+                    "User name": "Nome do utilizador",
+                    "Role Name": "Nome do Papel"
+                }
             }
         },
         "datas": {

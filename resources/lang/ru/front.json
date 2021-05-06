@@ -505,7 +505,11 @@
                 "Total number of back-end administrators": "фоновый администратор",
                 "Total number of roles": "количество ролей",
                 "Total number of users": "Число абонентов",
-                "Total number of menus": "Общее количество меню"
+                "Total number of menus": "Общее количество меню",
+                "admins": {
+                    "User name": "Имя пользователя",
+                    "Role Name": "имя роли"
+                }
             }
         },
         "datas": {

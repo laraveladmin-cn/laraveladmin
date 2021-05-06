@@ -505,7 +505,11 @@
                 "Total number of back-end administrators": "백그라운드 관리자 수",
                 "Total number of roles": "캐릭터 총수",
                 "Total number of users": "사용자 수",
-                "Total number of menus": "메뉴 총수"
+                "Total number of menus": "메뉴 총수",
+                "admins": {
+                    "User name": "사용자 이름",
+                    "Role Name": "캐릭터 명칭"
+                }
             }
         },
         "datas": {
