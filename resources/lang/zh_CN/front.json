@@ -307,7 +307,11 @@
                 "Total number of back-end administrators": "后台管理员数",
                 "Total number of roles": "角色总数",
                 "Total number of users": "用户数",
-                "Total number of menus": "菜单总数"
+                "Total number of menus": "菜单总数",
+                "admins": {
+                    "User name": "用户名称",
+                    "Role Name": "角色名称"
+                }
             }
         },
         "datas": {
