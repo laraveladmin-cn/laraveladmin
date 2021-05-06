@@ -781,5 +781,10 @@
     .navbar-custom-menu a{
         cursor:pointer;
     }
+    @media screen and (max-width: 768px) {
+        .control-sidebar-bg, .control-sidebar {
+            top: 50px
+        }
+    }
 
 </style>
