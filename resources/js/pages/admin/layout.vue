@@ -232,7 +232,7 @@
                     <div class="pull-right hidden-xs">
                         <b>{{$t('System version:')}}</b> {{version}}
                     </div>
-                    <strong>Copyright &copy; 2020
+                    <strong>{{$t('Copyright')}}
                         <a target="_blank" href="http://www.laraveladmin.cn">{{name}}</a>
                     </strong>
                     <span v-if="icp">
