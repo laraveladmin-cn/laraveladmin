@@ -44,7 +44,7 @@
                                 @change="$emit('change',itemObj[_key])"
                                 :disabled="!datas.url || options.disabled">
                             <option v-if="typeof options['placeholderValue']!='undefined'" :value="options['placeholderValue']">
-                                {{options.placeholder || '请选择'}}
+                                {{options.placeholder || $t('Please select')}}
                             </option>
                             <option v-for="(val,index) in array_get(datas.data.maps,_map_key)" :value="index">{{val}}</option>
                         </select>
