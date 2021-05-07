@@ -8,11 +8,11 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '路径',type:'text', rules:'required',title:''}" :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Route'),type:'text', rules:'required',title:''}" :datas="props">
                             </edit-item>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <edit-item key-name="description" :options="{name: '内容',type:'markdown', rules:'required',title:''}" :datas="props">
+                            <edit-item key-name="description" :options="{name: props.transField('Content'),type:'markdown', rules:'required',title:''}" :datas="props">
                                 <template slot="input-item">
                                     <editor-md v-model="props.data.row['description']"
                                                placeholder="请输入内容"
@@ -40,7 +40,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'docs',
                     id: 'edit', //多个组件同时使用时唯一标识
                     url: '', //数据表请求数据地址
                     params: null, //默认筛选条件

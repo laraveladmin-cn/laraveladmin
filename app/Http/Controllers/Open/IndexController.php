@@ -93,6 +93,7 @@ class IndexController extends Controller
             ->map(function ($value){
                 return str_replace('_','-',$value);
             })
+            ->values()
             ->toArray();
         $data['version'] = 'V1.0.0';
         $max_age = 3600*24;

@@ -56,7 +56,12 @@
         },
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
+            let shared_page = {
+                "{lang_path}":'_shared.pages.admin.admins',
+                '{lang_root}':''
+            };
             return {
+                ...shared_page,
                 shared_rule_name: {
                     "{lang_path}": '_shared.datas.roles.name',
                     '{lang_root}': ''
@@ -70,6 +75,7 @@
                     btnSizerMore:false, //更多筛选条件按钮
                     keywordKey:'user.name|user.uname', //关键字查询key
                     keywordGroup:true, //是否为选项组
+                    langPath:shared_page,
                     keywordPlaceholder:()=>{
                         return this.$t('enter',{name:this.$t('name')});
                     },//'请输入名称',

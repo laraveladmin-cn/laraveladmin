@@ -19,7 +19,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'features',
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
                     operation: true, //操作列
@@ -32,12 +33,12 @@
                     defOptions: null, //默认筛选条件
                     fields: {
                         id: {name: "ID", order: true},
-                        name: {name: "名称", order: true},
-                        icon: {name: "图标", order: true, type: "icon"},
-                        color: {name: "颜色", order: true, type: "color"},
-                        description: {name: "描述", order: true, type: "textarea",limit:25},
-                        created_at: {name: "创建时间", order: true, type: "time"},
-                        updated_at: {name: "修改时间", order: true, type: "time"}
+                        name: {name: "Name", order: true},
+                        icon: {name: "Icon", order: true, type: "icon"},
+                        color: {name: "Colour", order: true, type: "color"},
+                        description: {name: "Describe", order: true, type: "textarea",limit:25},
+                        created_at: {name: "Created At", order: true, type: "time"},
+                        updated_at: {name: "Updated At", order: true, type: "time"}
                     },
                 }
             };

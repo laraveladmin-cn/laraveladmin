@@ -8,18 +8,18 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '名称',type:'text', rules:'required|min:2|max:20',title:''}" :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'),type:'text', rules:'required|min:2|max:20',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="url" :options="{name: '链接地址',type:'url', rules:'url',title:''}" :datas="props">
+                            <edit-item key-name="url" :options="{name: props.transField('Link address'),type:'url', rules:'url',title:''}" :datas="props">
                             </edit-item>
 
-                            <edit-item key-name="description" :options="{name: '描述',type:'textarea', rules:'required|min:20|max:150',title:''}" :datas="props">
+                            <edit-item key-name="description" :options="{name: props.transField('Describe'),type:'textarea', rules:'required|min:20|max:150',title:''}" :datas="props">
                             </edit-item>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="logo" :options="{name: 'LOGO图片地址',type:'url', rules:'required|url',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="logo" :options="{name: 'LOGO图片',type:'upload', rules:'required|url',title:''}" :datas="props">
+                            <edit-item key-name="logo" :options="{name: props.transField('Logo image'),type:'upload', rules:'required|url',title:''}" :datas="props">
                                 <template slot="input-item">
                                     <upload v-model="props.data.row['logo']"
                                             :width="250"
@@ -48,7 +48,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'technologys',
                     id: 'edit', //多个组件同时使用时唯一标识
                     url: '', //数据表请求数据地址
                     params: null, //默认筛选条件

@@ -8,18 +8,18 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '名称',type:'text', rules:'required|min:2|max:8',title:'请填入2-8个字符'}" :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'),type:'text', rules:'required|min:2|max:8',title:'请填入2-8个字符'}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="icon" :options="{name: '图标',type:'icon', rules:'alpha_dash',title:''}" :datas="props">
+                            <edit-item key-name="icon" :options="{name: props.transField('Icon'),type:'icon', rules:'alpha_dash',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="color" :options="{name: '颜色',type:'color', rules:'required',title:''}" :datas="props">
+                            <edit-item key-name="color" :options="{name: props.transField('Colour'),type:'color', rules:'required',title:''}" :datas="props">
                                 <template slot="input-item">
                                     <colorpicker v-model="props.data.row['color']"
                                                  :disabled="!props.url">
                                     </colorpicker>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="description" :options="{name: '描述',type:'textarea', rules:'required|min:20|max:100',title:'请填入20-100个字符'}" :datas="props">
+                            <edit-item key-name="description" :options="{name: props.transField('Describe'),type:'textarea', rules:'required|min:20|max:100',title:'请填入20-100个字符'}" :datas="props">
                             </edit-item>
                         </div>
                     </template>
@@ -41,7 +41,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'features',
                     id: 'edit', //多个组件同时使用时唯一标识
                     url: '', //数据表请求数据地址
                     params: null, //默认筛选条件

@@ -105,7 +105,7 @@
                                 </ul>
                             </li>
                             <user-menu></user-menu>
-                            <li>
+                            <li v-if="locales.length>1">
                                 <a>
                                     <language :value="language" @change="setLanguage"></language>
                                 </a>
@@ -595,7 +595,8 @@
                 'icp',
                 'alerts',
                 'name',
-                'language'
+                'language',
+                'locales'
             ]),
             ...mapState('menu',{
                 menus:state => state.menus,
@@ -759,4 +760,10 @@
     .navbar-custom-menu a{
         cursor:pointer;
     }
+    @media screen and (max-width: 768px) {
+        .control-sidebar-bg, .control-sidebar {
+            top: 50px
+        }
+    }
+
 </style>

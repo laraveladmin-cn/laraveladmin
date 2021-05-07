@@ -33,11 +33,11 @@ class Doc extends Model
     //字段说明
     protected $fieldsName = [
         'id' => 'ID',
-        'name' => '路径',
-        'description' => '内容',
-        'created_at' => '创建时间',
-        'updated_at' => '修改时间',
-        'deleted_at' => '删除时间'
+        'name' => 'Route',
+        'description' => 'Content',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'deleted_at' => 'Deleted At'
     ];
 
 

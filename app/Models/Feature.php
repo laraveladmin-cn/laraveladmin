@@ -12,7 +12,7 @@ class Feature extends Model
 
     use BaseModel; //基础模型
     use SoftDeletes; //软删除
-    //数据表名称
+    //数据表Name
     protected $table = 'features';
     //批量赋值白名单
     protected $fillable = [
@@ -37,13 +37,13 @@ class Feature extends Model
     //字段说明
     protected $fieldsName = [
         'id' => 'ID',
-        'name' => '名称',
-        'icon' => '图标',
-        'color' => '颜色',
-        'description' => '描述',
-        'created_at' => '创建时间',
-        'updated_at' => '修改时间',
-        'deleted_at' => '删除时间'
+        'name' => 'Name',
+        'icon' => 'Icon',
+        'color' => 'Colour',
+        'description' => 'Describe',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'deleted_at' => 'Deleted At'
     ];
 
 

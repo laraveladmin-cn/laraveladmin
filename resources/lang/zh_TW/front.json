@@ -80,7 +80,27 @@
             "Personal data": "個人資料",
             "Role": "角色",
             "Journal": "日誌",
-            "Menu": "選單"
+            "Menu": "選單",
+            "Using documents": "使用檔案",
+            "Use documentation": "使用檔案說明",
+            "Document acquisition": "檔案獲取",
+            "Document get document content": "檔案獲取檔案內容",
+            "Sign in": "登入",
+            "Register": "注册",
+            "Forget password page": "忘記密碼頁面",
+            "Home page": "首頁",
+            "Official website homepage": "官網主頁",
+            "Download": "下載",
+            "Project source code download": "項目源碼下載",
+            "Online demo": "線上演示",
+            "Demo Online": "線上演示demo",
+            "Reward": "打賞",
+            "Contact us": "聯繫我們",
+            "New features": "新增功能",
+            "Using technology": "使用科技",
+            "Using related technology stack": "使用相關科技棧",
+            "Document content": "檔案內容",
+            "Document grouping": "檔案分組"
         },
         "tables": {
             "users": {
@@ -195,10 +215,10 @@
                     },
                     "use": [],
                     "env": {
-                        "Development environment": "開發環境",
-                        "Testing environment": "測試環境",
-                        "Pre launch environment": "預上線環境",
-                        "Formal environment": "正式環境"
+                        "local": "開發環境",
+                        "testing": "測試環境",
+                        "staging": "預上線環境",
+                        "production": "正式環境"
                     },
                     "group": [],
                     "middleware": []
@@ -300,6 +320,40 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "docs": {
+                "fields": {
+                    "Route": "路徑",
+                    "Content": "內容",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "features": {
+                "fields": {
+                    "Name": "名稱",
+                    "Icon": "圖標",
+                    "Colour": "顏色",
+                    "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "technologys": {
+                "fields": {
+                    "Name": "名稱",
+                    "Link address": "連結位址",
+                    "Logo image": "LOGO圖片",
+                    "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -307,7 +361,11 @@
                 "Total number of back-end administrators": "後臺管理員數",
                 "Total number of roles": "角色總數",
                 "Total number of users": "用戶數",
-                "Total number of menus": "選單總數"
+                "Total number of menus": "選單總數",
+                "admins": {
+                    "User name": "用戶名稱",
+                    "Role Name": "角色名稱"
+                }
             }
         },
         "datas": {
@@ -321,7 +379,8 @@
             },
             "roles": {
                 "name": {
-                    "Superadministrator": "超級管理員"
+                    "Superadministrator": "超級管理員",
+                    "Ordinary Member": "普通會員"
                 },
                 "description": {
                     "Have all operation permissions": "擁有所有操作許可權。"

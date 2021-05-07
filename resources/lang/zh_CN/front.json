@@ -80,7 +80,27 @@
             "Personal data": "个人资料",
             "Role": "角色",
             "Journal": "日志",
-            "Menu": "菜单"
+            "Menu": "菜单",
+            "Using documents": "使用文档",
+            "Use documentation": "使用文档说明",
+            "Document acquisition": "文档获取",
+            "Document get document content": "文档获取文档内容",
+            "Sign in": "登录",
+            "Register": "注册",
+            "Forget password page": "忘记密码页面",
+            "Home page": "首页",
+            "Official website homepage": "官网主页",
+            "Download": "下载",
+            "Project source code download": "项目源码下载",
+            "Online demo": "在线演示",
+            "Demo Online": "在线演示demo",
+            "Reward": "打赏",
+            "Contact us": "联系我们",
+            "New features": "新增功能",
+            "Using technology": "使用技术",
+            "Using related technology stack": "使用相关技术栈",
+            "Document content": "文档内容",
+            "Document grouping": "文档分组"
         },
         "tables": {
             "users": {
@@ -195,10 +215,10 @@
                     },
                     "use": [],
                     "env": {
-                        "Development environment": "开发环境",
-                        "Testing environment": "测试环境",
-                        "Pre launch environment": "预上线环境",
-                        "Formal environment": "正式环境"
+                        "local": "开发环境",
+                        "testing": "测试环境",
+                        "staging": "预上线环境",
+                        "production": "正式环境"
                     },
                     "group": [],
                     "middleware": []
@@ -300,6 +320,40 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "docs": {
+                "fields": {
+                    "Route": "路径",
+                    "Content": "内容",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "features": {
+                "fields": {
+                    "Name": "名称",
+                    "Icon": "图标",
+                    "Colour": "颜色",
+                    "Describe": "描述",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "technologys": {
+                "fields": {
+                    "Name": "名称",
+                    "Link address": "链接地址",
+                    "Logo image": "LOGO图片",
+                    "Describe": "描述",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -307,7 +361,11 @@
                 "Total number of back-end administrators": "后台管理员数",
                 "Total number of roles": "角色总数",
                 "Total number of users": "用户数",
-                "Total number of menus": "菜单总数"
+                "Total number of menus": "菜单总数",
+                "admins": {
+                    "User name": "用户名称",
+                    "Role Name": "角色名称"
+                }
             }
         },
         "datas": {
@@ -321,7 +379,8 @@
             },
             "roles": {
                 "name": {
-                    "Superadministrator": "超级管理员"
+                    "Superadministrator": "超级管理员",
+                    "Ordinary Member": "普通会员"
                 },
                 "description": {
                     "Have all operation permissions": "拥有所有操作权限。"

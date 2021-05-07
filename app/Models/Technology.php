@@ -12,7 +12,7 @@ class Technology extends Model
 
     use BaseModel; //基础模型
     use SoftDeletes; //软删除
-    //数据表名称
+    //数据表Name
     protected $table = 'technologys';
     //批量赋值白名单
     protected $fillable = [
@@ -37,13 +37,13 @@ class Technology extends Model
     //字段说明
     protected $fieldsName = [
         'id' => 'ID',
-        'name' => '名称',
-        'url' => '链接地址',
-        'logo' => 'LOGO图片',
-        'description' => '描述',
-        'created_at' => '创建时间',
-        'updated_at' => '修改时间',
-        'deleted_at' => '删除时间'
+        'name' => 'Name',
+        'url' => 'Link address',
+        'logo' => 'Logo image',
+        'description' => 'Describe',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'deleted_at' => 'Deleted At'
     ];
 
 

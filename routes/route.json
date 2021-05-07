@@ -11,7 +11,9 @@
         "home": {
             "prefix": "/home",
             "namespace": "\\App\\Http\\Controllers\\Home",
-            "middleware": ["auth"]
+            "middleware": [
+                "auth"
+            ]
         },
         "_home": {
             "prefix": "/home",
@@ -21,726 +23,756 @@
         "admin": {
             "prefix": "/admin",
             "namespace": "\\App\\Http\\Controllers\\Admin",
-            "middleware": ["log","auth","admin"]
+            "middleware": [
+                "log",
+                "auth",
+                "admin"
+            ]
         }
     },
     "menus": [
         {
             "id": 1,
-            "name": "菜单列表",
-            "icons": "",
-            "url":"",
-            "method":0,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 0,
-            "disabled": 0,
-            "description" : "根节点,所有菜单的父节点"
+            "name": "Menu list",
+            "description": "Root node, the parent node of all menus",
+            "method": [],
+            "_id": 1
         },
         {
             "id": 2,
-            "name": "运营",
+            "name": "Operate",
             "icons": "fa-dashboard",
-            "url":"/admin/index",
-            "method":0,
-            "status":1,
-            "is_page": 0,
+            "description": "Operation module",
+            "url": "/admin/index",
             "parent_id": 1,
-            "disabled": 0,
-            "description" : "运营模块"
-        },
-        {
-            "id": 3,
-            "name": "主页",
-            "icons": "fa-user",
-            "url":"/home/index",
-            "method":0,
-            "status":1,
-            "is_page": 0,
-            "parent_id": 1,
-            "disabled": 0,
-            "description" : "主页模块"
-        },
-        {
-            "id": 4,
-            "name": "官网",
-            "icons": "fa-home",
-            "url":"/open/index",
-            "method":0,
-            "status":1,
-            "is_page": 0,
-            "parent_id": 1,
-            "disabled": 0,
-            "description" : "官网模块"
+            "method": [],
+            "status": "Display",
+            "_id": 2
         },
         {
             "id": 5,
-            "name": "后台主页",
+            "name": "Backstage home page",
             "icons": "fa-home",
-            "url":"/admin/index",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "Backstage home page",
+            "url": "/admin/index",
             "parent_id": 2,
-            "disabled": 0,
-            "description" : "后台主页",
-            "group": "admin"
-        },
-        {
-            "id": 6,
-            "name": "用户管理",
-            "icons": "fa-users",
-            "url":"",
-            "method":0,
-            "status":1,
-            "is_page": 0,
-            "parent_id": 2,
-            "disabled": 0,
-            "description" : "用户管理组"
-        },
-        {
-            "id": 7,
-            "name": "其它设置",
-            "icons": "fa-gears",
-            "url":"",
-            "method":0,
-            "status":1,
-            "is_page": 0,
-            "parent_id": 2,
-            "disabled": 0,
-            "description" : "其它设置组"
-        },
-        {
-            "id": 8,
-            "name": "个人中心",
-            "icons": "fa-user",
-            "url":"",
-            "method":0,
-            "status":1,
-            "is_page": 0,
-            "parent_id": 2,
-            "disabled": 0,
-            "description" : "个人中心组"
-        },
-        {
-            "id": 57,
-            "name": "个人资料",
-            "icons": "fa-heart",
-            "url":"/admin/personage/index",
-            "method":1,
-            "status":1,
-            "is_page": 1,
-            "parent_id": 8,
-            "disabled": 0,
-            "description" : "个人资料",
-            "group": "admin"
-        },
-        {
-            "id": 58,
-            "name": "提交编辑个人资料",
-            "icons": "fa-heart",
-            "url":"/admin/personage/index",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 57,
-            "disabled": 0,
-            "description" : "提交编辑个人资料",
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "action": "PersonageController@postIndex"
-        },
-        {
-            "id": 59,
-            "name": "修改密码",
-            "icons": "fa-lock",
-            "url":"/admin/personage/password",
-            "method":1,
-            "status":1,
-            "is_page": 1,
-            "parent_id": 8,
-            "disabled": 0,
-            "description" : "修改密码",
-            "group": "admin"
-        },
-        {
-            "id": 60,
-            "name": "提交编辑修改密码",
-            "icons": "fa-lock",
-            "url":"/admin/personage/password",
-            "method":4,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 59,
-            "disabled": 0,
-            "description" : "提交编辑修改密码",
-            "group": "admin",
-            "action": "PersonageController@putPassword"
-        },
-        {
-            "id": 61,
-            "name": "获取配置信息",
-            "icons": "",
-            "url":"/open/config",
-            "method":1,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "获取配置信息",
-            "group": "open",
-            "action": "IndexController@config"
-        },
-        {
-            "id": 62,
-            "name": "更新token",
-            "icons": "",
-            "url":"/open/token",
-            "method":1,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "获取配置信息",
-            "group": "open",
-            "action": "IndexController@refreshToken",
-            "use": "web"
-        },
-        {
-            "id": 63,
-            "name": "登录",
-            "icons": "",
-            "url":"/open/login",
-            "method":1,
-            "status":1,
-            "is_page": 1,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "登录页面",
-            "group": "open",
-            "action": "LoginController@showLoginForm",
-            "as": "login"
-        },
-        {
-            "id": 64,
-            "name": "提交登录",
-            "icons": "",
-            "url":"/open/login",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 63,
-            "disabled": 0,
-            "description" : "提交登录",
-            "group": "open",
-            "action": "LoginController@login",
-            "use": ["web","api"],
-            "middleware": ["log"]
-        },
-        {
-            "id": 65,
-            "name": "退出登录",
-            "icons": "",
-            "url":"/open/logout",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "退出登录",
-            "group": "open",
-            "action": "LoginController@logout",
-            "as": "logout",
-            "use": ["web","api"]
-        },
-        {
-            "id": 66,
-            "name": "注册",
-            "icons": "",
-            "url":"/open/register",
-            "method":1,
-            "status":1,
-            "is_page": 1,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "注册页面",
-            "group": "open",
-            "action": "RegisterController@index"
-        },
-        {
-            "id": 67,
-            "name": "发送注册短信",
-            "icons": "",
-            "url":"/open/register/send",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 66,
-            "disabled": 0,
-            "description" : "发送注册短信",
-            "group": "open",
-            "action": "RegisterController@send",
-            "use": ["web","api"]
-        },{
-            "id": 68,
-            "name": "提交注册",
-            "icons": "",
-            "url":"/open/register",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 66,
-            "disabled": 0,
-            "description" : "提交注册",
-            "group": "open",
-            "action": "RegisterController@register",
-            "use": ["web","api"]
-        },
-        {
-            "id": 69,
-            "name": "忘记密码页面",
-            "icons": "",
-            "url":"/open/password",
-            "method":1,
-            "status":2,
-            "is_page": 1,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "忘记密码页面",
-            "group": "open",
-            "action": "ForgotPasswordController@index"
-        },{
-            "id": 70,
-            "name": "忘记密码邮件发送",
-            "icons": "",
-            "url":"/open/forgot-password/send",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 69,
-            "disabled": 0,
-            "description" : "忘记密码邮件发送",
-            "group": "open",
-            "action": "ForgotPasswordController@send"
-        },{
-            "id": 71,
-            "name": "忘记密码短信发送",
-            "icons": "",
-            "url":"/open/forgot-password/send-sms",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 69,
-            "disabled": 0,
-            "description" : "忘记密码短信发送",
-            "group": "open",
-            "action": "ForgotPasswordController@sendSMS"
-        },{
-            "id": 72,
-            "name": "忘记密码提交重置密码",
-            "icons": "",
-            "url":"/open/forgot-password/reset-password",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 69,
-            "disabled": 0,
-            "description" : "忘记密码提交重置密码",
-            "group": "open"
-        },{
-            "id": 73,
-            "name": "获取用户信息",
-            "icons": "",
-            "url":"/open/user",
-            "method":1,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "获取用户信息",
-            "group": "open",
-            "action": "IndexController@user"
-        },{
-            "id": 74,
-            "name": "获取菜单信息",
-            "icons": "",
-            "url":"/open/menu",
-            "method":1,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "获取菜单信息",
-            "group": "open",
-            "action": "IndexController@menu"
-        },
-        {
-            "id": 75,
-            "name": "极验验证",
-            "icons": "",
-            "url":"/open/geetest",
-            "method":1,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "极验验证",
-            "group": "open",
-            "action": "GeetestController@geetest",
-            "use": ["web","api"]
-        },
-        {
-            "id": 76,
-            "name": "三方登录",
-            "icons": "",
-            "url":"/open/other-login/{type}",
-            "method":1,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 63,
-            "disabled": 0,
-            "description" : "三方登录",
-            "group": "open",
-            "action": "LoginController@otherLogin",
-            "use": "web"
-        },
-        {
-            "id": 77,
-            "name": "三方登录后回调",
-            "icons": "",
-            "url":"/open/other-login-callback/{type}",
-            "method":1,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 76,
-            "disabled": 0,
-            "description" : "三方登录",
-            "group": "open",
-            "action": "LoginController@otherLoginCallback",
-            "use": ["web","api"]
-        },
-        {
-            "id": 78,
-            "name": "提交编辑修改密码",
-            "icons": "fa-lock",
-            "url":"/home/personage/password",
-            "method":4,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 3,
-            "disabled": 0,
-            "description" : "提交编辑修改密码",
-            "group": "home",
-            "action": "PersonageController@putPassword"
-        },
-        {
-            "id": 79,
-            "name": "获取连接唯一标识",
-            "icons": "",
-            "url":"/open/client-id",
-            "method":1,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "获取连接唯一标识",
-            "group": "open",
-            "action": "IndexController@clientId"
+            "_id": 3
         },
         {
             "id": 80,
-            "name": "错误日志下载",
-            "icons": "",
-            "url":"/admin/down-log",
-            "method":1,
-            "status":2,
-            "is_page": 0,
+            "name": "Error log Download",
+            "description": "Error log Download",
+            "url": "/admin/down-log",
             "parent_id": 5,
-            "disabled": 0,
-            "description" : "错误日志下载",
+            "method": [
+                "get"
+            ],
             "group": "admin",
             "action": "IndexController@downLog",
-            "use": ["web"]
+            "use": [
+                "web"
+            ],
+            "_id": 4
         },
         {
-            "id": 81,
-            "name": "首页",
-            "icons": "fa-home",
-            "url":"/open/index",
-            "method":1,
-            "status":1,
-            "is_page": 1,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "官网主页",
-            "group": "open",
-            "action": "IndexController@getIndex"
+            "id": 6,
+            "name": "User management",
+            "icons": "fa-users",
+            "description": "User management group",
+            "parent_id": 2,
+            "method": [],
+            "status": "Display",
+            "_id": 5
         },
         {
-            "id": 82,
-            "name": "下载",
-            "icons": "fa-download",
-            "url":"https://gitee.com/laravel-admin/laraveladmin",
-            "method":0,
-            "status":1,
-            "is_page": 0,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "项目源码下载"
+            "id": 7,
+            "name": "Other settings",
+            "icons": "fa-gears",
+            "description": "Other settings group",
+            "parent_id": 2,
+            "method": [],
+            "status": "Display",
+            "_id": 38
         },
         {
-            "id": 83,
-            "name": "在线演示",
-            "icons": "fa-desktop",
-            "url":"https://demo.laraveladmin.cn",
-            "method":0,
-            "status":1,
-            "is_page": 0,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "在线演示demo"
-        },
-        {
-            "id": 84,
-            "name": "打赏",
-            "icons": "fa-phone",
-            "url":"/open/contact",
-            "method":1,
-            "status":1,
-            "is_page": 1,
-            "parent_id": 4,
-            "disabled": 0,
-            "description" : "联系我们",
-            "group": "open",
-            "action": "IndexController@contact"
-        },
-        {
-            "id": 85,
-            "name": "使用文档",
-            "icons": "fa-home",
-            "url":"/home/index",
-            "method":1,
-            "status":1,
-            "is_page": 1,
-            "parent_id": 3,
-            "disabled": 0,
-            "description" : "使用文档说明",
-            "group": "_home",
-            "action": "IndexController@index"
-        },{
-            "id": 102,
-            "name": "个人中心",
-            "icons": "fa-user",
-            "url":"",
-            "method":0,
-            "status":1,
-            "is_page": 0,
-            "parent_id": 3,
-            "disabled": 0,
-            "description" : "个人中心组"
-        },{
-            "id": 103,
-            "name": "个人资料",
-            "icons": "fa-heart",
-            "url":"/home/personage/index",
-            "method":1,
-            "status":1,
-            "is_page": 1,
-            "parent_id": 102,
-            "disabled": 0,
-            "description" : "个人资料",
-            "group": "home"
-        },
-        {
-            "id": 104,
-            "name": "提交编辑修改个人资料",
-            "icons": "fa-lock",
-            "url":"/home/personage/index",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 103,
-            "disabled": 0,
-            "description" : "提交编辑修改密码",
-            "group": "home",
-            "action": "PersonageController@postIndex"
-        },{
-            "id": 105,
-            "name": "修改密码",
-            "icons": "fa-lock",
-            "url":"/home/personage/password",
-            "method":1,
-            "status":1,
-            "is_page": 1,
-            "parent_id": 102,
-            "disabled": 0,
-            "description" : "修改密码",
-            "group": "home"
-        },
-        {
-            "id": 114,
-            "name": "文档获取",
-            "icons": "fa-file-code-o",
-            "url":"/home/docs/{any}",
-            "method":1,
-            "status":0,
-            "is_page": 0,
-            "parent_id": 3,
-            "disabled": 0,
-            "description" : "文档获取文档内容",
-            "group": "_home",
-            "action": "IndexController@getDocs"
-        },
-        {
-            "id": 115,
-            "name": "文件上传",
-            "icons": "fa-upload",
-            "url":"/home/upload/index",
-            "method":2,
-            "status":2,
-            "is_page": 0,
-            "parent_id": 3,
-            "disabled": 0,
-            "description" : "文件上传",
-            "group": "home",
-            "action": "UploadController@postIndex"
+            "id": 120,
+            "name": "Menu drag",
+            "icons": "fa-mouse-pointer",
+            "description": "Menu drag page data",
+            "url": "/admin/menus/tree",
+            "parent_id": 41,
+            "method": [
+                "get"
+            ],
+            "group": "admin",
+            "action": "MenuController@tree",
+            "_id": 47
         },
         {
             "id": 116,
-            "name": "开发辅助",
+            "name": "Development assistance",
             "icons": "fa-wrench",
-            "url":"/admin/developments/index",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "Development assistant function page",
+            "url": "/admin/developments/index",
             "parent_id": 7,
-            "disabled": 0,
-            "env": "local",
-            "description" : "开发辅助功能页面",
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "action": "DevelopmentsController@index"
+            "action": "DevelopmentsController@index",
+            "env": "local",
+            "_id": 80
         },
         {
             "id": 117,
-            "name": "编辑页面布局保存",
+            "name": "Edit page layout save",
             "icons": "fa-save",
-            "url":"/admin/developments/layout",
-            "method":2,
-            "status":2,
+            "description": "Submit edit page layout save",
+            "url": "/admin/developments/layout",
             "parent_id": 116,
-            "is_page": 0,
-            "disabled": 0,
-            "env": "local",
-            "description" : "提交编辑页面布局保存",
+            "method": [
+                "post"
+            ],
             "group": "admin",
-            "action": "DevelopmentsController@postLayout"
+            "action": "DevelopmentsController@postLayout",
+            "env": "local",
+            "_id": 81
         },
         {
             "id": 118,
-            "name": "数据表查询",
+            "name": "Data table query",
             "icons": "fa-table",
-            "url":"/admin/developments/tables",
-            "method":1,
-            "status":2,
-            "is_page": 0,
+            "description": "Data table name association query",
+            "url": "/admin/developments/tables",
             "parent_id": 116,
-            "disabled": 0,
-            "env": "local",
-            "description" : "数据表名称联想查询",
+            "method": [
+                "get"
+            ],
             "group": "admin",
-            "action": "DevelopmentsController@tables"
+            "action": "DevelopmentsController@tables",
+            "env": "local",
+            "_id": 82
         },
         {
             "id": 119,
-            "name": "命令执行",
+            "name": "Command execution",
             "icons": "fa-code",
-            "url":"/admin/developments/command",
-            "method":2,
-            "status":2,
-            "is_page": 0,
+            "description": "Submit the command for execution",
+            "url": "/admin/developments/command",
             "parent_id": 116,
-            "disabled": 0,
-            "env": "local",
-            "description" : "提交命令进行执行",
+            "method": [
+                "post"
+            ],
             "group": "admin",
-            "action": "DevelopmentsController@postCommand"
+            "action": "DevelopmentsController@postCommand",
+            "env": "local",
+            "_id": 83
+        },
+        {
+            "id": 8,
+            "name": "Personal Center",
+            "icons": "fa-user",
+            "description": "Personal Center Group",
+            "parent_id": 2,
+            "method": [],
+            "status": "Display",
+            "_id": 84
+        },
+        {
+            "id": 57,
+            "name": "Personal data",
+            "icons": "fa-heart",
+            "description": "Personal data",
+            "url": "/admin/personage/index",
+            "parent_id": 8,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 85
+        },
+        {
+            "id": 58,
+            "name": "Submit and edit personal data",
+            "icons": "fa-heart",
+            "description": "Submit and edit personal data",
+            "url": "/admin/personage/index",
+            "parent_id": 57,
+            "method": [
+                "post"
+            ],
+            "group": "admin",
+            "action": "PersonageController@postIndex",
+            "_id": 86
+        },
+        {
+            "id": 59,
+            "name": "Change Password",
+            "icons": "fa-lock",
+            "description": "Change Password",
+            "url": "/admin/personage/password",
+            "parent_id": 8,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 87
+        },
+        {
+            "id": 60,
+            "name": "Submit to edit to change password",
+            "icons": "fa-lock",
+            "description": "Submit to edit to change password",
+            "url": "/admin/personage/password",
+            "parent_id": 59,
+            "method": [
+                "put"
+            ],
+            "group": "admin",
+            "action": "PersonageController@putPassword",
+            "_id": 88
+        },
+        {
+            "id": 3,
+            "name": "Homepage",
+            "icons": "fa-user",
+            "description": "Home module",
+            "url": "/home/index",
+            "parent_id": 1,
+            "method": [],
+            "status": "Display",
+            "_id": 89
+        },
+        {
+            "id": 78,
+            "name": "Submit to edit to change password",
+            "icons": "fa-lock",
+            "description": "Submit to edit to change password",
+            "url": "/home/personage/password",
+            "parent_id": 3,
+            "method": [
+                "put"
+            ],
+            "group": "home",
+            "action": "PersonageController@putPassword",
+            "_id": 90
+        },
+        {
+            "id": 85,
+            "name": "Using documents",
+            "icons": "fa-home",
+            "description": "Use documentation",
+            "url": "/home/index",
+            "parent_id": 3,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "_home",
+            "action": "IndexController@index",
+            "_id": 91
+        },
+        {
+            "id": 102,
+            "name": "Personal Center",
+            "icons": "fa-user",
+            "description": "Personal Center Group",
+            "parent_id": 3,
+            "method": [],
+            "status": "Display",
+            "_id": 92
+        },
+        {
+            "id": 103,
+            "name": "Personal data",
+            "icons": "fa-heart",
+            "description": "Personal data",
+            "url": "/home/personage/index",
+            "parent_id": 102,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "home",
+            "_id": 93
+        },
+        {
+            "id": 104,
+            "name": "Submit and edit personal data",
+            "icons": "fa-lock",
+            "description": "Submit to edit to change password",
+            "url": "/home/personage/index",
+            "parent_id": 103,
+            "method": [
+                "post"
+            ],
+            "group": "home",
+            "action": "PersonageController@postIndex",
+            "_id": 94
+        },
+        {
+            "id": 105,
+            "name": "Change Password",
+            "icons": "fa-lock",
+            "description": "Change Password",
+            "url": "/home/personage/password",
+            "parent_id": 102,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "home",
+            "_id": 95
+        },
+        {
+            "id": 114,
+            "name": "Document acquisition",
+            "icons": "fa-file-code-o",
+            "description": "Document get document content",
+            "url": "/home/docs/{any}",
+            "parent_id": 3,
+            "method": [
+                "get"
+            ],
+            "group": "_home",
+            "action": "IndexController@getDocs",
+            "_id": 96
+        },
+        {
+            "id": 115,
+            "name": "File upload",
+            "icons": "fa-upload",
+            "description": "File upload",
+            "url": "/home/upload/index",
+            "parent_id": 3,
+            "method": [
+                "post"
+            ],
+            "group": "home",
+            "action": "UploadController@postIndex",
+            "_id": 97
+        },
+        {
+            "id": 4,
+            "name": "Official website",
+            "icons": "fa-home",
+            "description": "Official website module",
+            "url": "/open/index",
+            "parent_id": 1,
+            "method": [],
+            "status": "Display",
+            "_id": 98
+        },
+        {
+            "id": 61,
+            "name": "Get configuration information",
+            "description": "Get configuration information",
+            "url": "/open/config",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "IndexController@config",
+            "_id": 99
+        },
+        {
+            "id": 62,
+            "name": "Update token",
+            "description": "Get configuration information",
+            "url": "/open/token",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "IndexController@refreshToken",
+            "use": [
+                "web"
+            ],
+            "_id": 100
+        },
+        {
+            "id": 63,
+            "name": "Sign in",
+            "description": "Login page",
+            "url": "/open/login",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "open",
+            "action": "LoginController@showLoginForm",
+            "as": "login",
+            "_id": 101
+        },
+        {
+            "id": 64,
+            "name": "Submit login",
+            "description": "Submit login",
+            "url": "/open/login",
+            "parent_id": 63,
+            "method": [
+                "post"
+            ],
+            "group": "open",
+            "action": "LoginController@login",
+            "use": [
+                "api",
+                "web"
+            ],
+            "middleware": [
+                "log"
+            ],
+            "_id": 102
+        },
+        {
+            "id": 76,
+            "name": "Three party login",
+            "description": "Three party login",
+            "url": "/open/other-login/{type}",
+            "parent_id": 63,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "LoginController@otherLogin",
+            "use": [
+                "web"
+            ],
+            "_id": 103
+        },
+        {
+            "id": 77,
+            "name": "Callback after three party login",
+            "description": "Three party login",
+            "url": "/open/other-login-callback/{type}",
+            "parent_id": 76,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "LoginController@otherLoginCallback",
+            "use": [
+                "api",
+                "web"
+            ],
+            "_id": 104
+        },
+        {
+            "id": 65,
+            "name": "Log out",
+            "description": "Log out",
+            "url": "/open/logout",
+            "parent_id": 4,
+            "method": [
+                "post"
+            ],
+            "group": "open",
+            "action": "LoginController@logout",
+            "use": [
+                "api",
+                "web"
+            ],
+            "as": "logout",
+            "_id": 105
+        },
+        {
+            "id": 66,
+            "name": "Register",
+            "description": "Registration page",
+            "url": "/open/register",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "open",
+            "action": "RegisterController@index",
+            "_id": 106
+        },
+        {
+            "id": 67,
+            "name": "Send sign up SMS",
+            "description": "Send sign up SMS",
+            "url": "/open/register/send",
+            "parent_id": 66,
+            "method": [
+                "post"
+            ],
+            "group": "open",
+            "action": "RegisterController@send",
+            "use": [
+                "api",
+                "web"
+            ],
+            "_id": 107
+        },
+        {
+            "id": 68,
+            "name": "Submit for registration",
+            "description": "Submit for registration",
+            "url": "/open/register",
+            "parent_id": 66,
+            "method": [
+                "post"
+            ],
+            "group": "open",
+            "action": "RegisterController@register",
+            "use": [
+                "api",
+                "web"
+            ],
+            "_id": 108
+        },
+        {
+            "id": 69,
+            "name": "Forget password page",
+            "description": "Forget password page",
+            "url": "/open/password",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "group": "open",
+            "action": "ForgotPasswordController@index",
+            "_id": 109
+        },
+        {
+            "id": 70,
+            "name": "Forget password email",
+            "description": "Forget password email",
+            "url": "/open/forgot-password/send",
+            "parent_id": 69,
+            "method": [
+                "post"
+            ],
+            "group": "open",
+            "action": "ForgotPasswordController@send",
+            "_id": 110
+        },
+        {
+            "id": 71,
+            "name": "Forget password SMS sending",
+            "description": "Forget password SMS sending",
+            "url": "/open/forgot-password/send-sms",
+            "parent_id": 69,
+            "method": [
+                "post"
+            ],
+            "group": "open",
+            "action": "ForgotPasswordController@sendSMS",
+            "_id": 111
+        },
+        {
+            "id": 72,
+            "name": "Forget password submit reset password",
+            "description": "Forget password submit reset password",
+            "url": "/open/forgot-password/reset-password",
+            "parent_id": 69,
+            "method": [
+                "post"
+            ],
+            "group": "open",
+            "_id": 112
+        },
+        {
+            "id": 73,
+            "name": "Get user information",
+            "description": "Get user information",
+            "url": "/open/user",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "IndexController@user",
+            "_id": 113
+        },
+        {
+            "id": 74,
+            "name": "Get menu information",
+            "description": "Get menu information",
+            "url": "/open/menu",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "IndexController@menu",
+            "_id": 114
+        },
+        {
+            "id": 75,
+            "name": "Polar verification",
+            "description": "Polar verification",
+            "url": "/open/geetest",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "GeetestController@geetest",
+            "use": [
+                "api",
+                "web"
+            ],
+            "_id": 115
+        },
+        {
+            "id": 79,
+            "name": "Get the unique identity of the connection",
+            "description": "Get the unique identity of the connection",
+            "url": "/open/client-id",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "IndexController@clientId",
+            "_id": 116
+        },
+        {
+            "id": 81,
+            "name": "Home page",
+            "icons": "fa-home",
+            "description": "Official website homepage",
+            "url": "/open/index",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "open",
+            "action": "IndexController@getIndex",
+            "_id": 117
+        },
+        {
+            "id": 82,
+            "name": "Download",
+            "icons": "fa-download",
+            "description": "Project source code download",
+            "url": "https://gitee.com/laravel-admin/laraveladmin",
+            "parent_id": 4,
+            "method": [],
+            "status": "Display",
+            "_id": 118
+        },
+        {
+            "id": 83,
+            "name": "Online demo",
+            "icons": "fa-desktop",
+            "description": "Demo Online",
+            "url": "https://demo.laraveladmin.cn",
+            "parent_id": 4,
+            "method": [],
+            "status": "Display",
+            "_id": 119
+        },
+        {
+            "id": 84,
+            "name": "Reward",
+            "icons": "fa-phone",
+            "description": "Contact us",
+            "url": "/open/contact",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "open",
+            "action": "IndexController@contact",
+            "_id": 120
         }
     ],
     "resource": [
         {
             "id": 9,
-            "name": "普通用户",
+            "name": "Ordinary users",
             "icons": "fa-user",
-            "url":"/admin/users",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "Ordinary users",
+            "url": "/admin/users",
             "parent_id": 6,
-            "disabled": 0,
-            "description" : "普通用户",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "options": {},
+            "_id": 6,
             "end_id": 16
         },
         {
             "id": 17,
-            "name": "权限管理",
-            "item_name": "角色",
+            "name": "Authority management",
             "icons": "fa-sitemap",
-            "url":"/admin/roles",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "Role list",
+            "url": "/admin/roles",
             "parent_id": 6,
-            "disabled": 0,
-            "description" : "角色列表",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "options": {},
+            "item_name": "Role",
+            "_id": 14,
             "end_id": 24
         },
         {
             "id": 25,
-            "name": "操作日志",
-            "item_name": "日志",
+            "name": "Operation log",
             "icons": "fa-mouse-pointer",
-            "url":"/admin/logs",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "Log list",
+            "url": "/admin/logs",
             "parent_id": 6,
-            "disabled": 0,
-            "description" : "日志列表",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "options": {},
+            "item_name": "Journal",
+            "_id": 22,
             "end_id": 32
         },
         {
             "id": 33,
-            "name": "后台用户",
+            "name": "Background users",
             "icons": "fa-user-secret",
-            "url":"/admin/admins",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "Background users",
+            "url": "/admin/admins",
             "parent_id": 6,
-            "disabled": 0,
-            "description" : "后台用户",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "options": {},
+            "_id": 30,
             "end_id": 40
         },
         {
             "id": 41,
-            "name": "菜单设置",
-            "item_name": "菜单",
+            "name": "Menu settings",
             "icons": "fa-bars",
-            "url":"/admin/menus",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "Menu list",
+            "url": "/admin/menus",
             "parent_id": 7,
-            "disabled": 0,
-            "description" : "菜单列表",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
+            "item_name": "Menu",
+            "_id": 39,
             "options": {
                 "only": [
                     {
@@ -781,70 +813,56 @@
         },
         {
             "id": 49,
-            "name": "系统设置",
+            "name": "System settings",
             "icons": "fa-gear",
-            "url":"/admin/configs",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "System settings",
+            "url": "/admin/configs",
             "parent_id": 7,
-            "disabled": 0,
-            "description" : "系统设置",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "options": {},
+            "_id": 48,
             "end_id": 56
         },
         {
             "id": 86,
-            "name": "新增功能",
+            "name": "New features",
             "icons": "fa-internet-explorer",
-            "url":"/admin/features",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "New features",
+            "url": "/admin/features",
             "parent_id": 7,
-            "disabled": 0,
-            "description" : "新增功能",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "options": {},
+            "_id": 56,
             "end_id": 93
         },
         {
             "id": 94,
-            "name": "使用技术",
+            "name": "Using technology",
             "icons": "fa-bullhorn",
-            "url":"/admin/technologys",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "Using related technology stack",
+            "url": "/admin/technologys",
             "parent_id": 7,
-            "disabled": 0,
-            "description" : "使用相关技术栈",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "options": {},
+            "_id": 64,
             "end_id": 101
         },
         {
             "id": 106,
-            "name": "文档内容",
+            "name": "Document content",
             "icons": "fa-file-text-o",
-            "url":"/admin/docs",
-            "method":1,
-            "status":1,
-            "is_page": 1,
+            "description": "Document grouping",
+            "url": "/admin/docs",
             "parent_id": 7,
-            "disabled": 0,
-            "description" : "文档分组",
+            "is_page": "Yes",
+            "status": "Display",
             "group": "admin",
-            "options": {},
+            "_id": 72,
             "end_id": 113
         }
     ],
-    "update_position": [
-
-
-    ]
-
+    "update_position": []
 }
-
-

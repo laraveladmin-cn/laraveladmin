@@ -42,7 +42,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'technologys',
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
                     operation: true, //操作列
@@ -55,12 +56,12 @@
                     defOptions: null, //默认筛选条件
                     fields: {
                         id: {name: "ID", order: true},
-                        name: {name: "名称", order: true},
-                 /*       url: {name: "链接地址", order: true, type: "url"},
-                        logo: {name: "LOGO图片", order: true, type: "upload"},
-                        description: {name: "描述", order: true, type: "textarea"},*/
-                  /*      created_at: {name: "创建时间", order: true, type: "time"},
-                        updated_at: {name: "修改时间", order: true, type: "time"}*/
+                        name: {name: "Name", order: true},
+                 /*       url: {name: "Link address", order: true, type: "url"},
+                        logo: {name: "Logo image", order: true, type: "upload"},
+                        description: {name: "Describe", order: true, type: "textarea"},*/
+                  /*      created_at: {name: "Created At", order: true, type: "time"},
+                        updated_at: {name: "Updated At", order: true, type: "time"}*/
                     },
                 }
             };

@@ -19,7 +19,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'docs',
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
                     operation: true, //操作列
@@ -32,10 +33,10 @@
                     defOptions: null, //默认筛选条件
                     fields: {
                         id: {name: "ID", order: true},
-                        name: {name: "路径", order: true},
-                        description: {name: "内容", order: true,limit:80},
-                        created_at: {name: "创建时间", order: true, type: "time"},
-                        updated_at: {name: "修改时间", order: true, type: "time"}
+                        name: {name: "Route", order: true},
+                        description: {name: "Content", order: true,limit:80},
+                        created_at: {name: "Created At", order: true, type: "time"},
+                        updated_at: {name: "Updated At", order: true, type: "time"}
                     },
                 }
             };
