@@ -988,5 +988,11 @@
     "password": "password",
     "Password": "Password",
     "Mobile phone number": "Mobile phone number",
-    "Empty": "Empty"
+    "Empty": "Empty",
+    "Copyright": "Copyright",
+    "Data modification": "Data modification",
+    "Select the time point": "Select the time point",
+    "Select time": "Select time",
+    "Select Date": "Select Date",
+    "Select month": "Select month"
 }

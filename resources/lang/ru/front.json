@@ -988,5 +988,11 @@
     "password": "пароль",
     "Password": "пароль",
     "Mobile phone number": "номер телефона",
-    "Empty": "пустота"
+    "Empty": "пустота",
+    "Copyright": "© Авторское право ·",
+    "Data modification": "Изменение данных",
+    "Select the time point": "Выберите точку времени",
+    "Select time": "время выборки",
+    "Select Date": "Выбор даты",
+    "Select month": "Выберите месяц"
 }

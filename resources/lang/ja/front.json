@@ -988,5 +988,11 @@
     "password": "パスワード",
     "Password": "パスワード",
     "Mobile phone number": "携帯の番号",
-    "Empty": "空をクリア"
+    "Empty": "空をクリア",
+    "Copyright": "© 著作権所有・",
+    "Data modification": "資料の修正",
+    "Select the time point": "時間点を選択",
+    "Select time": "時間を選択",
+    "Select Date": "日付を選択",
+    "Select month": "月を選択"
 }

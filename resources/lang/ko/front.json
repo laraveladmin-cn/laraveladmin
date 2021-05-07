@@ -988,5 +988,11 @@
     "password": "비밀 번호",
     "Password": "비밀 번호",
     "Mobile phone number": "핸드폰 번호",
-    "Empty": "텅 비다"
+    "Empty": "텅 비다",
+    "Copyright": "© 저작권 소유",
+    "Data modification": "자료 수정",
+    "Select the time point": "시간 선택",
+    "Select time": "선택 시간",
+    "Select Date": "날 짜 를 선택 하 다",
+    "Select month": "달 을 선택 하 다"
 }

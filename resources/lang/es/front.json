@@ -988,5 +988,11 @@
     "password": "Contraseña",
     "Password": "Contraseña",
     "Mobile phone number": "Número de teléfono móvil",
-    "Empty": "Vacío"
+    "Empty": "Vacío",
+    "Copyright": "© Todos los derechos reservados.",
+    "Data modification": "Modificación de los datos",
+    "Select the time point": "Seleccionar un punto de tiempo",
+    "Select time": "Seleccionar tiempo",
+    "Select Date": "Seleccionar fecha",
+    "Select month": "Seleccionar mes"
 }

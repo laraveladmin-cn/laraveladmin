@@ -988,5 +988,11 @@
     "password": "Mot de passe",
     "Password": "Mot de passe",
     "Mobile phone number": "Numéro de téléphone portable",
-    "Empty": "Vide."
+    "Empty": "Vide.",
+    "Copyright": "© Copyright ·",
+    "Data modification": "Modification des données",
+    "Select the time point": "Sélectionner un point dans le temps",
+    "Select time": "Sélectionner l'heure",
+    "Select Date": "Sélectionner la date",
+    "Select month": "Sélectionner le mois"
 }

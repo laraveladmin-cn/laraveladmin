@@ -988,5 +988,11 @@
     "password": "Senha",
     "Password": "Senha",
     "Mobile phone number": "Número de telefone",
-    "Empty": "Vazio"
+    "Empty": "Vazio",
+    "Copyright": "© Todos OS direitos reservados",
+    "Data modification": "Modificação de dados",
+    "Select the time point": "Selecionar Ponto de tempo",
+    "Select time": "Escolha a Hora",
+    "Select Date": "Selecionar UMA data",
+    "Select month": "Selecionar mês"
 }
