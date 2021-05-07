@@ -85,7 +85,11 @@
         },
         mounted() {
             this.clickIframe();
+        },
+        destroyed() {
+            clearInterval(this.intervalObj);
         }
+
     };
 </script>
 <style lang="scss" scoped>

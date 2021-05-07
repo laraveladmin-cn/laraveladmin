@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">菜单切换</span>
+                        <span class="sr-only">{{$t('Menu switch')}}</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -19,8 +19,12 @@
                 <div class="navbar-collapse collapse" role="navigation">
                     <ul class="nav navbar-nav">
                         <li :class="{active:menu.active}" v-for="(menu,index) in tree_menus" v-if="loginMenus(menu)">
-                            <router-link :to="menu.url" v-if="menu.url.indexOf('http')!=0">{{menu.name}}</router-link>
-                            <a :href="menu.url" target="_blank" v-else>{{menu.name}}</a>
+                            <router-link :to="menu.url" v-if="menu.url.indexOf('http')!=0">
+                                {{$tp(menu.name)}}
+                            </router-link>
+                            <a :href="menu.url" target="_blank" v-else>
+                                {{$tp(menu.name)}}
+                            </a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right hidden-sm" v-if="user && user.id">
@@ -28,7 +32,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right hidden-sm" v-else>
                         <li :class="{active:menu.active}" v-for="(menu,index) in tree_menus" v-if="!loginMenus(menu)">
-                            <router-link :to="menu.url" v-if="menu.url.indexOf('http')!=0">{{menu.name}}</router-link>
+                            <router-link :to="menu.url" v-if="menu.url.indexOf('http')!=0">{{$tp(menu.name)}}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -40,15 +44,15 @@
         <footer>
             <div class="container">
                 <ul class="bs-docs-footer-links">
-                    <li>特别鸣谢:</li>
+                    <li>{{$t('Special thanks')}}</li>
                     <li><a href="https://secure.quantumca.com.cn/" target="_blank">量子认证平台</a></li>
                     <li><a href="https://laravelacademy.org/" target="_blank">Laravel学院</a></li>
                 </ul>
-                <p class="pull-right"><a href="#">返回顶部</a></p>
+                <p class="pull-right"><a href="#">{{$t('Back to top')}}</a></p>
                 <p style="margin: 0px 0px">
-                    &copy; 版权所有 &middot; <a>{{name}}</a>
+                    {{$t('Copyright')}}<a>{{name}}</a>
                     <span class="wangjing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    备案号:<a href="http://beian.miit.gov.cn" target="_blank">{{icp}}</a>
+                    {{$t('The record number:')}}<a href="http://beian.miit.gov.cn" target="_blank">{{icp}}</a>
                 </p>
             </div>
         </footer>
@@ -91,6 +95,12 @@
                     path:to.path
                 });
             }
+        },
+        data(){
+          return {
+              "{lang_path}":'_shared.menus',
+              "{lang_root}":''
+          };
         },
         computed:{
             ...mapState([

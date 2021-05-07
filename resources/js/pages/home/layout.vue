@@ -20,15 +20,20 @@
                             <ul class="nav navbar-nav">
                                 <li :class="{active:menu.active}" v-for="(menu,index) in tree_menus">
                                     <router-link :to="menu.url" v-if="menu.url.indexOf('http')!=0" class="dropdown-toggle" data-toggle="dropdown">
-                                        {{menu.name}} <span class="caret" v-if="menu.childrens && menu.childrens.length"></span>
+                                        {{$tp(menu.name,menu_lang)}}
+                                        <span class="caret" v-if="menu.childrens && menu.childrens.length"></span>
                                     </router-link>
-                                    <a :href="menu.url" target="_blank" v-else>{{menu.name}}</a>
+                                    <a :href="menu.url" target="_blank" v-else>
+                                        {{$tp(menu.name,menu_lang)}}
+                                    </a>
                                     <ul class="dropdown-menu" role="menu" v-if="menu.childrens">
                                         <li v-for="(child,index) in menu.childrens">
                                             <router-link :to="child.url" v-if="child.url.indexOf('http')!=0">
-                                                {{child.name}}
+                                                {{$tp(child.name,menu_lang)}}
                                             </router-link>
-                                            <a :href="child.url" target="_blank" v-else>{{child.name}}</a>
+                                            <a :href="child.url" target="_blank" v-else>
+                                                {{$tp(child.name,menu_lang)}}
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -62,10 +67,10 @@
                             </ul>
                             <ul class="nav navbar-nav navbar-right hidden-sm" v-else>
                                 <li>
-                                    <router-link to="/open/login">登录</router-link>
+                                    <router-link to="/open/login">{{$t('Login')}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/open/register">注册</router-link>
+                                    <router-link to="/open/register">{{$t('Register')}}</router-link>
                                 </li>
                             </ul>
                         </div>
@@ -77,18 +82,18 @@
                 <div>
                     <section class="content-header">
                         <h1>
-                            {{current_menu['name']}}
-                            <small>{{current_menu['description']}}</small>
+                            {{$tp(current_menu['name'],menu_lang)}}
+                            <small>{{$tp(current_menu['description'],menu_lang)}}</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li :class="{active:navbar.active}" v-for="navbar in navbars">
                                 <router-link :to="navbar['url']" v-if="!navbar.active && navbar['url']">
                                     <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                    {{navbar['name']}}
+                                    {{$tp(navbar['name'],menu_lang)}}
                                 </router-link>
                                 <span v-else>
                                  <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                {{navbar['name']}}
+                                {{$tp(navbar['name'],menu_lang)}}
                             </span>
                             </li>
                         </ol>
@@ -105,14 +110,14 @@
             <footer class="main-footer">
                 <div class="container">
                     <div class="pull-right hidden-xs">
-                        <b>系统版本</b> {{version}}
+                        <b>$t('System version:')</b> {{version}}
                     </div>
                     <strong>
-                        Copyright &copy; 2020
+                        {{$t('Copyright')}}
                         <a target="_blank" href="http://www.laraveladmin.cn">{{name}}</a>
                     </strong>
                     <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-                    备案号:{{icp}}
+                    {{$t('The record number:')}}{{icp}}
                 </div>
             </footer>
         </div>
@@ -190,6 +195,10 @@
         data(){
             return {
                 "{lang_path}":'home.layout',
+                menu_lang:{
+                    "{lang_path}":'_shared.menus',
+                    "{lang_root}":''
+                }
             };
         }
     };
