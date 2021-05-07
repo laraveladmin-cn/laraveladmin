@@ -208,6 +208,7 @@ class Translation extends Seeder
                                 $index_content = str_replace("\"'{$name}'\"","\"props.transField('{$new}')\"",$index_content);
                                 $index_content = str_replace("props.data.maps","props.maps",$index_content);
                                 $index_content = str_replace($name,$new,$index_content);
+                                $index_content = str_replace("请输入关键字","Please enter keywords",$index_content);
                             }
                             if($edit_content){
                                 $edit_content = str_replace("'{$name}'","props.transField('{$new}')",$edit_content);
