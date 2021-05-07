@@ -760,7 +760,7 @@
                 if(typeof this.options.keywordPlaceholder=="function"){
                     return this.options.keywordPlaceholder();
                 }
-                return this.options.keywordPlaceholder || $t('Please enter keywords');
+                return this.$t(this.options.keywordPlaceholder) || this.$t('Please enter keywords');
             },
             //组件唯一标识
             id(){
