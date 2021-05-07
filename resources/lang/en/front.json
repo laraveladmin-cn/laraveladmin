@@ -799,5 +799,10 @@
     "password": "password",
     "Password": "Password",
     "Mobile phone number": "Mobile phone number",
-    "Empty": "Empty"
+    "Empty": "Empty",
+    "Copyright": "Copyright",
+    "Data modification": "Data modification",
+    "Menu switch": "Menu switch",
+    "Back to top": "Back to top",
+    "Special thanks": "Special thanks"
 }

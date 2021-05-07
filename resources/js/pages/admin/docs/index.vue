@@ -28,7 +28,7 @@
                     btnSizerMore: true, //更多筛选条件按钮
                     keywordKey: 'name|description', //关键字查询key
                     keywordGroup: false, //是否为选项组
-                    keywordPlaceholder: '请输入关键字',
+                    keywordPlaceholder: 'Please enter keywords',
                     primaryKey: 'id', //数据唯一性主键
                     defOptions: null, //默认筛选条件
                     fields: {
