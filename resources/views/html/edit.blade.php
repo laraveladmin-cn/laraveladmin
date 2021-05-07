@@ -115,7 +115,7 @@
                                     <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
                                                     class="w-100"
                                                     value-format="yyyy-MM-dd"
-                                                    placeholder="选择日期"
+                                                    :placeholder="$t('Select Date')"
                                                     type="date"
                                                     :editable="false"
                                                     :disabled="!props.url">
@@ -126,7 +126,7 @@
                                         <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
                                                         class="w-100"
                                                         value-format="yyyy-MM-dd HH:mm:ss"
-                                                        placeholder="选择时间"
+                                                        :placeholder="$t('Select time')"
                                                         type="datetime"
                                                         :editable="false"
                                                         :disabled="!props.url">
@@ -138,7 +138,7 @@
                                                     class="w-100"
                                                     @change="props.data['row']['{{$table_field['Field']}}'] = arguments[0]"
                                                     value-format="yyyy-MM-01"
-                                                    placeholder="选择月份"
+                                                    :placeholder="$t('Select month')"
                                                     type="month"
                                                     :editable="false"
                                                     :disabled="!props.url">
@@ -147,9 +147,12 @@
 @elseif($table_field['showType']=='ztree')
                                 <template slot="input-item">
                                     <ztree v-model="props.data.row['{{$table_field['Field']}}']"
-                                           :check-enable="false" :multiple="false" :id="'parent'"
+                                           :check-enable="false"
+                                           :multiple="false"
+                                           :id="'parent'"
                                            :chkbox-type='{ "Y" : "", "N" : "" }'
-                                           :data="props.maps['optional_parents']" :disabled="!props.url"></ztree>
+                                           :data="props.maps['optional_parents']"
+                                           :disabled="!props.url"></ztree>
                                 </template>
 @elseif($table_field['showType']=='ueditor')
                                 <template slot="input-item">
@@ -166,7 +169,7 @@
                                                  :keyword-key="'name'"
                                                  :show="['name']"
                                                  :disabled="!props.url"
-                                                 :placeholder-show="'请选择'"
+                                                 :placeholder-show="$t('Please select')"
                                                  :placeholder-value="0"
                                                  :is-ajax="true">
                                         </select2>
@@ -191,7 +194,8 @@
                                                     class="w-100"
                                                     value-format="HH-mm"
                                                     :picker-options="{start: '00:00',step: '00:30',end: '23:30'}"
-                                                    :disabled="!props.url" placeholder="选择时间">
+                                                    :disabled="!props.url"
+                                                    :placeholder="$t('Select time')">
                                     </el-time-select>
                                 </template>
 @elseif($table_field['showType']=='timePicker')
@@ -200,7 +204,8 @@
                                                     class="w-100"
                                                     value-format="HH:mm:ss"
                                                     :picker-options="{selectableRange: '00:00:00 - 23:59:59'}"
-                                                    :disabled="!props.url" placeholder="选择时间点">
+                                                    :disabled="!props.url"
+                                                    :placeholder="$t('Select the time point')">
                                     </el-time-picker>
                                 </template>
 @elseif($table_field['showType']=='switch')
@@ -247,7 +252,6 @@
 @elseif($table_field['showType']=='password')
                                 <template slot="input-item">
                                     <password-edit v-model="props.data.row['{{$table_field['Field']}}']"
-                                                   placeholder="请输入{{$table_field['info']}}"
                                                    :disabled="!props.url">
                                     </password-edit>
                                 </template>
@@ -261,7 +265,6 @@
 @elseif($table_field['showType']=='markdown')
                                     <template slot="input-item">
                                         <editor-md v-model="props.data.row['{{$table_field['Field']}}']"
-                                                   placeholder="请输入{{$table_field['info']}}"
                                                    :disabled="!props.url">
                                         </editor-md>
                                     </template>
