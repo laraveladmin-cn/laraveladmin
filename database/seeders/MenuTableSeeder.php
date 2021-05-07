@@ -93,6 +93,7 @@ class MenuTableSeeder extends Seeder
                 $data['icons'] = 'fa-list';
                 $data['description'] = "{$name} paging data";//$name.'分页数据';
             }elseif($key=='show'){
+                $data['is_page'] = 1;
                 $data['name'] = "Edit view {$l_name}";//'编辑查看'.$name;
                 $data['icons'] = 'fa-edit';
                 $data['is_page'] = 1;
