@@ -31,6 +31,50 @@ class MenuController extends Controller
     }
 
     /**
+     * 获取条件拼接对象
+     * @return mixed
+     */
+    protected function getWithOptionModel($fields_key = 'showIndexFields')
+    {
+        $this->bindModel OR $this->bindModel();
+        $options = $this->getOptions(); //筛选项+排序项
+        $where = collect($options['where'])->filter(function ($item){
+            return in_array($item['key'],['name','name|url']);
+        })->toArray();
+        $options['where'] = collect($options['where'])->filter(function ($item){
+            return !in_array($item['key'],['name','name|url']);
+        })->toArray();
+        $obj = $this->bindModel->with($this->selectWithFields($fields_key))
+            ->withCount(collect($this->getShowIndexFieldsCount())->filter(function ($item, $key) {
+                return !is_array($item);
+            })->toArray())
+            ->options($options);
+        $menus_trans = trans('_shared.menus');
+        collect($where)->map(function ($item)use(&$obj,$menus_trans){
+            $obj = $obj->where(function ($q)use($item,$menus_trans){
+                $value = $item['val'];
+                $names = collect($menus_trans)->filter(function ($val)use($value){
+                    return Str::contains($val,$value);
+                })->keys()
+                    ->toArray();
+                $value = preg_replace('/([_%\'"])/','\\\$1',$value ).'%';
+                if($item['key']=='name'){
+                    $q->where($item['key'],$item['exp'],$value)
+                        ->orWhere($item['key'],$item['exp'],'%'.$value);
+                }elseif($item['key']=='name|url'){
+                    $q->where('name',$item['exp'],$value)
+                        ->orWhere('name',$item['exp'],'%'.$value)
+                        ->orWhere('url',$item['exp'],$value)
+                        ->orWhere('url',$item['exp'],'%'.$value);
+                }
+                $q->orWhereIn('name',$names);
+            });
+        });
+
+        return $obj;
+    }
+
+    /**
      * 资源模型
      *
      * @var  string
@@ -293,5 +337,20 @@ class MenuController extends Controller
         RouteService::upRouteJson();
 
         return Response::returns(['alert' => alert(['message' => trans('Modify the success!')])]);
+    }
+
+    /**
+     * 列表页面返回数据前对数据处理
+     * @param $data
+     * @return mixed
+     */
+    protected function handleListReturn(&$data, $obj)
+    {
+        $data = collect($data)->toArray();
+        $data['data'] = collect($data['data'])->map(function ($item){
+            $item[config('laravel_admin.trans_prefix').'name'] = Menu::trans($item,'name');//trans_path($item['name'],'_shared.menus');
+            return $item;
+        })->toArray();
+        return $data;
     }
 }

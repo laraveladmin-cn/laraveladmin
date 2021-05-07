@@ -13,7 +13,7 @@
                                          :default-options="array_get(props,'maps.menu_id',[])"
                                          :url="use_url+'/admin/menus/list'"
                                          :keyword-key="'name|url'"
-                                         :show="['name','url']"
+                                         :show="['_trans_name','url']"
                                          :placeholder-show="props.transField('Operation menu','menu.name')"
                                          :placeholder-value="''"
                                          :is-ajax="true" >
