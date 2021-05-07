@@ -2,7 +2,7 @@
     <div class="admin_personage_index">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">资料修改</h3>
+                <h3 class="box-title">{{$t('Data modification')}}</h3>
             </div>
             <div class="box-body">
                 <edit :options="options">

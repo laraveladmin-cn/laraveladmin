@@ -2,13 +2,13 @@
     <div class="home_personage_index">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">资料修改</h3>
+                <h3 class="box-title">{{$t('Data modification')}}</h3>
             </div>
             <div class="box-body">
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="avatar" :options="{name: '头像'}"  :datas="props">
+                            <edit-item key-name="avatar" :options="{name: props.transField('Head portrait')}"  :datas="props">
                                 <template slot="input-item">
                                     <upload v-model="props.data.row['avatar']"
                                             :placeholder-value="'/dist/img/user_default_180.gif'"
@@ -16,11 +16,11 @@
                                     </upload>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="uname" :options="{name: '用户名',disabled:true, rules:'required|alpha_dash|min:5|max:18'}"  :datas="props">
+                            <edit-item key-name="uname" :options="{name: props.transField('User name'),disabled:true, rules:'required|alpha_dash|min:5|max:18'}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="name" :options="{name: '姓名',rules:'required|min:2'}"  :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'),rules:'required|min:2'}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="description" :options="{name: '个性签名',type:'textarea'}"  :datas="props">
+                            <edit-item key-name="description" :options="{name: props.transField('Personality signature'),type:'textarea'}"  :datas="props">
                             </edit-item>
                         </div>
                     </template>

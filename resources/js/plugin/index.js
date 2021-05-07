@@ -55,6 +55,7 @@ export default Plugin = {
             });
         };
         Vue.prototype.toUrl = function(url,event){
+            event.preventDefault();
             if(!url){
                 return
             }
@@ -68,7 +69,7 @@ export default Plugin = {
                     url = AppConfig.app_url+url;
                 }
                 window.open(url,'_blank');
-                return;
+                return false;
             }
             if(is_external){
                 window.location.href=url;
@@ -77,6 +78,7 @@ export default Plugin = {
                     dd(error.message);
                 });
             }
+            return false;
         };
         //指定路径翻译
         Object.defineProperty(Vue.prototype, '$tp', {
