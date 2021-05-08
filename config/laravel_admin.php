@@ -74,6 +74,7 @@ return [
         'es',  //西班牙语
         'pt',  //葡萄牙语
     ], //支持语言
-    'trans_prefix'=>'_trans_' //翻译语言前缀
+    'trans_prefix'=>'_trans_', //翻译语言前缀
+    'tinymce_key'=>env('TINYMCE_KEY','') //tinymce编辑器key
 
 ];
