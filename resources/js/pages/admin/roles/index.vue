@@ -4,7 +4,7 @@
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
                     <template slot="col" slot-scope="props">
-                        <span v-if="props.k =='name'">
+                        <span v-if="props.k =='name' || props.k =='parent.name' ">
                             {{$tp(array_get(props.row ,props.k),shared_name)}}
                         </span>
                         <span v-else-if="props.k =='description'">
