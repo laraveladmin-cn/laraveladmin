@@ -59,6 +59,7 @@ class IndexController extends Controller
         $data['verify'] = config('laravel_admin.verify.type')=='captcha' ? $this->captcha() : $this->geetest(); //验证配置
         $data['client_id'] = ClientAuth::getClient();
         $data['default_language'] = str_replace('_','-',app('translator')->getLocale());
+        $data['tinymce_key'] = config('laravel_admin.tinymce_key','');
         $data['locales'] = collect(config('laravel_admin.locales',[]))
             ->prepend(config('app.locale'))
             ->filter()

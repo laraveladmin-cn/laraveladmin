@@ -67,6 +67,7 @@ return [
     'log_id_key'=>'_log_id',
     'disabled_menus'=>env('DISABLED_MENUS', ''),
     'locales'=>['zh_CN','zh_TW','en'], //支持语言
-    'trans_prefix'=>'_trans_' //翻译语言前缀
+    'trans_prefix'=>'_trans_', //翻译语言前缀
+    'tinymce_key'=>env('TINYMCE_KEY','') //tinymce编辑器key
 
 ];
