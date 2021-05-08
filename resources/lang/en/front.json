@@ -498,6 +498,7 @@
                 "Console commands": "Console commands",
                 "Menu routing": "Menu routing",
                 "Plug-in installation": "Plug-in installation",
+                "Install the application plug-in": "Install the application plug-in",
                 "Relevant documentation": "Relevant documentation",
                 "Command": "Command",
                 "Instructions": "Instructions",
@@ -808,5 +809,6 @@
     "Select month": "Select month",
     "Menu switch": "Menu switch",
     "Back to top": "Back to top",
-    "Special thanks": "Special thanks"
+    "Special thanks": "Special thanks",
+    "Links": "Links"
 }
