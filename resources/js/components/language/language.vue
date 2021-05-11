@@ -1,7 +1,7 @@
 <template>
     <div class="language">
         <el-dropdown @command="changeVal" trigger="click">
-            <div>
+            <div ref="view">
                 <div class="country" v-if="val">
                     <div class="flag" :class="country"></div>
                 </div>
@@ -882,6 +882,9 @@
             //控制状态
             changeVal(value){
                 this.val = value;
+            },
+            open(){
+                this.$refs['view'].click();
             }
         },
         watch:{
