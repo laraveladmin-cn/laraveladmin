@@ -49,13 +49,18 @@ class MenuController extends Controller
                 return !is_array($item);
             })->toArray())
             ->options($options);
-        $menus_trans = trans('_shared.menus');
-        collect($where)->map(function ($item)use(&$obj,$menus_trans){
-            $obj = $obj->where(function ($q)use($item,$menus_trans){
+        $trans_name = config('laravel_admin.trans_prefix').'name';
+        $menus_trans = collect(Menu::main()->get(['id', 'name', 'parent_id','resource_id']))->map(function ($item)use($trans_name){
+            $item1 = collect($item)->toArray();
+            $item1[$trans_name] = Menu::trans($item,'name');//trans_path($item['name'],'_shared.menus');
+            return $item1;
+        });
+        collect($where)->map(function ($item)use(&$obj,$menus_trans,$trans_name){
+            $obj = $obj->where(function ($q)use($item,$menus_trans,$trans_name){
                 $value = $item['val'];
-                $names = collect($menus_trans)->filter(function ($val)use($value){
-                    return Str::contains($val,$value);
-                })->keys()
+                $menus_ids = collect($menus_trans)->filter(function ($item)use($value,$trans_name){
+                    return Str::contains(Arr::get($item,$trans_name),$value);
+                })->pluck('id')
                     ->toArray();
                 $value = preg_replace('/([_%\'"])/','\\\$1',$value ).'%';
                 if($item['key']=='name'){
@@ -67,7 +72,7 @@ class MenuController extends Controller
                         ->orWhere('url',$item['exp'],$value)
                         ->orWhere('url',$item['exp'],'%'.$value);
                 }
-                $q->orWhereIn('name',$names);
+                $q->orWhereIn('id',$menus_ids);
             });
         });
 

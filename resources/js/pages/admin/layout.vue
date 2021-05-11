@@ -142,8 +142,8 @@
                                 </ul>
                             </li>
                             <li v-if="locales.length>1">
-                                <a>
-                                    <language :value="language" @change="setLanguage"></language>
+                                <a @click="openLanguage">
+                                    <language ref="language" :value="language" @change="setLanguage"></language>
                                 </a>
                             </li>
                             <li>
@@ -533,6 +533,9 @@
 
         },
         methods:{
+            openLanguage(){
+              this.$refs['language'].open();
+            },
             translation(item,key){
                 let value = array_get(item,key,'');
                 let resource_id = item['resource_id'];

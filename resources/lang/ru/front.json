@@ -682,6 +682,7 @@
                 "Console commands": "команда консоли",
                 "Menu routing": "маршрутизация меню",
                 "Plug-in installation": "монтаж модулей",
+                "Install the application plug-in": "монтажный модуль",
                 "Relevant documentation": "коррелятивный документ",
                 "Command": "команда",
                 "Instructions": "Примечание",
@@ -994,5 +995,6 @@
     "Select the time point": "Выберите точку времени",
     "Select time": "время выборки",
     "Select Date": "Выбор даты",
-    "Select month": "Выберите месяц"
+    "Select month": "Выберите месяц",
+    "Unbundling": "развязывать"
 }

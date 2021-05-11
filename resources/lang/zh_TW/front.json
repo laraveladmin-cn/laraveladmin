@@ -682,6 +682,7 @@
                 "Console commands": "控制台命令",
                 "Menu routing": "選單路由",
                 "Plug-in installation": "挿件安裝",
+                "Install the application plug-in": "安裝外掛程式",
                 "Relevant documentation": "相關文檔",
                 "Command": "命令",
                 "Instructions": "說明",
@@ -994,5 +995,6 @@
     "Select the time point": "選擇時間點",
     "Select time": "選擇時間",
     "Select Date": "選擇日期",
-    "Select month": "選擇月份"
+    "Select month": "選擇月份",
+    "Unbundling": "解綁"
 }

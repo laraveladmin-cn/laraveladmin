@@ -682,6 +682,7 @@
                 "Console commands": "Comandos de consola",
                 "Menu routing": "Ruta del menú",
                 "Plug-in installation": "Instalación plug - in",
+                "Install the application plug-in": "Instalar plug - in",
                 "Relevant documentation": "Documentación pertinente",
                 "Command": "Orden",
                 "Instructions": "Descripción",
@@ -994,5 +995,6 @@
     "Select the time point": "Seleccionar un punto de tiempo",
     "Select time": "Seleccionar tiempo",
     "Select Date": "Seleccionar fecha",
-    "Select month": "Seleccionar mes"
+    "Select month": "Seleccionar mes",
+    "Unbundling": "Desenganche"
 }

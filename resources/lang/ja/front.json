@@ -682,6 +682,7 @@
                 "Console commands": "コンソールコマンド",
                 "Menu routing": "メニュールート",
                 "Plug-in installation": "プラグインのインストール",
+                "Install the application plug-in": "プラグインをインストール",
                 "Relevant documentation": "関連文書",
                 "Command": "コマンド",
                 "Instructions": "説明",
@@ -994,5 +995,6 @@
     "Select the time point": "時間点を選択",
     "Select time": "時間を選択",
     "Select Date": "日付を選択",
-    "Select month": "月を選択"
+    "Select month": "月を選択",
+    "Unbundling": "縛りを解く"
 }

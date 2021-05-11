@@ -682,6 +682,7 @@
                 "Console commands": "콘 솔 명령",
                 "Menu routing": "메뉴 경로",
                 "Plug-in installation": "플러그 인 설치",
+                "Install the application plug-in": "플러그 인 을 설치 하 다",
                 "Relevant documentation": "관련 문서",
                 "Command": "명령 하 다.",
                 "Instructions": "설명 하 다.",
@@ -994,5 +995,6 @@
     "Select the time point": "시간 선택",
     "Select time": "선택 시간",
     "Select Date": "날 짜 를 선택 하 다",
-    "Select month": "달 을 선택 하 다"
+    "Select month": "달 을 선택 하 다",
+    "Unbundling": "포박 을 풀다"
 }
