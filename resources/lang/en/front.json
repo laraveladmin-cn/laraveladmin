@@ -443,6 +443,7 @@
                 "Console commands": "Console commands",
                 "Menu routing": "Menu routing",
                 "Plug-in installation": "Plug-in installation",
+                "Install the application plug-in": "Install the application plug-in",
                 "Relevant documentation": "Relevant documentation",
                 "Command": "Command",
                 "Instructions": "Instructions",
@@ -744,5 +745,12 @@
     "password": "password",
     "Password": "Password",
     "Mobile phone number": "Mobile phone number",
-    "Empty": "Empty"
+    "Empty": "Empty",
+    "Copyright": "Copyright",
+    "Data modification": "Data modification",
+    "Select the time point": "Select the time point",
+    "Select time": "Select time",
+    "Select Date": "Select Date",
+    "Select month": "Select month",
+    "Unbundling": "Unbundling"
 }
