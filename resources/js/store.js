@@ -65,7 +65,7 @@ export default {
             if (loadedLanguages.includes(lang)) {
                 return Promise.resolve(setI18nLanguage(state,lang))
             }
-            let lang_dir = lang.replace(/-/g,'_');
+            let lang_dir = lang.replace(/\_/g,'-');
 
             // 如果尚未加载语言
             return import(/* webpackChunkName: "lang-[request]" */ `../lang/${lang_dir}/front.json`).then(
