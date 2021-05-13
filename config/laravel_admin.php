@@ -66,7 +66,7 @@ return [
     ],
     'log_id_key'=>'_log_id',
     'disabled_menus'=>env('DISABLED_MENUS', ''),
-    'locales'=>['zh_CN','zh_TW','en',
+    'locales'=>['zh-CN','zh-TW','en',
         'ja',   //日文
         'ko',  //韩文
         'fr',  //法语
