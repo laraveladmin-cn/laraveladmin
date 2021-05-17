@@ -27,7 +27,7 @@ class LanguageMiddleware{
         $language = $request->header($key,$request->cookie($key))?:$this->preferredLanguage($request);
         $language = $language?:$default;
         app('translator')->setLocale(
-            str_replace('-','_',$language)
+            str_replace('_','-',$language)
             //$language
         );
         $response = $next($request);
