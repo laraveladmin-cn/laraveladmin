@@ -119,6 +119,7 @@ return [
     'array_keys_in_array'                   => '已选的属性 :attribute 非法。',
     'array_in_array'                   => '已选的属性 :attribute 非法。',
     'sting_or_array'                   => '已选的属性 :attribute 非法。',
+    'url_path'=>':attribute 格式不正确。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
