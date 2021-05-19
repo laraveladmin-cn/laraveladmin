@@ -1,4 +1,4 @@
-<?php 
+<?php
 $str = <<<'str'
 {
     "accepted": ":attributeを承認してください。",
@@ -146,11 +146,12 @@ $str = <<<'str'
         "order": "並べ替え",
         "where": "フィルタ条件"
     },
-    "ckeck_password": "：atributeが正しくないです。",
-    "mobile_phone": "：atributeが正しくないです。",
-    "array_keys_in_array": "選択した属性:atributeが不正です。",
-    "array_in_array": "選択した属性:atributeが不正です。",
-    "sting_or_array": "選択した属性:atributeが不正です。"
+    "ckeck_password": ":attributeが正しくないです。",
+    "mobile_phone": ":attributeが正しくないです。",
+    "array_keys_in_array": "選択した属性:attributeが不正です。",
+    "array_in_array": "選択した属性:attributeが不正です。",
+    "sting_or_array": "選択した属性:attributeが不正です。",
+    "url_path": ":attributeフォーマットが不正です。"
 }
 str;
 return json_decode($str,true);

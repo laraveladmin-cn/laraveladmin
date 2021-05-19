@@ -1,4 +1,4 @@
-<?php 
+<?php
 $str = <<<'str'
 {
     "accepted": ":attribute을(를) 동의해야 합니다.",
@@ -146,11 +146,12 @@ $str = <<<'str'
         "order": "정렬 하 다.",
         "where": "필터 조건"
     },
-    "ckeck_password": ": attribute 가 정확 하지 않 습 니 다.",
-    "mobile_phone": ": attribute 가 정확 하지 않 습 니 다.",
-    "array_keys_in_array": "선 택 된 속성: attribute 불법.",
-    "array_in_array": "선 택 된 속성: attribute 불법.",
-    "sting_or_array": "선 택 된 속성: attribute 불법."
+    "ckeck_password": ":attribute 가 정확 하지 않 습 니 다.",
+    "mobile_phone": ":attribute 가 정확 하지 않 습 니 다.",
+    "array_keys_in_array": "선 택 된 속성:attribute 불법.",
+    "array_in_array": "선 택 된 속성:attribute 불법.",
+    "sting_or_array": "선 택 된 속성:attribute 불법.",
+    "url_path": ":attribute 형식 이 잘못 되 었 습 니 다."
 }
 str;
 return json_decode($str,true);

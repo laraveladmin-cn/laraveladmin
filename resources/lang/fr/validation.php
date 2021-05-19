@@ -1,4 +1,4 @@
-<?php 
+<?php
 $str = <<<'str'
 {
     "accepted": "Le champ :attribute doit être accepté.",
@@ -146,11 +146,12 @@ $str = <<<'str'
         "order": "Trier",
         "where": "Critères de filtrage"
     },
-    "ckeck_password": ": attribut incorrect.",
-    "mobile_phone": ": attribut incorrect.",
-    "array_keys_in_array": "Attribut sélectionné: attribut illégal.",
-    "array_in_array": "Attribut sélectionné: attribut illégal.",
-    "sting_or_array": "Attribut sélectionné: attribut illégal."
+    "ckeck_password": ":attribute incorrect.",
+    "mobile_phone": ":attribute incorrect.",
+    "array_keys_in_array": "Attribut sélectionné :attribute illégal.",
+    "array_in_array": "Attribut sélectionné :attribute illégal.",
+    "sting_or_array": "Attribut sélectionné :attribute illégal.",
+    "url_path": ":attribute mal formé."
 }
 str;
 return json_decode($str,true);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $str = <<<'str'
 {
     "accepted": "Вы должны принять :attribute.",
@@ -148,9 +148,10 @@ $str = <<<'str'
     },
     "ckeck_password": ": это неправильно.",
     "mobile_phone": ": это неправильно.",
-    "array_keys_in_array": "Выбранные атрибуты: недопустимы.",
-    "array_in_array": "Выбранные атрибуты: недопустимы.",
-    "sting_or_array": "Выбранные атрибуты: недопустимы."
+    "array_keys_in_array": "Выбранные атрибуты :attribute.",
+    "array_in_array": "Выбранные атрибуты :attribute.",
+    "sting_or_array": "Выбранные атрибуты :attribute.",
+    "url_path": ": неверный формат :attribute."
 }
 str;
 return json_decode($str,true);

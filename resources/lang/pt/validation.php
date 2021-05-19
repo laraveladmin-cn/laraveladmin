@@ -1,4 +1,4 @@
-<?php 
+<?php
 $str = <<<'str'
 {
     "accepted": "O campo :attribute deverá ser aceite.",
@@ -146,11 +146,12 @@ $str = <<<'str'
         "order": "Classificar",
         "where": "Condições de rastreio"
     },
-    "ckeck_password": ": atributo incorrecto.",
-    "mobile_phone": ": atributo incorrecto.",
-    "array_keys_in_array": "Atributo selecionado: atributo ilegal.",
-    "array_in_array": "Atributo selecionado: atributo ilegal.",
-    "sting_or_array": "Atributo selecionado: atributo ilegal."
+    "ckeck_password": ":attribute incorrecto.",
+    "mobile_phone": ":attribute incorrecto.",
+    "array_keys_in_array": "Atributo selecionado :attribute ilegal.",
+    "array_in_array": "Atributo selecionado :attribute ilegal.",
+    "sting_or_array": "Atributo selecionado :attribute ilegal.",
+    "url_path": "formato de :attribute incorrecto."
 }
 str;
 return json_decode($str,true);
