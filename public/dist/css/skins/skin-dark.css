@@ -5,8 +5,16 @@
 .skin-dark .main-header .navbar {
     background-color: #2a2b36;
 }
-.skin-dark .main-header .navbar .nav > li > a {
+.skin-dark .main-header .navbar .nav > li > a,
+.skin-dark .nav-tabs-custom > .nav-tabs > li > a {
     color: #a8a9bb;
+}
+.skin-dark .nav-tabs{
+    border-bottom: 1px solid #444;
+}
+.skin-dark .nav-tabs-custom > .nav-tabs > li.active > a{
+    border-left-color: #444;
+    border-right-color: #444;
 }
 .skin-dark .main-header .navbar .nav > li > a:hover,
 .skin-dark .main-header .navbar .nav > li > a:active,
@@ -14,7 +22,9 @@
 .skin-dark .main-header .navbar .nav .open > a,
 .skin-dark .main-header .navbar .nav .open > a:hover,
 .skin-dark .main-header .navbar .nav .open > a:focus,
-.skin-dark .main-header .navbar .nav > .active > a {
+.skin-dark .main-header .navbar .nav > .active > a ,
+.skin-dark .nav-tabs-custom > .nav-tabs > li.active > a,
+.skin-dark .nav-tabs-custom > .nav-tabs > li.active:hover > a{
     background-color: #2a2b36;
     color: #3c8dbc;
 }
