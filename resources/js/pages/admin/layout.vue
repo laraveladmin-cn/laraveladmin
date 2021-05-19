@@ -1,5 +1,6 @@
 <template>
-    <div class="main_body admin_layout sidebar-mini h100" :class="skin" v-if="loaded || !loading" v-cloak>
+
+    <div class="main_body admin_layout sidebar-mini h100" :class="dark?'skin-dark':skin" v-if="loaded || !loading" v-cloak>
         <message></message>
         <modal></modal>
         <div class="wrapper">
@@ -388,7 +389,11 @@
                         </ul>
                     </div>
                     <div class="tab-pane" id="control-sidebar-settings-tab">
-                        <h3 class="control-sidebar-heading">{{$tp('Theme')}}</h3>
+                        <h3 class="control-sidebar-heading">
+                            {{$tp('Theme')}}
+                            <i class="fa pull-right" :class="dark?'fa-sun-o':'fa-moon-o'" @click="dark = dark?0:1"></i>
+                        </h3>
+
                         <ul class="list-unstyled clearfix">
                             <li class="skin-item" v-for="(item,index) in skins">
                                 <a href="javascript:void(0)" class="clearfix full-opacity-hover" @click="setSkin(item.class)">
@@ -427,6 +432,10 @@
         },
         props: {},
         data(){
+            let dark = localStorage.getItem('dark') || 0;
+            if(dark){
+                $(document.body).addClass('_dark');
+            }
             return {
                 shared:{
                     '{lang_path}':'_shared.menus',
@@ -441,6 +450,7 @@
                 keywords:'',
                 timer:null,
                 skin:localStorage.getItem('skin') || 'skin-blue',
+                dark:dark,
                 skins: [
                     {
                     "name": "Blue",
@@ -701,6 +711,14 @@
                     key:'path',
                     path:to.matched[1].path.replace(':id','{id}')
                 });
+            },
+            dark(value){
+                localStorage.setItem('dark',value);
+                if(value){
+                    $(document.body).addClass('_dark');
+                }else {
+                    $(document.body).removeClass('_dark');
+                }
             }
         },
         created() {
