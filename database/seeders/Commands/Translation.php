@@ -362,7 +362,7 @@ class Translation extends Seeder
         });
         $local = config('app.locale','en');
         $local = str_replace('_','-',$local);//当前默认设置使用地区语言
-        $local_path = resource_path(str_replace('-','_',"lang/{$local}"));
+        $local_path = resource_path(str_replace('_','-',"lang/{$local}"));
         $files = scandir($local_path);
         collect($files)->map(function ($file)use($local_path,$local){
             $file_path = "{$local_path}/{$file}";
@@ -380,7 +380,7 @@ class Translation extends Seeder
                 }
             }
         });
-        $local_path1 = resource_path(str_replace('-','_',"lang/{$local}.json"));
+        $local_path1 = resource_path(str_replace('_','-',"lang/{$local}.json"));
         $data = json_decode(file_get_contents($local_path1),true)?:[];
         $this->outPutData($data,'',$local,false);
     }
@@ -399,9 +399,9 @@ class Translation extends Seeder
             })->map(function ($lang)use($data,$file,$local,$lang_prefix){
                 $lang = str_replace('_','-',$lang);
                 if($lang_prefix){
-                    $file_path = resource_path(str_replace('-','_',"lang/{$lang}")."/{$file}");
+                    $file_path = resource_path(str_replace('_','-',"lang/{$lang}")."/{$file}");
                 }else{
-                    $file_path = resource_path(str_replace('-','_',"lang/{$file}"));
+                    $file_path = resource_path(str_replace('_','-',"lang/{$file}"));
                 }
                 $data_back = array_merge(array(), $data);
                 if(file_exists($file_path)){
@@ -435,7 +435,7 @@ class Translation extends Seeder
                 return str_replace('_','-',$value)!=$local;
             })->map(function ($lang)use($file_path,$file,$local){
                 $lang = str_replace('_','-',$lang);
-                $file_path1 = resource_path(str_replace('-','_',"lang/{$lang}")."/{$file}");
+                $file_path1 = resource_path(str_replace('_','-',"lang/{$lang}")."/{$file}");
                 if(!file_exists($file_path1)){
                     copy($file_path,$file_path1);
                 }
@@ -455,9 +455,9 @@ class Translation extends Seeder
         })->map(function ($lang)use($data,$file,$local,$lang_prefix){
             $lang = str_replace('_','-',$lang);
             if($lang_prefix){
-                $file_path = resource_path(str_replace('-','_',"lang/{$lang}")."/{$file}");
+                $file_path = resource_path(str_replace('_','-',"lang/{$lang}")."/{$file}");
             }else{
-                $file_path = resource_path(str_replace('-','_',"lang/{$lang}.json"));
+                $file_path = resource_path(str_replace('_','-',"lang/{$lang}.json"));
             }
             $data_back = array_merge(array(), $data);
             if(file_exists($file_path)){
