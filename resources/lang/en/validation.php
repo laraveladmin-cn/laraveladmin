@@ -150,7 +150,8 @@ $str = <<<'str'
     "mobile_phone": ":attribute error。",
     "array_keys_in_array": "The :attribute field does not exist in :other.",
     "array_in_array": "The :attribute field does not exist in :other.",
-    "sting_or_array": "The :attribute field does not exist in :other."
+    "sting_or_array": "The :attribute field does not exist in :other.",
+    "url_path": "url_path"
 }
 str;
 return json_decode($str,true);
