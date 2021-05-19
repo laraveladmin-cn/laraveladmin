@@ -16,6 +16,23 @@
     border-left-color: #444;
     border-right-color: #444;
 }
+.skin-dark .el-input-number__decrease{
+    border-right: 1px solid #444;
+}
+.skin-dark .el-input-number__increase{
+    border-left: 1px solid #444;
+}
+.skin-dark .no-img{
+    background:rgba(255,255,255,0.2)
+}
+.skin-dark .thumbnail{
+    border: 1px solid #444;
+    background:rgba(255,255,255,0.2);
+    color: #a8a9bb;
+}
+.skin-dark .thumbnail .caption{
+    color: #a8a9bb;
+}
 .skin-dark .main-header .navbar .nav > li > a:hover,
 .skin-dark .main-header .navbar .nav > li > a:active,
 .skin-dark .main-header .navbar .nav > li > a:focus,
