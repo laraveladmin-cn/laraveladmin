@@ -64,6 +64,11 @@
                                     </ul>
                                 </li>
                                 <user-menu></user-menu>
+                                <li v-if="locales.length>1" class="language">
+                                    <a @click="openLanguage">
+                                        <language ref="language" :value="language" @change="setLanguage"></language>
+                                    </a>
+                                </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right hidden-sm" v-else>
                                 <li>
@@ -71,6 +76,11 @@
                                 </li>
                                 <li>
                                     <router-link to="/open/register">{{$t('Register')}}</router-link>
+                                </li>
+                                <li v-if="locales.length>1" class="language">
+                                    <a @click="openLanguage">
+                                        <language ref="language" :value="language" @change="setLanguage"></language>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -134,7 +144,8 @@
         components:{
             "message":Message,
             "modal":Modal,
-            "user-menu":userMenu
+            "user-menu":userMenu,
+            "language":()=>import(/* webpackChunkName: "common_components/language/language.vue" */ 'common_components/language/language.vue'),
         },
         props: {},
         computed: {
@@ -145,6 +156,8 @@
                 'name',
                 'version',
                 'name_short',
+                'language',
+                'locales'
             ]),
             ...mapState('user', {
                 user: state => state.user
@@ -166,7 +179,11 @@
             }),
             ...mapMutations({
                 menuSet: 'menu/set',  //设置当前路由,用于菜单选中
+                setLanguage:'setLanguage',
             }),
+            openLanguage(){
+                this.$refs['language'].open();
+            },
         },
         watch: {
             '$route'(to, from) {

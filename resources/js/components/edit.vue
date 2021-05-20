@@ -116,11 +116,12 @@
                 return maps;
             },
             transMap(name,field,table){
-                if(!this.options.lang_table && !array_get(this.data,'excel.sheet')){
+                let sheet = array_get(this.data,'excel.sheet');
+                if(!this.options.lang_table && !sheet){
                     return name;
                 }
                 if(!table){
-                    table = this.options.lang_table || this.data.excel.sheet;
+                    table = this.options.lang_table || sheet;
                 }
                 return this.$tp(name,{
                     "{lang_path}": '_shared.tables.'+table+'.maps.'+field,
@@ -128,12 +129,13 @@
                 });
             },
             transField(name,key,table){
-                if(!this.options.lang_table && !this.data.excel.sheet){
+                let sheet = array_get(this.data,'excel.sheet');
+                if(!this.options.lang_table && !sheet){
                     return name;
                 }
                 if(!table){
                     if(!key || key.indexOf('.')==-1){
-                        table = this.options.lang_table || this.data.excel.sheet;
+                        table = this.options.lang_table || sheet;
                     }else {
                         let arr = key.split('.');
                         arr.pop();

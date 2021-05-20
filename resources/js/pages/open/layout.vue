@@ -29,10 +29,20 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right hidden-sm" v-if="user && user.id">
                         <user-menu></user-menu>
+                        <li v-if="locales.length>1" class="language">
+                            <a @click="openLanguage">
+                                <language ref="language" :value="language" @change="setLanguage"></language>
+                            </a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right hidden-sm" v-else>
                         <li :class="{active:menu.active}" v-for="(menu,index) in tree_menus" v-if="!loginMenus(menu)">
                             <router-link :to="menu.url" v-if="menu.url.indexOf('http')!=0">{{$tp(menu.name)}}</router-link>
+                        </li>
+                        <li v-if="locales.length>1" class="language">
+                            <a @click="openLanguage">
+                                <language ref="language" :value="language" @change="setLanguage"></language>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -72,7 +82,8 @@
         components:{
             "message":Message,
             "modal":Modal,
-            "user-menu":userMenu
+            "user-menu":userMenu,
+            "language":()=>import(/* webpackChunkName: "common_components/language/language.vue" */ 'common_components/language/language.vue'),
         },
         props: {
         },
@@ -84,10 +95,14 @@
             }),
             ...mapMutations({
                 menuSet:'menu/set',  //设置当前路由,用于菜单选中
+                setLanguage:'setLanguage',
             }),
             loginMenus(menu){
                 return [66,63].indexOf(menu.id)==-1;
-            }
+            },
+            openLanguage(){
+                this.$refs['language'].open();
+            },
         },
         watch: {
             '$route' (to, from) {
@@ -108,7 +123,9 @@
                 'icp',
                 'logo',
                 'app_url',
-                'name'
+                'name',
+                'language',
+                'locales'
             ]),
             ...mapState('user',{
                 user:state => state.user
@@ -199,5 +216,4 @@
     .bs-docs-footer-links li+li{
         margin-left: 15px;
     }
-
 </style>

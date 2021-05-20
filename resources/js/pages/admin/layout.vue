@@ -1,5 +1,6 @@
 <template>
-    <div class="main_body admin_layout sidebar-mini h100" :class="skin" v-if="loaded || !loading" v-cloak>
+
+    <div class="main_body admin_layout sidebar-mini h100" :class="dark?'skin-dark':skin" v-if="loaded || !loading" v-cloak>
         <message></message>
         <modal></modal>
         <div class="wrapper">
@@ -240,7 +241,7 @@
                     </span>
                 </footer>
             </div>
-            <aside class="control-sidebar control-sidebar-dark">
+            <aside class="control-sidebar" ref="control_sidebar">
                 <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
                     <li class="active">
                         <a href="#control-sidebar-home-tab" data-toggle="tab">
@@ -355,7 +356,15 @@
                         </ul>
                     </div>
                     <div class="tab-pane" id="control-sidebar-settings-tab">
-                        <h3 class="control-sidebar-heading">{{$tp('Theme')}}</h3>
+                        <h3 class="control-sidebar-heading">
+                            {{$tp('Theme')}}
+                            <span class="pull-right" @click="switchDark">
+                                {{dark?$tp('Day'):$tp('Night')}}
+                                <i class="fa" :class="dark?'fa-sun-o':'fa-moon-o'"></i>
+                            </span>
+
+                        </h3>
+
                         <ul class="list-unstyled clearfix">
                             <li class="skin-item" v-for="(item,index) in skins">
                                 <a href="javascript:void(0)" class="clearfix full-opacity-hover" @click="setSkin(item.class)">
@@ -396,6 +405,7 @@
         },
         props: {},
         data(){
+            let dark = localStorage.getItem('dark')==1?1:0;
             return {
                 shared:{
                     '{lang_path}':'_shared.menus',
@@ -410,6 +420,7 @@
                 keywords:'',
                 timer:null,
                 skin:localStorage.getItem('skin') || 'skin-blue',
+                dark:dark,
                 skins: [
                     {
                     "name": "Blue",
@@ -502,6 +513,24 @@
 
         },
         methods:{
+            checkDark(){
+                let $control_sidebar = $(this.$refs['control_sidebar']);
+                let $body = $(document.body);
+                if(this.dark){
+                    $control_sidebar.addClass('control-sidebar-dark');
+                    $control_sidebar.removeClass('control-sidebar-light');
+                    $body.addClass('_dark');
+                }else {
+                    $control_sidebar.addClass('control-sidebar-light');
+                    $control_sidebar.removeClass('control-sidebar-dark');
+                    $body.removeClass('_dark');
+                }
+                localStorage.setItem('dark',this.dark);
+            },
+            switchDark(){
+               this.dark = this.dark?0:1;
+               this.checkDark();
+            },
             openLanguage(){
               this.$refs['language'].open();
             },
@@ -532,6 +561,7 @@
             load(){
                 //重载触发事件绑定
                 $(window).trigger('load');
+                this.checkDark();
             },
             ...mapActions({
                 getMenus:'menu/getMenus', //获取菜单数据
@@ -695,6 +725,8 @@
             });
             this.getMenus();
             this.getUser();
+        },
+        mounted(){
         }
     };
 </script>

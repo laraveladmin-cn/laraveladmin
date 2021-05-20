@@ -150,7 +150,8 @@ $str = <<<'str'
     "mobile_phone": "：attribute不正確。",
     "array_keys_in_array": "已選的内容：attribute非法。",
     "array_in_array": "已選的内容：attribute非法。",
-    "sting_or_array": "已選的内容：attribute非法。"
+    "sting_or_array": "已選的内容：attribute非法。",
+    "url_path": "：attribute格式不正確。"
 }
 str;
 return json_decode($str,true);

@@ -119,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            <div class="box-footer clearfix pager-tool" v-show="!options.hideTopPagerTool">
+            <div class="box-footer box-footer-top clearfix pager-tool" v-show="!options.hideTopPagerTool">
                 <slot name="pager" :data="data">
                     <div class="row">
                         <div class="col-lg-12">
@@ -875,7 +875,15 @@
     }
     .box-body .table-striped .loading{
         background-color: unset;
-        background: rgba(255,255,255,0.5);
+        background: #FFFFFF7F;
+    }
+    .skin-dark .box-body .table-striped .loading{
+        background-color: unset;
+        background: rgba(255,255,255,0.1);
+    }
+    .skin-dark .box .overlay > .fa,
+    .skin-dark .overlay-wrapper .overlay > .fa{
+        color: unset;
     }
     .table .loading{
         position: absolute;
@@ -981,4 +989,22 @@
     .m-top{
         margin-top: 10px !important;
     }
+    .box-footer-top{
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .table-responsive{
+        border: none;
+    }
+    @media screen and (max-width: 767px){
+        .table-responsive>.table-bordered {
+            border: 1px solid #f4f4f4;
+        }
+        .skin-dark .table-responsive>.table-bordered {
+            border: 1px solid #444;
+        }
+    }
+
 </style>
