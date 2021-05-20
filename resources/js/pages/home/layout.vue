@@ -69,7 +69,7 @@
     .language{
         padding: 5px;
         position: fixed;
-        right: 0px;
+        right: 5px;
         z-index: 10;
     }
 </style>
