@@ -1,5 +1,10 @@
 <template>
     <div class="open_layout h100">
+        <div v-if="locales.length>1" class="language">
+            <a @click="openLanguage">
+                <language ref="language" :value="language" @change="setLanguage"></language>
+            </a>
+        </div>
         <message></message>
         <modal></modal>
         <transition name="fade" enter-active-class="animated lightSpeedIn faster" mode="out-in" leave-active-class="animated lightSpeedOut faster">
@@ -15,9 +20,16 @@
     export default {
         components:{
             "message":Message,
-            "modal":Modal
+            "modal":Modal,
+            "language":()=>import(/* webpackChunkName: "common_components/language/language.vue" */ 'common_components/language/language.vue'),
         },
         props: {
+        },
+        computed:{
+            ...mapState([
+                'language',
+                'locales'
+            ]),
         },
         methods:{
             ...mapActions({
@@ -27,7 +39,11 @@
             }),
             ...mapMutations({
                 menuSet:'menu/set',  //设置当前路由,用于菜单选中
-            })
+                setLanguage:'setLanguage',
+            }),
+            openLanguage(){
+                this.$refs['language'].open();
+            },
         },
         watch: {
             '$route' (to, from) {
@@ -46,3 +62,11 @@
         }
     };
 </script>
+<style scoped>
+    .language{
+        padding: 5px;
+        position: fixed;
+        right: 0px;
+        z-index: 10;
+    }
+</style>
