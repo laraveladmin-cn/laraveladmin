@@ -433,7 +433,30 @@
             "index": {
                 "Home page of official website": "官網首頁",
                 "Backstage home page": "後臺首頁",
-                "Front desk home page": "前臺首頁"
+                "Front desk home page": "前臺首頁",
+                "Simple, intuitive, powerful front-end and back-end development framework, so that the full stack development more quickly, simple": "簡潔、直觀、強悍的前端後端開發框架，讓全棧開發更迅速、簡單。",
+                "LaravelAdmin documents": "LaravelAdmin檔案",
+                "Please register at the WWW main site before viewing the documentation, Do not register users in the demo environment": "請在www主站注册後再查看檔案，不要在演示環境註冊用戶",
+                "Background template download": "後臺範本下載",
+                "LaravelAdmin covers the basic features": "LaravelAdmin涵蓋基本功能",
+                "These basic functions make it easy and fast to realize our business": "這些基礎功能可以方便快速讓實現我們的業務",
+                "Related technology stack": "涉及相關科技棧"
+            },
+            "contact": {
+                "Demo environment": "演示環境",
+                "User name": "用戶名",
+                "Password": "密碼",
+                "Scan code for donation": "掃碼捐贈",
+                "Official QQ Group": "官方QQ群",
+                "Zip code": "郵編",
+                "Telephone": "電話",
+                "Email address": "電子郵箱",
+                "Address": "地址",
+                "Jiaozi No1, Jinjiang District, Chengdu City, Sichuan Province": "四川省成都市錦江區嬌子一號",
+                "Contact us": "聯繫我們",
+                "Open source is not easy thanks for your support": "開源不易謝謝支持",
+                "Mr Zhang": "張先生",
+                "WeChat Same number": "微信同號"
             },
             "Registered user": "註冊用戶",
             "Forget your password": "忘記密碼",

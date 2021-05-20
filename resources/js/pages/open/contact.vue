@@ -2,14 +2,14 @@
     <div class="open_contact">
         <div class="container marketing">
             <div  id="contact">
-                <h3>联系我们<small>(开源不易谢谢支持)</small></h3>
+                <h3>{{$tp('Contact us')}}<small>({{$tp('Open source is not easy thanks for your support')}})</small></h3>
                 <hr class="featurette-divider">
                 <div class="row featurette">
                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                         <div class="media">
                             <div class="media-left">
                                 <a href="#" class="thumbnail alipay">
-                                    <img class="media-object" :src="app_url+'/dist/img/alipay.jpg'" alt="扫码捐赠" data-holder-rendered="true">
+                                    <img class="media-object" :src="app_url+'/dist/img/alipay.jpg'" :alt="$tp('Scan code for donation')" data-holder-rendered="true">
                                 </a>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#" class="thumbnail pay-wx">
-                                        <img class="media-object" :src="app_url+'/dist/img/wxpay.jpg'" alt="扫码捐赠" data-holder-rendered="true">
+                                        <img class="media-object" :src="app_url+'/dist/img/wxpay.jpg'" :alt="$tp('Scan code for donation')" data-holder-rendered="true">
                                     </a>
 
                                 </div>
@@ -30,9 +30,9 @@
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                         <div class="media">
                             <div class="media-body">
-                                <h4 class="media-heading">演示环境</h4>
-                                用户名:<code>demo_admin</code>
-                                <br>密码:<code>admin123456</code>
+                                <h4 class="media-heading">{{$tp('Demo environment')}}</h4>
+                                {{$tp('User name')}}:<code>demo_admin</code>
+                                <br>{{$tp('Password')}}:<code>admin123456</code>
                             </div>
                         </div>
                         <div class="media">
@@ -42,7 +42,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">官方QQ群: 391528810</h4>
+                                <h4 class="media-heading">{{$tp('Official QQ Group')}}: 391528810</h4>
                             </div>
                         </div>
                         <div class="media">
@@ -52,7 +52,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">邮编: 610000</h4>
+                                <h4 class="media-heading">{{$tp('Zip code')}}: 610000</h4>
 
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">电话: 张先生 13699411148(微信同号)</h4>
+                                <h4 class="media-heading">{{$tp('Telephone')}}: {{$tp('Mr Zhang')}} 13699411148({{$tp('WeChat Same number')}})</h4>
                             </div>
                         </div>
                         <div class="media">
@@ -73,7 +73,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">电子邮箱:214986304@qq.com</h4>
+                                <h4 class="media-heading">{{$tp('Email address')}}:214986304@qq.com</h4>
                             </div>
                         </div>
                         <div class="media">
@@ -83,7 +83,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">地址:四川省成都市锦江区娇子一号</h4>
+                                <h4 class="media-heading">{{$tp('Address')}}:{{$tp('Jiaozi No1, Jinjiang District, Chengdu City, Sichuan Province')}}</h4>
                             </div>
                         </div>
                     </div>
@@ -109,6 +109,11 @@
         },
         methods:{
 
+        },
+        data(){
+            return {
+                "{lang_path}":'open.contact'
+            };
         }
 
     };

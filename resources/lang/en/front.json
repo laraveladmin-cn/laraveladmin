@@ -433,7 +433,30 @@
             "index": {
                 "Home page of official website": "Home page of official website",
                 "Backstage home page": "Backstage home page",
-                "Front desk home page": "Front desk home page"
+                "Front desk home page": "Front desk home page",
+                "Simple, intuitive, powerful front-end and back-end development framework, so that the full stack development more quickly, simple": "Simple, intuitive, powerful front-end and back-end development framework, so that the full stack development more quickly, simple",
+                "LaravelAdmin documents": "LaravelAdmin documents",
+                "Please register at the WWW main site before viewing the documentation, Do not register users in the demo environment": "Please register at the WWW main site before viewing the documentation, Do not register users in the demo environment",
+                "Background template download": "Background template download",
+                "LaravelAdmin covers the basic features": "LaravelAdmin covers the basic features",
+                "These basic functions make it easy and fast to realize our business": "These basic functions make it easy and fast to realize our business",
+                "Related technology stack": "Related technology stack"
+            },
+            "contact": {
+                "Demo environment": "Demo environment",
+                "User name": "User name",
+                "Password": "Password",
+                "Scan code for donation": "Scan code for donation",
+                "Official QQ Group": "Official QQ Group",
+                "Zip code": "Zip code",
+                "Telephone": "Telephone",
+                "Email address": "Email address",
+                "Address": "Address",
+                "Jiaozi No1, Jinjiang District, Chengdu City, Sichuan Province": "Jiaozi No1, Jinjiang District, Chengdu City, Sichuan Province",
+                "Contact us": "Contact us",
+                "Open source is not easy thanks for your support": "Open source is not easy thanks for your support",
+                "Mr Zhang": "Mr Zhang",
+                "WeChat Same number": "WeChat Same number"
             },
             "Registered user": "Registered user",
             "Forget your password": "Forget your password",
