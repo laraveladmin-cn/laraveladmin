@@ -868,7 +868,9 @@
                 "My birthday": "내 생일",
                 "Your birthday": "너의 생일",
                 "Recent Activities": "최근 활동",
-                "{number} minutes ago": "{number} 분 전"
+                "{number} minutes ago": "{number} 분 전",
+                "Night": "어두 운 밤",
+                "Day": "낮."
             },
             "firms": {
                 "http or https begins": "'http: /' 또는 'https: /' 로 시작 합 니 다.",

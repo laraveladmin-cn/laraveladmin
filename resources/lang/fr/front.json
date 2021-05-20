@@ -868,7 +868,9 @@
                 "My birthday": "Mon anniversaire.",
                 "Your birthday": "Ton anniversaire.",
                 "Recent Activities": "Activités récentes",
-                "{number} minutes ago": "{number} Il y a quelques minutes"
+                "{number} minutes ago": "{number} Il y a quelques minutes",
+                "Night": "Nuit noire",
+                "Day": "Jour"
             },
             "firms": {
                 "http or https begins": "« http: / / » ou « https: / / »",

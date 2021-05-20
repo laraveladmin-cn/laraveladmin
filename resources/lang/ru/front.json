@@ -868,7 +868,9 @@
                 "My birthday": "день рождения",
                 "Your birthday": "твой день рождения",
                 "Recent Activities": "Последние события",
-                "{number} minutes ago": "{number} минут назад"
+                "{number} minutes ago": "{number} минут назад",
+                "Night": "ночь",
+                "Day": "днём"
             },
             "firms": {
                 "http or https begins": "'http: / / или' https / 'начало",

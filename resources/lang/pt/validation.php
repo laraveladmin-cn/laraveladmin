@@ -1,4 +1,4 @@
-<?php
+<?php 
 $str = <<<'str'
 {
     "accepted": "O campo :attribute deverá ser aceite.",

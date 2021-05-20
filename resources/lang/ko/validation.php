@@ -1,4 +1,4 @@
-<?php
+<?php 
 $str = <<<'str'
 {
     "accepted": ":attribute을(를) 동의해야 합니다.",

@@ -868,7 +868,9 @@
                 "My birthday": "私の誕生日",
                 "Your birthday": "あなたの誕生日",
                 "Recent Activities": "最近のイベント",
-                "{number} minutes ago": "{number}分前"
+                "{number} minutes ago": "{number}分前",
+                "Night": "夜のやみ",
+                "Day": "昼"
             },
             "firms": {
                 "http or https begins": "'http:/'または'https://'先頭",
