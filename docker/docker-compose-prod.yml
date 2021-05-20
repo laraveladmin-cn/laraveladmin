@@ -37,6 +37,7 @@ services:
       - mysql
       - redis
     volumes:
+      - ../demo:/var/www/laravel/demo #demo代码目录
       - .:/var/www/laravel/laraveladmin #代码目录
       - ./docker/php/cron:/var/spool/cron/crontabs/root # 定时任务计划
       - ./docker/php/ini/php.ini:/usr/local/etc/php/php.ini #php配置文件
@@ -56,6 +57,7 @@ services:
     depends_on:
       - php
     volumes:
+      - ../demo:/var/www/laravel/demo #demo代码目录
       - .:/var/www/laravel/laraveladmin # 主目录
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./docker/nginx/vhost:/etc/nginx/conf.d/vhost
@@ -69,6 +71,7 @@ services:
 #    build: ./docker/node
     image: laraveladmin/node #镜像源
     volumes:
+      - ../demo:/var/www/laravel/demo #demo代码目录
       - .:/var/www/laravel/laraveladmin #代码目录
 #    command:
 #      npm run watch
