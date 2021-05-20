@@ -995,4 +995,16 @@
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
+    .table-responsive{
+        border: none;
+    }
+    @media screen and (max-width: 767px){
+        .table-responsive>.table-bordered {
+            border: 1px solid #f4f4f4;
+        }
+        .skin-dark .table-responsive>.table-bordered {
+            border: 1px solid #444;
+        }
+    }
+
 </style>

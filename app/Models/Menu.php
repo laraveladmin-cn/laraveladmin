@@ -406,7 +406,7 @@ class Menu extends Model
 
 
     /**
-     * 判断当前用户YesNo拥有某权限
+     * 判断当前用户是否拥有某权限
      * @param $url
      * @return bool
      */

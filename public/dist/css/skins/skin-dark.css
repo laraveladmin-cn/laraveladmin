@@ -201,7 +201,7 @@
 .skin-dark .form-control{
     background-color: #2F3039;
     border: 1px solid transparent;
-    color: rgba(255,255,255,.87);
+    color: #a8a9bb;
 }
 .skin-dark .input-group .input-group-addon,
 .skin-dark .select2-container--default .select2-results__option,

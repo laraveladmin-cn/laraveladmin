@@ -432,8 +432,8 @@
         },
         props: {},
         data(){
-            let dark = localStorage.getItem('dark') || 0;
-            if(dark){
+            let dark = localStorage.getItem('dark')==1?1:0;
+            if(dark==1){
                 $(document.body).addClass('_dark');
             }
             return {
