@@ -274,7 +274,7 @@
                     </span>
                 </footer>
             </div>
-            <aside class="control-sidebar control-sidebar-dark">
+            <aside class="control-sidebar" ref="control_sidebar">
                 <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
                     <li class="active">
                         <a href="#control-sidebar-home-tab" data-toggle="tab">
@@ -391,7 +391,11 @@
                     <div class="tab-pane" id="control-sidebar-settings-tab">
                         <h3 class="control-sidebar-heading">
                             {{$tp('Theme')}}
-                            <i class="fa pull-right" :class="dark?'fa-sun-o':'fa-moon-o'" @click="dark = dark?0:1"></i>
+                            <span class="pull-right" @click="switchDark">
+                                {{dark?$tp('Day'):$tp('Night')}}
+                                <i class="fa" :class="dark?'fa-sun-o':'fa-moon-o'"></i>
+                            </span>
+
                         </h3>
 
                         <ul class="list-unstyled clearfix">
@@ -433,9 +437,6 @@
         props: {},
         data(){
             let dark = localStorage.getItem('dark')==1?1:0;
-            if(dark==1){
-                $(document.body).addClass('_dark');
-            }
             return {
                 shared:{
                     '{lang_path}':'_shared.menus',
@@ -543,6 +544,24 @@
 
         },
         methods:{
+            checkDark(){
+                let $control_sidebar = $(this.$refs['control_sidebar']);
+                let $body = $(document.body);
+                if(this.dark){
+                    $control_sidebar.addClass('control-sidebar-dark');
+                    $control_sidebar.removeClass('control-sidebar-light');
+                    $body.addClass('_dark');
+                }else {
+                    $control_sidebar.addClass('control-sidebar-light');
+                    $control_sidebar.removeClass('control-sidebar-dark');
+                    $body.removeClass('_dark');
+                }
+                localStorage.setItem('dark',this.dark);
+            },
+            switchDark(){
+               this.dark = this.dark?0:1;
+               this.checkDark();
+            },
             openLanguage(){
               this.$refs['language'].open();
             },
@@ -573,6 +592,7 @@
             load(){
                 //重载触发事件绑定
                 $(window).trigger('load');
+                this.checkDark();
             },
             ...mapActions({
                 getMenus:'menu/getMenus', //获取菜单数据
@@ -711,14 +731,6 @@
                     key:'path',
                     path:to.matched[1].path.replace(':id','{id}')
                 });
-            },
-            dark(value){
-                localStorage.setItem('dark',value);
-                if(value){
-                    $(document.body).addClass('_dark');
-                }else {
-                    $(document.body).removeClass('_dark');
-                }
             }
         },
         created() {
@@ -743,6 +755,8 @@
             });
             this.getMenus();
             this.getUser();
+        },
+        mounted(){
         }
     };
 </script>
