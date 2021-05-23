@@ -7,7 +7,7 @@
                 <validation-observer ref="register" v-slot="{invalid,validate}">
                     <form method="post">
                         <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18',icon:'fa-user',placeholder:placeholderUsername}"></form-item>
-                        <form-item v-model="email" :options="{key:'email',name:$t('Email'),type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:$tp('Please enter email address'),title:'填了邮箱将优先使用邮件通知'}"></form-item>
+                        <form-item v-model="email" :options="{key:'email',name:$t('Email'),type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:$tp('Please enter email address'),title:$tp('Email notification will be preferred if you fill in the mailbox')}"></form-item>
                         <form-item v-model="mobile_phone" :options="{key:'mobile_phone',name:$t('Mobile phone number'),rules:email?'':'required|mobile',icon:'glyphicon-phone',placeholder:$tp('Please enter your mobile phone number')}"></form-item>
                         <form-item v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'',label:false}">
                             <geetest style="width: 150px"  v-if="verify['type']=='geetest'" :url="web_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></geetest>
@@ -30,14 +30,14 @@
                         <form-item v-model="confirm_password" :options="{key:'confirm_password',type:'password',name:$tp('Confirm password'),rules:'required|confirmed:password',icon:'glyphicon-log-in',placeholder:$tp('Please reconfirm your password')}"></form-item>
                         <form-item v-model="agree" :options="{key:'agree',name:$tp('protocol'),rules:'required',label:false,messages:false}">
                             <div class="social-auth-links row" :class="{'has-error':errors.length}">
-                                <div class="col-xs-8 row-col">
+                                <div class="col-xs-8 row-col agree-row">
                                     <icheck v-model="agree" :option="true">
                                     <span class="checkbox-label">
                                          {{$tp('I have read and agree')}}《<a href="#">{{$tp('Protocol')}}</a>》
                                     </span>
                                     </icheck>
                                 </div>
-                                <div class="col-xs-4 row-col btn-register">
+                                <div class="col-xs-4 row-col btn-register agree-row">
                                     <button type="button" class="btn btn-primary btn-block btn-flat" :disabled="loading" @click="postRegister(invalid,validate)">
                                         {{loading?$tp('Registration is underway'):$t('Register')}}
                                     </button>
@@ -232,7 +232,7 @@
         }
     };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .open_register{
         position: relative;
         background: url('/dist/img/login-bg.jpg') no-repeat;
@@ -274,5 +274,8 @@
     }
     .count-down{
         color: red;
+    }
+    .en .agree-row{
+        width: 100%;
     }
 </style>
