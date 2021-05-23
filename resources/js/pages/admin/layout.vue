@@ -358,11 +358,10 @@
                     <div class="tab-pane" id="control-sidebar-settings-tab">
                         <h3 class="control-sidebar-heading">
                             {{$tp('Theme')}}
-                            <span class="pull-right" @click="switchDark">
+                            <a href="javascript:void(0)" class="pull-right" @click="switchDark">
                                 {{dark?$tp('Day'):$tp('Night')}}
                                 <i class="fa" :class="dark?'fa-sun-o':'fa-moon-o'"></i>
-                            </span>
-
+                            </a>
                         </h3>
 
                         <ul class="list-unstyled clearfix">

@@ -14,10 +14,13 @@
                     {{value}}
                 </span>
             </label>
-            <slot>
-                <input :type="options.type || 'text'" :name="options.key" v-model="data" class="form-control" :placeholder="_placeholder">
-            </slot>
-            <span class="form-control-feedback" :class="icon" v-if="icon"></span>
+            <div class="clearfix"></div>
+            <div class="form-input">
+                <slot>
+                    <input :type="options.type || 'text'" :name="options.key" v-model="data" class="form-control" :placeholder="_placeholder">
+                </slot>
+                <span class="form-control-feedback" :class="icon" v-if="icon"></span>
+            </div>
         </div>
     </validation-provider>
 </template>
@@ -87,7 +90,7 @@
 
 <style scoped>
     .has-feedback label~.form-control-feedback{
-        top: 20px;
+        top: 0px;
     }
     .control-label{
         margin-bottom:0px;
@@ -95,6 +98,9 @@
     .title-label{
         font-weight: 500;
         font-size: 12px;
+    }
+    .form-input{
+        position: relative;
     }
 
 </style>
