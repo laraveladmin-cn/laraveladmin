@@ -4,16 +4,23 @@
             <label class="control-label" v-if="options.label!==false || (errors.length && options.messages!==false)">
                 {{options.label!==false?options.name+'：':''}}
             </label>
+            <label class="control-label pull-right text-light-blue title-label" v-show="options.title && (!errors.length || options.messages===false)">
+                <i class="fa fa-info-circle"></i>
+                <span>{{options.title}}</span>
+            </label>
             <label class="control-label pull-right" v-if="options.messages!==false">
                 <i class="fa fa-times-circle-o" v-show="errors.length>0" ></i>
                 <span v-for="value in errors">
                     {{value}}
                 </span>
             </label>
-            <slot>
-                <input :type="options.type || 'text'" :name="options.key" v-model="data" class="form-control" :placeholder="_placeholder">
-            </slot>
-            <span class="form-control-feedback" :class="icon" v-if="icon"></span>
+            <div class="clearfix"></div>
+            <div class="form-input">
+                <slot>
+                    <input :type="options.type || 'text'" :name="options.key" v-model="data" class="form-control" :placeholder="_placeholder">
+                </slot>
+                <span class="form-control-feedback" :class="icon" v-if="icon"></span>
+            </div>
         </div>
     </validation-provider>
 </template>
@@ -83,10 +90,17 @@
 
 <style scoped>
     .has-feedback label~.form-control-feedback{
-        top: 20px;
+        top: 0px;
     }
     .control-label{
         margin-bottom:0px;
+    }
+    .title-label{
+        font-weight: 500;
+        font-size: 12px;
+    }
+    .form-input{
+        position: relative;
     }
 
 </style>
