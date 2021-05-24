@@ -247,7 +247,7 @@
     }
     .register-box{
         position: absolute;
-        height: 635px;
+        height: 695px;
         left: 0;
         top: 0;
         bottom: 40px;
