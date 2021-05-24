@@ -597,7 +597,11 @@
             "Resetting": "Resetting…",
             "Get the verification code": "Get message code",
             "Getting": "Getting...",
+<<<<<<< HEAD
             "Enter the received message verification code": "Enter the received message code",
+=======
+            "Enter the received message verification code": "Enter the received message verification code",
+>>>>>>> 4feba49e98a26c100788150695cf8046d64f0010
             "seconds": "seconds",
             "new password": "new password",
             "confirm the new password": "confirm the new password",
@@ -614,7 +618,7 @@
             "Confirm password": "Confirm password",
             "Please reconfirm your password": "Please reconfirm your password",
             "Please enter your password": "Please enter your password",
-            "Enter the CAPTCHA you received": "Enter the code you received",
+            "Enter the CAPTCHA you received": "Enter the CAPTCHA you received",
             "Please enter your mobile phone number": "Please enter your mobile phone number",
             "Please enter email address": "Please enter email address"
         },
