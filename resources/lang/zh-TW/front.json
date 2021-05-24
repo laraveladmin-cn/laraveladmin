@@ -460,6 +460,7 @@
             },
             "Registered user": "註冊用戶",
             "Forget your password": "忘記密碼",
+            "Email notification will be preferred if you fill in the mailbox": "填了郵箱將優先使用郵件通知",
             "To log in": "直接登入",
             "Other login methods": "其它登入管道",
             "Remember to log in": "記住登入",
