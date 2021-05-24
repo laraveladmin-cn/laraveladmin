@@ -6,6 +6,7 @@
 </template>
 <script>
     require('./gt.js');
+    import { mapState} from 'vuex';
     export default {
         components: {
         },
@@ -52,37 +53,67 @@
                         this.captchaObj.reset();
                     }
                 }
+            },
+            '_i18n.locale'(){
+                this.destroy();
+                this.init();
+            }
+        },
+        methods:{
+            destroy(){
+                $('.geetest-captcha').html('');
+            },
+            init(){
+                let $this = this;
+                $.ajax({
+                    url: this.url + "?t=" + (new Date()).getTime(),
+                    headers:this.headers,
+                    data:{_token:this._token},
+                    type: "get",
+                    dataType: "json",
+                    success: function(data) {
+                        initGeetest({
+                            gt: data.gt,
+                            challenge: data.challenge,
+                            product: $this.data.product,
+                            offline: !data.success,
+                            new_captcha: data.new_captcha,
+                            lang: $this.data.lang,
+                            http: $this.data.http,
+                            width: '100%'
+                        }, function(captchaObj) {
+                            captchaObj.appendTo($($this.$el).find('.geetest-captcha'));
+                            captchaObj.onReady(function() {
+                                $this.show = false;
+                            });
+                            captchaObj.onSuccess(function () {
+                                $this.$emit('input', true); //修改值
+                                $this.$emit('change',true); //修改值
+                            });
+                            $this.captchaObj = captchaObj;
+                        });
+                    }
+                });
             }
         },
         mounted() {
-            var $this = this;
-            $.ajax({
-                url: this.url + "?t=" + (new Date()).getTime(),
-                type: "get",
-                dataType: "json",
-                success: function(data) {
-                    initGeetest({
-                        gt: data.gt,
-                        challenge: data.challenge,
-                        product: $this.data.product,
-                        offline: !data.success,
-                        new_captcha: data.new_captcha,
-                        lang: $this.data.lang,
-                        http: $this.data.http,
-                        width: '100%'
-                    }, function(captchaObj) {
-                        captchaObj.appendTo($($this.$el).find('.geetest-captcha'));
-                        captchaObj.onReady(function() {
-                            $this.show = false;
-                        });
-                        captchaObj.onSuccess(function () {
-                            $this.$emit('input', true); //修改值
-                            $this.$emit('change',true); //修改值
-                        });
-                        $this.captchaObj = captchaObj;
-                    });
+            this.init();
+        },
+        computed:{
+            ...mapState([
+                '_token',
+                'use_url',
+            ]),
+            headers(){
+                let headers = {
+                    Accept:'application/json, text/plain, */*'
+                };
+                let token = getCookie('Authorization');
+                if(token){
+                    headers.Authorization= decodeURIComponent(token);
                 }
-            });
+                return headers;
+            }
         }
     }
 </script>
