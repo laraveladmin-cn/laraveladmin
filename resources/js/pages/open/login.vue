@@ -15,7 +15,7 @@
                             <geetest v-if="verify['type']=='geetest' && mustVerify" :url="web_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']" class="geetest-code"></geetest>
                             <captcha v-if="verify['type']=='captcha' && mustVerify" :url="verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></captcha>
                         </form-item>
-                        <div class="social-auth-links row">
+                        <div class="row">
                             <div class="col-xs-8">
                                 <div class="checkbox icheck">
                                     <icheck v-model="remember" option="1">
@@ -23,7 +23,7 @@
                                     </icheck>
                                 </div>
                             </div>
-                            <div class="col-xs-4" style="padding-right: 0px">
+                            <div class="col-xs-4">
                                 <button type="button"
                                         class="btn btn-primary btn-block btn-flat"
                                         :disabled="logining"

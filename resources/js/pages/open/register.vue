@@ -30,14 +30,14 @@
                         <form-item v-model="confirm_password" :options="{key:'confirm_password',type:'password',name:$tp('Confirm password'),rules:'required|confirmed:password',icon:'glyphicon-log-in',placeholder:$tp('Please reconfirm your password')}"></form-item>
                         <form-item v-model="agree" :options="{key:'agree',name:$tp('protocol'),rules:'required',label:false,messages:false}">
                             <div class="social-auth-links row" :class="{'has-error':errors.length}">
-                                <div class="col-xs-8 row-col agree-row">
+                                <div class="col-xs-12 col-lg-12 row-col">
                                     <icheck v-model="agree" :option="true">
                                     <span class="checkbox-label">
                                          {{$tp('I have read and agree')}}《<a href="#">{{$tp('Protocol')}}</a>》
                                     </span>
                                     </icheck>
                                 </div>
-                                <div class="col-xs-4 row-col btn-register agree-row">
+                                <div class="col-xs-12 col-lg-12 row-col btn-register">
                                     <button type="button" class="btn btn-primary btn-block btn-flat" :disabled="loading" @click="postRegister(invalid,validate)">
                                         {{loading?$tp('Registration is underway'):$t('Register')}}
                                     </button>
@@ -274,8 +274,5 @@
     }
     .count-down{
         color: red;
-    }
-    .en .agree-row{
-        width: 100%;
     }
 </style>
