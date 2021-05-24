@@ -4,20 +4,47 @@ namespace App\Http\Controllers\Open;
 
 use App\Facades\ClientAuth;
 use App\Http\Controllers\Controller;
+use App\Models\Doc;
+use App\Models\Feature;
 use App\Models\Menu;
+use App\Models\Technology;
+use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class IndexController extends Controller
 {
     /**
+     * 首页数据
+     */
+    public function getIndex(){
+        $data = [
+            'features'=>Feature::take(50)->get(),
+            'technologys'=>Technology::take(100)->get()
+        ];
+        return Response::returns($data);
+    }
+
+    /**
+     * 联系我们
+     * @return mixed
+     */
+    public function contact(){
+        $data = [];
+        return Response::returns($data);
+    }
+
+    /**
      * 生成index.html文件生成的数据
      * @return array
      */
-    protected function indexData(){
+    public function indexData(){
+        $file = public_path(getRoutePrefix(config('laravel_admin.web_api_model')).'/home/docs/README.md');
+        $markdown = file_exists($file)?file_get_contents($file):Doc::query()->where('name','README.md')->value('description');
         return [
             'time_str'=>'&time='.time(),
-            'app_name'=>config('app.name')
+            'app_name'=>config('app.name'),
+            'markdown'=>Markdown::parse($markdown?:'')
         ];
     }
 

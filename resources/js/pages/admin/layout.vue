@@ -105,43 +105,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown user user-menu">
-                                <a class="dropdown-toggle" data-toggle="dropdown">
-                                    <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="user-image" :alt="$t('User avatars')">
-                                    <span class="hidden-xs">{{user['name']}}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="user-header">
-                                        <img :src="user['avatar'] || '/dist/img/user_default_180.gif'" class="img-circle" :alt="$t('User avatars')">
-
-                                        <p>
-                                            {{user['name']}} - {{$tp(roleName,shared_roule)}}
-                                            <small>{{$tp('Date of entry : {date}',{date:'2019-08-01'})}}</small>
-                                        </p>
-                                    </li>
-                                    <li class="user-body">
-                                        <div class="row">
-                                            <div class="col-xs-4 text-center">
-                                                <a>{{$tc('Section',0)}}</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a>{{$tc('Section',1)}}</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a>{{$tc('Section',2)}}</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a class="btn btn-default btn-flat">{{$tp('Personal center')}}</a>
-                                        </div>
-                                        <div class="pull-right">
-                                            <a class="btn btn-default btn-flat" @click="logout">{{$t('Logout')}}</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            <user-menu></user-menu>
                             <li v-if="locales.length>1">
                                 <a @click="openLanguage">
                                     <language ref="language" :value="language" @change="setLanguage"></language>
@@ -257,7 +221,10 @@
                         </ol>
                     </section>
                     <section class="content">
-                        <transition name="fade" enter-active-class="animated lightSpeedIn faster" mode="out-in" leave-active-class="animated lightSpeedOut faster">
+                        <transition name="fade"
+                                    mode="out-in"
+                                    enter-active-class="animated lightSpeedIn faster"
+                                    leave-active-class="animated lightSpeedOut faster">
                             <router-view></router-view>
                         </transition>
                     </section>
@@ -267,7 +234,7 @@
                         <b>{{$t('System version:')}}</b> {{version}}
                     </div>
                     <strong>{{$t('Copyright')}}
-                        <a target="_blank" href="http://www.laraveladmin.cn">Laravel Admin</a>
+                        <a target="_blank" href="http://www.laraveladmin.cn">{{name}}</a>
                     </strong>
                     <span v-if="icp">
                          <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> {{$t('The record number:')}}{{icp}}
@@ -425,12 +392,14 @@
     import SidebarItems from 'common_components/sidebarItems.vue';
     import Message from 'admin_components/message.vue';
     import Modal from 'admin_components/modal.vue';
+    import userMenu from 'pages_components/userMenu.vue';
     import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
     export default {
         components: {
             "sidebar-items": SidebarItems,
             "message":Message,
             "modal":Modal,
+            "user-menu":userMenu,
             "language":()=>import(/* webpackChunkName: "common_components/language/language.vue" */ 'common_components/language/language.vue'),
         },
         props: {},
@@ -657,6 +626,7 @@
                 'version',
                 'icp',
                 'alerts',
+                'name',
                 'language',
                 'locales'
             ]),
@@ -790,6 +760,15 @@
     }
     .progress-tool{
         height: 20px;
+    }
+    body{
+        padding-top: 0px;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
     }
     .skin-item{
         float:left;

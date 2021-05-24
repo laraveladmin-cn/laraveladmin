@@ -80,7 +80,27 @@
             "Personal data": "個人資料",
             "Role": "角色",
             "Journal": "日誌",
-            "Menu": "選單"
+            "Menu": "選單",
+            "Using documents": "使用檔案",
+            "Use documentation": "使用檔案說明",
+            "Document acquisition": "檔案獲取",
+            "Document get document content": "檔案獲取檔案內容",
+            "Sign in": "登入",
+            "Register": "注册",
+            "Forget password page": "忘記密碼頁面",
+            "Home page": "首頁",
+            "Official website homepage": "官網主頁",
+            "Download": "下載",
+            "Project source code download": "項目源碼下載",
+            "Online demo": "線上演示",
+            "Demo Online": "線上演示demo",
+            "Reward": "打賞",
+            "Contact us": "聯繫我們",
+            "New features": "新增功能",
+            "Using technology": "使用科技",
+            "Using related technology stack": "使用相關科技棧",
+            "Document content": "檔案內容",
+            "Document grouping": "檔案分組"
         },
         "tables": {
             "users": {
@@ -300,6 +320,40 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "docs": {
+                "fields": {
+                    "Route": "路徑",
+                    "Content": "內容",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "features": {
+                "fields": {
+                    "Name": "名稱",
+                    "Icon": "圖標",
+                    "Colour": "顏色",
+                    "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "technologys": {
+                "fields": {
+                    "Name": "名稱",
+                    "Link address": "連結位址",
+                    "Logo image": "LOGO圖片",
+                    "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -325,7 +379,8 @@
             },
             "roles": {
                 "name": {
-                    "Superadministrator": "超級管理員"
+                    "Superadministrator": "超級管理員",
+                    "Ordinary Member": "普通會員"
                 },
                 "description": {
                     "Have all operation permissions": "擁有所有操作許可權。"
@@ -378,10 +433,34 @@
             "index": {
                 "Home page of official website": "官網首頁",
                 "Backstage home page": "後臺首頁",
-                "Front desk home page": "前臺首頁"
+                "Front desk home page": "前臺首頁",
+                "Simple, intuitive, powerful front-end and back-end development framework, so that the full stack development more quickly, simple": "簡潔、直觀、強悍的前端後端開發框架，讓全棧開發更迅速、簡單。",
+                "LaravelAdmin documents": "LaravelAdmin檔案",
+                "Please register at the WWW main site before viewing the documentation, Do not register users in the demo environment": "請在www主站注册後再查看檔案，不要在演示環境註冊用戶",
+                "Background template download": "後臺範本下載",
+                "LaravelAdmin covers the basic features": "LaravelAdmin涵蓋基本功能",
+                "These basic functions make it easy and fast to realize our business": "這些基礎功能可以方便快速讓實現我們的業務",
+                "Related technology stack": "涉及相關科技棧"
+            },
+            "contact": {
+                "Demo environment": "演示環境",
+                "User name": "用戶名",
+                "Password": "密碼",
+                "Scan code for donation": "掃碼捐贈",
+                "Official QQ Group": "官方QQ群",
+                "Zip code": "郵編",
+                "Telephone": "電話",
+                "Email address": "電子郵箱",
+                "Address": "地址",
+                "Jiaozi No1, Jinjiang District, Chengdu City, Sichuan Province": "四川省成都市錦江區嬌子一號",
+                "Contact us": "聯繫我們",
+                "Open source is not easy thanks for your support": "開源不易謝謝支持",
+                "Mr Zhang": "張先生",
+                "WeChat Same number": "微信同號"
             },
             "Registered user": "註冊用戶",
             "Forget your password": "忘記密碼",
+            "Email notification will be preferred if you fill in the mailbox": "填了郵箱將優先使用郵件通知",
             "To log in": "直接登入",
             "Other login methods": "其它登入管道",
             "Remember to log in": "記住登入",
@@ -754,5 +833,9 @@
     "Select time": "選擇時間",
     "Select Date": "選擇日期",
     "Select month": "選擇月份",
+    "Menu switch": "選單切換",
+    "Back to top": "返回頂部",
+    "Special thanks": "特別鳴謝：",
+    "Links": "友情連結：",
     "Unbundling": "解綁"
 }

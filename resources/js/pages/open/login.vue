@@ -53,7 +53,7 @@
                     <router-link class="pull-right" to="/open/register">{{$tp('Registered user')}}</router-link>
                 </div>
             </div>
-            <icp></icp>
+           <!-- <icp></icp>-->
         </div>
 
     </div>
@@ -107,6 +107,7 @@
                 this.verifyCode = '';
                 if(res.status==200 && res.data.token){
                     setCookie('Authorization','Bearer '+res.data.token,res.data.lifetime/60/24);
+                    this.getUser();
                 }else if(res.data.errors){
                     let errors = catchError({response:res});
                     this.errorFun(errors);
@@ -171,7 +172,8 @@
 
             },
             ...mapActions({
-                refreshToken: 'refreshToken'
+                refreshToken: 'refreshToken',
+                getUser: 'user/getUser',
             }),
             //全局数据设置,设置弹窗提示
             ...mapMutations({
@@ -247,7 +249,7 @@
 
     };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .open_login {
         position: relative;
         background: url('/dist/img/login-bg.jpg') no-repeat;

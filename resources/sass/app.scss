@@ -12,6 +12,7 @@
 @import url('/dist/css/AdminLTE.css');
 @import url('/dist/css/skins/_all-skins.min.css');
 @import url('/dist/css/skins/skin-dark.css');
+@import url('/dist/css/site.min.css');
 .el-input.is-disabled .el-input__inner{
     background-color: #eee;
     border-color: #d2d6de;
@@ -114,6 +115,10 @@ html,body{
 #remktfrm{
     display: none;
 }
+.hide{
+    display: none;
+}
+
 .move-items{
     min-height: 59px;
 }
