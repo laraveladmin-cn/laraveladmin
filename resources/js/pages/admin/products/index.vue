@@ -62,6 +62,31 @@
                             </div>
                         </div>
                     </template>
+                    <template slot="col" slot-scope="props">
+                        <span v-if="props.k =='is_long_time'">
+                              <el-switch v-model="props.row[props.k]"
+                                     :disabled="!props.data.configUrl.updateUrl"
+                                     @change="changeStatus(props.row,props.k,props.data.configUrl.updateUrl)"
+                                     :active-text="props.maps[props.k][1]"
+                                     :inactive-text="props.maps[props.k][0]"
+                                     :active-value="1"
+                                     :inactive-value="0">
+                              </el-switch>
+                        </span>
+                        <span v-else-if="props.field.type =='label' || props.field.type =='radio'">
+                            <span class="label" :class="props.labelClass(props.row,props.k)">
+                                {{ props.maps | array_get(props.k,[]) | array_get(array_get(props.row,props.k,0)) }}
+                            </span>
+                        </span>
+                        <span v-else>
+                             <span v-if="props.field.limit" :title="array_get(props.row,props.k,'')">
+                                   {{props.row | array_get(props.k) | str_limit(props.field.limit)}}
+                             </span>
+                            <span v-else>
+                                     {{props.row | array_get(props.k)}}
+                            </span>
+                        </span>
+                    </template>
                 </data-table>
             </div>
         </div>
@@ -77,7 +102,7 @@
                 require(['common_components/select2.vue'], resolve);
             },
             "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
-
+            "el-switch": ()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
         },
         props: {
         },
@@ -117,6 +142,41 @@
                 'use_url'
             ])
         },
+        methods:{
+            ...mapActions({
+                refreshToken: 'refreshToken',
+                pushMessage: 'pushMessage',
+            }),
+            changeStatus(row,key,url){
+                let data = {
+                    _onlyUpdate:key,
+                    id:row.id
+                };
+                data[key] = row[key];
+                axios.put(this.use_url+url.replace('{id}',row.id), data).then( (response)=>{
+                    this.refreshToken();
+                    if(response.status!=200){
+                        row[key] = row[key]==0?1:0; //还原状态
+                    }
+                }).catch((error) =>{
+                    this.refreshToken();
+                    row[key] = row[key]==0?1:0; //还原状态
+                    if(error.response && error.response.status==422){
+                        this.pushMessage({
+                            'showClose':true,
+                            'title':this.$t('{action} failed!',{action:this.$t('Submission')}),
+                            'message':'',
+                            'type':'danger',
+                            'position':'top',
+                            'iconClass':'fa-warning',
+                            'customClass':'',
+                            'duration':3000,
+                            'show':true
+                        });
+                    }
+                });
+            }
+        }
 
     };
 </script>

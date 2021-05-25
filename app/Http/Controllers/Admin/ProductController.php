@@ -9,6 +9,8 @@ use App\Models\Classify;
 use App\Models\Firm;
 use App\Models\Pclassify;
 use App\Models\Year;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 
 class ProductController extends Controller
@@ -77,8 +79,18 @@ class ProductController extends Controller
      * 验证规则
      * @return  array
      */
-    protected function getValidateRule(){
-        return ['name'=>'required','order'=>'sometimes|integer'];
+    protected function getValidateRule($id=0){
+        $id = $id ?: Request::input('id',0);
+        $_onlyUpdate = Request::input('_onlyUpdate','');
+        $validate = [
+            'name'=>'required',
+            'order'=>'sometimes|integer',
+            'is_long_time'=>'sometimes|integer|in:0,1'
+        ];
+        if($id && $_onlyUpdate){
+            $validate = collect($_onlyUpdate)->only($_onlyUpdate)->toArray();
+        }
+        return $validate;
     }
 
     /**
@@ -90,8 +102,8 @@ class ProductController extends Controller
     protected function handleEditReturn($id,&$data){
         //查询分组数据
         $data['row']['pclassify_ids'] = $data['row']['pclassify_id']?
-            collect(Pclassify::where('left_margin','<=',$data['row']['pclassify']['left_margin'])
-                ->where('right_margin','>=',$data['row']['pclassify']['right_margin'])
+            collect(Pclassify::where('left_margin','<=',Arr::get($data,'row.pclassify.left_margin',0))
+                ->where('right_margin','>=',Arr::get($data,'row.pclassify.right_margin',0))
                 ->where('id','<>',1)
                 ->orderBy('left_margin','asc')
                 ->pluck('id'))->toArray()
