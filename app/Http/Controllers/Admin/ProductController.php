@@ -116,4 +116,19 @@ class ProductController extends Controller
         return $data;
     }
 
+    /**
+     * 执行修改前对数据进行处理
+     * @param $data
+     * @return mixed
+     */
+    protected function handlePostEditReturn(&$data)
+    {
+        $id = Request::input('id',0);
+        $_onlyUpdate = Request::input('_onlyUpdate','');
+        if($id && $_onlyUpdate){
+            $data = collect($data)->only($_onlyUpdate)->toArray();
+        }
+        return $data;
+    }
+
 }
