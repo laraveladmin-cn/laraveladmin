@@ -100,9 +100,17 @@
             "Using technology": "Using technology",
             "Using related technology stack": "Using related technology stack",
             "Document content": "Document content",
-            "Document grouping": "Document grouping"
+            "Document grouping": "Document grouping",
+            "Log file": "Log file"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "File",
+                    "Size": "Size",
+                    "Updated At": "Updated At"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "Username",
@@ -837,5 +845,6 @@
     "Back to top": "Back to top",
     "Special thanks": "Special thanks",
     "Links": "Links",
-    "Unbundling": "Unbundling"
+    "Unbundling": "Unbundling",
+    "Download": "Download"
 }

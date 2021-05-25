@@ -83,6 +83,10 @@ return [
             'notify_url' => '',  //持久化处理回调地址
             'hotlink_prevention_key' => null, // CDN 时间戳防盗链的 key。 设置为 null 则不启用本功能。
         ],
+        'logs'=>[
+            'driver' => 'local',
+            'root' => storage_path('logs'),
+        ]
 
     ],
 

@@ -100,9 +100,17 @@
             "Using technology": "使用技术",
             "Using related technology stack": "使用相关技术栈",
             "Document content": "文档内容",
-            "Document grouping": "文档分组"
+            "Document grouping": "文档分组",
+            "Log file": "日志文件"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "文件",
+                    "Size": "文件大小",
+                    "Updated At": "修改时间"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "用户名",
@@ -837,5 +845,6 @@
     "Back to top": "返回顶部",
     "Special thanks": "特别鸣谢:",
     "Links": "友情链接:",
-    "Unbundling": "解绑"
+    "Unbundling": "解绑",
+    "Download": "下载"
 }

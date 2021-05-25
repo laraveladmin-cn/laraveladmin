@@ -100,9 +100,17 @@
             "Using technology": "使用科技",
             "Using related technology stack": "使用相關科技棧",
             "Document content": "檔案內容",
-            "Document grouping": "檔案分組"
+            "Document grouping": "檔案分組",
+            "Log file": "日誌檔"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "檔案",
+                    "Size": "文件大小",
+                    "Updated At": "修改時間"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "用戶名",
@@ -837,5 +845,6 @@
     "Back to top": "返回頂部",
     "Special thanks": "特別鳴謝：",
     "Links": "友情連結：",
-    "Unbundling": "解綁"
+    "Unbundling": "解綁",
+    "Download": "下載"
 }
