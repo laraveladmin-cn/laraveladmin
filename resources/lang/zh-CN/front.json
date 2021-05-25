@@ -87,9 +87,18 @@
             "Insurance classification": "险种分类",
             "Insurance grouping": "险种分组",
             "Payment period": "交费年期",
-            "Cooperative company": "合作公司"
+            "Cooperative company": "合作公司",
+            "Log file": "日志文件",
+            "System log file": "系统日志文件"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "文件",
+                    "Size": "文件大小",
+                    "Updated At": "修改时间"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "用户名",
@@ -998,5 +1007,6 @@
     "Select time": "选择时间",
     "Select Date": "选择日期",
     "Select month": "选择月份",
-    "Unbundling": "解绑"
+    "Unbundling": "解绑",
+    "Download": "下载"
 }

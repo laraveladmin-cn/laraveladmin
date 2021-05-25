@@ -87,9 +87,18 @@
             "Insurance classification": "위험한 분류.",
             "Insurance grouping": "위험한 조 를 나누다.",
             "Payment period": "연비 납부 기간",
-            "Cooperative company": "협력 사"
+            "Cooperative company": "협력 사",
+            "Log file": "로그 파일",
+            "System log file": "시스템 로그 파일"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "문건.",
+                    "Size": "파일 크기",
+                    "Updated At": "수정 시간"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "사용자 이름",
@@ -998,5 +1007,6 @@
     "Select time": "선택 시간",
     "Select Date": "날 짜 를 선택 하 다",
     "Select month": "달 을 선택 하 다",
-    "Unbundling": "포박 을 풀다"
+    "Unbundling": "포박 을 풀다",
+    "Download": "다운로드 하 다."
 }

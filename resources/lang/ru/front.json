@@ -87,9 +87,18 @@
             "Insurance classification": "классификация видов опасности",
             "Insurance grouping": "классификация опасных видов",
             "Payment period": "срок платежа",
-            "Cooperative company": "кооперативная компания"
+            "Cooperative company": "кооперативная компания",
+            "Log file": "Файл журнала",
+            "System log file": "файл Системного журнала"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "Документация",
+                    "Size": "размер файла",
+                    "Updated At": "время изменения"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "Имя пользователя",
@@ -998,5 +1007,6 @@
     "Select time": "время выборки",
     "Select Date": "Выбор даты",
     "Select month": "Выберите месяц",
-    "Unbundling": "развязывать"
+    "Unbundling": "развязывать",
+    "Download": "загрузка"
 }

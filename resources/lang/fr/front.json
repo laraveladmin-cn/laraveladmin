@@ -87,9 +87,18 @@
             "Insurance classification": "Classification des types d'assurance",
             "Insurance grouping": "Groupe d'assurance",
             "Payment period": "Année de paiement",
-            "Cooperative company": "Entreprises partenaires"
+            "Cooperative company": "Entreprises partenaires",
+            "Log file": "Fichiers journaux",
+            "System log file": "Fichiers journaux du système"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "Documentation",
+                    "Size": "Taille du fichier",
+                    "Updated At": "Temps de modification"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "Nom d'utilisateur",
@@ -998,5 +1007,6 @@
     "Select time": "Sélectionner l'heure",
     "Select Date": "Sélectionner la date",
     "Select month": "Sélectionner le mois",
-    "Unbundling": "Dégroupage"
+    "Unbundling": "Dégroupage",
+    "Download": "Télécharger"
 }

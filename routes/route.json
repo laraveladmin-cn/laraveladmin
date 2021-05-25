@@ -187,6 +187,22 @@
             "_id": 60
         },
         {
+            "id": 149,
+            "name": "Log file",
+            "icons": "fa-file",
+            "description": "System log file",
+            "url": "/admin/file-log/index",
+            "parent_id": 7,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "action": "FileLogController@index",
+            "_id": 61
+        },
+        {
             "id": 8,
             "name": "Personal Center",
             "icons": "fa-user",
@@ -194,7 +210,7 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 61
+            "_id": 62
         },
         {
             "id": 57,
@@ -209,7 +225,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 62
+            "_id": 63
         },
         {
             "id": 58,
@@ -223,7 +239,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@postIndex",
-            "_id": 63
+            "_id": 64
         },
         {
             "id": 59,
@@ -238,7 +254,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 64
+            "_id": 65
         },
         {
             "id": 60,
@@ -252,7 +268,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@putPassword",
-            "_id": 65
+            "_id": 66
         },
         {
             "id": 81,
@@ -262,7 +278,7 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 66
+            "_id": 67
         },
         {
             "id": 82,
@@ -272,7 +288,7 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 115
+            "_id": 116
         },
         {
             "id": 148,
@@ -286,7 +302,7 @@
             ],
             "group": "admin",
             "action": "AgentSystemController@conditionDelete",
-            "_id": 124
+            "_id": 125
         },
         {
             "id": 3,
@@ -301,7 +317,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 125
+            "_id": 126
         },
         {
             "id": 78,
@@ -315,7 +331,7 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 126
+            "_id": 127
         },
         {
             "id": 139,
@@ -330,7 +346,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 127
+            "_id": 128
         },
         {
             "id": 140,
@@ -344,7 +360,7 @@
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 128
+            "_id": 129
         },
         {
             "id": 141,
@@ -358,7 +374,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 129
+            "_id": 130
         },
         {
             "id": 4,
@@ -371,7 +387,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "open",
-            "_id": 130
+            "_id": 131
         },
         {
             "id": 61,
@@ -384,7 +400,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 131
+            "_id": 132
         },
         {
             "id": 62,
@@ -400,7 +416,7 @@
             "use": [
                 "web"
             ],
-            "_id": 132
+            "_id": 133
         },
         {
             "id": 63,
@@ -415,7 +431,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 133
+            "_id": 134
         },
         {
             "id": 64,
@@ -435,7 +451,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 134
+            "_id": 135
         },
         {
             "id": 76,
@@ -451,7 +467,7 @@
             "use": [
                 "web"
             ],
-            "_id": 135
+            "_id": 136
         },
         {
             "id": 77,
@@ -468,7 +484,7 @@
                 "api",
                 "web"
             ],
-            "_id": 136
+            "_id": 137
         },
         {
             "id": 65,
@@ -485,7 +501,7 @@
                 "api",
                 "web"
             ],
-            "_id": 137
+            "_id": 138
         },
         {
             "id": 66,
@@ -499,7 +515,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 138
+            "_id": 139
         },
         {
             "id": 67,
@@ -516,7 +532,7 @@
                 "api",
                 "web"
             ],
-            "_id": 139
+            "_id": 140
         },
         {
             "id": 68,
@@ -533,7 +549,7 @@
                 "api",
                 "web"
             ],
-            "_id": 140
+            "_id": 141
         },
         {
             "id": 69,
@@ -547,7 +563,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 141
+            "_id": 142
         },
         {
             "id": 70,
@@ -560,7 +576,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 142
+            "_id": 143
         },
         {
             "id": 71,
@@ -573,7 +589,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 143
+            "_id": 144
         },
         {
             "id": 72,
@@ -585,7 +601,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 144
+            "_id": 145
         },
         {
             "id": 73,
@@ -598,7 +614,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 145
+            "_id": 146
         },
         {
             "id": 74,
@@ -611,7 +627,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 146
+            "_id": 147
         },
         {
             "id": 75,
@@ -628,7 +644,7 @@
                 "api",
                 "web"
             ],
-            "_id": 147
+            "_id": 148
         },
         {
             "id": 79,
@@ -641,7 +657,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 148
+            "_id": 149
         }
     ],
     "resource": [
@@ -772,7 +788,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 67,
+            "_id": 68,
             "end_id": 98
         },
         {
@@ -785,7 +801,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 75,
+            "_id": 76,
             "end_id": 106
         },
         {
@@ -799,7 +815,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Bank",
-            "_id": 83,
+            "_id": 84,
             "end_id": 90
         },
         {
@@ -812,7 +828,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 91,
+            "_id": 92,
             "end_id": 114
         },
         {
@@ -825,7 +841,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 99,
+            "_id": 100,
             "end_id": 122
         },
         {
@@ -838,7 +854,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 107,
+            "_id": 108,
             "end_id": 130
         },
         {
@@ -851,7 +867,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 116,
+            "_id": 117,
             "end_id": 138
         }
     ],

@@ -87,9 +87,18 @@
             "Insurance classification": "Insurance classification",
             "Insurance grouping": "Insurance grouping",
             "Payment period": "Payment period",
-            "Cooperative company": "Cooperative company"
+            "Cooperative company": "Cooperative company",
+            "Log file": "Log file",
+            "System log file": "System log file"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "File",
+                    "Size": "Size",
+                    "Updated At": "Updated At"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "Username",
@@ -998,5 +1007,6 @@
     "Select time": "Select time",
     "Select Date": "Select Date",
     "Select month": "Select month",
-    "Unbundling": "Unbundling"
+    "Unbundling": "Unbundling",
+    "Download": "Download"
 }

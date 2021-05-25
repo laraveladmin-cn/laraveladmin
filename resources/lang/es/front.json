@@ -87,9 +87,18 @@
             "Insurance classification": "Clasificación de las especies de seguros",
             "Insurance grouping": "Agrupación de especies de seguros",
             "Payment period": "Período anual de pago",
-            "Cooperative company": "Co - operative Company"
+            "Cooperative company": "Co - operative Company",
+            "Log file": "Archivo de registro",
+            "System log file": "Archivo de registro del sistema"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "Documentación",
+                    "Size": "Tamaño del archivo",
+                    "Updated At": "Tiempo de modificación"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "Nombre de usuario",
@@ -998,5 +1007,6 @@
     "Select time": "Seleccionar tiempo",
     "Select Date": "Seleccionar fecha",
     "Select month": "Seleccionar mes",
-    "Unbundling": "Desenganche"
+    "Unbundling": "Desenganche",
+    "Download": "Descargar"
 }

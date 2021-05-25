@@ -119,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            <div class="box-footer box-footer-top clearfix pager-tool" v-show="!options.hideTopPagerTool">
+            <div class="box-footer box-footer-top clearfix pager-tool" v-if="!options.hideTopPagerTool">
                 <slot name="pager" :data="data">
                     <div class="row">
                         <div class="col-lg-12">
@@ -169,7 +169,15 @@
                 <slot name="table" :data="data" :check_ids="check_ids" :remove="remove">
                     <table class="table table-hover table-bordered table-striped text-center dataTable">
                         <thead>
-                            <slot name="thead" :select-all="select_all" :operation="operation" :trans-field="transField" :checkbox="checkbox" :select-all-method="selectAll" :order-by-method="orderBy" :order-by="orderBy" :show-fields="show_fields">
+                            <slot name="thead"
+                                  :select-all="select_all"
+                                  :operation="operation"
+                                  :trans-field="transField"
+                                  :checkbox="checkbox"
+                                  :select-all-method="selectAll"
+                                  :order-by-method="orderBy"
+                                  :order-by="orderBy"
+                                  :show-fields="show_fields">
                                 <tr>
                                     <th class="id" v-if="checkbox">
                                        <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
@@ -270,7 +278,7 @@
                     </table>
                 </slot>
             </div>
-            <div class="box-footer clearfix pager-tool">
+            <div class="box-footer clearfix pager-tool" v-if="!options.hideBottomPagerTool">
                 <slot name="pager" :data="data">
                     <div class="row">
                         <div class="col-lg-12">
@@ -603,16 +611,17 @@
             },
             orderBy(key){
                 let item = this.options.fields[key];
+                let key1 = item.orderField || key;
                 if(item['order']){
                     let order = {};
-                    if(this.affirm_options.order[key]=='asc'){
-                        order[key] = 'desc';
+                    if(this.affirm_options.order[key1]=='asc'){
+                        order[key1] = 'desc';
                     }else {
-                        order[key] = 'asc';
+                        order[key1] = 'asc';
                     }
                     let options = copyObj(this.affirm_options);
                     collect(options.order).map((item,k)=>{
-                        if(k!=key){
+                        if(k!=key1){
                             order[k]=item;
                         }
                     }).all();
@@ -776,7 +785,8 @@
                 let orders = array_get(this.affirm_options,'order',{});
                 let fields = collect(copyObj(this.options.fields)).filter((item)=>{
                     return item['show'] || typeof item['show']=="undefined";
-                }).map((item,key)=>{
+                }).map((item,key1)=>{
+                    let key = item.orderField || key1;
                     //字段需要排序
                     if(item.order){
                         if(!item.class){

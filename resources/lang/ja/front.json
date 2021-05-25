@@ -87,9 +87,18 @@
             "Insurance classification": "危険種の分類",
             "Insurance grouping": "危険なグループ",
             "Payment period": "年限を納める",
-            "Cooperative company": "協力会社"
+            "Cooperative company": "協力会社",
+            "Log file": "ログファイル",
+            "System log file": "システムログファイル"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "ファイル",
+                    "Size": "ファイルサイズ",
+                    "Updated At": "変更時間"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "ユーザ名",
@@ -998,5 +1007,6 @@
     "Select time": "時間を選択",
     "Select Date": "日付を選択",
     "Select month": "月を選択",
-    "Unbundling": "縛りを解く"
+    "Unbundling": "縛りを解く",
+    "Download": "ダウンロード"
 }

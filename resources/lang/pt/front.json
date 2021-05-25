@@ -87,9 +87,18 @@
             "Insurance classification": "Classificação DOS seguros",
             "Insurance grouping": "Agrupamento de seguros",
             "Payment period": "Período de pagamento",
-            "Cooperative company": "Empresa Cooperativa"
+            "Cooperative company": "Empresa Cooperativa",
+            "Log file": "Ficheiro de registo",
+            "System log file": "Arquivo de Registro do sistema"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "Arquivo",
+                    "Size": "Tamanho do arquivo",
+                    "Updated At": "Tempo de revisão"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "Nome do utilizador",
@@ -998,5 +1007,6 @@
     "Select time": "Escolha a Hora",
     "Select Date": "Selecionar UMA data",
     "Select month": "Selecionar mês",
-    "Unbundling": "Desagregação"
+    "Unbundling": "Desagregação",
+    "Download": "Download"
 }
