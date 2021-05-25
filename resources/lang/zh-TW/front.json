@@ -80,9 +80,18 @@
             "Personal data": "個人資料",
             "Role": "角色",
             "Journal": "日誌",
-            "Menu": "選單"
+            "Menu": "選單",
+            "Log file": "日誌檔",
+            "System log file": "系統日誌檔"
         },
         "tables": {
+            "_file_logs": {
+                "fields": {
+                    "File": "檔案",
+                    "Size": "文件大小",
+                    "Updated At": "修改時間"
+                }
+            },
             "users": {
                 "fields": {
                     "Username": "用戶名",
@@ -754,5 +763,6 @@
     "Select time": "選擇時間",
     "Select Date": "選擇日期",
     "Select month": "選擇月份",
-    "Unbundling": "解綁"
+    "Unbundling": "解綁",
+    "Download": "下載"
 }

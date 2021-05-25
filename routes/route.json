@@ -187,6 +187,22 @@
             "_id": 60
         },
         {
+            "id": 90,
+            "name": "Log file",
+            "icons": "fa-file",
+            "description": "System log file",
+            "url": "/admin/file-log/index",
+            "parent_id": 7,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "action": "FileLogController@index",
+            "_id": 61
+        },
+        {
             "id": 8,
             "name": "Personal Center",
             "icons": "fa-user",
@@ -194,7 +210,7 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 61
+            "_id": 62
         },
         {
             "id": 57,
@@ -209,7 +225,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 62
+            "_id": 63
         },
         {
             "id": 58,
@@ -223,7 +239,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@postIndex",
-            "_id": 63
+            "_id": 64
         },
         {
             "id": 59,
@@ -238,7 +254,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 64
+            "_id": 65
         },
         {
             "id": 60,
@@ -252,7 +268,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@putPassword",
-            "_id": 65
+            "_id": 66
         },
         {
             "id": 3,
@@ -267,7 +283,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 66
+            "_id": 67
         },
         {
             "id": 78,
@@ -281,7 +297,7 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 67
+            "_id": 68
         },
         {
             "id": 81,
@@ -296,7 +312,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 68
+            "_id": 69
         },
         {
             "id": 82,
@@ -310,7 +326,7 @@
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 69
+            "_id": 70
         },
         {
             "id": 83,
@@ -324,7 +340,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 70
+            "_id": 71
         },
         {
             "id": 4,
@@ -337,7 +353,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "open",
-            "_id": 71
+            "_id": 72
         },
         {
             "id": 61,
@@ -350,7 +366,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 72
+            "_id": 73
         },
         {
             "id": 62,
@@ -366,7 +382,7 @@
             "use": [
                 "web"
             ],
-            "_id": 73
+            "_id": 74
         },
         {
             "id": 63,
@@ -381,7 +397,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 74
+            "_id": 75
         },
         {
             "id": 64,
@@ -401,7 +417,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 75
+            "_id": 76
         },
         {
             "id": 76,
@@ -417,7 +433,7 @@
             "use": [
                 "web"
             ],
-            "_id": 76
+            "_id": 77
         },
         {
             "id": 77,
@@ -434,7 +450,7 @@
                 "api",
                 "web"
             ],
-            "_id": 77
+            "_id": 78
         },
         {
             "id": 65,
@@ -452,7 +468,7 @@
                 "web"
             ],
             "as": "logout",
-            "_id": 78
+            "_id": 79
         },
         {
             "id": 66,
@@ -466,7 +482,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 79
+            "_id": 80
         },
         {
             "id": 67,
@@ -483,7 +499,7 @@
                 "api",
                 "web"
             ],
-            "_id": 80
+            "_id": 81
         },
         {
             "id": 68,
@@ -500,7 +516,7 @@
                 "api",
                 "web"
             ],
-            "_id": 81
+            "_id": 82
         },
         {
             "id": 69,
@@ -514,7 +530,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 82
+            "_id": 83
         },
         {
             "id": 70,
@@ -527,7 +543,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 83
+            "_id": 84
         },
         {
             "id": 71,
@@ -540,7 +556,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 84
+            "_id": 85
         },
         {
             "id": 72,
@@ -552,7 +568,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 85
+            "_id": 86
         },
         {
             "id": 73,
@@ -565,7 +581,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 86
+            "_id": 87
         },
         {
             "id": 74,
@@ -578,7 +594,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 87
+            "_id": 88
         },
         {
             "id": 75,
@@ -595,7 +611,7 @@
                 "api",
                 "web"
             ],
-            "_id": 88
+            "_id": 89
         },
         {
             "id": 79,
@@ -608,7 +624,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 89
+            "_id": 90
         }
     ],
     "resource": [
