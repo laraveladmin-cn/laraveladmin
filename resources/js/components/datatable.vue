@@ -410,12 +410,13 @@
                 set:'set'
             }),
             transField(name,key,table){
-                if(!this.options.lang_table && !this.data.excel.sheet){
+                let sheet = array_get(this.data,'excel.sheet','');
+                if(!this.options.lang_table && !sheet){
                     return name;
                 }
                 if(!table){
                     if(!key || key.indexOf('.')==-1){
-                        table = this.options.lang_table || this.data.excel.sheet;
+                        table = this.options.lang_table || sheet;
                     }else {
                         let arr = key.replace('.$index','').split('.');
                         arr.pop();
@@ -434,11 +435,12 @@
                 });
             },
             transMap(name,field,table){
-                if(!this.options.lang_table && !this.data.excel.sheet){
+                let sheet = array_get(this.data,'excel.sheet','');
+                if(!this.options.lang_table && !sheet){
                     return name;
                 }
                 if(!table){
-                    table = this.options.lang_table || this.data.excel.sheet;
+                    table = this.options.lang_table || sheet;
                 }
                 return this.$tp(name,{
                     "{lang_path}": '_shared.tables.'+table+'.maps.'+field,
@@ -662,10 +664,11 @@
                 let export_fileds = copyObj(this.export_fileds);
                 options['export_fileds'] = export_fileds;
                 let url = this.data.configUrl.exportUrl;
+                let sheet = array_get(this.data,'excel.sheet','');
                 let parms = {
                     options:options,
                     url:url,
-                    sheet:this.data.excel.sheet,
+                    sheet:sheet,
                     fileName:this.data.excel.fileName
                 };
                 this.downloadExcel(parms);
@@ -692,9 +695,10 @@
                         content: this.$t('Are you sure you want to import all the data in bulk?'), //'您确定要批量导入所有数据吗?',
                         callback:()=>{
                             $(this.$el).find('.import input:file').val('');
+                            let sheet = array_get(this.data,'excel.sheet','');
                             this.importData({
                                 file:file,
-                                sheet:this.data.excel.sheet,
+                                sheet:sheet,
                                 url:this.data.configUrl.importUrl,
                                 callback:()=>{
                                     this.refresh();

@@ -124,6 +124,7 @@ class CreateView extends BaseCreate
             })->pluck('validator', 'Field')->toArray();
         }
         $data['class'] = Str::snake($class);
+        $data['table_name'] = $this->bindModel->getTable();
         $this->datas = $data;
     }
 }
