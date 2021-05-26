@@ -764,5 +764,7 @@
     "Select Date": "选择日期",
     "Select month": "选择月份",
     "Unbundling": "解绑",
-    "Download": "下载"
+    "Download": "下载",
+    "Click Upload": "点击上传",
+    "Only picture files can be uploaded and no more than {size}": "只能上传图片文件，且不超过{size}"
 }
