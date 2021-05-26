@@ -1013,5 +1013,7 @@
     "Select month": "Select month",
     "Unbundling": "Unbundling",
     "Download": "Download",
-    "Delete within condition": "Delete within condition"
+    "Delete within condition": "Delete within condition",
+    "Click Upload": "Click Upload",
+    "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}"
 }

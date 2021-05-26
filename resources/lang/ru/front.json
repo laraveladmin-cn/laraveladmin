@@ -1013,5 +1013,7 @@
     "Select month": "Выберите месяц",
     "Unbundling": "развязывать",
     "Download": "загрузка",
-    "Delete within condition": "удаление в условиях"
+    "Delete within condition": "удаление в условиях",
+    "Click Upload": "Нажмите для загрузки",
+    "Only picture files can be uploaded and no more than {size}": "только для загрузки фотофайлов и не более {size}"
 }

@@ -1013,5 +1013,7 @@
     "Select month": "月を選択",
     "Unbundling": "縛りを解く",
     "Download": "ダウンロード",
-    "Delete within condition": "条件内で削除"
+    "Delete within condition": "条件内で削除",
+    "Click Upload": "クリックしてアップロード",
+    "Only picture files can be uploaded and no more than {size}": "画像ファイルのみアップロードできます。"
 }

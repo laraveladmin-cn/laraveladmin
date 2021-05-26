@@ -1013,5 +1013,7 @@
     "Select month": "Sélectionner le mois",
     "Unbundling": "Dégroupage",
     "Download": "Télécharger",
-    "Delete within condition": "Supprimer dans les conditions"
+    "Delete within condition": "Supprimer dans les conditions",
+    "Click Upload": "Cliquez pour télécharger",
+    "Only picture files can be uploaded and no more than {size}": "Seuls les fichiers Image peuvent être téléchargés et ne doivent pas dépasser {taille}"
 }
