@@ -799,5 +799,10 @@
             top: 50px
         }
     }
+    .dropdown-menu .footer{
+         padding: 0px;
+         border-top: none;
+         margin-top: 0px;
+    }
 
 </style>
