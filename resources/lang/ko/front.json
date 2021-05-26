@@ -461,7 +461,8 @@
                     "Closing date": "판매 정지 날짜",
                     "Created At": "창설 시간",
                     "Updated At": "수정 시간",
-                    "Deleted At": "삭제 시간"
+                    "Deleted At": "삭제 시간",
+                    "Preview Poster": "포스터 미리 보기"
                 },
                 "maps": {
                     "is_long_time": {

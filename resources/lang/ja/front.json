@@ -461,7 +461,8 @@
                     "Closing date": "販売停止日",
                     "Created At": "作成時間",
                     "Updated At": "変更時間",
-                    "Deleted At": "削除時間"
+                    "Deleted At": "削除時間",
+                    "Preview Poster": "ポスターのプレビュー"
                 },
                 "maps": {
                     "is_long_time": {

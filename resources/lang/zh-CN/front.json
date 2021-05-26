@@ -461,7 +461,8 @@
                     "Closing date": "停售日期",
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
-                    "Deleted At": "删除时间"
+                    "Deleted At": "删除时间",
+                    "Preview Poster": "预览海报"
                 },
                 "maps": {
                     "is_long_time": {

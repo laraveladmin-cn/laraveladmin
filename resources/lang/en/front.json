@@ -461,7 +461,8 @@
                     "Closing date": "Closing date",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
-                    "Deleted At": "Deleted At"
+                    "Deleted At": "Deleted At",
+                    "Preview Poster": "Preview Poster"
                 },
                 "maps": {
                     "is_long_time": {

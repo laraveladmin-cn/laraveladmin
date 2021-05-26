@@ -461,7 +461,8 @@
                     "Closing date": "Fecha de cierre",
                     "Created At": "Tiempo de creación",
                     "Updated At": "Tiempo de modificación",
-                    "Deleted At": "Tiempo de eliminación"
+                    "Deleted At": "Tiempo de eliminación",
+                    "Preview Poster": "Vista previa del póster"
                 },
                 "maps": {
                     "is_long_time": {

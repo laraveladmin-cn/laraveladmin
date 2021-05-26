@@ -189,6 +189,14 @@
                                     </el-date-picker>
                                 </template>
                             </edit-item>
+                            <edit-item key-name="images" :options="{name: props.transField('Preview Poster'), required: false}"  :datas="props">
+                                <template slot="input-item">
+                                    <upload  v-model="props.data.row['images']"
+                                            :disabled="!props.url"
+                                            :value-key="'url'">
+                                    </upload>
+                                </template>
+                            </edit-item>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                           <edit-item key-name="year_ids" :options='{"name": props.transField("Optional years","","years"), "required": false,type:"checkbox"}'  :datas="props">
@@ -238,7 +246,10 @@
             },
             "hide-more": function (resolve) {
                 require(['common_components/hideMore'], resolve);
-            }
+            },
+            "upload":function(resolve){
+                require(['common_components/upload.vue'], resolve);
+            },
         },
         props: {
         },

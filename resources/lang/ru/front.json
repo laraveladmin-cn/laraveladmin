@@ -461,7 +461,8 @@
                     "Closing date": "дата прекращения продажи",
                     "Created At": "время создания",
                     "Updated At": "время изменения",
-                    "Deleted At": "время удаления"
+                    "Deleted At": "время удаления",
+                    "Preview Poster": "предварительный просмотр"
                 },
                 "maps": {
                     "is_long_time": {

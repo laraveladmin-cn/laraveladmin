@@ -32,7 +32,8 @@ class Product extends Model
        'no',
        'status',
        'issue_at',
-       'stop_at'
+       'stop_at',
+        'images'
     ];
     //输出隐藏字段
     protected $hidden = ['deleted_at'];
@@ -58,6 +59,7 @@ class Product extends Model
         'status' => 'State',
         'issue_at' => 'Release time',
         'stop_at' => 'Closing date',
+        'images'=>'Preview Poster',
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
         //'deleted_at' => 'Deleted At'
@@ -111,7 +113,8 @@ class Product extends Model
         'pdf_url' => '',
         'company_no' => '',
         'no' => '',
-        'status' => 1
+        'status' => 1,
+        'images'=>[]
     ];
 
     /**
@@ -174,6 +177,25 @@ class Product extends Model
      */
     public function years(){
         return $this->belongsToMany('App\Models\Year');
+    }
+
+    /**
+     * @param  $value
+     * @return  array
+     */
+    public function getImagesAttribute($value)
+    {
+        $res = $value?json_decode($value,true):[];
+        return $res?:[];
+    }
+
+    /**
+     * @param  $value
+     * @return  array
+     */
+    public function setImagesAttribute($value)
+    {
+        $this->attributes['images'] = (is_array($value) && $value)?json_encode($value):'';
     }
 
 
