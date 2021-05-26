@@ -885,6 +885,9 @@
                 "http or https begins": "'http:/'または'https://'先頭",
                 "The LOGO has not been set": "まだLOGOが設定されていません",
                 "Attachment Image": "添付画像"
+            },
+            "agent_systems": {
+                "http or https begins": "'http:/'または'https://'先頭"
             }
         },
         "errors": {
@@ -1008,5 +1011,6 @@
     "Select Date": "日付を選択",
     "Select month": "月を選択",
     "Unbundling": "縛りを解く",
-    "Download": "ダウンロード"
+    "Download": "ダウンロード",
+    "Delete within condition": "条件内で削除"
 }

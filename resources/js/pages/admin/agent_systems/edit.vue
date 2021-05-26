@@ -12,7 +12,7 @@
                             </edit-item>
                             <edit-item key-name="full_name" :options="{name: props.transField('Full name'), required: true}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="url" :options='{"name": props.transField("Website address"), "required": false,title:"http://或https://开头"}' :datas="props">
+                            <edit-item key-name="url" :options='{"name": props.transField("Website address"), "required": false,title:$tp("http or https begins")}' :datas="props">
                                 <template slot="input-item">
                                     <div class="input-group">
                                         <input
@@ -59,6 +59,7 @@
         },
         data(){
             return {
+                "{lang_path}":'admin.agent_systems',
                 options:{
                     lang_table:'agent_systems',
                     id:'edit', //多个组件同时使用时唯一标识

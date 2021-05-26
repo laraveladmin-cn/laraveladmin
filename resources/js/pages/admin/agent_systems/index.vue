@@ -19,7 +19,7 @@
                         </span>
                     </template>
                     <template slot="input_group_add_btn" slot-scope="props">
-                        <button type="button" title="条件内删除" v-if="props.data.configUrl.conditionDeleteUrl" class="btn btn-primary" @click="conditionDelete(props.data.options)">
+                        <button type="button" :title="$t('Delete within condition')" v-if="props.data.configUrl.conditionDeleteUrl" class="btn btn-primary" @click="conditionDelete(props.data.options)">
                             <i class="glyphicon glyphicon glyphicon-trash"></i>
                         </button>
                     </template>

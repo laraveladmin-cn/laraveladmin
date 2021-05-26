@@ -885,6 +885,9 @@
                 "http or https begins": "'http: /' 또는 'https: /' 로 시작 합 니 다.",
                 "The LOGO has not been set": "로고 아직 안 설 치 했 어 요.",
                 "Attachment Image": "첨부 사진"
+            },
+            "agent_systems": {
+                "http or https begins": "'http: /' 또는 'https: /' 로 시작 합 니 다."
             }
         },
         "errors": {
@@ -1008,5 +1011,6 @@
     "Select Date": "날 짜 를 선택 하 다",
     "Select month": "달 을 선택 하 다",
     "Unbundling": "포박 을 풀다",
-    "Download": "다운로드 하 다."
+    "Download": "다운로드 하 다.",
+    "Delete within condition": "조건 내 삭제"
 }

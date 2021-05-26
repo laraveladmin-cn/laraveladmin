@@ -885,6 +885,9 @@
                 "http or https begins": "'http://' or 'https://' begins",
                 "The LOGO has not been set": "The LOGO has not been set",
                 "Attachment Image": "Attachment Image"
+            },
+            "agent_systems": {
+                "http or https begins": "'http://' or 'https://' begins"
             }
         },
         "errors": {
@@ -1008,5 +1011,6 @@
     "Select Date": "Select Date",
     "Select month": "Select month",
     "Unbundling": "Unbundling",
-    "Download": "Download"
+    "Download": "Download",
+    "Delete within condition": "Delete within condition"
 }

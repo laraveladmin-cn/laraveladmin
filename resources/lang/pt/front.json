@@ -885,6 +885,9 @@
                 "http or https begins": "Comece com'http://'ou'HTTPS:/'",
                 "The LOGO has not been set": "O logótipo ainda não FOI definido",
                 "Attachment Image": "Imagem anexa"
+            },
+            "agent_systems": {
+                "http or https begins": "Comece com'http://'ou'HTTPS:/'"
             }
         },
         "errors": {
@@ -1008,5 +1011,6 @@
     "Select Date": "Selecionar UMA data",
     "Select month": "Selecionar mês",
     "Unbundling": "Desagregação",
-    "Download": "Download"
+    "Download": "Download",
+    "Delete within condition": "Excluir Dentro Da condição"
 }

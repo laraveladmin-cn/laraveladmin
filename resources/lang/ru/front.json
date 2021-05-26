@@ -885,6 +885,9 @@
                 "http or https begins": "'http: / / или' https / 'начало",
                 "The LOGO has not been set": "ещё не установлено LOGO",
                 "Attachment Image": "рисунок вложения"
+            },
+            "agent_systems": {
+                "http or https begins": "'http: / / или' https / 'начало"
             }
         },
         "errors": {
@@ -1008,5 +1011,6 @@
     "Select Date": "Выбор даты",
     "Select month": "Выберите месяц",
     "Unbundling": "развязывать",
-    "Download": "загрузка"
+    "Download": "загрузка",
+    "Delete within condition": "удаление в условиях"
 }

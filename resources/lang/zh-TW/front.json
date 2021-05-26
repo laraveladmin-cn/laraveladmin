@@ -885,6 +885,9 @@
                 "http or https begins": "'http://'或'https://‘開頭",
                 "The LOGO has not been set": "還沒有設定LOGO",
                 "Attachment Image": "附件圖片"
+            },
+            "agent_systems": {
+                "http or https begins": "'http://'或'https://‘開頭"
             }
         },
         "errors": {
@@ -1008,5 +1011,6 @@
     "Select Date": "選擇日期",
     "Select month": "選擇月份",
     "Unbundling": "解綁",
-    "Download": "下載"
+    "Download": "下載",
+    "Delete within condition": "條件內删除"
 }

@@ -885,6 +885,9 @@
                 "http or https begins": "« http: / / » ou « https: / / »",
                 "The LOGO has not been set": "Logo non défini",
                 "Attachment Image": "Images jointes"
+            },
+            "agent_systems": {
+                "http or https begins": "« http: / / » ou « https: / / »"
             }
         },
         "errors": {
@@ -1008,5 +1011,6 @@
     "Select Date": "Sélectionner la date",
     "Select month": "Sélectionner le mois",
     "Unbundling": "Dégroupage",
-    "Download": "Télécharger"
+    "Download": "Télécharger",
+    "Delete within condition": "Supprimer dans les conditions"
 }
