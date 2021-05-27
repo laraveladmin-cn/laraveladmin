@@ -129,10 +129,8 @@
                 }).values().all();
             },
             handleSuccess(file, fileList) {
-                this.val.push({
-                    'name': file.original,
-                    'url': file[this.valueKey]
-                });
+                file.url = file[this.valueKey];
+                this.val.push(file);
             },
             handleAvatarSuccess(res, file){
                 this.refreshToken();
