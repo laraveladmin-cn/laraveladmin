@@ -228,28 +228,17 @@
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     export default {
         components:{
-            'edit':function(resolve){require(['common_components/edit.vue'], resolve);},
-            "edit-item": function (resolve) {
-                require(['common_components/editItem.vue'], resolve);
-            },
-            "select2":function(resolve){
-                require(['common_components/select2.vue'], resolve);
-            },
-            "icheck":function(resolve){
-                require(['common_components/icheck.vue'], resolve);
-            },
-            "el-date-picker": function (resolve) {
-                require(['element-ui/lib/date-picker'], resolve);
-            },
-            "el-cascader": function (resolve) {
-                require(['element-ui/lib/cascader'], resolve);
-            },
-            "hide-more": function (resolve) {
-                require(['common_components/hideMore'], resolve);
-            },
-            "upload":function(resolve){
-                require(['common_components/upload.vue'], resolve);
-            },
+            'edit':()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
+            'el-input-number':()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
+            'edit-item':()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
+            'el-switch':()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
+            'editor-md':()=>import(/* webpackChunkName: "common_components/editorMd.vue" */ 'common_components/editorMd.vue'),
+            'upload':()=>import(/* webpackChunkName: "common_components/upload.vue" */ 'common_components/upload.vue'),
+            'icheck':()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+            'select2':()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
+            'hide-more':()=>import(/* webpackChunkName: "common_components/hideMore" */ 'common_components/hideMore'),
+            'el-date-picker':()=>import(/* webpackChunkName: "element-ui/lib/date-picker" */ 'element-ui/lib/date-picker'),
+            "el-cascader":()=>import(/* webpackChunkName: "element-ui/lib/cascader" */ 'element-ui/lib/cascader'),
         },
         props: {
         },

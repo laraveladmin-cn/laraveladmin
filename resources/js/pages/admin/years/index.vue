@@ -65,7 +65,7 @@
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     export default {
         components:{
-            'data-table':function(resolve){require(['common_components/datatable.vue'], resolve);},
+            'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
             "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
 
         },

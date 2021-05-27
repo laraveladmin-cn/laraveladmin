@@ -175,33 +175,15 @@
 
     export default {
         components: {
-            'edit': function (resolve) {
-                require(['common_components/edit.vue'], resolve);
-            },
-            "el-input-number": function (resolve) {
-                require(['element-ui/lib/input-number'], resolve);
-            },
-            "edit-item": function (resolve) {
-                require(['common_components/editItem.vue'], resolve);
-            },
-            "el-switch": function (resolve) {
-                require(['element-ui/lib/switch'], resolve);
-            },
-            "editor-md": function (resolve) {
-                require(['common_components/editorMd.vue'], resolve);
-            },
-            "upload":function(resolve){
-                require(['common_components/upload.vue'], resolve);
-            },
-            "icheck":function(resolve){
-                require(['common_components/icheck.vue'], resolve);
-             },
-            "select2":function(resolve){
-                require(['common_components/select2.vue'], resolve);
-            },
-            "hide-more": function (resolve) {
-                require(['common_components/hideMore'], resolve);
-            },
+            'edit':()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
+            'el-input-number':()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
+            'edit-item':()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
+            'el-switch':()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
+            'editor-md':()=>import(/* webpackChunkName: "common_components/editorMd.vue" */ 'common_components/editorMd.vue'),
+            'upload':()=>import(/* webpackChunkName: "common_components/upload.vue" */ 'common_components/upload.vue'),
+            'icheck':()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+            'select2':()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
+            'hide-more':()=>import(/* webpackChunkName: "common_components/hideMore" */ 'common_components/hideMore'),
         },
         props: {},
         computed:{

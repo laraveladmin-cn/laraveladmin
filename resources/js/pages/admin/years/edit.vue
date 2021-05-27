@@ -39,13 +39,9 @@
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     export default {
         components:{
-            'edit':function(resolve){require(['common_components/edit.vue'], resolve);},
-            "edit-item": function (resolve) {
-                require(['common_components/editItem.vue'], resolve);
-            },
-            "el-input-number": function (resolve) {
-                require(['element-ui/lib/input-number'], resolve);
-            },
+            'edit':()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
+            'edit-item':()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
+            'el-input-number':()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
         },
         props: {
         },

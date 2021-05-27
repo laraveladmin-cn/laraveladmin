@@ -38,13 +38,9 @@
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     export default {
         components:{
-            'edit':function(resolve){require(['common_components/edit.vue'], resolve);},
-            "edit-item": function (resolve) {
-                require(['common_components/editItem.vue'], resolve);
-            },
-            "ztree":function(resolve){
-                require(['common_components/ztree.vue'], resolve);
-            }
+            'edit':()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
+            'edit-item':()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
+            "ztree": () => import(/* webpackChunkName: "common_components/ztree.vue" */ 'common_components/ztree.vue'),
         },
         props: {
         },

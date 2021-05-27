@@ -42,9 +42,7 @@
         props: {
         },
         components:{
-            "echart":function(resolve){
-                require(['common_components/echart.vue'], resolve);
-            }
+            'echart':()=>import(/* webpackChunkName: "common_components/echart.vue" */ 'common_components/echart.vue'),
         },
         data(){
             return {
