@@ -43,7 +43,7 @@
         components: {
             edit: ()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
             editItem: ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
-            upload:function(resolve){require(['common_components/upload.vue'], resolve);}, //上传组件
+            upload:()=>import(/* webpackChunkName: "common_components/upload.vue" */ 'common_components/upload.vue'),
         },
         props: {},
         data() {

@@ -36,7 +36,7 @@
         components: {
             edit: ()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
             editItem: ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
-            colorpicker:function(resolve){require(['common_components/colorpicker.vue'], resolve);}, //颜色选择器异步组件
+            colorpicker:()=>import(/* webpackChunkName: "common_components/colorpicker.vue" */ 'common_components/colorpicker.vue'),
         },
         props: {},
         data() {
