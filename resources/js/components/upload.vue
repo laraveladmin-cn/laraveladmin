@@ -196,12 +196,11 @@
                 return headers;
             },
             isArray(){
-                return typeof this.val=="object";
+                return typeof this.val=="object" && this.val!==null;
             }
         },
         watch:{
             value(val){
-                //dd(this.val,val,this.val!=val);
                 if(this.val!=val || (typeof this.val)!=(typeof val)){
                     this.val = val;
                 }
