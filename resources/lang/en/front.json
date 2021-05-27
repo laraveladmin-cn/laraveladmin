@@ -846,5 +846,7 @@
     "Special thanks": "Special thanks",
     "Links": "Links",
     "Unbundling": "Unbundling",
-    "Download": "Download"
+    "Download": "Download",
+    "Click Upload": "Click Upload",
+    "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}"
 }

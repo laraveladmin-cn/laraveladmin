@@ -312,6 +312,7 @@
         data() {
             return {
                 options: {
+                    lang_table:'{{$table_name}}', //字段翻译
                     id: 'edit', //多个组件同时使用时唯一标识
                     params: null, //默认筛选条件
                     url:this.url || '', //数据表请求数据地址

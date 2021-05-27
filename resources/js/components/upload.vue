@@ -1,22 +1,44 @@
 <template>
     <div>
-        <el-upload class="avatar-uploader"
-                   :action="use_url+action"
-                   :show-file-list="false"
-                   :on-success="handleAvatarSuccess"
-                   :on-error="handleAvatarError"
-                   @click="$emit('blur')"
-                   :data="{_token:_token}"
-                   :headers="headers"
-                   name="file"
-                   :before-upload="beforeAvatarUpload">
-            <img v-if="value || placeholderValue" :src="showurl" class="avatar" :width="width+'px'" :height="height+'px'">
-            <i v-else class="el-icon-plus avatar-uploader-icon avatar" :style="'line-height: '+height+'px;height:'+height+'px;width:'+width+'px'"></i>
-        </el-upload>
+        <div v-if="isArray">
+            <el-upload name="file"
+                       class="avatar-uploader"
+                       :action="use_url+action"
+                       list-type="picture"
+                       :file-list="val"
+                       :data="{_token:_token}"
+                       :headers="headers"
+                       @click="$emit('blur')"
+                       :before-upload="beforeAvatarUpload"
+                       :on-error="handleAvatarError"
+                       :on-remove="handleRemove"
+                       :on-success="handleSuccess">
+                <slot>
+                    <button class="btn btn-primary">{{$t('Click Upload')}}</button>
+                </slot>
+            </el-upload>
+        </div>
+        <div v-else class="single">
+            <el-upload class="avatar-uploader"
+                       :action="use_url+action"
+                       :show-file-list="false"
+                       :on-success="handleAvatarSuccess"
+                       :on-error="handleAvatarError"
+                       @click="$emit('blur')"
+                       :data="{_token:_token}"
+                       :headers="headers"
+                       name="file"
+                       :before-upload="beforeAvatarUpload">
+                <slot>
+                    <img v-if="value || placeholderValue" :src="showurl" class="avatar" :width="width+'px'" :height="height+'px'">
+                    <i v-else class="el-icon-plus avatar-uploader-icon avatar" :style="'line-height: '+height+'px;height:'+height+'px;width:'+width+'px'"></i>
+                </slot>
+            </el-upload>
+        </div>
     </div>
 </template>
 <style lang="scss">
-    .avatar-uploader .el-upload {
+   .single .avatar-uploader .el-upload {
         border: 1px dashed #d9d9d9;
         border-radius: 6px;
         cursor: pointer;
@@ -39,21 +61,21 @@
     }
 </style>
 <script>
-    import ElUpload from 'element-ui/lib/upload';
     import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
     export default {
         components: {
-            'el-upload':ElUpload
+            'el-upload': ()=>import(/* webpackChunkName: "element-ui/lib/upload" */ 'element-ui/lib/upload'),
         },
         data(){
             return {
-                parm:''
+                parm:'',
+                val:this.value
             };
         },
 
         props:{
             value: {
-                type:[String],
+                type:[String,Array],
                 default: function () {
                     return '';
                 }
@@ -101,6 +123,15 @@
             ...mapMutations({
                 set:'set'
             }),
+            handleRemove(file, fileList) {
+                this.val = collect(this.val).filter( (item) =>{
+                    return item['url'] != file[this.valueKey];
+                }).values().all();
+            },
+            handleSuccess(file, fileList) {
+                file.url = file[this.valueKey];
+                this.val.push(file);
+            },
             handleAvatarSuccess(res, file){
                 this.refreshToken();
                 let $this = this;
@@ -161,10 +192,23 @@
                     headers.Authorization= decodeURIComponent(token);
                 }
                 return headers;
+            },
+            isArray(){
+                return typeof this.val=="object" && this.val!==null;
             }
         },
         watch:{
-
+            value(val){
+                if(this.val!=val || (typeof this.val)!=(typeof val)){
+                    this.val = val;
+                }
+            },
+            val(val){
+                if(this.value!=val){
+                    this.$emit('input', val); //修改值
+                    this.$emit('change',val); //修改值
+                }
+            }
         },
         mounted() {
 

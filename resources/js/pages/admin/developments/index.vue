@@ -75,7 +75,7 @@
                                                 <template slot="input-item">
                                                     <div class="edit-item-content">
                                                         <select2 v-model="item.value"
-                                                                 :default-options="item.map || array_get(props,'data.maps.'+item.map_key,[])"
+                                                                 :default-options="transMap(props,item)"
                                                                  :placeholder-show="item.placeholder || $t('Please select')"
                                                                  :disabled="!props.url"
                                                                  :placeholder-value="''"
@@ -375,6 +375,17 @@
                     }
                 });
                  return item1;
+            },
+            transMap(props,item){
+                let map = item.map || array_get(props,'data.maps.'+item.map_key,[]);
+                map = collect(map).map((value,key)=>{
+                    if(value && typeof value=="string"){
+                        return this.$tp(value);
+                    }else {
+                        return value;
+                    }
+                }).all();
+                return map;
             }
         },
         watch:{
