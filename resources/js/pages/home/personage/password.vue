@@ -77,10 +77,9 @@
 
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
-    import lockEdit from "common_components/lockEdit";
     export default {
         components:{
-            lockEdit,
+            'lock-edit':()=>import(/* webpackChunkName: "common_components/lockEdit" */ 'common_components/lockEdit'),
             'edit':()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
             "edit-item": ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
             "password-edit": ()=>import(/* webpackChunkName: "common_components/passwordEdit.vue" */ 'common_components/passwordEdit.vue'),
