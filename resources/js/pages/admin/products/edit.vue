@@ -189,7 +189,7 @@
                                     </el-date-picker>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="images" :options="{name: props.transField('Preview Poster'), required: false}"  :datas="props">
+                            <edit-item key-name="images" :options="{name: props.transField('Preview Poster'), required: false,title:$t('Only picture files can be uploaded and no more than {size}',{size:'2MB'})}"  :datas="props">
                                 <template slot="input-item">
                                     <upload  v-model="props.data.row['images']"
                                             :disabled="!props.url"
