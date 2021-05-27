@@ -15,7 +15,6 @@
                        :on-success="handleSuccess">
                 <slot>
                     <button class="btn btn-primary">{{$t('Click Upload')}}</button>
-                    <div slot="tip" class="el-upload__tip">{{$t('Only picture files can be uploaded and no more than {size}',{size:'2MB'})}}</div>
                 </slot>
             </el-upload>
         </div>
