@@ -22,12 +22,7 @@ class CreateController extends BaseCreate
      *
      * @var string
      */
-    protected $description = '自定义模板控制器生成';
-    public function __construct()
-    {
-        parent::__construct();
-        $this->description = trans_path('Custom template controller generation',$this->transPath);
-    }
+    protected $description = 'Custom template controller generation';
 
     protected $type='php';
     protected $tpl = 'php/controller';

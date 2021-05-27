@@ -2,18 +2,14 @@
 
 namespace App\Console\Commands;
 
+use App\Console\BaseCommand;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
-class MigrateAllCommand extends Command
+class MigrateAllCommand extends BaseCommand
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->description = trans_path('Execute all migration files',$this->transPath);
-    }
-    protected $transPath='commands';
+
     /**
      * The name and signature of the console command.
      *
@@ -26,7 +22,7 @@ class MigrateAllCommand extends Command
      *
      * @var string
      */
-    protected $description = '执行所有迁移文件';
+    protected $description = 'Execute all migration files';
 
     /**
      * Execute the console command.

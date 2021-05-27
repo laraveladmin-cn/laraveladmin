@@ -22,12 +22,7 @@ class CreateModel extends BaseCreate
      *
      * @var string
      */
-    protected $description = '自定义模板模型生成';
-    public function __construct()
-    {
-        parent::__construct();
-        $this->description = trans_path('Custom template model generation',$this->transPath);
-    }
+    protected $description = 'Custom template model generation';
     protected $type='php';
     protected $tpl = 'php/model';
     protected $baseNamespace = 'App\Models';
