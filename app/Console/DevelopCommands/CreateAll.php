@@ -3,22 +3,14 @@
 namespace App\Console\DevelopCommands;
 
 
+use App\Console\BaseCommand;
 use App\Models\Migration;
-use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class CreateAll extends Command
+class CreateAll extends BaseCommand
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->description = trans_path('Generate all resources',$this->transPath);
-    }
-    protected $transPath='commands';
 
     /**
      * The name and signature of the console command.
@@ -32,7 +24,7 @@ class CreateAll extends Command
      *
      * @var string
      */
-    protected $description = '生成所有资源';
+    protected $description = 'Generate all resources';
 
     protected function migrationPath($migration){
         return database_path('migrations/'.(explode('_',$migration)[0])).'/'.$migration.'.php';
