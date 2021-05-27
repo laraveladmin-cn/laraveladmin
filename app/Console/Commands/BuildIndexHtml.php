@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
+use App\Console\BaseCommand;
 use Illuminate\Support\Str;
 
-class BuildIndexHtml extends Command
+class BuildIndexHtml extends BaseCommand
 {
 
     /**
@@ -20,21 +20,10 @@ class BuildIndexHtml extends Command
      *
      * @var string
      */
-    protected $description = '编译生成前端入口文件index.html';
+    protected $description = 'Compile and generate the front-end entry file "index.html"';
 
     protected $fileName = 'index.html';
-    protected $transPath='commands';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->description = trans_path('Compile and generate the front-end entry file "index.html"',$this->transPath);
-    }
 
     /**
      * Execute the console command.

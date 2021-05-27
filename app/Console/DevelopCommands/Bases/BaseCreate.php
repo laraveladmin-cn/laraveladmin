@@ -2,10 +2,10 @@
 
 namespace App\Console\DevelopCommands\Bases;
 
-use Illuminate\Console\Command;
+use App\Console\BaseCommand;
 use Illuminate\Support\Str;
 
-abstract class BaseCreate extends Command
+abstract class BaseCreate extends BaseCommand
 {
     //数据
     protected $datas = [];
@@ -20,8 +20,6 @@ abstract class BaseCreate extends Command
 
     //输出路径
     protected $outputPath='';
-
-    protected $transPath='commands';
 
     //生成后自动加载
     protected $composer_dump = true;

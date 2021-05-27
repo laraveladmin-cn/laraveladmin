@@ -21,12 +21,7 @@ class CreateView extends BaseCreate
      *
      * @var string
      */
-    protected $description = '自定义模板视图生成';
-    public function __construct()
-    {
-        parent::__construct();
-        $this->description = trans_path('Custom template front-end view generation',$this->transPath);
-    }
+    protected $description = 'Custom template front-end view generation';
     protected $type = 'vue';
     protected $tpl = 'html/edit';
     protected $baseNamespace = '';
