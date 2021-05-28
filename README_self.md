@@ -78,6 +78,7 @@ cnpm -v
 ```shell
 git clone https://gitee.com/laravel-admin/laraveladmin.git
 cd laraveladmin
+git remote add laraveladmin https://gitee.com/laravel-admin/laraveladmin.git
 ```
 
 2. 参照.env.example配置[.env](env.md)文件(务必设置好mysql密码,redis密码)
@@ -165,15 +166,38 @@ envoy run update --branch=master --self=1
 8. 添加自己的代码仓库源
 
 ```shell
-git remote add self https://用户名:密码@gitee.com/自己代码仓库.git
+git remote remove origin
+git remote add origin https://用户名:密码@gitee.com/自己代码仓库.git
 ```
 
-9. 定时任务,队列,守护进程管理请自己手动添加
+9. 本地开发环境更新到laraveladmin最新代码
+
+```shell
+git pull laraveladmin master
+```
+
+10. 定时任务,队列,守护进程管理请自己手动添加
 
 [定时任务](https://laravelacademy.org/post/8484)
 
 [队列,Supervisor](https://laravelacademy.org/post/21535)
 
+11. 安装完成后的常见问题
+    
+    - 进入页面提示错误信息
+    
+        ![页面错误提示图片](https://www.laraveladmin.cn/storage/uploads/images/2021/05/28/OK6Vpu81z28mEzeN5MzDLohuAsth1wpMQ11qqtEN.jpg)
+    
+        > 请检查.env中的APP_URL设置项是否设置正确(必须与浏览器访问地址路径一致且不要以"/"结尾)
+    
+    - 验证码一直处于加载中
+    
+        ![验证码一直处于加载中](https://www.laraveladmin.cn/storage/uploads/images/2021/05/28/LfC6S1YeI2i9MwqAXjaIbWcvL6rbt4oQkfxZKGvr.jpg)
+
+        > 请设置.env中的APP_VERIFY_LOGIN_PASS_NUM值为更大的值,或者申请极验配置项配置在.env中
+    
+    - [极验配置流程](/components/geetest.md)   
+                                                                                                                                         
 #### 使用说明
 
 1. [官网及相关文档: https://www.laraveladmin.cn](https://www.laraveladmin.cn)
