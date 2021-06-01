@@ -9,12 +9,12 @@ return [
     'icp'=>env('ICP',''), //备案号
     'communication_mode'=>[
         'forgot_password'=>[ //忘记密码通讯方式
-            'email'=>'电子邮箱',
-            'mobile_phone'=>'手机号'
+            'email'=>'Email', //电子邮箱
+            'mobile_phone'=>'Mobile Phone'//手机号
         ],
         'register'=>[ //注册用户通讯方式
-            'email'=>'电子邮箱',
-            'mobile_phone'=>'手机号'
+            'email'=>'Email', //电子邮箱
+            'mobile_phone'=>'Mobile Phone'//手机号
         ]
     ],
     'verify'=>[
@@ -47,9 +47,8 @@ return [
             'login_num_key'=>'login_num'
         ]
     ],
-    'client_id_key'=>'Client-Id',
-    //登录的记住我过期时间(天)
-    'remember_lifetime'=>7,
+    'client_id_key'=>'Client-Id', //接口请求认证的header键
+    'remember_lifetime'=>7,//登录的记住我过期时间(天)
     'ali_dayu' => [
         'app_key' => env('ALIYUN_SMS_AK',''), //APP KEY
         'app_secret' => env('ALIYUN_SMS_AS',''), //APP SECRET
@@ -60,12 +59,12 @@ return [
             'forgot'=>env('ALI_DAYU_CODE_FORGOT',''), //用户注册短信模板
         ]
     ],
-    'register_login'=>false,
-    'log_exclude_method'=>[
+    'register_login'=>false, //注册成功后自动登录该用户
+    'log_exclude_method'=>[ //操作日志记录排除的请求方式
         'get'
     ],
-    'log_id_key'=>'_log_id',
-    'disabled_menus'=>env('DISABLED_MENUS', ''),
+    'log_id_key'=>'_log_id', //登录次数缓存key
+    'disabled_menus'=>env('DISABLED_MENUS', ''), //禁用菜单位(将禁用其所有子集)
     'locales'=>['zh-CN','zh-TW','en'], //支持语言
     'trans_prefix'=>'_trans_', //翻译语言前缀
     'tinymce_key'=>env('TINYMCE_KEY','') //tinymce编辑器key

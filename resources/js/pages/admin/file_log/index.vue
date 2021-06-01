@@ -24,7 +24,7 @@
                     </template>
                     <template slot="table" slot-scope="props" v-if="type!=0">
                         <ul class="row files-container">
-                            <li v-for="file in props.data.list.data" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <li v-for="file in props.data.list.data" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
                                 <file-preview :file="file" :download-disabled="!props.data.configUrl['downloadUrl']"></file-preview>
                             </li>
                         </ul>

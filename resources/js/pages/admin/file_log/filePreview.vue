@@ -91,4 +91,7 @@
     .file-preview{
         border: 1px solid #eee;
     }
+    .mailbox-attachment-info{
+        min-height: 74px;
+    }
 </style>
