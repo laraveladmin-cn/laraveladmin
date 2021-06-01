@@ -14,7 +14,7 @@ class IndexController extends Controller
      * 生成index.html文件生成的数据
      * @return array
      */
-    protected function indexData(){
+    public function indexData(){
         return [
             'time_str'=>'&time='.time(),
             'app_name'=>config('app.name')
