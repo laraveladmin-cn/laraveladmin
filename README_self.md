@@ -78,6 +78,7 @@ cnpm -v
 ```shell
 git clone https://gitee.com/laravel-admin/laraveladmin.git
 cd laraveladmin
+git remote add laraveladmin https://gitee.com/laravel-admin/laraveladmin.git
 ```
 
 2. 参照.env.example配置[.env](env.md)文件(务必设置好mysql密码,redis密码)
@@ -89,11 +90,30 @@ cp .env.example .env
 vi .env
 ```
 
-3. 安装composer相关扩展包及项目代码初始化
+3. 安装composer相关扩展包及项目代码初始化(以下两种方式选一种进行安装即可)
 
 > windows安装请先直接下载vendor.zip解压在项目代码中
 
 [vendor.zip](https://www.laraveladmin.cn/api/home/docs/vendor.zip)
+
+> phpstudy安装执行迁移命令出现如下错误时,可以升级mysql到8版本,或请参考解决方案[执行迁移文件错误解决](https://stackoverflow.com/questions/42244541/laravel-migration-error-syntax-error-or-access-violation-1071-specified-key-wa)
+![执行迁移文件错误](https://www.laraveladmin.cn/api/home/docs/images/执行迁移文件错误.jpg)
+
+3-1. 直接命令安装
+
+```shell
+cnpm install #前端编译扩展包安装
+npm run prod #编译前端页面js
+php artisan config:clear #清理配置缓存
+php artisan cache:clear #清理缓存
+php artisan key:generate --force #生成APP_KEY
+php artisan storage:link #创建上传文件目录软连接
+php artisan db:seed --class=CheckDatabaseSeeder --force #检查并创建数据库
+php artisan migrate:all #创建数据表
+php artisan db:seed --force #初始化数据
+```
+
+3-2. 通过envoy命令进行安装
 
 > 如果安装"laravel/envoy"过程中失败请切换下全局镜像源,进行尝试
 
@@ -126,6 +146,9 @@ envoy run init --branch=master --self=1 #项目初始化
 127.0.0.1 local.laraveladmin.cn
 ```
 
+> 登录用户名及密码参照.env中的"ADMIN_USER_NAME","ADMIN_PASSWORD"设置项
+> 登录验证码使用的极验滑块验证(免费的),注册后在.env中进行配置
+
 6. 开发环境前端实时编译启动
 
 ```shell
@@ -143,15 +166,38 @@ envoy run update --branch=master --self=1
 8. 添加自己的代码仓库源
 
 ```shell
-git remote add self https://用户名:密码@gitee.com/自己代码仓库.git
+git remote remove origin
+git remote add origin https://用户名:密码@gitee.com/自己代码仓库.git
 ```
 
-9. 定时任务,队列,守护进程管理请自己手动添加
+9. 本地开发环境更新到laraveladmin最新代码
+
+```shell
+git pull laraveladmin master
+```
+
+10. 定时任务,队列,守护进程管理请自己手动添加
 
 [定时任务](https://laravelacademy.org/post/8484)
 
 [队列,Supervisor](https://laravelacademy.org/post/21535)
 
+11. 安装完成后的常见问题
+    
+    - 进入页面提示错误信息
+    
+        ![页面错误提示图片](https://www.laraveladmin.cn/storage/uploads/images/2021/05/28/OK6Vpu81z28mEzeN5MzDLohuAsth1wpMQ11qqtEN.jpg)
+    
+        > 请检查.env中的APP_URL设置项是否设置正确(必须与浏览器访问地址路径一致且不要以"/"结尾)
+    
+    - 验证码一直处于加载中
+    
+        ![验证码一直处于加载中](https://www.laraveladmin.cn/storage/uploads/images/2021/05/28/LfC6S1YeI2i9MwqAXjaIbWcvL6rbt4oQkfxZKGvr.jpg)
+
+        > 请设置.env中的APP_VERIFY_LOGIN_PASS_NUM值为更大的值,或者申请极验配置项配置在.env中
+    
+    - [极验配置流程](/components/geetest.md)   
+                                                                                                                                         
 #### 使用说明
 
 1. [官网及相关文档: https://www.laraveladmin.cn](https://www.laraveladmin.cn)
