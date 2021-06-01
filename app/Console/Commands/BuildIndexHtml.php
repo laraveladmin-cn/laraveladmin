@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Http\Controllers\Open\IndexController;
 use App\Console\BaseCommand;
-use App\Http\Controllers\Open\IndexController;
 use Illuminate\Support\Str;
 
 class BuildIndexHtml extends BaseCommand
