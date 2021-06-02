@@ -120,7 +120,7 @@
             <footer class="main-footer">
                 <div class="container">
                     <div class="pull-right hidden-xs">
-                        <b>$t('System version:')</b> {{version}}
+                        <b>{{$t('System version:')}}</b> {{version}}
                     </div>
                     <strong>
                         {{$t('Copyright')}}
