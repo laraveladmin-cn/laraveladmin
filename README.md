@@ -20,8 +20,12 @@
 
 ### 简介说明
 
-`laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供丰富的页面组件和表单元素，还有即插即用的功能组件，通过简单的配置或使用少量的代码就实现完善的后台管理功能。\(QQ群: 391528810\)
+`laravel-admin`是一个可以快速帮你构建后台管理的工具，它提供丰富的页面组件和表单元素，还有即插即用的功能组件，通过简单的配置或使用少量的代码就实现完善的后台管理功能。
+
 [Demo](https://demo.laraveladmin.cn) \|\| [阅读文档](https://www.laraveladmin.cn/home/index)
+
+**QQ群: `391528810`**
+
 ![QQ群](https://www.laraveladmin.cn/api/home/docs/images/QQ群.jpg)
 
 ### 功能特色
@@ -34,38 +38,48 @@
 
 ### 功能截图
 
-* 首页
+**首页**
+
 ![LaravelAdmin首页](https://www.laraveladmin.cn/storage/uploads/images/2020/12/05/kg3F2blsJISs6GbyFdmItHU7VKGLPx4zUIrPS0H6.jpeg)
 
-* 登录页面
+**登录页面**
+
 ![LaravelAdmin登录页面](https://www.laraveladmin.cn/api/home/docs/images/登录页面.jpg)
 
-* 注册页面
+**注册页面**
+
 ![LaravelAdmin注册页面](https://www.laraveladmin.cn/api/home/docs/images/注册页面.jpg)
 
-* 忘记密码
+**忘记密码**
+
 ![LaravelAdmin忘记密码](https://www.laraveladmin.cn/api/home/docs/images/忘记密码.jpg)
 
-* 开发辅助
+**开发辅助**
+
 ![LaravelAdmin开发辅助](https://www.laraveladmin.cn/api/home/docs/images/开发辅助.jpg)
 
-* 列表页面
+**列表页面**
+
 ![LaravelAdmin登录页面](https://www.laraveladmin.cn/api/home/docs/images/列表页面.jpg)
 
-* 编辑页面
+**编辑页面**
+
 ![LaravelAdmin编辑页面](https://www.laraveladmin.cn/api/home/docs/images/页面编辑.jpg)
 
-* 弹窗编辑
+**弹窗编辑**
+
 ![LaravelAdmin弹窗编辑](https://www.laraveladmin.cn/api/home/docs/images/弹窗编辑.jpg)
 
-* 手机端适配
+**手机端适配**
 
 ![LaravelAdmin手机端适配](https://www.laraveladmin.cn/api/home/docs/images/手机端.jpg)
 
-* 平板适配
+**平板适配**
+
 ![LaravelAdmin平板适配](https://www.laraveladmin.cn/api/home/docs/images/pad屏幕.jpg)
 
-* 编辑页面拖拽布局后反向更新代码
+**编辑页面拖拽布局后反向更新代码**
+
 ![LaravelAdmin拖拽布局](https://www.laraveladmin.cn/api/home/docs/images/拖拽布局.gif)
 
 ## 环境部署
