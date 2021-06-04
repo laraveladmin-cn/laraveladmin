@@ -144,8 +144,8 @@ class Menu extends Model
         'use'=>'Route usage',
         'as'=>'Routing alias',
         'middleware'=>'Using middleware alone',
-        //'left_margin' => '左边界',
-        //'right_margin' => '右边界',
+        //'left_margin' => 'Left boundary',
+        //'right_margin' => 'Right boundary',
         //'created_at' => 'Created At',
         //'updated_at' => 'Updated At',
         //'deleted_at' => 'Deleted At',
@@ -433,7 +433,7 @@ class Menu extends Model
     }
 
     /**
-     * 判断urlYesNo在菜单目录里
+     * 判断url是否在菜单目录里
      * @param $url
      * @param $menus
      * @return bool
@@ -442,13 +442,13 @@ class Menu extends Model
         $url = self::realRoute($url);
         $method = self::methodValue($method);
         $isIn = false;
-        $menu = [];
-        collect($menus)->each(function($item) use (&$isIn,$url,$method,&$menu){
-            if(strpos($item['url'],$url)===0 && in_array($method,$item['method'])){
-                $isIn = true;
-                $menu = $item;
-            }
+        $menus = collect($menus)->filter(function($item) use (&$isIn,$url,$method,&$menu){
+            return strpos($item['url'],$url)===0 && in_array($method,$item['method']);
         });
+        $menu = collect($menus)->first(function ($item)use($url){
+            return $item['url']==$url;
+        })?:(collect($menus)->first()?:[]);
+        $menu and $isIn=true;
         return $is_bool?$isIn:$menu;
     }
 
@@ -482,6 +482,13 @@ class Menu extends Model
         return $item;
     }
 
+    /**
+     * 翻译自动生成的资源路由
+     * @param $q
+     * @param $item
+     * @param $key
+     * @return array|\Illuminate\Contracts\Translation\Translator|string|null
+     */
     public function scopeTrans($q, $item, $key)
     {
         $value = Arr::get($item, $key, '');

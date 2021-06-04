@@ -181,7 +181,9 @@
                     "Resources": "所屬資源",
                     "Restricted use environment": "限制使用環境",
                     "Specify where the route is used": "指定路由使用地方",
-                    "Resources included": "包含資源"
+                    "Resources included": "包含資源",
+                    "Left boundary": "左邊界",
+                    "Right boundary": "右邊界"
                 },
                 "maps": {
                     "method": [],
@@ -656,7 +658,6 @@
             "Server internal error, please contact the developer for processing": "服務器內部錯誤，請聯系開發人員進行處理！你可以點擊"
         }
     },
-    "Console commands": [],
     "New": "新建",
     "Refresh": "重繪",
     "Delete selected": "删除選中",
