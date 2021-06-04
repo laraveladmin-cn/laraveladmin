@@ -48,6 +48,7 @@ then
 fi
 #导入配置
 export $(grep -Ev '^$|[#;]' .env | xargs)
+APP_ENV=$(echo "${APP_ENV}" | sed -e 's/\r//g')
 #判断是否本地开发环境
 if [[ "${APP_ENV}" == "" || "${APP_ENV}" == "local" ]]
     then
@@ -73,12 +74,14 @@ fi
 #设置初始化数据库为可连接
 if [ ! -f ./docker/mysql/init.sql ]
 then
+    DB_USERNAME=$(echo "${DB_USERNAME}" | sed -e 's/\r//g')
+    DB_PASSWORD=$(echo "${DB_PASSWORD}" | sed -e 's/\r//g')
     sql=$(cat <<EOF
 ALTER USER '${DB_USERNAME}'@'%' IDENTIFIED WITH mysql_native_password BY '${DB_PASSWORD}';
 EOF
 )
     echo "GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO '${DB_USERNAME}'@'%';" > ./docker/mysql/init.sql
-    echo $sql >> ./docker/mysql/init.sql
+    echo $(echo $sql | sed -e 's/\r//g') >> ./docker/mysql/init.sql
     echo "flush privileges;" >> ./docker/mysql/init.sql
 fi
 #编排环境
@@ -88,7 +91,7 @@ if [ "$is_local" == "0" ]
     then
        docker rmi -f  `docker images | grep '<none>' | awk '{print $3}'`
 fi
-unset $(grep -Ev '^$|[#;]' .env | sed -E 's/(.*)=.*/\1/')
+unset $(grep -Ev '^$|[#;]' .env | sed -E 's/([^=]*)=.*/\1/')
 
 
 
