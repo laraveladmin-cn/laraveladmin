@@ -31,7 +31,7 @@ do
             queue_type="listen"
     fi
     http_host=${SWOOLE_HTTP_HOST}
-    unset $(grep -Ev '^$|[#;]' ${code_dir}/${project}/.env | sed -E 's/(.*)=.*/\1/')
+    unset $(grep -Ev '^$|[#;]' ${code_dir}/${project}/.env | sed -E 's/([^=]*)=.*/\1/')
 #队列
 echo "[program:${project}]
 process_name=%(program_name)s_%(process_num)02d
