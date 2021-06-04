@@ -188,7 +188,9 @@
                     "Resources": "所属资源",
                     "Restricted use environment": "限制使用环境",
                     "Specify where the route is used": "指定路由使用地方",
-                    "Resources included": "包含资源"
+                    "Resources included": "包含资源",
+                    "Left boundary": "左边界",
+                    "Right boundary": "右边界"
                 },
                 "maps": {
                     "method": [],
