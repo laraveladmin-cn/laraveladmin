@@ -188,7 +188,9 @@
                     "Resources": "リソース",
                     "Restricted use environment": "使用環境を制限する",
                     "Specify where the route is used": "ルートの使用場所を指定します。",
-                    "Resources included": "リソースを含める"
+                    "Resources included": "リソースを含める",
+                    "Left boundary": "左境界",
+                    "Right boundary": "右端"
                 },
                 "maps": {
                     "method": [],
@@ -904,7 +906,6 @@
             "Server internal error, please contact the developer for processing": "サーバー内部のエラーは、開発者に連絡してください。クリックしてもいいです"
         }
     },
-    "Console commands": [],
     "New": "新規作成",
     "Refresh": "更新",
     "Delete selected": "選択を削除",

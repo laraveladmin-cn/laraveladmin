@@ -188,7 +188,9 @@
                     "Resources": "подведомственные ресурсы",
                     "Restricted use environment": "ограничение использования",
                     "Specify where the route is used": "место назначения маршрутов",
-                    "Resources included": "включать ресурсы"
+                    "Resources included": "включать ресурсы",
+                    "Left boundary": "левая граница",
+                    "Right boundary": "правая граница"
                 },
                 "maps": {
                     "method": [],
@@ -904,7 +906,6 @@
             "Server internal error, please contact the developer for processing": "внутренняя ошибка сервера, свяжитесь с разработчиками для обработки!Вы можете щёлкнуть"
         }
     },
-    "Console commands": [],
     "New": "Создать",
     "Refresh": "Обновить",
     "Delete selected": "Удалить выделение",

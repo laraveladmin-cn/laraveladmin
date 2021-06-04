@@ -188,7 +188,9 @@
                     "Resources": "소속 자원",
                     "Restricted use environment": "사용 환경 을 제한 하 다",
                     "Specify where the route is used": "경로 지정 사용처",
-                    "Resources included": "자원 포함"
+                    "Resources included": "자원 포함",
+                    "Left boundary": "왼쪽 경계",
+                    "Right boundary": "오른쪽 경계"
                 },
                 "maps": {
                     "method": [],
@@ -904,7 +906,6 @@
             "Server internal error, please contact the developer for processing": "서버 내부 오류, 개발 자 에 게 연락 하여 처리 하 세 요!클릭 하 셔 도 됩 니 다."
         }
     },
-    "Console commands": [],
     "New": "새로 건설 하 다.",
     "Refresh": "새로 고침",
     "Delete selected": "선택 사항 삭제",

@@ -188,7 +188,9 @@
                     "Resources": "Recursos de propiedad",
                     "Restricted use environment": "Entorno de uso restringido",
                     "Specify where the route is used": "Especificar el lugar de uso de la ruta",
-                    "Resources included": "Incluir recursos"
+                    "Resources included": "Incluir recursos",
+                    "Left boundary": "Límite izquierdo",
+                    "Right boundary": "Límite derecho"
                 },
                 "maps": {
                     "method": [],
@@ -904,7 +906,6 @@
             "Server internal error, please contact the developer for processing": "¡Error interno del servidor, póngase en contacto con el desarrollador para procesar!Puede hacer clic en"
         }
     },
-    "Console commands": [],
     "New": "Nuevo",
     "Refresh": "Refrescar",
     "Delete selected": "Borrar selección",
