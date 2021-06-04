@@ -44,14 +44,14 @@ redirect_stderr=true
 stdout_logfile=${code_dir}/${project}/storage/logs/supervisor.log" > /etc/supervisor/conf.d/${project}.conf
 
 #队列监控
-#echo "[program:${project}_horizon]
-#process_name=%(program_name)s_%(process_num)02d
-#command=php ${code_dir}/${project}/artisan horizon
-#autostart=true
-#autorestart=true
-#user=www-data
-#redirect_stderr=true
-#stdout_logfile=${code_dir}/${project}/storage/logs/horizon.log" > /etc/supervisor/conf.d/"${project}"_horizon.conf
+echo "[program:${project}_horizon]
+process_name=%(program_name)s_%(process_num)02d
+command=php ${code_dir}/${project}/artisan horizon
+autostart=true
+autorestart=true
+user=www-data
+redirect_stderr=true
+stdout_logfile=${code_dir}/${project}/storage/logs/horizon.log" > /etc/supervisor/conf.d/"${project}"_horizon.conf
   #phpswoole服务
   if  [ "${is_local}" = 0 ] && ! [ "${http_host}" = "" ]
     then
