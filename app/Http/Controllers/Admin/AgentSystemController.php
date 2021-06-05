@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
-use App\Models\PuserUser;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 
