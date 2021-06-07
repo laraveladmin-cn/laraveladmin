@@ -7,7 +7,7 @@
             <div class="box-body">
                 <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="menu_id" :options="{name: props.transField('Operation menu'), required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
@@ -41,7 +41,7 @@
                             <edit-item key-name="ip" :options="{name: props.transField('IP address'), required: true}"  :datas="props">
                             </edit-item>
                         </div>
-                        <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-8 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="parameters" :options="{name: props.transField('Request parameters'), required: true}"  :datas="props">
                                 <template slot="input-item">
                                     <json-view :deep="3" style="height: 295px;overflow: scroll" :closed="false" :theme="'one-dark'"  :data="JSON.parse(array_get(props,'data.row.parameters','{}'))"/>
@@ -49,7 +49,7 @@
                             </edit-item>
 
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <edit-item key-name="return" :options="{name: props.transField('Return data'), required: true}"  :datas="props">
                                 <template slot="input-item">
                                     <json-view :deep="3" style="height: 500px;overflow: scroll"  :closed="false" :theme="'one-dark'"  :data="JSON.parse(array_get(props,'data.row.return','{}'))"/>

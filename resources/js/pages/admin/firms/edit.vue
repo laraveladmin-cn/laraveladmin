@@ -7,7 +7,7 @@
             <div class="box-body">
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="name" :options="{name: props.transField('Name'), required: true}"  :datas="props">
                             </edit-item>
                             <edit-item key-name="full_name" :options='{"name": props.transField("Full name"), "required": true}' :datas="props">
@@ -84,7 +84,7 @@
                             </edit-item>
 
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="logo" :options='{"name": props.transField("Brand logo"), "required": false}' :datas="props">
                                 <template slot="input-item">
                                     <upload :width="370" :height="201"  v-model="props.data.row['logo']"
@@ -135,7 +135,7 @@
                                 </template>
                             </edit-item>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="bank_ids" :options='{"name": props.transField("Support bank selection"), "required": false,type:"checkbox"}'  :datas="props">
                                 <template slot="input-item">
                                     <hide-more :tool="count(array_get(props,'data.maps.bank_ids',[]))>33">

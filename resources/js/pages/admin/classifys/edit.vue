@@ -7,7 +7,7 @@
             <div class="box-body">
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="name" :options="{name: props.transField('Name'), required: true}"  :datas="props">
                             </edit-item>
                             <edit-item key-name="description" :options='{"name":props.transField("Remarks"), "required": false,"type":"textarea","title":$t("Prompt message")}' :datas="props">

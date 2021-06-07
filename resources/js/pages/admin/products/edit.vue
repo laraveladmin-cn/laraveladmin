@@ -7,7 +7,7 @@
             <div class="box-body">
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="name" :options="{name: props.transField('Name'), required: true,rules:'required'}"  :datas="props">
                             </edit-item>
                             <edit-item key-name="firm_id" :options="{name: props.transField('Insurance Company','','firms'), required: true,rules:'required'}"  :datas="props">
@@ -82,7 +82,7 @@
                                 </template>
                             </edit-item>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="class" :options="{name: props.transField('Category'), required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
@@ -198,7 +198,7 @@
                                 </template>
                             </edit-item>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                           <edit-item key-name="year_ids" :options='{"name": props.transField("Optional years","","years"), "required": false,type:"checkbox"}'  :datas="props">
                                 <template slot="input-item">
                                     <hide-more :tool="count(array_get(props,'data.maps.year_ids',[]))>33">
