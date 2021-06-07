@@ -26,7 +26,10 @@
                             </th>
                         </tr>
                         <tr>
-                            <th v-for="(field,index) in props.showFields" :class="field['class']" @click="props.orderByMethod(index)"
+                            <th v-for="(field,index) in props.showFields"
+                                :class="field['class']"
+                                class="b-w-1"
+                                @click="props.orderByMethod(index)"
                                 v-if="index=='classify.name' || index=='classify2.name'">
                                 {{props.transField(field['name'],index)}}
                             </th>
@@ -182,5 +185,7 @@
     div table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after{
         top: 28px;
     }
-
+    table.table-bordered.dataTable .b-w-1:last-child{
+        border-right-width: 1px;
+    }
 </style>
