@@ -591,7 +591,8 @@
                 "Class name": "類名",
                 "It is also generated when it exists": "存在時也生成",
                 "Event class name": "事件類名",
-                "Service provider": "服務提供者"
+                "Service provider": "服務提供者",
+                "Is the table name prefixed": "錶名是否帶首碼"
             },
             "menus": {
                 "Drag shift": "拖拽移位",
