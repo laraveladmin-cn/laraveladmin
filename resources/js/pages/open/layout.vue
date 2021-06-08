@@ -58,6 +58,7 @@
                     <li><a href="https://secure.quantumca.com.cn/" target="_blank">量子认证平台</a></li>
                     <li><a href="https://laravelacademy.org/" target="_blank">Laravel学院</a></li>
                     <li><a href="https://gitee.com/light4/light4admin" target="_blank">light4admin</a></li>
+                    <li><a href="https://django-vue-admin.com/" target="_blank">Django-Vue-Admin</a></li>
                 </ul>
                 <p class="pull-right"><a href="#">{{$t('Back to top')}}</a></p>
                 <p style="margin: 0px 0px">
