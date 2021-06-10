@@ -1,7 +1,10 @@
 <template>
     <div>
-        <input v-show="false" type="file" @change="changeFile" />
-        <button class="btn btn-block btn-primary btn-sm" style="width: 90px" onclick="return false;" :disabled="file.name && uping==1" @click="selectFile">
+        <input v-show="false" type="file" @change="changeFile" :accept="accept" />
+        <button class="btn btn-block btn-primary btn-sm btn-select"
+                onclick="return false;"
+                :disabled="file.name && uping==1"
+                @click="selectFile">
             {{button_show}}
         </button>
         <div class="progress-group" v-show="file.name">
@@ -13,22 +16,33 @@
                 <div class="progress-bar progress-bar-warning" :style="{width: percents.total+'%'}"></div>
             </div>
         </div>
+        <slot>
+            <div class="value">
+                <a target="_blank" :href="value">{{value}}</a>
+            </div>
+        </slot>
     </div>
 </template>
-<style lang="scss">
 
-</style>
 <script>
+    import {mapActions,mapState} from 'vuex';
     let qiniu = require('qiniu-js');
     let md5 = require('md5');
     export default {
         components: {
         },
         props:{
+            //允许选择上传类型
+            accept:{
+                type:[String],
+                default: function () {
+                    return '*/*';
+                }
+            },
             tokenUrl:{ //获取上传token
                 type:[String],
                 default: function () {
-                    return '/open/qn/token';
+                    return '/open/qiniu/token';
                 }
             },
             token:{ //上传token直接传入
@@ -86,15 +100,14 @@
             }),
             //获取token
             getToken(){
-                let $this = this;
                 if(this.token){
                     this.uptoken = this.token;
                 }else {
-                    axios.get(this.tokenUrl).then(function (response) {
-                        $this.uptoken = response.data.token;
-                        $this.updomain = response.data.domain;
-                    }).catch(function (error) {
-                        $this.$store.commit('alert', {
+                    axios.get(this.use_url+this.tokenUrl).then( (response)=> {
+                        this.uptoken = response.data.token;
+                        this.updomain = response.data.domain;
+                    }).catch( (error) =>{
+                        this.$store.commit('alert', {
                             'showClose': true,
                             'title': this.$t('The upload component failed to get toke, the file will not be uploaded!'), //'上传组件获取toke失败,将无法上传文件!',
                             'position': 'top',
@@ -114,18 +127,17 @@
                 return false;
             },
             changeFile(file){
-                let $this = this;
                 let file_new = file.target.files[0];
                 let key_new = ''+file_new.lastModified+file_new.name+file_new.size;
                 let key_old = ''+this.file.lastModified+this.file.name+this.file.size;
                 //选择不同文件时,取消上传
                 if(key_new != key_old){
-                    $this.uping = 0;
-                    $this.percents = {
+                    this.uping = 0;
+                    this.percents = {
                         total:0, //总进度
                         chunks:[] //分块进度
                     };
-                    $this.subscription = {};
+                    this.subscription = {};
                     this.file = file_new; //获取上传文件
                     this.putExtra.params["x:name"] = this.file.name.split(".")[0];
                     let date = new Date();
@@ -142,9 +154,8 @@
             },
             //开始上传
             up(){
-                let $this = this;
                 if(!this.uptoken){
-                    $this.$store.commit('alert', {
+                    this.$store.commit('alert', {
                         'showClose': true,
                         'title': this.$t('The upload component failed to get toke, the file will not be uploaded!'),//'上传组件获取toke失败,将无法上传文件!',
                         'position': 'top',
@@ -158,7 +169,7 @@
                     return;
                 }
                 if(typeof this.file.name =="undefined"){
-                    $this.$store.commit('alert', {
+                    this.$store.commit('alert', {
                         'showClose': true,
                         'title': this.$t('Please select the file'),
                         'position': 'top',
@@ -223,6 +234,10 @@
             this.getToken();
         },
         computed:{
+            ...mapState([
+                '_token',
+                'use_url',
+            ]),
             button_show(){
                 return this.uping==0?this.$t('Select the file'):this.$t('Reselect');//'选择文件':'重新选择';
             },
@@ -233,3 +248,14 @@
 
     }
 </script>
+<style lang="scss" scoped>
+    .btn-select{
+        width: 90px;
+    }
+    .value{
+        min-height: 20px;
+    }
+    .progress{
+        margin-bottom: 0px;
+    }
+</style>

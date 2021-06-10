@@ -625,6 +625,20 @@
             "group": "open",
             "action": "IndexController@clientId",
             "_id": 90
+        },
+        {
+            "id": 91,
+            "name": "七牛云TOKEN",
+            "icons": "fa-cloud-upload",
+            "description": "七牛云上传TOKEN获取",
+            "url": "/open/qi-niu/token",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "QiNiuController@getToken",
+            "_id": 91
         }
     ],
     "resource": [
