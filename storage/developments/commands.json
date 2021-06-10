@@ -42,6 +42,16 @@
                 "is_boolean": true
             },
             {
+                "key": "has_prefix",
+                "value": 1,
+                "rules": "",
+                "title": "",
+                "name": "Is the table name prefixed",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
                 "key": "only",
                 "value": [],
                 "rules": "",
@@ -202,6 +212,16 @@
                 "rules": "",
                 "title": "Automatic loading is not checked after code generation",
                 "name": "Do not load automatically",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "has_prefix",
+                "value": 1,
+                "rules": "",
+                "title": "",
+                "name": "Is the table name prefixed",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true

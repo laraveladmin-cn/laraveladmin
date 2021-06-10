@@ -15,7 +15,7 @@ class CreateModel extends BaseCreate
      * @var string
      */
     protected $signature = 'create:model {table : The name of model}
-    {--connection} {--no_dump}';
+    {--connection} {--no_dump} {--has_prefix}';
 
     /**
      * The console command description.
@@ -28,7 +28,19 @@ class CreateModel extends BaseCreate
     protected $baseNamespace = 'App\Models';
 
     protected function getOutputPath(){
-        $this->outputPath = app_path('Models/'.Str::studly($this->getClassName($this->argument('table'))));
+        $table = $this->getTable();
+        $this->outputPath = app_path('Models/'.Str::studly($this->getClassName($table)));
+    }
+
+    public function getTable(){
+        $table = $this->argument('table');
+        if($this->hasOption('has_prefix') && $this->option('has_prefix')){
+            $connection = $this->option('connection') ?: config('database.default');
+            $data['connection'] = $connection==config('database.default') ? '': $connection;
+            $prefix = config('database.connections.'.$connection.'.prefix');
+            $table = Str::replaceFirst($prefix,'',$table);
+        }
+        return $table;
     }
 
     /**
@@ -38,8 +50,10 @@ class CreateModel extends BaseCreate
      */
     public function getTableInfo($table,$connection){
         $prefix = config('database.connections.'.$connection.'.prefix');
+        if($this->hasOption('has_prefix') && $this->option('has_prefix')){
+            $prefix = '';
+        }
         $trueTable = $prefix.$table;
-
         //数据表备注信息
         $data['comment'] =  DB::connection($connection)->select('SELECT TABLE_COMMENT FROM information_schema.`TABLES` WHERE TABLE_SCHEMA= :db_name AND TABLE_NAME = :tname',
             [
@@ -95,14 +109,14 @@ class CreateModel extends BaseCreate
      * 创建控制器
      */
     protected function readyDatas(){
-        $name = $this->argument('table');
+        $name = $this->getTable();
         $data['php'] = '<?php'; //模板代码
         $data['table'] = $name;
         $data['namespace']  = $this->baseNamespace; //生成代码命名空间
         $data['name'] = Str::studly($this->getClassName($name)); //模型名称
         $connection = $this->option('connection') ?: config('database.default');
         $data['connection'] = $connection==config('database.default') ? '': $connection;
-        $data['tableInfo'] = $this->getTableInfo($name,$connection); //数据表信息
+        $data['tableInfo'] = $this->getTableInfo($this->argument('table'),$connection); //数据表信息
         $table_fields = collect($data['tableInfo']['table_fields']);
         $data['table_comment'] = $data['tableInfo']['table_comment'];
         $data['table_relations'] = $data['tableInfo']['table_relations'];

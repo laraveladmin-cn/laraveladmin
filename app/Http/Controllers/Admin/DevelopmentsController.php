@@ -109,7 +109,8 @@ class DevelopmentsController extends Controller
         $tableModel = $tableModel->setConnection($connection)
             ->setTable(DB::raw('information_schema.`TABLES`'))
             ->where('TABLE_SCHEMA',config('database.connections.'.$connection.'.database'))
-            ->where('TABLE_NAME','like','%'.$tname.'%');
+            ->where('TABLE_NAME','like','%'.$tname.'%')
+            ->orderBy('CREATE_TIME','desc');
                //获取分页数据
         if (!Request::input('page') || Request::input('get_count')) {
             $data = $tableModel->paginate();

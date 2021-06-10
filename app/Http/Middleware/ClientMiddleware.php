@@ -17,7 +17,7 @@ class ClientMiddleware{
 
     }
 
-    protected $except = [];
+    protected $except = []; //排除路由
 
     /**
      * Determine if the request has a URI that should pass through CSRF verification.

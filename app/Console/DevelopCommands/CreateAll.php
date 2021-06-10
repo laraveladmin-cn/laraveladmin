@@ -17,7 +17,13 @@ class CreateAll extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'create:all {table : The name of model} {module?} {--c|connection= : The database connection to use} {--no_dump} {--only=}';
+    protected $signature = 'create:all
+    {table : The name of model}
+    {module?}
+    {--c|connection= : The database connection to use}
+    {--no_dump}
+    {--only=}
+    {--has_prefix}';
 
     /**
      * The console command description.
@@ -45,7 +51,15 @@ class CreateAll extends BaseCommand
      */
     public function handle()
     {
-        $table = $this->argument('table');
+        $table = $no_prefix_table = $this->argument('table');
+        $has_prefix = false;
+        if($this->hasOption('has_prefix') && $this->option('has_prefix')){
+            $connection = $this->option('connection') ?: config('database.default');
+            $data['connection'] = $connection==config('database.default') ? '': $connection;
+            $prefix = config('database.connections.'.$connection.'.prefix');
+            $no_prefix_table = Str::replaceFirst($prefix,'',$no_prefix_table);
+            $has_prefix = true;
+        }
         $in_console = app()->runningInConsole();
         //生成迁移
         if($this->hasOnly('migration')){
@@ -95,12 +109,13 @@ class CreateAll extends BaseCommand
         if($this->hasOnly('model')){
             $this->call('create:model',[
                 'table'=>$table,
-                '--no_dump'=>true
+                '--no_dump'=>true,
+                '--has_prefix'=>$has_prefix
             ]);
         }
 
         $module = $this->argument('module')?:'admin';
-        $modelName = Str::studly($module).'/'.Str::studly($this->getClassName(Str::singular($table)));
+        $modelName = Str::studly($module).'/'.Str::studly($this->getClassName(Str::singular($no_prefix_table)));
         //生成控制器
         if($this->hasOnly('controller')){
             $this->call('create:controller',[
