@@ -89,7 +89,9 @@
             "Payment period": "Payment period",
             "Cooperative company": "Cooperative company",
             "Log file": "Log file",
-            "System log file": "System log file"
+            "System log file": "System log file",
+            "Seven cattle cloud token": "Seven cattle cloud token",
+            "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get"
         },
         "tables": {
             "_file_logs": {
@@ -399,7 +401,10 @@
                     "Return receipt input date Calculation business month": "Return receipt input date Calculation business month",
                     "Support bank selection": "Support bank selection",
                     "Fixed default password": "Fixed default password",
-                    "Insurance Company": "Insurance Company"
+                    "Insurance Company": "Insurance Company",
+                    "Receipt template type": "Receipt template type",
+                    "Pdf template": "Pdf template",
+                    "Content template": "Content template"
                 },
                 "maps": {
                     "type": {
@@ -423,6 +428,10 @@
                     },
                     "service_api": {
                         "National treasure": "National treasure"
+                    },
+                    "receipt_type": {
+                        "Pdf template": "Pdf template",
+                        "Content template": "Content template"
                     }
                 }
             },

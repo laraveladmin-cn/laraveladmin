@@ -89,7 +89,9 @@
             "Payment period": "Année de paiement",
             "Cooperative company": "Entreprises partenaires",
             "Log file": "Fichiers journaux",
-            "System log file": "Fichiers journaux du système"
+            "System log file": "Fichiers journaux du système",
+            "Seven cattle cloud token": "Seven Bull Cloud token",
+            "Seven cattle cloud upload token to get": "Seven Niu Cloud upload token get"
         },
         "tables": {
             "_file_logs": {
@@ -399,7 +401,10 @@
                     "Return receipt input date Calculation business month": "Date d'entrée du reçu calcul du mois d'affaires",
                     "Support bank selection": "Sélection des banques de soutien",
                     "Fixed default password": "Mot de passe par défaut fixe",
-                    "Insurance Company": "Compagnies d'assurance"
+                    "Insurance Company": "Compagnies d'assurance",
+                    "Receipt template type": "Type de modèle de réception",
+                    "Pdf template": "Modèle PDF",
+                    "Content template": "Modèles de contenu"
                 },
                 "maps": {
                     "type": {
@@ -423,6 +428,10 @@
                     },
                     "service_api": {
                         "National treasure": "Trésor national"
+                    },
+                    "receipt_type": {
+                        "Pdf template": "Modèle PDF",
+                        "Content template": "Modèles de contenu"
                     }
                 }
             },
@@ -831,7 +840,8 @@
                 "Class name": "Nom de la classe",
                 "It is also generated when it exists": "Est également généré lorsqu'il existe",
                 "Event class name": "Nom de la classe d'événements",
-                "Service provider": "Fournisseurs de services"
+                "Service provider": "Fournisseurs de services",
+                "Is the table name prefixed": "Si le nom de la table est préfixé"
             },
             "menus": {
                 "Drag shift": "Glisser - déposer",

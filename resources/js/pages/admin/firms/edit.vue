@@ -139,7 +139,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="receipt_type" :options='{"name": "回执模板类型", "required": false,"type":"select"}' :datas="props">
+                            <edit-item key-name="receipt_type" :options='{"name": props.transField("Receipt template type"), "required": false,"type":"select"}' :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['receipt_type']"
@@ -151,7 +151,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="receipt_url" :options='{"name": "PDF模板"}' :datas="props" v-show="props.data.row['receipt_type']==0">
+                            <edit-item key-name="receipt_url" :options='{"name": props.transField("Pdf template")}' :datas="props" v-show="props.data.row['receipt_type']==0">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <qiniu-upload :token-url="'/open/qi-niu/token?disk=qiniu_public'"
@@ -184,7 +184,7 @@
                             </edit-item>
                         </div>
                         <div class="move-items col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <edit-item :options='{"name": "内容模板"}' :key-name="'receipt_tmp'" v-show="props.data.row['receipt_type']==1" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <edit-item :options='{"name": props.transField("Content template")}' :key-name="'receipt_tmp'" v-show="props.data.row['receipt_type']==1" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <template slot="input-item">
                                     <div>
                                         <tinymce v-model="props.data.row['receipt_tmp']" :disabled="!props.url">

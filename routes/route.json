@@ -661,9 +661,9 @@
         },
         {
             "id": 150,
-            "name": "七牛云TOKEN",
+            "name": "Seven cattle cloud token",
             "icons": "fa-cloud-upload",
-            "description": "七牛云上传TOKEN获取",
+            "description": "Seven cattle cloud upload token to get",
             "url": "/open/qi-niu/token",
             "parent_id": 4,
             "method": [

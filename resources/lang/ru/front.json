@@ -89,7 +89,9 @@
             "Payment period": "срок платежа",
             "Cooperative company": "кооперативная компания",
             "Log file": "Файл журнала",
-            "System log file": "файл Системного журнала"
+            "System log file": "файл Системного журнала",
+            "Seven cattle cloud token": "семь коров",
+            "Seven cattle cloud upload token to get": "семь коровьих облаков"
         },
         "tables": {
             "_file_logs": {
@@ -399,7 +401,10 @@
                     "Return receipt input date Calculation business month": "дата выдачи",
                     "Support bank selection": "Поддержка выбора банка",
                     "Fixed default password": "постоянный пароль по умолчанию",
-                    "Insurance Company": "страховая компания"
+                    "Insurance Company": "страховая компания",
+                    "Receipt template type": "Тип шаблона",
+                    "Pdf template": "Шаблоны PDF",
+                    "Content template": "шаблон содержимого"
                 },
                 "maps": {
                     "type": {
@@ -423,6 +428,10 @@
                     },
                     "service_api": {
                         "National treasure": "Национальные сокровища"
+                    },
+                    "receipt_type": {
+                        "Pdf template": "Pdf - опалубка",
+                        "Content template": "шаблон содержимого"
                     }
                 }
             },
@@ -831,7 +840,8 @@
                 "Class name": "Имя класса",
                 "It is also generated when it exists": "при наличии",
                 "Event class name": "имя категории событий",
-                "Service provider": "поставщик услуг"
+                "Service provider": "поставщик услуг",
+                "Is the table name prefixed": "Название таблицы с префиксом"
             },
             "menus": {
                 "Drag shift": "буксирный сдвиг",

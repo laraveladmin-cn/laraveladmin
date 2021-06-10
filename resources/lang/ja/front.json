@@ -89,7 +89,9 @@
             "Payment period": "年限を納める",
             "Cooperative company": "協力会社",
             "Log file": "ログファイル",
-            "System log file": "システムログファイル"
+            "System log file": "システムログファイル",
+            "Seven cattle cloud token": "七牛雲TOKEN",
+            "Seven cattle cloud upload token to get": "七牛雲アップロードTOKEN取得"
         },
         "tables": {
             "_file_logs": {
@@ -399,7 +401,10 @@
                     "Return receipt input date Calculation business month": "領収書の入力日は業務月を計算します。",
                     "Support bank selection": "銀行の選択をサポートします",
                     "Fixed default password": "デフォルトのパスワードを固定",
-                    "Insurance Company": "保険会社"
+                    "Insurance Company": "保険会社",
+                    "Receipt template type": "返信用テンプレートのタイプ",
+                    "Pdf template": "PDFテンプレート",
+                    "Content template": "内容テンプレート"
                 },
                 "maps": {
                     "type": {
@@ -423,6 +428,10 @@
                     },
                     "service_api": {
                         "National treasure": "国宝"
+                    },
+                    "receipt_type": {
+                        "Pdf template": "pdfテンプレート",
+                        "Content template": "内容テンプレート"
                     }
                 }
             },
@@ -831,7 +840,8 @@
                 "Class name": "クラス名",
                 "It is also generated when it exists": "存在時も生成",
                 "Event class name": "イベント名",
-                "Service provider": "サービスプロバイダ"
+                "Service provider": "サービスプロバイダ",
+                "Is the table name prefixed": "テーブル名にプレフィックスが付いていますか？"
             },
             "menus": {
                 "Drag shift": "ドラッグ操作",

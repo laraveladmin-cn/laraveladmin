@@ -67,8 +67,8 @@ class Firm extends Model
             "guobao"=>'National treasure'
          ],
         'receipt_type'=>[
-            '0'=>'pdf模板',
-            '1'=>'内容模板'
+            '0'=>'Pdf template',
+            '1'=>'Content template'
         ],
     ];
     //字段默认值
@@ -111,9 +111,9 @@ class Firm extends Model
         'account_at_merge'=>'Consolidated expected settlement month',
         'service_api'=>'Docking services',
         'insure_notify'=>'Insurance notice',
-        'receipt_type'=>'回执模板类型',
-        'receipt_url'=>'PDF模板',
-        'receipt_tmp'=>'内容模板',
+        'receipt_type'=>'Receipt template type',
+        'receipt_url'=>'Pdf template',
+        'receipt_tmp'=>'Content template',
         'id'=>'ID',
     ];
 

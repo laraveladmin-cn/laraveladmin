@@ -89,7 +89,9 @@
             "Payment period": "交費年期",
             "Cooperative company": "合作公司",
             "Log file": "日誌檔",
-            "System log file": "系統日誌檔"
+            "System log file": "系統日誌檔",
+            "Seven cattle cloud token": "七牛雲TOKEN",
+            "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取"
         },
         "tables": {
             "_file_logs": {
@@ -399,7 +401,10 @@
                     "Return receipt input date Calculation business month": "回執錄入日期計算業務月份",
                     "Support bank selection": "支持銀行選擇",
                     "Fixed default password": "固定默認密碼",
-                    "Insurance Company": "保險公司"
+                    "Insurance Company": "保險公司",
+                    "Receipt template type": "回執範本類型",
+                    "Pdf template": "PDF範本",
+                    "Content template": "內容範本"
                 },
                 "maps": {
                     "type": {
@@ -423,6 +428,10 @@
                     },
                     "service_api": {
                         "National treasure": "國寶"
+                    },
+                    "receipt_type": {
+                        "Pdf template": "pdf範本",
+                        "Content template": "內容範本"
                     }
                 }
             },

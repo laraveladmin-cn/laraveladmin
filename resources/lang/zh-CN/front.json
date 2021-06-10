@@ -89,7 +89,9 @@
             "Payment period": "交费年期",
             "Cooperative company": "合作公司",
             "Log file": "日志文件",
-            "System log file": "系统日志文件"
+            "System log file": "系统日志文件",
+            "Seven cattle cloud token": "七牛云TOKEN",
+            "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取"
         },
         "tables": {
             "_file_logs": {
@@ -399,7 +401,10 @@
                     "Return receipt input date Calculation business month": "回执录入日期计算业务月份",
                     "Support bank selection": "支持银行选择",
                     "Fixed default password": "固定默认密码",
-                    "Insurance Company": "保险公司"
+                    "Insurance Company": "保险公司",
+                    "Receipt template type": "回执模板类型",
+                    "Pdf template": "PDF模板",
+                    "Content template": "内容模板"
                 },
                 "maps": {
                     "type": {
@@ -423,6 +428,10 @@
                     },
                     "service_api": {
                         "National treasure": "国宝"
+                    },
+                    "receipt_type": {
+                        "Pdf template": "pdf模板",
+                        "Content template": "内容模板"
                     }
                 }
             },
