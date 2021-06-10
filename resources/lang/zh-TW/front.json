@@ -82,7 +82,9 @@
             "Journal": "日誌",
             "Menu": "選單",
             "Log file": "日誌檔",
-            "System log file": "系統日誌檔"
+            "System log file": "系統日誌檔",
+            "Seven cattle cloud token": "七牛雲TOKEN",
+            "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取"
         },
         "tables": {
             "_file_logs": {

@@ -82,7 +82,9 @@
             "Journal": "Journal",
             "Menu": "Menu",
             "Log file": "Log file",
-            "System log file": "System log file"
+            "System log file": "System log file",
+            "Seven cattle cloud token": "Seven cattle cloud token",
+            "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get"
         },
         "tables": {
             "_file_logs": {
