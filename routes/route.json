@@ -302,7 +302,7 @@
             ],
             "group": "admin",
             "action": "AgentSystemController@conditionDelete",
-            "_id": 124
+            "_id": 125
         },
         {
             "id": 3,
@@ -658,6 +658,20 @@
             "group": "open",
             "action": "IndexController@clientId",
             "_id": 149
+        },
+        {
+            "id": 150,
+            "name": "七牛云TOKEN",
+            "icons": "fa-cloud-upload",
+            "description": "七牛云上传TOKEN获取",
+            "url": "/open/qi-niu/token",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "QiNiuController@getToken",
+            "_id": 150
         }
     ],
     "resource": [

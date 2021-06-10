@@ -2,13 +2,15 @@
     <div class="admin_user_edit">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
+                <h3 class="box-title">{{$t('Quickly fill in')}}
+                </h3>
             </div>
             <div class="box-body">
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: props.transField('Name'), required: true}"  :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'), required: true}"
+                                :datas="props">
                             </edit-item>
                             <edit-item key-name="full_name" :options='{"name": props.transField("Full name"), "required": true}' :datas="props">
                             </edit-item>
@@ -20,12 +22,14 @@
                                             v-model="props.data.row['url']"
                                             class="form-control"
                                             :placeholder="$t('Please enter')"
-                                            :disabled="!props.url">
+                                        :disabled="!props.url">
                                         <div class="input-group-addon">
                                             <a v-if="props.data.row['url']" :href="props.data.row['url']" target="_blank">
-                                                <i class="fa fa-link"></i>
+                                                <i class="fa fa-link">
+                                                </i>
                                             </a>
-                                            <i v-else class="fa fa-link"></i>
+                                            <i v-else class="fa fa-link">
+                                            </i>
                                         </div>
                                     </div>
                                 </template>
@@ -34,10 +38,10 @@
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['service_api']"
-                                                 :disabled="!props.url"
-                                                 :default-options="props.maps['service_api']"
-                                                 :placeholder-value="''"
-                                                 :is-ajax="false" >
+                                            :disabled="!props.url"
+                                            :default-options="props.maps['service_api']"
+                                            :placeholder-value="''"
+                                            :is-ajax="false" >
                                         </select2>
                                     </div>
                                 </template>
@@ -46,10 +50,10 @@
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['uname_rule']"
-                                                 :disabled="!props.url"
-                                                 :default-options="props.maps['uname_rule']"
-                                                 :placeholder="false"
-                                                 :is-ajax="false" >
+                                            :disabled="!props.url"
+                                            :default-options="props.maps['uname_rule']"
+                                            :placeholder="false"
+                                            :is-ajax="false" >
                                         </select2>
                                     </div>
                                 </template>
@@ -58,10 +62,10 @@
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['password_rule']"
-                                                 :disabled="!props.url"
-                                                 :default-options="props.maps['password_rule']"
-                                                 :placeholder="false"
-                                                 :is-ajax="false" >
+                                            :disabled="!props.url"
+                                            :default-options="props.maps['password_rule']"
+                                            :placeholder="false"
+                                            :is-ajax="false" >
                                         </select2>
                                     </div>
                                 </template>
@@ -72,33 +76,34 @@
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['url_rule']"
-                                                 :disabled="!props.url"
-                                                 :default-options="props.maps['url_rule']"
-                                                 :placeholder="false"
-                                                 :is-ajax="false" >
+                                            :disabled="!props.url"
+                                            :default-options="props.maps['url_rule']"
+                                            :placeholder="false"
+                                            :is-ajax="false" >
                                         </select2>
                                     </div>
                                 </template>
                             </edit-item>
+                            <edit-item key-name="description" :options='{"name": props.transField("Describe"), "required": false,"type":"textarea","title":$t("Prompt message")}' :datas="props">
+                            </edit-item>
                             <edit-item v-show="props.data.row['url_rule']==1" key-name="url_rule_tpl" :options='{"name": props.transField("Link address rule template"), "required": true}' :datas="props">
                             </edit-item>
-
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="logo" :options='{"name": props.transField("Brand logo"), "required": false}' :datas="props">
                                 <template slot="input-item">
-                                    <upload :width="370" :height="201"  v-model="props.data.row['logo']"
-                                            :disabled="!props.url"
-                                            :value-key="'url'">
+                                    <upload :width="370" :height="201"
+                                        v-model="props.data.row['logo']"
+                                        :disabled="!props.url"
+                                        :value-key="'url'">
                                     </upload>
                                 </template>
                             </edit-item>
-
-
                             <edit-item key-name="account_day_by_sign_at" :options='{"name": props.transField("Business month calculated by signing date"), "required": false}' :datas="props">
                                 <template slot="input-item">
                                     <div>
-                                        <el-input-number   class="w-100" :min="0" :max="28" size="medium" v-model="props.data.row['account_day_by_sign_at']" :disabled="!props.url" :step="1">
+                                        <el-input-number
+                                            class="w-100" :min="0" :max="28" size="medium" v-model="props.data.row['account_day_by_sign_at']" :disabled="!props.url" :step="1">
                                         </el-input-number>
                                     </div>
                                 </template>
@@ -106,7 +111,8 @@
                             <edit-item key-name="account_day_by_end_at" :options='{"name": props.transField("Return receipt input date Calculation business month"), "required": false}' :datas="props">
                                 <template slot="input-item">
                                     <div>
-                                        <el-input-number   class="w-100" :min="0" size="medium" :max="28" v-model="props.data.row['account_day_by_end_at']" :disabled="!props.url" :step="1">
+                                        <el-input-number
+                                            class="w-100" :min="0" size="medium" :max="28" v-model="props.data.row['account_day_by_end_at']" :disabled="!props.url" :step="1">
                                         </el-input-number>
                                     </div>
                                 </template>
@@ -115,22 +121,44 @@
                                 <template slot="input-item">
                                     <div>
                                         <el-input-number class="w-100" :min="0" size="medium" v-model="props.data.row['order']"
-                                                         :disabled="!props.url" :step="1">
+                                            :disabled="!props.url" :step="1">
                                         </el-input-number>
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="account_at_merge" :options='{"name": props.transField("Consolidated expected settlement month"), "required": false}'
-                                       :datas="props">
+                            <edit-item key-name="account_at_merge" :options='{"name": props.transField("Consolidated expected settlement month"), "required": false}'                                        :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <el-switch v-model="props.data.row['account_at_merge']"
-                                                   :disabled="!props.url"
-                                                   :active-text="$t('Open')"
-                                                   :inactive-text="$t('Closed')"
-                                                   :active-value="1"
-                                                   :inactive-value="0">
+                                            :disabled="!props.url"
+                                            :active-text="$t('Open')"
+                                            :inactive-text="$t('Closed')"
+                                            :active-value="1"
+                                            :inactive-value="0">
                                         </el-switch>
+                                    </div>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="receipt_type" :options='{"name": "回执模板类型", "required": false,"type":"select"}' :datas="props">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <select2 v-model="props.data.row['receipt_type']"
+                                                 :disabled="!props.url"
+                                                 :default-options="props.maps['receipt_type']"
+                                                 :placeholder="false"
+                                                 :is-ajax="false" >
+                                        </select2>
+                                    </div>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="receipt_url" :options='{"name": "PDF模板"}' :datas="props" v-show="props.data.row['receipt_type']==0">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <qiniu-upload :token-url="'/open/qi-niu/token?disk=qiniu_public'"
+                                                      :root-path="'uploads/pdfs/'"
+                                                      :accept="'.pdf'"
+                                                      v-model="props.data.row['receipt_url']">
+                                        </qiniu-upload>
                                     </div>
                                 </template>
                             </edit-item>
@@ -141,35 +169,45 @@
                                     <hide-more :tool="count(array_get(props,'data.maps.bank_ids',[]))>33">
                                         <template>
                                             <div v-for="(item,index) in props.maps['bank_ids']" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" v-if="index<=33">
-                                                <icheck v-model="props.data.row['bank_ids']" :option="index" :disabled="!props.url" :label="item"> {{item}}</icheck>
+                                                <icheck v-model="props.data.row['bank_ids']" :option="index" :disabled="!props.url" :label="item"> {{item}}
+                                                </icheck>
                                             </div>
                                         </template>
                                         <template slot="hide">
                                             <div v-for="(item,index) in props.maps['bank_ids']" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" v-if="index>33">
-                                                <icheck v-model="props.data.row['bank_ids']" :option="index" :disabled="!props.url" :label="item"> {{item}}</icheck>
+                                                <icheck v-model="props.data.row['bank_ids']" :option="index" :disabled="!props.url" :label="item"> {{item}}
+                                                </icheck>
                                             </div>
                                         </template>
                                     </hide-more>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="description" :options='{"name": props.transField("Describe"), "required": false,"type":"textarea","title":$t("Prompt message")}' :datas="props">
+                        </div>
+                        <div class="move-items col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <edit-item :options='{"name": "内容模板"}' :key-name="'receipt_tmp'" v-show="props.data.row['receipt_type']==1" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <template slot="input-item">
+                                    <div>
+                                        <tinymce v-model="props.data.row['receipt_tmp']" :disabled="!props.url">
+                                        </tinymce>
+                                    </div>
+                                </template>
+                            </edit-item>
+                            <edit-item :options='{"name": props.transField("Insurance notice"), "required": false,"title":$t("Prompt message")}' :key-name="'insure_notify'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <template slot="input-item">
+                                    <div>
+                                        <editor-md v-model="props.data.row['insure_notify']" :disabled="!props.url">
+                                        </editor-md>
+                                    </div>
+                                </template>
                             </edit-item>
                         </div>
-                        <edit-item :options='{"name": props.transField("Insurance notice"), "required": false,"title":$t("Prompt message")}' :key-name="'insure_notify'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <template slot="input-item">
-                                <div>
-                                    <editor-md v-model="props.data.row['insure_notify']" :disabled="!props.url">
-                                    </editor-md>
-                                </div>
-                            </template>
-                        </edit-item>
+
                     </template>
                 </edit>
             </div>
         </div>
     </div>
 </template>
-
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
 
@@ -184,6 +222,9 @@
             'icheck':()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
             'select2':()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             'hide-more':()=>import(/* webpackChunkName: "common_components/hideMore" */ 'common_components/hideMore'),
+            'qiniu-upload':()=>import(/* webpackChunkName: "common_components/qiniuUpload.vue" */ 'common_components/qiniuUpload.vue'),
+            'tinymce':()=>import(/* webpackChunkName: "common_components/tinymce.vue" */ 'common_components/tinymce.vue'),
+
         },
         props: {},
         computed:{

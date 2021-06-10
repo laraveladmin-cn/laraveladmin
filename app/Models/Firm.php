@@ -34,6 +34,9 @@ class Firm extends Model
        'account_at_merge',
        'service_api',
        'insure_notify',
+        'receipt_type',
+        'receipt_url',
+        'receipt_tmp'
     ];
     //输出隐藏字段
     protected $hidden = ['deleted_at'];
@@ -62,7 +65,11 @@ class Firm extends Model
          ],
         'service_api'=>[
             "guobao"=>'National treasure'
-         ]
+         ],
+        'receipt_type'=>[
+            '0'=>'pdf模板',
+            '1'=>'内容模板'
+        ],
     ];
     //字段默认值
     protected $fieldsDefault = [
@@ -80,7 +87,9 @@ class Firm extends Model
         'order' => 0,
         'account_at_merge' => 0,
         'service_api' => '',
-        'insure_notify'=>''
+        'insure_notify'=>'',
+        'receipt_url'=>'',
+        'receipt_type'=>0,
     ];
 
     //字段Name
@@ -102,6 +111,9 @@ class Firm extends Model
         'account_at_merge'=>'Consolidated expected settlement month',
         'service_api'=>'Docking services',
         'insure_notify'=>'Insurance notice',
+        'receipt_type'=>'回执模板类型',
+        'receipt_url'=>'PDF模板',
+        'receipt_tmp'=>'内容模板',
         'id'=>'ID',
     ];
 
