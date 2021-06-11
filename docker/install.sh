@@ -46,6 +46,10 @@ then
     echo "\033[31m 请先设置.env配置 \033[0m"
     exit 2
 fi
+if [ ! -f ~/.composer/config.json ]
+then
+    cp ./docker/php/config.json ~/.composer/config.json
+fi
 #导入配置
 export $(grep -Ev '^$|[#;]' .env | xargs)
 APP_ENV=$(echo "${APP_ENV}" | sed -e 's/\r//g')
