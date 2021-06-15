@@ -31,6 +31,20 @@ class LogController extends Controller
      */
     protected $resourceModel = 'Log';
 
+    /**
+     * 绑定模型
+     *
+     * @return mixed
+     */
+    protected function bindModel()
+    {
+        if ( ! $this->bindModel ) {
+            $this->bindModel = $this->newBindModel()->main('=');
+        }
+
+        return $this->bindModel;
+    }
+
     protected $sizer = [
         'menu_id' => '=',
         'user_id' => '=',

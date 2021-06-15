@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Models\Traits\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Admin extends Model
 {
@@ -34,6 +35,23 @@ class Admin extends Model
     /* 角色信息 */
     public function roles(){
         return $this->belongsToMany('App\Models\Role','admin_role','admin_id','role_id');
+    }
+
+    /**
+     * 我管理的用户
+     */
+    public function scopeMain($query,$self='='){
+        //登录用户
+        $user = Auth::user();
+        //超级管理员
+        if ($user && Role::isSuper()) {
+            return $query;
+        }
+        $query->whereHas('roles',function ($q)use($self){
+            $q->main($self);
+        });
+        return $query;
+
     }
 
 }

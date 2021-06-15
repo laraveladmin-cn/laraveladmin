@@ -180,6 +180,7 @@
                         options.init_instance_callback = ()=>{
                             this.editorMd = tinyMCE.editors[this.id];
                             this.show=true;
+                            this.setDisabled(this.disabled);
                         };
                         options.selector = '#'+this.id;
                         options.language = this.$i18n.locale.replace(/-/g,'_');
