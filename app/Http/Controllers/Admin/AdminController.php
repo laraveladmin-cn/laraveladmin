@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
+use App\Models\AdminRole;
+use App\Models\Menu;
+use App\Models\MenuRole;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
 {
@@ -19,6 +23,20 @@ class AdminController extends Controller
      * @var  string
      */
     protected $resourceModel = 'Admin';
+
+    /**
+     * 绑定模型
+     *
+     * @return mixed
+     */
+    protected function bindModel()
+    {
+        if ( ! $this->bindModel ) {
+            $this->bindModel = $this->newBindModel()->main('');
+        }
+
+        return $this->bindModel;
+    }
 
     /**
      * 筛选条件设置
@@ -182,19 +200,19 @@ class AdminController extends Controller
     }
 
     /**
+     * 执行修改前对数据进行处理
      * @param $data
      * @return mixed
      */
     protected function handlePostEditReturn(&$data)
     {
-        //判断权限
-        $id = Arr::get($data,'id',0);
-        $roles = collect($this->getRoles($id))->filter(function ($role){
-            return !$role['disabled'];
-        })->pluck('id'); //可选角色
-        $role_ids = collect(Arr::get($data,'role_ids',[]))->unique(); //提交角色id
-        if(collect($roles)->intersect($role_ids->toArray())->count()!=$role_ids->count()){
-
+        //验证勾选角色
+        $has_roles_id = Role::main('')->pluck('id')?:[];
+        $role_ids = collect(Arr::get($data,'role_ids',[]))->unique();
+        if(collect($has_roles_id)->intersect($role_ids->toArray())->count()!=$role_ids->count()){
+            throw ValidationException::withMessages(['role_ids'=>[
+                trans('You have no right to modify this role!')//'你无权修改该角色!'
+            ]]);
         }
 
         if ( Arr::get($data,'user.id') == 1 ) {
@@ -206,8 +224,43 @@ class AdminController extends Controller
             'id' => $user['id'],
         ], $user);
         $data['user_id'] = $user['id'];
-
+        unset($data['role_ids']);
         return $data;
+    }
+
+    /**
+     * 保存数据后对返回数据处理
+     * @param $item
+     * @param $data
+     */
+    protected function handlePostEdit($item, $data)
+    {
+        //当前用户管理的角色
+        $have = Role::main('')->pluck('id')->toArray();
+        //新角色权限
+        $new_roles = collect(Request::input('role_ids',[]))->intersect($have)->all();
+        $id = Arr::get($data,'id',0);
+        if($id){
+            //修改菜单-角色关系
+            if ( $id != 1 ) {
+                //当前用户拥有该角色的旧权限
+                $old_roles = $item->roles->pluck('id')
+                    ->intersect($have)
+                    ->all();
+                //删除旧的权限,添加新权限
+                $add_roles = collect($new_roles)->diff($old_roles)->all();
+                $del_roles = collect($old_roles)->diff($new_roles)->all();
+                $del_roles AND $item->roles()->detach($del_roles);
+                $add_roles AND AdminRole::insertReplaceAll(collect($add_roles)->map(function($value)use($item){
+                    return ['admin_id'=>$item['id'],'role_id'=>$value];
+                })->toArray());
+            }
+        }else{
+            //所有父节点添加对应权限
+            $new_roles AND AdminRole::insertReplaceAll(collect($new_roles)->map(function($value)use($item){
+                return ['admin_id'=>$item['id'],'role_id'=>$value];
+            })->toArray());
+        }
     }
 
     /**
@@ -248,12 +301,21 @@ class AdminController extends Controller
         } else {
             $has_roles = collect([]);
         }
-
+        //我拥有的最高角色权限
+        $my_roles = collect(Role::my()->get(['id','name','parent_id','level','left_margin','right_margin']));
         //获取当前用户所有下属角色
         $self_roles = $this->rolesChildsId(Role::isSuper());
-
         //列出所有角色,当前用户不可操作的角色禁用
         return Role::orderBy('left_margin')
+            //过滤与其无关的角色
+            ->where(function ($q)use($my_roles){
+                $q->whereRaw('false');
+                $my_roles->each(function ($role)use ($q){
+                    $q->orWhere(function ($q)use ($role){
+                        $q->whereRaw('(left_margin>='.$role['left_margin'].' && right_margin<='.$role['right_margin'].') or (left_margin<='.$role['left_margin'].' && right_margin>='.$role['right_margin'].')');
+                    });
+                });
+            })
             ->get(['id','name','parent_id','level','left_margin','right_margin'])
             ->each(function ($item) use ($self_roles, $has_roles) {
                 $item->checked = in_array($item->id, $has_roles->pluck('id')->toArray()); //当前用户拥有角色
