@@ -187,6 +187,16 @@ class AdminController extends Controller
      */
     protected function handlePostEditReturn(&$data)
     {
+        //判断权限
+        $id = Arr::get($data,'id',0);
+        $roles = collect($this->getRoles($id))->filter(function ($role){
+            return !$role['disabled'];
+        })->pluck('id'); //可选角色
+        $role_ids = collect(Arr::get($data,'role_ids',[]))->unique(); //提交角色id
+        if(collect($roles)->intersect($role_ids->toArray())->count()!=$role_ids->count()){
+
+        }
+
         if ( Arr::get($data,'user.id') == 1 ) {
             unset($data['user']['status']);
         }
@@ -222,7 +232,6 @@ class AdminController extends Controller
         $data['row'] = collect($data['row'])->toArray();
         $data['row']['bind_user'] = !!$data['row']['user_id'] - 0;
         $data['row']['user_id_back'] = $data['row']['user_id'];
-
         return $data;
     }
 
@@ -248,7 +257,7 @@ class AdminController extends Controller
             ->get(['id','name','parent_id','level','left_margin','right_margin'])
             ->each(function ($item) use ($self_roles, $has_roles) {
                 $item->checked = in_array($item->id, $has_roles->pluck('id')->toArray()); //当前用户拥有角色
-                $item->disabled = !in_array($item->id, $self_roles); //添加用户角色是否可用
+                $item->disabled = $item->_disabled= !in_array($item->id, $self_roles); //添加用户角色是否可用
                 $item->chkDisabled = $item->disabled;
             });
     }
