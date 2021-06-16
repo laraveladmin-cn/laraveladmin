@@ -720,6 +720,20 @@
             "group": "open",
             "action": "IndexController@contact",
             "_id": 121
+        },
+        {
+            "id": 122,
+            "name": "Seven cattle cloud token",
+            "icons": "fa-cloud-upload",
+            "description": "Seven cattle cloud upload token to get",
+            "url": "/open/qi-niu/token",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "QiNiuController@getToken",
+            "_id": 122
         }
     ],
     "resource": [

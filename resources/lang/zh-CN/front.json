@@ -101,7 +101,10 @@
             "Using related technology stack": "使用相关技术栈",
             "Document content": "文档内容",
             "Document grouping": "文档分组",
-            "Log file": "日志文件"
+            "Log file": "日志文件",
+            "System log file": "系统日志文件",
+            "Seven cattle cloud token": "七牛云TOKEN",
+            "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取"
         },
         "tables": {
             "_file_logs": {
@@ -669,7 +672,8 @@
                 "Class name": "类名",
                 "It is also generated when it exists": "存在时也生成",
                 "Event class name": "事件类名",
-                "Service provider": "服务提供者"
+                "Service provider": "服务提供者",
+                "Is the table name prefixed": "表名是否带前缀"
             },
             "menus": {
                 "Drag shift": "拖拽移位",

@@ -24,7 +24,7 @@ class MenuController extends Controller
     protected function bindModel()
     {
         if ( ! $this->bindModel ) {
-            $this->bindModel = $this->newBindModel()->usable();
+            $this->bindModel = $this->newBindModel()->main();
         }
 
         return $this->bindModel;

@@ -32,6 +32,9 @@
                         },
                         callback: {
                             beforeClick(treeId, treeNode, clickFlag){
+                                if(treeNode._disabled){
+                                    return false;
+                                }
                                 return !$this.disabled;
                             },
                             onCheck:  (e, id, node)=> {
@@ -129,7 +132,11 @@
                     setTimeout(()=>{
                         if(this.ztree){
                             collect(this.ztree.transformToArray(this.ztree.getNodes())).map((item)=>{
-                                 this.ztree.setChkDisabled(item, value);
+                                 if(item._disabled){
+                                     this.ztree.setChkDisabled(item, true);
+                                 }else {
+                                     this.ztree.setChkDisabled(item, value);
+                                 }
                             });
                         }
                     },200);

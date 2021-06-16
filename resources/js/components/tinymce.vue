@@ -42,7 +42,7 @@
                         placeholder:'Please enter',
                         readonly:false,
                         language:'zh_CN',
-                        plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help emoticons autosave bdmap indent2em autoresize formatpainter axupimgs',
+                        plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help emoticons autosave',//bdmap indent2em autoresize formatpainter axupimgs
                         toolbar: 'code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | \
     styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat | \
     table image media charmap emoticons hr pagebreak insertdatetime print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs',
@@ -180,6 +180,7 @@
                         options.init_instance_callback = ()=>{
                             this.editorMd = tinyMCE.editors[this.id];
                             this.show=true;
+                            this.setDisabled(this.disabled);
                         };
                         options.selector = '#'+this.id;
                         options.language = this.$i18n.locale.replace(/-/g,'_');

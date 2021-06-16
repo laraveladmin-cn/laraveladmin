@@ -101,7 +101,10 @@
             "Using related technology stack": "Using related technology stack",
             "Document content": "Document content",
             "Document grouping": "Document grouping",
-            "Log file": "Log file"
+            "Log file": "Log file",
+            "System log file": "System log file",
+            "Seven cattle cloud token": "Seven cattle cloud token",
+            "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get"
         },
         "tables": {
             "_file_logs": {
@@ -669,7 +672,8 @@
                 "Class name": "Class name",
                 "It is also generated when it exists": "It is also generated when it exists",
                 "Event class name": "Event class name",
-                "Service provider": "Service provider"
+                "Service provider": "Service provider",
+                "Is the table name prefixed": "Is the table name prefixed"
             },
             "menus": {
                 "Drag shift": "Drag shift",

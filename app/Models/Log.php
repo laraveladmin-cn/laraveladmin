@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BaseModel;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class Log extends Model
 {
@@ -67,6 +69,25 @@ class Log extends Model
      */
     public function menu(){
         return $this->belongsTo('App\Models\Menu');
+    }
+
+    /**
+     * 我管理的日志
+     */
+    public function scopeMain($query,$self='='){
+        //登录用户
+        $user = Auth::user();
+        //超级管理员
+        if ($user && Role::isSuper()) {
+            return $query;
+        }
+        $query->whereHas('user.admin',function ($q)use ($self){
+            $q->main($self);
+        })->whereHas('menu',function ($q){
+            $q->main();
+        });
+        return $query;
+
     }
 
 

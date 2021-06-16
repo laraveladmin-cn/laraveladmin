@@ -42,7 +42,7 @@ services:
       - ./docker/php/cron:/var/spool/cron/crontabs/root # 定时任务计划
       - ./docker/php/ini/php.ini:/usr/local/etc/php/php.ini #php配置文件
       - ./docker/php/ini/www.conf:/usr/local/etc/php-fpm.d/www.conf # php-fpm配置文件
-      - ./docker/php/config.json:/root/.composer/config.json #全局镜像源
+#      - ./docker/php/config.json:/root/.composer/config.json #全局镜像源
       - ../docker/mysql/shared:/var/lib/mysql_shared #与mysql共享目录
       - ~/.ssh:/root/.ssh #秘钥挂载方便拉取代码
       - ~/.composer:/root/.composer #compoer全局安装包

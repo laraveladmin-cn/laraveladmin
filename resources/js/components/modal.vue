@@ -1,10 +1,10 @@
 <template>
-    <div class="modal fade in" v-show="!closed" @click="clickModal">
+    <div class="modal fade in" v-show="!closed" v-on:mousedown.self="clickModal">
         <transition
             name="fade"
             enter-active-class="bounceInDown animated"
             leave-active-class="zoomOut animated">
-            <div class="row modal-dialog" v-if="value">
+            <div class="row modal-dialog" v-if="value" v-on:mousedown.self="clickModal">
                 <div :class="className" @click="clickContent($event)">
                     <div class="modal-content">
                         <button type="button" class="btn btn-sm close" @click="close">
