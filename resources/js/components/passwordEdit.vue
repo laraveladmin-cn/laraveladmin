@@ -6,6 +6,7 @@
                @blur="$emit('blur')"
                @keydown.enter="$emit('keydown-enter')"
                class="form-control"
+               autocomplete="on"
                :placeholder="_placeholder">
         <div class="input-group-addon">
             <i class="fa fa-eye" v-show="type=='password'" @click="toggle"></i>

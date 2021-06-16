@@ -1,20 +1,22 @@
 <template>
     <div :id="id" :class="{'active-move':is_local}">
-        <validation-observer :ref="id" v-slot="{invalid,validate}">
-            <div class="row">
-                <slot name="content" :data="data" :url="url" :maps="_maps" :error="error" :trans-field="transField">
-                </slot>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="button" class="btn btn-primary pull-right" :disabled="!url"  @click="submitForm(invalid,validate)">{{$t('Submit')}}</button>
+        <form>
+            <validation-observer :ref="id" v-slot="{invalid,validate}">
+                <div class="row">
+                    <slot name="content" :data="data" :url="url" :maps="_maps" :error="error" :trans-field="transField">
+                    </slot>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <button type="button" class="btn btn-default pull-left" @click="resetForm">{{$t('Reset')}}</button>
-                    <button type="button" class="btn btn-success pull-right" v-if="is_local" @click="saveLayout">{{$t('Save the layout')}}</button>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <button type="button" class="btn btn-primary pull-right" :disabled="!url"  @click="submitForm(invalid,validate)">{{$t('Submit')}}</button>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <button type="button" class="btn btn-default pull-left" @click="resetForm">{{$t('Reset')}}</button>
+                        <button type="button" class="btn btn-success pull-right" v-if="is_local" @click="saveLayout">{{$t('Save the layout')}}</button>
+                    </div>
                 </div>
-            </div>
-        </validation-observer>
+            </validation-observer>
+        </form>
     </div>
 </template>
 
