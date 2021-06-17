@@ -53,6 +53,8 @@ RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.ph
 # 用于数据库备份
 RUN apt-get install -y default-mysql-client \
                    mariadb-client
+# 安装mongodb扩展
+#RUN pecl install mongodb && docker-php-ext-enable mongodb
 
 ENV PATH /root/.composer/vendor/bin:$PATH
 RUN chown -R www-data:www-data /var/www && \
