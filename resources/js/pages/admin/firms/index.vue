@@ -25,7 +25,13 @@
                              </router-link>
                         </span>
                         <span v-else-if="props.k =='logo'">
-                            <img v-if="props.row['logo']" class="attachment-img" :src="props.row['logo']" :alt="$tp('Attachment Image')" />
+                            <el-image
+                                v-if="props.row['logo']"
+                                class="attachment-img"
+                                :src="props.row['logo']"
+                                :alt="$tp('Attachment Image')"
+                                :preview-src-list="props.row['logo']?[props.row['logo']]:[]">
+                            </el-image>
                             <div v-else class="img-rounded no-img" :alt="$tp('The LOGO has not been set')">
                             </div>
                         </span>
@@ -44,6 +50,8 @@
     export default {
         components: {
             'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
+            'el-image':()=>import(/* webpackChunkName: "element-ui/lib/image" */ 'element-ui/lib/image'),
+
         },
         props: {},
         methods:{
