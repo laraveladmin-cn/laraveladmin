@@ -65,7 +65,14 @@ return [
     ],
     'log_id_key'=>'_log_id', //登录次数缓存key
     'disabled_menus'=>env('DISABLED_MENUS', ''), //禁用菜单位(将禁用其所有子集)
-    'locales'=>['zh-CN','zh-TW','en'], //支持语言
+    'locales'=>['zh-CN','zh-TW','en',
+        'ja',   //日文
+        'ko',  //韩文
+        'fr',  //法语
+        'ru',   //俄语
+        'es',  //西班牙语
+        'pt',  //葡萄牙语
+    ], //支持语言
     'trans_prefix'=>'_trans_', //翻译语言前缀
     'tinymce_key'=>env('TINYMCE_KEY','') //tinymce编辑器key
 

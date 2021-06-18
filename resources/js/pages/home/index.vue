@@ -6,8 +6,12 @@
         <br>
         <router-link to="/">{{$tp('Home page of official website')}}</router-link>
         <br>
+        <h3 style="color: red">{{$tp('Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use')}}</h3>
+        <br>
         {{user}}
-
+        <h1>
+            <a href="https://www.laraveladmin.cn">{{$tp('Official environment official website')}}https://www.laraveladmin.cn</a>
+        </h1>
     </div>
 </template>
 

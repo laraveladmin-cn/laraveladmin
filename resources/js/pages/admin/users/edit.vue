@@ -68,6 +68,24 @@
             "upload":()=>import(/* webpackChunkName: "common_components/upload.vue" */ 'common_components/upload.vue'),
         },
         props: {
+            url:{
+                type: [String],
+                default: function () {
+                    return '';
+                }
+            },
+            noBack:{
+                type: [Boolean],
+                default: function () {
+                    return false;
+                }
+            },
+            callback:{
+                type: [Function],
+                default: function () {
+                    return function () {};
+                }
+            },
         },
         data(){
             return {
@@ -75,12 +93,14 @@
                 options:{
                     lang_table:'users',
                     id:'edit', //多个组件同时使用时唯一标识
-                    url:'', //数据表请求数据地址
+                    url:this.url || '', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {},
+                    no_back:this.noBack,
                     callback:(response,row)=>{ //修改成功
                         if(row.id==this.user.id){
                             this.getUser(1);
                         }
+                        this.callback();
                     }
                 }
             };
@@ -94,6 +114,13 @@
             ...mapState('user',{
                 user:state => state.user
             }),
+        },
+        mounted() {
+        },
+        watch:{
+            url(val){
+                this.options.url = val;
+            }
         }
     };
 </script>

@@ -96,7 +96,7 @@
             "_id": 38
         },
         {
-            "id": 88,
+            "id": 146,
             "name": "Menu drag",
             "icons": "fa-mouse-pointer",
             "description": "Menu drag page data",
@@ -110,12 +110,12 @@
             "_id": 47
         },
         {
-            "id": 89,
+            "id": 147,
             "name": "Submit menu location modification",
             "icons": "fa-edit",
             "description": "Submit menu location modification",
             "url": "/admin/menus/update-position",
-            "parent_id": 88,
+            "parent_id": 146,
             "method": [
                 "post"
             ],
@@ -125,7 +125,7 @@
             "_id": 48
         },
         {
-            "id": 84,
+            "id": 142,
             "name": "Development assistance",
             "icons": "fa-wrench",
             "description": "Development assistant function page",
@@ -142,12 +142,12 @@
             "_id": 57
         },
         {
-            "id": 85,
+            "id": 143,
             "name": "Edit page layout save",
             "icons": "fa-save",
             "description": "Submit edit page layout save",
             "url": "/admin/developments/layout",
-            "parent_id": 84,
+            "parent_id": 142,
             "method": [
                 "post"
             ],
@@ -157,12 +157,12 @@
             "_id": 58
         },
         {
-            "id": 86,
+            "id": 144,
             "name": "Data table query",
             "icons": "fa-table",
             "description": "Data table name association query",
             "url": "/admin/developments/tables",
-            "parent_id": 84,
+            "parent_id": 142,
             "method": [
                 "get"
             ],
@@ -172,12 +172,12 @@
             "_id": 59
         },
         {
-            "id": 87,
+            "id": 145,
             "name": "Command execution",
             "icons": "fa-code",
             "description": "Submit the command for execution",
             "url": "/admin/developments/command",
-            "parent_id": 84,
+            "parent_id": 142,
             "method": [
                 "post"
             ],
@@ -187,7 +187,7 @@
             "_id": 60
         },
         {
-            "id": 90,
+            "id": 149,
             "name": "Log file",
             "icons": "fa-file",
             "description": "System log file",
@@ -271,6 +271,40 @@
             "_id": 66
         },
         {
+            "id": 81,
+            "name": "Insurance management",
+            "icons": "fa-cubes",
+            "description": "Insurance management",
+            "parent_id": 2,
+            "method": [],
+            "status": "Display",
+            "_id": 67
+        },
+        {
+            "id": 82,
+            "name": "Cooperation channel",
+            "icons": "fa-globe",
+            "description": "Insurance management",
+            "parent_id": 2,
+            "method": [],
+            "status": "Display",
+            "_id": 116
+        },
+        {
+            "id": 148,
+            "name": "Conditions delete partner company",
+            "icons": "fa-trash",
+            "description": "Conditions delete partner company",
+            "url": "/admin/agent-systems/condition-delete",
+            "parent_id": 131,
+            "method": [
+                "delete"
+            ],
+            "group": "admin",
+            "action": "AgentSystemController@conditionDelete",
+            "_id": 125
+        },
+        {
             "id": 3,
             "name": "Homepage",
             "icons": "fa-user",
@@ -283,7 +317,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 67
+            "_id": 126
         },
         {
             "id": 78,
@@ -297,10 +331,10 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 68
+            "_id": 127
         },
         {
-            "id": 81,
+            "id": 139,
             "name": "Personal data",
             "icons": "fa-heart",
             "description": "Personal data",
@@ -312,24 +346,24 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 69
+            "_id": 128
         },
         {
-            "id": 82,
+            "id": 140,
             "name": "Submit and edit personal data",
             "icons": "fa-lock",
             "description": "Submit to edit to change password",
             "url": "/home/personage/index",
-            "parent_id": 81,
+            "parent_id": 139,
             "method": [
                 "post"
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 70
+            "_id": 129
         },
         {
-            "id": 83,
+            "id": 141,
             "name": "File upload",
             "icons": "fa-upload",
             "description": "File upload",
@@ -340,7 +374,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 71
+            "_id": 130
         },
         {
             "id": 4,
@@ -353,7 +387,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "open",
-            "_id": 72
+            "_id": 131
         },
         {
             "id": 61,
@@ -366,7 +400,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 73
+            "_id": 132
         },
         {
             "id": 62,
@@ -382,7 +416,7 @@
             "use": [
                 "web"
             ],
-            "_id": 74
+            "_id": 133
         },
         {
             "id": 63,
@@ -397,7 +431,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 75
+            "_id": 134
         },
         {
             "id": 64,
@@ -417,7 +451,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 76
+            "_id": 135
         },
         {
             "id": 76,
@@ -433,7 +467,7 @@
             "use": [
                 "web"
             ],
-            "_id": 77
+            "_id": 136
         },
         {
             "id": 77,
@@ -450,7 +484,7 @@
                 "api",
                 "web"
             ],
-            "_id": 78
+            "_id": 137
         },
         {
             "id": 65,
@@ -467,8 +501,7 @@
                 "api",
                 "web"
             ],
-            "as": "logout",
-            "_id": 79
+            "_id": 138
         },
         {
             "id": 66,
@@ -482,7 +515,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 80
+            "_id": 139
         },
         {
             "id": 67,
@@ -499,7 +532,7 @@
                 "api",
                 "web"
             ],
-            "_id": 81
+            "_id": 140
         },
         {
             "id": 68,
@@ -516,7 +549,7 @@
                 "api",
                 "web"
             ],
-            "_id": 82
+            "_id": 141
         },
         {
             "id": 69,
@@ -530,7 +563,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 83
+            "_id": 142
         },
         {
             "id": 70,
@@ -543,7 +576,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 84
+            "_id": 143
         },
         {
             "id": 71,
@@ -556,7 +589,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 85
+            "_id": 144
         },
         {
             "id": 72,
@@ -568,7 +601,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 86
+            "_id": 145
         },
         {
             "id": 73,
@@ -581,7 +614,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 87
+            "_id": 146
         },
         {
             "id": 74,
@@ -594,7 +627,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 88
+            "_id": 147
         },
         {
             "id": 75,
@@ -611,7 +644,7 @@
                 "api",
                 "web"
             ],
-            "_id": 89
+            "_id": 148
         },
         {
             "id": 79,
@@ -624,10 +657,10 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 90
+            "_id": 149
         },
         {
-            "id": 91,
+            "id": 150,
             "name": "Seven cattle cloud token",
             "icons": "fa-cloud-upload",
             "description": "Seven cattle cloud upload token to get",
@@ -638,7 +671,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 91
+            "_id": 150
         }
     ],
     "resource": [
@@ -758,6 +791,98 @@
             "group": "admin",
             "_id": 49,
             "end_id": 56
+        },
+        {
+            "id": 91,
+            "name": "Insurance company",
+            "icons": "fa-hand-pointer-o",
+            "description": "Insurance company",
+            "url": "/admin/firms",
+            "parent_id": 81,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 68,
+            "end_id": 98
+        },
+        {
+            "id": 99,
+            "name": "Insurance products",
+            "icons": "fa-cubes",
+            "description": "Insurance products",
+            "url": "/admin/products",
+            "parent_id": 81,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 76,
+            "end_id": 106
+        },
+        {
+            "id": 83,
+            "name": "Bank management",
+            "icons": "fa-bank",
+            "description": "Bank management",
+            "url": "/admin/banks",
+            "parent_id": 81,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "Bank",
+            "_id": 84,
+            "end_id": 90
+        },
+        {
+            "id": 107,
+            "name": "Insurance classification",
+            "icons": "fa-map",
+            "description": "Insurance classification",
+            "url": "/admin/classifys",
+            "parent_id": 81,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 92,
+            "end_id": 114
+        },
+        {
+            "id": 115,
+            "name": "Insurance grouping",
+            "icons": "fa-object-group",
+            "description": "Insurance grouping",
+            "url": "/admin/pclassifys",
+            "parent_id": 81,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 100,
+            "end_id": 122
+        },
+        {
+            "id": 123,
+            "name": "Payment period",
+            "icons": "fa-clock-o",
+            "description": "Payment period",
+            "url": "/admin/years",
+            "parent_id": 81,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 108,
+            "end_id": 130
+        },
+        {
+            "id": 131,
+            "name": "Cooperative company",
+            "icons": "fa-sitemap",
+            "description": "Cooperative company",
+            "url": "/admin/agent-systems",
+            "parent_id": 82,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 117,
+            "end_id": 138
         }
     ],
     "update_position": []

@@ -97,7 +97,6 @@
                                     {{props.row | array_get(props.k)}}
                                 </span>
                             </template>
-
                         </data-table>
                     </div>
                 </div>

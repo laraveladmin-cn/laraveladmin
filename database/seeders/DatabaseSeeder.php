@@ -19,5 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminTableSeeder::class); //初始后台用户安装
         $this->call(AdminRoleTableSeeder::class); //后台用户添加角色安装
 
+        $this->call(BankTableSeeder::class); //银行数据
+        $this->call(ClassifyTableSeeder::class); //险种分类
+        $this->call(PclassifyTableSeeder::class); //险种分组
+        $this->call(YearTableSeeder::class); //年期
+        $this->call(ProductSeeder::class); //产品相关数据
     }
 }
