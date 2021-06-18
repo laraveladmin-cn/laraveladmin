@@ -169,6 +169,7 @@ class ProductSeeder extends Seeder
         $this->now_time = time();
         $this->year = date('Y');
         $urls = collect($this->mapLogos)->pluck('url','name')->toArray();
+        $logos = collect($this->mapLogos)->pluck('logo','name')->toArray();
         $firm_id = 1;
         $product_id = 1;
         $pclassifys_list = Pclassify::get()->toArray();
@@ -179,9 +180,11 @@ class ProductSeeder extends Seeder
             $data = json_decode(file_get_contents(database_path($this->life_file)),true)?:[];
             //获取保险公司名称
             collect($data)
-                ->map(function ($item)use($urls,&$firm_id){
+                ->map(function ($item)use($urls,$logos,&$firm_id){
                     if(!Arr::get($this->firms,$item['firm'])){ //保险公司
                         $firm_name = str_replace(['保险股份有限公司','保险有限公司','保险有限责任公司'],'',$item['firm']);
+                        $logo = Arr::get($logos,$firm_name,'');
+                        $logo = $logo?'/dist/img/company/'.$logo:'';
                         $this->firms[$item['firm']] = [
                             'id'=>$firm_id,
                             'name'=>$firm_name,
@@ -189,6 +192,7 @@ class ProductSeeder extends Seeder
                             'type'=>1,
                             'description'=>$item['firm'],
                             'url'=>Arr::get($urls,$firm_name,''),
+                            'logo'=>$logo,
                             'created_at'=>$this->now,
                             'updated_at'=>$this->now
                         ];
@@ -203,9 +207,11 @@ class ProductSeeder extends Seeder
             $map_status = array_flip($this->maps['status']);
             //获取保险公司名称
             collect($data)
-                ->map(function ($item)use($urls,&$firm_id,&$product_id,$map_status){
+                ->map(function ($item)use($urls,$logos,&$firm_id,&$product_id,$map_status){
                     if(!Arr::get($this->firms,$item['firm'])){ //保险公司
                         $firm_name = str_replace(['保险股份有限公司','保险有限公司','保险有限责任公司'],'',$item['firm']);
+                        $logo = Arr::get($logos,$firm_name,'');
+                        $logo = $logo?'/dist/img/company/'.$logo:'';
                         $this->firms[$item['firm']] = [
                             'id'=>$firm_id,
                             'name'=>$firm_name,
@@ -213,6 +219,7 @@ class ProductSeeder extends Seeder
                             'type'=>1,
                             'description'=>$item['firm'],
                             'url'=>Arr::get($urls,$firm_name,''),
+                            'logo'=>$logo,
                             'created_at'=>$this->now,
                             'updated_at'=>$this->now
                         ];
