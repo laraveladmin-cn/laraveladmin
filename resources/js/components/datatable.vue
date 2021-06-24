@@ -512,11 +512,12 @@
                        return value!=='';
                     }).all();
                 }
+                options = copyObj(options);
                 this.loading = true;
                 let options_str = JSON.stringify(options);
                 this.options_str = options_str;
                 let url = this.data.configUrl['listUrl'] || this.options.url || this.$router.currentRoute.path;
-                axios.get(this.use_url+url,{params:copyObj(options)}).then( (response)=> {
+                axios.get(this.use_url+url,{params:options}).then( (response)=> {
                     this.data.options.order = copyObj(options.order || {});
                     if(url==this.data.configUrl['listUrl']){
                         for (let i in response.data ) {
