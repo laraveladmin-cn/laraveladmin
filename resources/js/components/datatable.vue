@@ -236,6 +236,14 @@
                                                   {{row | array_get(k)}}
                                             </code>
                                         </span>
+                                        <span v-else-if="field.type =='pre'">
+                                            <pre v-if="field.limit">
+                                                {{row | array_get(k) | str_limit(field.limit)}}
+                                            </pre>
+                                            <pre v-else>
+                                                  {{row | array_get(k)}}
+                                            </pre>
+                                        </span>
                                         <span v-else>
                                              <span v-if="field.limit" :title="array_get(row,k,'')">
                                                    {{row | array_get(k) | str_limit(field.limit)}}
