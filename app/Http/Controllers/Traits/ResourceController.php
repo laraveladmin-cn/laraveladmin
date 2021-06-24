@@ -254,7 +254,8 @@ trait ResourceController
         $ids = $this->handleDestroyReturn($ids);
         $res = false;
         if ($ids) {
-            $res = $this->bindModel->whereIn('id', $ids)->delete();
+            $primaryKey = $this->newBindModel()->getKeyName() ?: 'id';
+            $res = $this->bindModel->whereIn($primaryKey, $ids)->delete();
         }
         if ($res === false) {
             return Response::returns(['alert' => alert([
