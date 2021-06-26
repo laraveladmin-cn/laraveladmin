@@ -9,7 +9,9 @@
                         <div class="navbar-header">
                             <router-link to="/open/index" class="navbar-brand">
                                 <img :src="app_url+logo" alt="LOGO" class="img-circle logo">
-                                {{name}}
+                                <span class="hidden-xs">
+                                   {{name}}
+                                </span>
                             </router-link>
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                                     data-target="#navbar-collapse">
