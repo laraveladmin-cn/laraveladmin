@@ -1,5 +1,5 @@
-version: '2'
-services:
+version: '2' #使用docker-compose版本
+services: #服务
   mysql: #数据库服务
     image: mysql:8 #镜像源
     volumes: #数据卷,挂载目录
@@ -9,15 +9,15 @@ services:
 #    ports: #与宿主进的端口映射
 #      - 3306:3306 #宿主机端口:容器端口
     restart: always #异常退出后重启
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password #启动执行指令
     environment: #容器中环境变量
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} #数据库root用户密码
       MYSQL_DATABASE: ${DB_DATABASE} #新创建数据库名称
 #      MYSQL_USER: ${DB_USERNAME} #数据库用户名
 #      MYSQL_PASSWORD: ${DB_PASSWORD} #数据库密码
   redis: #redis服务
-    build: ./docker/redis
-    restart: always
+    build: ./docker/redis #Dockerfile源码编译
+    restart: always #异常退出后自动重启服务
     command: > #设置redis启动密码
       --requirepass ${REDIS_PASSWORD}
     environment: #容器中环境变量
@@ -30,7 +30,7 @@ services:
   php: #用于开发环境
     #build: ./docker/php
     image: laraveladmin/laraveladmin #镜像源
-    depends_on:
+    depends_on: #启动依赖
       - redis
       - mysql
     volumes:
@@ -42,8 +42,8 @@ services:
       - ../docker/mysql/shared:/var/lib/mysql_shared #与mysql共享目录
       - ~/.ssh:/root/.ssh #秘钥挂载方便拉取代码
       - ~/.composer:/root/.composer #compoer全局安装包
-    links:
-      - mysql:db
+    links: #服务之间的hosts绑定访问
+      - mysql:db #服务名:别名
       - redis:redis
     restart: always
   nginx: #服务器服务

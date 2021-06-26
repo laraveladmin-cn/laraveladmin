@@ -512,6 +512,7 @@
                        return value!=='';
                     }).all();
                 }
+                options = copyObj(options);
                 this.loading = true;
                 let options_str = JSON.stringify(options);
                 this.options_str = options_str;
