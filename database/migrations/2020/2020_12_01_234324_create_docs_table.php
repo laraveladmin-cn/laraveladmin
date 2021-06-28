@@ -19,6 +19,9 @@ class CreateDocsTable extends Migration
             $table->text('description')->comment('内容$markdown');
             $table->timestamps();
             $table->softDeletes()->comment('删除时间');
+            //设置表备注
+            $table->charset = config('database.connections.'.config('database.default').'.charset').
+                ' COMMENT="文档$softDeletes,timestamps"';
         });
     }
 

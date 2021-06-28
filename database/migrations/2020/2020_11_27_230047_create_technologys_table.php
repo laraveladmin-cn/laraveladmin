@@ -21,6 +21,9 @@ class CreateTechnologysTable extends Migration
             $table->string('description')->default('')->comment('描述$textarea@required|min:20|max:150');
             $table->timestamps();
             $table->softDeletes()->comment('删除时间');
+            //设置表备注
+            $table->charset = config('database.connections.'.config('database.default').'.charset').
+                ' COMMENT="技术栈$softDeletes,timestamps"';
         });
     }
 
