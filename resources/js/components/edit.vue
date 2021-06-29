@@ -1,6 +1,6 @@
 <template>
     <div :id="id" :class="{'active-move':is_local}">
-        <form>
+        <form onsubmit="return false;">
             <validation-observer :ref="id" v-slot="{invalid,validate}">
                 <div class="row">
                     <slot name="content" :data="data" :url="url" :maps="_maps" :error="error" :trans-field="transField">
