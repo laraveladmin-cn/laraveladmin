@@ -91,7 +91,7 @@ trait ResourceController
         collect($this->editFields)->map(function ($item, $key) use ($id, &$data) {
             if (is_array($item) && Str::endsWith($key, 's')) { //多个关联
                 if ($id) {
-                    $data['row'][Str::singular($key) . '_ids'] = collect(Arr::get($data, 'row.' . $key, []))->pluck('id')->toArray();
+                    $data['row'][Str::singular($key) . '_ids'] = collect(Arr::get($data, 'row.' . $key, []))->pluck( $this->newBindModel()->$key()->getRelated()->getKeyName())->toArray();
                 } else {
                     $data['row'][Str::singular($key) . '_ids'] = [];
                     $data['row'][$key] = [];
