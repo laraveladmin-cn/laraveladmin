@@ -186,7 +186,9 @@
                                     <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
                                         {{transField(field.name,index)}}
                                     </th>
-                                    <th class="operate" v-if="operation">{{$t('Operation')}}</th>
+                                    <slot name="thead-operate" :operation="operation">
+                                        <th class="operate" v-if="operation">{{$t('Operation')}}</th>
+                                    </slot>
                                 </tr>
                             </slot>
                         </thead>
