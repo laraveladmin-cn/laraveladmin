@@ -27,7 +27,6 @@
                        @click="$emit('blur')"
                        :data="{_token:_token}"
                        :headers="headers"
-                       name="file"
                        :before-upload="beforeAvatarUpload">
                 <slot>
                     <img v-if="value || placeholderValue" :src="showurl" class="avatar" :width="width+'px'" :height="height+'px'">
