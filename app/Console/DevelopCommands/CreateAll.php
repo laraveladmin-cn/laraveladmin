@@ -98,8 +98,14 @@ class CreateAll extends BaseCommand
                 })));
                 $migration_file and Migration::firstOrCreate(['migration'=>$migration_file],['migration'=>$migration_file,'batch'=>0]);
                 $migration = Migration::query()->latest('id')->value('migration');
+                $file = $this->migrationPath($migration);
+                $content = file_get_contents($file);
+                if(Str::contains($content,'timestamps()->comment')){
+                    $content = Str::replace('timestamps()->comment','timestamps();//->comment',$content);
+                    file_put_contents($file,$content);
+                }
                 $this->info(
-                    trans_path('File ":file" created successfully',$this->transPath,['file'=>$this->migrationPath($migration)])
+                    trans_path('File ":file" created successfully',$this->transPath,['file'=>$file])
                     //$this->migrationPath($migration).' 创建成功'
                 );
             }
