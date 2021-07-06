@@ -16,9 +16,9 @@
                               ({{$tp('Please register at the WWW main site before viewing the documentation, Do not register users in the demo environment')}})
                         </span>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="/ate.zip" target="_blank" role="button">{{$tp('Background template download')}}</a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>

@@ -105,9 +105,10 @@ class UserController extends Controller
             ->withCount(collect($this->getShowIndexFieldsCount())->filter(function($item,$key){
                 return !is_array($item);
             })->toArray())
-            ->whereDoesntHave('admin') //不显后台用户
             ->options($this->getOptions());
-
+        if(!Request::input('all')){
+            $obj = $obj->whereDoesntHave('admin'); //不显后台用户
+        }
         return $obj;
     }
 

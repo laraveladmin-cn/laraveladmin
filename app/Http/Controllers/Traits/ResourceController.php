@@ -227,6 +227,7 @@ trait ResourceController
             ? $fields : array_merge([$this->newBindModel()->getKeyName()], $fields));
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel();
+        $obj = $this->handleList($obj);
         $perPage = Request::input('per_page', $this->per_page);
         $perPage = $perPage > 200 ? 200 : $perPage; //限制单页最大获取数据量
         //获取分页数据
@@ -916,6 +917,17 @@ trait ResourceController
     }
 
     /**
+     * 列表页面数据获取前对数据处理
+     * @param $obj
+     * @return mixed
+     */
+    protected function handleList(&$obj)
+    {
+        return $obj;
+    }
+
+
+    /**
      * 列表页面返回数据前对数据处理
      * @param $data
      * @return mixed
@@ -964,5 +976,7 @@ trait ResourceController
     {
         //
     }
+
+
 
 }

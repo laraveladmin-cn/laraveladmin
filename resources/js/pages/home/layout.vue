@@ -129,7 +129,7 @@
                         <a target="_blank" href="http://www.laraveladmin.cn">{{name}}</a>
                     </strong>
                     <span class="wangjing"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-                    {{$t('The record number:')}}{{icp}}
+                    {{$t('The record number:')}}<a href="http://beian.miit.gov.cn" target="_blank">{{icp}}</a>
                 </div>
             </footer>
         </div>

@@ -726,6 +726,7 @@
                 "Night": "黑夜",
                 "Day": "白天"
             }
+
         },
         "errors": {
             "Page not found": "出错了！页面不存在。",
@@ -853,5 +854,6 @@
     "Unbundling": "解绑",
     "Download": "下载",
     "Click Upload": "点击上传",
-    "Only picture files can be uploaded and no more than {size}": "只能上传图片文件，且不超过{size}"
+    "Only picture files can be uploaded and no more than {size}": "只能上传图片文件，且不超过{size}",
+    "Please enter the link address": "请输入链接地址"
 }

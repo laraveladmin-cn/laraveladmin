@@ -91,6 +91,16 @@
             "_id": 5
         },
         {
+            "id": 132,
+            "name": "捐赠管理",
+            "icons": "fa-share-alt-square",
+            "description": "捐赠管理",
+            "parent_id": 2,
+            "method": [],
+            "status": "Display",
+            "_id": 46
+        },
+        {
             "id": 7,
             "name": "Other settings",
             "icons": "fa-gears",
@@ -98,7 +108,7 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 38
+            "_id": 71
         },
         {
             "id": 120,
@@ -112,7 +122,22 @@
             ],
             "group": "admin",
             "action": "MenuController@tree",
-            "_id": 47
+            "_id": 80
+        },
+        {
+            "id": 131,
+            "name": "Submit menu location modification",
+            "icons": "fa-edit",
+            "description": "Submit menu location modification",
+            "url": "/admin/menus/update-position",
+            "parent_id": 120,
+            "method": [
+                "post"
+            ],
+            "group": "admin",
+            "action": "MenuController@updatePosition",
+            "env": "local",
+            "_id": 81
         },
         {
             "id": 116,
@@ -129,7 +154,7 @@
             "group": "admin",
             "action": "DevelopmentsController@index",
             "env": "local",
-            "_id": 80
+            "_id": 114
         },
         {
             "id": 117,
@@ -144,7 +169,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postLayout",
             "env": "local",
-            "_id": 81
+            "_id": 115
         },
         {
             "id": 118,
@@ -159,7 +184,7 @@
             "group": "admin",
             "action": "DevelopmentsController@tables",
             "env": "local",
-            "_id": 82
+            "_id": 116
         },
         {
             "id": 119,
@@ -174,7 +199,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postCommand",
             "env": "local",
-            "_id": 83
+            "_id": 117
         },
         {
             "id": 121,
@@ -190,7 +215,7 @@
             "group": "admin",
             "action": "FileLogController@index",
             "as": "系统日志文件",
-            "_id": 84
+            "_id": 118
         },
         {
             "id": 8,
@@ -200,7 +225,7 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 85
+            "_id": 119
         },
         {
             "id": 57,
@@ -215,7 +240,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 86
+            "_id": 120
         },
         {
             "id": 58,
@@ -229,7 +254,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@postIndex",
-            "_id": 87
+            "_id": 121
         },
         {
             "id": 59,
@@ -244,7 +269,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 88
+            "_id": 122
         },
         {
             "id": 60,
@@ -258,7 +283,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@putPassword",
-            "_id": 89
+            "_id": 123
         },
         {
             "id": 3,
@@ -269,7 +294,7 @@
             "parent_id": 1,
             "method": [],
             "status": "Display",
-            "_id": 90
+            "_id": 124
         },
         {
             "id": 78,
@@ -283,7 +308,7 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 91
+            "_id": 125
         },
         {
             "id": 85,
@@ -299,7 +324,7 @@
             "status": "Display",
             "group": "_home",
             "action": "IndexController@index",
-            "_id": 92
+            "_id": 126
         },
         {
             "id": 102,
@@ -309,7 +334,7 @@
             "parent_id": 3,
             "method": [],
             "status": "Display",
-            "_id": 93
+            "_id": 127
         },
         {
             "id": 103,
@@ -324,7 +349,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 94
+            "_id": 128
         },
         {
             "id": 104,
@@ -338,7 +363,7 @@
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 95
+            "_id": 129
         },
         {
             "id": 105,
@@ -353,7 +378,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 96
+            "_id": 130
         },
         {
             "id": 114,
@@ -367,7 +392,7 @@
             ],
             "group": "_home",
             "action": "IndexController@getDocs",
-            "_id": 97
+            "_id": 131
         },
         {
             "id": 115,
@@ -381,7 +406,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 98
+            "_id": 132
         },
         {
             "id": 4,
@@ -392,7 +417,7 @@
             "parent_id": 1,
             "method": [],
             "status": "Display",
-            "_id": 99
+            "_id": 133
         },
         {
             "id": 61,
@@ -405,7 +430,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 100
+            "_id": 134
         },
         {
             "id": 62,
@@ -421,7 +446,7 @@
             "use": [
                 "web"
             ],
-            "_id": 101
+            "_id": 135
         },
         {
             "id": 63,
@@ -437,7 +462,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 102
+            "_id": 136
         },
         {
             "id": 64,
@@ -457,7 +482,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 103
+            "_id": 137
         },
         {
             "id": 76,
@@ -473,7 +498,7 @@
             "use": [
                 "web"
             ],
-            "_id": 104
+            "_id": 138
         },
         {
             "id": 77,
@@ -490,7 +515,7 @@
                 "api",
                 "web"
             ],
-            "_id": 105
+            "_id": 139
         },
         {
             "id": 65,
@@ -508,7 +533,7 @@
                 "web"
             ],
             "as": "logout",
-            "_id": 106
+            "_id": 140
         },
         {
             "id": 66,
@@ -523,7 +548,7 @@
             "status": "Display",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 107
+            "_id": 141
         },
         {
             "id": 67,
@@ -540,7 +565,7 @@
                 "api",
                 "web"
             ],
-            "_id": 108
+            "_id": 142
         },
         {
             "id": 68,
@@ -557,7 +582,7 @@
                 "api",
                 "web"
             ],
-            "_id": 109
+            "_id": 143
         },
         {
             "id": 69,
@@ -571,7 +596,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 110
+            "_id": 144
         },
         {
             "id": 70,
@@ -584,7 +609,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 111
+            "_id": 145
         },
         {
             "id": 71,
@@ -597,7 +622,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 112
+            "_id": 146
         },
         {
             "id": 72,
@@ -609,7 +634,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 113
+            "_id": 147
         },
         {
             "id": 73,
@@ -622,7 +647,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 114
+            "_id": 148
         },
         {
             "id": 74,
@@ -635,7 +660,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 115
+            "_id": 149
         },
         {
             "id": 75,
@@ -652,7 +677,7 @@
                 "api",
                 "web"
             ],
-            "_id": 116
+            "_id": 150
         },
         {
             "id": 79,
@@ -665,7 +690,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 117
+            "_id": 151
         },
         {
             "id": 81,
@@ -681,7 +706,7 @@
             "status": "Display",
             "group": "open",
             "action": "IndexController@getIndex",
-            "_id": 118
+            "_id": 152
         },
         {
             "id": 82,
@@ -692,7 +717,7 @@
             "parent_id": 4,
             "method": [],
             "status": "Display",
-            "_id": 119
+            "_id": 153
         },
         {
             "id": 83,
@@ -702,8 +727,7 @@
             "url": "https://demo.laraveladmin.cn",
             "parent_id": 4,
             "method": [],
-            "status": "Display",
-            "_id": 120
+            "_id": 154
         },
         {
             "id": 84,
@@ -716,10 +740,9 @@
                 "get"
             ],
             "is_page": "Yes",
-            "status": "Display",
             "group": "open",
             "action": "IndexController@contact",
-            "_id": 121
+            "_id": 155
         },
         {
             "id": 122,
@@ -733,7 +756,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 122
+            "_id": 156
         }
     ],
     "resource": [
@@ -751,6 +774,20 @@
             "end_id": 16
         },
         {
+            "id": 123,
+            "name": "会员用户",
+            "icons": "fa-graduation-cap",
+            "description": "会员用户",
+            "url": "/admin/members",
+            "parent_id": 6,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "会员用户",
+            "_id": 14,
+            "end_id": 130
+        },
+        {
             "id": 17,
             "name": "Authority management",
             "icons": "fa-sitemap",
@@ -761,7 +798,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Role",
-            "_id": 14,
+            "_id": 22,
             "end_id": 24
         },
         {
@@ -775,7 +812,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Journal",
-            "_id": 22,
+            "_id": 30,
             "end_id": 32
         },
         {
@@ -788,8 +825,48 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 30,
+            "_id": 38,
             "end_id": 40
+        },
+        {
+            "id": 133,
+            "name": "赞助商",
+            "icons": "fa-trophy",
+            "description": "赞助商",
+            "url": "/admin/sponsors",
+            "parent_id": 132,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "赞助商",
+            "_id": 47,
+            "end_id": 140
+        },
+        {
+            "id": 141,
+            "name": "捐赠记录",
+            "icons": "fa-credit-card",
+            "description": "捐赠记录",
+            "url": "/admin/donations",
+            "parent_id": 132,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 55,
+            "end_id": 148
+        },
+        {
+            "id": 149,
+            "name": "收益明细",
+            "icons": "fa-server",
+            "description": "收益明细",
+            "url": "/admin/bills",
+            "parent_id": 132,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 63,
+            "end_id": 156
         },
         {
             "id": 41,
@@ -802,7 +879,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Menu",
-            "_id": 39,
+            "_id": 72,
             "options": {
                 "only": [
                     {
@@ -851,7 +928,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 48,
+            "_id": 82,
             "end_id": 56
         },
         {
@@ -864,7 +941,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 56,
+            "_id": 90,
             "end_id": 93
         },
         {
@@ -877,7 +954,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 64,
+            "_id": 98,
             "end_id": 101
         },
         {
@@ -890,7 +967,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 72,
+            "_id": 106,
             "end_id": 113
         }
     ],
