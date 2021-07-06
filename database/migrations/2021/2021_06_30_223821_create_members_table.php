@@ -20,7 +20,7 @@ class CreateMembersTable extends Migration
             $table->unsignedSmallInteger('level')->default(0)->comment('层级');
             $table->unsignedInteger('left_margin')->default(0)->comment('左边界');
             $table->unsignedInteger('right_margin')->default(0)->comment('右边界');
-            $table->timestamps()->comment('更新时间');
+            $table->timestamps();//->comment('更新时间');
             $table->softDeletes()->comment('删除时间');
         });
     }

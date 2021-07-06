@@ -18,7 +18,7 @@ class CreateSponsorsTable extends Migration
             $table->string('name', 100)->nullable()->comment('赞助商@sometimes|required|alpha_dash|between:2,100');
             $table->string('url')->nullable()->comment('链接$url@sometimes|required|active_url');
             $table->string('logo')->nullable()->comment('LOGO图标$upload@sometimes|required|active_url');
-            $table->timestamps()->comment('修改时间');
+            $table->timestamps();//->comment('修改时间');
             $table->softDeletes()->comment('删除时间');
         });
     }
