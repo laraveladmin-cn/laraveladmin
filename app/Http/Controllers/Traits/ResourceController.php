@@ -100,6 +100,13 @@ trait ResourceController
         });
         //数据字段映射信息
         $data['maps'] = $this->getFieldsMap($this->editFields, $this->newBindModel());
+        //选项映射关系数据处理
+        collect($this->editFields)->map(function ($item, $key) use ($id, &$data) {
+            $k = $key.'_id';
+            if (is_array($item) && isset($data['row'][$k])) { //属于关联
+                $data['maps'][$k] = mapOption($data['row'], $k);
+            }
+        });
         $data['mapsRelations'] = $this->mapsRelations($this->editFields, $this->newBindModel());
         //增删改查URL地址
         $data['configUrl'] = $this->getConfigUrl('edit');

@@ -38,7 +38,7 @@ class CreateView extends BaseCreate
         "not_in","not_regex","password","present","regular_expression",
         "required_unless","required_with","required_with_all","required_without",
         "required_without_all","same",
-        "starts_with","string","timezone"
+        "starts_with","string","timezone","active_url"
     ];
     /**
      * 绑定模型
