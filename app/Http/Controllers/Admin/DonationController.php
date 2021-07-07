@@ -19,6 +19,21 @@ class DonationController extends Controller
 
     ];
 
+    public $editFields=[
+        'member'=>[
+            'id','user_id',
+            'user'=>[
+                'id',
+                'name',
+                'uname'
+            ]
+        ],
+        'sponsor'=>[
+            'id','name'
+        ]
+
+    ];
+
     /**
      * Index页面字段名称显示多条数据统计值
      * @var array
@@ -68,8 +83,8 @@ class DonationController extends Controller
     {
         $validate = [
             'member_id' => 'required|integer|exists:members,id',
-            'sponsor_id' => 'required|integer|exists:donations,id',
-            'amount' => 'sometimes|required|number|min:0.02'
+            'sponsor_id' => 'required|integer|exists:sponsors,id',
+            'amount' => 'sometimes|required|min:0.02'
         ];
         return $validate;
     }
@@ -82,8 +97,6 @@ class DonationController extends Controller
      */
     protected function handleEditReturn($id, &$data)
     {
-        $data['maps']['member_id'] = mapOption($data['row'], 'member_id');
-        $data['maps']['sponsor_id'] = mapOption($data['row'], 'sponsor_id');
         return $data;
     }
 

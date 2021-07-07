@@ -8,9 +8,9 @@
                 <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '赞助商',type:'text', rules:'required|alpha_dash|between:2,100',title:''}" :datas="props">
+                            <edit-item key-name="name" :options="{name: '赞助商',type:'text', rules:'required|alpha_dash',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="url" :options="{name: '链接',type:'url', rules:'required|active_url',title:''}" :datas="props">
+                            <edit-item key-name="url" :options="{name: '链接',type:'url', rules:'required|url',title:''}" :datas="props">
                                     <template slot="input-item">
                                         <div class="input-group">
                                             <input
@@ -30,7 +30,7 @@
                                         </div>
                                     </template>
                             </edit-item>
-                            <edit-item key-name="logo" :options="{name: 'LOGO图标',type:'upload', rules:'required|active_url',title:''}" :datas="props">
+                            <edit-item key-name="logo" :options="{name: 'LOGO图标',type:'upload', rules:'required|url',title:''}" :datas="props">
                                 <template slot="input-item">
                                     <div style="margin-bottom: 5px">
                                         <input
