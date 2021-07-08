@@ -90,7 +90,8 @@ cd {{$path_dir}} && \
 git checkout {{$branch}} && \
 git pull origin {{$branch}} && \
 @if(!$self)
-chown -R www-data:www-data storage public && \
+chown -R www-data:www-data storage && \
+chmod 777 public && \
 @endif
 @if($unzip_vendor)
     unzip -o -d ./ ./vendor.zip && \
@@ -110,7 +111,8 @@ php artisan db:seed --force && \
 @endif
 php artisan build:index.html
 @if(!$is_online)
-    chmod -R 777 storage bootstrap/cache public
+    chmod -R 777 storage bootstrap/cache && \
+    chmod 777 public
 @endif
 @endtask
 
