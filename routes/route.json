@@ -727,7 +727,37 @@
             "url": "https://demo.laraveladmin.cn",
             "parent_id": 4,
             "method": [],
+            "status": "Display",
             "_id": 154
+        },
+        {
+            "id": 157,
+            "name": "赞助商",
+            "icons": "fa-coffee",
+            "description": "赞助商",
+            "url": "/open/sponsors",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "open",
+            "action": "SponsorController@index",
+            "_id": 155
+        },
+        {
+            "id": 158,
+            "name": "赞助商分页",
+            "icons": "fa-list",
+            "description": "赞助商分页",
+            "url": "/admin/sponsors/list",
+            "parent_id": 157,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "_id": 156
         },
         {
             "id": 84,
@@ -740,9 +770,10 @@
                 "get"
             ],
             "is_page": "Yes",
+            "status": "Display",
             "group": "open",
             "action": "IndexController@contact",
-            "_id": 155
+            "_id": 157
         },
         {
             "id": 122,
@@ -756,7 +787,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 156
+            "_id": 158
         }
     ],
     "resource": [
