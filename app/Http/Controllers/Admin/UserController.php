@@ -67,7 +67,11 @@ class UserController extends Controller
      * 编辑页面时的字段值
      * @var array
      */
-    public $editFields = [];
+    public $editFields = [
+        'province'=>['id','name'],
+        'city'=>['id','name'],
+        'area'=>['id','name']
+    ];
 
     public $exportFieldsName = [];
 

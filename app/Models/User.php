@@ -30,7 +30,10 @@ class User extends Authenticatable
         'mobile_phone',
         'status',
         'description',
-        'avatar'
+        'avatar',
+        'province_id',
+        'city_id',
+        'area_id'
     ];
 
     /**
@@ -83,7 +86,10 @@ class User extends Authenticatable
         'remember_token'=>null,
         'status'=>1,
         'description'=>null,
-        'avatar'=>''
+        'avatar'=>'',
+        'province_id'=>0,
+        'city_id'=>0,
+        'area_id'=>0
     ];
 
     //字段默认值
@@ -99,6 +105,9 @@ class User extends Authenticatable
         //'created_at' => 'Created At',
         //'updated_at' => 'Updated At',
         //'deleted_at' => 'Deleted At',
+        'province_id'=>'省ID',
+        'city_id'=>'市ID',
+        'area_id'=>'区ID',
         'id' => 'ID',
     ];
 
@@ -135,6 +144,19 @@ class User extends Authenticatable
      */
     public function ousers(){
         return $this->hasMany('App\Models\Ouser');
+    }
+
+    /* 所属省份 */
+    public function province(){
+        return $this->belongsTo('App\Models\Area','province_id');
+    }
+    /* 所属市 */
+    public function city(){
+        return $this->belongsTo('App\Models\Area','city_id');
+    }
+    /* 所属区 */
+    public function area(){
+        return $this->belongsTo('App\Models\Area');
     }
 
     public function scopeIsAdmin($query){

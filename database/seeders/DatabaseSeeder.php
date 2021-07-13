@@ -24,5 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PclassifyTableSeeder::class); //险种分组
         $this->call(YearTableSeeder::class); //年期
         $this->call(ProductSeeder::class); //产品相关数据
+
+        $this->call(AreaTableSeeder::class); //地区数据
     }
 }

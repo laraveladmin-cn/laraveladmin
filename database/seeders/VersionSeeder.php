@@ -13,7 +13,7 @@ class VersionSeeder extends Seeder
     {
         $this->call(MenuTableSeeder::class); //菜单数据安装
 
-
+        $this->call(AreaTableSeeder::class); //地区数据
 
     }
 

@@ -19,14 +19,6 @@
                             </edit-item>
                             <edit-item key-name="name" :options="{name: props.transField('Name'), required: true,rules:'required'}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="description" :options="{name: props.transField('Remarks'), required: false,type:'textarea'}"  :datas="props">
-                            </edit-item>
-                        </div>
-                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="email" :options="{name: props.transField('E-mail'), required: !props.data.row.mobile_phone,rules:props.data.row.mobile_phone?'':'required|email'}"  :datas="props">
-                            </edit-item>
-                            <edit-item key-name="mobile_phone" :options="{name: props.transField('Phone number'), required: !props.data.row.email,rules:props.data.row.email?'':'required|mobile'}"  :datas="props">
-                            </edit-item>
                             <edit-item key-name="status" :options="{name: props.transField('State'), required: true}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
@@ -39,6 +31,66 @@
                                     </div>
                                 </template>
                             </edit-item>
+                            <edit-item key-name="description" :options="{name: props.transField('Remarks'), required: false,type:'textarea'}"  :datas="props">
+                            </edit-item>
+                        </div>
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                            <edit-item key-name="email" :options="{name: props.transField('E-mail'), required: !props.data.row.mobile_phone,rules:props.data.row.mobile_phone?'':'required|email'}"  :datas="props">
+                            </edit-item>
+                            <edit-item key-name="mobile_phone" :options="{name: props.transField('Phone number'), required: !props.data.row.email,rules:props.data.row.email?'':'required|mobile'}"  :datas="props">
+                            </edit-item>
+
+                            <edit-item key-name="province_id" :options="{name: '省', required: ''}"  :datas="props">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <select2 v-model="props.data.row['province_id']"
+                                                 :disabled="!props.url || props.data.row['id']==1"
+                                                 :keyword-key="'name'"
+                                                 :default-options="array_get(props,'data.row.province.id',0)?[array_get(props,'data.row.province')]:[]"
+                                                 :placeholder-value="'0'"
+                                                 :url="use_url+'/admin/areas/list'"
+                                                 :is-ajax="true"
+                                                 :params="{where:{'level':2}}"
+                                                 @change="changeProvinceId(props.data.row)"
+                                        >
+                                        </select2>
+                                    </div>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="city_id" :options="{name: '市', required: ''}"  :datas="props">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <select2 v-model="props.data.row['city_id']"
+                                                 :disabled="!props.url || props.data.row['id']==1 || !props.data.row['province_id']"
+                                                 :default-options="array_get(props,'data.row.city.id',0)?[array_get(props,'data.row.city')]:[]"
+                                                 :placeholder-value="'0'"
+                                                 :url="use_url+'/admin/areas/list'"
+                                                 :keyword-key="'name'"
+                                                 :is-ajax="true"
+                                                 :params="{where:{'parent_id':props.data.row['province_id']}}"
+                                                 @change="changeCityId(props.data.row)"
+                                        >
+                                        </select2>
+                                    </div>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="area_id" :options="{name: '区', required: ''}"  :datas="props">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <select2 v-model="props.data.row['area_id']"
+                                                 :disabled="!props.url || props.data.row['id']==1 || !props.data.row['city_id']"
+                                                 :default-options="array_get(props,'data.row.area.id',0)?[array_get(props,'data.row.area')]:[]"
+                                                 :placeholder-value="'0'"
+                                                 :url="use_url+'/admin/areas/list'"
+                                                 :keyword-key="'name'"
+                                                 :is-ajax="true"
+                                                 :params="{where:{'parent_id':props.data.row['city_id']}}"
+                                        >
+                                        </select2>
+                                    </div>
+                                </template>
+                            </edit-item>
+
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="avatar" :options="{name: props.transField('Head portrait'), required: false}"  :datas="props">
@@ -109,8 +161,18 @@
             ...mapActions({
                 getUser:'user/getUser', //获取用户数据
             }),
+            changeProvinceId(row){
+                row.city_id = 0;
+                row.area_id = 0;
+            },
+            changeCityId(row){
+                row.area_id = 0;
+            },
         },
         computed:{
+            ...mapState([
+                'use_url'
+            ]),
             ...mapState('user',{
                 user:state => state.user
             }),
