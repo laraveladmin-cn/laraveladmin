@@ -121,6 +121,10 @@ sh ./docker/install.sh
 
 4. 设置当前代码目录的上级目录跟"\~"目录必须包含 dokcer的File Sharing列表中的目录中
 
+> 参考图
+
+![设置参考图](https://www.laraveladmin.cn/storage/uploads/images/2021/07/01/1zHz43xRs01Q4bO4LVd6yejMlBvv7AytHXEfveAB.jpg)
+
 5. php容器环境中安装composer相关扩展包及项目代码初始化
 
 

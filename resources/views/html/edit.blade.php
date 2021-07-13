@@ -10,6 +10,11 @@
         'path' => 'element-ui/lib/date-picker',
         'info' => '日期组件'
     ];
+    $icheck =  [
+        'name' => 'icheck',
+        'path' => 'common_components/icheck.vue',
+        'info' => '单选复选组件'
+    ];
     $components = [
         'markdown'=>[
             'name' => 'editorMd',
@@ -83,7 +88,10 @@
         ],
         'date' =>$datePicker,
         'datetime'=>$datePicker,
-        'month'=>$datePicker
+        'month'=>$datePicker,
+        'icheck'=>$icheck,
+        'icheck-radio'=>$icheck,
+        'icheck-checkbox'=>$icheck,
     ];
     $components = collect($components)
         ->only(collect($table_fields)
@@ -121,6 +129,25 @@
                                                     :disabled="!props.url">
                                     </el-date-picker>
                                 </template>
+@elseif($table_field['showType']=='url')
+                                    <template slot="input-item">
+                                        <div class="input-group">
+                                            <input
+                                                type="text"
+                                                v-model="props.data.row['{{$table_field['Field']}}']"
+                                                class="form-control"
+                                                :placeholder="$t('Please enter')"
+                                                :disabled="!props.url" />
+                                            <div class="input-group-addon">
+                                                <a v-if="props.data.row['{{$table_field['Field']}}']" :href="props.data.row['{{$table_field['Field']}}']" target="_blank">
+                                                    <i class="fa fa-link">
+                                                    </i>
+                                                </a>
+                                                <i v-else class="fa fa-link">
+                                                </i>
+                                            </div>
+                                        </div>
+                                    </template>
 @elseif($table_field['showType']=='datetime')
                                     <template slot="input-item">
                                         <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
@@ -268,6 +295,34 @@
                                                    :disabled="!props.url">
                                         </editor-md>
                                     </template>
+@elseif($table_field['showType']=='icheck' || $table_field['showType']=='icheck-radio')
+                                    <template slot="input-item">
+                                        <div class="row">
+                                            <div v-for="(item,index) in props.maps['{{$table_field['Field']}}']"
+                                                 class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                <icheck v-model="props.data.row['{{$table_field['Field']}}']"
+                                                        :title="item"
+                                                        type="radio"
+                                                        :option="index"
+                                                        :disabled="!props.url">
+                                                    {{$startSymbol}}item{{$endSymbol}}
+                                                </icheck>
+                                            </div>
+                                        </div>
+                                    </template>
+@elseif($table_field['showType']=='icheck-checkbox')
+                            <template slot="input-item">
+                                <div class="row">
+                                    <div v-for="(item,index) in props.maps['{{$table_field['Field']}}']"
+                                         class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <icheck v-model="props.data.row['{{$table_field['Field']}}']"
+                                                :option="index"
+                                                :disabled="!props.url">
+                                            {{$startSymbol}}item{{$endSymbol}}
+                                        </icheck>
+                                    </div>
+                                </div>
+                            </template>
 @endif
                             </edit-item>
 @endforeach

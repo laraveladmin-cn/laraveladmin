@@ -14,6 +14,9 @@
                       :id="id"
                       :show_export_fields="show_export_fields"
                       :trans-field="transField"
+                      :search="search"
+                      :reset="reset"
+
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
@@ -24,6 +27,7 @@
                             </slot>
                             <slot name="refresh">
                                 <button class="btn btn-success"
+                                        v-show="btnRefresh"
                                         type="button"
                                         @click="refresh">
                                     <i class="fa fa-refresh"></i> {{$t("Refresh")}}
@@ -836,6 +840,9 @@
             },
             btnSizerMore(){
                 return (this.options.btnSizerMore || typeof this.options.btnSizerMore=="undefined" );
+            },
+            btnRefresh(){
+                return (this.options.btnRefresh || typeof this.options.btnRefresh=="undefined" );
             },
             perPageOptions(){
                 if(this.options.per_page_options){
