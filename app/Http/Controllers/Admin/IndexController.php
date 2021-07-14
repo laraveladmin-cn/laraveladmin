@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Models\Admin;
+use App\Models\Log;
 use App\Models\Menu;
 use App\Models\Role;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
 class IndexController extends Controller
@@ -52,6 +55,14 @@ class IndexController extends Controller
             $item[config('laravel_admin.trans_prefix').'name'] = trans_path($item['name'],'_shared.pages.admin');
             return $item;
         })->toArray();
+        $data['access'] = Log::where('menu_id',Menu::where('url','/open/login')
+            ->where('method','&',2)
+            ->value('id'))
+            ->where('user_id','<>',0)
+            ->where('created_at','>=',Carbon::now()->subMonth()->toDateString())
+            ->selectRaw(DB::raw('LEFT(created_at,10) as date,COUNT(*) as value'))
+            ->groupBy(DB::raw('LEFT(created_at,10)'))
+            ->get();//访问统计数据
         return $data;
     }
 

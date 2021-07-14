@@ -655,6 +655,7 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "登录访问统计图",
             "Bar charts": "柱状图",
             "Sales": "销量",
             "Shirt": "衬衫",

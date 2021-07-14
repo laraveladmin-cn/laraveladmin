@@ -17,9 +17,11 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 over">
+                <echart :options="option4" style="height:400px;"></echart>
+            </div>
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 over">
                 <echart :options="option1" style="height:400px;"></echart>
-
             </div>
             <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 over">
                 <div style="min-width: 710px">
@@ -31,6 +33,7 @@
                     <echart :options="option3" style="height:400px;"></echart>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
@@ -303,6 +306,30 @@
         },
         created() {
             this.getData({},'','data');
+        },
+        computed:{
+            option4(){
+                let access = this.data.access||[];
+                return {
+                    title: {
+                        text: this.$tp('Log in to access the statistics chart') //登录访问统计图
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: collect(access).pluck('date').all()//['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: collect(access).pluck('value').all(),//[820, 932, 901, 934, 1290, 1330, 1320],
+                        type: 'line',
+                        smooth: true
+                    }]
+                };
+
+            }
+
         },
         methods:{
 
