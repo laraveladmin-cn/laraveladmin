@@ -18,7 +18,8 @@ class CheckDatabaseSeeder extends Seeder
         try {
             $has = collect(DB::connection('schema')->select($sql))->first();
         }catch (\Exception $exception){
-            $this->command->warn(trans('Check that the user connected to the database has access to the schema database!'));//'请检查连接数据库用户是否有读取schema数据库权限!'
+            $this->command->warn(trans('Check whether the connection IP Settings or the database user has access to read the schema database!'));//'请检查连接IP设置或数据库用户是否有读取schema数据库权限!'
+            $this->command->error($exception->getMessage());
         }
         if(!$has){
             $default = config('database.default');
@@ -35,6 +36,7 @@ class CheckDatabaseSeeder extends Seeder
                 DB::connection('schema')->statement($sql);
             }catch (\Exception $exception){
                 $this->command->warn(trans("Failed to create :attribute database!",['attribute'=>$database]));//'创建'.$database.'数据库失败!'
+                $this->command->error($exception->getMessage());
             }
         }
 
