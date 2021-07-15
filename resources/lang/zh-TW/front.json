@@ -91,7 +91,8 @@
             "Log file": "日誌檔",
             "System log file": "系統日誌檔",
             "Seven cattle cloud token": "七牛雲TOKEN",
-            "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取"
+            "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取",
+            "Regional management": "地區管理"
         },
         "tables": {
             "_file_logs": {
@@ -128,7 +129,13 @@
                     "Old password": "舊密碼",
                     "New password": "新密碼",
                     "Confirm the new password": "確認新密碼",
-                    "Tripartite login": "三方登入"
+                    "Tripartite login": "三方登入",
+                    "Province ID": "省ID",
+                    "City ID": "市ID",
+                    "Zone ID": "區ID",
+                    "Province": "省",
+                    "City": "市",
+                    "Zone": "區"
                 },
                 "maps": {
                     "status": {
@@ -519,6 +526,22 @@
                     "Optional years": "可選年期"
                 },
                 "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "區域ID",
+                    "Name": "名稱",
+                    "Parent ID": "父ID",
+                    "Hierarchy": "層級",
+                    "Left border": "左邊界",
+                    "Right border": "右邊界",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Parent": "父級",
+                    "Parent name": "父級名稱"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -655,6 +678,9 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "登入訪問統計圖",
+            "Number of successful login": "成功登錄次數",
+            "IP row of heavy": "IP排重",
             "Bar charts": "柱狀圖",
             "Sales": "銷量",
             "Shirt": "襯衫",

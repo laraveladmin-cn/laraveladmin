@@ -91,7 +91,8 @@
             "Log file": "Archivo de registro",
             "System log file": "Archivo de registro del sistema",
             "Seven cattle cloud token": "Nube de siete vacas Token",
-            "Seven cattle cloud upload token to get": "Siete Niu Cloud upload Token get"
+            "Seven cattle cloud upload token to get": "Siete Niu Cloud upload Token get",
+            "Regional management": "Gestión regional"
         },
         "tables": {
             "_file_logs": {
@@ -128,7 +129,13 @@
                     "Old password": "Contraseña antigua",
                     "New password": "Nueva contraseña",
                     "Confirm the new password": "Confirmar nueva contraseña",
-                    "Tripartite login": "Inicio de sesión tripartito"
+                    "Tripartite login": "Inicio de sesión tripartito",
+                    "Province ID": "ID de la provincia",
+                    "City ID": "ID de la ciudad",
+                    "Zone ID": "ID de área",
+                    "Province": "Provincia",
+                    "City": "Ciudad",
+                    "Zone": "Región"
                 },
                 "maps": {
                     "status": {
@@ -519,6 +526,22 @@
                     "Optional years": "Años opcionales"
                 },
                 "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "ID de área",
+                    "Name": "Nombre",
+                    "Parent ID": "Id padre",
+                    "Hierarchy": "Jerarquía",
+                    "Left border": "Límite izquierdo",
+                    "Right border": "Límite derecho",
+                    "Created At": "Tiempo de creación",
+                    "Updated At": "Tiempo de modificación",
+                    "Deleted At": "Tiempo de eliminación",
+                    "Parent": "Padre",
+                    "Parent name": "Nombre del padre"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -655,6 +678,9 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "Gráfico estadístico de acceso de inicio de sesión",
+            "Number of successful login": "Número de conexiones exitosas",
+            "IP row of heavy": "Rediseño IP",
             "Bar charts": "Histograma",
             "Sales": "Volumen de ventas",
             "Shirt": "Camisa",

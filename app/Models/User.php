@@ -105,9 +105,9 @@ class User extends Authenticatable
         //'created_at' => 'Created At',
         //'updated_at' => 'Updated At',
         //'deleted_at' => 'Deleted At',
-        'province_id'=>'省ID',
-        'city_id'=>'市ID',
-        'area_id'=>'区ID',
+        'province_id'=>'Province ID',
+        'city_id'=>'City ID',
+        'area_id'=>'Zone ID',
         'id' => 'ID',
     ];
 

@@ -40,7 +40,7 @@
                             <edit-item key-name="mobile_phone" :options="{name: props.transField('Phone number'), required: !props.data.row.email,rules:props.data.row.email?'':'required|mobile'}"  :datas="props">
                             </edit-item>
 
-                            <edit-item key-name="province_id" :options="{name: '省', required: ''}"  :datas="props">
+                            <edit-item key-name="province_id" :options="{name: props.transField('Province'), required: ''}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['province_id']"
@@ -57,7 +57,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="city_id" :options="{name: '市', required: ''}"  :datas="props">
+                            <edit-item key-name="city_id" :options="{name: props.transField('City'), required: ''}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['city_id']"
@@ -74,7 +74,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="area_id" :options="{name: '区', required: ''}"  :datas="props">
+                            <edit-item key-name="area_id" :options="{name: props.transField('Zone'), required: ''}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['area_id']"

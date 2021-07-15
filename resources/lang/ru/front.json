@@ -91,7 +91,8 @@
             "Log file": "Файл журнала",
             "System log file": "файл Системного журнала",
             "Seven cattle cloud token": "семь коров",
-            "Seven cattle cloud upload token to get": "семь коровьих облаков"
+            "Seven cattle cloud upload token to get": "семь коровьих облаков",
+            "Regional management": "территориальное управление"
         },
         "tables": {
             "_file_logs": {
@@ -128,7 +129,13 @@
                     "Old password": "старый пароль",
                     "New password": "новый пароль",
                     "Confirm the new password": "подтвердить новый пароль",
-                    "Tripartite login": "тройной вход"
+                    "Tripartite login": "тройной вход",
+                    "Province ID": "идентификатор провинции",
+                    "City ID": "идентификатор города",
+                    "Zone ID": "идентификатор области",
+                    "Province": "провинция",
+                    "City": "город",
+                    "Zone": "район"
                 },
                 "maps": {
                     "status": {
@@ -519,6 +526,22 @@
                     "Optional years": "необязательный период"
                 },
                 "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "идентификатор области",
+                    "Name": "имя",
+                    "Parent ID": "родительский ID",
+                    "Hierarchy": "иерархия",
+                    "Left border": "левая граница",
+                    "Right border": "правая граница",
+                    "Created At": "время создания",
+                    "Updated At": "время изменения",
+                    "Deleted At": "время удаления",
+                    "Parent": "отчество",
+                    "Parent name": "родительское имя"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -655,6 +678,9 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "статистическая карта доступа",
+            "Number of successful login": "удачный вход",
+            "IP row of heavy": "сброс IP - строк",
             "Bar charts": "колонка",
             "Sales": "объем сбыта",
             "Shirt": "рубашка",

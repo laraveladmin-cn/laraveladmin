@@ -91,7 +91,8 @@
             "Log file": "Ficheiro de registo",
             "System log file": "Arquivo de Registro do sistema",
             "Seven cattle cloud token": "Sete cardápios de Nuvem de gado",
-            "Seven cattle cloud upload token to get": "Sete itens de Nuvem de gado para receber"
+            "Seven cattle cloud upload token to get": "Sete itens de Nuvem de gado para receber",
+            "Regional management": "Gestão regional"
         },
         "tables": {
             "_file_logs": {
@@ -128,7 +129,13 @@
                     "Old password": "Senha Antiga",
                     "New password": "Nova senha",
                     "Confirm the new password": "Confirmar Nova senha",
-                    "Tripartite login": "Três partidarias"
+                    "Tripartite login": "Três partidarias",
+                    "Province ID": "ID Da província",
+                    "City ID": "Identidade da Cidade",
+                    "Zone ID": "Zona ID",
+                    "Province": "Província",
+                    "City": "Cidade",
+                    "Zone": "área"
                 },
                 "maps": {
                     "status": {
@@ -519,6 +526,22 @@
                     "Optional years": "Termo opcional"
                 },
                 "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "Zona ID",
+                    "Name": "Nome",
+                    "Parent ID": "ID do Pai",
+                    "Hierarchy": "Hierarquia",
+                    "Left border": "Fronteira esquerda",
+                    "Right border": "Fronteira Direita",
+                    "Created At": "Tempo de criação",
+                    "Updated At": "Tempo de revisão",
+                    "Deleted At": "Apagar tempo",
+                    "Parent": "Pais",
+                    "Parent name": "Nome do Pai"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -655,6 +678,9 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "Registrar no gráfico de acesso",
+            "Number of successful login": "Número de logins de SUCESSO",
+            "IP row of heavy": "IP de duplicação",
             "Bar charts": "Histograma",
             "Sales": "Volume de vendas",
             "Shirt": "Camisa",

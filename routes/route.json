@@ -794,9 +794,9 @@
         },
         {
             "id": 151,
-            "name": "地区管理",
+            "name": "Regional management",
             "icons": "fa-map-pin",
-            "description": "地区管理",
+            "description": "Regional management",
             "url": "/admin/areas",
             "parent_id": 7,
             "is_page": "Yes",

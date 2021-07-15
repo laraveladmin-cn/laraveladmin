@@ -91,7 +91,8 @@
             "Log file": "ログファイル",
             "System log file": "システムログファイル",
             "Seven cattle cloud token": "七牛雲TOKEN",
-            "Seven cattle cloud upload token to get": "七牛雲アップロードTOKEN取得"
+            "Seven cattle cloud upload token to get": "七牛雲アップロードTOKEN取得",
+            "Regional management": "地域の管理"
         },
         "tables": {
             "_file_logs": {
@@ -128,7 +129,13 @@
                     "Old password": "古いパスワード",
                     "New password": "新しいパスワード",
                     "Confirm the new password": "新しいパスワードを確認します",
-                    "Tripartite login": "サードパーティ登録"
+                    "Tripartite login": "サードパーティ登録",
+                    "Province ID": "省ID",
+                    "City ID": "市のID",
+                    "Zone ID": "エリアID",
+                    "Province": "省",
+                    "City": "市",
+                    "Zone": "エリア"
                 },
                 "maps": {
                     "status": {
@@ -519,6 +526,22 @@
                     "Optional years": "任意年限"
                 },
                 "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "エリアID",
+                    "Name": "名前",
+                    "Parent ID": "親ID",
+                    "Hierarchy": "階層",
+                    "Left border": "左境界",
+                    "Right border": "右端",
+                    "Created At": "作成時間",
+                    "Updated At": "変更時間",
+                    "Deleted At": "削除時間",
+                    "Parent": "親‐とう",
+                    "Parent name": "親の名前"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -655,6 +678,9 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "アクセス統計図",
+            "Number of successful login": "ログイン成功回数",
+            "IP row of heavy": "IPドレン",
             "Bar charts": "ヒストグラム",
             "Sales": "販売量",
             "Shirt": "シャツ",

@@ -8,9 +8,9 @@
                 <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="name" :options="{name: '名称',type:'text', rules:'required',title:''}" :datas="props">
+                            <edit-item key-name="name" :options="{name: props.transField('Name'),type:'text', rules:'required',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="parent_id" :options="{name: '父级',type:'text', rules:props.data.no_root?'':'required',title:''}" :datas="props">
+                            <edit-item key-name="parent_id" :options="{name: props.transField('Parent'),type:'text', rules:props.data.no_root?'':'required',title:''}" :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['parent_id']"

@@ -58,9 +58,9 @@ class AreaController extends Controller
 
     //字段导出
     public $exportFieldsName = [
-        'name' => '名称',
-        'parent.name' => '父级名称',
-        'parent_id' => '父级ID',
+        'name' => 'Name',
+        'parent.name' => 'Parent name',
+        'parent_id' => 'Parent ID',
         'id'=>'ID',
     ];
 

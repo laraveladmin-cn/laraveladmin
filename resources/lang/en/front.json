@@ -91,7 +91,8 @@
             "Log file": "Log file",
             "System log file": "System log file",
             "Seven cattle cloud token": "Seven cattle cloud token",
-            "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get"
+            "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get",
+            "Regional management": "Regional management"
         },
         "tables": {
             "_file_logs": {
@@ -128,7 +129,13 @@
                     "Old password": "Old password",
                     "New password": "New password",
                     "Confirm the new password": "Confirm the new password",
-                    "Tripartite login": "Tripartite login"
+                    "Tripartite login": "Tripartite login",
+                    "Province ID": "Province ID",
+                    "City ID": "City ID",
+                    "Zone ID": "Zone ID",
+                    "Province": "Province",
+                    "City": "City",
+                    "Zone": "Zone"
                 },
                 "maps": {
                     "status": {
@@ -519,6 +526,22 @@
                     "Optional years": "Optional years"
                 },
                 "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "Zone ID",
+                    "Name": "Name",
+                    "Parent ID": "Parent ID",
+                    "Hierarchy": "Hierarchy",
+                    "Left border": "Left border",
+                    "Right border": "Right border",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "Parent": "Parent",
+                    "Parent name": "Parent name"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -655,6 +678,9 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "Log in to access the statistics chart",
+            "Number of successful login": "Number of successful login",
+            "IP row of heavy": "IP row of heavy",
             "Bar charts": "Bar charts",
             "Sales": "Sales",
             "Shirt": "Shirt",

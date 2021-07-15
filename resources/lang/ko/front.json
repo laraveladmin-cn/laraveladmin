@@ -91,7 +91,8 @@
             "Log file": "로그 파일",
             "System log file": "시스템 로그 파일",
             "Seven cattle cloud token": "칠 우 윈 투 킨.",
-            "Seven cattle cloud upload token to get": "칠 우 운 올 려 서 TOKEN 획득."
+            "Seven cattle cloud upload token to get": "칠 우 운 올 려 서 TOKEN 획득.",
+            "Regional management": "지역 관리"
         },
         "tables": {
             "_file_logs": {
@@ -128,7 +129,13 @@
                     "Old password": "오래된 비밀번호",
                     "New password": "새 비밀번호",
                     "Confirm the new password": "새 비밀번호 확인",
-                    "Tripartite login": "3 자 등록"
+                    "Tripartite login": "3 자 등록",
+                    "Province ID": "성 ID",
+                    "City ID": "시 ID",
+                    "Zone ID": "지역 ID",
+                    "Province": "성.",
+                    "City": "시장.",
+                    "Zone": "구역."
                 },
                 "maps": {
                     "status": {
@@ -519,6 +526,22 @@
                     "Optional years": "선택 가능 한 연도"
                 },
                 "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "영역 ID",
+                    "Name": "명칭.",
+                    "Parent ID": "아버지 ID",
+                    "Hierarchy": "등급",
+                    "Left border": "왼쪽 경계",
+                    "Right border": "오른쪽 경계",
+                    "Created At": "생 성 시간",
+                    "Updated At": "수정 시간",
+                    "Deleted At": "삭제 시간",
+                    "Parent": "아버지",
+                    "Parent name": "부모 이름"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -655,6 +678,9 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "로그 인 방문 통계 도",
+            "Number of successful login": "성공 로그 인 횟수",
+            "IP row of heavy": "IP 배 중",
             "Bar charts": "막대 그래프",
             "Sales": "판매 량",
             "Shirt": "셔츠",

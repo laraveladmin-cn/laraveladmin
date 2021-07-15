@@ -60,7 +60,7 @@ class IndexController extends Controller
             ->value('id'))
             ->where('user_id','<>',0)
             ->where('created_at','>=',Carbon::now()->subMonth()->toDateString())
-            ->selectRaw(DB::raw('LEFT(created_at,10) as date,COUNT(*) as value'))
+            ->selectRaw(DB::raw('LEFT(created_at,10) as date,COUNT(*) as value,COUNT(DISTINCT `ip`) as distinct_value'))
             ->groupBy(DB::raw('LEFT(created_at,10)'))
             ->get();//访问统计数据
         return $data;

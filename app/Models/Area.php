@@ -14,7 +14,7 @@ class Area extends Model
     use BaseModel; //基础模型
     use TreeModel; //树状结构
     use SoftDeletes; //软删除
-    //数据表名称
+    //数据表Name
     protected $table = 'areas';
     //批量赋值白名单
     protected $fillable = [
@@ -37,15 +37,15 @@ class Area extends Model
     ];
     //字段说明
     protected $fieldsName = [
-        'id' => '区域ID',
-        'name' => '名称',
-        'parent_id' => '父ID',
-        'level' => '层级',
-        'left_margin' => '左边界',
-        'right_margin' => '右边界',
-        'created_at' => '创建时间',
-        'updated_at' => '修改时间',
-        'deleted_at' => '删除时间'
+        'id' => 'Zone ID',
+        'name' => 'Name',
+        'parent_id' => 'Parent ID',
+        'level' => 'Hierarchy',
+        'left_margin' => 'Left border',
+        'right_margin' => 'Right border',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'deleted_at' => 'Deleted At'
     ];
 
 
