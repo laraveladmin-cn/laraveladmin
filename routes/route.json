@@ -741,7 +741,6 @@
                 "get"
             ],
             "is_page": "Yes",
-            "status": "Display",
             "group": "open",
             "action": "SponsorController@index",
             "_id": 155
@@ -751,12 +750,13 @@
             "name": "赞助商分页",
             "icons": "fa-list",
             "description": "赞助商分页",
-            "url": "/admin/sponsors/list",
+            "url": "/open/sponsors/list",
             "parent_id": 157,
             "method": [
                 "get"
             ],
             "group": "open",
+            "action": "SponsorController@list",
             "_id": 156
         },
         {
