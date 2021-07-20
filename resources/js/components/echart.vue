@@ -91,6 +91,9 @@
             this.i
         },
         watch:{
+            options(){
+                setTimeout(this.init,0);
+            }
         }
     }
 </script>
