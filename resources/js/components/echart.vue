@@ -88,7 +88,6 @@
                 editormdJs.src = 'https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js';
                 document.body.appendChild(editormdJs);
             }
-            this.i
         },
         watch:{
             options(){
