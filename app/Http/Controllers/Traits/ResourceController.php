@@ -230,8 +230,15 @@ trait ResourceController
         $this->selectValidate();
         //指定查询字段
         $fields = $this->selectFields($this->showIndexFields);
-        $fields and $this->bindModel = $this->bindModel()->select(in_array($this->newBindModel()->getKeyName(), $fields)
-            ? $fields : array_merge([$this->newBindModel()->getKeyName()], $fields));
+        //判断是否包含主键字段,没有包含自动添加
+        $model = $this->newBindModel();
+        $primary_key = $model->getKeyName();
+        if($primary_key && $fields){
+            $primary_key1 = $model->getTable().'.'.$primary_key;
+            $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
+            $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
+        }
+        $fields and $this->bindModel = $this->bindModel()->select($fields);
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel();
         $obj = $this->handleList($obj);
@@ -932,7 +939,6 @@ trait ResourceController
     {
         return $obj;
     }
-
 
     /**
      * 列表页面返回数据前对数据处理
