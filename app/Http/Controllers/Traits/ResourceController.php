@@ -60,7 +60,7 @@ trait ResourceController
             $model = '\App\Models\\' . Str::studly($val);
             $item = [];
             $relation_id = Request::input('where.' . $value, 0);
-            if ($relation_id) {
+            if ($relation_id && class_exists($model)) {
                 $fields = isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'];
                 $item = collect($model::select($fields)
                     ->find($relation_id))->toArray();
