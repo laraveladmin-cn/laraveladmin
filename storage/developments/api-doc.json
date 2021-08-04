@@ -1,0 +1,115 @@
+[
+    {
+        "id": 63,
+        "name": "登录页面",
+        "params": [],
+        "body_params": [],
+        "responses": [
+            {
+                "name": "otherLogin",
+                "description": "三方登录集合"
+            },
+            {
+                "name": "otherLogin.$index",
+                "description": "三方登录"
+            },
+            {
+                "name": "otherLogin.$index.type",
+                "description": "服务商"
+            },
+            {
+                "name": "otherLogin.$index.url",
+                "description": "跳转地址"
+            },
+            {
+                "name": "otherLogin.$index.class",
+                "description": "图标样式"
+            },
+            {
+                "name": "mustVerify",
+                "description": "是否有验证码"
+            }
+        ]
+    },
+    {
+        "id": 64,
+        "name": "提交登录",
+        "params": [],
+        "body_params": [{
+            "name": "username",
+            "type": 2,
+            "title": "用户名",
+            "description": "用户名",
+            "example": "demo_admin",
+            "validate": "必填"
+        }, {
+            "name": "password",
+            "type": 2,
+            "title": "密码",
+            "description": "密码",
+            "example": "admin123456",
+            "validate": "必填"
+        }, {
+            "name": "_token",
+            "type": 2,
+            "title": "CSRF认证token",
+            "description": "",
+            "example": "",
+            "validate": "必填"
+        }, {
+            "name": "other",
+            "type": 2,
+            "title": "三方登录回传标记",
+            "description": "三方登录回传绑定码",
+            "example": "",
+            "validate": "非必填"
+        }, {
+            "name": "verify",
+            "type": 2,
+            "title": "极验滑块验证参数",
+            "description": "极验滑块验证参数",
+            "example": "",
+            "validate": "当出现滑块验证时必填"
+        }, {
+            "name": "geetest_seccode",
+            "type": 2,
+            "title": "极验滑块验证参数",
+            "description": "极验滑块验证参数",
+            "example": "",
+            "validate": "当出现滑块验证时必填"
+        }, {
+            "name": "geetest_validate",
+            "type": 2,
+            "title": "极验滑块验证参数",
+            "description": "极验滑块验证参数",
+            "example": "",
+            "validate": "当出现滑块验证时必填"
+        }],
+        "responses": [{
+            "name": "title",
+            "description": "提示"
+        }, {
+            "name": "content",
+            "description": "提示内容"
+        }, {
+            "name": "lifetime",
+            "description": "token保存生命周期"
+        }, {
+            "name": "redirect",
+            "description": "跳转至页面"
+        }, {
+            "name": "token",
+            "description": "用户token认证信息"
+        }]
+    },
+    {
+        "id": 62,
+        "name": "更新token",
+        "params": [],
+        "body_params": [],
+        "responses": [{
+            "name": "_token",
+            "description": "CSRF认证token值"
+        }]
+    }
+]

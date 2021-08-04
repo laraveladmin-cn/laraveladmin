@@ -255,7 +255,17 @@ class Menu extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function params(){
-        return $this->hasMany('App\Models\Param');
+        return $this->hasMany('App\Models\Param')
+            ->where('use',0);
+    }
+
+    /**
+     * 接口body参数
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function body_params(){
+        return $this->hasMany('App\Models\Param')
+            ->where('use',1);
     }
 
     /**

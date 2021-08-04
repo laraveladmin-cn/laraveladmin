@@ -6,6 +6,7 @@ use App\Facades\ClientAuth;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 
 class IndexController extends Controller
@@ -159,8 +160,12 @@ class IndexController extends Controller
      * 获取菜单信息
      */
     public function menu(){
-        $data['menus'] = collect(Menu::main()
-            ->select(['id','name','icons','description','url','parent_id','resource_id','status','level','left_margin','right_margin','method'])
+        $obj = Menu::main()
+            ->select(['id','name','icons','description',
+                'url','parent_id','resource_id','status','level',
+                'left_margin','right_margin','method',
+                'resource_id'
+            ])
             ->orderBy('left_margin','asc')
             ->with(['parent'=>function($q){
                 $q->select([
@@ -168,13 +173,17 @@ class IndexController extends Controller
                     'name',
                     'item_name'
                 ]);
-            }])
-            ->get())
+            }]);
+        if(Request::input('type')=='document'){
+            $obj = $obj->with(['params','body_params','responses']);
+        }
+        $data['menus'] = collect($obj->get())
             ->map(function ($item){
-                $item[config('laravel_admin.trans_prefix').'name'] = trans_path($item['name'],'_shared.menus');
-                $item[config('laravel_admin.trans_prefix').'description'] = trans_path($item['description'],'_shared.menus');
+                $item[config('laravel_admin.trans_prefix').'name'] = Menu::trans($item,'name');
+                $item[config('laravel_admin.trans_prefix').'description'] = Menu::trans($item,'description');
                 return $item;
         });
+
         return Response::returns($data);
     }
 
