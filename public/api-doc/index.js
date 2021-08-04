@@ -235,6 +235,7 @@ const App = {
             if(this.loading){
                 return false;
             }
+            this.loading = true;
             axios.request({
                 params:this.params,
                 url:this.api_url,
@@ -305,7 +306,7 @@ const App = {
                     if (typeof tree[i] != 'object') {
                         result[result.length] = {"key": key + i, "k": i, "type": typeof tree[i], "value": tree[i], "deep": deep};
                     } else {
-                        let type = Array.isArray(tree[i])?'array':typeof tree[i];
+                        let type = Array.isArray(tree[i])?'array':(tree[i]===null?'null':typeof tree[i]);
                         result[result.length] = {"key": key + i, "k": i, "type": type, "value": '['+type+']', "deep": deep};
                         let res = this.treeToArr(tree[i], key + i, deep);
                         for (let j = 0; j < res.length; j++) {
@@ -370,6 +371,10 @@ const App = {
         },
         //获取所有接口数据
         getMenus(){
+            if(this.loading){
+                return false;
+            }
+            this.loading = true;
             axios.request({
                 url:this.use_url+this.menus_url,
                 method:'get'

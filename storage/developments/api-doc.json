@@ -35,81 +35,209 @@
         "id": 64,
         "name": "提交登录",
         "params": [],
-        "body_params": [{
-            "name": "username",
-            "type": 2,
-            "title": "用户名",
-            "description": "用户名",
-            "example": "demo_admin",
-            "validate": "必填"
-        }, {
-            "name": "password",
-            "type": 2,
-            "title": "密码",
-            "description": "密码",
-            "example": "admin123456",
-            "validate": "必填"
-        }, {
-            "name": "_token",
-            "type": 2,
-            "title": "CSRF认证token",
-            "description": "",
-            "example": "",
-            "validate": "必填"
-        }, {
-            "name": "other",
-            "type": 2,
-            "title": "三方登录回传标记",
-            "description": "三方登录回传绑定码",
-            "example": "",
-            "validate": "非必填"
-        }, {
-            "name": "verify",
-            "type": 2,
-            "title": "极验滑块验证参数",
-            "description": "极验滑块验证参数",
-            "example": "",
-            "validate": "当出现滑块验证时必填"
-        }, {
-            "name": "geetest_seccode",
-            "type": 2,
-            "title": "极验滑块验证参数",
-            "description": "极验滑块验证参数",
-            "example": "",
-            "validate": "当出现滑块验证时必填"
-        }, {
-            "name": "geetest_validate",
-            "type": 2,
-            "title": "极验滑块验证参数",
-            "description": "极验滑块验证参数",
-            "example": "",
-            "validate": "当出现滑块验证时必填"
-        }],
-        "responses": [{
-            "name": "title",
-            "description": "提示"
-        }, {
-            "name": "content",
-            "description": "提示内容"
-        }, {
-            "name": "lifetime",
-            "description": "token保存生命周期"
-        }, {
-            "name": "redirect",
-            "description": "跳转至页面"
-        }, {
-            "name": "token",
-            "description": "用户token认证信息"
-        }]
+        "body_params": [
+            {
+                "name": "username",
+                "type": 2,
+                "title": "用户名",
+                "description": "用户名",
+                "example": "demo_admin",
+                "validate": "必填"
+            },
+            {
+                "name": "password",
+                "type": 2,
+                "title": "密码",
+                "description": "密码",
+                "example": "admin123456",
+                "validate": "必填"
+            },
+            {
+                "name": "_token",
+                "type": 2,
+                "title": "CSRF认证token",
+                "description": "",
+                "example": "",
+                "validate": "必填"
+            },
+            {
+                "name": "other",
+                "type": 2,
+                "title": "三方登录回传标记",
+                "description": "三方登录回传绑定码",
+                "example": "",
+                "validate": "非必填"
+            },
+            {
+                "name": "verify",
+                "type": 2,
+                "title": "极验滑块验证参数",
+                "description": "极验滑块验证参数",
+                "example": "",
+                "validate": "当出现滑块验证时必填"
+            },
+            {
+                "name": "geetest_seccode",
+                "type": 2,
+                "title": "极验滑块验证参数",
+                "description": "极验滑块验证参数",
+                "example": "",
+                "validate": "当出现滑块验证时必填"
+            },
+            {
+                "name": "geetest_validate",
+                "type": 2,
+                "title": "极验滑块验证参数",
+                "description": "极验滑块验证参数",
+                "example": "",
+                "validate": "当出现滑块验证时必填"
+            }
+        ],
+        "responses": [
+            {
+                "name": "title",
+                "description": "提示"
+            },
+            {
+                "name": "content",
+                "description": "提示内容"
+            },
+            {
+                "name": "lifetime",
+                "description": "token保存生命周期"
+            },
+            {
+                "name": "redirect",
+                "description": "跳转至页面"
+            },
+            {
+                "name": "token",
+                "description": "用户token认证信息"
+            }
+        ]
     },
     {
         "id": 62,
         "name": "更新token",
         "params": [],
         "body_params": [],
-        "responses": [{
-            "name": "_token",
-            "description": "CSRF认证token值"
-        }]
+        "responses": [
+            {
+                "name": "_token",
+                "description": "CSRF认证token值"
+            }
+        ]
+    },
+    {
+        "id": 61,
+        "name": "获取配置信息",
+        "params": [],
+        "body_params": [],
+        "responses": [
+            {
+                "name": "logo",
+                "description": "站点LOGO图片地址"
+            },
+            {
+                "name": "name",
+                "description": "应用名称"
+            },
+            {
+                "name": "name_short",
+                "description": "应用名称简称"
+            },
+            {
+                "name": "debug",
+                "description": "是否为调试模式"
+            },
+            {
+                "name": "env",
+                "description": "当前环境状态"
+            },
+            {
+                "name": "icp",
+                "description": "icp备案号码"
+            },
+            {
+                "name": "api_url_model",
+                "description": "接口请求模式"
+            },
+            {
+                "name": "app_url",
+                "description": "应用站点网址"
+            },
+            {
+                "name": "api_url",
+                "description": "移动应用接口请求地址源"
+            },
+            {
+                "name": "web_url",
+                "description": "网页应用接口请求地址源"
+            },
+            {
+                "name": "domain",
+                "description": "登录信息cookie存储domain"
+            },
+            {
+                "name": "lifetime",
+                "description": "登录信息过期生命周期"
+            },
+            {
+                "name": "verify",
+                "description": "验证码配置"
+            },
+            {
+                "name": "verify.type",
+                "description": "验证码类型"
+            },
+            {
+                "name": "verify.dataUrl",
+                "description": "验证码获取地址"
+            },
+            {
+                "name": "verify.data",
+                "description": "验证配置数据项"
+            },
+            {
+                "name": "verify.data.client_fail_alert",
+                "description": "滑块验证配置项(未验证提醒文案)"
+            },
+            {
+                "name": "verify.data.lang",
+                "description": "滑块验证配置项(语言)"
+            },
+            {
+                "name": "verify.data.product",
+                "description": "滑块验证配置项"
+            },
+            {
+                "name": "verify.data.http",
+                "description": "滑块验证配置项"
+            },
+            {
+                "name": "client_id",
+                "description": "连接唯一标识(类似cookie的session id机制)"
+            },
+            {
+                "name": "default_language",
+                "description": "默认系统语言"
+            },
+            {
+                "name": "tinymce_key",
+                "description": "tinymce富文本编辑器配置"
+            },
+            {
+                "name": "locales",
+                "description": "可切换系统语言"
+            },
+            {
+                "name": "locales.$index",
+                "description": "系统语言选项"
+            },
+            {
+                "name": "version",
+                "description": "应用版本号"
+            }
+        ]
     }
 ]
