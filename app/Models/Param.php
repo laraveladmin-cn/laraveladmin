@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Param extends Model
 {
-
+    protected $itemName='请求参数';
     use BaseModel; //基础模型
     use SoftDeletes; //软删除
     //数据表名称

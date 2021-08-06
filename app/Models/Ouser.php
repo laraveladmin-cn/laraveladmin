@@ -13,6 +13,7 @@ class Ouser extends Model
 
     use BaseModel; //基础模型
     use SoftDeletes; //软删除
+    protected $itemName='三方登录用户';
     //数据表名称
     protected $table = 'ousers';
     //批量赋值白名单

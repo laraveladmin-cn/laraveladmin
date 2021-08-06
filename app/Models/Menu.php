@@ -34,6 +34,7 @@ class Menu extends Model
     protected $openRoot = [4]; //游客访问
     protected $homeRoot = [3]; //登录用户
     protected $adminRoot = [2]; //后台菜单
+    protected $itemName='菜单';
     //批量赋值白名单
     protected $fillable = [
         'id',

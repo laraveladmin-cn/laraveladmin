@@ -76,7 +76,17 @@ class LoginController extends Controller
      * 三方登录
      * @return mixed
      */
-    public function otherLogin($type){
+    public function otherLogin($type=''){
+        //参数验证
+        $request = app('request');
+        $request->offsetSet('type',$type);
+        $validator = Validator::make($request->all(), ['type'=>'required|string|in:'.collect(config('services',[]))->keys()->implode(',')], [],[
+            'type'=>trans('Three-party Login service provider')
+        ]);
+        if ($validator->fails()) {
+            throw ValidationException::withMessages($validator->errors()->toArray());
+        }
+        $type = $request->input('type');
         return Socialite::with($type)->redirect();
     }
 

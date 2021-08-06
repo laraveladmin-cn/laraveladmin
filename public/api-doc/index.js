@@ -66,18 +66,7 @@ const App = {
                 {name:'Authorization',example:token || '',title:'登录用户认证参数'},
                 {name:'Accept-Language',example:AppConfig.default_language||'',title:'国家语言'}
                 ], //公共请求头
-            common_responses:[
-                {
-                    "name": "title",
-                    "description": "提示"
-                }, {
-                    "name": "content",
-                    "description": "提示内容"
-                }, {
-                    "name": "redirect",
-                    "description": "跳转至页面"
-                }
-            ],
+            common_responses:[],
             menus_url:'/open/menu?type=document',//获取接口请求地址
             api_model:AppConfig.api_url_model||'web',//接口模式
             domain:AppConfig.app_url||'',
@@ -191,7 +180,9 @@ const App = {
             });
             if(this.keywords){
                 let filter_menus = menus.filter( (menu)=> {
-                    return menu['name'].indexOf(this.keywords)!=-1 || (menu['_trans_name'] && menu['_trans_name'].indexOf(this.keywords)!=-1);
+                    return menu['name'].indexOf(this.keywords)!=-1 ||
+                        (menu['_trans_name'] && menu['_trans_name'].indexOf(this.keywords)!=-1) ||
+                        menu['url'].indexOf(this.keywords)!=-1;
                 });
                 menus = menus.filter( (menu)=> {
                     let flog = false;
@@ -226,7 +217,13 @@ const App = {
         copyObj:copyObj,
         submit(){
             if(this.api.use_method=='get'){
-                window.open(this.form_api_url, '_blank');
+                let url = this.form_api_url;
+                if(url.indexOf('?')==-1){
+                    url = url+'?json=1';
+                }else {
+                    url = url+'&json=1';
+                }
+                window.open(url, '_blank');
             }else {
                 this.$refs['form'].submit();
             }
@@ -248,6 +245,8 @@ const App = {
                 this.result = response;
                 this.loading = false;
             }).catch((error) => {
+                this.result = error.response || {};
+                dd(this.result);
                 this.loading = false;
             });
 
@@ -374,6 +373,7 @@ const App = {
             if(this.loading){
                 return false;
             }
+            this.keywords = this.keywords_back = '';
             this.loading = true;
             axios.request({
                 url:this.use_url+this.menus_url,
@@ -382,6 +382,10 @@ const App = {
                 if(response.data.menus){
                     //dd(response.data.menus);
                     this.menus = response.data.menus;
+                    this.selectMenu();
+                }
+                if(response.data.common_responses){
+                    this.common_responses = response.data.common_responses;
                     this.selectMenu();
                 }
                 this.loading = false;

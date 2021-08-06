@@ -15,7 +15,7 @@ class Role extends Model
 {
     use TreeModel; //树状结构
     use SoftDeletes,BaseModel; //软删除
-
+    protected $itemName='角色';
     //批量赋值白名单
     protected $fillable = [
         'name',

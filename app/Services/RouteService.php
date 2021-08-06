@@ -249,7 +249,7 @@ class RouteService
         });
     }
 
-    protected static function getClass($value){
+    public static function getClass($value){
         $str = Str::singular(Str::camel(str_replace('-','_',$value)));
         if(Str::endsWith($str,'ss')){
             $str = Str::replaceLast('ss','s',$str);

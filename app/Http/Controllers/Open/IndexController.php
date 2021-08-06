@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Open;
 use App\Facades\ClientAuth;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
@@ -176,6 +177,21 @@ class IndexController extends Controller
             }]);
         if(Request::input('type')=='document'){
             $obj = $obj->with(['params','body_params','responses']);
+            $file = storage_path('/developments/api-doc.json');
+            if(file_exists($file)){
+                $common_responses_data = json_decode(file_get_contents($file),true)?:[];
+                $common_responses = Arr::get($common_responses_data,'common_responses',[]);
+                collect(Arr::get($common_responses_data,'common_responses_list',[]))->each(function ($item)use(&$common_responses){
+                    $common_responses[] = $item;
+                    $common_responses[] = [
+                        'name'=>'list.'.$item['name'],
+                        'description'=>$item['description']
+                    ];
+                });
+                $data['common_responses'] = $common_responses;
+            }else{
+                $data['common_responses'] = [];
+            }
         }
         $data['menus'] = collect($obj->get())
             ->map(function ($item){

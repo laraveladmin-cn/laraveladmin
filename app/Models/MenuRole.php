@@ -9,6 +9,7 @@ use App\Models\Traits\BaseModel;
 class MenuRole extends Model
 {
     protected $table = 'menu_role'; //数据表名称
+    protected $itemName='菜单角色关联';
     public $timestamps = false;
     use BaseModel; //软删除
 

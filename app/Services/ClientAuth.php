@@ -70,6 +70,9 @@ class ClientAuth
      */
     public function isApi(){
         return LifeData::remember('_is_api',function (){
+            if(!Request::route()){
+                return false;
+            }
             return Str::startsWith('/'.Request::route()->getPrefix(),$this->routePrefix);
         });
     }
