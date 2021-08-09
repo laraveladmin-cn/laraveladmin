@@ -70,7 +70,7 @@ class BuildApiDoc extends BaseCommand
             //->where('method','&',1)
             //->where('id','>=',9)
             //->where('id','<=',16)
-            //->where('id','=',16)
+            //->where('id','=',13)
             ->with(['parent'=>function($q){
             $q->select([
                 'id',
@@ -288,9 +288,9 @@ class BuildApiDoc extends BaseCommand
             $item['params'] = collect($params_data)->values()->toArray();
             $item['route_params'] = collect($route_params_data)->values()->toArray();
             $item['body_params'] = collect($body_params_data)->values()->toArray();
-            if($item['id']==16){
-                //dd(json_encode($item['route_params'],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
-            }
+            /*if($item['id']==13){
+                dd(json_encode($item['responses'],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+            }*/
             $menus[$item['id']] = $item;
 
         });
@@ -333,7 +333,7 @@ class BuildApiDoc extends BaseCommand
                 break;
             }
             $k = (is_numeric($key) && !$is_maps && !$is_where)?$prefix.'$index':$prefix.$key;
-            if(!Arr::get($responses_data,$k) && !Arr::get($this->common_responses,$k)){
+            if(!isset($responses_data[$k]) && !isset($this->common_responses[$k])){
                 if(!is_array($value)){
                     if(Str::startsWith($k,'excel.exportFields.')){ //导出字段响应描述
                         $k1 = str_replace('excel.exportFields.','',$k);

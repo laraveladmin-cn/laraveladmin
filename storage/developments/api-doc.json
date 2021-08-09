@@ -616,6 +616,10 @@
                 {
                     "name": "maps.status.2",
                     "description": "停用"
+                },
+                {
+                    "name": "row.name",
+                    "description": "姓名"
                 }
             ],
             "route_params": [
@@ -1341,6 +1345,10 @@
                 {
                     "name": "mapsRelations.tmp",
                     "description": ""
+                },
+                {
+                    "name": "row.name",
+                    "description": "名称"
                 }
             ],
             "route_params": [
@@ -5020,6 +5028,10 @@
                 {
                     "name": "mapsRelations.resources",
                     "description": ""
+                },
+                {
+                    "name": "row.name",
+                    "description": "名称"
                 }
             ],
             "route_params": [
@@ -5477,6 +5489,10 @@
                 {
                     "name": "maps.itype.5",
                     "description": "switch"
+                },
+                {
+                    "name": "row.name",
+                    "description": "名称"
                 }
             ],
             "route_params": [
@@ -5624,6 +5640,10 @@
                 {
                     "name": "maps.status.2",
                     "description": "停用"
+                },
+                {
+                    "name": "row.name",
+                    "description": "姓名"
                 }
             ],
             "route_params": []
@@ -6183,6 +6203,10 @@
                 {
                     "name": "lifetime",
                     "description": ""
+                },
+                {
+                    "name": "user.name",
+                    "description": ""
                 }
             ],
             "route_params": []
@@ -6458,6 +6482,10 @@
                 {
                     "name": "maps.status.2",
                     "description": "停用"
+                },
+                {
+                    "name": "row.name",
+                    "description": "姓名"
                 }
             ],
             "route_params": []
@@ -6618,6 +6646,10 @@
                 },
                 {
                     "name": "history",
+                    "description": ""
+                },
+                {
+                    "name": "row.name",
                     "description": ""
                 }
             ],
