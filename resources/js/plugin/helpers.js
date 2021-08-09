@@ -17,7 +17,7 @@ export default {
         let keys = key.split('.');
         let reslut = arr;
         for (let i in keys) {
-            if (typeof reslut != "object" || this.isNull(reslut)) {
+            if (typeof reslut != "object" || isNull(reslut)) {
                 return def;
             }
             reslut = reslut[keys[i]];
