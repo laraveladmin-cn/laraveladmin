@@ -1,6 +1,6 @@
 <?php
 /**
- * 赞助商模型
+ * Sponsor模型
  */
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
@@ -31,12 +31,12 @@ class Sponsor extends Model
     //字段说明
     protected $fieldsName = [
         'id' => 'ID',
-        'name' => '赞助商',
-        'url' => '链接',
-        'logo' => 'LOGO图标',
-        'created_at' => '创建时间',
-        'updated_at' => '修改时间',
-        'deleted_at' => '删除时间'
+        'name' => 'Sponsor',
+        'url' => 'Link',
+        'logo' => 'Logo Icon',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'deleted_at' => 'Deleted At'
     ];
 
 

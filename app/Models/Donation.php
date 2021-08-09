@@ -28,9 +28,9 @@ class Donation extends Model
     //字段值map
     protected $fieldsShowMaps = [
         'from'=>[
-            "1"=>'微信',
-            "2"=>'支付宝',
-            "3"=>'转账'
+            "1"=>'WeChat',
+            "2"=>'Alipay',
+            "3"=>'Transfer accounts'
          ]
     ];
     //字段默认值
@@ -43,13 +43,13 @@ class Donation extends Model
     //字段说明
     protected $fieldsName = [
         'id' => 'ID',
-        'member_id' => '会员ID',
-        'sponsor_id' => '赞助商ID',
-        'from' => '来源',
-        'amount' => '捐赠金额',
-        'created_at' => '创建时间',
-        'updated_at' => '修改时间',
-        'deleted_at' => '删除时间'
+        'member_id' => 'Member ID',
+        'sponsor_id' => 'Sponsor ID',
+        'from' => 'Source',
+        'amount' => 'Donation amount',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'deleted_at' => 'Deleted At'
     ];
 
 

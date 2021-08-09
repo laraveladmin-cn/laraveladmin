@@ -36,7 +36,7 @@
                                         </select2>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="from" :options="{name: '来源',type:'radio', rules:'',title:''}" :datas="props">
+                            <edit-item key-name="from" :options="{name: props.transField('Source'),type:'radio', rules:'',title:''}" :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
                                         <div v-for="(item,index) in props.maps['from']"
@@ -52,7 +52,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="amount" :options="{name: '捐赠金额',type:'num', rules:'required|min:0.02',title:''}" :datas="props">
+                            <edit-item key-name="amount" :options="{name: props.transField('Donation amount'),type:'num', rules:'required|min:0.02',title:''}" :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <el-input-number v-model="props.data.row['amount']"

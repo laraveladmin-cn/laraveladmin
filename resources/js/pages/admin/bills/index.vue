@@ -33,7 +33,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'bills',
                     lang_table: 'bills', //字段翻译
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
@@ -51,8 +52,8 @@
                         id: {name: "ID", order: true},
                         "member.user.name": {name: "会员", order: false},
                         donation_id: {name: "捐赠记录", order: true},
-                        amount: {name: "金额", order: true},
-                        status: {name: "状态", order: true, type: "radio"},
+                        amount: {name: "Amount of money", order: true},
+                        status: {name: "State", order: true, type: "radio"},
                         created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}
                     },

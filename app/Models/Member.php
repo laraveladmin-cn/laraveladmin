@@ -38,14 +38,14 @@ class Member extends Model
     //字段说明
     protected $fieldsName = [
         'id' => 'ID',
-        'user_id' => '用户ID',
-        'parent_id' => '推荐人ID',
-        'level' => '层级',
-        'left_margin' => '左边界',
-        'right_margin' => '右边界',
-        'created_at' => '创建时间',
-        'updated_at' => '修改时间',
-        'deleted_at' => '删除时间'
+        'user_id' => 'User ID',
+        'parent_id' => 'Recommender ID',
+        'level' => 'Hierarchy',
+        'left_margin' => 'Left boundary',
+        'right_margin' => 'Right boundary',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'deleted_at' => 'Deleted At'
     ];
 
 

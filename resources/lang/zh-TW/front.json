@@ -104,7 +104,13 @@
             "Log file": "日誌檔",
             "System log file": "系統日誌檔",
             "Seven cattle cloud token": "七牛雲TOKEN",
-            "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取"
+            "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取",
+            "Donation management": "捐贈管理",
+            "Sponsor": "贊助商",
+            "Sponsor Pagination": "贊助商分頁",
+            "Member user": "會員用戶",
+            "Donation record": "捐贈記錄",
+            "Income details": "收益明細"
         },
         "tables": {
             "_file_logs": {
@@ -367,6 +373,65 @@
                     "Link address": "連結位址",
                     "Logo image": "LOGO圖片",
                     "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "bills": {
+                "fields": {
+                    "Member ID": "會員ID",
+                    "Donation ID": "捐贈ID",
+                    "Amount of money": "金額",
+                    "State": "狀態",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": {
+                    "status": {
+                        "No cash withdrawal": "未提現",
+                        "Withdrawn cash": "已提現"
+                    }
+                }
+            },
+            "donations": {
+                "fields": {
+                    "Member ID": "會員ID",
+                    "Sponsor ID": "贊助商ID",
+                    "Source": "來源",
+                    "Donation amount": "捐贈金額",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": {
+                    "from": {
+                        "WeChat": "微信",
+                        "Alipay": "支付寶",
+                        "Transfer accounts": "轉帳"
+                    }
+                }
+            },
+            "members": {
+                "fields": {
+                    "User ID": "用戶ID",
+                    "Recommender ID": "推薦人ID",
+                    "Hierarchy": "層級",
+                    "Left boundary": "左邊界",
+                    "Right boundary": "右邊界",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "sponsors": {
+                "fields": {
+                    "Sponsor": "贊助商",
+                    "Link": "連結",
+                    "Logo Icon": "LOGO圖標",
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
                     "Deleted At": "删除時間"
@@ -859,5 +924,6 @@
     "Unbundling": "解綁",
     "Download": "下載",
     "Click Upload": "點擊上傳",
-    "Only picture files can be uploaded and no more than {size}": "只能上傳圖片檔案，且不超過{size}"
+    "Only picture files can be uploaded and no more than {size}": "只能上傳圖片檔案，且不超過{size}",
+    "Please enter the link address": "請輸入連結位址"
 }

@@ -19,7 +19,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'members',
                     lang_table: 'members', //字段翻译
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
@@ -35,8 +36,8 @@
                     defOptions: null, //默认筛选条件
                     fields: {
                         id: {name: "ID", order: true},
-                        //user_id: {name: "用户ID", order: true, type: "select2"},
-                        //parent_id: {name: "推荐人ID", order: true, type: "select2"},
+                        //user_id: {name: "User ID", order: true, type: "select2"},
+                        //parent_id: {name: "Recommender ID", order: true, type: "select2"},
                         //created_at: {name: "Created At", order: true, type: "time"},
                         'user.uname': {name: "用户名", order: false},
                         'user.name':{name: "用户", order: false,type: 'level', levelName: 'level', class: 'text-left'},

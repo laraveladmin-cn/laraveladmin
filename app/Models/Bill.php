@@ -28,8 +28,8 @@ class Bill extends Model
     //字段值map
     protected $fieldsShowMaps = [
         'status'=>[
-            "0"=>'未提现',
-            "1"=>'已提现'
+            "0"=>'No cash withdrawal',
+            "1"=>'Withdrawn cash'
          ]
     ];
     //字段默认值
@@ -42,13 +42,13 @@ class Bill extends Model
     //字段说明
     protected $fieldsName = [
         'id' => 'ID',
-        'member_id' => '会员ID',
-        'donation_id' => '捐赠ID',
-        'amount' => '金额',
-        'status' => '状态',
-        'created_at' => '创建时间',
-        'updated_at' => '修改时间',
-        'deleted_at' => '删除时间'
+        'member_id' => 'Member ID',
+        'donation_id' => 'Donation ID',
+        'amount' => 'Amount of money',
+        'status' => 'State',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'deleted_at' => 'Deleted At'
     ];
 
 

@@ -19,7 +19,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'sponsors',
                     lang_table: 'sponsors', //字段翻译
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
@@ -35,9 +36,9 @@
                     defOptions: null, //默认筛选条件
                     fields: {
                         id: {name: "ID", order: true},
-                        name: {name: "赞助商", order: true},
-                        url: {name: "链接", order: true, type: "url"},
-                        logo: {name: "LOGO图标", order: true, type: "upload"},
+                        name: {name: "Sponsor", order: true},
+                        url: {name: "Link", order: true, type: "url"},
+                        logo: {name: "Logo Icon", order: true, type: "upload"},
                         created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}
                     },

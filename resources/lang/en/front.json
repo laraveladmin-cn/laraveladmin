@@ -104,7 +104,13 @@
             "Log file": "Log file",
             "System log file": "System log file",
             "Seven cattle cloud token": "Seven cattle cloud token",
-            "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get"
+            "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get",
+            "Donation management": "Donation management",
+            "Sponsor": "Sponsor",
+            "Sponsor Pagination": "Sponsor Pagination",
+            "Member user": "Member user",
+            "Donation record": "Donation record",
+            "Income details": "Income details"
         },
         "tables": {
             "_file_logs": {
@@ -367,6 +373,65 @@
                     "Link address": "Link address",
                     "Logo image": "Logo image",
                     "Describe": "Describe",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "bills": {
+                "fields": {
+                    "Member ID": "Member ID",
+                    "Donation ID": "Donation ID",
+                    "Amount of money": "Amount of money",
+                    "State": "State",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": {
+                    "status": {
+                        "No cash withdrawal": "No cash withdrawal",
+                        "Withdrawn cash": "Withdrawn cash"
+                    }
+                }
+            },
+            "donations": {
+                "fields": {
+                    "Member ID": "Member ID",
+                    "Sponsor ID": "Sponsor ID",
+                    "Source": "Source",
+                    "Donation amount": "Donation amount",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": {
+                    "from": {
+                        "WeChat": "WeChat",
+                        "Alipay": "Alipay",
+                        "Transfer accounts": "Transfer accounts"
+                    }
+                }
+            },
+            "members": {
+                "fields": {
+                    "User ID": "User ID",
+                    "Recommender ID": "Recommender ID",
+                    "Hierarchy": "Hierarchy",
+                    "Left boundary": "Left boundary",
+                    "Right boundary": "Right boundary",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "sponsors": {
+                "fields": {
+                    "Sponsor": "Sponsor",
+                    "Link": "Link",
+                    "Logo Icon": "Logo Icon",
                     "Created At": "Created At",
                     "Updated At": "Updated At",
                     "Deleted At": "Deleted At"
@@ -859,5 +924,6 @@
     "Unbundling": "Unbundling",
     "Download": "Download",
     "Click Upload": "Click Upload",
-    "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}"
+    "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}",
+    "Please enter the link address": "Please enter the link address"
 }

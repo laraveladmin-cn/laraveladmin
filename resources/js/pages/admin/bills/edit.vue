@@ -38,7 +38,7 @@
                                     </select2>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="amount" :options="{name: '金额',type:'text', rules:'',title:''}"
+                            <edit-item key-name="amount" :options="{name: props.transField('Amount of money'),type:'text', rules:'',title:''}"
                                        :datas="props">
                                 <template slot="input-item">
                                     <div>
@@ -53,7 +53,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="status" :options="{name: '状态',type:'radio', rules:'',title:''}"
+                            <edit-item key-name="status" :options="{name: props.transField('State'),type:'radio', rules:'',title:''}"
                                        :datas="props">
                                 <template slot="input-item">
                                     <div class="row">
@@ -113,7 +113,8 @@
         },
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'bills',
                     lang_table: 'bills', //字段翻译
                     id: 'edit', //多个组件同时使用时唯一标识
                     params: null, //默认筛选条件

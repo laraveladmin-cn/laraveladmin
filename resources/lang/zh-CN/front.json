@@ -104,7 +104,13 @@
             "Log file": "日志文件",
             "System log file": "系统日志文件",
             "Seven cattle cloud token": "七牛云TOKEN",
-            "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取"
+            "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取",
+            "Donation management": "捐赠管理",
+            "Sponsor": "赞助商",
+            "Sponsor Pagination": "赞助商分页",
+            "Member user": "会员用户",
+            "Donation record": "捐赠记录",
+            "Income details": "收益明细"
         },
         "tables": {
             "_file_logs": {
@@ -367,6 +373,65 @@
                     "Link address": "链接地址",
                     "Logo image": "LOGO图片",
                     "Describe": "描述",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "bills": {
+                "fields": {
+                    "Member ID": "会员ID",
+                    "Donation ID": "捐赠ID",
+                    "Amount of money": "金额",
+                    "State": "状态",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": {
+                    "status": {
+                        "No cash withdrawal": "未提现",
+                        "Withdrawn cash": "已提现"
+                    }
+                }
+            },
+            "donations": {
+                "fields": {
+                    "Member ID": "会员ID",
+                    "Sponsor ID": "赞助商ID",
+                    "Source": "来源",
+                    "Donation amount": "捐赠金额",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": {
+                    "from": {
+                        "WeChat": "微信",
+                        "Alipay": "支付宝",
+                        "Transfer accounts": "转账"
+                    }
+                }
+            },
+            "members": {
+                "fields": {
+                    "User ID": "用户ID",
+                    "Recommender ID": "推荐人ID",
+                    "Hierarchy": "层级",
+                    "Left boundary": "左边界",
+                    "Right boundary": "右边界",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "sponsors": {
+                "fields": {
+                    "Sponsor": "赞助商",
+                    "Link": "链接",
+                    "Logo Icon": "LOGO图标",
                     "Created At": "创建时间",
                     "Updated At": "修改时间",
                     "Deleted At": "删除时间"
@@ -732,7 +797,6 @@
                 "Night": "黑夜",
                 "Day": "白天"
             }
-
         },
         "errors": {
             "Page not found": "出错了！页面不存在。",

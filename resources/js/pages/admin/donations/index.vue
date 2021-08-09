@@ -48,7 +48,8 @@
         props: {},
         data() {
             return {
-                options: {
+                options:{
+                    lang_table:'donations',
                     lang_table: 'donations', //字段翻译
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
@@ -66,8 +67,8 @@
                         id: {name: "ID", order: true},
                         "member.user.name": {name: "捐赠会员", order: false, type: "select2"},
                         "sponsor.name": {name: "赞助商", order: false, type: "select2"},
-                        from: {name: "来源", order: true, type: "radio"},
-                        amount: {name: "捐赠金额", order: true, type: "num"},
+                        from: {name: "Source", order: true, type: "radio"},
+                        amount: {name: "Donation amount", order: true, type: "num"},
                         "bills_count": {name: "受益记录", order: false, type: "num"},
                         created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}
