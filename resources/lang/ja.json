@@ -91,11 +91,12 @@
     "E-mail is already in use!": "メールはもう使われました。",
     "Please activate it through the user's registered email!": "ユーザー登録のメールボックスを使ってアクティブにしてください。",
     "Unable to generate the request signature, Route unavailable": "署名を生成できませんでした。ルートは利用できません。",
-    "Check that the user connected to the database has access to the schema database!": "接続データベースのユーザーがschemaデータベースを読み込む権限があるか確認してください。",
+    "Check whether the connection IP Settings or the database user has access to read the schema database!": "接続IP設定またはデータベースユーザにschemaデータベースを読み込む権限があるか確認してください。",
     "Failed to create :attribute database!": "データベースの作成に失敗しました。",
     "Menu unchanged!": "メニューは変更されていません",
     "Created At": "作成時間",
     "Updated At": "変更時間",
     "Deleted At": "削除時間",
-    "The operation successful!": "操作成功！"
+    "The operation successful!": "操作成功！",
+    "Three-party Login service provider": "サードパーティ登録サービスプロバイダ"
 }

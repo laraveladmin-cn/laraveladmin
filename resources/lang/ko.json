@@ -91,11 +91,12 @@
     "E-mail is already in use!": "이메일 이 이미 사용 되 었 습 니 다!",
     "Please activate it through the user's registered email!": "사용자 가 등록 한 메 일 로 활성화 하 세 요!",
     "Unable to generate the request signature, Route unavailable": "서명 을 만 들 수 없습니다. 경로 가 사용 할 수 없습니다.",
-    "Check that the user connected to the database has access to the schema database!": "데이터 베 이 스 를 연결 하 는 사용자 가 schema 데이터 베 이 스 를 읽 을 수 있 는 권한 이 있 는 지 확인 하 세 요!",
+    "Check whether the connection IP Settings or the database user has access to read the schema database!": "연결 IP 설정 이나 데이터베이스 사용자 가 schema 데이터 베 이 스 를 읽 을 수 있 는 권한 이 있 는 지 확인 하 십시오!",
     "Failed to create :attribute database!": "데이터베이스 생 성: attribute 실패!",
     "Menu unchanged!": "메뉴 가 바 뀌 지 않 았 습 니 다!",
     "Created At": "창설 시간",
     "Updated At": "수정 시간",
     "Deleted At": "삭제 시간",
-    "The operation successful!": "조작 성공!"
+    "The operation successful!": "조작 성공!",
+    "Three-party Login service provider": "삼자 로그 인 서비스 업 체"
 }

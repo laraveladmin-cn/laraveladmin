@@ -267,6 +267,11 @@
                         "Character string": "Cadeia de caracteres",
                         "Number": "Número",
                         "Boolean value": "Valor booleano"
+                    },
+                    "use": {
+                        "URL parameter": "Parâmetro URL",
+                        "Body parameter": "Parâmetro do Corpo",
+                        "Route parameter": "Parâmetro de rota"
                     }
                 }
             },
@@ -867,7 +872,8 @@
                 "It is also generated when it exists": "Também é gerado quando existe.",
                 "Event class name": "Nome Da classe de eventos",
                 "Service provider": "Prestador de serviços",
-                "Is the table name prefixed": "É o Nome Da tabela prefixado"
+                "Is the table name prefixed": "É o Nome Da tabela prefixado",
+                "Automatic scanning to generate API document data": "Verificação automática para Gerar dados do documento API"
             },
             "menus": {
                 "Drag shift": "Arrastar mudança",

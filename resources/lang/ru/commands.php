@@ -19,7 +19,8 @@ $str = <<<'str'
     "From \":old\" to \":new\"": "от «: old » до «: new »",
     "Failed to translate \":old\"": "ошибка перевода \": old\"",
     "Failed to translate \":old\" into \":lang\"": "перевод \": old\" на \": lang\" не удалось",
-    "This command can only be executed in the development environment": "Выполнение команды возможно только в условиях разработки"
+    "This command can only be executed in the development environment": "Выполнение команды возможно только в условиях разработки",
+    "Automatic scan to generate Api document data": "генерировать данные для документа Api"
 }
 str;
 return json_decode($str,true);

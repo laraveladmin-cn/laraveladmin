@@ -19,7 +19,8 @@ $str = <<<'str'
     "From \":old\" to \":new\"": "\"old\" 에서 \"new\" 까지",
     "Failed to translate \":old\"": "번역 실패",
     "Failed to translate \":old\" into \":lang\"": "번역 실패",
-    "This command can only be executed in the development environment": "개발 환경 에서 만 명령 을 수행 할 수 있 습 니 다."
+    "This command can only be executed in the development environment": "개발 환경 에서 만 명령 을 수행 할 수 있 습 니 다.",
+    "Automatic scan to generate Api document data": "자동 검색 으로 Api 문서 데이터 생 성"
 }
 str;
 return json_decode($str,true);

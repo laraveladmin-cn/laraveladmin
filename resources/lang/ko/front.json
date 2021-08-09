@@ -267,6 +267,11 @@
                         "Character string": "문자열.",
                         "Number": "숫자.",
                         "Boolean value": "불 값"
+                    },
+                    "use": {
+                        "URL parameter": "url 매개 변수",
+                        "Body parameter": "body 파라미터",
+                        "Route parameter": "경로 매개 변수"
                     }
                 }
             },
@@ -867,7 +872,8 @@
                 "It is also generated when it exists": "존재 할 때 도 생 성",
                 "Event class name": "사건 유형",
                 "Service provider": "서비스 제공 자",
-                "Is the table name prefixed": "표 이름 에 접 두 사 를 붙 일 지 여부"
+                "Is the table name prefixed": "표 이름 에 접 두 사 를 붙 일 지 여부",
+                "Automatic scanning to generate API document data": "자동 검색 으로 Api 문서 데이터 생 성"
             },
             "menus": {
                 "Drag shift": "드래그 자리 이동",

@@ -91,11 +91,12 @@
     "E-mail is already in use!": "¡El correo electrónico ya está en uso!",
     "Please activate it through the user's registered email!": "¡Por favor, utilice el buzón de correo registrado por el usuario para activar!",
     "Unable to generate the request signature, Route unavailable": "No se pudo generar la firma, la ruta no está disponible.",
-    "Check that the user connected to the database has access to the schema database!": "¡Compruebe si el usuario de la base de datos de conexión tiene permiso para leer la base de datos del esquema!",
+    "Check whether the connection IP Settings or the database user has access to read the schema database!": "¡Compruebe la configuración de la IP de conexión o si el usuario de la base de datos tiene permiso para leer la base de datos del esquema!",
     "Failed to create :attribute database!": "¡Crear base de datos: falló el atributo!",
     "Menu unchanged!": "¡El menú no ha cambiado!",
     "Created At": "Tiempo de creación",
     "Updated At": "Tiempo de modificación",
     "Deleted At": "Tiempo de eliminación",
-    "The operation successful!": "¡Operación exitosa!"
+    "The operation successful!": "¡Operación exitosa!",
+    "Three-party Login service provider": "Proveedor de servicios de inicio de sesión tripartito"
 }

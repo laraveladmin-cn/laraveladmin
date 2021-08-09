@@ -267,6 +267,11 @@
                         "Character string": "строка",
                         "Number": "цифра",
                         "Boolean value": "логическое значение"
+                    },
+                    "use": {
+                        "URL parameter": "Url параметр",
+                        "Body parameter": "параметр тела",
+                        "Route parameter": "параметр route"
                     }
                 }
             },
@@ -867,7 +872,8 @@
                 "It is also generated when it exists": "при наличии",
                 "Event class name": "имя категории событий",
                 "Service provider": "поставщик услуг",
-                "Is the table name prefixed": "Название таблицы с префиксом"
+                "Is the table name prefixed": "Название таблицы с префиксом",
+                "Automatic scanning to generate API document data": "генерировать данные для документа Api"
             },
             "menus": {
                 "Drag shift": "буксирный сдвиг",

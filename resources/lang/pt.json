@@ -91,11 +91,12 @@
     "E-mail is already in use!": "Email FOI usado!",
     "Please activate it through the user's registered email!": "Por favor, use o e-mail registrado para ativar!",
     "Unable to generate the request signature, Route unavailable": "Não FOI possível Gerar assinatura, rota não disponível.",
-    "Check that the user connected to the database has access to the schema database!": "Por favor, verifique se o utilizador que está a ligar-se à base de dados TEM a permissão para ler a base de dados do diagrama!",
+    "Check whether the connection IP Settings or the database user has access to read the schema database!": "Verifique se a configuração IP Da conexão ou usuário de Banco de dados TEM permissão para ler o Banco de dados do diagrama!",
     "Failed to create :attribute database!": "Criar Banco de dados: atributo falhou!",
     "Menu unchanged!": "O menu não mudou!",
     "Created At": "Tempo de criação",
     "Updated At": "Tempo de revisão",
     "Deleted At": "Apagar tempo",
-    "The operation successful!": "Operação BEM sucedida!"
+    "The operation successful!": "Operação BEM sucedida!",
+    "Three-party Login service provider": "Fornecedor de serviços de login de terceiros"
 }

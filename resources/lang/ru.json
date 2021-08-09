@@ -91,11 +91,12 @@
     "E-mail is already in use!": "почта уже используется!",
     "Please activate it through the user's registered email!": "Активируйте почтовый ящик, зарегистрированный пользователем!",
     "Unable to generate the request signature, Route unavailable": "Невозможно создать подпись, маршрут недоступен.",
-    "Check that the user connected to the database has access to the schema database!": "Проверьте права доступа пользователей к базам данных schema!",
+    "Check whether the connection IP Settings or the database user has access to read the schema database!": "Проверьте, имеют ли пользователи права доступа к базе данных schema!",
     "Failed to create :attribute database!": "Ошибка создания базы данных: attribute!",
     "Menu unchanged!": "меню не изменилось!",
     "Created At": "время создания",
     "Updated At": "время изменения",
     "Deleted At": "время удаления",
-    "The operation successful!": "операция выполнена!"
+    "The operation successful!": "операция выполнена!",
+    "Three-party Login service provider": "тройной вход"
 }
