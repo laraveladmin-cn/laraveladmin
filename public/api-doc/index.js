@@ -171,8 +171,15 @@ const App = {
             });
             return Qs.parse(params_str);
         },
+        api_url_parm(){
+            let url = this.api.url.replace(/\{\?/ig,'{');
+            collect(this.api.route_params || []).each((parm,index)=>{
+                url = url.replace('{'+parm.name+'}',parm.example).replace(/\/\//ig,'');
+            });
+            return url;
+        },
         api_url(){
-            return this.use_url+this.api.url;
+            return this.use_url+this.api_url_parm;
         },
         form_api_url(){
             if(this.params_str){
@@ -432,7 +439,13 @@ const App = {
                 return menu.method.length;
             });
             this.api.use_method = this.array_get(this.maps.method,this.api.method[0],'');
-            this.select = this.api.use_method!='get'?1:0;
+            if(this.api.route_params && this.api.route_params.length){
+                this.select = 2;
+            }else {
+                this.select = this.api.use_method!='get'?1:0;
+            }
+
+
             //dd(JSON.stringify(this.api));
             this.back_api = this.copyObj(this.api);
             this.result = {};

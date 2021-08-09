@@ -5848,7 +5848,7 @@
                     "name": "_token",
                     "description": "CSRF认证token值"
                 }
-            ]
+            ],
             "route_params": []
         },
         {
