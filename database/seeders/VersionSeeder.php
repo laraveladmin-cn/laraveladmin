@@ -12,8 +12,9 @@ class VersionSeeder extends Seeder
     public function run()
     {
         $this->call(MenuTableSeeder::class); //菜单数据安装
-        //$this->call(TechnologyTableSeeder::class);
-        //$this->call(FeatureTableSeeder::class);
+        $this->call(ParamTableSeeder::class); //接口文档参数说明
+        $this->call(ResponseTableSeeder::class); //接口文档响应说明
+
 
     }
 
