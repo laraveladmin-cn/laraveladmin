@@ -273,6 +273,11 @@
                         "Character string": "字串",
                         "Number": "數位",
                         "Boolean value": "布林值"
+                    },
+                    "use": {
+                        "URL parameter": "url參數",
+                        "Body parameter": "body參數",
+                        "Route parameter": "route參數"
                     }
                 }
             },
@@ -673,7 +678,8 @@
                 "It is also generated when it exists": "存在時也生成",
                 "Event class name": "事件類名",
                 "Service provider": "服務提供者",
-                "Is the table name prefixed": "錶名是否帶首碼"
+                "Is the table name prefixed": "錶名是否帶首碼",
+                "Automatic scanning to generate API document data": "自動掃描生成Api檔案數據"
             },
             "menus": {
                 "Drag shift": "拖拽移位",
