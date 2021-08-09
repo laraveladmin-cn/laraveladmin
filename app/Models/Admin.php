@@ -29,7 +29,7 @@ class Admin extends Model
 
     //字段默认值
     protected $fieldsName = [
-        'user_id' => '用户ID',
+        'user_id' => 'User ID',
         'id' => 'ID',
     ];
 

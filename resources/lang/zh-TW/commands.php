@@ -19,7 +19,8 @@ $str = <<<'str'
     "From \":old\" to \":new\"": "從“：old”至“：new”",
     "Failed to translate \":old\"": "翻譯“：old”失敗",
     "Failed to translate \":old\" into \":lang\"": "翻譯“：old”成“：lang”失敗",
-    "This command can only be executed in the development environment": "只能在開發環境才可執行該命令"
+    "This command can only be executed in the development environment": "只能在開發環境才可執行該命令",
+    "Automatic scan to generate Api document data": "自動掃描生成Api檔案數據"
 }
 str;
 return json_decode($str,true);

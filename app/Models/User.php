@@ -89,7 +89,7 @@ class User extends Authenticatable
     //字段默认值
     protected $fieldsName = [
         'uname' => 'User name',
-        'password' => '密码',
+        'password' => 'Password',
         'name' => 'Name',
         'avatar' => 'Head portrait',
         'email' => 'E-mail',
@@ -104,7 +104,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * 密码加密设置
+     * Password加密设置
      * @param  $value
      * @return  array
      */
