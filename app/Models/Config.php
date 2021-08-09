@@ -11,7 +11,7 @@ use Illuminate\Support\Arr;
 class Config extends Model
 {
     use SoftDeletes,BaseModel; //软删除
-
+    protected $itemName='系统设置';
     protected $table = 'configs'; //数据表Name
     //批量赋值白名单
     protected $fillable = [

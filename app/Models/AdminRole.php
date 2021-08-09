@@ -12,7 +12,7 @@ class AdminRole extends Model
     use BaseModel;
 
     protected $table = 'admin_role'; //数据表名称
-
+    protected $itemName='后台用户权限关联';
     public $timestamps = false;
     //批量赋值白名单
     protected $fillable = ['admin_id','role_id'];

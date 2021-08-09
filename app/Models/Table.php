@@ -11,7 +11,7 @@ class Table extends Model
 {
 
     use BaseModel; //基础模型
-
+    protected $itemName='数据表';
     protected $table = 'tables'; //数据表名称
     //没有主键ID
     protected $primaryKey = '';

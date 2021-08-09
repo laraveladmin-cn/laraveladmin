@@ -97,5 +97,6 @@
     "Created At": "创建时间",
     "Updated At": "修改时间",
     "Deleted At": "删除时间",
-    "The operation successful!": "操作成功！"
+    "The operation successful!": "操作成功！",
+    "Three-party Login service provider": "三方登录服务商"
 }

@@ -15,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable,BaseModel,SoftDeletes,HasApiTokens;
-
+    protected $itemName='用户';
 
     /**
      * The attributes that are mass assignable.
@@ -89,6 +89,7 @@ class User extends Authenticatable
     //字段默认值
     protected $fieldsName = [
         'uname' => 'User name',
+        'password' => '密码',
         'name' => 'Name',
         'avatar' => 'Head portrait',
         'email' => 'E-mail',

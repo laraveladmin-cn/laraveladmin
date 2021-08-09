@@ -12,6 +12,7 @@ class Response extends Model
 
     use BaseModel; //基础模型
     use SoftDeletes; //软删除
+    protected $itemName='响应说明';
     //数据表名称
     protected $table = 'responses';
     //批量赋值白名单

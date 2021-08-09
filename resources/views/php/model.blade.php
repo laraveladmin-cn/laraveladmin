@@ -43,6 +43,10 @@ class {{$name}} extends Model
     //没有主键ID
     protected $primaryKey = '';
 @endif
+@if($table_comment)
+    //没有主键ID
+    protected $itemName = '{{$table_comment}}';
+@endif
     //批量赋值白名单
     protected $fillable = [{!! $fillable !!}];
     //输出隐藏字段

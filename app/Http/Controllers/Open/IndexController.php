@@ -7,9 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Doc;
 use App\Models\Feature;
 use App\Models\Menu;
+<<<<<<< HEAD
 use App\Models\Technology;
 use Illuminate\Mail\Markdown;
+=======
+use Illuminate\Support\Arr;
+>>>>>>> 8f40fcc86983fe037e1baacc93f671899f11a944
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 
 class IndexController extends Controller
@@ -186,8 +191,12 @@ class IndexController extends Controller
      * 获取菜单信息
      */
     public function menu(){
-        $data['menus'] = collect(Menu::main()
-            ->select(['id','name','icons','description','url','parent_id','resource_id','status','level','left_margin','right_margin','method'])
+        $obj = Menu::main()
+            ->select(['id','name','icons','description',
+                'url','parent_id','resource_id','status','level',
+                'left_margin','right_margin','method',
+                'resource_id'
+            ])
             ->orderBy('left_margin','asc')
             ->with(['parent'=>function($q){
                 $q->select([
@@ -195,13 +204,32 @@ class IndexController extends Controller
                     'name',
                     'item_name'
                 ]);
-            }])
-            ->get())
+            }]);
+        if(Request::input('type')=='document'){
+            $obj = $obj->with(['route_params','params','body_params','responses']);
+            $file = storage_path('/developments/api-doc.json');
+            if(file_exists($file)){
+                $common_responses_data = json_decode(file_get_contents($file),true)?:[];
+                $common_responses = Arr::get($common_responses_data,'common_responses',[]);
+                collect(Arr::get($common_responses_data,'common_responses_list',[]))->each(function ($item)use(&$common_responses){
+                    $common_responses[] = $item;
+                    $common_responses[] = [
+                        'name'=>'list.'.$item['name'],
+                        'description'=>$item['description']
+                    ];
+                });
+                $data['common_responses'] = $common_responses;
+            }else{
+                $data['common_responses'] = [];
+            }
+        }
+        $data['menus'] = collect($obj->get())
             ->map(function ($item){
-                $item[config('laravel_admin.trans_prefix').'name'] = trans_path($item['name'],'_shared.menus');
-                $item[config('laravel_admin.trans_prefix').'description'] = trans_path($item['description'],'_shared.menus');
+                $item[config('laravel_admin.trans_prefix').'name'] = Menu::trans($item,'name');
+                $item[config('laravel_admin.trans_prefix').'description'] = Menu::trans($item,'description');
                 return $item;
         });
+
         return Response::returns($data);
     }
 

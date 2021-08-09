@@ -60,6 +60,8 @@ class IndexController extends Controller
      * @return string|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function downLog(){
+        $request = app('request');
+        $this->validate($request,['file'=>'required']);
         $file = str_replace('..','',Request::input('file','laravel-'.date('Y-m-d').'.log'));
         $file = storage_path('/logs/'.$file);
         if(!file_exists($file)){

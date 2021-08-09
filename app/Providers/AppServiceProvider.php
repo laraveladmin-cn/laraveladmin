@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Console\Commands\BuildIndexHtml;
+use App\Console\DevelopCommands\BuildApiDoc;
 use App\Console\DevelopCommands\CreateAll;
 use App\Console\DevelopCommands\CreateController;
 use App\Console\DevelopCommands\CreateModel;
@@ -70,6 +71,7 @@ class AppServiceProvider extends ServiceProvider
             $commands[] = CreateController::class;
             $commands[] = CreateView::class;
             $commands[] = CreateAll::class;
+            $commands[] = BuildApiDoc::class;
             $this->commands($commands);
         }
 

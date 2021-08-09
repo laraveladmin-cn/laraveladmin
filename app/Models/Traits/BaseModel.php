@@ -336,11 +336,19 @@ trait BaseModel{
      * 获取字段默认值
      * @return array
      */
-    public function scopeGetFieldsName($query){
+    public function scopeGetFieldsName($query,$key=''){
         if(!isset($this->fieldsName)){
-            return collect([]);
+            $data = collect([]);
+            if($key){
+                return $data->get($key,'');
+            }
+            return $data;
         }
-        return collect($this->fieldsName);
+        $data = collect($this->fieldsName);
+        if($key){
+            return $data->get($key,'');
+        }
+        return $data;
     }
 
 
@@ -354,6 +362,10 @@ trait BaseModel{
 
     public function scopeGetTableComment($query){
         return isset($this->tableComment)?$this->tableComment:'';
+    }
+
+    public function scopeGetItemName(){
+        return isset($this->itemName)?$this->itemName:'';
     }
 
     public function scopeGetClassName(){

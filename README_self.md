@@ -96,9 +96,14 @@ vi .env
 
 3. 安装composer相关扩展包及项目代码初始化(以下两种方式选一种进行安装即可)
 
+
 > windows安装请先直接下载vendor.zip解压在项目代码中
 
 [vendor.zip](https://www.laraveladmin.cn/api/home/docs/vendor.zip)
+
+```shell
+composer install
+```
 
 > phpstudy安装执行迁移命令出现如下错误时,可以升级mysql到8版本,或请参考解决方案[执行迁移文件错误解决](https://stackoverflow.com/questions/42244541/laravel-migration-error-syntax-error-or-access-violation-1071-specified-key-wa)
 ![执行迁移文件错误](https://www.laraveladmin.cn/api/home/docs/images/执行迁移文件错误.jpg)
