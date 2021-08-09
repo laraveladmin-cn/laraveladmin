@@ -270,6 +270,15 @@ class Menu extends Model
     }
 
     /**
+     * 接口路由参数
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function route_params(){
+        return $this->hasMany('App\Models\Param')
+            ->where('use',2);
+    }
+
+    /**
      * 接口响应说明
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

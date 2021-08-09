@@ -1,0 +1,427 @@
+{
+    "menus": [
+        {
+            "id": 63,
+            "_trans_name": "登录页面",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "otherLogin",
+                    "description": "三方登录集合"
+                },
+                {
+                    "name": "otherLogin.$index",
+                    "description": "三方登录"
+                },
+                {
+                    "name": "otherLogin.$index.type",
+                    "description": "服务商"
+                },
+                {
+                    "name": "otherLogin.$index.url",
+                    "description": "跳转地址"
+                },
+                {
+                    "name": "otherLogin.$index.class",
+                    "description": "图标样式"
+                },
+                {
+                    "name": "mustVerify",
+                    "description": "是否有验证码"
+                }
+            ]
+        },
+        {
+            "id": 64,
+            "_trans_name": "提交登录",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "username",
+                    "type": 2,
+                    "title": "用户名",
+                    "description": "用户名",
+                    "example": "demo_admin",
+                    "validate": "必填"
+                },
+                {
+                    "name": "password",
+                    "type": 2,
+                    "title": "密码",
+                    "description": "密码",
+                    "example": "admin123456",
+                    "validate": "必填"
+                },
+                {
+                    "name": "_token",
+                    "type": 2,
+                    "title": "CSRF认证token",
+                    "description": "",
+                    "example": "",
+                    "validate": "必填"
+                },
+                {
+                    "name": "other",
+                    "type": 2,
+                    "title": "三方登录回传标记",
+                    "description": "三方登录回传绑定码",
+                    "example": "",
+                    "validate": "非必填"
+                },
+                {
+                    "name": "verify",
+                    "type": 2,
+                    "title": "极验滑块验证参数",
+                    "description": "极验滑块验证参数",
+                    "example": "",
+                    "validate": "当出现滑块验证时必填"
+                },
+                {
+                    "name": "geetest_seccode",
+                    "type": 2,
+                    "title": "极验滑块验证参数",
+                    "description": "极验滑块验证参数",
+                    "example": "",
+                    "validate": "当出现滑块验证时必填"
+                },
+                {
+                    "name": "geetest_validate",
+                    "type": 2,
+                    "title": "极验滑块验证参数",
+                    "description": "极验滑块验证参数",
+                    "example": "",
+                    "validate": "当出现滑块验证时必填"
+                }
+            ],
+            "responses": [
+                {
+                    "name": "title",
+                    "description": "提示"
+                },
+                {
+                    "name": "content",
+                    "description": "提示内容"
+                },
+                {
+                    "name": "lifetime",
+                    "description": "token保存生命周期"
+                },
+                {
+                    "name": "redirect",
+                    "description": "跳转至页面"
+                },
+                {
+                    "name": "token",
+                    "description": "用户token认证信息"
+                }
+            ]
+        },
+        {
+            "id": 62,
+            "_trans_name": "更新token",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "_token",
+                    "description": "CSRF认证token值"
+                }
+            ]
+        },
+        {
+            "id": 61,
+            "_trans_name": "获取配置信息",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "logo",
+                    "description": "站点LOGO图片地址"
+                },
+                {
+                    "name": "name",
+                    "description": "应用名称"
+                },
+                {
+                    "name": "name_short",
+                    "description": "应用名称简称"
+                },
+                {
+                    "name": "debug",
+                    "description": "是否为调试模式"
+                },
+                {
+                    "name": "env",
+                    "description": "当前环境状态"
+                },
+                {
+                    "name": "icp",
+                    "description": "icp备案号码"
+                },
+                {
+                    "name": "api_url_model",
+                    "description": "接口请求模式"
+                },
+                {
+                    "name": "app_url",
+                    "description": "应用站点网址"
+                },
+                {
+                    "name": "api_url",
+                    "description": "移动应用接口请求地址源"
+                },
+                {
+                    "name": "web_url",
+                    "description": "网页应用接口请求地址源"
+                },
+                {
+                    "name": "domain",
+                    "description": "登录信息cookie存储domain"
+                },
+                {
+                    "name": "lifetime",
+                    "description": "登录信息过期生命周期"
+                },
+                {
+                    "name": "verify",
+                    "description": "验证码配置"
+                },
+                {
+                    "name": "verify.type",
+                    "description": "验证码类型"
+                },
+                {
+                    "name": "verify.dataUrl",
+                    "description": "验证码获取地址"
+                },
+                {
+                    "name": "verify.data",
+                    "description": "验证配置数据项"
+                },
+                {
+                    "name": "verify.data.client_fail_alert",
+                    "description": "滑块验证配置项(未验证提醒文案)"
+                },
+                {
+                    "name": "verify.data.lang",
+                    "description": "滑块验证配置项(语言)"
+                },
+                {
+                    "name": "verify.data.product",
+                    "description": "滑块验证配置项"
+                },
+                {
+                    "name": "verify.data.http",
+                    "description": "滑块验证配置项"
+                },
+                {
+                    "name": "client_id",
+                    "description": "连接唯一标识(类似cookie的session id机制)"
+                },
+                {
+                    "name": "default_language",
+                    "description": "默认系统语言"
+                },
+                {
+                    "name": "tinymce_key",
+                    "description": "tinymce富文本编辑器配置"
+                },
+                {
+                    "name": "locales",
+                    "description": "可切换系统语言"
+                },
+                {
+                    "name": "locales.$index",
+                    "description": "系统语言选项"
+                },
+                {
+                    "name": "version",
+                    "description": "应用版本号"
+                }
+            ]
+        }
+    ],
+    "common_responses": [
+        {
+            "name": "title",
+            "description": "提示"
+        }, {
+            "name": "content",
+            "description": "提示内容"
+        }, {
+            "name": "redirect",
+            "description": "跳转至页面"
+        },
+        {
+            "name": "message",
+            "description": "提示内容"
+        },
+        {
+            "name": "errors",
+            "description": "参数验证错误提醒"
+        },
+        {
+            "name": "alert",
+            "description": "消息提示"
+        },
+        {
+            "name": "alert.customClass",
+            "description": "消息提示自定义样式类"
+        },
+        {
+            "name": "alert.duration",
+            "description": "消息提示显示时长"
+        },
+        {
+            "name": "alert.iconClass",
+            "description": "消息提示显示图标类"
+        },
+        {
+            "name": "alert.message",
+            "description": "消息提示内容"
+        },
+        {
+            "name": "alert.position",
+            "description": "消息提示显示位置"
+        },
+        {
+            "name": "alert.show",
+            "description": "判断消息提示是否显示临时变量"
+        },
+        {
+            "name": "alert.showClose",
+            "description": "消息提示可否提前手动关闭"
+        },
+        {
+            "name": "alert.title",
+            "description": "消息提示标题"
+        },
+        {
+            "name": "alert.type",
+            "description": "消息提示类型"
+        },
+        {
+            "name": "list",
+            "description": "列表分页数据"
+        }, {
+            "name": "options",
+            "description": "排序筛选对象"
+        }, {
+            "name": "options.where",
+            "description": "当前筛选条件"
+        }, {
+            "name": "options.where._key",
+            "description": "关键字搜索组使用搜索key"
+        }, {
+            "name": "options.order",
+            "description": "当前排序结果"
+        }, {
+            "name": "maps",
+            "description": "数据项字典映射"
+        }, {
+            "name": "mapsRelations",
+            "description": "关联对象对应的数据表"
+        }, {
+            "name": "configUrl",
+            "description": "拥有的可操作权限"
+        }, {
+            "name": "configUrl.indexUrl",
+            "description": "列表页面"
+        }, {
+            "name": "configUrl.listUrl",
+            "description": "分页接口"
+        }, {
+            "name": "configUrl.exportUrl",
+            "description": "导出地址"
+        }, {
+            "name": "configUrl.importUrl",
+            "description": "导入地址"
+        }, {
+            "name": "configUrl.showUrl",
+            "description": "查看详情"
+        }, {
+            "name": "configUrl.createUrl",
+            "description": "创建操作"
+        }, {
+            "name": "configUrl.updateUrl",
+            "description": "修改操作"
+        }, {
+            "name": "configUrl.deleteUrl",
+            "description": "删除操作"
+        }, {
+            "name": "keywordsMap",
+            "description": "关键字搜索可选项"
+        }, {
+            "name": "excel",
+            "description": "导出excel配置"
+        }, {
+            "name": "excel.sheet",
+            "description": "导出excel的sheet名称"
+        }, {
+            "name": "excel.fileName",
+            "description": "导出excel的文件名"
+        }, {
+            "name": "excel.exportFields",
+            "description": "导出excel的可选字段"
+        },
+        {
+            "name": "row",
+            "description": "单个数据对象"
+        }
+    ],
+    "common_responses_list": [
+        {
+            "name": "current_page",
+            "description": "当前页码"
+        }, {
+            "name": "data",
+            "description": "分页数据集合"
+        },
+       {
+            "name": "first_page_url",
+            "description": "第一页地址"
+        }, {
+            "name": "from",
+            "description": "数据条数开始数"
+        }, {
+            "name": "last_page",
+            "description": "最大页码"
+        }, {
+            "name": "last_page_url",
+            "description": "最后一页地址"
+        }, {
+            "name": "links",
+            "description": "页码按钮集合"
+        }, {
+            "name": "links.$index",
+            "description": "页码按钮数据对象"
+        }, {
+            "name": "links.$index.url",
+            "description": "页码地址"
+        }, {
+            "name": "links.$index.label",
+            "description": "页码数"
+        }, {
+            "name": "links.$index.active",
+            "description": "是否选中当前页码"
+        }, {
+            "name": "next_page_url",
+            "description": "下一页地址"
+        }, {
+            "name": "path",
+            "description": "数据地址"
+        }, {
+            "name": "per_page",
+            "description": "每页多少条"
+        }, {
+            "name": "prev_page_url",
+            "description": "上一页地址"
+        }, {
+            "name": "to",
+            "description": "数据条数结束数"
+        }, {
+            "name": "total",
+            "description": "总数据条数"
+        }]
+}

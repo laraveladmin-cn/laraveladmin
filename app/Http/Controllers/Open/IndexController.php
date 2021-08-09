@@ -176,7 +176,7 @@ class IndexController extends Controller
                 ]);
             }]);
         if(Request::input('type')=='document'){
-            $obj = $obj->with(['params','body_params','responses']);
+            $obj = $obj->with(['route_params','params','body_params','responses']);
             $file = storage_path('/developments/api-doc.json');
             if(file_exists($file)){
                 $common_responses_data = json_decode(file_get_contents($file),true)?:[];

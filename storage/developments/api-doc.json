@@ -5,7 +5,8 @@
             "_trans_name": "主页",
             "params": [],
             "body_params": [],
-            "responses": []
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 5,
@@ -45,7 +46,8 @@
                     "name": "count.$index._trans_name",
                     "description": ""
                 }
-            ]
+            ],
+            "route_params": []
         },
         {
             "id": 9,
@@ -54,7 +56,7 @@
                 {
                     "name": "where[_key]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "关键字搜索组默认使用key",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -94,7 +96,7 @@
                 {
                     "name": "where[name|uname]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "姓名或用户名",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -102,7 +104,7 @@
                 {
                     "name": "where[name|uname|mobile_phone|email]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "姓名或用户名或手机号码或电子邮箱",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -118,58 +120,38 @@
                 {
                     "name": "order[updated_at]",
                     "type": 1,
-                    "title": "修改时间",
-                    "description": "",
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "desc",
                     "validate": ""
                 },
                 {
                     "name": "order[id]",
                     "type": 1,
-                    "title": "ID",
-                    "description": "",
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "asc",
                     "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
                 }
             ],
             "body_params": [],
             "responses": [
-                {
-                    "name": "list.data.$index",
-                    "description": "用户对象"
-                },
-                {
-                    "name": "list.data.$index.id",
-                    "description": "ID"
-                },
-                {
-                    "name": "list.data.$index.uname",
-                    "description": "用户名"
-                },
-                {
-                    "name": "list.data.$index.name",
-                    "description": "姓名"
-                },
-                {
-                    "name": "list.data.$index.mobile_phone",
-                    "description": "手机号码"
-                },
-                {
-                    "name": "list.data.$index.email",
-                    "description": "电子邮箱"
-                },
-                {
-                    "name": "list.data.$index.status",
-                    "description": "状态"
-                },
-                {
-                    "name": "list.data.$index.created_at",
-                    "description": "创建时间"
-                },
-                {
-                    "name": "list.data.$index.updated_at",
-                    "description": "修改时间"
-                },
                 {
                     "name": "options.where.status",
                     "description": "状态"
@@ -188,11 +170,11 @@
                 },
                 {
                     "name": "options.where.name|uname",
-                    "description": ""
+                    "description": "姓名或用户名"
                 },
                 {
                     "name": "options.where.name|uname|mobile_phone|email",
-                    "description": ""
+                    "description": "姓名或用户名或手机号码或电子邮箱"
                 },
                 {
                     "name": "options.where.id",
@@ -231,6 +213,10 @@
                     "description": "用户名"
                 },
                 {
+                    "name": "excel.exportFields.password",
+                    "description": "密码"
+                },
+                {
                     "name": "excel.exportFields.name",
                     "description": "姓名"
                 },
@@ -257,8 +243,424 @@
                 {
                     "name": "excel.exportFields.id",
                     "description": "ID"
+                },
+                {
+                    "name": "list.data.$index",
+                    "description": "用户对象"
+                },
+                {
+                    "name": "list.data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "list.data.$index.uname",
+                    "description": "用户名"
+                },
+                {
+                    "name": "list.data.$index.name",
+                    "description": "姓名"
+                },
+                {
+                    "name": "list.data.$index.mobile_phone",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "list.data.$index.email",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "list.data.$index.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "list.data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "list.data.$index.updated_at",
+                    "description": "修改时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 10,
+            "_trans_name": "普通用户分页",
+            "params": [
+                {
+                    "name": "where[status]",
+                    "type": 1,
+                    "title": "状态",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[created_at][0]",
+                    "type": 1,
+                    "title": "创建时间",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[created_at][1]",
+                    "type": 1,
+                    "title": "创建时间",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[admin]",
+                    "type": 1,
+                    "title": "未命名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name|uname]",
+                    "type": 1,
+                    "title": "姓名或用户名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name|uname|mobile_phone|email]",
+                    "type": 1,
+                    "title": "姓名或用户名或手机号码或电子邮箱",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[id]",
+                    "type": 1,
+                    "title": "ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "用户对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.uname",
+                    "description": "用户名"
+                },
+                {
+                    "name": "data.$index.name",
+                    "description": "姓名"
+                },
+                {
+                    "name": "data.$index.mobile_phone",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "data.$index.email",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "data.$index.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 11,
+            "_trans_name": "导出普通用户",
+            "params": [
+                {
+                    "name": "where[status]",
+                    "type": 1,
+                    "title": "状态",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[created_at][0]",
+                    "type": 1,
+                    "title": "创建时间",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[created_at][1]",
+                    "type": 1,
+                    "title": "创建时间",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[admin]",
+                    "type": 1,
+                    "title": "未命名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name|uname]",
+                    "type": 1,
+                    "title": "姓名或用户名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name|uname|mobile_phone|email]",
+                    "type": 1,
+                    "title": "姓名或用户名或手机号码或电子邮箱",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[id]",
+                    "type": 1,
+                    "title": "ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "用户对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "用户名"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "密码"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "姓名"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "data.$index.5",
+                    "description": "状态"
+                },
+                {
+                    "name": "data.$index.6",
+                    "description": "备注"
+                },
+                {
+                    "name": "data.$index.7",
+                    "description": "头像"
+                },
+                {
+                    "name": "data.$index.8",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 12,
+            "_trans_name": "导入普通用户",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 13,
+            "_trans_name": "编辑查看普通用户",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.uname",
+                    "description": "用户名"
+                },
+                {
+                    "name": "row.password",
+                    "description": "密码"
+                },
+                {
+                    "name": "row.email",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "row.mobile_phone",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "row.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "row.description",
+                    "description": "备注"
+                },
+                {
+                    "name": "row.avatar",
+                    "description": "头像"
+                },
+                {
+                    "name": "maps.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "maps.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.status.2",
+                    "description": "停用"
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
                 }
             ]
+        },
+        {
+            "id": 14,
+            "_trans_name": "创建普通用户",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 15,
+            "_trans_name": "更新普通用户",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 16,
+            "_trans_name": "删除普通用户",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 17,
@@ -267,7 +669,7 @@
                 {
                     "name": "where[_key]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "关键字搜索组默认使用key",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -275,7 +677,7 @@
                 {
                     "name": "where[roles.id]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "ID",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -299,18 +701,34 @@
                 {
                     "name": "order[left_margin]",
                     "type": 1,
-                    "title": "未命名",
-                    "description": "",
+                    "title": "未命名排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "asc",
                     "validate": ""
                 },
                 {
                     "name": "order[id]",
                     "type": 1,
-                    "title": "ID",
-                    "description": "",
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "asc",
                     "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
                 }
             ],
             "body_params": [],
@@ -389,7 +807,7 @@
                 },
                 {
                     "name": "maps.parent.is_tmp",
-                    "description": "是否模板"
+                    "description": "角色是否模板"
                 },
                 {
                     "name": "maps.parent.is_tmp.0",
@@ -427,7 +845,547 @@
                     "name": "excel.exportFields.id",
                     "description": "ID"
                 }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 18,
+            "_trans_name": "角色分页",
+            "params": [
+                {
+                    "name": "where[roles.id]",
+                    "type": 1,
+                    "title": "ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[is_tmp]",
+                    "type": 1,
+                    "title": "是否模板",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[left_margin]",
+                    "type": 1,
+                    "title": "未命名排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "角色对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.name",
+                    "description": "名称"
+                },
+                {
+                    "name": "data.$index.description",
+                    "description": "描述"
+                },
+                {
+                    "name": "data.$index.parent_id",
+                    "description": "父级ID"
+                },
+                {
+                    "name": "data.$index.level",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "data.$index.admins_count",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.parent",
+                    "description": ""
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 19,
+            "_trans_name": "导出角色",
+            "params": [
+                {
+                    "name": "where[roles.id]",
+                    "type": 1,
+                    "title": "ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[is_tmp]",
+                    "type": 1,
+                    "title": "是否模板",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[left_margin]",
+                    "type": 1,
+                    "title": "未命名排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "角色对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "名称"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "描述"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "父级ID"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "模板ID"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "是否模板"
+                },
+                {
+                    "name": "data.$index.5",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 20,
+            "_trans_name": "导入角色",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 21,
+            "_trans_name": "编辑查看角色",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.description",
+                    "description": "描述"
+                },
+                {
+                    "name": "row.parent_id",
+                    "description": "父级ID"
+                },
+                {
+                    "name": "row.tmp_id",
+                    "description": "模板ID"
+                },
+                {
+                    "name": "row.is_tmp",
+                    "description": "是否模板"
+                },
+                {
+                    "name": "row.menus",
+                    "description": "菜单"
+                },
+                {
+                    "name": "row.tmp",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.tmp.id",
+                    "description": "角色ID"
+                },
+                {
+                    "name": "row.tmp.name",
+                    "description": "角色名称"
+                },
+                {
+                    "name": "row.menu_ids",
+                    "description": ""
+                },
+                {
+                    "name": "maps.is_tmp",
+                    "description": "是否模板"
+                },
+                {
+                    "name": "maps.is_tmp.0",
+                    "description": "否"
+                },
+                {
+                    "name": "maps.is_tmp.1",
+                    "description": "是"
+                },
+                {
+                    "name": "maps.menus",
+                    "description": ""
+                },
+                {
+                    "name": "maps.menus.method",
+                    "description": "菜单请求方式"
+                },
+                {
+                    "name": "maps.menus.method.1",
+                    "description": "get"
+                },
+                {
+                    "name": "maps.menus.method.2",
+                    "description": "post"
+                },
+                {
+                    "name": "maps.menus.method.4",
+                    "description": "put"
+                },
+                {
+                    "name": "maps.menus.method.8",
+                    "description": "delete"
+                },
+                {
+                    "name": "maps.menus.method.16",
+                    "description": "head"
+                },
+                {
+                    "name": "maps.menus.method.32",
+                    "description": "options"
+                },
+                {
+                    "name": "maps.menus.method.64",
+                    "description": "trace"
+                },
+                {
+                    "name": "maps.menus.method.128",
+                    "description": "connect"
+                },
+                {
+                    "name": "maps.menus.method.256",
+                    "description": "patch"
+                },
+                {
+                    "name": "maps.menus.is_page",
+                    "description": "菜单是否为页面"
+                },
+                {
+                    "name": "maps.menus.is_page.0",
+                    "description": "否"
+                },
+                {
+                    "name": "maps.menus.is_page.1",
+                    "description": "是"
+                },
+                {
+                    "name": "maps.menus.status",
+                    "description": "菜单状态"
+                },
+                {
+                    "name": "maps.menus.status.1",
+                    "description": "显示"
+                },
+                {
+                    "name": "maps.menus.status.2",
+                    "description": "不显示"
+                },
+                {
+                    "name": "maps.menus.disabled",
+                    "description": "菜单功能状态"
+                },
+                {
+                    "name": "maps.menus.disabled.0",
+                    "description": "启用"
+                },
+                {
+                    "name": "maps.menus.disabled.1",
+                    "description": "禁用"
+                },
+                {
+                    "name": "maps.menus.use",
+                    "description": "菜单路由使用地方"
+                },
+                {
+                    "name": "maps.menus.use.1",
+                    "description": "api"
+                },
+                {
+                    "name": "maps.menus.use.2",
+                    "description": "web"
+                },
+                {
+                    "name": "maps.menus.env",
+                    "description": "菜单使用环境"
+                },
+                {
+                    "name": "maps.menus.env.local",
+                    "description": "开发环境"
+                },
+                {
+                    "name": "maps.menus.env.testing",
+                    "description": "测试环境"
+                },
+                {
+                    "name": "maps.menus.env.staging",
+                    "description": "预上线环境"
+                },
+                {
+                    "name": "maps.menus.env.production",
+                    "description": "正式环境"
+                },
+                {
+                    "name": "maps.menus.group",
+                    "description": "菜单所属组"
+                },
+                {
+                    "name": "maps.menus.group.none",
+                    "description": "none"
+                },
+                {
+                    "name": "maps.menus.group.open",
+                    "description": "open"
+                },
+                {
+                    "name": "maps.menus.group.home",
+                    "description": "home"
+                },
+                {
+                    "name": "maps.menus.group.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.menus.middleware",
+                    "description": "菜单单独使用中间件"
+                },
+                {
+                    "name": "maps.menus.middleware.auth",
+                    "description": "auth"
+                },
+                {
+                    "name": "maps.menus.middleware.auth.basic",
+                    "description": "auth.basic"
+                },
+                {
+                    "name": "maps.menus.middleware.bindings",
+                    "description": "bindings"
+                },
+                {
+                    "name": "maps.menus.middleware.cache.headers",
+                    "description": "cache.headers"
+                },
+                {
+                    "name": "maps.menus.middleware.can",
+                    "description": "can"
+                },
+                {
+                    "name": "maps.menus.middleware.guest",
+                    "description": "guest"
+                },
+                {
+                    "name": "maps.menus.middleware.password.confirm",
+                    "description": "password.confirm"
+                },
+                {
+                    "name": "maps.menus.middleware.signed",
+                    "description": "signed"
+                },
+                {
+                    "name": "maps.menus.middleware.throttle",
+                    "description": "throttle"
+                },
+                {
+                    "name": "maps.menus.middleware.verified",
+                    "description": "verified"
+                },
+                {
+                    "name": "maps.menus.middleware.log",
+                    "description": "log"
+                },
+                {
+                    "name": "maps.menus.middleware.api_client",
+                    "description": "api_client"
+                },
+                {
+                    "name": "maps.menus.middleware.auth.redirect",
+                    "description": "auth.redirect"
+                },
+                {
+                    "name": "maps.menus.middleware.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.menus.middleware.activated",
+                    "description": "activated"
+                },
+                {
+                    "name": "maps.tmp",
+                    "description": ""
+                },
+                {
+                    "name": "maps.tmp.is_tmp",
+                    "description": "角色是否模板"
+                },
+                {
+                    "name": "maps.tmp.is_tmp.0",
+                    "description": "否"
+                },
+                {
+                    "name": "maps.tmp.is_tmp.1",
+                    "description": "是"
+                },
+                {
+                    "name": "maps.tmp_id",
+                    "description": "模板ID"
+                },
+                {
+                    "name": "maps.optional_parents",
+                    "description": ""
+                },
+                {
+                    "name": "maps.permissions",
+                    "description": ""
+                },
+                {
+                    "name": "mapsRelations.menus",
+                    "description": ""
+                },
+                {
+                    "name": "mapsRelations.tmp",
+                    "description": ""
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
             ]
+        },
+        {
+            "id": 22,
+            "_trans_name": "创建角色",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 23,
+            "_trans_name": "更新角色",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 24,
+            "_trans_name": "删除角色",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 25,
@@ -436,7 +1394,7 @@
                 {
                     "name": "where[_key]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "关键字搜索组默认使用key",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -470,7 +1428,7 @@
                     "type": 1,
                     "title": "创建时间",
                     "description": "",
-                    "example": "2021-08-06 00:00:00",
+                    "example": "2021-08-09 00:00:00",
                     "validate": ""
                 },
                 {
@@ -484,18 +1442,34 @@
                 {
                     "name": "order[updated_at]",
                     "type": 1,
-                    "title": "修改时间",
-                    "description": "",
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "desc",
                     "validate": ""
                 },
                 {
                     "name": "order[id]",
                     "type": 1,
-                    "title": "ID",
-                    "description": "",
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "desc",
                     "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
                 }
             ],
             "body_params": [],
@@ -538,15 +1512,15 @@
                 },
                 {
                     "name": "list.data.$index.user.id",
-                    "description": "ID"
+                    "description": "用户ID"
                 },
                 {
                     "name": "list.data.$index.user.name",
-                    "description": "姓名"
+                    "description": "用户姓名"
                 },
                 {
                     "name": "list.data.$index.user.uname",
-                    "description": "用户名"
+                    "description": "用户用户名"
                 },
                 {
                     "name": "list.data.$index.menu",
@@ -554,19 +1528,19 @@
                 },
                 {
                     "name": "list.data.$index.menu.id",
-                    "description": "ID"
+                    "description": "菜单ID"
                 },
                 {
                     "name": "list.data.$index.menu.name",
-                    "description": "名称"
+                    "description": "菜单名称"
                 },
                 {
                     "name": "list.data.$index.menu.parent_id",
-                    "description": "父级ID"
+                    "description": "菜单父级ID"
                 },
                 {
                     "name": "list.data.$index.menu.resource_id",
-                    "description": "所属资源ID"
+                    "description": "菜单所属资源ID"
                 },
                 {
                     "name": "list.data.$index.menu.parent",
@@ -574,15 +1548,15 @@
                 },
                 {
                     "name": "list.data.$index.menu.parent.id",
-                    "description": "ID"
+                    "description": "菜单ID"
                 },
                 {
                     "name": "list.data.$index.menu.parent.name",
-                    "description": "名称"
+                    "description": "菜单名称"
                 },
                 {
                     "name": "list.data.$index.menu.parent.item_name",
-                    "description": ""
+                    "description": "菜单"
                 },
                 {
                     "name": "options.where.menu_id",
@@ -618,7 +1592,7 @@
                 },
                 {
                     "name": "maps.user.status",
-                    "description": "状态"
+                    "description": "用户状态"
                 },
                 {
                     "name": "maps.user.status.0",
@@ -638,7 +1612,7 @@
                 },
                 {
                     "name": "maps.menu.method",
-                    "description": "请求方式"
+                    "description": "菜单请求方式"
                 },
                 {
                     "name": "maps.menu.method.1",
@@ -678,7 +1652,7 @@
                 },
                 {
                     "name": "maps.menu.is_page",
-                    "description": "是否为页面"
+                    "description": "菜单是否为页面"
                 },
                 {
                     "name": "maps.menu.is_page.0",
@@ -690,7 +1664,7 @@
                 },
                 {
                     "name": "maps.menu.status",
-                    "description": "状态"
+                    "description": "菜单状态"
                 },
                 {
                     "name": "maps.menu.status.1",
@@ -702,7 +1676,7 @@
                 },
                 {
                     "name": "maps.menu.disabled",
-                    "description": "功能状态"
+                    "description": "菜单功能状态"
                 },
                 {
                     "name": "maps.menu.disabled.0",
@@ -714,7 +1688,7 @@
                 },
                 {
                     "name": "maps.menu.use",
-                    "description": "路由使用地方"
+                    "description": "菜单路由使用地方"
                 },
                 {
                     "name": "maps.menu.use.1",
@@ -726,7 +1700,7 @@
                 },
                 {
                     "name": "maps.menu.env",
-                    "description": "使用环境"
+                    "description": "菜单使用环境"
                 },
                 {
                     "name": "maps.menu.env.local",
@@ -746,7 +1720,7 @@
                 },
                 {
                     "name": "maps.menu.group",
-                    "description": "所属组"
+                    "description": "菜单所属组"
                 },
                 {
                     "name": "maps.menu.group.none",
@@ -766,7 +1740,7 @@
                 },
                 {
                     "name": "maps.menu.middleware",
-                    "description": "单独使用中间件"
+                    "description": "菜单单独使用中间件"
                 },
                 {
                     "name": "maps.menu.middleware.auth",
@@ -830,11 +1804,11 @@
                 },
                 {
                     "name": "maps.menu.parent",
-                    "description": ""
+                    "description": "菜单"
                 },
                 {
                     "name": "maps.menu.parent.method",
-                    "description": "请求方式"
+                    "description": "菜单请求方式"
                 },
                 {
                     "name": "maps.menu.parent.method.1",
@@ -874,7 +1848,7 @@
                 },
                 {
                     "name": "maps.menu.parent.is_page",
-                    "description": "是否为页面"
+                    "description": "菜单是否为页面"
                 },
                 {
                     "name": "maps.menu.parent.is_page.0",
@@ -886,7 +1860,7 @@
                 },
                 {
                     "name": "maps.menu.parent.status",
-                    "description": "状态"
+                    "description": "菜单状态"
                 },
                 {
                     "name": "maps.menu.parent.status.1",
@@ -898,7 +1872,7 @@
                 },
                 {
                     "name": "maps.menu.parent.disabled",
-                    "description": "功能状态"
+                    "description": "菜单功能状态"
                 },
                 {
                     "name": "maps.menu.parent.disabled.0",
@@ -910,7 +1884,7 @@
                 },
                 {
                     "name": "maps.menu.parent.use",
-                    "description": "路由使用地方"
+                    "description": "菜单路由使用地方"
                 },
                 {
                     "name": "maps.menu.parent.use.1",
@@ -922,7 +1896,7 @@
                 },
                 {
                     "name": "maps.menu.parent.env",
-                    "description": "使用环境"
+                    "description": "菜单使用环境"
                 },
                 {
                     "name": "maps.menu.parent.env.local",
@@ -942,7 +1916,7 @@
                 },
                 {
                     "name": "maps.menu.parent.group",
-                    "description": "所属组"
+                    "description": "菜单所属组"
                 },
                 {
                     "name": "maps.menu.parent.group.none",
@@ -962,7 +1936,7 @@
                 },
                 {
                     "name": "maps.menu.parent.middleware",
-                    "description": "单独使用中间件"
+                    "description": "菜单单独使用中间件"
                 },
                 {
                     "name": "maps.menu.parent.middleware.auth",
@@ -1042,11 +2016,11 @@
                 },
                 {
                     "name": "excel.exportFields.menu.name",
-                    "description": "操作菜单"
+                    "description": "菜单操作菜单"
                 },
                 {
                     "name": "excel.exportFields.user.name",
-                    "description": "操作者"
+                    "description": "用户操作者"
                 },
                 {
                     "name": "excel.exportFields.location",
@@ -1068,7 +2042,635 @@
                     "name": "excel.exportFields.id",
                     "description": "ID"
                 }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 26,
+            "_trans_name": "日志分页",
+            "params": [
+                {
+                    "name": "where[menu_id]",
+                    "type": 1,
+                    "title": "菜单ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[user_id]",
+                    "type": 1,
+                    "title": "用户ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[parameters]",
+                    "type": 1,
+                    "title": "请求参数",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[created_at][0]",
+                    "type": 1,
+                    "title": "创建时间",
+                    "description": "",
+                    "example": "2021-08-09 00:00:00",
+                    "validate": ""
+                },
+                {
+                    "name": "where[created_at][1]",
+                    "type": 1,
+                    "title": "创建时间",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "日志对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.menu_id",
+                    "description": "菜单ID"
+                },
+                {
+                    "name": "data.$index.location",
+                    "description": "位置"
+                },
+                {
+                    "name": "data.$index.ip",
+                    "description": "IP地址"
+                },
+                {
+                    "name": "data.$index.parameters",
+                    "description": "请求参数"
+                },
+                {
+                    "name": "data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "data.$index.user",
+                    "description": "用户对象"
+                },
+                {
+                    "name": "data.$index.user.id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "data.$index.user.uname",
+                    "description": "用户用户名"
+                },
+                {
+                    "name": "data.$index.menu",
+                    "description": "菜单对象"
+                },
+                {
+                    "name": "data.$index.menu.id",
+                    "description": "菜单ID"
+                },
+                {
+                    "name": "data.$index.menu.name",
+                    "description": "菜单名称"
+                },
+                {
+                    "name": "data.$index.menu.parent_id",
+                    "description": "菜单父级ID"
+                },
+                {
+                    "name": "data.$index.menu.resource_id",
+                    "description": "菜单所属资源ID"
+                },
+                {
+                    "name": "data.$index.menu.parent",
+                    "description": "菜单对象"
+                },
+                {
+                    "name": "data.$index.menu.parent.id",
+                    "description": "菜单ID"
+                },
+                {
+                    "name": "data.$index.menu.parent.name",
+                    "description": "菜单名称"
+                },
+                {
+                    "name": "data.$index.menu.parent.item_name",
+                    "description": "菜单"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 27,
+            "_trans_name": "导出日志",
+            "params": [
+                {
+                    "name": "where[menu_id]",
+                    "type": 1,
+                    "title": "菜单ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[user_id]",
+                    "type": 1,
+                    "title": "用户ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[parameters]",
+                    "type": 1,
+                    "title": "请求参数",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[created_at][0]",
+                    "type": 1,
+                    "title": "创建时间",
+                    "description": "",
+                    "example": "2021-08-09 00:00:00",
+                    "validate": ""
+                },
+                {
+                    "name": "where[created_at][1]",
+                    "type": 1,
+                    "title": "创建时间",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "日志对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "操作菜单"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "操作者"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "位置"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "IP地址"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "请求参数"
+                },
+                {
+                    "name": "data.$index.5",
+                    "description": "返回数据"
+                },
+                {
+                    "name": "data.$index.6",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 28,
+            "_trans_name": "导入日志",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 29,
+            "_trans_name": "编辑查看日志",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.menu_id",
+                    "description": "菜单ID"
+                },
+                {
+                    "name": "row.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "row.location",
+                    "description": "位置"
+                },
+                {
+                    "name": "row.ip",
+                    "description": "IP地址"
+                },
+                {
+                    "name": "row.parameters",
+                    "description": "请求参数"
+                },
+                {
+                    "name": "row.return",
+                    "description": "返回数据"
+                },
+                {
+                    "name": "row.menu",
+                    "description": "菜单"
+                },
+                {
+                    "name": "row.menu.id",
+                    "description": "菜单ID"
+                },
+                {
+                    "name": "row.menu.name",
+                    "description": "菜单名称"
+                },
+                {
+                    "name": "row.menu.url",
+                    "description": "菜单URL路径"
+                },
+                {
+                    "name": "row.user",
+                    "description": "用户"
+                },
+                {
+                    "name": "row.user.id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "row.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "maps.menu",
+                    "description": ""
+                },
+                {
+                    "name": "maps.menu.method",
+                    "description": "菜单请求方式"
+                },
+                {
+                    "name": "maps.menu.method.1",
+                    "description": "get"
+                },
+                {
+                    "name": "maps.menu.method.2",
+                    "description": "post"
+                },
+                {
+                    "name": "maps.menu.method.4",
+                    "description": "put"
+                },
+                {
+                    "name": "maps.menu.method.8",
+                    "description": "delete"
+                },
+                {
+                    "name": "maps.menu.method.16",
+                    "description": "head"
+                },
+                {
+                    "name": "maps.menu.method.32",
+                    "description": "options"
+                },
+                {
+                    "name": "maps.menu.method.64",
+                    "description": "trace"
+                },
+                {
+                    "name": "maps.menu.method.128",
+                    "description": "connect"
+                },
+                {
+                    "name": "maps.menu.method.256",
+                    "description": "patch"
+                },
+                {
+                    "name": "maps.menu.is_page",
+                    "description": "菜单是否为页面"
+                },
+                {
+                    "name": "maps.menu.is_page.0",
+                    "description": "否"
+                },
+                {
+                    "name": "maps.menu.is_page.1",
+                    "description": "是"
+                },
+                {
+                    "name": "maps.menu.status",
+                    "description": "菜单状态"
+                },
+                {
+                    "name": "maps.menu.status.1",
+                    "description": "显示"
+                },
+                {
+                    "name": "maps.menu.status.2",
+                    "description": "不显示"
+                },
+                {
+                    "name": "maps.menu.disabled",
+                    "description": "菜单功能状态"
+                },
+                {
+                    "name": "maps.menu.disabled.0",
+                    "description": "启用"
+                },
+                {
+                    "name": "maps.menu.disabled.1",
+                    "description": "禁用"
+                },
+                {
+                    "name": "maps.menu.use",
+                    "description": "菜单路由使用地方"
+                },
+                {
+                    "name": "maps.menu.use.1",
+                    "description": "api"
+                },
+                {
+                    "name": "maps.menu.use.2",
+                    "description": "web"
+                },
+                {
+                    "name": "maps.menu.env",
+                    "description": "菜单使用环境"
+                },
+                {
+                    "name": "maps.menu.env.local",
+                    "description": "开发环境"
+                },
+                {
+                    "name": "maps.menu.env.testing",
+                    "description": "测试环境"
+                },
+                {
+                    "name": "maps.menu.env.staging",
+                    "description": "预上线环境"
+                },
+                {
+                    "name": "maps.menu.env.production",
+                    "description": "正式环境"
+                },
+                {
+                    "name": "maps.menu.group",
+                    "description": "菜单所属组"
+                },
+                {
+                    "name": "maps.menu.group.none",
+                    "description": "none"
+                },
+                {
+                    "name": "maps.menu.group.open",
+                    "description": "open"
+                },
+                {
+                    "name": "maps.menu.group.home",
+                    "description": "home"
+                },
+                {
+                    "name": "maps.menu.group.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.menu.middleware",
+                    "description": "菜单单独使用中间件"
+                },
+                {
+                    "name": "maps.menu.middleware.auth",
+                    "description": "auth"
+                },
+                {
+                    "name": "maps.menu.middleware.auth.basic",
+                    "description": "auth.basic"
+                },
+                {
+                    "name": "maps.menu.middleware.bindings",
+                    "description": "bindings"
+                },
+                {
+                    "name": "maps.menu.middleware.cache.headers",
+                    "description": "cache.headers"
+                },
+                {
+                    "name": "maps.menu.middleware.can",
+                    "description": "can"
+                },
+                {
+                    "name": "maps.menu.middleware.guest",
+                    "description": "guest"
+                },
+                {
+                    "name": "maps.menu.middleware.password.confirm",
+                    "description": "password.confirm"
+                },
+                {
+                    "name": "maps.menu.middleware.signed",
+                    "description": "signed"
+                },
+                {
+                    "name": "maps.menu.middleware.throttle",
+                    "description": "throttle"
+                },
+                {
+                    "name": "maps.menu.middleware.verified",
+                    "description": "verified"
+                },
+                {
+                    "name": "maps.menu.middleware.log",
+                    "description": "log"
+                },
+                {
+                    "name": "maps.menu.middleware.api_client",
+                    "description": "api_client"
+                },
+                {
+                    "name": "maps.menu.middleware.auth.redirect",
+                    "description": "auth.redirect"
+                },
+                {
+                    "name": "maps.menu.middleware.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.menu.middleware.activated",
+                    "description": "activated"
+                },
+                {
+                    "name": "maps.user",
+                    "description": ""
+                },
+                {
+                    "name": "maps.user.status",
+                    "description": "用户状态"
+                },
+                {
+                    "name": "maps.user.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.user.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.user.status.2",
+                    "description": "停用"
+                },
+                {
+                    "name": "maps.menu_id",
+                    "description": "菜单ID"
+                },
+                {
+                    "name": "maps.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "mapsRelations.menu",
+                    "description": ""
+                },
+                {
+                    "name": "mapsRelations.user",
+                    "description": ""
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
             ]
+        },
+        {
+            "id": 30,
+            "_trans_name": "创建日志",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 31,
+            "_trans_name": "更新日志",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 32,
+            "_trans_name": "删除日志",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 33,
@@ -1077,7 +2679,7 @@
                 {
                     "name": "where[_key]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "关键字搜索组默认使用key",
                     "description": "",
                     "example": "user.name|user.uname",
                     "validate": ""
@@ -1085,7 +2687,7 @@
                 {
                     "name": "where[roles.id]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "角色ID",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -1093,7 +2695,7 @@
                 {
                     "name": "where[user.name|user.uname]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "用户姓名或用户用户名",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -1101,7 +2703,7 @@
                 {
                     "name": "where[roles.name]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "角色名称",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -1109,18 +2711,34 @@
                 {
                     "name": "order[updated_at]",
                     "type": 1,
-                    "title": "修改时间",
-                    "description": "",
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "desc",
                     "validate": ""
                 },
                 {
                     "name": "order[id]",
                     "type": 1,
-                    "title": "ID",
-                    "description": "",
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "desc",
                     "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
                 }
             ],
             "body_params": [],
@@ -1147,23 +2765,23 @@
                 },
                 {
                     "name": "list.data.$index.user.id",
-                    "description": "ID"
+                    "description": "用户ID"
                 },
                 {
                     "name": "list.data.$index.user.uname",
-                    "description": "用户名"
+                    "description": "用户用户名"
                 },
                 {
                     "name": "list.data.$index.user.name",
-                    "description": "姓名"
+                    "description": "用户姓名"
                 },
                 {
                     "name": "list.data.$index.user.mobile_phone",
-                    "description": "手机号码"
+                    "description": "用户手机号码"
                 },
                 {
                     "name": "list.data.$index.user.status",
-                    "description": "状态"
+                    "description": "用户状态"
                 },
                 {
                     "name": "list.data.$index.roles",
@@ -1175,11 +2793,11 @@
                 },
                 {
                     "name": "list.data.$index.roles.$index.id",
-                    "description": "ID"
+                    "description": "角色ID"
                 },
                 {
                     "name": "list.data.$index.roles.$index.name",
-                    "description": "名称"
+                    "description": "角色名称"
                 },
                 {
                     "name": "list.data.$index.roles.$index.pivot",
@@ -1199,15 +2817,15 @@
                 },
                 {
                     "name": "options.where.roles.id",
-                    "description": "ID"
+                    "description": "角色ID"
                 },
                 {
                     "name": "options.where.user.name|user.uname",
-                    "description": ""
+                    "description": "用户姓名或用户用户名"
                 },
                 {
                     "name": "options.where.roles.name",
-                    "description": "名称"
+                    "description": "角色名称"
                 },
                 {
                     "name": "options.order.updated_at",
@@ -1223,7 +2841,7 @@
                 },
                 {
                     "name": "maps.user.status",
-                    "description": "状态"
+                    "description": "用户状态"
                 },
                 {
                     "name": "maps.user.status.0",
@@ -1243,7 +2861,7 @@
                 },
                 {
                     "name": "maps.roles.is_tmp",
-                    "description": "是否模板"
+                    "description": "角色是否模板"
                 },
                 {
                     "name": "maps.roles.is_tmp.0",
@@ -1271,31 +2889,31 @@
                 },
                 {
                     "name": "excel.exportFields.user.uname",
-                    "description": "用户名"
+                    "description": "用户用户名"
                 },
                 {
                     "name": "excel.exportFields.user.name",
-                    "description": "姓名"
+                    "description": "用户姓名"
                 },
                 {
                     "name": "excel.exportFields.user.avatar",
-                    "description": "头像"
+                    "description": "用户头像"
                 },
                 {
                     "name": "excel.exportFields.user.email",
-                    "description": "电子邮箱"
+                    "description": "用户电子邮箱"
                 },
                 {
                     "name": "excel.exportFields.user.mobile_phone",
-                    "description": "手机号码"
+                    "description": "用户手机号码"
                 },
                 {
                     "name": "excel.exportFields.user.status",
-                    "description": "状态"
+                    "description": "用户状态"
                 },
                 {
                     "name": "excel.exportFields.user.description",
-                    "description": "备注"
+                    "description": "用户备注"
                 },
                 {
                     "name": "excel.exportFields.user_id",
@@ -1305,7 +2923,411 @@
                     "name": "excel.exportFields.id",
                     "description": "ID"
                 }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 34,
+            "_trans_name": "后台用户分页",
+            "params": [
+                {
+                    "name": "where[roles.id]",
+                    "type": 1,
+                    "title": "角色ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[user.name|user.uname]",
+                    "type": 1,
+                    "title": "用户姓名或用户用户名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[roles.name]",
+                    "type": 1,
+                    "title": "角色名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "后台用户对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "data.$index.user",
+                    "description": "用户对象"
+                },
+                {
+                    "name": "data.$index.user.id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.user.uname",
+                    "description": "用户用户名"
+                },
+                {
+                    "name": "data.$index.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "data.$index.user.mobile_phone",
+                    "description": "用户手机号码"
+                },
+                {
+                    "name": "data.$index.user.status",
+                    "description": "用户状态"
+                },
+                {
+                    "name": "data.$index.roles",
+                    "description": "角色对象集合"
+                },
+                {
+                    "name": "data.$index.roles.$index",
+                    "description": "角色对象"
+                },
+                {
+                    "name": "data.$index.roles.$index.id",
+                    "description": "角色ID"
+                },
+                {
+                    "name": "data.$index.roles.$index.name",
+                    "description": "角色名称"
+                },
+                {
+                    "name": "data.$index.roles.$index.pivot",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.roles.$index.pivot.admin_id",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.roles.$index.pivot.role_id",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.roles_name",
+                    "description": ""
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 35,
+            "_trans_name": "导出后台用户",
+            "params": [
+                {
+                    "name": "where[roles.id]",
+                    "type": 1,
+                    "title": "角色ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[user.name|user.uname]",
+                    "type": 1,
+                    "title": "用户姓名或用户用户名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[roles.name]",
+                    "type": 1,
+                    "title": "角色名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "后台用户对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "用户名"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "姓名"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "头像"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "data.$index.5",
+                    "description": "状态"
+                },
+                {
+                    "name": "data.$index.6",
+                    "description": "备注"
+                },
+                {
+                    "name": "data.$index.7",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.8",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 36,
+            "_trans_name": "导入后台用户",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 37,
+            "_trans_name": "编辑查看后台用户",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "row.user",
+                    "description": "用户"
+                },
+                {
+                    "name": "row.user.id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "row.user.uname",
+                    "description": "用户用户名"
+                },
+                {
+                    "name": "row.user.password",
+                    "description": "用户密码"
+                },
+                {
+                    "name": "row.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "row.user.email",
+                    "description": "用户电子邮箱"
+                },
+                {
+                    "name": "row.user.mobile_phone",
+                    "description": "用户手机号码"
+                },
+                {
+                    "name": "row.user.status",
+                    "description": "用户状态"
+                },
+                {
+                    "name": "row.user.description",
+                    "description": "用户备注"
+                },
+                {
+                    "name": "row.user.avatar",
+                    "description": "用户头像"
+                },
+                {
+                    "name": "row.roles",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.role_ids",
+                    "description": ""
+                },
+                {
+                    "name": "row.bind_user",
+                    "description": ""
+                },
+                {
+                    "name": "row.user_id_back",
+                    "description": ""
+                },
+                {
+                    "name": "maps.user",
+                    "description": ""
+                },
+                {
+                    "name": "maps.user.status",
+                    "description": "用户状态"
+                },
+                {
+                    "name": "maps.user.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.user.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.user.status.2",
+                    "description": "停用"
+                },
+                {
+                    "name": "maps.roles",
+                    "description": ""
+                },
+                {
+                    "name": "maps.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "mapsRelations.user",
+                    "description": ""
+                },
+                {
+                    "name": "mapsRelations.roles",
+                    "description": ""
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
             ]
+        },
+        {
+            "id": 38,
+            "_trans_name": "创建后台用户",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 39,
+            "_trans_name": "更新后台用户",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 40,
+            "_trans_name": "删除后台用户",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 41,
@@ -1314,7 +3336,7 @@
                 {
                     "name": "where[_key]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "关键字搜索组默认使用key",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -1354,7 +3376,7 @@
                 {
                     "name": "where[name|url]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "名称或URL路径",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -1370,18 +3392,34 @@
                 {
                     "name": "order[left_margin]",
                     "type": 1,
-                    "title": "未命名",
-                    "description": "",
+                    "title": "未命名排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "asc",
                     "validate": ""
                 },
                 {
                     "name": "order[id]",
                     "type": 1,
-                    "title": "ID",
-                    "description": "",
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "asc",
                     "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
                 }
             ],
             "body_params": [],
@@ -1464,7 +3502,7 @@
                 },
                 {
                     "name": "options.where.name|url",
-                    "description": ""
+                    "description": "名称或URL路径"
                 },
                 {
                     "name": "options.where.resource_id",
@@ -1676,7 +3714,7 @@
                 },
                 {
                     "name": "maps.parent.method",
-                    "description": "请求方式"
+                    "description": "菜单请求方式"
                 },
                 {
                     "name": "maps.parent.method.1",
@@ -1716,7 +3754,7 @@
                 },
                 {
                     "name": "maps.parent.is_page",
-                    "description": "是否为页面"
+                    "description": "菜单是否为页面"
                 },
                 {
                     "name": "maps.parent.is_page.0",
@@ -1728,7 +3766,7 @@
                 },
                 {
                     "name": "maps.parent.status",
-                    "description": "状态"
+                    "description": "菜单状态"
                 },
                 {
                     "name": "maps.parent.status.1",
@@ -1740,7 +3778,7 @@
                 },
                 {
                     "name": "maps.parent.disabled",
-                    "description": "功能状态"
+                    "description": "菜单功能状态"
                 },
                 {
                     "name": "maps.parent.disabled.0",
@@ -1752,7 +3790,7 @@
                 },
                 {
                     "name": "maps.parent.use",
-                    "description": "路由使用地方"
+                    "description": "菜单路由使用地方"
                 },
                 {
                     "name": "maps.parent.use.1",
@@ -1764,7 +3802,7 @@
                 },
                 {
                     "name": "maps.parent.env",
-                    "description": "使用环境"
+                    "description": "菜单使用环境"
                 },
                 {
                     "name": "maps.parent.env.local",
@@ -1784,7 +3822,7 @@
                 },
                 {
                     "name": "maps.parent.group",
-                    "description": "所属组"
+                    "description": "菜单所属组"
                 },
                 {
                     "name": "maps.parent.group.none",
@@ -1804,7 +3842,7 @@
                 },
                 {
                     "name": "maps.parent.middleware",
-                    "description": "单独使用中间件"
+                    "description": "菜单单独使用中间件"
                 },
                 {
                     "name": "maps.parent.middleware.auth",
@@ -1892,7 +3930,7 @@
                 },
                 {
                     "name": "excel.exportFields.parent.name",
-                    "description": "父级名称"
+                    "description": "菜单父级名称"
                 },
                 {
                     "name": "excel.exportFields.method",
@@ -1922,7 +3960,1111 @@
                     "name": "excel.exportFields.id",
                     "description": "ID"
                 }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 42,
+            "_trans_name": "菜单分页",
+            "params": [
+                {
+                    "name": "where[status]",
+                    "type": 1,
+                    "title": "状态",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[is_page]",
+                    "type": 1,
+                    "title": "是否为页面",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[method]",
+                    "type": 1,
+                    "title": "请求方式",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name|url]",
+                    "type": 1,
+                    "title": "名称或URL路径",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[resource_id]",
+                    "type": 1,
+                    "title": "所属资源ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[left_margin]",
+                    "type": 1,
+                    "title": "未命名排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "菜单对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.icons",
+                    "description": "图标"
+                },
+                {
+                    "name": "data.$index.name",
+                    "description": "名称"
+                },
+                {
+                    "name": "data.$index.url",
+                    "description": "URL路径"
+                },
+                {
+                    "name": "data.$index.parent_id",
+                    "description": "父级ID"
+                },
+                {
+                    "name": "data.$index.level",
+                    "description": "层级"
+                },
+                {
+                    "name": "data.$index.method",
+                    "description": "菜单对象"
+                },
+                {
+                    "name": "data.$index.is_page",
+                    "description": "是否为页面"
+                },
+                {
+                    "name": "data.$index.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "data.$index.resource_id",
+                    "description": "所属资源ID"
+                },
+                {
+                    "name": "data.$index.parent",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index._trans_name",
+                    "description": ""
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 43,
+            "_trans_name": "导出菜单",
+            "params": [
+                {
+                    "name": "where[status]",
+                    "type": 1,
+                    "title": "状态",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[is_page]",
+                    "type": 1,
+                    "title": "是否为页面",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[method]",
+                    "type": 1,
+                    "title": "请求方式",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name|url]",
+                    "type": 1,
+                    "title": "名称或URL路径",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[resource_id]",
+                    "type": 1,
+                    "title": "所属资源ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[left_margin]",
+                    "type": 1,
+                    "title": "未命名排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "菜单对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "名称"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "图标"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "描述"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "URL路径"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "父级名称"
+                },
+                {
+                    "name": "data.$index.5",
+                    "description": "请求方式"
+                },
+                {
+                    "name": "data.$index.6",
+                    "description": "是否为页面"
+                },
+                {
+                    "name": "data.$index.7",
+                    "description": "功能状态"
+                },
+                {
+                    "name": "data.$index.8",
+                    "description": "状态"
+                },
+                {
+                    "name": "data.$index.9",
+                    "description": "层级"
+                },
+                {
+                    "name": "data.$index.10",
+                    "description": "父级ID"
+                },
+                {
+                    "name": "data.$index.11",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 44,
+            "_trans_name": "导入菜单",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 45,
+            "_trans_name": "编辑查看菜单",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.disabled",
+                    "description": "功能状态"
+                },
+                {
+                    "name": "row.icons",
+                    "description": "图标"
+                },
+                {
+                    "name": "row.description",
+                    "description": "描述"
+                },
+                {
+                    "name": "row.url",
+                    "description": "URL路径"
+                },
+                {
+                    "name": "row.parent_id",
+                    "description": "父级ID"
+                },
+                {
+                    "name": "row.method",
+                    "description": ""
+                },
+                {
+                    "name": "row.is_page",
+                    "description": "是否为页面"
+                },
+                {
+                    "name": "row.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "row.resource_id",
+                    "description": "所属资源ID"
+                },
+                {
+                    "name": "row.group",
+                    "description": "所属组"
+                },
+                {
+                    "name": "row.action",
+                    "description": "绑定控制器方法"
+                },
+                {
+                    "name": "row.env",
+                    "description": "使用环境"
+                },
+                {
+                    "name": "row.plug_in_key",
+                    "description": "插件菜单唯一标识"
+                },
+                {
+                    "name": "row.use",
+                    "description": ""
+                },
+                {
+                    "name": "row.as",
+                    "description": "路由别名"
+                },
+                {
+                    "name": "row.middleware",
+                    "description": ""
+                },
+                {
+                    "name": "row.item_name",
+                    "description": ""
+                },
+                {
+                    "name": "row.resource",
+                    "description": "菜单"
+                },
+                {
+                    "name": "row.resource.id",
+                    "description": "菜单ID"
+                },
+                {
+                    "name": "row.resource.name",
+                    "description": "菜单名称"
+                },
+                {
+                    "name": "row.resources",
+                    "description": "菜单"
+                },
+                {
+                    "name": "row.resource_ids",
+                    "description": ""
+                },
+                {
+                    "name": "row._type",
+                    "description": ""
+                },
+                {
+                    "name": "row._options",
+                    "description": ""
+                },
+                {
+                    "name": "maps.method",
+                    "description": "请求方式"
+                },
+                {
+                    "name": "maps.method.1",
+                    "description": "get"
+                },
+                {
+                    "name": "maps.method.2",
+                    "description": "post"
+                },
+                {
+                    "name": "maps.method.4",
+                    "description": "put"
+                },
+                {
+                    "name": "maps.method.8",
+                    "description": "delete"
+                },
+                {
+                    "name": "maps.method.16",
+                    "description": "head"
+                },
+                {
+                    "name": "maps.method.32",
+                    "description": "options"
+                },
+                {
+                    "name": "maps.method.64",
+                    "description": "trace"
+                },
+                {
+                    "name": "maps.method.128",
+                    "description": "connect"
+                },
+                {
+                    "name": "maps.method.256",
+                    "description": "patch"
+                },
+                {
+                    "name": "maps.is_page",
+                    "description": "是否为页面"
+                },
+                {
+                    "name": "maps.is_page.0",
+                    "description": "否"
+                },
+                {
+                    "name": "maps.is_page.1",
+                    "description": "是"
+                },
+                {
+                    "name": "maps.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "maps.status.1",
+                    "description": "显示"
+                },
+                {
+                    "name": "maps.status.2",
+                    "description": "不显示"
+                },
+                {
+                    "name": "maps.disabled",
+                    "description": "功能状态"
+                },
+                {
+                    "name": "maps.disabled.0",
+                    "description": "启用"
+                },
+                {
+                    "name": "maps.disabled.1",
+                    "description": "禁用"
+                },
+                {
+                    "name": "maps.use",
+                    "description": "路由使用地方"
+                },
+                {
+                    "name": "maps.use.1",
+                    "description": "api"
+                },
+                {
+                    "name": "maps.use.2",
+                    "description": "web"
+                },
+                {
+                    "name": "maps.env",
+                    "description": "使用环境"
+                },
+                {
+                    "name": "maps.env.local",
+                    "description": "开发环境"
+                },
+                {
+                    "name": "maps.env.testing",
+                    "description": "测试环境"
+                },
+                {
+                    "name": "maps.env.staging",
+                    "description": "预上线环境"
+                },
+                {
+                    "name": "maps.env.production",
+                    "description": "正式环境"
+                },
+                {
+                    "name": "maps.group",
+                    "description": "所属组"
+                },
+                {
+                    "name": "maps.group.none",
+                    "description": "none"
+                },
+                {
+                    "name": "maps.group.open",
+                    "description": "open"
+                },
+                {
+                    "name": "maps.group.home",
+                    "description": "home"
+                },
+                {
+                    "name": "maps.group.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.middleware",
+                    "description": "单独使用中间件"
+                },
+                {
+                    "name": "maps.middleware.auth",
+                    "description": "auth"
+                },
+                {
+                    "name": "maps.middleware.auth.basic",
+                    "description": "auth.basic"
+                },
+                {
+                    "name": "maps.middleware.bindings",
+                    "description": "bindings"
+                },
+                {
+                    "name": "maps.middleware.cache.headers",
+                    "description": "cache.headers"
+                },
+                {
+                    "name": "maps.middleware.can",
+                    "description": "can"
+                },
+                {
+                    "name": "maps.middleware.guest",
+                    "description": "guest"
+                },
+                {
+                    "name": "maps.middleware.password.confirm",
+                    "description": "password.confirm"
+                },
+                {
+                    "name": "maps.middleware.signed",
+                    "description": "signed"
+                },
+                {
+                    "name": "maps.middleware.throttle",
+                    "description": "throttle"
+                },
+                {
+                    "name": "maps.middleware.verified",
+                    "description": "verified"
+                },
+                {
+                    "name": "maps.middleware.log",
+                    "description": "log"
+                },
+                {
+                    "name": "maps.middleware.api_client",
+                    "description": "api_client"
+                },
+                {
+                    "name": "maps.middleware.auth.redirect",
+                    "description": "auth.redirect"
+                },
+                {
+                    "name": "maps.middleware.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.middleware.activated",
+                    "description": "activated"
+                },
+                {
+                    "name": "maps.resource",
+                    "description": ""
+                },
+                {
+                    "name": "maps.resource.method",
+                    "description": "菜单请求方式"
+                },
+                {
+                    "name": "maps.resource.method.1",
+                    "description": "get"
+                },
+                {
+                    "name": "maps.resource.method.2",
+                    "description": "post"
+                },
+                {
+                    "name": "maps.resource.method.4",
+                    "description": "put"
+                },
+                {
+                    "name": "maps.resource.method.8",
+                    "description": "delete"
+                },
+                {
+                    "name": "maps.resource.method.16",
+                    "description": "head"
+                },
+                {
+                    "name": "maps.resource.method.32",
+                    "description": "options"
+                },
+                {
+                    "name": "maps.resource.method.64",
+                    "description": "trace"
+                },
+                {
+                    "name": "maps.resource.method.128",
+                    "description": "connect"
+                },
+                {
+                    "name": "maps.resource.method.256",
+                    "description": "patch"
+                },
+                {
+                    "name": "maps.resource.is_page",
+                    "description": "菜单是否为页面"
+                },
+                {
+                    "name": "maps.resource.is_page.0",
+                    "description": "否"
+                },
+                {
+                    "name": "maps.resource.is_page.1",
+                    "description": "是"
+                },
+                {
+                    "name": "maps.resource.status",
+                    "description": "菜单状态"
+                },
+                {
+                    "name": "maps.resource.status.1",
+                    "description": "显示"
+                },
+                {
+                    "name": "maps.resource.status.2",
+                    "description": "不显示"
+                },
+                {
+                    "name": "maps.resource.disabled",
+                    "description": "菜单功能状态"
+                },
+                {
+                    "name": "maps.resource.disabled.0",
+                    "description": "启用"
+                },
+                {
+                    "name": "maps.resource.disabled.1",
+                    "description": "禁用"
+                },
+                {
+                    "name": "maps.resource.use",
+                    "description": "菜单路由使用地方"
+                },
+                {
+                    "name": "maps.resource.use.1",
+                    "description": "api"
+                },
+                {
+                    "name": "maps.resource.use.2",
+                    "description": "web"
+                },
+                {
+                    "name": "maps.resource.env",
+                    "description": "菜单使用环境"
+                },
+                {
+                    "name": "maps.resource.env.local",
+                    "description": "开发环境"
+                },
+                {
+                    "name": "maps.resource.env.testing",
+                    "description": "测试环境"
+                },
+                {
+                    "name": "maps.resource.env.staging",
+                    "description": "预上线环境"
+                },
+                {
+                    "name": "maps.resource.env.production",
+                    "description": "正式环境"
+                },
+                {
+                    "name": "maps.resource.group",
+                    "description": "菜单所属组"
+                },
+                {
+                    "name": "maps.resource.group.none",
+                    "description": "none"
+                },
+                {
+                    "name": "maps.resource.group.open",
+                    "description": "open"
+                },
+                {
+                    "name": "maps.resource.group.home",
+                    "description": "home"
+                },
+                {
+                    "name": "maps.resource.group.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.resource.middleware",
+                    "description": "菜单单独使用中间件"
+                },
+                {
+                    "name": "maps.resource.middleware.auth",
+                    "description": "auth"
+                },
+                {
+                    "name": "maps.resource.middleware.auth.basic",
+                    "description": "auth.basic"
+                },
+                {
+                    "name": "maps.resource.middleware.bindings",
+                    "description": "bindings"
+                },
+                {
+                    "name": "maps.resource.middleware.cache.headers",
+                    "description": "cache.headers"
+                },
+                {
+                    "name": "maps.resource.middleware.can",
+                    "description": "can"
+                },
+                {
+                    "name": "maps.resource.middleware.guest",
+                    "description": "guest"
+                },
+                {
+                    "name": "maps.resource.middleware.password.confirm",
+                    "description": "password.confirm"
+                },
+                {
+                    "name": "maps.resource.middleware.signed",
+                    "description": "signed"
+                },
+                {
+                    "name": "maps.resource.middleware.throttle",
+                    "description": "throttle"
+                },
+                {
+                    "name": "maps.resource.middleware.verified",
+                    "description": "verified"
+                },
+                {
+                    "name": "maps.resource.middleware.log",
+                    "description": "log"
+                },
+                {
+                    "name": "maps.resource.middleware.api_client",
+                    "description": "api_client"
+                },
+                {
+                    "name": "maps.resource.middleware.auth.redirect",
+                    "description": "auth.redirect"
+                },
+                {
+                    "name": "maps.resource.middleware.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.resource.middleware.activated",
+                    "description": "activated"
+                },
+                {
+                    "name": "maps.resources",
+                    "description": ""
+                },
+                {
+                    "name": "maps.resources.method",
+                    "description": "菜单请求方式"
+                },
+                {
+                    "name": "maps.resources.method.1",
+                    "description": "get"
+                },
+                {
+                    "name": "maps.resources.method.2",
+                    "description": "post"
+                },
+                {
+                    "name": "maps.resources.method.4",
+                    "description": "put"
+                },
+                {
+                    "name": "maps.resources.method.8",
+                    "description": "delete"
+                },
+                {
+                    "name": "maps.resources.method.16",
+                    "description": "head"
+                },
+                {
+                    "name": "maps.resources.method.32",
+                    "description": "options"
+                },
+                {
+                    "name": "maps.resources.method.64",
+                    "description": "trace"
+                },
+                {
+                    "name": "maps.resources.method.128",
+                    "description": "connect"
+                },
+                {
+                    "name": "maps.resources.method.256",
+                    "description": "patch"
+                },
+                {
+                    "name": "maps.resources.is_page",
+                    "description": "菜单是否为页面"
+                },
+                {
+                    "name": "maps.resources.is_page.0",
+                    "description": "否"
+                },
+                {
+                    "name": "maps.resources.is_page.1",
+                    "description": "是"
+                },
+                {
+                    "name": "maps.resources.status",
+                    "description": "菜单状态"
+                },
+                {
+                    "name": "maps.resources.status.1",
+                    "description": "显示"
+                },
+                {
+                    "name": "maps.resources.status.2",
+                    "description": "不显示"
+                },
+                {
+                    "name": "maps.resources.disabled",
+                    "description": "菜单功能状态"
+                },
+                {
+                    "name": "maps.resources.disabled.0",
+                    "description": "启用"
+                },
+                {
+                    "name": "maps.resources.disabled.1",
+                    "description": "禁用"
+                },
+                {
+                    "name": "maps.resources.use",
+                    "description": "菜单路由使用地方"
+                },
+                {
+                    "name": "maps.resources.use.1",
+                    "description": "api"
+                },
+                {
+                    "name": "maps.resources.use.2",
+                    "description": "web"
+                },
+                {
+                    "name": "maps.resources.env",
+                    "description": "菜单使用环境"
+                },
+                {
+                    "name": "maps.resources.env.local",
+                    "description": "开发环境"
+                },
+                {
+                    "name": "maps.resources.env.testing",
+                    "description": "测试环境"
+                },
+                {
+                    "name": "maps.resources.env.staging",
+                    "description": "预上线环境"
+                },
+                {
+                    "name": "maps.resources.env.production",
+                    "description": "正式环境"
+                },
+                {
+                    "name": "maps.resources.group",
+                    "description": "菜单所属组"
+                },
+                {
+                    "name": "maps.resources.group.none",
+                    "description": "none"
+                },
+                {
+                    "name": "maps.resources.group.open",
+                    "description": "open"
+                },
+                {
+                    "name": "maps.resources.group.home",
+                    "description": "home"
+                },
+                {
+                    "name": "maps.resources.group.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.resources.middleware",
+                    "description": "菜单单独使用中间件"
+                },
+                {
+                    "name": "maps.resources.middleware.auth",
+                    "description": "auth"
+                },
+                {
+                    "name": "maps.resources.middleware.auth.basic",
+                    "description": "auth.basic"
+                },
+                {
+                    "name": "maps.resources.middleware.bindings",
+                    "description": "bindings"
+                },
+                {
+                    "name": "maps.resources.middleware.cache.headers",
+                    "description": "cache.headers"
+                },
+                {
+                    "name": "maps.resources.middleware.can",
+                    "description": "can"
+                },
+                {
+                    "name": "maps.resources.middleware.guest",
+                    "description": "guest"
+                },
+                {
+                    "name": "maps.resources.middleware.password.confirm",
+                    "description": "password.confirm"
+                },
+                {
+                    "name": "maps.resources.middleware.signed",
+                    "description": "signed"
+                },
+                {
+                    "name": "maps.resources.middleware.throttle",
+                    "description": "throttle"
+                },
+                {
+                    "name": "maps.resources.middleware.verified",
+                    "description": "verified"
+                },
+                {
+                    "name": "maps.resources.middleware.log",
+                    "description": "log"
+                },
+                {
+                    "name": "maps.resources.middleware.api_client",
+                    "description": "api_client"
+                },
+                {
+                    "name": "maps.resources.middleware.auth.redirect",
+                    "description": "auth.redirect"
+                },
+                {
+                    "name": "maps.resources.middleware.admin",
+                    "description": "admin"
+                },
+                {
+                    "name": "maps.resources.middleware.activated",
+                    "description": "activated"
+                },
+                {
+                    "name": "maps.resource_id",
+                    "description": "所属资源ID"
+                },
+                {
+                    "name": "maps._options_name",
+                    "description": ""
+                },
+                {
+                    "name": "maps.optional_parents",
+                    "description": ""
+                },
+                {
+                    "name": "maps._type",
+                    "description": ""
+                },
+                {
+                    "name": "maps._type.0",
+                    "description": "普通链接"
+                },
+                {
+                    "name": "maps._type.1",
+                    "description": "资源"
+                },
+                {
+                    "name": "maps._type.2",
+                    "description": "单独路由"
+                },
+                {
+                    "name": "maps._options",
+                    "description": ""
+                },
+                {
+                    "name": "maps._options.0",
+                    "description": "_list"
+                },
+                {
+                    "name": "maps._options.1",
+                    "description": "_export"
+                },
+                {
+                    "name": "maps._options.2",
+                    "description": "_import"
+                },
+                {
+                    "name": "maps._options.3",
+                    "description": "_show"
+                },
+                {
+                    "name": "maps._options.4",
+                    "description": "_create"
+                },
+                {
+                    "name": "maps._options.5",
+                    "description": "_update"
+                },
+                {
+                    "name": "maps._options.6",
+                    "description": "_delete"
+                },
+                {
+                    "name": "mapsRelations.resource",
+                    "description": ""
+                },
+                {
+                    "name": "mapsRelations.resources",
+                    "description": ""
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
             ]
+        },
+        {
+            "id": 46,
+            "_trans_name": "创建菜单",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 47,
+            "_trans_name": "更新菜单",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 48,
+            "_trans_name": "删除菜单",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 49,
@@ -1931,7 +5073,7 @@
                 {
                     "name": "where[_key]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "关键字搜索组默认使用key",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -1939,7 +5081,7 @@
                 {
                     "name": "where[name|key]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "名称或键名称",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -1947,18 +5089,34 @@
                 {
                     "name": "order[updated_at]",
                     "type": 1,
-                    "title": "修改时间",
-                    "description": "",
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "desc",
                     "validate": ""
                 },
                 {
                     "name": "order[id]",
                     "type": 1,
-                    "title": "ID",
-                    "description": "",
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "desc",
                     "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
                 }
             ],
             "body_params": [],
@@ -1993,7 +5151,7 @@
                 },
                 {
                     "name": "options.where.name|key",
-                    "description": ""
+                    "description": "名称或键名称"
                 },
                 {
                     "name": "options.order.updated_at",
@@ -2071,7 +5229,299 @@
                     "name": "excel.exportFields.id",
                     "description": "ID"
                 }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 50,
+            "_trans_name": "系统设置分页",
+            "params": [
+                {
+                    "name": "where[name|key]",
+                    "type": 1,
+                    "title": "名称或键名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "系统设置对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.name",
+                    "description": "名称"
+                },
+                {
+                    "name": "data.$index.description",
+                    "description": "描述"
+                },
+                {
+                    "name": "data.$index.key",
+                    "description": "键名称"
+                },
+                {
+                    "name": "data.$index.value",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 51,
+            "_trans_name": "导出系统设置",
+            "params": [
+                {
+                    "name": "where[name|key]",
+                    "type": 1,
+                    "title": "名称或键名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "系统设置对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "名称"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "描述"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "键名称"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "类型"
+                },
+                {
+                    "name": "data.$index.5",
+                    "description": "输入框类型"
+                },
+                {
+                    "name": "data.$index.6",
+                    "description": "组件属性"
+                },
+                {
+                    "name": "data.$index.7",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 52,
+            "_trans_name": "导入系统设置",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 53,
+            "_trans_name": "编辑查看系统设置",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.description",
+                    "description": "描述"
+                },
+                {
+                    "name": "row.key",
+                    "description": "键名称"
+                },
+                {
+                    "name": "row.value",
+                    "description": ""
+                },
+                {
+                    "name": "row.type",
+                    "description": "类型"
+                },
+                {
+                    "name": "row.itype",
+                    "description": "输入框类型"
+                },
+                {
+                    "name": "row.options",
+                    "description": "组件属性"
+                },
+                {
+                    "name": "maps.type",
+                    "description": "类型"
+                },
+                {
+                    "name": "maps.type.1",
+                    "description": "字符串"
+                },
+                {
+                    "name": "maps.type.2",
+                    "description": "json"
+                },
+                {
+                    "name": "maps.type.3",
+                    "description": "数字"
+                },
+                {
+                    "name": "maps.itype",
+                    "description": "输入框类型"
+                },
+                {
+                    "name": "maps.itype.1",
+                    "description": "input"
+                },
+                {
+                    "name": "maps.itype.2",
+                    "description": "textarea"
+                },
+                {
+                    "name": "maps.itype.3",
+                    "description": "markdown"
+                },
+                {
+                    "name": "maps.itype.4",
+                    "description": "json"
+                },
+                {
+                    "name": "maps.itype.5",
+                    "description": "switch"
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
             ]
+        },
+        {
+            "id": 54,
+            "_trans_name": "创建系统设置",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 55,
+            "_trans_name": "更新系统设置",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 56,
+            "_trans_name": "删除系统设置",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 57,
@@ -2080,38 +5530,111 @@
             "body_params": [],
             "responses": [
                 {
-                    "name": "count",
+                    "name": "row",
                     "description": ""
                 },
                 {
-                    "name": "count.$index",
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.province_id",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.name",
+                    "name": "row.city_id",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.value",
+                    "name": "row.area_id",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.class",
+                    "name": "row.uname",
+                    "description": "用户名"
+                },
+                {
+                    "name": "row.avatar",
+                    "description": "头像"
+                },
+                {
+                    "name": "row.email",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "row.mobile_phone",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "row.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "row.email_verified_at",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.icon",
+                    "name": "row.description",
+                    "description": "备注"
+                },
+                {
+                    "name": "row.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "row.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "row.admin",
+                    "description": "后台用户"
+                },
+                {
+                    "name": "row.admin.id",
+                    "description": "后台用户ID"
+                },
+                {
+                    "name": "row.admin.user_id",
+                    "description": "后台用户用户ID"
+                },
+                {
+                    "name": "row.admin.created_at",
+                    "description": "后台用户创建时间"
+                },
+                {
+                    "name": "row.admin.updated_at",
+                    "description": "后台用户修改时间"
+                },
+                {
+                    "name": "configUrl.backUrl",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.url",
-                    "description": ""
+                    "name": "maps.status",
+                    "description": "状态"
                 },
                 {
-                    "name": "count.$index._trans_name",
-                    "description": ""
+                    "name": "maps.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.status.2",
+                    "description": "停用"
                 }
-            ]
+            ],
+            "route_params": []
+        },
+        {
+            "id": 58,
+            "_trans_name": "提交编辑修改个人资料",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 59,
@@ -2120,581 +5643,403 @@
             "body_params": [],
             "responses": [
                 {
-                    "name": "count",
+                    "name": "row",
                     "description": ""
                 },
                 {
-                    "name": "count.$index",
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.old_password",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.name",
+                    "name": "row.password",
+                    "description": "密码"
+                },
+                {
+                    "name": "row.password_confirmation",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.value",
+                    "name": "row.ousers",
+                    "description": "三方登录用户"
+                },
+                {
+                    "name": "row.unbind_ids",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.class",
+                    "name": "row.email",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "row.mobile_phone",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "configUrl.backUrl",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.icon",
+                    "name": "maps.ousers",
                     "description": ""
                 },
                 {
-                    "name": "count.$index.url",
-                    "description": ""
+                    "name": "maps.ousers.type",
+                    "description": "三方登录用户"
                 },
                 {
-                    "name": "count.$index._trans_name",
-                    "description": ""
+                    "name": "maps.ousers.type.1",
+                    "description": "qq"
+                },
+                {
+                    "name": "maps.ousers.type.2",
+                    "description": "weixin"
+                },
+                {
+                    "name": "maps.ousers.type.3",
+                    "description": "weibo"
+                },
+                {
+                    "name": "maps.ousers.type.4",
+                    "description": "weixinweb"
+                },
+                {
+                    "name": "maps.ousers.type.5",
+                    "description": "official"
+                },
+                {
+                    "name": "maps.ousers.type_show",
+                    "description": "三方登录用户"
                 }
-            ]
+            ],
+            "route_params": []
+        },
+        {
+            "id": 60,
+            "_trans_name": "提交编辑修改密码",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 61,
             "_trans_name": "获取配置信息",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
             "responses": [
                 {
-                    "name": "list.data.$index",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.id",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.name",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.description",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.key",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.value",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.where.name|key",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.id",
-                    "description": ""
-                },
-                {
                     "name": "logo",
-                    "description": ""
+                    "description": "站点LOGO图片地址"
                 },
                 {
                     "name": "name",
-                    "description": ""
+                    "description": "应用名称"
                 },
                 {
                     "name": "name_short",
-                    "description": ""
+                    "description": "应用名称简称"
                 },
                 {
                     "name": "debug",
-                    "description": ""
+                    "description": "是否为调试模式"
                 },
                 {
                     "name": "env",
-                    "description": ""
+                    "description": "当前环境状态"
                 },
                 {
                     "name": "icp",
-                    "description": ""
+                    "description": "icp备案号码"
                 },
                 {
                     "name": "api_url_model",
-                    "description": ""
+                    "description": "接口请求模式"
                 },
                 {
                     "name": "app_url",
-                    "description": ""
+                    "description": "应用站点网址"
                 },
                 {
                     "name": "api_url",
-                    "description": ""
+                    "description": "移动应用接口请求地址源"
                 },
                 {
                     "name": "web_url",
-                    "description": ""
+                    "description": "网页应用接口请求地址源"
                 },
                 {
                     "name": "domain",
-                    "description": ""
+                    "description": "登录信息cookie存储domain"
                 },
                 {
                     "name": "lifetime",
-                    "description": ""
+                    "description": "登录信息过期生命周期"
                 },
                 {
                     "name": "verify",
-                    "description": ""
+                    "description": "验证码配置"
                 },
                 {
                     "name": "verify.type",
-                    "description": ""
+                    "description": "验证码类型"
                 },
                 {
                     "name": "verify.dataUrl",
-                    "description": ""
+                    "description": "验证码获取地址"
                 },
                 {
                     "name": "verify.data",
-                    "description": ""
+                    "description": "验证配置数据项"
                 },
                 {
                     "name": "verify.data.client_fail_alert",
-                    "description": ""
+                    "description": "滑块验证配置项(未验证提醒文案)"
                 },
                 {
                     "name": "verify.data.lang",
-                    "description": ""
+                    "description": "滑块验证配置项(语言)"
                 },
                 {
                     "name": "verify.data.product",
-                    "description": ""
+                    "description": "滑块验证配置项"
                 },
                 {
                     "name": "verify.data.http",
-                    "description": ""
+                    "description": "滑块验证配置项"
                 },
                 {
                     "name": "client_id",
-                    "description": ""
+                    "description": "连接唯一标识(类似cookie的session id机制)"
                 },
                 {
                     "name": "default_language",
-                    "description": ""
+                    "description": "默认系统语言"
                 },
                 {
                     "name": "tinymce_key",
-                    "description": ""
+                    "description": "tinymce富文本编辑器配置"
                 },
                 {
                     "name": "locales",
-                    "description": ""
+                    "description": "可切换系统语言"
                 },
                 {
                     "name": "locales.$index",
-                    "description": ""
+                    "description": "系统语言选项"
                 },
                 {
                     "name": "version",
-                    "description": ""
+                    "description": "应用版本号"
                 }
-            ]
+            ],
+            "route_params": []
         },
         {
             "id": 62,
             "_trans_name": "更新token",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
             "responses": [
                 {
-                    "name": "list.data.$index",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.id",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.name",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.description",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.key",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.value",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.where.name|key",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.id",
-                    "description": ""
-                },
-                {
                     "name": "_token",
-                    "description": ""
+                    "description": "CSRF认证token值"
                 }
             ]
+            "route_params": []
         },
         {
             "id": 63,
             "_trans_name": "登录页面",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
             "responses": [
                 {
-                    "name": "list.data.$index",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.id",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.name",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.description",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.key",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.value",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.where.name|key",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.id",
-                    "description": ""
-                },
-                {
                     "name": "otherLogin",
-                    "description": ""
+                    "description": "三方登录集合"
                 },
                 {
                     "name": "otherLogin.$index",
-                    "description": ""
+                    "description": "三方登录"
                 },
                 {
                     "name": "otherLogin.$index.type",
-                    "description": ""
+                    "description": "服务商"
                 },
                 {
                     "name": "otherLogin.$index.url",
-                    "description": ""
+                    "description": "跳转地址"
                 },
                 {
                     "name": "otherLogin.$index.class",
-                    "description": ""
+                    "description": "图标样式"
                 },
                 {
                     "name": "mustVerify",
-                    "description": ""
+                    "description": "是否有验证码"
                 }
-            ]
+            ],
+            "route_params": []
+        },
+        {
+            "id": 64,
+            "_trans_name": "提交登录",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "username",
+                    "type": 2,
+                    "title": "用户名",
+                    "description": "用户名",
+                    "example": "demo_admin",
+                    "validate": "必填"
+                },
+                {
+                    "name": "password",
+                    "type": 2,
+                    "title": "密码",
+                    "description": "密码",
+                    "example": "admin123456",
+                    "validate": "必填"
+                },
+                {
+                    "name": "_token",
+                    "type": 2,
+                    "title": "CSRF认证token",
+                    "description": "",
+                    "example": "",
+                    "validate": "必填"
+                },
+                {
+                    "name": "other",
+                    "type": 2,
+                    "title": "三方登录回传标记",
+                    "description": "三方登录回传绑定码",
+                    "example": "",
+                    "validate": "非必填"
+                },
+                {
+                    "name": "verify",
+                    "type": 2,
+                    "title": "极验滑块验证参数",
+                    "description": "极验滑块验证参数",
+                    "example": "",
+                    "validate": "当出现滑块验证时必填"
+                },
+                {
+                    "name": "geetest_seccode",
+                    "type": 2,
+                    "title": "极验滑块验证参数",
+                    "description": "极验滑块验证参数",
+                    "example": "",
+                    "validate": "当出现滑块验证时必填"
+                },
+                {
+                    "name": "geetest_validate",
+                    "type": 2,
+                    "title": "极验滑块验证参数",
+                    "description": "极验滑块验证参数",
+                    "example": "",
+                    "validate": "当出现滑块验证时必填"
+                }
+            ],
+            "responses": [
+                {
+                    "name": "title",
+                    "description": "提示"
+                },
+                {
+                    "name": "content",
+                    "description": "提示内容"
+                },
+                {
+                    "name": "lifetime",
+                    "description": "token保存生命周期"
+                },
+                {
+                    "name": "redirect",
+                    "description": "跳转至页面"
+                },
+                {
+                    "name": "token",
+                    "description": "用户token认证信息"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 65,
+            "_trans_name": "退出登录",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 66,
             "_trans_name": "注册页面",
             "params": [],
             "body_params": [],
-            "responses": []
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 67,
+            "_trans_name": "发送注册短信",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 68,
+            "_trans_name": "提交注册",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 69,
             "_trans_name": "忘记页面",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
-            "responses": [
-                {
-                    "name": "list.data.$index",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.id",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.name",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.description",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.key",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.value",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.where.name|key",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.id",
-                    "description": ""
-                }
-            ]
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 70,
+            "_trans_name": "忘记密码邮件发送",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 71,
+            "_trans_name": "忘记密码短信发送",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 72,
+            "_trans_name": "忘记密码提交重置密码",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 73,
             "_trans_name": "获取用户信息",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
             "responses": [
-                {
-                    "name": "list.data.$index",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.id",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.name",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.description",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.key",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.value",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.where.name|key",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.id",
-                    "description": ""
-                },
                 {
                     "name": "user",
                     "description": ""
@@ -2839,87 +6184,15 @@
                     "name": "lifetime",
                     "description": ""
                 }
-            ]
+            ],
+            "route_params": []
         },
         {
             "id": 74,
             "_trans_name": "获取菜单信息",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
             "responses": [
-                {
-                    "name": "list.data.$index",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.id",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.name",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.description",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.key",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.value",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.where.name|key",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.id",
-                    "description": ""
-                },
                 {
                     "name": "menus",
                     "description": ""
@@ -2988,260 +6261,229 @@
                     "name": "menus.$index.parent",
                     "description": ""
                 }
-            ]
+            ],
+            "route_params": []
         },
         {
             "id": 75,
             "_trans_name": "极验验证",
             "params": [],
             "body_params": [],
-            "responses": []
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 78,
+            "_trans_name": "提交编辑修改密码",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 79,
             "_trans_name": "获取连接唯一标识",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
             "responses": [
-                {
-                    "name": "list.data.$index",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.id",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.name",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.description",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.key",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.value",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.where.name|key",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.id",
-                    "description": ""
-                },
                 {
                     "name": "client_id",
                     "description": ""
                 }
-            ]
+            ],
+            "route_params": []
         },
         {
             "id": 81,
             "_trans_name": "个人资料",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
             "responses": [
                 {
-                    "name": "list.data.$index",
+                    "name": "row",
                     "description": ""
                 },
                 {
-                    "name": "list.data.$index.id",
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.province_id",
                     "description": ""
                 },
                 {
-                    "name": "list.data.$index.name",
+                    "name": "row.city_id",
                     "description": ""
                 },
                 {
-                    "name": "list.data.$index.description",
+                    "name": "row.area_id",
                     "description": ""
                 },
                 {
-                    "name": "list.data.$index.key",
+                    "name": "row.uname",
+                    "description": "用户名"
+                },
+                {
+                    "name": "row.avatar",
+                    "description": "头像"
+                },
+                {
+                    "name": "row.email",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "row.mobile_phone",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "row.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "row.email_verified_at",
                     "description": ""
                 },
                 {
-                    "name": "list.data.$index.value",
+                    "name": "row.description",
+                    "description": "备注"
+                },
+                {
+                    "name": "row.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "row.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "row.admin",
+                    "description": "后台用户"
+                },
+                {
+                    "name": "row.admin.id",
+                    "description": "后台用户ID"
+                },
+                {
+                    "name": "row.admin.user_id",
+                    "description": "后台用户用户ID"
+                },
+                {
+                    "name": "row.admin.created_at",
+                    "description": "后台用户创建时间"
+                },
+                {
+                    "name": "row.admin.updated_at",
+                    "description": "后台用户修改时间"
+                },
+                {
+                    "name": "row.admin.roles",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.admin.roles.$index",
                     "description": ""
                 },
                 {
-                    "name": "list.data.$index.updated_at",
+                    "name": "row.admin.roles.$index.id",
+                    "description": "角色ID"
+                },
+                {
+                    "name": "row.admin.roles.$index.tmp_id",
+                    "description": "角色模板ID"
+                },
+                {
+                    "name": "row.admin.roles.$index.name",
+                    "description": "角色名称"
+                },
+                {
+                    "name": "row.admin.roles.$index.is_tmp",
+                    "description": "角色是否模板"
+                },
+                {
+                    "name": "row.admin.roles.$index.description",
+                    "description": "角色描述"
+                },
+                {
+                    "name": "row.admin.roles.$index.parent_id",
+                    "description": "角色父级ID"
+                },
+                {
+                    "name": "row.admin.roles.$index.level",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.admin.roles.$index.left_margin",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.admin.roles.$index.right_margin",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.admin.roles.$index.created_at",
+                    "description": "角色创建时间"
+                },
+                {
+                    "name": "row.admin.roles.$index.updated_at",
+                    "description": "角色修改时间"
+                },
+                {
+                    "name": "row.admin.roles.$index.pivot",
                     "description": ""
                 },
                 {
-                    "name": "options.where.name|key",
+                    "name": "row.admin.roles.$index.pivot.admin_id",
                     "description": ""
                 },
                 {
-                    "name": "options.order.updated_at",
+                    "name": "row.admin.roles.$index.pivot.role_id",
                     "description": ""
                 },
                 {
-                    "name": "options.order.id",
+                    "name": "configUrl.backUrl",
                     "description": ""
+                },
+                {
+                    "name": "maps.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "maps.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.status.2",
+                    "description": "停用"
                 }
-            ]
+            ],
+            "route_params": []
+        },
+        {
+            "id": 82,
+            "_trans_name": "提交编辑修改个人资料",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 83,
+            "_trans_name": "文件上传",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 84,
             "_trans_name": "开发辅助",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
             "responses": [
-                {
-                    "name": "list.data.$index",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.id",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.name",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.description",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.key",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.value",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.where.name|key",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.updated_at",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.id",
-                    "description": ""
-                },
                 {
                     "name": "row",
                     "description": ""
@@ -3378,7 +6620,16 @@
                     "name": "history",
                     "description": ""
                 }
-            ]
+            ],
+            "route_params": []
+        },
+        {
+            "id": 85,
+            "_trans_name": "编辑页面布局保存",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 86,
@@ -3474,147 +6725,23 @@
                     "name": "data.$index.TABLE_COMMENT",
                     "description": ""
                 }
-            ]
+            ],
+            "route_params": []
+        },
+        {
+            "id": 87,
+            "_trans_name": "命令执行",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 88,
             "_trans_name": "菜单拖拽",
-            "params": [
-                {
-                    "name": "where[_key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "where[name|key]",
-                    "type": 1,
-                    "title": "未命名",
-                    "description": "",
-                    "example": "",
-                    "validate": ""
-                },
-                {
-                    "name": "order[updated_at]",
-                    "type": 1,
-                    "title": "Updated At",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                },
-                {
-                    "name": "order[id]",
-                    "type": 1,
-                    "title": "ID",
-                    "description": "",
-                    "example": "desc",
-                    "validate": ""
-                }
-            ],
+            "params": [],
             "body_params": [],
             "responses": [
-                {
-                    "name": "list.data.$index",
-                    "description": "菜单对象"
-                },
-                {
-                    "name": "list.data.$index.TABLE_CATALOG",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.TABLE_SCHEMA",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.TABLE_NAME",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.TABLE_TYPE",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.ENGINE",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.VERSION",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.ROW_FORMAT",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.TABLE_ROWS",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.AVG_ROW_LENGTH",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.DATA_LENGTH",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.MAX_DATA_LENGTH",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.INDEX_LENGTH",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.DATA_FREE",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.AUTO_INCREMENT",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.CREATE_TIME",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.UPDATE_TIME",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.CHECK_TIME",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.TABLE_COLLATION",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.CHECKSUM",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.CREATE_OPTIONS",
-                    "description": ""
-                },
-                {
-                    "name": "list.data.$index.TABLE_COMMENT",
-                    "description": ""
-                },
-                {
-                    "name": "options.where.name|key",
-                    "description": ""
-                },
-                {
-                    "name": "options.order.updated_at",
-                    "description": "Updated At"
-                },
-                {
-                    "name": "options.order.id",
-                    "description": "ID"
-                },
                 {
                     "name": "tree",
                     "description": ""
@@ -3679,7 +6806,16 @@
                     "name": "row.update_position",
                     "description": ""
                 }
-            ]
+            ],
+            "route_params": []
+        },
+        {
+            "id": 89,
+            "_trans_name": "提交菜单位置修改",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
         },
         {
             "id": 90,
@@ -3696,10 +6832,26 @@
                 {
                     "name": "order[updated_at]",
                     "type": 1,
-                    "title": "未命名",
-                    "description": "",
+                    "title": "未命名排序",
+                    "description": "asc-升序,desc-降序",
                     "example": "desc",
                     "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
                 }
             ],
             "body_params": [],
@@ -3716,7 +6868,8 @@
                     "name": "configUrl.downloadUrl",
                     "description": ""
                 }
-            ]
+            ],
+            "route_params": []
         },
         {
             "id": 91,
@@ -3732,7 +6885,8 @@
                     "name": "domain",
                     "description": ""
                 }
-            ]
+            ],
+            "route_params": []
         }
     ],
     "common_responses": [
@@ -3810,7 +6964,7 @@
         },
         {
             "name": "options.where._key",
-            "description": "默认关键字搜索组选中值"
+            "description": "关键字搜索组使用搜索key"
         },
         {
             "name": "options.order",

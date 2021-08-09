@@ -23,7 +23,7 @@ class Param extends Model
     //字段值map
     protected $fieldsShowMaps = [
         'type'=>["1"=>'Character string',"2"=>'Number',"3"=>'Boolean value'],
-        'use'=>['url参数','body参数']
+        'use'=>['url参数','body参数','route参数']
     ];
     //字段默认值
     protected $fieldsDefault = [

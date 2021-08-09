@@ -46,6 +46,20 @@ let list_to_tree = function(data, pk='id', pid = 'parent_id', child = 'childs'){
 const copyObj = function(obj){
     return JSON.parse(JSON.stringify(obj || {}));
 };
+/**
+ * ajax提交请求
+ * 参数格式化
+ */
+window.axios.interceptors.request.use(function (config) {
+    config.paramsSerializer = function (params) {
+        params = JSON.parse(JSON.stringify(params));
+        //params['json'] = 1;
+        return Qs.stringify(params, {arrayFormat: 'repeat'});
+    };
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});
 const App = {
     components:{},
     data() {
@@ -131,27 +145,31 @@ const App = {
         },
         //组装请求参数
         params(){
-            let params = {};
+            let params_str = '';
             collect(this.api.params).each((param)=>{
-                //this.array_set(params,param.name.replace(/\]/ig,'').replace(/\[/ig,'.'),param.example);
                 if(param.example!==''){
-                    this.array_set(params,param.name,param.example);
+                    if(params_str){
+                        params_str +='&'+param.name+'='+param.example;
+                    }else {
+                        params_str +=param.name+'='+param.example;
+                    }
                 }
             });
-            return params;
+            return Qs.parse(params_str);
         },
         params_str(){
-            return Qs.stringify(this.params, {arrayFormat: 'brackets'});
+            return Qs.stringify(this.params);
         },
         body_params(){
-            let params = {};
+            let params_str = '';
             collect(this.api.body_params).each((param)=>{
-                this.array_set(params,param.name.replace(/\]/ig,'').replace(/\[/ig,'.'),param.example);
-                //if(param.example!==''){
-                    this.array_set(params,param.name,param.example);
-                //}
+                if(params_str){
+                    params_str +='&'+param.name+'='+param.example;
+                }else {
+                    params_str +=param.name+'='+param.example;
+                }
             });
-            return params;
+            return Qs.parse(params_str);
         },
         api_url(){
             return this.use_url+this.api.url;
@@ -344,7 +362,19 @@ const App = {
             return reslut === '' ? def : reslut;
         },
         try_array_get(arr, key, def){
-            return this.array_get(arr, key, this.array_get(arr, key.replace(/\-[0-9]{1,}/ig,"-$index"), def));
+            let res = this.array_get(arr, key,'');
+            if(res){
+                return res;
+            }
+            let arr_data = key.match(/\-[0-9]{1,}/g);
+            for (let i in arr_data){
+                key = key.replace(/\-[0-9]{1,}/i,"-$index");
+                res = this.array_get(arr, key,'');
+                if(res){
+                    return res;
+                }
+            }
+            return res;
         },
         dd:dd,
         copyObj:function(obj){
