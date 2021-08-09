@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class); //初始用户安装
         $this->call(AdminTableSeeder::class); //初始后台用户安装
         $this->call(AdminRoleTableSeeder::class); //后台用户添加角色安装
+        $this->call(ParamTableSeeder::class); //接口文档参数说明
+        $this->call(ResponseTableSeeder::class); //接口文档响应说明
 
         $this->call(BankTableSeeder::class); //银行数据
         $this->call(ClassifyTableSeeder::class); //险种分类

@@ -13,7 +13,9 @@ class VersionSeeder extends Seeder
     {
         $this->call(MenuTableSeeder::class); //菜单数据安装
 
-        $this->call(AreaTableSeeder::class); //地区数据
+        $this->call(ParamTableSeeder::class); //接口文档参数说明
+        $this->call(ResponseTableSeeder::class); //接口文档响应说明
+
 
     }
 
