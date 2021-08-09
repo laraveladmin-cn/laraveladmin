@@ -12,6 +12,7 @@ class Admin extends Model
 {
     protected $table = 'admins'; //数据表名称
     use SoftDeletes,BaseModel; //软删除
+    protected $itemName='后台用户';
     //批量赋值白名单
     protected $fillable = ['user_id'];
     //输出隐藏字段
@@ -26,6 +27,12 @@ class Admin extends Model
         'user_id'=>0
     ];
 
+    //字段默认值
+    protected $fieldsName = [
+        'user_id' => '用户ID',
+        'id' => 'ID',
+    ];
+
 
     /* 用户信息 */
     public function user(){
@@ -36,6 +43,7 @@ class Admin extends Model
     public function roles(){
         return $this->belongsToMany('App\Models\Role','admin_role','admin_id','role_id');
     }
+
 
     /**
      * 我管理的用户

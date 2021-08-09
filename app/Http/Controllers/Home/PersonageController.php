@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Validator;
 
 class PersonageController extends Controller
 {
+
+    public function getModel(){
+        return new User();
+    }
     /**
      * 个人资料页面
      * @return mixed
@@ -35,7 +39,7 @@ class PersonageController extends Controller
     }
 
     protected function getModule(){
-        return collect(explode('/',app('request')->getPathInfo()))->filter()->values()->get(1);
+        return collect(explode('/',app('request')->getPathInfo()))->filter()->values()->get(1)?:'home';
     }
 
     /**

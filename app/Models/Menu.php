@@ -34,6 +34,7 @@ class Menu extends Model
     protected $openRoot = [4]; //游客访问
     protected $homeRoot = [3]; //登录用户
     protected $adminRoot = [2]; //后台菜单
+    protected $itemName='菜单';
     //批量赋值白名单
     protected $fillable = [
         'id',
@@ -255,7 +256,26 @@ class Menu extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function params(){
-        return $this->hasMany('App\Models\Param');
+        return $this->hasMany('App\Models\Param')
+            ->where('use',0);
+    }
+
+    /**
+     * 接口body参数
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function body_params(){
+        return $this->hasMany('App\Models\Param')
+            ->where('use',1);
+    }
+
+    /**
+     * 接口路由参数
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function route_params(){
+        return $this->hasMany('App\Models\Param')
+            ->where('use',2);
     }
 
     /**

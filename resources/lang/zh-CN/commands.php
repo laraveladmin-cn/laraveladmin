@@ -30,6 +30,7 @@ return [
     'From ":old" to ":new"'=>'从":old"至":new"',
     'Failed to translate ":old"'=>'翻译":old"失败',
     'Failed to translate ":old" into ":lang"'=>'翻译":old"成":lang"失败',
-    'This command can only be executed in the development environment'=>'只能在开发环境才可执行该命令'
+    'This command can only be executed in the development environment'=>'只能在开发环境才可执行该命令',
+    'Automatic scan to generate Api document data'=>'自动扫描生成Api文档数据'
 
 ];

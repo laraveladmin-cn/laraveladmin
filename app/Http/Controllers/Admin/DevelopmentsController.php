@@ -68,7 +68,8 @@ class DevelopmentsController extends Controller
     /**
      * 调用命令
      */
-    public function postCommand(\Illuminate\Http\Request $request){
+    public function postCommand(){
+        $request = app('request');
         $this->validate($request,[
             '_exec'=>'required|string'
         ]);
@@ -92,7 +93,8 @@ class DevelopmentsController extends Controller
     /**
      * 查询数据表
      */
-    public function tables(\Illuminate\Http\Request $request){
+    public function tables(){
+        $request = app('request');
         $validator = Validator::make($request->all(),[
             'where.TABLE_NAME'=>'nullable|string',
             'connection'=>'nullable|string',

@@ -15,7 +15,7 @@ class Log extends Model
     public $past_due = 3600*24*365;
 
     use BaseModel,SoftDeletes; //基础模型
-
+    protected $itemName='日志';
     protected $table = 'logs'; //数据表名称
     //批量赋值白名单
     protected $fillable = [

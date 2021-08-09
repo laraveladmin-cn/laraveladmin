@@ -163,4 +163,9 @@ class LifeDataRepository implements ArrayAccess, ConfigContract
         return $value;
     }
 
+    public function clear(){
+        $this->items = [];
+        $this->items_modified = [];
+    }
+
 }

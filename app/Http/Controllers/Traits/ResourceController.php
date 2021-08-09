@@ -31,11 +31,20 @@ trait ResourceController
     protected $bindModel;
 
     /**
+     * 获取绑定的数据模型
+     * @return mixed
+     */
+    public function getModel(){
+        return $this->bindModel();
+    }
+
+    /**
      * 列表页面
      * @return mixed
      */
     public function index()
     {
+        //dd($this->getModel()->getModel()->parent());
         $model = $this->newBindModel();
         //查询数据结果
         $data['list'] = $this->list();
@@ -535,10 +544,15 @@ trait ResourceController
      */
     protected function getConfigUrl($type = 'index')
     {
-        $main = Route::getCurrentRoute()
-            ->getCompiled()
-            ->getStaticPrefix();
-        $main = Menu::realRoute($main);
+        $current_route = Route::getCurrentRoute();
+        if($current_route){
+            $main = $current_route
+                ->getCompiled()
+                ->getStaticPrefix();
+            $main = Menu::realRoute($main);
+        }else{
+            $main = '';
+        }
         $data = collect(RouteService::getResourceRoutes())->map(function ($item, $key) use ($main, $type) {
             $item['path'] = $item['route'] ? $main . '/' . $item['route'] : $main;
             $item['key'] = $key . 'Url';
@@ -989,5 +1003,7 @@ trait ResourceController
     {
         //
     }
+
+
 
 }
