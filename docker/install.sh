@@ -46,6 +46,10 @@ then
     echo "\033[31m 请先设置.env配置 \033[0m"
     exit 2
 fi
+if [ ! -d ~/.composer ]
+    then
+    mkdir ~/.composer
+fi
 if [ ! -f ~/.composer/config.json ]
 then
     cp ./docker/php/config.json ~/.composer/config.json
