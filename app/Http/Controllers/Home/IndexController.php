@@ -16,7 +16,7 @@ class IndexController extends Controller
     /**
      * 文档
      */
-    public function getDocs($any){
+    public function getDocs($any=''){
         $path = $any;
         return Doc::where('name',$path)->value('description') ?: '没有更多内容了...';
 

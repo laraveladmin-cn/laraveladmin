@@ -1349,6 +1349,10 @@
                 {
                     "name": "row.name",
                     "description": "名称"
+                },
+                {
+                    "name": "maps.menus.group._home",
+                    "description": "_home"
                 }
             ],
             "route_params": [
@@ -2049,6 +2053,14 @@
                 {
                     "name": "excel.exportFields.id",
                     "description": "ID"
+                },
+                {
+                    "name": "maps.menu.group._home",
+                    "description": "_home"
+                },
+                {
+                    "name": "maps.menu.parent.group._home",
+                    "description": "_home"
                 }
             ],
             "route_params": []
@@ -2634,6 +2646,10 @@
                 {
                     "name": "mapsRelations.user",
                     "description": ""
+                },
+                {
+                    "name": "maps.menu.group._home",
+                    "description": "_home"
                 }
             ],
             "route_params": [
@@ -3967,6 +3983,14 @@
                 {
                     "name": "excel.exportFields.id",
                     "description": "ID"
+                },
+                {
+                    "name": "maps.group._home",
+                    "description": "_home"
+                },
+                {
+                    "name": "maps.parent.group._home",
+                    "description": "_home"
                 }
             ],
             "route_params": []
@@ -5032,6 +5056,18 @@
                 {
                     "name": "row.name",
                     "description": "名称"
+                },
+                {
+                    "name": "maps.group._home",
+                    "description": "_home"
+                },
+                {
+                    "name": "maps.resource.group._home",
+                    "description": "_home"
+                },
+                {
+                    "name": "maps.resources.group._home",
+                    "description": "_home"
                 }
             ],
             "route_params": [
@@ -6486,6 +6522,14 @@
                 {
                     "name": "row.name",
                     "description": "姓名"
+                },
+                {
+                    "name": "features",
+                    "description": ""
+                },
+                {
+                    "name": "technologys",
+                    "description": ""
                 }
             ],
             "route_params": []
@@ -6666,6 +6710,1584 @@
         {
             "id": 86,
             "_trans_name": "数据表查询",
+            "params": [
+                {
+                    "name": "where[_key]",
+                    "type": 1,
+                    "title": "关键字搜索组默认使用key",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.TABLE_CATALOG",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.TABLE_SCHEMA",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.TABLE_NAME",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.TABLE_TYPE",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.ENGINE",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.VERSION",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.ROW_FORMAT",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.TABLE_ROWS",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.AVG_ROW_LENGTH",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.DATA_LENGTH",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.MAX_DATA_LENGTH",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.INDEX_LENGTH",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.DATA_FREE",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.AUTO_INCREMENT",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.CREATE_TIME",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.UPDATE_TIME",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.CHECK_TIME",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.TABLE_COLLATION",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.CHECKSUM",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.CREATE_OPTIONS",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.TABLE_COMMENT",
+                    "description": ""
+                },
+                {
+                    "name": "options.where.name",
+                    "description": "名称"
+                },
+                {
+                    "name": "options.order.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.order.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.name",
+                    "description": "名称"
+                },
+                {
+                    "name": "excel.exportFields.icon",
+                    "description": "图标"
+                },
+                {
+                    "name": "excel.exportFields.color",
+                    "description": "颜色"
+                },
+                {
+                    "name": "excel.exportFields.description",
+                    "description": "描述"
+                },
+                {
+                    "name": "excel.exportFields.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "excel.exportFields.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "excel.exportFields.deleted_at",
+                    "description": "删除时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 87,
+            "_trans_name": "命令执行",
+            "params": [
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 88,
+            "_trans_name": "菜单拖拽",
+            "params": [
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "tree",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.id",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.name",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.icons",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.parent_id",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.level",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.left_margin",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.right_margin",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.item_name",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.resource_id",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index.parent",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index._parent_id",
+                    "description": ""
+                },
+                {
+                    "name": "tree.$index._level",
+                    "description": ""
+                },
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.update_position",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "名称"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "图标"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "颜色"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "描述"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 89,
+            "_trans_name": "提交菜单位置修改",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 90,
+            "_trans_name": "日志文件",
+            "params": [
+                {
+                    "name": "where[file]",
+                    "type": 1,
+                    "title": "未命名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "未命名排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "options.where.file",
+                    "description": ""
+                },
+                {
+                    "name": "options.order.updated_at",
+                    "description": ""
+                },
+                {
+                    "name": "configUrl.downloadUrl",
+                    "description": ""
+                },
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.name",
+                    "description": "名称"
+                },
+                {
+                    "name": "row.icon",
+                    "description": "图标"
+                },
+                {
+                    "name": "row.color",
+                    "description": "颜色"
+                },
+                {
+                    "name": "row.description",
+                    "description": "描述"
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
+            ]
+        },
+        {
+            "id": 91,
+            "_trans_name": "七牛云TOKEN",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "token",
+                    "description": ""
+                },
+                {
+                    "name": "domain",
+                    "description": ""
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 92,
+            "_trans_name": "更新新增功能",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 93,
+            "_trans_name": "删除新增功能",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 94,
+            "_trans_name": "使用技术",
+            "params": [
+                {
+                    "name": "where[_key]",
+                    "type": 1,
+                    "title": "关键字搜索组默认使用key",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "options.where.name",
+                    "description": "名称"
+                },
+                {
+                    "name": "options.order.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.order.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.name",
+                    "description": "名称"
+                },
+                {
+                    "name": "excel.exportFields.url",
+                    "description": "链接地址"
+                },
+                {
+                    "name": "excel.exportFields.logo",
+                    "description": "LOGO图片"
+                },
+                {
+                    "name": "excel.exportFields.description",
+                    "description": "描述"
+                },
+                {
+                    "name": "excel.exportFields.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "excel.exportFields.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "excel.exportFields.deleted_at",
+                    "description": "删除时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 95,
+            "_trans_name": "使用技术分页",
+            "params": [
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 96,
+            "_trans_name": "导出使用技术",
+            "params": [
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "名称",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "名称"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "链接地址"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "LOGO图片"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "描述"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 97,
+            "_trans_name": "导入使用技术",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 98,
+            "_trans_name": "编辑查看使用技术",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.name",
+                    "description": "名称"
+                },
+                {
+                    "name": "row.url",
+                    "description": "链接地址"
+                },
+                {
+                    "name": "row.logo",
+                    "description": "LOGO图片"
+                },
+                {
+                    "name": "row.description",
+                    "description": "描述"
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
+            ]
+        },
+        {
+            "id": 99,
+            "_trans_name": "创建使用技术",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 100,
+            "_trans_name": "更新使用技术",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 101,
+            "_trans_name": "删除使用技术",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 103,
+            "_trans_name": "个人资料",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.province_id",
+                    "description": ""
+                },
+                {
+                    "name": "row.city_id",
+                    "description": ""
+                },
+                {
+                    "name": "row.area_id",
+                    "description": ""
+                },
+                {
+                    "name": "row.uname",
+                    "description": "用户名"
+                },
+                {
+                    "name": "row.name",
+                    "description": "姓名"
+                },
+                {
+                    "name": "row.avatar",
+                    "description": "头像"
+                },
+                {
+                    "name": "row.email",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "row.mobile_phone",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "row.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "row.email_verified_at",
+                    "description": ""
+                },
+                {
+                    "name": "row.description",
+                    "description": "备注"
+                },
+                {
+                    "name": "row.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "row.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "row.admin",
+                    "description": "后台用户"
+                },
+                {
+                    "name": "row.admin.id",
+                    "description": "后台用户ID"
+                },
+                {
+                    "name": "row.admin.user_id",
+                    "description": "后台用户用户ID"
+                },
+                {
+                    "name": "row.admin.created_at",
+                    "description": "后台用户创建时间"
+                },
+                {
+                    "name": "row.admin.updated_at",
+                    "description": "后台用户修改时间"
+                },
+                {
+                    "name": "row.admin.roles",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.admin.roles.$index",
+                    "description": ""
+                },
+                {
+                    "name": "row.admin.roles.$index.id",
+                    "description": "角色ID"
+                },
+                {
+                    "name": "row.admin.roles.$index.tmp_id",
+                    "description": "角色模板ID"
+                },
+                {
+                    "name": "row.admin.roles.$index.name",
+                    "description": "角色名称"
+                },
+                {
+                    "name": "row.admin.roles.$index.is_tmp",
+                    "description": "角色是否模板"
+                },
+                {
+                    "name": "row.admin.roles.$index.description",
+                    "description": "角色描述"
+                },
+                {
+                    "name": "row.admin.roles.$index.parent_id",
+                    "description": "角色父级ID"
+                },
+                {
+                    "name": "row.admin.roles.$index.level",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.admin.roles.$index.left_margin",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.admin.roles.$index.right_margin",
+                    "description": "角色"
+                },
+                {
+                    "name": "row.admin.roles.$index.created_at",
+                    "description": "角色创建时间"
+                },
+                {
+                    "name": "row.admin.roles.$index.updated_at",
+                    "description": "角色修改时间"
+                },
+                {
+                    "name": "row.admin.roles.$index.pivot",
+                    "description": ""
+                },
+                {
+                    "name": "row.admin.roles.$index.pivot.admin_id",
+                    "description": ""
+                },
+                {
+                    "name": "row.admin.roles.$index.pivot.role_id",
+                    "description": ""
+                },
+                {
+                    "name": "configUrl.backUrl",
+                    "description": ""
+                },
+                {
+                    "name": "maps.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "maps.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.status.2",
+                    "description": "停用"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 104,
+            "_trans_name": "提交编辑修改个人资料",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 105,
+            "_trans_name": "修改密码",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.old_password",
+                    "description": ""
+                },
+                {
+                    "name": "row.password",
+                    "description": "密码"
+                },
+                {
+                    "name": "row.password_confirmation",
+                    "description": ""
+                },
+                {
+                    "name": "row.ousers",
+                    "description": "三方登录用户"
+                },
+                {
+                    "name": "row.unbind_ids",
+                    "description": ""
+                },
+                {
+                    "name": "row.email",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "row.mobile_phone",
+                    "description": "手机号码"
+                },
+                {
+                    "name": "configUrl.backUrl",
+                    "description": ""
+                },
+                {
+                    "name": "maps.ousers",
+                    "description": ""
+                },
+                {
+                    "name": "maps.ousers.type",
+                    "description": "三方登录用户"
+                },
+                {
+                    "name": "maps.ousers.type.1",
+                    "description": "qq"
+                },
+                {
+                    "name": "maps.ousers.type.2",
+                    "description": "weixin"
+                },
+                {
+                    "name": "maps.ousers.type.3",
+                    "description": "weibo"
+                },
+                {
+                    "name": "maps.ousers.type.4",
+                    "description": "weixinweb"
+                },
+                {
+                    "name": "maps.ousers.type.5",
+                    "description": "official"
+                },
+                {
+                    "name": "maps.ousers.type_show",
+                    "description": "三方登录用户"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 106,
+            "_trans_name": "文档内容",
+            "params": [
+                {
+                    "name": "where[_key]",
+                    "type": 1,
+                    "title": "关键字搜索组默认使用key",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name|description]",
+                    "type": 1,
+                    "title": "路径或内容",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "list.data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "list.data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "list.data.$index.name",
+                    "description": "路径"
+                },
+                {
+                    "name": "list.data.$index.description",
+                    "description": "内容"
+                },
+                {
+                    "name": "list.data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "list.data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.where.name|description",
+                    "description": "路径或内容"
+                },
+                {
+                    "name": "options.order.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.order.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.name",
+                    "description": "路径"
+                },
+                {
+                    "name": "excel.exportFields.description",
+                    "description": "内容"
+                },
+                {
+                    "name": "excel.exportFields.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "excel.exportFields.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "excel.exportFields.deleted_at",
+                    "description": "删除时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 107,
+            "_trans_name": "文档内容分页",
+            "params": [
+                {
+                    "name": "where[name|description]",
+                    "type": 1,
+                    "title": "路径或内容",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.name",
+                    "description": "路径"
+                },
+                {
+                    "name": "data.$index.description",
+                    "description": "内容"
+                },
+                {
+                    "name": "data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 108,
+            "_trans_name": "导出文档内容",
+            "params": [
+                {
+                    "name": "where[name|description]",
+                    "type": 1,
+                    "title": "路径或内容",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "路径"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "内容"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 109,
+            "_trans_name": "导入文档内容",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 110,
+            "_trans_name": "编辑查看文档内容",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.name",
+                    "description": "路径"
+                },
+                {
+                    "name": "row.description",
+                    "description": "内容"
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
+            ]
+        },
+        {
+            "id": 111,
+            "_trans_name": "创建文档内容",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 112,
+            "_trans_name": "更新文档内容",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 113,
+            "_trans_name": "删除文档内容",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 114,
+            "_trans_name": "文档获取",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 115,
+            "_trans_name": "文件上传",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 116,
+            "_trans_name": "开发辅助",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.command",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters.$index",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters.$index.key",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters.$index.value",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters.$index.rules",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters.$index.title",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters.$index.name",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters.$index.type",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters.$index.placeholderValue",
+                    "description": ""
+                },
+                {
+                    "name": "row.parameters.$index._value",
+                    "description": ""
+                },
+                {
+                    "name": "row.name",
+                    "description": ""
+                },
+                {
+                    "name": "row._id",
+                    "description": ""
+                },
+                {
+                    "name": "row._exec",
+                    "description": ""
+                },
+                {
+                    "name": "commands",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.command",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters.$index",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters.$index.key",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters.$index.value",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters.$index.rules",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters.$index.title",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters.$index.name",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters.$index.type",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters.$index.placeholderValue",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.parameters.$index._value",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index.name",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index._id",
+                    "description": ""
+                },
+                {
+                    "name": "commands.$index._exec",
+                    "description": ""
+                },
+                {
+                    "name": "maps.database",
+                    "description": ""
+                },
+                {
+                    "name": "maps.database.mysql",
+                    "description": ""
+                },
+                {
+                    "name": "index",
+                    "description": ""
+                },
+                {
+                    "name": "history",
+                    "description": ""
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 117,
+            "_trans_name": "编辑页面布局保存",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 118,
+            "_trans_name": "数据表查询",
             "params": [],
             "body_params": [],
             "responses": [
@@ -6761,7 +8383,7 @@
             "route_params": []
         },
         {
-            "id": 87,
+            "id": 119,
             "_trans_name": "命令执行",
             "params": [],
             "body_params": [],
@@ -6769,7 +8391,7 @@
             "route_params": []
         },
         {
-            "id": 88,
+            "id": 120,
             "_trans_name": "菜单拖拽",
             "params": [],
             "body_params": [],
@@ -6842,15 +8464,7 @@
             "route_params": []
         },
         {
-            "id": 89,
-            "_trans_name": "提交菜单位置修改",
-            "params": [],
-            "body_params": [],
-            "responses": [],
-            "route_params": []
-        },
-        {
-            "id": 90,
+            "id": 121,
             "_trans_name": "日志文件",
             "params": [
                 {
@@ -6904,7 +8518,7 @@
             "route_params": []
         },
         {
-            "id": 91,
+            "id": 122,
             "_trans_name": "七牛云TOKEN",
             "params": [],
             "body_params": [],
@@ -6916,6 +8530,2040 @@
                 {
                     "name": "domain",
                     "description": ""
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 123,
+            "_trans_name": "会员用户",
+            "params": [
+                {
+                    "name": "where[_key]",
+                    "type": 1,
+                    "title": "关键字搜索组默认使用key",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[user.name|user.uname|user.mobile_phone]",
+                    "type": 1,
+                    "title": "用户姓名或用户用户名或用户手机号码",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[left_margin]",
+                    "type": 1,
+                    "title": "左边界排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "list.data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "list.data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "list.data.$index.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "list.data.$index.parent_id",
+                    "description": "推荐人ID"
+                },
+                {
+                    "name": "list.data.$index.level",
+                    "description": "层级"
+                },
+                {
+                    "name": "list.data.$index.left_margin",
+                    "description": "左边界"
+                },
+                {
+                    "name": "list.data.$index.right_margin",
+                    "description": "右边界"
+                },
+                {
+                    "name": "list.data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "list.data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "list.data.$index.user",
+                    "description": "用户对象"
+                },
+                {
+                    "name": "list.data.$index.user.id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "list.data.$index.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "list.data.$index.user.uname",
+                    "description": "用户用户名"
+                },
+                {
+                    "name": "list.data.$index.parent",
+                    "description": ""
+                },
+                {
+                    "name": "options.where.user.name|user.uname|user.mobile_phone",
+                    "description": "用户姓名或用户用户名或用户手机号码"
+                },
+                {
+                    "name": "options.order.left_margin",
+                    "description": "左边界"
+                },
+                {
+                    "name": "maps.user",
+                    "description": ""
+                },
+                {
+                    "name": "maps.user.status",
+                    "description": "用户状态"
+                },
+                {
+                    "name": "maps.user.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.user.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.user.status.2",
+                    "description": "停用"
+                },
+                {
+                    "name": "maps.parent",
+                    "description": ""
+                },
+                {
+                    "name": "maps.parent.user",
+                    "description": ""
+                },
+                {
+                    "name": "maps.parent.user.status",
+                    "description": "用户状态"
+                },
+                {
+                    "name": "maps.parent.user.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.parent.user.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.parent.user.status.2",
+                    "description": "停用"
+                },
+                {
+                    "name": "mapsRelations.user",
+                    "description": ""
+                },
+                {
+                    "name": "mapsRelations.parent",
+                    "description": ""
+                },
+                {
+                    "name": "excel.exportFields.user.uname",
+                    "description": "用户用户名"
+                },
+                {
+                    "name": "excel.exportFields.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "excel.exportFields.parent.user.uname",
+                    "description": "用户推荐人用户名"
+                },
+                {
+                    "name": "excel.exportFields.parent.user.name",
+                    "description": "用户推荐人"
+                },
+                {
+                    "name": "excel.exportFields.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "excel.exportFields.parent_id",
+                    "description": "父级ID"
+                },
+                {
+                    "name": "excel.exportFields.id",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 124,
+            "_trans_name": "会员用户分页",
+            "params": [
+                {
+                    "name": "where[user.name|user.uname|user.mobile_phone]",
+                    "type": 1,
+                    "title": "用户姓名或用户用户名或用户手机号码",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[left_margin]",
+                    "type": 1,
+                    "title": "左边界排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.parent_id",
+                    "description": "推荐人ID"
+                },
+                {
+                    "name": "data.$index.level",
+                    "description": "层级"
+                },
+                {
+                    "name": "data.$index.left_margin",
+                    "description": "左边界"
+                },
+                {
+                    "name": "data.$index.right_margin",
+                    "description": "右边界"
+                },
+                {
+                    "name": "data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "data.$index.user",
+                    "description": "用户对象"
+                },
+                {
+                    "name": "data.$index.user.id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "data.$index.user.uname",
+                    "description": "用户用户名"
+                },
+                {
+                    "name": "data.$index.parent",
+                    "description": ""
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 125,
+            "_trans_name": "导出会员用户",
+            "params": [
+                {
+                    "name": "where[user.name|user.uname|user.mobile_phone]",
+                    "type": 1,
+                    "title": "用户姓名或用户用户名或用户手机号码",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[left_margin]",
+                    "type": 1,
+                    "title": "左边界排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "asc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "用户名"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "姓名"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "推荐人用户名"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "推荐人"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.5",
+                    "description": "父级ID"
+                },
+                {
+                    "name": "data.$index.6",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 126,
+            "_trans_name": "导入会员用户",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 127,
+            "_trans_name": "编辑查看会员用户",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "row.parent_id",
+                    "description": "推荐人ID"
+                },
+                {
+                    "name": "maps.optional_parents",
+                    "description": ""
+                },
+                {
+                    "name": "maps.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "no_root",
+                    "description": ""
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
+            ]
+        },
+        {
+            "id": 128,
+            "_trans_name": "创建会员用户",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 129,
+            "_trans_name": "更新会员用户",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 130,
+            "_trans_name": "删除会员用户",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 131,
+            "_trans_name": "提交菜单位置修改",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 133,
+            "_trans_name": "赞助商",
+            "params": [
+                {
+                    "name": "where[_key]",
+                    "type": 1,
+                    "title": "关键字搜索组默认使用key",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "赞助商",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "list.data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "list.data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "list.data.$index.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "list.data.$index.url",
+                    "description": "链接"
+                },
+                {
+                    "name": "list.data.$index.logo",
+                    "description": "LOGO图标"
+                },
+                {
+                    "name": "list.data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "list.data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.where.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "options.order.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.order.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "excel.exportFields.url",
+                    "description": "链接"
+                },
+                {
+                    "name": "excel.exportFields.logo",
+                    "description": "LOGO图标"
+                },
+                {
+                    "name": "excel.exportFields.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "excel.exportFields.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "excel.exportFields.deleted_at",
+                    "description": "删除时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 134,
+            "_trans_name": "赞助商分页",
+            "params": [
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "赞助商",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "data.$index.url",
+                    "description": "链接"
+                },
+                {
+                    "name": "data.$index.logo",
+                    "description": "LOGO图标"
+                },
+                {
+                    "name": "data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 135,
+            "_trans_name": "导出赞助商",
+            "params": [
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "赞助商",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "链接"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "LOGO图标"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 136,
+            "_trans_name": "导入赞助商",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 137,
+            "_trans_name": "编辑查看赞助商",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "row.url",
+                    "description": "链接"
+                },
+                {
+                    "name": "row.logo",
+                    "description": "LOGO图标"
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
+            ]
+        },
+        {
+            "id": 138,
+            "_trans_name": "创建赞助商",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 139,
+            "_trans_name": "更新赞助商",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 140,
+            "_trans_name": "删除赞助商",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 141,
+            "_trans_name": "捐赠记录",
+            "params": [
+                {
+                    "name": "where[_key]",
+                    "type": 1,
+                    "title": "关键字搜索组默认使用key",
+                    "description": "",
+                    "example": "member.user.name",
+                    "validate": ""
+                },
+                {
+                    "name": "where[from]",
+                    "type": 1,
+                    "title": "来源",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[sponsor.name]",
+                    "type": 1,
+                    "title": "赞助商",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[member.user.name]",
+                    "type": 1,
+                    "title": "用户姓名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "list.data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "list.data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "list.data.$index.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "list.data.$index.sponsor_id",
+                    "description": "赞助商ID"
+                },
+                {
+                    "name": "list.data.$index.from",
+                    "description": "来源"
+                },
+                {
+                    "name": "list.data.$index.amount",
+                    "description": "捐赠金额"
+                },
+                {
+                    "name": "list.data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "list.data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "list.data.$index.bills_count",
+                    "description": ""
+                },
+                {
+                    "name": "list.data.$index.member",
+                    "description": "对象"
+                },
+                {
+                    "name": "list.data.$index.member.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "list.data.$index.member.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "list.data.$index.member.user",
+                    "description": "用户对象"
+                },
+                {
+                    "name": "list.data.$index.member.user.id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "list.data.$index.member.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "list.data.$index.sponsor",
+                    "description": "对象"
+                },
+                {
+                    "name": "list.data.$index.sponsor.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "list.data.$index.sponsor.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "options.where.from",
+                    "description": "来源"
+                },
+                {
+                    "name": "options.where.sponsor.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "options.where.member.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "options.order.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.order.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "maps.from",
+                    "description": "来源"
+                },
+                {
+                    "name": "maps.from.1",
+                    "description": "微信"
+                },
+                {
+                    "name": "maps.from.2",
+                    "description": "支付宝"
+                },
+                {
+                    "name": "maps.from.3",
+                    "description": "转账"
+                },
+                {
+                    "name": "maps.member",
+                    "description": ""
+                },
+                {
+                    "name": "maps.member.user",
+                    "description": ""
+                },
+                {
+                    "name": "maps.member.user.status",
+                    "description": "用户状态"
+                },
+                {
+                    "name": "maps.member.user.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.member.user.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.member.user.status.2",
+                    "description": "停用"
+                },
+                {
+                    "name": "maps.sponsor",
+                    "description": ""
+                },
+                {
+                    "name": "mapsRelations.member",
+                    "description": ""
+                },
+                {
+                    "name": "mapsRelations.sponsor",
+                    "description": ""
+                },
+                {
+                    "name": "keywordsMap.sponsor.name",
+                    "description": ""
+                },
+                {
+                    "name": "keywordsMap.member.user.name",
+                    "description": ""
+                },
+                {
+                    "name": "excel.exportFields.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "excel.exportFields.sponsor_id",
+                    "description": "赞助商ID"
+                },
+                {
+                    "name": "excel.exportFields.from",
+                    "description": "来源"
+                },
+                {
+                    "name": "excel.exportFields.amount",
+                    "description": "捐赠金额"
+                },
+                {
+                    "name": "excel.exportFields.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "excel.exportFields.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "excel.exportFields.deleted_at",
+                    "description": "删除时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 142,
+            "_trans_name": "捐赠记录分页",
+            "params": [
+                {
+                    "name": "where[from]",
+                    "type": 1,
+                    "title": "来源",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[sponsor.name]",
+                    "type": 1,
+                    "title": "赞助商",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[member.user.name]",
+                    "type": 1,
+                    "title": "用户姓名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "data.$index.sponsor_id",
+                    "description": "赞助商ID"
+                },
+                {
+                    "name": "data.$index.from",
+                    "description": "来源"
+                },
+                {
+                    "name": "data.$index.amount",
+                    "description": "捐赠金额"
+                },
+                {
+                    "name": "data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "data.$index.bills_count",
+                    "description": ""
+                },
+                {
+                    "name": "data.$index.member",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.member.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.member.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.member.user",
+                    "description": "用户对象"
+                },
+                {
+                    "name": "data.$index.member.user.id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "data.$index.member.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "data.$index.sponsor",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.sponsor.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.sponsor.name",
+                    "description": "赞助商"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 143,
+            "_trans_name": "导出捐赠记录",
+            "params": [
+                {
+                    "name": "where[from]",
+                    "type": 1,
+                    "title": "来源",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[sponsor.name]",
+                    "type": 1,
+                    "title": "赞助商",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[member.user.name]",
+                    "type": 1,
+                    "title": "用户姓名",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "赞助商ID"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "来源"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "捐赠金额"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 144,
+            "_trans_name": "导入捐赠记录",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 145,
+            "_trans_name": "编辑查看捐赠记录",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "row.sponsor_id",
+                    "description": "赞助商ID"
+                },
+                {
+                    "name": "row.from",
+                    "description": "来源"
+                },
+                {
+                    "name": "row.amount",
+                    "description": "捐赠金额"
+                },
+                {
+                    "name": "row.member",
+                    "description": ""
+                },
+                {
+                    "name": "row.member.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.member.user_id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "row.member.user",
+                    "description": "用户"
+                },
+                {
+                    "name": "row.member.user.id",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "row.member.user.uname",
+                    "description": "用户用户名"
+                },
+                {
+                    "name": "row.member.user.name",
+                    "description": "用户姓名"
+                },
+                {
+                    "name": "row.sponsor",
+                    "description": ""
+                },
+                {
+                    "name": "row.sponsor.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.sponsor.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "maps.from",
+                    "description": "来源"
+                },
+                {
+                    "name": "maps.from.1",
+                    "description": "微信"
+                },
+                {
+                    "name": "maps.from.2",
+                    "description": "支付宝"
+                },
+                {
+                    "name": "maps.from.3",
+                    "description": "转账"
+                },
+                {
+                    "name": "maps.member",
+                    "description": ""
+                },
+                {
+                    "name": "maps.member.user",
+                    "description": ""
+                },
+                {
+                    "name": "maps.member.user.status",
+                    "description": "用户状态"
+                },
+                {
+                    "name": "maps.member.user.status.0",
+                    "description": "注销"
+                },
+                {
+                    "name": "maps.member.user.status.1",
+                    "description": "有效"
+                },
+                {
+                    "name": "maps.member.user.status.2",
+                    "description": "停用"
+                },
+                {
+                    "name": "maps.sponsor",
+                    "description": ""
+                },
+                {
+                    "name": "maps.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "maps.sponsor_id",
+                    "description": "赞助商ID"
+                },
+                {
+                    "name": "mapsRelations.member",
+                    "description": ""
+                },
+                {
+                    "name": "mapsRelations.sponsor",
+                    "description": ""
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
+            ]
+        },
+        {
+            "id": 146,
+            "_trans_name": "创建捐赠记录",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 147,
+            "_trans_name": "更新捐赠记录",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 148,
+            "_trans_name": "删除捐赠记录",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 149,
+            "_trans_name": "收益明细",
+            "params": [
+                {
+                    "name": "where[_key]",
+                    "type": 1,
+                    "title": "关键字搜索组默认使用key",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[member_id]",
+                    "type": 1,
+                    "title": "会员ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[donation_id]",
+                    "type": 1,
+                    "title": "捐赠ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[status]",
+                    "type": 1,
+                    "title": "状态",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "options.where.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "options.where.donation_id",
+                    "description": "捐赠ID"
+                },
+                {
+                    "name": "options.where.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "options.order.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.order.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "maps.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "maps.status.0",
+                    "description": "未提现"
+                },
+                {
+                    "name": "maps.status.1",
+                    "description": "已提现"
+                },
+                {
+                    "name": "maps.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "maps.donation_id",
+                    "description": "捐赠ID"
+                },
+                {
+                    "name": "excel.exportFields.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "excel.exportFields.donation_id",
+                    "description": "捐赠ID"
+                },
+                {
+                    "name": "excel.exportFields.amount",
+                    "description": "金额"
+                },
+                {
+                    "name": "excel.exportFields.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "excel.exportFields.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "excel.exportFields.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "excel.exportFields.deleted_at",
+                    "description": "删除时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 150,
+            "_trans_name": "收益明细分页",
+            "params": [
+                {
+                    "name": "where[member_id]",
+                    "type": 1,
+                    "title": "会员ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[donation_id]",
+                    "type": 1,
+                    "title": "捐赠ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[status]",
+                    "type": 1,
+                    "title": "状态",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 151,
+            "_trans_name": "导出收益明细",
+            "params": [
+                {
+                    "name": "where[member_id]",
+                    "type": 1,
+                    "title": "会员ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[donation_id]",
+                    "type": 1,
+                    "title": "捐赠ID",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[status]",
+                    "type": 1,
+                    "title": "状态",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "",
+                    "validate": "正整数"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.$index",
+                    "description": "excel数据项"
+                },
+                {
+                    "name": "data.$index.0",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "data.$index.1",
+                    "description": "捐赠ID"
+                },
+                {
+                    "name": "data.$index.2",
+                    "description": "金额"
+                },
+                {
+                    "name": "data.$index.3",
+                    "description": "状态"
+                },
+                {
+                    "name": "data.$index.4",
+                    "description": "ID"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 152,
+            "_trans_name": "导入收益明细",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 153,
+            "_trans_name": "编辑查看收益明细",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "row",
+                    "description": ""
+                },
+                {
+                    "name": "row.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "row.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "row.donation_id",
+                    "description": "捐赠ID"
+                },
+                {
+                    "name": "row.amount",
+                    "description": "金额"
+                },
+                {
+                    "name": "row.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "maps.status",
+                    "description": "状态"
+                },
+                {
+                    "name": "maps.status.0",
+                    "description": "未提现"
+                },
+                {
+                    "name": "maps.status.1",
+                    "description": "已提现"
+                },
+                {
+                    "name": "maps.member_id",
+                    "description": "会员ID"
+                },
+                {
+                    "name": "maps.donation_id",
+                    "description": "捐赠ID"
+                }
+            ],
+            "route_params": [
+                {
+                    "name": "id",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID",
+                    "example": "0",
+                    "validate": "正整数"
+                }
+            ]
+        },
+        {
+            "id": 154,
+            "_trans_name": "创建收益明细",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 155,
+            "_trans_name": "更新收益明细",
+            "params": [],
+            "body_params": [],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 156,
+            "_trans_name": "删除收益明细",
+            "params": [],
+            "body_params": [
+                {
+                    "name": "ids[]",
+                    "type": 2,
+                    "title": "ID",
+                    "description": "数据ID;单条数据还可使用'ids'作为key",
+                    "example": "1",
+                    "validate": "正整数"
+                }
+            ],
+            "responses": [],
+            "route_params": []
+        },
+        {
+            "id": 157,
+            "_trans_name": "赞助商",
+            "params": [
+                {
+                    "name": "where[_key]",
+                    "type": 1,
+                    "title": "关键字搜索组默认使用key",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "where[name]",
+                    "type": 1,
+                    "title": "赞助商",
+                    "description": "",
+                    "example": "",
+                    "validate": ""
+                },
+                {
+                    "name": "order[updated_at]",
+                    "type": 1,
+                    "title": "修改时间排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "order[id]",
+                    "type": 1,
+                    "title": "ID排序",
+                    "description": "asc-升序,desc-降序",
+                    "example": "desc",
+                    "validate": ""
+                },
+                {
+                    "name": "page",
+                    "type": 2,
+                    "title": "页码",
+                    "description": "页码",
+                    "example": "1",
+                    "validate": "正整数"
+                },
+                {
+                    "name": "per_page",
+                    "type": 2,
+                    "title": "每页数据条数",
+                    "description": "每页多少条",
+                    "example": "15",
+                    "validate": "正整数;最大值为200"
+                }
+            ],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "list.data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "list.data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "list.data.$index.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "list.data.$index.url",
+                    "description": "链接"
+                },
+                {
+                    "name": "list.data.$index.logo",
+                    "description": "LOGO图标"
+                },
+                {
+                    "name": "list.data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "list.data.$index.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.where.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "options.order.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "options.order.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "excel.exportFields.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "excel.exportFields.url",
+                    "description": "链接"
+                },
+                {
+                    "name": "excel.exportFields.logo",
+                    "description": "LOGO图标"
+                },
+                {
+                    "name": "excel.exportFields.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "excel.exportFields.updated_at",
+                    "description": "修改时间"
+                },
+                {
+                    "name": "excel.exportFields.deleted_at",
+                    "description": "删除时间"
+                }
+            ],
+            "route_params": []
+        },
+        {
+            "id": 158,
+            "_trans_name": "赞助商分页",
+            "params": [],
+            "body_params": [],
+            "responses": [
+                {
+                    "name": "data.$index",
+                    "description": "对象"
+                },
+                {
+                    "name": "data.$index.id",
+                    "description": "ID"
+                },
+                {
+                    "name": "data.$index.name",
+                    "description": "赞助商"
+                },
+                {
+                    "name": "data.$index.url",
+                    "description": "链接"
+                },
+                {
+                    "name": "data.$index.logo",
+                    "description": "LOGO图标"
+                },
+                {
+                    "name": "data.$index.created_at",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "data.$index.updated_at",
+                    "description": "修改时间"
                 }
             ],
             "route_params": []

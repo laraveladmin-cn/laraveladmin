@@ -7,12 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Doc;
 use App\Models\Feature;
 use App\Models\Menu;
-<<<<<<< HEAD
 use App\Models\Technology;
 use Illuminate\Mail\Markdown;
-=======
 use Illuminate\Support\Arr;
->>>>>>> 8f40fcc86983fe037e1baacc93f671899f11a944
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
