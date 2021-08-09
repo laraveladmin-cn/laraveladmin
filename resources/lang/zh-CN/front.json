@@ -267,6 +267,11 @@
                         "Character string": "字符串",
                         "Number": "数字",
                         "Boolean value": "布尔值"
+                    },
+                    "use": {
+                        "URL parameter": "url参数",
+                        "Body parameter": "body参数",
+                        "Route parameter": "route参数"
                     }
                 }
             },
@@ -867,7 +872,8 @@
                 "It is also generated when it exists": "存在时也生成",
                 "Event class name": "事件类名",
                 "Service provider": "服务提供者",
-                "Is the table name prefixed": "表名是否带前缀"
+                "Is the table name prefixed": "表名是否带前缀",
+                "Automatic scanning to generate API document data": "自动扫描生成Api文档数据"
             },
             "menus": {
                 "Drag shift": "拖拽移位",

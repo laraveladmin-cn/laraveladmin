@@ -408,7 +408,7 @@
     },
     {
         "command": "build:api-doc",
-        "name": "自动扫描生成Api文档数据"
+        "name": "Automatic scanning to generate API document data"
     },
     {
         "command": "clear-compiled",
