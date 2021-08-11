@@ -39,6 +39,14 @@ trait ResourceController
     }
 
     /**
+     * 获取筛选项
+     * @return mixed
+     */
+    public function getSizer(){
+        return $this->sizer;
+    }
+
+    /**
      * 列表页面
      * @return mixed
      */

@@ -325,11 +325,19 @@ trait BaseModel{
      * 获取字段默认值
      * @return array
      */
-    public function scopeGetFieldsDefault($query){
+    public function scopeGetFieldsDefault($query,$key=''){
         if(!isset($this->fieldsDefault)){
-            return collect([]);
+            $data = collect([]);
+            if($key){
+                return $data->get($key);
+            }
+            return $data;
         }
-        return collect($this->fieldsDefault);
+        $data = collect($this->fieldsDefault);
+        if($key){
+            return $data->get($key);
+        }
+        return $data;
     }
 
     /**
