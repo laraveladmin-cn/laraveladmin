@@ -3,6 +3,27 @@
         <div class="row">
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options" ref="table">
+                    <template slot="col" slot-scope="props">
+                       <span v-if="props.field.type =='url'">
+                           <a :href="array_get(props.row,props.k)" target="_blank">
+                               {{props.row | array_get(props.k)}}
+                           </a>
+                        </span>
+                        <span v-else-if="props.field.type =='upload'">
+                           <el-image
+                               v-if="array_get(props.row,props.k)"
+                               class="attachment-img"
+                               :src="array_get(props.row,props.k)"
+                               :alt="$tp('Attachment Image')"
+                               :preview-src-list="array_get(props.row,props.k)?[array_get(props.row,props.k)]:[]">
+                            </el-image>
+                            <div v-else class="img-rounded no-img" :alt="$tp('The image has not been set')">
+                            </div>
+                        </span>
+                        <span v-else>
+                            {{props.row | array_get(props.k)}}
+                        </span>
+                    </template>
                 </data-table>
             </div>
         </div>
@@ -14,13 +35,13 @@
 
     export default {
         components: {
-            'data-table': () => import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue')
+            'data-table': () => import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
+            'el-image':()=>import(/* webpackChunkName: "element-ui/lib/image" */ 'element-ui/lib/image'),
         },
         props: {},
         data() {
             return {
                 options:{
-                    lang_table:'sponsors',
                     lang_table: 'sponsors', //字段翻译
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
