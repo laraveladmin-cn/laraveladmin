@@ -52,7 +52,6 @@ trait ResourceController
      */
     public function index()
     {
-        //dd($this->getModel()->getModel()->parent());
         $model = $this->newBindModel();
         //查询数据结果
         $data['list'] = $this->list();
