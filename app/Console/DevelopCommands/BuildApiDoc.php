@@ -334,11 +334,6 @@ class BuildApiDoc extends BaseCommand
         Response::insertReplaceAll($this->responses);
         $data['menus'] = collect($menus)->values()->toArray();
         file_put_contents($file,json_encode( $data ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
-        //更新数据填充
-        $this->call('create:seed',['model'=>'Models\\Param','--no_dump'=>true]);
-        $this->call('create:seed',['model'=>'Models\\Response','--no_dump'=>false]);
-
-
     }
 
     /**
