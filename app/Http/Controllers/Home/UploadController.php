@@ -12,10 +12,21 @@ use Illuminate\Support\Facades\Validator;
 class UploadController extends Controller
 {
     protected $maps = [
+        /**
+         * 图片上传规则
+         */
         'image'=>[
             'base_path'=>'/uploads/images/',
             'path'=>'Y/m/d',
             'validate'=>'required|file|image|max:2048'
+        ],
+        /**
+         * pdf上传规则
+         */
+        'pdf'=>[
+            'base_path'=>'/uploads/pdf/',
+            'path'=>'Y/m/d',
+            'validate'=>'required|file|mimetypes:application/pdf|mimes:pdf|max:20480'
         ]
     ];
 
