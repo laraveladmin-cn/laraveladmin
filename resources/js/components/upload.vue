@@ -4,7 +4,7 @@
             <el-upload name="file"
                        class="avatar-uploader"
                        :action="use_url+action"
-                       list-type="picture"
+                       :list-type="listType"
                        :file-list="val"
                        :data="{_token:_token}"
                        :headers="headers"
@@ -75,6 +75,12 @@
         },
 
         props:{
+            listType:{
+                type:[String],
+                default: function () {
+                    return 'picture';
+                }
+            },
             accept:{
                 type:[String,Array],
                 default: function () {
