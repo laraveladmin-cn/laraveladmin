@@ -12,6 +12,7 @@
                        :before-upload="beforeAvatarUpload"
                        :on-error="handleAvatarError"
                        :on-remove="handleRemove"
+                       :accept="accept_str"
                        :on-success="handleSuccess">
                 <slot>
                     <button class="btn btn-primary">{{$t('Click Upload')}}</button>
@@ -27,6 +28,7 @@
                        @click="$emit('blur')"
                        :data="{_token:_token}"
                        :headers="headers"
+                       :accept="accept_str"
                        :before-upload="beforeAvatarUpload">
                 <slot>
                     <img v-if="value || placeholderValue" :src="showurl" class="avatar" :width="width+'px'" :height="height+'px'">
@@ -73,6 +75,12 @@
         },
 
         props:{
+            accept:{
+                type:[String,Array],
+                default: function () {
+                    return '';
+                }
+            },
             value: {
                 type:[String,Array],
                 default: function () {
@@ -169,6 +177,12 @@
             }
         },
         computed:{
+            accept_str(){
+              if(typeof this.accept== "string"){
+                  return this.accept;
+              }
+              return collect(this.accept).implode(',');
+            },
             showurl(){
                 if(!this.value){
                     return this.placeholderValue;
