@@ -200,6 +200,10 @@ trait BaseModel{
                 return $key.'&'.$val;
             })->implode(' or ');
             $query->$where(DB::raw('('.$str.')'));
+        }elseif($exp=='find_in_set'){
+            $exps[] = 'whereRaw';
+            $where = Str::camel(implode('_',$exps));
+            $query->$where(DB::raw("FIND_IN_SET('{$val}',`{$key}`)"));
         }else{
             $exps[] = 'where';
             $where = Str::camel(implode('_',$exps));
