@@ -164,6 +164,7 @@
                                                               body.innerHTML = res_str;
                                                               iframe.onload();
                                                           }).catch((error) =>{
+                                                              this.refreshToken();
                                                               let res_str = JSON.stringify({
                                                                   success : 0,
                                                                   message : this.$t('Error uploading file!'),
