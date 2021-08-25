@@ -630,6 +630,20 @@
             "_id": 155
         },
         {
+            "id": 159,
+            "name": "获取单条菜单详细信息",
+            "icons": "fa-edit",
+            "description": "菜单详情",
+            "url": "/open/menu-info",
+            "parent_id": 74,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "IndexController@menuInfo",
+            "_id": 156
+        },
+        {
             "id": 75,
             "name": "Polar verification",
             "description": "Polar verification",
@@ -644,7 +658,7 @@
                 "api",
                 "web"
             ],
-            "_id": 156
+            "_id": 157
         },
         {
             "id": 79,
@@ -657,7 +671,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 157
+            "_id": 158
         },
         {
             "id": 150,
@@ -671,7 +685,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 158
+            "_id": 159
         }
     ],
     "resource": [

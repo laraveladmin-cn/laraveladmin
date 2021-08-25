@@ -73,7 +73,7 @@ class LogController extends Controller
         'menu_id',
         'location',
         'ip',
-        'parameters',
+        'LEFT(`parameters`,100) as `parameters`',
         'created_at',
 
         'user' => [

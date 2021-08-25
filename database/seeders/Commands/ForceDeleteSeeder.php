@@ -4,6 +4,7 @@ namespace Database\Seeders\Commands;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ForceDeleteSeeder extends Seeder
 {
@@ -15,8 +16,12 @@ class ForceDeleteSeeder extends Seeder
     public function run()
     {
 
-        collect(Storage::allFiles(app_path('Models')))
-            ->map(function($file){
+        collect(Storage::disk('root')->allFiles('/app/Models'))
+            ->each(function($file){
+                $file = Str::replaceFirst('app/Models/','',$file);
+                if(Str::startsWith($file,'.')){
+                    return;
+                }
                 $model_str = '\\App\Models\\'.str_replace('.php','',$file);
                 $model = new $model_str();
                 try{

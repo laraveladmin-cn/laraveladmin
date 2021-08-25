@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -11,12 +12,30 @@ use Illuminate\Support\Facades\Validator;
 class UploadController extends Controller
 {
     protected $maps = [
+        /**
+         * 图片上传规则
+         */
         'image'=>[
             'base_path'=>'/uploads/images/',
-            'path'=>'Y/m/d'
+            'path'=>'Y/m/d',
+            'validate'=>'required|file|image|max:2048'
+        ],
+        /**
+         * pdf上传规则
+         */
+        'pdf'=>[
+            'base_path'=>'/uploads/pdf/',
+            'path'=>'Y/m/d',
+            'validate'=>'required|file|mimetypes:application/pdf|mimes:pdf|max:20480'
         ]
     ];
-    public function postIndex(\Illuminate\Http\Request $request){
+
+    /**
+     * 上传文件
+     * @return mixed
+     */
+    public function postIndex(){
+        $request = Request::instance();
         $validate = $this->getValidateRule();
         $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
@@ -53,9 +72,11 @@ class UploadController extends Controller
      */
     protected function getValidateRule()
     {
+        $request = Request::instance();
+        $type = $request->input('type','image'); //上传类型
         return [
-            'file' => 'required|file|image|max:'.(1024*2), //文件验证
-            'type'=>'nullable|in:image', //上传类型
+            'file' => Arr::get($this->maps,$type.'.validate',''), //文件验证
+            'type'=>'nullable|in:'.collect($this->maps)->keys()->implode(','), //上传类型
             'disk'=>'nullable|in:public' //上传磁盘
         ];
     }

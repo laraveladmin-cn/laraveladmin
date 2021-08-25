@@ -200,6 +200,10 @@ trait BaseModel{
                 return $key.'&'.$val;
             })->implode(' or ');
             $query->$where(DB::raw('('.$str.')'));
+        }elseif($exp=='find_in_set'){
+            $exps[] = 'whereRaw';
+            $where = Str::camel(implode('_',$exps));
+            $query->$where(DB::raw("FIND_IN_SET('{$val}',`{$key}`)"));
         }else{
             $exps[] = 'where';
             $where = Str::camel(implode('_',$exps));
@@ -325,11 +329,19 @@ trait BaseModel{
      * 获取字段默认值
      * @return array
      */
-    public function scopeGetFieldsDefault($query){
+    public function scopeGetFieldsDefault($query,$key=''){
         if(!isset($this->fieldsDefault)){
-            return collect([]);
+            $data = collect([]);
+            if($key){
+                return $data->get($key);
+            }
+            return $data;
         }
-        return collect($this->fieldsDefault);
+        $data = collect($this->fieldsDefault);
+        if($key){
+            return $data->get($key);
+        }
+        return $data;
     }
 
     /**

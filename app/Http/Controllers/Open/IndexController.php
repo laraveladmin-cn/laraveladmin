@@ -6,12 +6,17 @@ use App\Facades\ClientAuth;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class IndexController extends Controller
 {
+
+
     /**
      * 生成index.html文件生成的数据
      * @return array
@@ -164,8 +169,7 @@ class IndexController extends Controller
         $obj = Menu::main()
             ->select(['id','name','icons','description',
                 'url','parent_id','resource_id','status','level',
-                'left_margin','right_margin','method',
-                'resource_id'
+                'left_margin','right_margin','method'
             ])
             ->orderBy('left_margin','asc')
             ->with(['parent'=>function($q){
@@ -176,22 +180,24 @@ class IndexController extends Controller
                 ]);
             }]);
         if(Request::input('type')=='document'){
-            $obj = $obj->with(['route_params','params','body_params','responses']);
-            $file = storage_path('/developments/api-doc.json');
-            if(file_exists($file)){
-                $common_responses_data = json_decode(file_get_contents($file),true)?:[];
-                $common_responses = Arr::get($common_responses_data,'common_responses',[]);
-                collect(Arr::get($common_responses_data,'common_responses_list',[]))->each(function ($item)use(&$common_responses){
-                    $common_responses[] = $item;
-                    $common_responses[] = [
-                        'name'=>'list.'.$item['name'],
-                        'description'=>$item['description']
-                    ];
-                });
-                $data['common_responses'] = $common_responses;
-            }else{
-                $data['common_responses'] = [];
+            if(!isset($this->common_responses)){
+                $file = storage_path('/developments/api-doc-common.json');
+                $this->common_responses = [];
+                if(file_exists($file)){
+                    $common_responses_data = json_decode(file_get_contents($file),true)?:[];
+                    $common_responses = Arr::get($common_responses_data,'common_responses',[]);
+                    collect(Arr::get($common_responses_data,'common_responses_list',[]))
+                        ->each(function ($item)use(&$common_responses){
+                        $common_responses[] = $item;
+                        $common_responses[] = [
+                            'name'=>'list.'.$item['name'],
+                            'description'=>$item['description']
+                        ];
+                    });
+                    $this->common_responses = $common_responses;
+                }
             }
+            $data['common_responses'] = $this->common_responses;
         }
         $data['menus'] = collect($obj->get())
             ->map(function ($item){
@@ -201,6 +207,26 @@ class IndexController extends Controller
         });
 
         return Response::returns($data);
+    }
+
+    /**
+     * 查询单个菜单详情
+     */
+    public function menuInfo(){
+        $request = app('request');
+        $validator = Validator::make($request->all(), [
+            'id'=>'required|integer'
+        ]);
+        if ($validator->fails()) {
+            throw ValidationException::withMessages($validator->errors()->toArray());
+        }
+        $id = app('request')->input('id',0);
+        $row = Menu::main()
+            ->select(['id'])
+            ->with(['route_params','params','body_params','responses'])
+            ->find($id);
+        return Response::returns(['row'=>$row]);
+
     }
 
 

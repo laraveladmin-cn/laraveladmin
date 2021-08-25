@@ -1,4 +1,4 @@
-if(!AppConfig){
+if(!window.AppConfig){
     window.AppConfig = {};
 }
 const dd = function () {
@@ -82,6 +82,7 @@ const App = {
                 ], //公共请求头
             common_responses:[],
             menus_url:'/open/menu?type=document',//获取接口请求地址
+            menu_info_url:'/open/menu-info',//获取接口请求地址
             api_model:AppConfig.api_url_model||'web',//接口模式
             domain:AppConfig.app_url||'',
             maps:{
@@ -91,7 +92,7 @@ const App = {
                 },
                 method:{1:'get',2:'post',4:'put',8:'delete'},
                 params:{
-                    type:{1:'字符串',2:'数字'}
+                    type:{1:'字符串',2:'数字',3:'布尔值'}
                 }
             },
             select:0,
@@ -416,6 +417,7 @@ const App = {
                 url:this.use_url+this.menus_url,
                 method:'get'
             }).then( (response)=> {
+                this.loading = false;
                 if(response.data.menus){
                     //dd(response.data.menus);
                     this.menus = response.data.menus;
@@ -425,12 +427,15 @@ const App = {
                     this.common_responses = response.data.common_responses;
                     this.selectMenu();
                 }
-                this.loading = false;
+
             }).catch((error) => {
                 this.loading = false;
             });
         },
         selectMenu(id){
+            if(this.loading){
+                return ;
+            }
             //查询第一个接口
             this.api = collect(this.menus).first((menu) =>{
                 if(id){
@@ -444,11 +449,32 @@ const App = {
             }else {
                 this.select = this.api.use_method!='get'?1:0;
             }
-
+            this.result = {};
+            if(!this.api.loaded){
+                this.loading = true;
+                axios.request({
+                    url:this.use_url+this.menu_info_url,
+                    params:{id:this.api.id},
+                    method:'get'
+                }).then( (response)=> {
+                    if(response.data.row){
+                        collect(['route_params','params','body_params','responses']).each((value)=>{
+                            this.api[value] = response.data.row[value];
+                        });
+                    }
+                    this.loading = false;
+                    this.api.loaded = true;
+                    this.back_api = this.copyObj(this.api);
+                }).catch((error) => {
+                    this.loading = false;
+                });
+            }else {
+                this.back_api = this.copyObj(this.api);
+            }
 
             //dd(JSON.stringify(this.api));
-            this.back_api = this.copyObj(this.api);
-            this.result = {};
+
+
         }
     },
 
