@@ -92,7 +92,9 @@
             "System log file": "系统日志文件",
             "Seven cattle cloud token": "七牛云TOKEN",
             "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取",
-            "Regional management": "地区管理"
+            "Regional management": "地区管理",
+            "Get single menu details": "获取单条菜单详细信息",
+            "Menu details": "菜单详情"
         },
         "tables": {
             "_file_logs": {

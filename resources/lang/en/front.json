@@ -92,7 +92,9 @@
             "System log file": "System log file",
             "Seven cattle cloud token": "Seven cattle cloud token",
             "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get",
-            "Regional management": "Regional management"
+            "Regional management": "Regional management",
+            "Get single menu details": "Get single menu details",
+            "Menu details": "Menu details"
         },
         "tables": {
             "_file_logs": {

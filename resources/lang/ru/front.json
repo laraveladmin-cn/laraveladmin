@@ -92,7 +92,9 @@
             "System log file": "файл Системного журнала",
             "Seven cattle cloud token": "семь коров",
             "Seven cattle cloud upload token to get": "семь коровьих облаков",
-            "Regional management": "территориальное управление"
+            "Regional management": "территориальное управление",
+            "Get single menu details": "получить сведения о меню",
+            "Menu details": "меню"
         },
         "tables": {
             "_file_logs": {

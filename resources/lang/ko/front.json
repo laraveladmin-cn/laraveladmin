@@ -92,7 +92,9 @@
             "System log file": "시스템 로그 파일",
             "Seven cattle cloud token": "칠 우 윈 투 킨.",
             "Seven cattle cloud upload token to get": "칠 우 운 올 려 서 TOKEN 획득.",
-            "Regional management": "지역 관리"
+            "Regional management": "지역 관리",
+            "Get single menu details": "단일 메뉴 정보 가 져 오기",
+            "Menu details": "메뉴 정보"
         },
         "tables": {
             "_file_logs": {

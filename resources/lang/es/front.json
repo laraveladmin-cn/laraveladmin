@@ -92,7 +92,9 @@
             "System log file": "Archivo de registro del sistema",
             "Seven cattle cloud token": "Nube de siete vacas Token",
             "Seven cattle cloud upload token to get": "Siete Niu Cloud upload Token get",
-            "Regional management": "Gestión regional"
+            "Regional management": "Gestión regional",
+            "Get single menu details": "Obtener detalles de un solo menú",
+            "Menu details": "Detalles del menú"
         },
         "tables": {
             "_file_logs": {
