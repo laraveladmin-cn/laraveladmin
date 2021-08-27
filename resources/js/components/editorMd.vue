@@ -147,6 +147,9 @@
                                           while (true){
                                               let $input = $(this.$el).find('.editormd-file-input input[type="file"]');
                                               if($input.length){
+                                                  $(this.$el).find('.editormd-image-dialog .editormd-dialog-close,.editormd-image-dialog .editormd-enter-btn,.editormd-image-dialog .editormd-cancel-btn').on('click',()=>{
+                                                      this.onSubmit = false;
+                                                  });
                                                   if(!this.onSubmit){
                                                       this.onSubmit = true;
                                                       $input.attr('name','file');
