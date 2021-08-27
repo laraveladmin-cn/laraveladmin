@@ -539,7 +539,9 @@
                         }
                         //添加历史记录
                         if(!options['get_count'] && !flog){
-                            this.$router.push({ path: this.$router.currentRoute.path, query: { options: options_str }}).catch(()=>{});
+                           let query = copyObj(this.$route.query);
+                            query[this.options_key] = options_str;
+                            this.$router.push({ path: this.$router.currentRoute.path, query: query}).catch(()=>{});
                         }
                     }else {
                         for (let i in response.data ) {
@@ -757,13 +759,13 @@
                 };
             },
             '$route.fullPath'(val){
-                let value = this.$route.query.options;
+                let value = this.$route.query[this.options_key];
                 if(value!=this.options_str){
                     let options;
                     if(value){
                         options = JSON.parse(value);
                     }else {
-                        if(typeof this.$route.query.options=="undefined"){
+                        if(typeof this.$route.query[this.options_key]=="undefined"){
                             options = {where:{},order:{}};
                             this.data.configUrl['listUrl'] = '';
                         }else {
@@ -781,6 +783,9 @@
                 'use_url',
                 'statusClass'
             ]),
+            options_key(){
+                return typeof this.options.optionsKey=="undefined"?'options':this.options.optionsKey;
+            },
             _total(){
                 return array_get(this.data,'list.total',0);
             },
@@ -868,7 +873,7 @@
                 document.body.appendChild($script);
             }
             //获取数据
-            let options = this.options.defOptions || JSON.parse(this.$router.currentRoute.query.options || '{}');
+            let options = this.options.defOptions || JSON.parse(this.$router.currentRoute.query[this.options_key] || '{}');
             if(this.options.keywordKey){
                 if(!options.where){
                     options.where = {};
