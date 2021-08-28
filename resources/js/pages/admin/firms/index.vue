@@ -71,8 +71,8 @@
                     keywordKey: 'name', //关键字查询key
                     keywordGroup: false, //是否为选项组
                     keywordPlaceholder:()=>{
-                return this.$t('enter',{name:this.$t('name')});
-            },//'请输入Name',
+                        return this.$t('enter',{name:this.$t('name')});
+                    },//'请输入Name',
                     primaryKey: 'id', //数据唯一性主键
                     defOptions: def_options, //默认筛选条件
                     //hideTopPagerTool:true,
