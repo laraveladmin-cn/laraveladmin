@@ -3,6 +3,42 @@
         <div class="row">
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
+                    <template slot="header" slot-scope="props">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <h4 class="text-center">{{props | array_get('data.list.total')}}</h4>
+                                    </div>
+                                    <div class="small-box-footer">{{$t('Total number')}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
+                                <div class="small-box bg-green" >
+                                    <div class="inner" >
+                                        <h4 class="text-center">{{props | array_get('data.list.count_status.value0')}}</h4>
+                                    </div>
+                                    <div class="small-box-footer">{{props | array_get('maps.status.0')}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
+                                <div class="small-box bg-yellow" >
+                                    <div class="inner" >
+                                        <h4 class="text-center">{{props | array_get('data.list.count_status.value1')}}</h4>
+                                    </div>
+                                    <div class="small-box-footer">{{props | array_get('maps.status.1')}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
+                                <div class="small-box bg-red" >
+                                    <div class="inner" >
+                                        <h4 class="text-center">{{props | array_get('data.list.count_status.value2')}}</h4>
+                                    </div>
+                                    <div class="small-box-footer">{{props | array_get('maps.status.2')}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
                     <template slot="thead" slot-scope="props">
                         <tr>
                             <th class="id" v-if="props.checkbox" rowspan="2">

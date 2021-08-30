@@ -1060,5 +1060,6 @@
     "Download": "Télécharger",
     "Delete within condition": "Supprimer dans les conditions",
     "Click Upload": "Cliquez pour télécharger",
-    "Only picture files can be uploaded and no more than {size}": "Seuls les fichiers Image peuvent être téléchargés et ne doivent pas dépasser {taille}"
+    "Only picture files can be uploaded and no more than {size}": "Seuls les fichiers Image peuvent être téléchargés et ne doivent pas dépasser {taille}",
+    "Total number": "Total général"
 }

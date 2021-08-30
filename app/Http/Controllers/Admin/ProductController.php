@@ -8,8 +8,10 @@ use App\Models\Bank;
 use App\Models\Classify;
 use App\Models\Firm;
 use App\Models\Pclassify;
+use App\Models\Product;
 use App\Models\Year;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -128,6 +130,28 @@ class ProductController extends Controller
         if($id && $_onlyUpdate){
             $data = collect($data)->only($_onlyUpdate)->toArray();
         }
+        return $data;
+    }
+
+    /**
+     * 列表页面返回数据前对数据处理
+     * @param $data
+     * @return mixed
+     */
+    protected function handleListReturn(&$data, $obj)
+    {
+        $this->bindModel = null;
+        $obj = $this->bindModel();
+        $options = $this->getOptions(); //筛选项+排序项
+        $data = collect($data)->toArray();
+        $sql = [];
+        collect(Product::getFieldsMap('status'))->each(function ($value,$key)use(&$sql){
+            $sql[] = 'SUM(CASE WHEN `status`='.$key.' THEN 1 ELSE 0 END) AS value'.$key;
+        });
+        $data['count_status'] = (clone $obj)->options(
+            collect($options)->only(['where'])->toArray()
+        )
+            ->select(DB::raw(collect($sql)->implode(',')))->first();
         return $data;
     }
 

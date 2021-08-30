@@ -1060,5 +1060,6 @@
     "Download": "Descargar",
     "Delete within condition": "Supresión condicional",
     "Click Upload": "Haga clic en cargar",
-    "Only picture files can be uploaded and no more than {size}": "Sólo se pueden cargar archivos de imagen y no más de {tamaño}"
+    "Only picture files can be uploaded and no more than {size}": "Sólo se pueden cargar archivos de imagen y no más de {tamaño}",
+    "Total number": "Total"
 }

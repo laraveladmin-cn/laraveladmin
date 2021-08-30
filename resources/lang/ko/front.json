@@ -1060,5 +1060,6 @@
     "Download": "다운로드 하 다.",
     "Delete within condition": "조건 내 삭제",
     "Click Upload": "클릭 하여 업로드",
-    "Only picture files can be uploaded and no more than {size}": "이미지 파일 만 올 릴 수 있 고 {size} 을 초과 하지 않 습 니 다."
+    "Only picture files can be uploaded and no more than {size}": "이미지 파일 만 올 릴 수 있 고 {size} 을 초과 하지 않 습 니 다.",
+    "Total number": "총수"
 }

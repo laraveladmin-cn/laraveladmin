@@ -1060,5 +1060,6 @@
     "Download": "ダウンロード",
     "Delete within condition": "条件内で削除",
     "Click Upload": "クリックしてアップロード",
-    "Only picture files can be uploaded and no more than {size}": "画像ファイルのみアップロードできます。"
+    "Only picture files can be uploaded and no more than {size}": "画像ファイルのみアップロードできます。",
+    "Total number": "合計"
 }

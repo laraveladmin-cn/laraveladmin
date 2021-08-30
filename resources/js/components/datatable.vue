@@ -2,7 +2,7 @@
     <div :id="id">
         <div class="data-table">
             <div class="box-header sizer">
-                <slot name="header" :data="data"></slot>
+                <slot name="header" :data="data" :maps="_maps"></slot>
                 <slot name="sizer"
                       :data="data"
                       :ids="check_ids"
