@@ -2,7 +2,7 @@
     <div class="admin_user_index">
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box box-primary" :options="options">
+                <data-table ref="table" class="box box-primary" :options="options">
                     <template slot="header" slot-scope="props">
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
@@ -36,6 +36,11 @@
                                     </div>
                                     <div class="small-box-footer">{{props | array_get('maps.status.2')}}</div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <echart :options="pie_optons" style="height:200px;"></echart>
                             </div>
                         </div>
                     </template>
@@ -140,6 +145,8 @@
             'select2':()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
             "el-switch": ()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
+            'echart':()=>import(/* webpackChunkName: "common_components/echart.vue" */ 'common_components/echart.vue'),
+
         },
         props: {
         },
@@ -177,7 +184,53 @@
         computed:{
             ...mapState([
                 'use_url'
-            ])
+            ]),
+            pie_optons(){
+                let count_status = this.$refs['table'].data.list.count_status || {};
+                let maps_status =  this.$refs['table']._maps.status || {};
+                let data = collect(maps_status).map((value,key)=>{
+                    return {value: array_get(count_status,'value'+key,0), name: value}
+                }).values().all();
+                let option = {
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        top: '5%',
+                        left: 'center'
+                    },
+                    series: [
+                        {
+                            name: '访问来源',
+                            type: 'pie',
+                            radius: ['40%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    fontSize: '40',
+                                    fontWeight: 'bold'
+                                }
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            data: data/*[
+                                {value: 1048, name: '搜索引擎'},
+                                {value: 735, name: '直接访问'},
+                                {value: 580, name: '邮件营销'},
+                                {value: 484, name: '联盟广告'},
+                                {value: 300, name: '视频广告'}
+                            ]*/
+                        }
+                    ]
+                };
+                return option;
+            }
         },
         methods:{
             ...mapActions({

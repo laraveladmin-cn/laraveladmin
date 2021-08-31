@@ -140,18 +140,21 @@ class ProductController extends Controller
      */
     protected function handleListReturn(&$data, $obj)
     {
-        $this->bindModel = null;
-        $obj = $this->bindModel();
-        $options = $this->getOptions(); //筛选项+排序项
-        $data = collect($data)->toArray();
-        $sql = [];
-        collect(Product::getFieldsMap('status'))->each(function ($value,$key)use(&$sql){
-            $sql[] = 'SUM(CASE WHEN `status`='.$key.' THEN 1 ELSE 0 END) AS value'.$key;
-        });
-        $data['count_status'] = (clone $obj)->options(
-            collect($options)->only(['where'])->toArray()
-        )
-            ->select(DB::raw(collect($sql)->implode(',')))->first();
+        if (!Request::input('page') || Request::input('get_count')) {
+            $this->bindModel = null;
+            $obj = $this->bindModel();
+            $options = $this->getOptions(); //筛选项+排序项
+            $data = collect($data)->toArray();
+            $sql = [];
+            collect(Product::getFieldsMap('status'))->each(function ($value,$key)use(&$sql){
+                $sql[] = 'SUM(CASE WHEN `status`='.$key.' THEN 1 ELSE 0 END) AS value'.$key;
+            });
+            $data['count_status'] = (clone $obj)->options(
+                collect($options)->only(['where'])->toArray()
+            )
+                ->select(DB::raw(collect($sql)->implode(',')))->first();
+        }
+
         return $data;
     }
 
