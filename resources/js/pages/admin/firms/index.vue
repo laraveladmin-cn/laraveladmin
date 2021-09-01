@@ -75,7 +75,8 @@
                     },//'请输入Name',
                     primaryKey: 'id', //数据唯一性主键
                     defOptions: def_options, //默认筛选条件
-                    //hideTopPagerTool:true,
+                    defaultExportNotAll:true,//导出字段默认不全选
+                    //hideTopPagerTool:true,//去掉顶部分页工具栏
                     fields: {
                         "id": {"name": "ID", "order": true},
                         "name": {"name": "Name", "order": true},
