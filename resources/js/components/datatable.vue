@@ -549,7 +549,11 @@
                             Vue.set(this.data,i,response.data[i]);
                         }
                         if(this.count(this.data.excel.exportFields) && !this.export_fileds){
-                            this.export_fileds = collect(this.data.excel.exportFields).keys().all();
+                            if(this.options.defaultExportNotAll){
+                                this.export_fileds = [];
+                            }else {
+                                this.export_fileds = collect(this.data.excel.exportFields).keys().all();
+                            }
                         }else if(!this.export_fileds){
                             this.export_fileds = [];
                         }
