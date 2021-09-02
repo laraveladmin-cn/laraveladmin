@@ -143,7 +143,7 @@
                               if($picture.length){
                                   if(!this.onClick){
                                       this.onClick=true;
-                                      $picture.on('click',async()=>{
+                                      $picture.on('touchend click',async()=>{
                                           while (true){
                                               let $input = $(this.$el).find('.editormd-file-input input[type="file"]');
                                               if($input.length){
