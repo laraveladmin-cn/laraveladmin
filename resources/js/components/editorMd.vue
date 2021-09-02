@@ -1,7 +1,7 @@
 <template>
-    <div @mouseout="mouseoutEvent">
+    <div @mouseout="mouseoutEvent" @touchend="stopTouchend">
         <input type="hidden" :value="_token" ref="token" name="_token">
-        <div :id="options.id" style="height: 100%">
+        <div :id="options.id" style="height: 100%" >
             <textarea style="display:none;"></textarea>
         </div>
     </div>
@@ -124,9 +124,11 @@
                     this.editorMd.config('readOnly',val);
                 }
             },
-
+            stopTouchend(e){
+                e.stopPropagation();
+            },
             init(){
-              this.intervalTime = setInterval(()=>{
+                this.intervalTime = setInterval(()=>{
                   if(typeof editormd=="function"){
                       clearInterval(this.intervalTime);
                       let options = copyObj(this.options);
@@ -193,6 +195,9 @@
                       this.editorMd = editormd(options);
                   }
               },250);
+                $(document).on('touchend',()=>{
+                    this.mouseoutEvent();
+                });
           },
             sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms))
