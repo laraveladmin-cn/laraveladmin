@@ -245,9 +245,22 @@
     }
 </script>
 
-<style scoped>
+<style>
     @import url('/bower_components/editor.md/css/editormd.css');
     .editormd-fullscreen{
         z-index: 9999;
     }
+    @media screen and (max-width: 750px) {
+        .editormd-image-dialog{
+            left: 3% !important;
+            width: 94% !important;
+            height: unset !important;
+            max-width: 465px !important;
+            top:200px !important;
+        }
+        .editormd-image-dialog .editormd-form label{
+            float: unset;
+        }
+    }
+
 </style>
