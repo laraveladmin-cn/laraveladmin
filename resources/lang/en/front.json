@@ -110,7 +110,9 @@
             "Sponsor Pagination": "Sponsor Pagination",
             "Member user": "Member user",
             "Donation record": "Donation record",
-            "Income details": "Income details"
+            "Income details": "Income details",
+            "Get single menu details": "Get single menu details",
+            "Menu details": "Menu details"
         },
         "tables": {
             "_file_logs": {

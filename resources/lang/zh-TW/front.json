@@ -110,7 +110,9 @@
             "Sponsor Pagination": "贊助商分頁",
             "Member user": "會員用戶",
             "Donation record": "捐贈記錄",
-            "Income details": "收益明細"
+            "Income details": "收益明細",
+            "Get single menu details": "獲取單條選單詳細資訊",
+            "Menu details": "選單詳情"
         },
         "tables": {
             "_file_logs": {
