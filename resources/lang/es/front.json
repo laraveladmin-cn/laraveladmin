@@ -408,6 +408,7 @@
                     "Link rules template": "Plantilla de reglas de enlace",
                     "Number of insurance types": "Número de especies de seguros",
                     "Withholding Bank": "Banco de retención",
+                    "Number of long-term insurance types": "Número de especies de seguros a largo plazo",
                     "Company official website": "Sitio web oficial de la empresa",
                     "Online Insurance Service Provider": "Proveedor de servicios de seguros en línea",
                     "Link address rules": "Regla de dirección de enlace",
@@ -487,7 +488,10 @@
                     "Created At": "Tiempo de creación",
                     "Updated At": "Tiempo de modificación",
                     "Deleted At": "Tiempo de eliminación",
-                    "Preview Poster": "Vista previa del póster"
+                    "Preview Poster": "Vista previa del póster",
+                    "Stop selling insurance plant number": "Número de tipos de seguros fuera de venta",
+                    "Number of types of insurance on sale": "Número de especies de seguros en venta",
+                    "Number of discontinued insurance types": "Número de especies de seguros desactivadas"
                 },
                 "maps": {
                     "is_long_time": {

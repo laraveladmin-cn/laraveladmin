@@ -408,6 +408,7 @@
                     "Link rules template": "Link rules template",
                     "Number of insurance types": "Number of insurance types",
                     "Withholding Bank": "Withholding Bank",
+                    "Number of long-term insurance types": "Number of long-term insurance types",
                     "Company official website": "Company official website",
                     "Online Insurance Service Provider": "Online Insurance Service Provider",
                     "Link address rules": "Link address rules",
@@ -487,7 +488,10 @@
                     "Created At": "Created At",
                     "Updated At": "Updated At",
                     "Deleted At": "Deleted At",
-                    "Preview Poster": "Preview Poster"
+                    "Preview Poster": "Preview Poster",
+                    "Stop selling insurance plant number": "Stop selling insurance plant number",
+                    "Number of types of insurance on sale": "Number of types of insurance on sale",
+                    "Number of discontinued insurance types": "Number of discontinued insurance types"
                 },
                 "maps": {
                     "is_long_time": {

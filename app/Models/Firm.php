@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Firm extends Model
 {
@@ -163,5 +164,18 @@ class Firm extends Model
         return $this->hasMany('App\Models\Product');
     }
 
+    /**
+     * 品牌拥有的险种统计
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products_count_status(){
+        $sql = ['firm_id'];
+        collect(Product::getFieldsMap('status'))->each(function ($value,$key)use(&$sql){
+            $sql[] = 'SUM(CASE WHEN `status`='.$key.' THEN 1 ELSE 0 END) AS value'.$key;
+        });
+        return $this->hasOne('App\Models\Product','firm_id','id')
+            ->select(DB::raw(collect($sql)->implode(',')))
+            ->groupBy('firm_id');
+    }
 
 }

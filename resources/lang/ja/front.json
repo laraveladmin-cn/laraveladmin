@@ -408,6 +408,7 @@
                     "Link rules template": "Link rulesテンプレート",
                     "Number of insurance types": "危険種の数",
                     "Withholding Bank": "銀行の掛け金をする",
+                    "Number of long-term insurance types": "長期危険種数",
                     "Company official website": "会社のウェブサイト",
                     "Online Insurance Service Provider": "オンライン保険サービスプロバイダ",
                     "Link address rules": "リンク先規則",
@@ -487,7 +488,10 @@
                     "Created At": "作成時間",
                     "Updated At": "変更時間",
                     "Deleted At": "削除時間",
-                    "Preview Poster": "ポスターのプレビュー"
+                    "Preview Poster": "ポスターのプレビュー",
+                    "Stop selling insurance plant number": "販売停止の危険種数",
+                    "Number of types of insurance on sale": "売り注文数",
+                    "Number of discontinued insurance types": "危険種の使用を停止する"
                 },
                 "maps": {
                     "is_long_time": {

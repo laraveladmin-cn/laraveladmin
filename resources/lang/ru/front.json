@@ -408,6 +408,7 @@
                     "Link rules template": "Шаблоны: Link rules",
                     "Number of insurance types": "количество видов опасности",
                     "Withholding Bank": "комиссионный банк",
+                    "Number of long-term insurance types": "количество видов долгосрочного риска",
                     "Company official website": "официальный сайт компании",
                     "Online Insurance Service Provider": "сетевой страховщик",
                     "Link address rules": "Правило адреса ссылки",
@@ -487,7 +488,10 @@
                     "Created At": "время создания",
                     "Updated At": "время изменения",
                     "Deleted At": "время удаления",
-                    "Preview Poster": "предварительный просмотр"
+                    "Preview Poster": "предварительный просмотр",
+                    "Stop selling insurance plant number": "количество видов опасности",
+                    "Number of types of insurance on sale": "количество видов риска при продаже",
+                    "Number of discontinued insurance types": "количество видов опасности"
                 },
                 "maps": {
                     "is_long_time": {

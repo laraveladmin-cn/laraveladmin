@@ -408,6 +408,7 @@
                     "Link rules template": "Link rules範本",
                     "Number of insurance types": "險種數量",
                     "Withholding Bank": "代扣銀行",
+                    "Number of long-term insurance types": "長期險種數量",
                     "Company official website": "公司官網網址",
                     "Online Insurance Service Provider": "線上投保服務商",
                     "Link address rules": "連結位址規則",
@@ -487,7 +488,10 @@
                     "Created At": "創建時間",
                     "Updated At": "修改時間",
                     "Deleted At": "删除時間",
-                    "Preview Poster": "預覽海報"
+                    "Preview Poster": "預覽海報",
+                    "Stop selling insurance plant number": "停售險種數量",
+                    "Number of types of insurance on sale": "在售險種數量",
+                    "Number of discontinued insurance types": "停用險種數量"
                 },
                 "maps": {
                     "is_long_time": {

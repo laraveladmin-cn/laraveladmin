@@ -10,6 +10,13 @@ use App\Http\Controllers\Controller;
 class FirmController extends Controller
 {
     use ResourceController;
+    public function __construct()
+    {
+        //统计长期险种数量
+        $this->showIndexFieldsCount['products AS products_count_is_long_time'] = function ($q){
+            $q->where('is_long_time',1);
+        };
+    }
 
     /**
      * 资源模型
@@ -22,7 +29,8 @@ class FirmController extends Controller
      * @var array
      */
     public $showIndexFields=[
-        'id','name','logo','url','description','updated_at'
+        'id','name','logo','url','description','updated_at',
+        'products_count_status'=>[]
     ];
 
     /**

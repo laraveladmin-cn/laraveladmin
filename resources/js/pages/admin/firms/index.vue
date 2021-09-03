@@ -84,7 +84,11 @@
                         "description": {"name": "Describe", "order": true},
                         "products_count": {"name": "Number of insurance types", "order": true},
                         "banks_count": {"name": "Withholding Bank", "order": true},
-                        "updated_at": {"name": "Updated At", "order": true}
+                        "products_count_is_long_time":{"name": "Number of long-term insurance types", "order": true},
+                        "products_count_status.value0":{"name": "Stop selling insurance plant number", "order": false},
+                        "products_count_status.value1":{"name": "Number of types of insurance on sale", "order": false},
+                        "products_count_status.value2":{"name": "Number of discontinued insurance types", "order": false},
+                        "updated_at": {"name": "Updated At", "order": true},
                     },
                 }
             };
