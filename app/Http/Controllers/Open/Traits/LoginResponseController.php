@@ -41,7 +41,7 @@ trait LoginResponseController
         $user = Auth::user();
         $this->bindOuser($user);
         $remember = $request->has('remember');
-        $lifetime = $remember?config('laravel_admin.remember_lifetime')*60*24:config('session.lifetime');
+        $lifetime = (!$remember)?config('laravel_admin.no_remember_lifetime'):config('session.lifetime');
         if($remember){
             $rememberTokenCookieKey = Auth::getRecallerName();
             Cookie::queue($rememberTokenCookieKey, Cookie::get($rememberTokenCookieKey), $lifetime);
