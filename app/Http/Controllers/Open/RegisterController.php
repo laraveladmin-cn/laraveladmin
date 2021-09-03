@@ -6,6 +6,7 @@ use App\Http\Controllers\Open\Traits\LoginResponseController;
 use App\Mail\SendMessage;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -29,9 +30,9 @@ class RegisterController extends Controller
     |
     */
 
-    protected $redirectTo = '/admin/index'; //内勤人员跳转
+    protected $redirectTo = RouteServiceProvider::ADMIN; //内勤人员跳转
     protected $redirectAfterLogout = '/open/login'; //未登录跳转登录
-    protected $redirectToHome = '/home/index'; //代理人跳转
+    protected $redirectToHome = RouteServiceProvider::HOME; //普通用户跳转
     protected $emailActivateTime = 3600; //注册邮箱激活失效时间
 
     /**
