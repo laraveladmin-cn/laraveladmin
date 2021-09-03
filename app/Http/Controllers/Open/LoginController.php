@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Open\Traits\LoginResponseController;
 use App\Models\Ouser;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use App\Services\SessionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -48,7 +49,7 @@ class LoginController extends Controller
      */
 
     protected $redirectAfterLogout = '/open/login';
-    protected $redirectToHome = '/home/index';
+    protected $redirectToHome = RouteServiceProvider::HOME;
 
     protected $loginNumIp = '';
     protected $loginNumUname = '';
