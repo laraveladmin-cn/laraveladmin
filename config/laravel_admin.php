@@ -48,7 +48,7 @@ return [
         ]
     ],
     'client_id_key'=>'Client-Id', //接口请求认证的header键
-    'remember_lifetime'=>7,//登录的记住我过期时间(天)
+    'no_remember_lifetime'=>120,//登录的不记住我过期时间(分钟) 设置值要小于session.lifetime的值
     'ali_dayu' => [
         'app_key' => env('ALIYUN_SMS_AK',''), //APP KEY
         'app_secret' => env('ALIYUN_SMS_AS',''), //APP SECRET
