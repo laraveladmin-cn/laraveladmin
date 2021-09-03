@@ -40,6 +40,7 @@ class BuildApiDoc extends BaseCommand
     protected $table = '';
     protected $controller='';
     protected $menu_id = 0;
+    protected $sizer = [];
 
     /**
      * Execute the console command.
@@ -48,13 +49,16 @@ class BuildApiDoc extends BaseCommand
      */
     public function handle()
     {
+        app('request')->offsetSet('json',1);
         Auth::loginUsingId(1); //模拟超管用户登录
         $this->now_at = Carbon::now()->toDateTimeString();
         $this->group = Arr::get(json_decode(file_get_contents(base_path('routes/route.json')),true),'group',[]);
         $file = storage_path('developments/api-doc.json');
         $data = json_decode(file_get_contents($file),true)?:[];
-        $common_responses = Arr::get($data,'common_responses',[]);
-        collect(Arr::get($data,'common_responses_list',[]))->each(function ($item)use(&$common_responses){
+        $file1 = storage_path('developments/api-doc-common.json');
+        $data1 = json_decode(file_get_contents($file1),true)?:[];
+        $common_responses = Arr::get($data1,'common_responses',[]);
+        collect(Arr::get($data1,'common_responses_list',[]))->each(function ($item)use(&$common_responses){
             $common_responses[] = $item;
             $common_responses[] = [
                 'name'=>'list.'.$item['name'],
@@ -138,6 +142,11 @@ class BuildApiDoc extends BaseCommand
             }
             $this->controller = new $class();
             LifeData::clear();
+            if(method_exists( $this->controller,'getSizer')){
+                $this->sizer = $this->controller->getSizer();
+            }else{
+                $this->sizer = [];
+            }
             $responses = [];
             try {
                 if($method=='edit' && $menu['resource_id']>0){ //编辑查看页面
@@ -204,13 +213,23 @@ class BuildApiDoc extends BaseCommand
                                     $k2 = collect(explode('.',$k))->filter();
                                     $field = $k2->pop();
                                     $k2 = $k2->implode('.');
+                                    $title = $this->getFieldName($field,$k2)?:'未命名';
+                                    $validate = '';
+                                    if(Str::endsWith($field,'_at') && isset($this->sizer[$k]) && in_array($exp = Arr::get($this->sizer[$k],$kk),['>=','>','<','<='])){
+                                        if(Str::contains($exp,'>')){
+                                            $title .='开始';
+                                        }else{
+                                            $title .='结束';
+                                        }
+                                        $validate = '时间日期格式';
+                                    }
                                     $params_data[$name] = [
                                         "name"=> $name,
-                                        "type"=> 1,
-                                        "title"=> $this->getFieldName($field,$k2)?:'未命名',
+                                        "type"=> $this->getType($k),
+                                        "title"=> $title,
                                         "description"=> "",
                                         "example"=> $v,
-                                        "validate"=> ""
+                                        "validate"=> $validate
                                     ];
                                 }
                             }
@@ -231,7 +250,7 @@ class BuildApiDoc extends BaseCommand
                                 $title = collect($title)->filter()->implode('或')?:'未命名';
                                 $params_data[$name] = [
                                     "name"=> $name,
-                                    "type"=> 1,
+                                    "type"=> $this->getType($k),
                                     "title"=> $key=='order'?$title.'排序':$title,
                                     "description"=> $key=='order'?"asc-升序,desc-降序":"",
                                     "example"=> $value,
@@ -315,11 +334,6 @@ class BuildApiDoc extends BaseCommand
         Response::insertReplaceAll($this->responses);
         $data['menus'] = collect($menus)->values()->toArray();
         file_put_contents($file,json_encode( $data ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
-        //更新数据填充
-        $this->call('create:seed',['model'=>'Models\\Param','--no_dump'=>true]);
-        $this->call('create:seed',['model'=>'Models\\Response','--no_dump'=>false]);
-
-
     }
 
     /**
@@ -531,6 +545,31 @@ class BuildApiDoc extends BaseCommand
             }
         });
         return $model;
+    }
+
+    /**
+     * 获取参数类型
+     */
+    public function getType($key){
+        $k1 = collect(explode('.',$key))->filter();
+        $field = $k1->pop();
+        $k1 = $k1->implode('.');
+        $model = $this->getRelationModel($k1);
+        if(!$model){
+            return 1;
+        }
+        if($field=='id'){
+            return 2;
+        }
+        $type = gettype($model->getFieldsDefault($field));
+        if($type=='double' || $type=='integer'){
+            return 2;
+        }elseif($type=='boolean'){
+            return 3;
+        }else{
+            return 1;
+        }
+
     }
 
 }

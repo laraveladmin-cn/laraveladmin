@@ -1,7 +1,7 @@
 <template>
-    <div @mouseout="mouseoutEvent">
+    <div @mouseout="mouseoutEvent" @touchend="stopTouchend">
         <input type="hidden" :value="_token" ref="token" name="_token">
-        <div :id="options.id" style="height: 100%">
+        <div :id="options.id" style="height: 100%" >
             <textarea style="display:none;"></textarea>
         </div>
     </div>
@@ -124,9 +124,11 @@
                     this.editorMd.config('readOnly',val);
                 }
             },
-
+            stopTouchend(e){
+                e.stopPropagation();
+            },
             init(){
-              this.intervalTime = setInterval(()=>{
+                this.intervalTime = setInterval(()=>{
                   if(typeof editormd=="function"){
                       clearInterval(this.intervalTime);
                       let options = copyObj(this.options);
@@ -143,10 +145,13 @@
                               if($picture.length){
                                   if(!this.onClick){
                                       this.onClick=true;
-                                      $picture.on('click',async()=>{
+                                      $picture.on('touchend click',async()=>{
                                           while (true){
                                               let $input = $(this.$el).find('.editormd-file-input input[type="file"]');
                                               if($input.length){
+                                                  $(this.$el).find('.editormd-image-dialog .editormd-dialog-close,.editormd-image-dialog .editormd-enter-btn,.editormd-image-dialog .editormd-cancel-btn').on('click',()=>{
+                                                      this.onSubmit = false;
+                                                  });
                                                   if(!this.onSubmit){
                                                       this.onSubmit = true;
                                                       $input.attr('name','file');
@@ -164,6 +169,7 @@
                                                               body.innerHTML = res_str;
                                                               iframe.onload();
                                                           }).catch((error) =>{
+                                                              this.refreshToken();
                                                               let res_str = JSON.stringify({
                                                                   success : 0,
                                                                   message : this.$t('Error uploading file!'),
@@ -189,6 +195,9 @@
                       this.editorMd = editormd(options);
                   }
               },250);
+                $(document).on('touchend',()=>{
+                    this.mouseoutEvent();
+                });
           },
             sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms))
@@ -236,9 +245,24 @@
     }
 </script>
 
-<style scoped>
+<style>
     @import url('/bower_components/editor.md/css/editormd.css');
     .editormd-fullscreen{
         z-index: 9999;
     }
+    @media screen and (max-width: 750px) {
+        .editormd-image-dialog{
+            left: 3% !important;
+            width: 94% !important;
+            height: 368px !important;
+            max-width: 465px !important;
+            top:0 !important;
+            bottom: 0 !important;
+            margin: auto !important;
+        }
+        .editormd-image-dialog .editormd-form label{
+            float: unset;
+        }
+    }
+
 </style>

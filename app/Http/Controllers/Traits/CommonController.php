@@ -13,7 +13,9 @@ namespace App\Http\Controllers\Traits;
 use App\Facades\LifeData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 
 trait CommonController{
     /**
@@ -223,7 +225,12 @@ trait CommonController{
     {
         $result = [];
         foreach ($fields as $field) {
-            !is_array($field) and $result[] = $field;
+            if(!is_array($field)){
+                if(is_string($field) && Str::contains($field,'`')){
+                    $field = DB::raw($field);
+                }
+                $result[] = $field;
+            }
         }
         return $result;
     }

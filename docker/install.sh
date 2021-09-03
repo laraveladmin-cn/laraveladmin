@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-#安装docker-composer
+#安装docker-compose
 if [ "$(uname)" == "Darwin" ]
     then
         # Mac安装docker
+        if [ ! -d /etc/docker ]
+            then
+            mkdir /etc/docker
+        fi
         ! which docker && \
         \cp -rf ./docker/daemon.json /etc/docker/daemon.json && \
         brew cask install docker && \
@@ -11,6 +15,10 @@ if [ "$(uname)" == "Darwin" ]
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]
     then
         # Linux安装docker
+        if [ ! -d /etc/docker ]
+            then
+            mkdir /etc/docker
+        fi
         ! which docker && \
         \cp -rf ./docker/daemon.json /etc/docker/daemon.json && \
         yum install -y yum-utils \

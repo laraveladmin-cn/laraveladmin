@@ -39,12 +39,19 @@ trait ResourceController
     }
 
     /**
+     * 获取筛选项
+     * @return mixed
+     */
+    public function getSizer(){
+        return $this->sizer;
+    }
+
+    /**
      * 列表页面
      * @return mixed
      */
     public function index()
     {
-        //dd($this->getModel()->getModel()->parent());
         $model = $this->newBindModel();
         //查询数据结果
         $data['list'] = $this->list();
