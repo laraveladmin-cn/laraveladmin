@@ -19,7 +19,7 @@ class ForceDeleteSeeder extends Seeder
         collect(Storage::disk('root')->allFiles('/app/Models'))
             ->each(function($file){
                 $file = Str::replaceFirst('app/Models/','',$file);
-                if(Str::startsWith($file,'.')){
+                if(Str::startsWith($file,'.') || Str::startsWith($file,'Traits/')){
                     return;
                 }
                 $model_str = '\\App\Models\\'.str_replace('.php','',$file);
