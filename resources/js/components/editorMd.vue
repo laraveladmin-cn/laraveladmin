@@ -254,9 +254,11 @@
         .editormd-image-dialog{
             left: 3% !important;
             width: 94% !important;
-            height: unset !important;
+            height: 368px !important;
             max-width: 465px !important;
-            top:200px !important;
+            top:0 !important;
+            bottom: 0 !important;
+            margin: auto !important;
         }
         .editormd-image-dialog .editormd-form label{
             float: unset;
