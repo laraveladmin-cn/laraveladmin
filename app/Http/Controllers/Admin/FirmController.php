@@ -59,6 +59,14 @@ class FirmController extends Controller
         'banks'=>['banks.id']
     ];
 
+    /**
+     * 允许的更多非本表字段的排序字段
+     * @var array
+     */
+    public $allowOrderMore=[
+        'products_count_is_long_time'
+    ];
+
 
     /**
      * 单条数据提交验证规则
