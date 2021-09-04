@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Open\Traits;
 use App\Facades\Formatter;
 use App\Models\Menu;
 use App\Models\Ouser;
+use App\Providers\RouteServiceProvider;
 use App\Services\FormatterService;
 use App\Services\SessionService;
 use Illuminate\Http\Request;
@@ -19,8 +20,8 @@ use Illuminate\Support\Facades\Request as RequestFacade;
 trait LoginResponseController
 {
 
-    protected $redirectTo = '/admin/index';
-    protected $redirectToTourist = '/open/index'; //游客跳转
+    protected $redirectTo = RouteServiceProvider::ADMIN;
+    protected $redirectToTourist = RouteServiceProvider::OPEN; //游客跳转
     protected $other_login_key = 'laravel_admin.store_keys.other_login.key';
     protected function setLoginFailedNum($login_num){
 
@@ -40,7 +41,7 @@ trait LoginResponseController
         $user = Auth::user();
         $this->bindOuser($user);
         $remember = $request->has('remember');
-        $lifetime = $remember?config('laravel_admin.remember_lifetime')*60*24:config('session.lifetime');
+        $lifetime = (!$remember)?config('laravel_admin.no_remember_lifetime'):config('session.lifetime');
         if($remember){
             $rememberTokenCookieKey = Auth::getRecallerName();
             Cookie::queue($rememberTokenCookieKey, Cookie::get($rememberTokenCookieKey), $lifetime);

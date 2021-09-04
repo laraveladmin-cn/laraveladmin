@@ -179,8 +179,8 @@ class IndexController extends Controller
         $lifetime = config('session.lifetime');
         if($user){
             $user->load('admin','admin.roles');
-            if($user->tokenCan('remember')){
-                $lifetime = config('laravel_admin.remember_lifetime')*60*24;
+            if(!$user->tokenCan('remember')){
+                $lifetime = config('laravel_admin.no_remember_lifetime');
             };
         }
         return Response::returns([
