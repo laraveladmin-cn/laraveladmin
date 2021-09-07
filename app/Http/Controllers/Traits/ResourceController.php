@@ -800,7 +800,7 @@ trait ResourceController
 
                 return $value;
             });
-
+            $row = $this->handleExportRow($row);
             return $row;
         });
         if (!Request::input('page')) {
@@ -811,7 +811,10 @@ trait ResourceController
 
         return $data;
     }
-
+    protected function handleExportRow(&$row)
+    {
+        return $row;
+    }
     protected function handleExportValue($item, $key, $maps, &$value = '')
     {
         return $value;
