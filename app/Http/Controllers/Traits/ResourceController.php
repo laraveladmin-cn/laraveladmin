@@ -344,7 +344,7 @@ trait ResourceController
     public function update($id = 0)
     {
         $request = Request::instance();
-        $validate = $this->getValidateRule();
+        $validate = $this->getValidateRule($id);
         $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             return Response::returns([
@@ -581,7 +581,7 @@ trait ResourceController
      * 新增或修改,验证规则获取
      * @return mixed
      */
-    abstract protected function getValidateRule();
+    abstract protected function getValidateRule($id=0);
 
     /**
      * 导入验证规则
@@ -800,7 +800,7 @@ trait ResourceController
 
                 return $value;
             });
-
+            $row = $this->handleExportRow($row);
             return $row;
         });
         if (!Request::input('page')) {
@@ -811,7 +811,10 @@ trait ResourceController
 
         return $data;
     }
-
+    protected function handleExportRow(&$row)
+    {
+        return $row;
+    }
     protected function handleExportValue($item, $key, $maps, &$value = '')
     {
         return $value;
