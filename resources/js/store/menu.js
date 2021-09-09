@@ -152,10 +152,16 @@ export default {
             let currentMenu = getters.current_menu;
             let has = typeof currentMenu.left_margin !="undefined";
             if(!has){
-                let path = '/'+state.path.split('/')[1]+'/index';
-                currentMenu = collect(state.menus).sortBy('right_margin').first(function (menu) {
-                    return path && (path==menu['url'] || state.path+'/index'==menu['url']) && (menu['method'].indexOf(1)!=-1);
+                //获取模块下的第一个页面
+                let model = '/'+state.path.split('/')[1]+'/';
+                currentMenu = collect(state.menus).sortBy('left_margin').first(function (menu) {
+                    return menu['url'].indexOf(model)==0 && menu['level']>2;
                 }) || {};
+                if(currentMenu.level && currentMenu.level!=3){
+                    currentMenu = collect(state.menus).sortBy('left_margin').first(function (menu) {
+                        return menu['left_margin']<=currentMenu['left_margin'] && menu['right_margin']>=currentMenu['right_margin'] && menu['level']==3;
+                    })
+                }
             }
             let navbars = collect(state.menus).sortBy('left_margin').filter(function (menu) {
                 return menu['left_margin']<=currentMenu['left_margin'] && menu['right_margin']>=currentMenu['right_margin']

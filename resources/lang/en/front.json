@@ -84,7 +84,12 @@
             "Log file": "Log file",
             "System log file": "System log file",
             "Seven cattle cloud token": "Seven cattle cloud token",
-            "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get"
+            "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get",
+            "500 page": "500 page",
+            "403 page": "403 page",
+            "404 page": "404 page",
+            "Get single menu details": "Get single menu details",
+            "Menu details": "Menu details"
         },
         "tables": {
             "_file_logs": {

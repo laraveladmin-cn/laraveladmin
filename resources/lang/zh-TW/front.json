@@ -84,7 +84,12 @@
             "Log file": "日誌檔",
             "System log file": "系統日誌檔",
             "Seven cattle cloud token": "七牛雲TOKEN",
-            "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取"
+            "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取",
+            "500 page": "500頁面",
+            "403 page": "403頁面",
+            "404 page": "404頁面",
+            "Get single menu details": "獲取單條選單詳細資訊",
+            "Menu details": "選單詳情"
         },
         "tables": {
             "_file_logs": {

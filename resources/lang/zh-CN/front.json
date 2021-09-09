@@ -84,7 +84,12 @@
             "Log file": "日志文件",
             "System log file": "系统日志文件",
             "Seven cattle cloud token": "七牛云TOKEN",
-            "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取"
+            "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取",
+            "500 page": "500页面",
+            "403 page": "403页面",
+            "404 page": "404页面",
+            "Get single menu details": "获取单条菜单详细信息",
+            "Menu details": "菜单详情"
         },
         "tables": {
             "_file_logs": {

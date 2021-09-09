@@ -598,9 +598,9 @@
         },
         {
             "id": 92,
-            "name": "获取单条菜单详细信息",
+            "name": "Get single menu details",
             "icons": "fa-edit",
-            "description": "菜单详情",
+            "description": "Menu details",
             "url": "/open/menu-info",
             "parent_id": 74,
             "method": [
