@@ -567,6 +567,9 @@
                 "admins": {
                     "User name": "用户名称",
                     "Role Name": "角色名称"
+                },
+                "years": {
+                    "Please enter the value , split": "请输入值','分割"
                 }
             }
         },

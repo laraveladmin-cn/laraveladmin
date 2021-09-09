@@ -23,7 +23,8 @@ class YearController extends Controller
 
 
     protected $sizer=[
-        'name'=>'like'
+        'name'=>'like',
+        'value'=>'in'
     ];
     /**
      * Index页面字段名称显示

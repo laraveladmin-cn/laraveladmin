@@ -567,6 +567,9 @@
                 "admins": {
                     "User name": "ユーザ名",
                     "Role Name": "キャラクター名"
+                },
+                "years": {
+                    "Please enter the value , split": "値を入力してください。"
                 }
             }
         },

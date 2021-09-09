@@ -3,6 +3,13 @@
         <div class="row">
             <div class="col-xs-12">
                 <data-table class="box box-primary" :options="options">
+                    <template slot="sizer-more" slot-scope="props">
+                        <div class="row" >
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
+                                <input-in v-model="props.where['value']" :placeholder="$tp('Please enter the value , split')"></input-in>
+                            </div>
+                        </div>
+                    </template>
                     <template slot="table" slot-scope="props">
                         <div>
                             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6" v-for="(row,i) in (props.data.list?props.data.list.data:[])">
@@ -67,6 +74,7 @@
         components:{
             'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
             "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+            "input-in":()=>import(/* webpackChunkName: "common_components/inputIn.vue" */ 'common_components/inputIn.vue'),
 
         },
         props: {
@@ -74,6 +82,8 @@
         data(){
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             return {
+                "{lang_path}":'_shared.pages.admin.years',
+                '{lang_root}':'',
                 options:{
                     lang_table:'years',
                     id:'data-table', //多个data-table同时使用时唯一标识

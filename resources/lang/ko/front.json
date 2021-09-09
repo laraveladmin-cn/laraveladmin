@@ -567,6 +567,9 @@
                 "admins": {
                     "User name": "사용자 이름",
                     "Role Name": "캐릭터 명칭"
+                },
+                "years": {
+                    "Please enter the value , split": "값 ',' 분할 '을 입력 하 십시오."
                 }
             }
         },
