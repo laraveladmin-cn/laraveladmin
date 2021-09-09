@@ -94,7 +94,10 @@
             "Seven cattle cloud upload token to get": "Sete itens de Nuvem de gado para receber",
             "Regional management": "Gestão regional",
             "Get single menu details": "Obter detalhes do menu único",
-            "Menu details": "Menu detalhes"
+            "Menu details": "Menu detalhes",
+            "500 page": "500 páginas",
+            "403 page": "403 página",
+            "404 page": "404 página"
         },
         "tables": {
             "_file_logs": {

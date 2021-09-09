@@ -94,7 +94,10 @@
             "Seven cattle cloud upload token to get": "семь коровьих облаков",
             "Regional management": "территориальное управление",
             "Get single menu details": "получить сведения о меню",
-            "Menu details": "меню"
+            "Menu details": "меню",
+            "500 page": "500 страниц",
+            "403 page": "страница",
+            "404 page": "Страница 404"
         },
         "tables": {
             "_file_logs": {

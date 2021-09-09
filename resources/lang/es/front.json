@@ -94,7 +94,10 @@
             "Seven cattle cloud upload token to get": "Siete Niu Cloud upload Token get",
             "Regional management": "Gestión regional",
             "Get single menu details": "Obtener detalles de un solo menú",
-            "Menu details": "Detalles del menú"
+            "Menu details": "Detalles del menú",
+            "500 page": "500 páginas",
+            "403 page": "Página 403",
+            "404 page": "Página 404"
         },
         "tables": {
             "_file_logs": {

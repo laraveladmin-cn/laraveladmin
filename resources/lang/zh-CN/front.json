@@ -94,7 +94,10 @@
             "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取",
             "Regional management": "地区管理",
             "Get single menu details": "获取单条菜单详细信息",
-            "Menu details": "菜单详情"
+            "Menu details": "菜单详情",
+            "500 page": "500页面",
+            "403 page": "403页面",
+            "404 page": "404页面"
         },
         "tables": {
             "_file_logs": {

@@ -94,7 +94,10 @@
             "Seven cattle cloud upload token to get": "칠 우 운 올 려 서 TOKEN 획득.",
             "Regional management": "지역 관리",
             "Get single menu details": "단일 메뉴 정보 가 져 오기",
-            "Menu details": "메뉴 정보"
+            "Menu details": "메뉴 정보",
+            "500 page": "500 쪽",
+            "403 page": "403 쪽",
+            "404 page": "404 페이지"
         },
         "tables": {
             "_file_logs": {
