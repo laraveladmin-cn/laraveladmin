@@ -138,7 +138,7 @@
                                 <template slot="input-item">
                                     <div class="row">
                                         <div v-for="(item,index) in props.maps['is_page']"
-                                             class="col-lg-3 col-md-3 col-sm-3 col-xs-2">
+                                             class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                             <icheck v-model="props.data.row['is_page']"
                                                     type="radio"
                                                     :option="index"
@@ -153,7 +153,7 @@
                                 <template slot="input-item">
                                     <div class="row">
                                         <div v-for="(item,index) in props.maps['status']"
-                                             class="col-lg-4 col-md-4 col-sm-4 col-xs-3">
+                                             class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                             <icheck v-model="props.data.row['status']"
                                                     type="radio"
                                                     :option="index"
