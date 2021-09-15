@@ -639,7 +639,12 @@
                 "Backstage home page": "后台首页",
                 "Front desk home page": "前台首页",
                 "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "请勿在本演示环境注册用户,本演示环境的注册,登录仅用于演示使用",
-                "Official environment official website": "正式环境官网:"
+                "Official environment official website": "正式环境官网:",
+                "Document": "文档",
+                "Website": "官网",
+                "Template download": "模板下载",
+                "Gitee": "码云",
+                "Laravel documentation": "Laravel文档"
             },
             "Registered user": "注册用户",
             "Forget your password": "忘记密码",
