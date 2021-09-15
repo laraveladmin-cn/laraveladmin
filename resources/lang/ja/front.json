@@ -639,7 +639,12 @@
                 "Backstage home page": "バックグラウンド",
                 "Front desk home page": "フロントトップ",
                 "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "本デモンストレーション環境ではユーザーを登録しないでください。本デモンストレーション環境の登録はデモンストレーションのみに使用します。",
-                "Official environment official website": "公式環境公式サイト："
+                "Official environment official website": "公式環境公式サイト：",
+                "Document": "文書",
+                "Website": "公式サイト",
+                "Template download": "テンプレートのダウンロード",
+                "Gitee": "符号雲",
+                "Laravel documentation": "Laravel文書"
             },
             "Registered user": "ユーザー登録",
             "Forget your password": "パスワードを忘れます",

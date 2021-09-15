@@ -639,7 +639,12 @@
                 "Backstage home page": "фоновая страница",
                 "Front desk home page": "передняя страница",
                 "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "не регистрировать пользователей в этой презентации, зарегистрироваться в этой презентации",
-                "Official environment official website": "официальная сеть экологических работников:"
+                "Official environment official website": "официальная сеть экологических работников:",
+                "Document": "Документация",
+                "Website": "сеть чиновников",
+                "Template download": "Загрузка шаблонов",
+                "Gitee": "цифры",
+                "Laravel documentation": "Laravel Documents"
             },
             "Registered user": "зарегистрированный пользователь",
             "Forget your password": "забыть пароль",

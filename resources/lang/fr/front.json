@@ -639,7 +639,12 @@
                 "Backstage home page": "Page d'accueil des coulisses",
                 "Front desk home page": "Page d'accueil de la réception",
                 "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "N'enregistrez pas les utilisateurs dans cet environnement de démonstration, inscrivez - vous dans cet environnement de démonstration seulement pour la démonstration",
-                "Official environment official website": "Site officiel de l'environnement:"
+                "Official environment official website": "Site officiel de l'environnement:",
+                "Document": "Documentation",
+                "Website": "Site officiel",
+                "Template download": "Téléchargement de modèles",
+                "Gitee": "Nuage de code",
+                "Laravel documentation": "Laraver Documentation"
             },
             "Registered user": "Utilisateurs enregistrés",
             "Forget your password": "Mot de passe oublié",

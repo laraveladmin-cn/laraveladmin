@@ -639,7 +639,12 @@
                 "Backstage home page": "백그라운드 홈 페이지",
                 "Front desk home page": "프런트 홈 페이지",
                 "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "이 프 리 젠 테 이 션 환경 에 가입 하지 마 십시오. 본 프 리 젠 테 이 션 환경의 등록 은 프 리 젠 테 이 션 에 만 사 용 됩 니 다.",
-                "Official environment official website": "공식 환경 홈 페이지:"
+                "Official environment official website": "공식 환경 홈 페이지:",
+                "Document": "문서.",
+                "Website": "홈 페이지",
+                "Template download": "템 플 릿 다운로드",
+                "Gitee": "암운",
+                "Laravel documentation": "Laravel 문서"
             },
             "Registered user": "가입 사용자",
             "Forget your password": "비밀 번 호 를 잊어버리다.",
