@@ -62,7 +62,7 @@ trait LoginResponseController
         $domain = config('session.domain');
         return Response::returns([
             'token'=>$token,
-            'redirect' => $redirect,
+            'redirect_url' => $redirect,
             'lifetime'=>$lifetime
         ],200)->cookie('Authorization','Bearer '.$token,$lifetime,'/',$domain,null,false);
     }

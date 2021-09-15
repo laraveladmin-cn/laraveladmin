@@ -32,15 +32,20 @@ export default {
         window.axios.interceptors.response.use((response)=>{
             //跳转
             if (typeof response.data != 'undefined' && typeof response.data.redirect != 'undefined' && response.data.redirect) {
-                if(response.data.redirect=='/open/login'){
-                    this.refreshToken();
-                }else if(response.data.redirect.indexOf('http://')==0 || response.data.redirect.indexOf('https://')==0){
+                if(response.data.redirect.indexOf('http://')==0 || response.data.redirect.indexOf('https://')==0){ //跳转外部页面
                     window.location.href = response.data.redirect;
-
                 }else {
-                    this.$router.push({ path: response.data.redirect }).catch(error => {
-                        dd(error.message);
-                    });
+                    if(response.status==200){
+                        this.$router.push({ path: response.data.redirect }).catch(error => {
+                            dd(error.message);
+                        });
+                    }else {
+                        this.$router.replace({ path: response.data.redirect }).catch(error => {
+                            dd(error.message);
+                        });
+                    }
+
+
                 }
             }
             //消息提醒
@@ -59,19 +64,13 @@ export default {
                 typeof error.response.data != 'undefined' &&
                 typeof error.response.data.redirect != 'undefined' &&
                 error.response.data.redirect) {
-                if(error.response.data.redirect=='/open/login'){
-                    this.refreshToken();
-                }
-                this.$router.push({ path: error.response.data.redirect }).catch(error => {
+                this.$router.replace({ path: error.response.data.redirect }).catch(error => {
                     dd(error.message);
                 });
             }else if(error.response.status==503){
                 this.$router.push({ path: '/503' }).catch(error => {
                 });
-            }/*else if(error.response.status==500){
-                this.$router.push({ path: '/500' }).catch(error => {
-                });
-            }*/else if(!error.response || (error.response && error.response.status!=422 && error.response.status!=200)){
+            }else if(!error.response || (error.response && error.response.status!=422 && error.response.status!=200)){
                 let message = {
                     'showClose' : true, //显示关闭按钮
                     'title' : this.$t('An error occurred while requesting the server, please contact the developer in time'),//'请求服务器时发生错误,请及时联系开发人员!', //消息内容
@@ -83,10 +82,13 @@ export default {
                     'duration' : 3000, //显示时间毫秒
                     'show' : true //是否自动弹出
                 };
+
+                //token过期
                 if(error.response.status==419 && error.response.data.message.indexOf('token')!=-1){
                     this.refreshToken();
                     message.title = this.$t('Token has expired, please try again');
                 }
+
                 if(error.response.data.alert){
                     this.pushMessage(error.response.data.alert);
                 }else {
