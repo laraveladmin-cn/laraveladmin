@@ -166,9 +166,7 @@
                                             </div>
                                         </div>
                                         <div class="box-body">
-                                            <div class="output-body" >
-                                                {{output}}
-                                            </div>
+                                            <div class="output-body">{{output}}</div>
                                         </div>
                                     </div>
                                 </div>
