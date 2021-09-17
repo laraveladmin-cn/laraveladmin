@@ -37,7 +37,7 @@ class RedirectIfAuthenticated
                         $redirect =  RouteServiceProvider::ADMIN;
                     }
                 }
-                return orRedirect($redirect);
+                return orRedirect($redirect,302);
             }
         }
 

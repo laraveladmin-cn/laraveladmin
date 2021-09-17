@@ -114,6 +114,9 @@
                 }
                 this.logining = false;
                 this.loading = false;
+                this.$router.replace({ path: res.data.redirect_url }).catch(error => {
+                    dd(error.message);
+                });
             },
             errorFun(errors){
                 let username = collect(errors.username || []);

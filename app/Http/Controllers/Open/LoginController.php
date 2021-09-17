@@ -417,7 +417,7 @@ class LoginController extends Controller
 
     protected function loggedOut(Request $request)
     {
-        return orRedirect($this->redirectAfterLogout);
+        return orRedirect($this->redirectAfterLogout,302);
     }
 
     /**
