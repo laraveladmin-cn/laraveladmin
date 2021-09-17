@@ -784,6 +784,7 @@
                 "get"
             ],
             "is_page": "Yes",
+            "status": "Display",
             "group": "open",
             "action": "IndexController@contact",
             "_id": 158

@@ -62,7 +62,7 @@
                 </ul>
                 <p class="pull-right"><a href="#">{{$t('Back to top')}}</a></p>
                 <p style="margin: 0px 0px">
-                    {{$t('Copyright')}}<a>全栈开源项目<!--{{name}}--></a>
+                    {{$t('Copyright')}}<a>{{name}}</a>
                     <span class="wangjing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     {{$t('The record number:')}}<a href="http://beian.miit.gov.cn" target="_blank">{{icp}}</a>
                 </p>
