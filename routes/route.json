@@ -138,7 +138,6 @@
             "status": "Display",
             "group": "admin",
             "action": "DevelopmentsController@index",
-            "env": "local",
             "_id": 65
         },
         {
@@ -168,7 +167,6 @@
             ],
             "group": "admin",
             "action": "DevelopmentsController@tables",
-            "env": "local",
             "_id": 67
         },
         {
