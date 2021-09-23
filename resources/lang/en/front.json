@@ -781,5 +781,6 @@
     "Unbundling": "Unbundling",
     "Download": "Download",
     "Click Upload": "Click Upload",
-    "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}"
+    "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}",
+    "Confirm to add": "Confirm to add"
 }
