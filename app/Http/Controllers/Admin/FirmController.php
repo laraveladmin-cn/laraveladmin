@@ -56,7 +56,7 @@ class FirmController extends Controller
      * @var array
      */
     public $editFields = [
-        'banks'=>['banks.id']
+        'banks'=>['banks.id','name']
     ];
 
     /**
@@ -115,7 +115,7 @@ class FirmController extends Controller
      */
     protected function handleEditReturn($id,&$data){
         //查询所有银行
-        $data['maps']['bank_ids'] = Bank::optionsMap();
+        //$data['maps']['bank_ids'] = Bank::optionsMap();
         return $data;
     }
 

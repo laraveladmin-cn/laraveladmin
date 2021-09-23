@@ -166,22 +166,15 @@
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="bank_ids" :options='{"name": props.transField("Support bank selection"), "required": false,type:"checkbox"}'  :datas="props">
                                 <template slot="input-item">
-                                    <hide-more :tool="count(array_get(props,'data.maps.bank_ids',[]))>33">
-                                        <template>
-                                            <div v-for="(item,index) in props.maps['bank_ids']" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" v-if="index<=33">
-                                                <icheck v-model="props.data.row['bank_ids']" :option="index" :disabled="!props.url" :label="item"> {{item}}
-                                                </icheck>
-                                            </div>
-                                        </template>
-                                        <template slot="hide">
-                                            <div v-for="(item,index) in props.maps['bank_ids']" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" v-if="index>33">
-                                                <icheck v-model="props.data.row['bank_ids']" :option="index" :disabled="!props.url" :label="item"> {{item}}
-                                                </icheck>
-                                            </div>
-                                        </template>
-                                    </hide-more>
+                                    <select-many v-model="props.data.row['bank_ids']"
+                                                 :options="props.data.row['banks']"
+                                                 :url="'/admin/banks/list'"
+                                                 :item-url="'/admin/banks/'"
+                                    >
+                                    </select-many>
                                 </template>
                             </edit-item>
+
                         </div>
                         <div class="move-items col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <edit-item :options='{"name": props.transField("Content template")}' :key-name="'receipt_tmp'" v-show="props.data.row['receipt_type']==1" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -224,6 +217,7 @@
             'hide-more':()=>import(/* webpackChunkName: "common_components/hideMore" */ 'common_components/hideMore'),
             'qiniu-upload':()=>import(/* webpackChunkName: "common_components/qiniuUpload.vue" */ 'common_components/qiniuUpload.vue'),
             'tinymce':()=>import(/* webpackChunkName: "common_components/tinymce.vue" */ 'common_components/tinymce.vue'),
+            'select-many':()=>import(/* webpackChunkName: "common_components/selectMany" */ 'common_components/selectMany'),
 
         },
         props: {},
