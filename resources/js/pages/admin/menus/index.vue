@@ -106,7 +106,7 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-body">
-                                <menu-tree :callback="callback" ref="menuTree"></menu-tree>
+                                <menu-tree :callback="callback" ref="menuTree" v-if="load_tree"></menu-tree>
                             </div>
                         </div>
                     </div>
@@ -184,6 +184,7 @@
                         this.getMenus();
                     }
                 },
+                load_tree:false
             };
         },
         computed: {
@@ -195,6 +196,11 @@
         watch: {
             url(val) {
                 this.options.url = val;
+            },
+            active(val){
+                if(val==1){
+                    this.load_tree=true;
+                }
             }
         },
         methods: {
