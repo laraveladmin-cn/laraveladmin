@@ -169,6 +169,7 @@
                                     <select-many v-model="props.data.row['bank_ids']"
                                                  :options="props.data.row['banks']"
                                                  :url="'/admin/banks/list'"
+                                                 :keyword-key="'name'"
                                                  :item-url="'/admin/banks/'"
                                     >
                                     </select-many>
