@@ -1076,5 +1076,6 @@
     "Delete within condition": "条件内删除",
     "Click Upload": "点击上传",
     "Only picture files can be uploaded and no more than {size}": "只能上传图片文件，且不超过{size}",
-    "Total number": "总数"
+    "Total number": "总数",
+    "Confirm to add": "确认添加"
 }

@@ -1076,5 +1076,6 @@
     "Delete within condition": "條件內删除",
     "Click Upload": "點擊上傳",
     "Only picture files can be uploaded and no more than {size}": "只能上傳圖片檔案，且不超過{size}",
-    "Total number": "總數"
+    "Total number": "總數",
+    "Confirm to add": "確認添加"
 }

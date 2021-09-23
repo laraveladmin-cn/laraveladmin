@@ -1076,5 +1076,6 @@
     "Delete within condition": "удаление в условиях",
     "Click Upload": "Нажмите для загрузки",
     "Only picture files can be uploaded and no more than {size}": "только для загрузки фотофайлов и не более {size}",
-    "Total number": "итог"
+    "Total number": "итог",
+    "Confirm to add": "подтверждать Добавление"
 }
