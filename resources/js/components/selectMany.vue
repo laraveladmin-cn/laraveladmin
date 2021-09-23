@@ -11,7 +11,7 @@
                      :show="show"
                      :is-ajax="true">
             </select2>
-            <span class="input-group-addon" :title="$t('Confirm to add')" @click="add">
+            <span class="input-group-addon btn btn-block btn-default" :class="{disabled:disabled}" :title="$t('Confirm to add')" @click="add">
                 <i class="fa fa-plus"></i>
             </span>
         </div>
@@ -23,7 +23,7 @@
                             <span class="label label-primary">
                                 {{showName(option)}}
                             </span>
-                            <span class="pull-right text-red" :title="$t('Delete')" @click="remove(option)">
+                            <span class="pull-right text-red" :class="{disabled:disabled}" :title="$t('Delete')" @click="remove(option)">
                                 <i class="fa fa-trash-o"></i>
                             </span>
                         </a>
@@ -121,6 +121,9 @@
         },
         methods:{
             remove(item){
+                if(this.disabled){
+                    return ;
+                }
                 let id = array_get(item,this.primaryKey);
                 let index=-1;
                 collect(this.options).eachSpread((i) => {
@@ -150,7 +153,7 @@
                 return text;
             },
             add(){
-                if (this.loading) {
+                if (this.loading || this.disabled) {
                     return;
                 }
                 let id = this.val_id - 0;
