@@ -33,6 +33,7 @@ class DevelopmentsController extends Controller
      */
     public function index(){
         $submit = '/admin/developments/command';
+        $tablesUrl = '/admin/developments/tables';
         $commands = collect($this->commands)->map(function ($command,$index){
             $command['_id'] = $index+1;
             $command['parameters'] = collect(Arr::get($command,'parameters',[]))->map(function ($parameter){
@@ -47,7 +48,8 @@ class DevelopmentsController extends Controller
             'row'=>$commands[$index-1],
             'commands'=>$commands,
             'configUrl'=>[
-                'createUrl'=>Menu::hasPermission($submit,'post') ? $submit : ''
+                'createUrl'=>Menu::hasPermission($submit,'post') ? $submit : '',
+                'tablesUrl'=>Menu::hasPermission($tablesUrl,'get') ? $tablesUrl : '',
             ],
             'maps'=>[
                 //可选数据库

@@ -19,7 +19,7 @@
                             v-model="itemObj[_key]"
                             @change="$emit('change',itemObj[_key])"
                             class="form-control"
-                            :disabled="!datas.url || options.disabled"
+                            :disabled="_disabled"
                             :placeholder="_placeholder">
                         <input
                             v-else-if="options.type=='email'"
@@ -27,7 +27,7 @@
                             v-model="itemObj[_key]"
                             @change="$emit('change',itemObj[_key])"
                             class="form-control"
-                            :disabled="!datas.url || options.disabled"
+                            :disabled="_disabled"
                             :placeholder="_placeholder">
                         <textarea
                             v-else-if="options.type=='textarea'"
@@ -35,14 +35,14 @@
                             @change="$emit('change',itemObj[_key])"
                             class="form-control"
                             rows="6"
-                            :disabled="!datas.url || options.disabled"
+                            :disabled="_disabled"
                             :placeholder="_placeholder">
                     </textarea>
                         <select v-else-if="options.type=='select'"
                                 class="form-control"
                                 v-model="itemObj[_key]"
                                 @change="$emit('change',itemObj[_key])"
-                                :disabled="!datas.url || options.disabled">
+                                :disabled="_disabled">
                             <option v-if="typeof options['placeholderValue']!='undefined'" :value="options['placeholderValue']">
                                 {{options.placeholder || $t('Please select')}}
                             </option>
@@ -51,7 +51,7 @@
                         <div class="row" v-else-if="options.type=='checkbox'">
                             <div v-for="(item,index) in array_get(datas.maps,_map_key)" class="col-sm-4">
                                 <label>
-                                    <input v-model="itemObj[_key]" @change="$emit('change',itemObj[_key])" :value="index" :disabled="!datas.url || options.disabled" type="checkbox" />
+                                    <input v-model="itemObj[_key]" @change="$emit('change',itemObj[_key])" :value="index" :disabled="_disabled" type="checkbox" />
                                     {{item}}
                                 </label>
                             </div>
@@ -59,7 +59,7 @@
                         <div class="row" v-else-if="options.type=='radio'">
                             <div v-for="(item,index) in array_get(datas.maps,_map_key)" class="col-sm-4">
                                 <label>
-                                    <input v-model="itemObj[_key]" @change="$emit('change',itemObj[_key])" :value="index" :disabled="!datas.url || options.disabled" type="radio"  />
+                                    <input v-model="itemObj[_key]" @change="$emit('change',itemObj[_key])" :value="index" :disabled="_disabled" type="radio"  />
                                     {{item}}
                                 </label>
                             </div>
@@ -70,7 +70,7 @@
                                 v-model="itemObj[_key]"
                                 @change="$emit('change',itemObj[_key])"
                                 class="form-control"
-                                :disabled="!datas.url || options.disabled"
+                                :disabled="_disabled"
                                 :placeholder="_placeholder">
                             <div class="input-group-addon">
                                 <i class="fa" :class="itemObj[_key]"></i>
@@ -82,7 +82,7 @@
                                 v-model="itemObj[_key]"
                                 @change="$emit('change',itemObj[_key])"
                                 class="form-control"
-                                :disabled="!datas.url || options.disabled"
+                                :disabled="_disabled"
                                 :placeholder="_placeholder">
                             <div class="input-group-addon">
                                 <a v-if="itemObj[_key]" :href="itemObj[_key]" target="_blank">
@@ -131,6 +131,12 @@
                 default: function () {
                     return '';
                 }
+            },
+            disabled:{
+                type: [Boolean],
+                default: function () {
+                    return undefined;
+                }
             }
         },
         computed:{
@@ -164,6 +170,12 @@
             },
             _title(){
                 return this.options.title || this.$t('Prompt message');//'提示信息'
+            },
+            _disabled(){
+                if(typeof this.disabled!="undefined"){
+                    return this.disabled;
+                }
+                return !this.datas.url || this.options.disabled;
             }
         },
         watch:{

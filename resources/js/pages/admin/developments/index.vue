@@ -53,10 +53,10 @@
                                                     <div class="edit-item-content">
                                                         <select2 v-model="item.value"
                                                                  :default-options="[]"
-                                                                 :url="use_url+'/admin/developments/tables'"
+                                                                 :url="use_url+props.data.configUrl['tablesUrl']"
                                                                  :keyword-key="'TABLE_NAME'"
                                                                  :show="['TABLE_NAME']"
-                                                                 :disabled="!props.url"
+                                                                 :disabled="!props.data.configUrl['tablesUrl']"
                                                                  :primary-key="'TABLE_NAME'"
                                                                  :placeholder-show="item.placeholder || $t('Please select')"
                                                                  :placeholder-value="''"
@@ -77,7 +77,6 @@
                                                         <select2 v-model="item.value"
                                                                  :default-options="transMap(props,item)"
                                                                  :placeholder-show="item.placeholder || $t('Please select')"
-                                                                 :disabled="!props.url"
                                                                  :placeholder-value="''"
                                                                  @change="clearInput"
                                                                  :is-ajax="false" >
@@ -93,7 +92,7 @@
                                                 <template slot="input-item">
                                                     <div class="row">
                                                         <div v-for="(item1,index) in (item.map || array_get(props,'data.maps.'+item.map_key,[]))" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                            <icheck v-model="item.value" :option="index" :disabled="!props.url" :label="$tp(item1)"> {{$tp(item1)}}</icheck>
+                                                            <icheck v-model="item.value" :option="index" :label="$tp(item1)"> {{$tp(item1)}}</icheck>
                                                         </div>
                                                     </div>
                                                 </template>
@@ -117,6 +116,7 @@
                                             <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else
                                                        :options="transItem(item)"
+                                                       :disabled="false"
                                                        :datas="props"
                                                        :key="index">
                                             </edit-item>
@@ -245,7 +245,7 @@
         },
         mounted() {
             this.interval = setInterval(()=>{
-                if(this.$refs['edit'].data.commands){
+                if(typeof this.$refs['edit']!="undefined" && this.$refs['edit'].data && this.$refs['edit'].data.commands){
                     this.commands = this.$refs['edit'].data.commands;
                     clearInterval(this.interval);
                 }
