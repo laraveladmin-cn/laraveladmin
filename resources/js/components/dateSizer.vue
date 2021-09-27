@@ -5,7 +5,7 @@
                             class="w-100"
                             :picker-options="{disabledDate:disabledDateStart}"
                             value-format="yyyy-MM-dd 00:00:00"
-                            :placeholder="$t('Start date')"
+                            :placeholder="placeholders[0] || $t('Start date')"
                             type="date"
                             :editable="false">
             </el-date-picker>
@@ -15,7 +15,7 @@
                             class="w-100"
                             :picker-options="{disabledDate:disabledDateEnd}"
                             value-format="yyyy-MM-dd 23:59:59"
-                            :placeholder="$t('End date')"
+                            :placeholder="placeholders[1] || $t('End date')"
                             type="date"
                             :editable="false">
             </el-date-picker>
@@ -36,6 +36,18 @@
                     return ['',''];
                 }
             },
+            placeholders:{
+                type:[Array],
+                default: function () {
+                    return ['',''];
+                }
+            },
+            disabledFuture:{
+                type:[Boolean],
+                default: function () {
+                    return true;
+                }
+            }
         },
         data(){
             return {
@@ -57,15 +69,15 @@
                     let date = new Date(this.val[1]);
                     return time.getTime() > date.getTime();
                 }
-                return time.getTime() > Date.now(); //小于今天
+                return this.disabledFuture?time.getTime() > Date.now():false; //小于今天
             },
             disabledDateEnd(time){
                 if(this.val[0]){
                     let date = new Date(this.val[0]);
                     let time1 = time.getTime();
-                    return time1 < date.getTime() || time1 > Date.now();
+                    return time1 < date.getTime() || (this.disabledFuture?time1 > Date.now():false);
                 }
-                return time.getTime() > Date.now();
+                return this.disabledFuture?time.getTime() > Date.now():false;
             }
         }
     };
