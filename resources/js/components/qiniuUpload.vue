@@ -1,7 +1,7 @@
 <template>
     <div>
         <input v-show="false" type="file" @change="changeFile" :accept="accept" />
-        <button class="btn btn-block btn-primary btn-sm btn-select"
+        <button class="btn btn-primary btn-sm inline-block"
                 onclick="return false;"
                 :disabled="file.name && uping==1"
                 @click="selectFile">
@@ -249,9 +249,6 @@
     }
 </script>
 <style lang="scss" scoped>
-    .btn-select{
-        width: 90px;
-    }
     .value{
         min-height: 20px;
     }
