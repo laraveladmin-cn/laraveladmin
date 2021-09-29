@@ -48,7 +48,17 @@
             };
         },
         methods: {
-
+            goUrl(url,event){
+                let oEvent=window.event || event;
+                //获取ctrl 键对应的事件属性
+                let bCtrlKeyCode = oEvent.ctrlKey || oEvent.metaKey;
+                let is_external = url.indexOf('http://')==0 || url.indexOf('https://')==0;
+                //新窗口打开
+                if(!bCtrlKeyCode && !is_external && url){
+                    $('.sidebar-open').removeClass('sidebar-open');
+                }
+                this.toUrl(url,event);
+            }
         },
     }
 </script>
