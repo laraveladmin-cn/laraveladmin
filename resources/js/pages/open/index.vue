@@ -68,7 +68,7 @@
     .top-left {
         position: absolute;
         left: 10px;
-        top: 18px;
+        top: 10px;
     }
 
     .content {
