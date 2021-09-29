@@ -1,8 +1,8 @@
 <template>
     <div class="dateSizer row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 sizer-item">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <el-date-picker v-model="val[0]"
-                            class="w-100"
+                            class="w-100 sizer-item"
                             :picker-options="{disabledDate:disabledDateStart}"
                             value-format="yyyy-MM-dd 00:00:00"
                             :placeholder="placeholders[0] || $t('Start date')"
@@ -10,9 +10,9 @@
                             :editable="false">
             </el-date-picker>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 sizer-item">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <el-date-picker v-model="val[1]"
-                            class="w-100"
+                            class="w-100 sizer-item"
                             :picker-options="{disabledDate:disabledDateEnd}"
                             value-format="yyyy-MM-dd 23:59:59"
                             :placeholder="placeholders[1] || $t('End date')"
@@ -82,3 +82,8 @@
         }
     };
 </script>
+<style scoped>
+    .sizer-item{
+        margin-top: 10px;
+    }
+</style>

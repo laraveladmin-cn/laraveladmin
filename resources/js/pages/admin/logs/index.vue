@@ -5,7 +5,7 @@
                 <data-table class="box box-primary" :options="options">
                     <template slot="sizer-more" slot-scope="props">
                         <div class="row" >
-                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 sizer-item">
+                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
                                 <date-sizer v-model="props.where['created_at']"></date-sizer>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item">
