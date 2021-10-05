@@ -193,3 +193,13 @@ div table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:aft
 .skin-black-light .main-header .navbar>.sidebar-toggle,.skin-black .main-header .navbar>.sidebar-toggle {
     border-right:none;
 }
+@media (max-width: 767px) {
+    .skin-black-light .main-header .logo{
+        background-color:#fff;
+        color: black;
+    }
+    .skin-black-light .main-header .logo:hover{
+        background-color: #fcfcfc;
+        color: black;
+    }
+}
