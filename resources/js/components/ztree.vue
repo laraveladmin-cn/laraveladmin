@@ -1,5 +1,5 @@
 <template>
-    <div @mouseout="$emit('blur')">
+    <div @mouseout="$emit('blur')" v-if="refresh_dom">
         <ul class="ztree" :id="'ztree_'+id"></ul>
     </div>
 </template>
@@ -103,15 +103,13 @@
             return {
                 ztree:null,
                 val:typeof this.value =="object" ? collect(copyObj(this.value)).sort().all():this.value,
-                old_disabled:this.disabled
+                old_disabled:this.disabled,
+                refresh_dom:true
             };
         },
         methods:{
             init(){
                 let ul = $(this.$el).find('ul');
-                if(this.ztree){
-                    $.fn.zTree.destroy('ztree_'+this.id);
-                }
                 if(this.mainDatas.length){
                     let ztree = $.fn.zTree.init(ul,this.mainConfig,this.mainDatas);
                     this.ztree = ztree;
@@ -141,6 +139,21 @@
                         }
                     },200);
                 }
+            },
+            //重载节点
+            reload(){
+                this.refresh_dom=false;
+                if(this.ztree){
+                    this.ztree.destroy();
+                    $.fn.zTree.destroy('ztree_'+this.id);
+                    this.ztree = null;
+                }
+                setTimeout(()=>{
+                    this.refresh_dom=true;
+                    setTimeout(()=>{
+                        this.init();
+                    },50);
+                },10);
             }
         },
         mounted() {
@@ -192,7 +205,7 @@
                 this.disabledChange(value);
             },
             data(value){
-                this.init();
+              this.reload();
             },
             chkboxType(value){
                 if(this.ztree && this.ztree.setting){
@@ -200,7 +213,7 @@
                 }
             },
             '_i18n.locale'(){
-                this.init();
+                this.reload();
             }
         },
         computed:{
@@ -228,6 +241,13 @@
             }
         },
         updated(){
+        },
+        beforeDestroy() {
+            if(this.ztree){
+                this.ztree.destroy();
+                $.fn.zTree.destroy('ztree_'+this.id);
+                this.ztree = null;
+            }
         }
     }
 </script>

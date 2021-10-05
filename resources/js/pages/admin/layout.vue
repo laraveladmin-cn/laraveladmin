@@ -1,6 +1,5 @@
 <template>
-
-    <div class="main_body admin_layout sidebar-mini h100" :class="dark?'skin-dark':skin" v-if="loaded || !loading" v-cloak>
+    <div class="main_body admin_layout sidebar-mini h100" :class="dark?'skin-dark':skin" v-show="loaded || !loading" v-cloak>
         <message></message>
         <modal></modal>
         <div class="wrapper">

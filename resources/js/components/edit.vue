@@ -1,5 +1,6 @@
 <template>
     <div :id="id" :class="{'active-move':is_local}">
+       <!-- <component-demos ref="demos" v-if="is_local"></component-demos>-->
         <form onsubmit="return false;">
             <validation-observer :ref="id" v-slot="{invalid,validate}">
                 <div class="row">
@@ -8,6 +9,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                       <!-- <button type="button" class="btn btn-info pull-left" v-if="is_local" @click="$refs['demos'].open()">组件示例</button>-->
                         <button type="button" class="btn btn-primary pull-right" :disabled="!url"  @click="submitForm(invalid,validate)">{{$t('Submit')}}</button>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -27,7 +29,8 @@
     export default {
         name: "edit",
         components: {
-            ValidationObserver
+            ValidationObserver,
+            "component-demos":()=>import(/* webpackChunkName: "common_components/componentDemos.vue" */ 'common_components/componentDemos.vue'),
         },
         props: {
             //配置选项

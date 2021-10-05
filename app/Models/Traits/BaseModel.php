@@ -186,24 +186,28 @@ trait BaseModel{
             }
             $exps[] = 'whereRaw';
             $where = Str::camel(implode('_',$exps));
-            $str = collect($val)->map(function ($val){
-                return '&'.$val;
+            $values = [];
+            $str = collect($val)->map(function ($val)use(&$values){
+                $values[] = $val;
+                return '& ?';
             })->implode('');
-            $query->$where(DB::raw($key.$str));
+            $query->$where("{$key}{$str}",$values);
         }elseif($exp=='&or'){
             if(!$val){
                 $val = [0];
             }
             $exps[] = 'whereRaw';
             $where = Str::camel(implode('_',$exps));
-            $str = collect($val)->map(function ($val)use($key){
-                return $key.'&'.$val;
+            $values = [];
+            $str = collect($val)->map(function ($val)use($key,&$values){
+                $values[] = $val;
+                return "`{$key}` & ?";
             })->implode(' or ');
-            $query->$where(DB::raw('('.$str.')'));
+            $query->$where("({$str})",$values);
         }elseif($exp=='find_in_set'){
             $exps[] = 'whereRaw';
             $where = Str::camel(implode('_',$exps));
-            $query->$where(DB::raw("FIND_IN_SET('{$val}',`{$key}`)"));
+            $query->$where("FIND_IN_SET( ? ,`{$key}`)",[$val]);
         }else{
             $exps[] = 'where';
             $where = Str::camel(implode('_',$exps));
