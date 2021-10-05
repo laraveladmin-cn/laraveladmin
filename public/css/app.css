@@ -3268,4 +3268,13 @@ table.dataTable thead .sorting_desc_disabled:after {
 .skin-black .main-header .navbar > .sidebar-toggle {
   border-right: none;
 }
-
+@media (max-width: 767px) {
+    .skin-black-light .main-header .logo{
+        background-color:#fff;
+        color: black;
+    }
+    .skin-black-light .main-header .logo:hover{
+        background-color: #fcfcfc;
+        color: black;
+    }
+}
