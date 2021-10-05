@@ -3221,8 +3221,7 @@ table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc:after,
 table.dataTable thead .sorting_asc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:after {
-  bottom: 0;
-  top: 12px;
+    top: calc(50% - 10px);
 }
 
 .per_page .el-input--suffix {
