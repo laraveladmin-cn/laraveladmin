@@ -33,7 +33,8 @@ class Kernel extends ConsoleKernel
         $schedule->command("db:seed --force")
             ->name('db_seed')
             ->withoutOverlapping()
-            ->dailyAt('00:01');
+            ->hourly();
+            //->dailyAt('00:01');
         if(config('app.env')!='local'){
             //数据库备份
             $schedule->command("backup:run --only-db")
