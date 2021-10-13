@@ -532,12 +532,14 @@
                 //当前筛选条件
                 let options = copyObj(this.data.options);
                 this.getData(options);
+                this.$emit('search',options);
             },
             //重置筛选
             reset(){
                 let options = copyObj(this.back_options);
                 this.data.options = options;
                 this.getData(options);
+                this.$emit('reset',options);
             },
             //跳转到对应页面
             toPage(page,perPage){
