@@ -81,7 +81,7 @@ trait BaseModel{
                 $val = /*'%'.*/preg_replace('/([_%\'"])/','\\\$1', $item['val']).'%';
             }else if($item['exp']=='between'){
                 $val = is_string($item['val']) ? explode(' - ',$item['val']):$item['val'];
-            }else if(in_array($item['exp'],['in' , '&or'])){
+            }else if(in_array($item['exp'],['in','not_in' , '&or'])){
                 $val = is_string($item['val']) ? explode(',',$item['val']):$item['val'];
             }else{
                 $val = $item['val'];
@@ -159,7 +159,7 @@ trait BaseModel{
      * @param string $condition
      */
     protected function jointWhere(&$query,$key,$exp,$val,$condition='and'){
-        $whereMap = ['in','between'];
+        $whereMap = ['in','not_in','between'];
         $exps = [];
         if($condition=='or'){
             $exps[] = 'or';
