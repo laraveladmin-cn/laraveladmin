@@ -62,7 +62,7 @@
                             <button type="button" :title="$t('Import data')" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                 <i class="fa fa-folder-open-o"></i>
                                 {{$t("Bulk import")}}
-                                <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
+                                <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false" />
                             </button>
                             <slot name="add_btn"></slot>
                         </div>
