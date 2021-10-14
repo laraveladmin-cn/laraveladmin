@@ -229,7 +229,7 @@ trait ResourceController
             $validate_rules['where.' . $key] = 'sometimes|nullable|array';
             $validate_rules['where.' . $key . '.0'] = 'sometimes|nullable|string';
             $validate_rules['where.' . $key . '.1'] = 'sometimes|nullable|string';
-        } else if ($value == 'in') {
+        } else if (in_array($value,['in','not_in' , '&or'])) {
             $validate_rules['where.' . $key] = 'sometimes|nullable|string_or_array';
         } else if (in_array($value, ['&', '|'])) {
             $validate_rules['where.' . $key] = 'sometimes|nullable|numeric';
