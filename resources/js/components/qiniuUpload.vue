@@ -68,6 +68,12 @@
                 default: function () {
                     return 'uploads/videos/';
                 }
+            },
+            autoStart:{
+                type:[Boolean],
+                default: function () {
+                    return false;
+                }
             }
         },
         data(){
@@ -149,6 +155,9 @@
                     let type=this.file.name.substring(index1,index2);
                     let key = this.rootPath+Y+M+D+md5(key_new)+type;
                     this.observable = qiniu.upload(this.file, key, this.uptoken, this.putExtra, this.config);
+                }
+                if(this.autoStart){
+                    this.up();
                 }
 
             },
