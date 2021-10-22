@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input v-show="false" type="file" ref="file" @change="changeFile" :accept="accept" />
+        <input v-show="false" type="file" @change="changeFile" :accept="accept" />
         <button class="btn btn-primary btn-sm inline-block"
                 onclick="return false;"
                 :disabled="file.name && uping==1"
@@ -17,9 +17,8 @@
             </div>
         </div>
         <slot>
-            <div class="value" v-show="value">
+            <div class="value">
                 <a target="_blank" :href="value">{{value}}</a>
-                <i class="fa fa-times pull-right" @click="remove"></i>
             </div>
         </slot>
     </div>
@@ -75,8 +74,7 @@
                 default: function () {
                     return false;
                 }
-            },
-
+            }
         },
         data(){
             return {
@@ -107,17 +105,13 @@
                 pushMessage: 'pushMessage',
             }),
             //获取token
-            getToken(callback,key){
+            getToken(){
                 if(this.token){
                     this.uptoken = this.token;
-                    callback();
                 }else {
-                    axios.get(this.use_url+this.tokenUrl,{
-                        params:{key:key}
-                    }).then( (response)=> {
+                    axios.get(this.use_url+this.tokenUrl).then( (response)=> {
                         this.uptoken = response.data.token;
                         this.updomain = response.data.domain;
-                        callback();
                     }).catch( (error) =>{
                         this.$store.commit('alert', {
                             'showClose': true,
@@ -160,12 +154,10 @@
                     let index2=this.file.name.length;
                     let type=this.file.name.substring(index1,index2);
                     let key = this.rootPath+Y+M+D+md5(key_new)+type;
-                    this.getToken(()=>{
-                        this.observable = qiniu.upload(this.file, key, this.uptoken, this.putExtra, this.config);
-                        if(this.autoStart){
-                            this.up();
-                        }
-                    },key);
+                    this.observable = qiniu.upload(this.file, key, this.uptoken, this.putExtra, this.config);
+                }
+                if(this.autoStart){
+                    this.up();
                 }
 
             },
@@ -200,17 +192,18 @@
                     return ;
                 }
                 if(this.uping!=1 && this.uping!=3){ //没有上传时
+                    let $this = this;
                     this.uping = 1; //正在上传
                     this.subscription = this.observable.subscribe({
-                        next:(response)=> { //获取进度
+                        next(response) { //获取进度
                             var chunks = response.chunks||[];
-                            this.percents.chunks = collect(chunks).pluck('percent').all();
-                            this.percents.total = response.total.percent; //总进度
+                            $this.percents.chunks = collect(chunks).pluck('percent').all();
+                            $this.percents.total = response.total.percent; //总进度
                         },
-                        error:(err)=>{
-                            this.cancelUp();
-                            console.log(err);
-                            this.$store.commit('alert', {
+                        error(err){
+                            //console.log(err);
+                            //alert('上传出错');
+                            $this.$store.commit('alert', {
                                 'showClose': true,
                                 'title': this.$t('{action} failed!',{action:this.$t('Upload')}),
                                 'position': 'top',
@@ -222,17 +215,17 @@
                                 'show': true
                             });
                         },
-                        complete:(res)=>{
+                        complete(res){
                             //console.log(res);
                             let value = res.key;
                             if (value.substr(0,1)!='/'){
                                 value = '/'+value;
                             }
-                            value = this.updomain+value;
-                            this.$emit('input', value); //修改值
-                            this.$emit('change',value); //修改值
-                            this.res = value;
-                            this.uping = 3;
+                            value = $this.updomain+value;
+                            $this.$emit('input', value); //修改值
+                            $this.$emit('change',value); //修改值
+                            $this.res = value;
+                            $this.uping = 3;
                         }
                     }) // 上传开始
                 }
@@ -243,21 +236,11 @@
                     this.uping = 2; //暂停上传
                 }
 
-            },
-            remove(){
-                if(this.value){
-                    this.$emit('input', ''); //修改值
-                    this.$emit('change',''); //修改值
-                    this.cancelUp();
-                    this.uping=0;
-                    this.file = {};
-                    this.$refs['file'].value='';
-                }
             }
 
         },
         mounted() {
-            //this.getToken();
+            this.getToken();
         },
         computed:{
             ...mapState([
@@ -269,11 +252,6 @@
             },
             operation_show(){
                 return this.uping==0?this.$t('Start uploading'):(this.uping==3?this.$t('Upload completed'):this.$t('Keep uploading'));//'开始上传':(this.uping==3?'上传完成':'继续上传')
-            }
-        },
-        watch:{
-            value(val,old){
-
             }
         }
 
