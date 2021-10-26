@@ -76,6 +76,20 @@ class UserController extends Controller
     public $exportFieldsName = [];
 
     /**
+     * 绑定模型
+     *
+     * @return mixed
+     */
+    protected function bindModel()
+    {
+        if ( ! $this->bindModel ) {
+            $this->bindModel = $this->newBindModel()->whereDoesntHave('admin'); //只显示普通用户
+        }
+
+        return $this->bindModel;
+    }
+
+    /**
      * 添加或修改时数据验证规则
      * @return array
      */
@@ -97,23 +111,6 @@ class UserController extends Controller
         ];
     }
 
-
-    /**
-     * 获取条件拼接对象
-     * @return mixed
-     */
-    public function getWithOptionModel()
-    {
-        $this->bindModel OR $this->bindModel();
-        $obj = $this->bindModel->with($this->selectWithFields())
-            ->withCount(collect($this->getShowIndexFieldsCount())->filter(function($item,$key){
-                return !is_array($item);
-            })->toArray())
-            ->whereDoesntHave('admin') //不显后台用户
-            ->options($this->getOptions());
-
-        return $obj;
-    }
 
     /**
      * @param $data
