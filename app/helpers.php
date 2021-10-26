@@ -229,7 +229,6 @@ function orRedirect($to = null, $status = 200){
  * @param string $pid parent标记字段
  * @param string $level level标记字段
  * @return array
- * @author 麦当苗儿 <zuojiazi@vip.qq.com>
  */
 function listToTree($list, $pk='id', $pid = 'parent_id', $child = 'children', $root = 0) {
     // 创建Tree
@@ -333,7 +332,7 @@ if (! function_exists('trans_path')) {
     }
 }
 
-if (! function_exists('trans_conversion')) {
+if (! function_exists('front_trans_conversion')) {
     /**
      * Translate the given message.
      *
