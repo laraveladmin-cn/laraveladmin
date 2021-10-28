@@ -10,7 +10,7 @@
         <div class="progress-group" v-show="file.name">
             <a class="progress-text name" @click="up" v-if="file.name && uping!=1">{{operation_show}}</a>
             <a class="progress-text name" @click="cancelUp" v-else-if="file.name && uping==1">{{$t('Pause uploading')}}</a>
-            <span class="progress-number">{{percents.total.toFixed(2)}}%</span>
+            <span class="progress-number">{{percents.total.toFixed(2)-0}}%</span>
             <span>{{file.name}}</span>
             <div class="progress sm">
                 <div class="progress-bar progress-bar-warning" :style="{width: percents.total+'%'}"></div>
@@ -18,7 +18,9 @@
         </div>
         <slot>
             <div class="value" v-show="value">
-                <a target="_blank" :href="value">{{value}}</a>
+                <div class="show-value">
+                    <a target="_blank" :href="value" :title="value">{{value}}</a>
+                </div>
                 <i class="fa fa-times pull-right" @click="remove"></i>
             </div>
         </slot>
@@ -285,5 +287,13 @@
     }
     .progress{
         margin-bottom: 0px;
+    }
+    .show-value{
+        display: inline-block;
+        width: calc(100% - 20px);
+        overflow:hidden; //超出的文本隐藏
+        text-overflow:ellipsis; //溢出用省略号显示
+        white-space:nowrap; //溢出不换行
+        margin-top: 3px;
     }
 </style>
