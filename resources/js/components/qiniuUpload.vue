@@ -239,6 +239,16 @@
                     this.uping = 2; //暂停上传
                 }
 
+            },
+            remove(){
+                if(this.value){
+                    this.$emit('input', ''); //修改值
+                    this.$emit('change',''); //修改值
+                    this.cancelUp();
+                    this.uping=0;
+                    this.file = {};
+                    this.$refs['file'].value='';
+                }
             }
 
         },
