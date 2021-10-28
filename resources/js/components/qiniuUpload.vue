@@ -21,7 +21,7 @@
                 <div class="show-value">
                     <a target="_blank" :href="value" :title="value">{{value}}</a>
                 </div>
-                <i class="fa fa-times pull-right" @click="remove"></i>
+                <i class="fa fa-times pull-right remove" @click="remove"></i>
             </div>
         </slot>
     </div>
@@ -294,6 +294,8 @@
         overflow:hidden; //超出的文本隐藏
         text-overflow:ellipsis; //溢出用省略号显示
         white-space:nowrap; //溢出不换行
+    }
+    .remove{
         margin-top: 3px;
     }
 </style>
