@@ -122,25 +122,6 @@ php artisan migrate:all #创建数据表
 php artisan db:seed --force #初始化数据
 ```
 
-3-2. 通过envoy命令进行安装
-
-> 如果安装"laravel/envoy"过程中失败请切换下全局镜像源,进行尝试
-
-    - 腾讯云composer镜像源:https://mirrors.cloud.tencent.com/composer
-    - 阿里云composer镜像源:https://mirrors.aliyun.com/composer
-    - 华为云composer镜像源:https://mirrors.huaweicloud.com/repository/php
-    - laravel(中国)composer镜像源:https://packagist.laravel-china.org
-    - phpcomposer:https://packagist.phpcomposer.com
-
-```shell
-composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer #设置镜像源
-composer global require laravel/envoy -vvv #该命令出错了请切换镜像源
-composer global dump-autoload
-cnpm install #前端编译扩展包安装
-npm run prod #编译前端页面js
-envoy run init --branch=master --self=1 #项目初始化
-```
-
 > 安装完成请在编辑器排除这两个目录防止编辑器被卡死
 
 ![防止编辑器卡死](https://www.laraveladmin.cn/api/home/docs/images/防止编辑器卡顿.png)
