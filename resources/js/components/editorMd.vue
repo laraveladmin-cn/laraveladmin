@@ -90,21 +90,21 @@
               editorMd:null,
               intervalTime:null,
               onClick:false,
-              onSubmit:false
+              onSubmit:false,
+              loaded:false
           };
         },
         watch:{
             disabled(value){
-                setTimeout(()=>{
+                this.awaitFun((value)=>{
                     this.setDisabled(value);
-                },500);
+                },value);
             },
             value(val){
-                setTimeout(()=>{
+                this.awaitFun((val)=>{
                     this.setValue(val);
-                },500);
+                },val);
             },
-
         },
         methods:{
             ...mapActions({
@@ -114,6 +114,13 @@
             ...mapMutations({
                 set:'set'
             }),
+            awaitFun(callback,val){
+                if(this.loaded){
+                    callback(val);
+                }else {
+                    setTimeout(this.awaitFun,500,callback,val);
+                }
+            },
             setValue(val){
                 if(this.editorMd && this.editorMd.getMarkdown()!=val){
                     this.editorMd.setMarkdown(val || '');
@@ -139,6 +146,7 @@
                       options.onchange =  ()=> {
                       };
                       options.onload = async ()=>{
+                          this.loaded=true;
                           //查找图片上传按钮并绑定事件
                           while(true) {
                               let $picture = $(this.$el).find('.editormd-toolbar-container .fa-picture-o');
@@ -191,6 +199,7 @@
                               }
                               await this.sleep(1000);
                           }
+
                       };
                       this.editorMd = editormd(options);
                   }
