@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Console\Commands\BuildIndexHtml;
 use App\Console\DevelopCommands\BuildApiDoc;
 use App\Console\DevelopCommands\CreateAll;
 use App\Console\DevelopCommands\CreateController;
@@ -10,22 +9,18 @@ use App\Console\DevelopCommands\CreateModel;
 use App\Console\DevelopCommands\CreateSeed;
 use App\Console\DevelopCommands\CreateView;
 use App\Facades\LifeData;
-use App\Models\Log;
 use App\Models\Traits\DbMysqlImplModel;
 use App\Models\Traits\NestedSetsService;
-use App\Services\AgentService;
 use App\Services\ClientAuth;
 use App\Services\FormatterService;
 use App\Services\LifeDataRepository;
 use App\Services\OptionRepository;
 use App\Services\SMSNewService;
-use App\Services\StorageManager;
 use App\Validators\CustomValidator;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -62,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(ResponseFactory $factory)
     {
+        Schema::defaultStringLength(191);
         //注册创建代码命令
         if ($this->app->environment() == 'local')  {
             //开发环境注册
