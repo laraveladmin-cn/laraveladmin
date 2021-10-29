@@ -142,7 +142,6 @@
                                         <div v-clipboard:copy="command(props.data.row)"  v-clipboard:success="onCopy" class="snippet command">
                                             <button class="btn">
                                                 <img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" :alt="$tp('Copy it to the paste board')">
-                                                {{$tp('Copy it to the paste board')}}
                                             </button>
                                             <code>
                                                 {{command(props.data.row)}}
@@ -171,24 +170,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-hover table-bordered table-striped text-center dataTable">
-                                <thead>
-                                <tr>
-                                    <th>{{$tp('Command')}}</th>
-                                    <th>{{$tp('Instructions')}}</th>
-                                    <!--     <th>English</th>-->
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="item in _commands">
-                                    <td v-clipboard:copy="'php artisan '+item.command"  v-clipboard:success="onCopy" class="snippet">
-                                        <button class="btn" data-clipboard-snippet=""><img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="Copy to clipboard"></button>
-                                        <code>{{item.command}}</code>
-                                    </td>
-                                    <td>{{item._name}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div class="table-content">
+                                <table class="table table-hover table-bordered table-striped text-center dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th>{{$tp('Command')}}</th>
+                                        <th>{{$tp('Instructions')}}</th>
+                                        <!--     <th>English</th>-->
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="item in _commands">
+                                        <td v-clipboard:copy="'php artisan '+item.command"  v-clipboard:success="onCopy" class="snippet">
+                                            <button class="btn" data-clipboard-snippet=""><img class="clippy" width="13" src="https://clipboardjs.com/assets/images/clippy.svg" alt="Copy to clipboard"></button>
+                                            <code>{{item.command}}</code>
+                                        </td>
+                                        <td>{{item._name}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="chart tab-pane" id="menus">
@@ -478,4 +479,12 @@
     .box{
         margin-top: 10px;
     }
+    code{
+        margin-right: 20px;
+    }
+    .table-content{
+        width: 100%;
+        overflow:scroll;
+    }
+
 </style>

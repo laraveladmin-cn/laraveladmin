@@ -2,18 +2,28 @@
     <div class="language">
         <el-dropdown @command="changeVal" trigger="click">
             <div ref="view">
-                <div class="country" v-if="val">
-                    <div class="flag" :class="country"></div>
-                </div>
-                <i class="fa fa-globe" v-else></i>
-                <span class="country-name">{{country_name || $t('Language')}}</span>
+                <span v-if="isLanguage">
+                    <i class="fa fa-globe"></i>
+                </span>
+                <span v-else>
+                    <div class="country" v-if="val">
+                        <div class="flag" :class="country_or_region"></div>
+                    </div>
+                    <i class="fa fa-globe" v-else></i>
+                </span>
+                <span class="country-name">{{country_or_region_name || $t('Language')}}</span>
             </div>
             <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item :command="item.value" v-for="(item,index) in _languages" v-bind:key="index">
-                    <div class="country">
-                        <div class="flag" :class="item.country"></div>
-                    </div>
-                    <span class="country-name">{{item.name}} {{item.en_name}}</span>
+                    <span v-if="isLanguage">
+                          <span class="country-name">{{item.language}}</span>
+                    </span>
+                    <span v-else>
+                        <div class="country">
+                            <div class="flag" :class="item.country_or_region"></div>
+                        </div>
+                        <span class="country-name">{{item.name}} {{item.en_name}}</span>
+                    </span>
                 </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
@@ -35,6 +45,11 @@
                     return '';
                 }
             },
+            isLanguage:{
+                default() {
+                    return true;
+                }
+            }
         },
         data: function () {
             return {
@@ -44,831 +59,844 @@
                         value:"zh-CN",
                         name:"中国",
                         en_name:"China",
-                        country:"cn",
+                        country_or_region:"cn",
+                        language:'中文 (简体)'
                     },
                     {
                         value:"zh-TW",
                         name: "中國(台灣)",
                         en_name:"China (Taiwan)",
-                        country: "tw",
+                        country_or_region: "tw",
+                        language:'中文 (繁體)'
                     },
                     {
                         value:"zh-HK",
                         name: "中國(香港)",
                         en_name:"China (Hong Kong)",
-                        country: "hk",
+                        country_or_region: "hk",
+                        language:'中文 (繁體)',
                     },
                     {
                         value:"en",
                         name:"English",
                         en_name:"Britain",
-                        country:"gb",
+                        country_or_region:"gb",
+                        language:'English'
                     },
                     {
                         value:"ja",
                         name: "日本",
-                        country: "jp",
-                        en_name:"Japan"
+                        country_or_region: "jp",
+                        en_name:"Japan",
+                        language:'日本語',
                     },
                     {
                         value:"ko",
                         name: "대한민국",
-                        country: "kr",
-                        en_name:"South Korea"
+                        country_or_region: "kr",
+                        en_name:"South Korea",
+                        language:'한국어',
                     },
                     {
                         value:"fr",
                         name: "La France",
                         en_name: "France",
-                        country: "fr"
+                        country_or_region: "fr",
+                        language:'Français',
                     },
                     {
                         value:"ru",
                         name: "Россия",
                         en_name: "Russia",
-                        country: "ru"
+                        country_or_region: "ru",
+                        language:'Русский',
                     },
                     {
                         value:"es",
                         name: "España",
                         en_name: "Spain",
-                        country: "es"
+                        country_or_region: "es",
+                        language:'Español',
                     },
                     {
                         value:"pt",
                         name: "Portugal",
                         en_name: "Portugal",
-                        country: "pt"
+                        country_or_region: "pt",
+                        language:'Português',
                     }
 
                 ],
-             /*   countries_reference:[
-                    {
-                    name: "Afghanistan (‫افغانستان‬‎)",
-                    country: "af"
-                }, {
-                    name: "Åland Islands (Åland)",
-                    country: "ax"
-                }, {
-                    name: "Albania (Shqipëri)",
-                    country: "al"
-                }, {
-                    name: "Algeria (‫الجزائر‬‎)",
-                    country: "dz"
-                }, {
-                    name: "American Samoa",
-                    country: "as"
-                }, {
-                    name: "Andorra",
-                    country: "ad"
-                }, {
-                    name: "Angola",
-                    country: "ao"
-                }, {
-                    name: "Anguilla",
-                    country: "ai"
-                }, {
-                    name: "Antarctica",
-                    country: "aq"
-                }, {
-                    name: "Antigua and Barbuda",
-                    country: "ag"
-                }, {
-                    name: "Argentina",
-                    country: "ar"
-                }, {
-                    name: "Armenia (Հայաստան)",
-                    country: "am"
-                }, {
-                    name: "Aruba",
-                    country: "aw"
-                }, {
-                    name: "Australia",
-                    country: "au"
-                }, {
-                    name: "Austria (Österreich)",
-                    country: "at"
-                }, {
-                    name: "Azerbaijan (Azərbaycan)",
-                    country: "az"
-                }, {
-                    name: "Bahamas",
-                    country: "bs"
-                }, {
-                    name: "Bahrain (‫البحرين‬‎)",
-                    country: "bh"
-                }, {
-                    name: "Bangladesh (বাংলাদেশ)",
-                    country: "bd"
-                }, {
-                    name: "Barbados",
-                    country: "bb"
-                }, {
-                    name: "Belarus (Беларусь)",
-                    country: "by"
-                }, {
-                    name: "Belgium (België)",
-                    country: "be"
-                }, {
-                    name: "Belize",
-                    country: "bz"
-                }, {
-                    name: "Benin (Bénin)",
-                    country: "bj"
-                }, {
-                    name: "Bermuda",
-                    country: "bm"
-                }, {
-                    name: "Bhutan (འབྲུག)",
-                    country: "bt"
-                }, {
-                    name: "Bolivia",
-                    country: "bo"
-                }, {
-                    name: "Bosnia and Herzegovina (Босна и Херцеговина)",
-                    country: "ba"
-                }, {
-                    name: "Botswana",
-                    country: "bw"
-                }, {
-                    name: "Bouvet Island (Bouvetøya)",
-                    country: "bv"
-                }, {
-                    name: "Brazil (Brasil)",
-                    country: "br"
-                }, {
-                    name: "British Indian Ocean Territory",
-                    country: "io"
-                }, {
-                    name: "British Virgin Islands",
-                    country: "vg"
-                }, {
-                    name: "Brunei",
-                    country: "bn"
-                }, {
-                    name: "Bulgaria (България)",
-                    country: "bg"
-                }, {
-                    name: "Burkina Faso",
-                    country: "bf"
-                }, {
-                    name: "Burundi (Uburundi)",
-                    country: "bi"
-                }, {
-                    name: "Cambodia (កម្ពុជា)",
-                    country: "kh"
-                }, {
-                    name: "Cameroon (Cameroun)",
-                    country: "cm"
-                }, {
-                    name: "Canada",
-                    country: "ca"
-                }, {
-                    name: "Cape Verde (Kabu Verdi)",
-                    country: "cv"
-                }, {
-                    name: "Caribbean Netherlands",
-                    country: "bq"
-                }, {
-                    name: "Cayman Islands",
-                    country: "ky"
-                }, {
-                    name: "Central African Republic (République Centrafricaine)",
-                    country: "cf"
-                }, {
-                    name: "Chad (Tchad)",
-                    country: "td"
-                }, {
-                    name: "Chile",
-                    country: "cl"
-                }, {
-                    name: "China (中国)",
-                    country: "cn"
-                }, {
-                    name: "Christmas Island",
-                    country: "cx"
-                }, {
-                    name: "Cocos (Keeling) Islands (Kepulauan Cocos (Keeling))",
-                    country: "cc"
-                }, {
-                    name: "Colombia",
-                    country: "co"
-                }, {
-                    name: "Comoros (‫جزر القمر‬‎)",
-                    country: "km"
-                }, {
-                    name: "Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)",
-                    country: "cd"
-                }, {
-                    name: "Congo (Republic) (Congo-Brazzaville)",
-                    country: "cg"
-                }, {
-                    name: "Cook Islands",
-                    country: "ck"
-                }, {
-                    name: "Costa Rica",
-                    country: "cr"
-                }, {
-                    name: "Côte d’Ivoire",
-                    country: "ci"
-                }, {
-                    name: "Croatia (Hrvatska)",
-                    country: "hr"
-                }, {
-                    name: "Cuba",
-                    country: "cu"
-                }, {
-                    name: "Curaçao",
-                    country: "cw"
-                }, {
-                    name: "Cyprus (Κύπρος)",
-                    country: "cy"
-                }, {
-                    name: "Czech Republic (Česká republika)",
-                    country: "cz"
-                }, {
-                    name: "Denmark (Danmark)",
-                    country: "dk"
-                }, {
-                    name: "Djibouti",
-                    country: "dj"
-                }, {
-                    name: "Dominica",
-                    country: "dm"
-                }, {
-                    name: "Dominican Republic (República Dominicana)",
-                    country: "do"
-                }, {
-                    name: "Ecuador",
-                    country: "ec"
-                }, {
-                    name: "Egypt (‫مصر‬‎)",
-                    country: "eg"
-                }, {
-                    name: "El Salvador",
-                    country: "sv"
-                }, {
-                    name: "Equatorial Guinea (Guinea Ecuatorial)",
-                    country: "gq"
-                }, {
-                    name: "Eritrea",
-                    country: "er"
-                }, {
-                    name: "Estonia (Eesti)",
-                    country: "ee"
-                }, {
-                    name: "Ethiopia",
-                    country: "et"
-                }, {
-                    name: "Falkland Islands (Islas Malvinas)",
-                    country: "fk"
-                }, {
-                    name: "Faroe Islands (Føroyar)",
-                    country: "fo"
-                }, {
-                    name: "Fiji",
-                    country: "fj"
-                }, {
-                    name: "Finland (Suomi)",
-                    country: "fi"
-                }, {
-                    name: "France",
-                    country: "fr"
-                }, {
-                    name: "French Guiana (Guyane française)",
-                    country: "gf"
-                }, {
-                    name: "French Polynesia (Polynésie française)",
-                    country: "pf"
-                }, {
-                    name: "French Southern Territories (Terres australes françaises)",
-                    country: "tf"
-                }, {
-                    name: "Gabon",
-                    country: "ga"
-                }, {
-                    name: "Gambia",
-                    country: "gm"
-                }, {
-                    name: "Georgia (საქართველო)",
-                    country: "ge"
-                }, {
-                    name: "Germany (Deutschland)",
-                    country: "de"
-                }, {
-                    name: "Ghana (Gaana)",
-                    country: "gh"
-                }, {
-                    name: "Gibraltar",
-                    country: "gi"
-                }, {
-                    name: "Greece (Ελλάδα)",
-                    country: "gr"
-                }, {
-                    name: "Greenland (Kalaallit Nunaat)",
-                    country: "gl"
-                }, {
-                    name: "Grenada",
-                    country: "gd"
-                }, {
-                    name: "Guadeloupe",
-                    country: "gp"
-                }, {
-                    name: "Guam",
-                    country: "gu"
-                }, {
-                    name: "Guatemala",
-                    country: "gt"
-                }, {
-                    name: "Guernsey",
-                    country: "gg"
-                }, {
-                    name: "Guinea (Guinée)",
-                    country: "gn"
-                }, {
-                    name: "Guinea-Bissau (Guiné Bissau)",
-                    country: "gw"
-                }, {
-                    name: "Guyana",
-                    country: "gy"
-                }, {
-                    name: "Haiti",
-                    country: "ht"
-                }, {
-                    name: "Heard Island and Mcdonald Islands",
-                    country: "hm"
-                }, {
-                    name: "Honduras",
-                    country: "hn"
-                }, {
-                    name: "Hong Kong (香港)",
-                    country: "hk"
-                }, {
-                    name: "Hungary (Magyarország)",
-                    country: "hu"
-                }, {
-                    name: "Iceland (Ísland)",
-                    country: "is"
-                }, {
-                    name: "India (भारत)",
-                    country: "in"
-                }, {
-                    name: "Indonesia",
-                    country: "id"
-                }, {
-                    name: "Iran (‫ایران‬‎)",
-                    country: "ir"
-                }, {
-                    name: "Iraq (‫العراق‬‎)",
-                    country: "iq"
-                }, {
-                    name: "Ireland",
-                    country: "ie"
-                }, {
-                    name: "Isle of Man",
-                    country: "im"
-                }, {
-                    name: "Israel (‫ישראל‬‎)",
-                    country: "il"
-                }, {
-                    name: "Italy (Italia)",
-                    country: "it"
-                }, {
-                    name: "Jamaica",
-                    country: "jm"
-                }, {
-                    name: "Japan (日本)",
-                    country: "jp"
-                }, {
-                    name: "Jersey",
-                    country: "je"
-                }, {
-                    name: "Jordan (‫الأردن‬‎)",
-                    country: "jo"
-                }, {
-                    name: "Kazakhstan (Казахстан)",
-                    country: "kz"
-                }, {
-                    name: "Kenya",
-                    country: "ke"
-                }, {
-                    name: "Kiribati",
-                    country: "ki"
-                }, {
-                    name: "Kosovo (Kosovë)",
-                    country: "xk"
-                }, {
-                    name: "Kuwait (‫الكويت‬‎)",
-                    country: "kw"
-                }, {
-                    name: "Kyrgyzstan (Кыргызстан)",
-                    country: "kg"
-                }, {
-                    name: "Laos (ລາວ)",
-                    country: "la"
-                }, {
-                    name: "Latvia (Latvija)",
-                    country: "lv"
-                }, {
-                    name: "Lebanon (‫لبنان‬‎)",
-                    country: "lb"
-                }, {
-                    name: "Lesotho",
-                    country: "ls"
-                }, {
-                    name: "Liberia",
-                    country: "lr"
-                }, {
-                    name: "Libya (‫ليبيا‬‎)",
-                    country: "ly"
-                }, {
-                    name: "Liechtenstein",
-                    country: "li"
-                }, {
-                    name: "Lithuania (Lietuva)",
-                    country: "lt"
-                }, {
-                    name: "Luxembourg",
-                    country: "lu"
-                }, {
-                    name: "Macau (澳門)",
-                    country: "mo"
-                }, {
-                    name: "Macedonia (FYROM) (Македонија)",
-                    country: "mk"
-                }, {
-                    name: "Madagascar (Madagasikara)",
-                    country: "mg"
-                }, {
-                    name: "Malawi",
-                    country: "mw"
-                }, {
-                    name: "Malaysia",
-                    country: "my"
-                }, {
-                    name: "Maldives",
-                    country: "mv"
-                }, {
-                    name: "Mali",
-                    country: "ml"
-                }, {
-                    name: "Malta",
-                    country: "mt"
-                }, {
-                    name: "Marshall Islands",
-                    country: "mh"
-                }, {
-                    name: "Martinique",
-                    country: "mq"
-                }, {
-                    name: "Mauritania (‫موريتانيا‬‎)",
-                    country: "mr"
-                }, {
-                    name: "Mauritius (Moris)",
-                    country: "mu"
-                }, {
-                    name: "Mayotte",
-                    country: "yt"
-                }, {
-                    name: "Mexico (México)",
-                    country: "mx"
-                }, {
-                    name: "Micronesia",
-                    country: "fm"
-                }, {
-                    name: "Moldova (Republica Moldova)",
-                    country: "md"
-                }, {
-                    name: "Monaco",
-                    country: "mc"
-                }, {
-                    name: "Mongolia (Монгол)",
-                    country: "mn"
-                }, {
-                    name: "Montenegro (Crna Gora)",
-                    country: "me"
-                }, {
-                    name: "Montserrat",
-                    country: "ms"
-                }, {
-                    name: "Morocco (‫المغرب‬‎)",
-                    country: "ma"
-                }, {
-                    name: "Mozambique (Moçambique)",
-                    country: "mz"
-                }, {
-                    name: "Myanmar (Burma) (မြန်မာ)",
-                    country: "mm"
-                }, {
-                    name: "Namibia (Namibië)",
-                    country: "na"
-                }, {
-                    name: "Nauru",
-                    country: "nr"
-                }, {
-                    name: "Nepal (नेपाल)",
-                    country: "np"
-                }, {
-                    name: "Netherlands (Nederland)",
-                    country: "nl"
-                }, {
-                    name: "New Caledonia (Nouvelle-Calédonie)",
-                    country: "nc"
-                }, {
-                    name: "New Zealand",
-                    country: "nz"
-                }, {
-                    name: "Nicaragua",
-                    country: "ni"
-                }, {
-                    name: "Niger (Nijar)",
-                    country: "ne"
-                }, {
-                    name: "Nigeria",
-                    country: "ng"
-                }, {
-                    name: "Niue",
-                    country: "nu"
-                }, {
-                    name: "Norfolk Island",
-                    country: "nf"
-                }, {
-                    name: "North Korea (조선 민주주의 인민 공화국)",
-                    country: "kp"
-                }, {
-                    name: "Northern Mariana Islands",
-                    country: "mp"
-                }, {
-                    name: "Norway (Norge)",
-                    country: "no"
-                }, {
-                    name: "Oman (‫عُمان‬‎)",
-                    country: "om"
-                }, {
-                    name: "Pakistan (‫پاکستان‬‎)",
-                    country: "pk"
-                }, {
-                    name: "Palau",
-                    country: "pw"
-                }, {
-                    name: "Palestine (‫فلسطين‬‎)",
-                    country: "ps"
-                }, {
-                    name: "Panama (Panamá)",
-                    country: "pa"
-                }, {
-                    name: "Papua New Guinea",
-                    country: "pg"
-                }, {
-                    name: "Paraguay",
-                    country: "py"
-                }, {
-                    name: "Peru (Perú)",
-                    country: "pe"
-                }, {
-                    name: "Philippines",
-                    country: "ph"
-                }, {
-                    name: "Pitcairn Islands",
-                    country: "pn"
-                }, {
-                    name: "Poland (Polska)",
-                    country: "pl"
-                }, {
-                    name: "Portugal",
-                    country: "pt"
-                }, {
-                    name: "Puerto Rico",
-                    country: "pr"
-                }, {
-                    name: "Qatar (‫قطر‬‎)",
-                    country: "qa"
-                }, {
-                    name: "Réunion (La Réunion)",
-                    country: "re"
-                }, {
-                    name: "Romania (România)",
-                    country: "ro"
-                }, {
-                    name: "Russia (Россия)",
-                    country: "ru"
-                }, {
-                    name: "Rwanda",
-                    country: "rw"
-                }, {
-                    name: "Saint Barthélemy (Saint-Barthélemy)",
-                    country: "bl"
-                }, {
-                    name: "Saint Helena",
-                    country: "sh"
-                }, {
-                    name: "Saint Kitts and Nevis",
-                    country: "kn"
-                }, {
-                    name: "Saint Lucia",
-                    country: "lc"
-                }, {
-                    name: "Saint Martin (Saint-Martin (partie française))",
-                    country: "mf"
-                }, {
-                    name: "Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)",
-                    country: "pm"
-                }, {
-                    name: "Saint Vincent and the Grenadines",
-                    country: "vc"
-                }, {
-                    name: "Samoa",
-                    country: "ws"
-                }, {
-                    name: "San Marino",
-                    country: "sm"
-                }, {
-                    name: "São Tomé and Príncipe (São Tomé e Príncipe)",
-                    country: "st"
-                }, {
-                    name: "Saudi Arabia (‫المملكة العربية السعودية‬‎)",
-                    country: "sa"
-                }, {
-                    name: "Senegal (Sénégal)",
-                    country: "sn"
-                }, {
-                    name: "Serbia (Србија)",
-                    country: "rs"
-                }, {
-                    name: "Seychelles",
-                    country: "sc"
-                }, {
-                    name: "Sierra Leone",
-                    country: "sl"
-                }, {
-                    name: "Singapore",
-                    country: "sg"
-                }, {
-                    name: "Sint Maarten",
-                    country: "sx"
-                }, {
-                    name: "Slovakia (Slovensko)",
-                    country: "sk"
-                }, {
-                    name: "Slovenia (Slovenija)",
-                    country: "si"
-                }, {
-                    name: "Solomon Islands",
-                    country: "sb"
-                }, {
-                    name: "Somalia (Soomaaliya)",
-                    country: "so"
-                }, {
-                    name: "South Africa",
-                    country: "za"
-                }, {
-                    name: "South Georgia & South Sandwich Islands",
-                    country: "gs"
-                }, {
-                    name: "South Korea (대한민국)",
-                    country: "kr"
-                }, {
-                    name: "South Sudan (‫جنوب السودان‬‎)",
-                    country: "ss"
-                }, {
-                    name: "Spain (España)",
-                    country: "es"
-                }, {
-                    name: "Sri Lanka (ශ්‍රී ලංකාව)",
-                    country: "lk"
-                }, {
-                    name: "Sudan (‫السودان‬‎)",
-                    country: "sd"
-                }, {
-                    name: "Suriname",
-                    country: "sr"
-                }, {
-                    name: "Svalbard and Jan Mayen (Svalbard og Jan Mayen)",
-                    country: "sj"
-                }, {
-                    name: "Swaziland",
-                    country: "sz"
-                }, {
-                    name: "Sweden (Sverige)",
-                    country: "se"
-                }, {
-                    name: "Switzerland (Schweiz)",
-                    country: "ch"
-                }, {
-                    name: "Syria (‫سوريا‬‎)",
-                    country: "sy"
-                }, {
-                    name: "Taiwan (台灣)",
-                    country: "tw"
-                }, {
-                    name: "Tajikistan",
-                    country: "tj"
-                }, {
-                    name: "Tanzania",
-                    country: "tz"
-                }, {
-                    name: "Thailand (ไทย)",
-                    country: "th"
-                }, {
-                    name: "Timor-Leste",
-                    country: "tl"
-                }, {
-                    name: "Togo",
-                    country: "tg"
-                }, {
-                    name: "Tokelau",
-                    country: "tk"
-                }, {
-                    name: "Tonga",
-                    country: "to"
-                }, {
-                    name: "Trinidad and Tobago",
-                    country: "tt"
-                }, {
-                    name: "Tunisia (‫تونس‬‎)",
-                    country: "tn"
-                }, {
-                    name: "Turkey (Türkiye)",
-                    country: "tr"
-                }, {
-                    name: "Turkmenistan",
-                    country: "tm"
-                }, {
-                    name: "Turks and Caicos Islands",
-                    country: "tc"
-                }, {
-                    name: "Tuvalu",
-                    country: "tv"
-                }, {
-                    name: "Uganda",
-                    country: "ug"
-                }, {
-                    name: "Ukraine (Україна)",
-                    country: "ua"
-                }, {
-                    name: "United Arab Emirates (‫الإمارات العربية المتحدة‬‎)",
-                    country: "ae"
-                }, {
-                    name: "United Kingdom",
-                    country: "gb"
-                }, {
-                    name: "United States",
-                    country: "us"
-                }, {
-                    name: "U.S. Minor Outlying Islands",
-                    country: "um"
-                }, {
-                    name: "U.S. Virgin Islands",
-                    country: "vi"
-                }, {
-                    name: "Uruguay",
-                    country: "uy"
-                }, {
-                    name: "Uzbekistan (Oʻzbekiston)",
-                    country: "uz"
-                }, {
-                    name: "Vanuatu",
-                    country: "vu"
-                }, {
-                    name: "Vatican City (Città del Vaticano)",
-                    country: "va"
-                }, {
-                    name: "Venezuela",
-                    country: "ve"
-                }, {
-                    name: "Vietnam (Việt Nam)",
-                    country: "vn"
-                }, {
-                    name: "Wallis and Futuna",
-                    country: "wf"
-                }, {
-                    name: "Western Sahara (‫الصحراء الغربية‬‎)",
-                    country: "eh"
-                }, {
-                    name: "Yemen (‫اليمن‬‎)",
-                    country: "ye"
-                }, {
-                    name: "Zambia",
-                    country: "zm"
-                }, {
-                    name: "Zimbabwe",
-                    country: "zw"
-                } ]*/
+                /*   countries_reference:[
+                       {
+                       name: "Afghanistan (‫افغانستان‬‎)",
+                       country_or_region: "af"
+                   }, {
+                       name: "Åland Islands (Åland)",
+                       country_or_region: "ax"
+                   }, {
+                       name: "Albania (Shqipëri)",
+                       country_or_region: "al"
+                   }, {
+                       name: "Algeria (‫الجزائر‬‎)",
+                       country_or_region: "dz"
+                   }, {
+                       name: "American Samoa",
+                       country_or_region: "as"
+                   }, {
+                       name: "Andorra",
+                       country_or_region: "ad"
+                   }, {
+                       name: "Angola",
+                       country_or_region: "ao"
+                   }, {
+                       name: "Anguilla",
+                       country_or_region: "ai"
+                   }, {
+                       name: "Antarctica",
+                       country_or_region: "aq"
+                   }, {
+                       name: "Antigua and Barbuda",
+                       country_or_region: "ag"
+                   }, {
+                       name: "Argentina",
+                       country_or_region: "ar"
+                   }, {
+                       name: "Armenia (Հայաստան)",
+                       country_or_region: "am"
+                   }, {
+                       name: "Aruba",
+                       country_or_region: "aw"
+                   }, {
+                       name: "Australia",
+                       country_or_region: "au"
+                   }, {
+                       name: "Austria (Österreich)",
+                       country_or_region: "at"
+                   }, {
+                       name: "Azerbaijan (Azərbaycan)",
+                       country_or_region: "az"
+                   }, {
+                       name: "Bahamas",
+                       country_or_region: "bs"
+                   }, {
+                       name: "Bahrain (‫البحرين‬‎)",
+                       country_or_region: "bh"
+                   }, {
+                       name: "Bangladesh (বাংলাদেশ)",
+                       country_or_region: "bd"
+                   }, {
+                       name: "Barbados",
+                       country_or_region: "bb"
+                   }, {
+                       name: "Belarus (Беларусь)",
+                       country_or_region: "by"
+                   }, {
+                       name: "Belgium (België)",
+                       country_or_region: "be"
+                   }, {
+                       name: "Belize",
+                       country_or_region: "bz"
+                   }, {
+                       name: "Benin (Bénin)",
+                       country_or_region: "bj"
+                   }, {
+                       name: "Bermuda",
+                       country_or_region: "bm"
+                   }, {
+                       name: "Bhutan (འབྲུག)",
+                       country_or_region: "bt"
+                   }, {
+                       name: "Bolivia",
+                       country_or_region: "bo"
+                   }, {
+                       name: "Bosnia and Herzegovina (Босна и Херцеговина)",
+                       country_or_region: "ba"
+                   }, {
+                       name: "Botswana",
+                       country_or_region: "bw"
+                   }, {
+                       name: "Bouvet Island (Bouvetøya)",
+                       country_or_region: "bv"
+                   }, {
+                       name: "Brazil (Brasil)",
+                       country_or_region: "br"
+                   }, {
+                       name: "British Indian Ocean Territory",
+                       country_or_region: "io"
+                   }, {
+                       name: "British Virgin Islands",
+                       country_or_region: "vg"
+                   }, {
+                       name: "Brunei",
+                       country_or_region: "bn"
+                   }, {
+                       name: "Bulgaria (България)",
+                       country_or_region: "bg"
+                   }, {
+                       name: "Burkina Faso",
+                       country_or_region: "bf"
+                   }, {
+                       name: "Burundi (Uburundi)",
+                       country_or_region: "bi"
+                   }, {
+                       name: "Cambodia (កម្ពុជា)",
+                       country_or_region: "kh"
+                   }, {
+                       name: "Cameroon (Cameroun)",
+                       country_or_region: "cm"
+                   }, {
+                       name: "Canada",
+                       country_or_region: "ca"
+                   }, {
+                       name: "Cape Verde (Kabu Verdi)",
+                       country_or_region: "cv"
+                   }, {
+                       name: "Caribbean Netherlands",
+                       country_or_region: "bq"
+                   }, {
+                       name: "Cayman Islands",
+                       country_or_region: "ky"
+                   }, {
+                       name: "Central African Republic (République Centrafricaine)",
+                       country_or_region: "cf"
+                   }, {
+                       name: "Chad (Tchad)",
+                       country_or_region: "td"
+                   }, {
+                       name: "Chile",
+                       country_or_region: "cl"
+                   }, {
+                       name: "China (中国)",
+                       country_or_region: "cn"
+                   }, {
+                       name: "Christmas Island",
+                       country_or_region: "cx"
+                   }, {
+                       name: "Cocos (Keeling) Islands (Kepulauan Cocos (Keeling))",
+                       country_or_region: "cc"
+                   }, {
+                       name: "Colombia",
+                       country_or_region: "co"
+                   }, {
+                       name: "Comoros (‫جزر القمر‬‎)",
+                       country_or_region: "km"
+                   }, {
+                       name: "Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)",
+                       country_or_region: "cd"
+                   }, {
+                       name: "Congo (Republic) (Congo-Brazzaville)",
+                       country_or_region: "cg"
+                   }, {
+                       name: "Cook Islands",
+                       country_or_region: "ck"
+                   }, {
+                       name: "Costa Rica",
+                       country_or_region: "cr"
+                   }, {
+                       name: "Côte d’Ivoire",
+                       country_or_region: "ci"
+                   }, {
+                       name: "Croatia (Hrvatska)",
+                       country_or_region: "hr"
+                   }, {
+                       name: "Cuba",
+                       country_or_region: "cu"
+                   }, {
+                       name: "Curaçao",
+                       country_or_region: "cw"
+                   }, {
+                       name: "Cyprus (Κύπρος)",
+                       country_or_region: "cy"
+                   }, {
+                       name: "Czech Republic (Česká republika)",
+                       country_or_region: "cz"
+                   }, {
+                       name: "Denmark (Danmark)",
+                       country_or_region: "dk"
+                   }, {
+                       name: "Djibouti",
+                       country_or_region: "dj"
+                   }, {
+                       name: "Dominica",
+                       country_or_region: "dm"
+                   }, {
+                       name: "Dominican Republic (República Dominicana)",
+                       country_or_region: "do"
+                   }, {
+                       name: "Ecuador",
+                       country_or_region: "ec"
+                   }, {
+                       name: "Egypt (‫مصر‬‎)",
+                       country_or_region: "eg"
+                   }, {
+                       name: "El Salvador",
+                       country_or_region: "sv"
+                   }, {
+                       name: "Equatorial Guinea (Guinea Ecuatorial)",
+                       country_or_region: "gq"
+                   }, {
+                       name: "Eritrea",
+                       country_or_region: "er"
+                   }, {
+                       name: "Estonia (Eesti)",
+                       country_or_region: "ee"
+                   }, {
+                       name: "Ethiopia",
+                       country_or_region: "et"
+                   }, {
+                       name: "Falkland Islands (Islas Malvinas)",
+                       country_or_region: "fk"
+                   }, {
+                       name: "Faroe Islands (Føroyar)",
+                       country_or_region: "fo"
+                   }, {
+                       name: "Fiji",
+                       country_or_region: "fj"
+                   }, {
+                       name: "Finland (Suomi)",
+                       country_or_region: "fi"
+                   }, {
+                       name: "France",
+                       country_or_region: "fr"
+                   }, {
+                       name: "French Guiana (Guyane française)",
+                       country_or_region: "gf"
+                   }, {
+                       name: "French Polynesia (Polynésie française)",
+                       country_or_region: "pf"
+                   }, {
+                       name: "French Southern Territories (Terres australes françaises)",
+                       country_or_region: "tf"
+                   }, {
+                       name: "Gabon",
+                       country_or_region: "ga"
+                   }, {
+                       name: "Gambia",
+                       country_or_region: "gm"
+                   }, {
+                       name: "Georgia (საქართველო)",
+                       country_or_region: "ge"
+                   }, {
+                       name: "Germany (Deutschland)",
+                       country_or_region: "de"
+                   }, {
+                       name: "Ghana (Gaana)",
+                       country_or_region: "gh"
+                   }, {
+                       name: "Gibraltar",
+                       country_or_region: "gi"
+                   }, {
+                       name: "Greece (Ελλάδα)",
+                       country_or_region: "gr"
+                   }, {
+                       name: "Greenland (Kalaallit Nunaat)",
+                       country_or_region: "gl"
+                   }, {
+                       name: "Grenada",
+                       country_or_region: "gd"
+                   }, {
+                       name: "Guadeloupe",
+                       country_or_region: "gp"
+                   }, {
+                       name: "Guam",
+                       country_or_region: "gu"
+                   }, {
+                       name: "Guatemala",
+                       country_or_region: "gt"
+                   }, {
+                       name: "Guernsey",
+                       country_or_region: "gg"
+                   }, {
+                       name: "Guinea (Guinée)",
+                       country_or_region: "gn"
+                   }, {
+                       name: "Guinea-Bissau (Guiné Bissau)",
+                       country_or_region: "gw"
+                   }, {
+                       name: "Guyana",
+                       country_or_region: "gy"
+                   }, {
+                       name: "Haiti",
+                       country_or_region: "ht"
+                   }, {
+                       name: "Heard Island and Mcdonald Islands",
+                       country_or_region: "hm"
+                   }, {
+                       name: "Honduras",
+                       country_or_region: "hn"
+                   }, {
+                       name: "Hong Kong (香港)",
+                       country_or_region: "hk"
+                   }, {
+                       name: "Hungary (Magyarország)",
+                       country_or_region: "hu"
+                   }, {
+                       name: "Iceland (Ísland)",
+                       country_or_region: "is"
+                   }, {
+                       name: "India (भारत)",
+                       country_or_region: "in"
+                   }, {
+                       name: "Indonesia",
+                       country_or_region: "id"
+                   }, {
+                       name: "Iran (‫ایران‬‎)",
+                       country_or_region: "ir"
+                   }, {
+                       name: "Iraq (‫العراق‬‎)",
+                       country_or_region: "iq"
+                   }, {
+                       name: "Ireland",
+                       country_or_region: "ie"
+                   }, {
+                       name: "Isle of Man",
+                       country_or_region: "im"
+                   }, {
+                       name: "Israel (‫ישראל‬‎)",
+                       country_or_region: "il"
+                   }, {
+                       name: "Italy (Italia)",
+                       country_or_region: "it"
+                   }, {
+                       name: "Jamaica",
+                       country_or_region: "jm"
+                   }, {
+                       name: "Japan (日本)",
+                       country_or_region: "jp"
+                   }, {
+                       name: "Jersey",
+                       country_or_region: "je"
+                   }, {
+                       name: "Jordan (‫الأردن‬‎)",
+                       country_or_region: "jo"
+                   }, {
+                       name: "Kazakhstan (Казахстан)",
+                       country_or_region: "kz"
+                   }, {
+                       name: "Kenya",
+                       country_or_region: "ke"
+                   }, {
+                       name: "Kiribati",
+                       country_or_region: "ki"
+                   }, {
+                       name: "Kosovo (Kosovë)",
+                       country_or_region: "xk"
+                   }, {
+                       name: "Kuwait (‫الكويت‬‎)",
+                       country_or_region: "kw"
+                   }, {
+                       name: "Kyrgyzstan (Кыргызстан)",
+                       country_or_region: "kg"
+                   }, {
+                       name: "Laos (ລາວ)",
+                       country_or_region: "la"
+                   }, {
+                       name: "Latvia (Latvija)",
+                       country_or_region: "lv"
+                   }, {
+                       name: "Lebanon (‫لبنان‬‎)",
+                       country_or_region: "lb"
+                   }, {
+                       name: "Lesotho",
+                       country_or_region: "ls"
+                   }, {
+                       name: "Liberia",
+                       country_or_region: "lr"
+                   }, {
+                       name: "Libya (‫ليبيا‬‎)",
+                       country_or_region: "ly"
+                   }, {
+                       name: "Liechtenstein",
+                       country_or_region: "li"
+                   }, {
+                       name: "Lithuania (Lietuva)",
+                       country_or_region: "lt"
+                   }, {
+                       name: "Luxembourg",
+                       country_or_region: "lu"
+                   }, {
+                       name: "Macau (澳門)",
+                       country_or_region: "mo"
+                   }, {
+                       name: "Macedonia (FYROM) (Македонија)",
+                       country_or_region: "mk"
+                   }, {
+                       name: "Madagascar (Madagasikara)",
+                       country_or_region: "mg"
+                   }, {
+                       name: "Malawi",
+                       country_or_region: "mw"
+                   }, {
+                       name: "Malaysia",
+                       country_or_region: "my"
+                   }, {
+                       name: "Maldives",
+                       country_or_region: "mv"
+                   }, {
+                       name: "Mali",
+                       country_or_region: "ml"
+                   }, {
+                       name: "Malta",
+                       country_or_region: "mt"
+                   }, {
+                       name: "Marshall Islands",
+                       country_or_region: "mh"
+                   }, {
+                       name: "Martinique",
+                       country_or_region: "mq"
+                   }, {
+                       name: "Mauritania (‫موريتانيا‬‎)",
+                       country_or_region: "mr"
+                   }, {
+                       name: "Mauritius (Moris)",
+                       country_or_region: "mu"
+                   }, {
+                       name: "Mayotte",
+                       country_or_region: "yt"
+                   }, {
+                       name: "Mexico (México)",
+                       country_or_region: "mx"
+                   }, {
+                       name: "Micronesia",
+                       country_or_region: "fm"
+                   }, {
+                       name: "Moldova (Republica Moldova)",
+                       country_or_region: "md"
+                   }, {
+                       name: "Monaco",
+                       country_or_region: "mc"
+                   }, {
+                       name: "Mongolia (Монгол)",
+                       country_or_region: "mn"
+                   }, {
+                       name: "Montenegro (Crna Gora)",
+                       country_or_region: "me"
+                   }, {
+                       name: "Montserrat",
+                       country_or_region: "ms"
+                   }, {
+                       name: "Morocco (‫المغرب‬‎)",
+                       country_or_region: "ma"
+                   }, {
+                       name: "Mozambique (Moçambique)",
+                       country_or_region: "mz"
+                   }, {
+                       name: "Myanmar (Burma) (မြန်မာ)",
+                       country_or_region: "mm"
+                   }, {
+                       name: "Namibia (Namibië)",
+                       country_or_region: "na"
+                   }, {
+                       name: "Nauru",
+                       country_or_region: "nr"
+                   }, {
+                       name: "Nepal (नेपाल)",
+                       country_or_region: "np"
+                   }, {
+                       name: "Netherlands (Nederland)",
+                       country_or_region: "nl"
+                   }, {
+                       name: "New Caledonia (Nouvelle-Calédonie)",
+                       country_or_region: "nc"
+                   }, {
+                       name: "New Zealand",
+                       country_or_region: "nz"
+                   }, {
+                       name: "Nicaragua",
+                       country_or_region: "ni"
+                   }, {
+                       name: "Niger (Nijar)",
+                       country_or_region: "ne"
+                   }, {
+                       name: "Nigeria",
+                       country_or_region: "ng"
+                   }, {
+                       name: "Niue",
+                       country_or_region: "nu"
+                   }, {
+                       name: "Norfolk Island",
+                       country_or_region: "nf"
+                   }, {
+                       name: "North Korea (조선 민주주의 인민 공화국)",
+                       country_or_region: "kp"
+                   }, {
+                       name: "Northern Mariana Islands",
+                       country_or_region: "mp"
+                   }, {
+                       name: "Norway (Norge)",
+                       country_or_region: "no"
+                   }, {
+                       name: "Oman (‫عُمان‬‎)",
+                       country_or_region: "om"
+                   }, {
+                       name: "Pakistan (‫پاکستان‬‎)",
+                       country_or_region: "pk"
+                   }, {
+                       name: "Palau",
+                       country_or_region: "pw"
+                   }, {
+                       name: "Palestine (‫فلسطين‬‎)",
+                       country_or_region: "ps"
+                   }, {
+                       name: "Panama (Panamá)",
+                       country_or_region: "pa"
+                   }, {
+                       name: "Papua New Guinea",
+                       country_or_region: "pg"
+                   }, {
+                       name: "Paraguay",
+                       country_or_region: "py"
+                   }, {
+                       name: "Peru (Perú)",
+                       country_or_region: "pe"
+                   }, {
+                       name: "Philippines",
+                       country_or_region: "ph"
+                   }, {
+                       name: "Pitcairn Islands",
+                       country_or_region: "pn"
+                   }, {
+                       name: "Poland (Polska)",
+                       country_or_region: "pl"
+                   }, {
+                       name: "Portugal",
+                       country_or_region: "pt"
+                   }, {
+                       name: "Puerto Rico",
+                       country_or_region: "pr"
+                   }, {
+                       name: "Qatar (‫قطر‬‎)",
+                       country_or_region: "qa"
+                   }, {
+                       name: "Réunion (La Réunion)",
+                       country_or_region: "re"
+                   }, {
+                       name: "Romania (România)",
+                       country_or_region: "ro"
+                   }, {
+                       name: "Russia (Россия)",
+                       country_or_region: "ru"
+                   }, {
+                       name: "Rwanda",
+                       country_or_region: "rw"
+                   }, {
+                       name: "Saint Barthélemy (Saint-Barthélemy)",
+                       country_or_region: "bl"
+                   }, {
+                       name: "Saint Helena",
+                       country_or_region: "sh"
+                   }, {
+                       name: "Saint Kitts and Nevis",
+                       country_or_region: "kn"
+                   }, {
+                       name: "Saint Lucia",
+                       country_or_region: "lc"
+                   }, {
+                       name: "Saint Martin (Saint-Martin (partie française))",
+                       country_or_region: "mf"
+                   }, {
+                       name: "Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)",
+                       country_or_region: "pm"
+                   }, {
+                       name: "Saint Vincent and the Grenadines",
+                       country_or_region: "vc"
+                   }, {
+                       name: "Samoa",
+                       country_or_region: "ws"
+                   }, {
+                       name: "San Marino",
+                       country_or_region: "sm"
+                   }, {
+                       name: "São Tomé and Príncipe (São Tomé e Príncipe)",
+                       country_or_region: "st"
+                   }, {
+                       name: "Saudi Arabia (‫المملكة العربية السعودية‬‎)",
+                       country_or_region: "sa"
+                   }, {
+                       name: "Senegal (Sénégal)",
+                       country_or_region: "sn"
+                   }, {
+                       name: "Serbia (Србија)",
+                       country_or_region: "rs"
+                   }, {
+                       name: "Seychelles",
+                       country_or_region: "sc"
+                   }, {
+                       name: "Sierra Leone",
+                       country_or_region: "sl"
+                   }, {
+                       name: "Singapore",
+                       country_or_region: "sg"
+                   }, {
+                       name: "Sint Maarten",
+                       country_or_region: "sx"
+                   }, {
+                       name: "Slovakia (Slovensko)",
+                       country_or_region: "sk"
+                   }, {
+                       name: "Slovenia (Slovenija)",
+                       country_or_region: "si"
+                   }, {
+                       name: "Solomon Islands",
+                       country_or_region: "sb"
+                   }, {
+                       name: "Somalia (Soomaaliya)",
+                       country_or_region: "so"
+                   }, {
+                       name: "South Africa",
+                       country_or_region: "za"
+                   }, {
+                       name: "South Georgia & South Sandwich Islands",
+                       country_or_region: "gs"
+                   }, {
+                       name: "South Korea (대한민국)",
+                       country_or_region: "kr"
+                   }, {
+                       name: "South Sudan (‫جنوب السودان‬‎)",
+                       country_or_region: "ss"
+                   }, {
+                       name: "Spain (España)",
+                       country_or_region: "es"
+                   }, {
+                       name: "Sri Lanka (ශ්‍රී ලංකාව)",
+                       country_or_region: "lk"
+                   }, {
+                       name: "Sudan (‫السودان‬‎)",
+                       country_or_region: "sd"
+                   }, {
+                       name: "Suriname",
+                       country_or_region: "sr"
+                   }, {
+                       name: "Svalbard and Jan Mayen (Svalbard og Jan Mayen)",
+                       country_or_region: "sj"
+                   }, {
+                       name: "Swaziland",
+                       country_or_region: "sz"
+                   }, {
+                       name: "Sweden (Sverige)",
+                       country_or_region: "se"
+                   }, {
+                       name: "Switzerland (Schweiz)",
+                       country_or_region: "ch"
+                   }, {
+                       name: "Syria (‫سوريا‬‎)",
+                       country_or_region: "sy"
+                   }, {
+                       name: "Taiwan (台灣)",
+                       country_or_region: "tw"
+                   }, {
+                       name: "Tajikistan",
+                       country_or_region: "tj"
+                   }, {
+                       name: "Tanzania",
+                       country_or_region: "tz"
+                   }, {
+                       name: "Thailand (ไทย)",
+                       country_or_region: "th"
+                   }, {
+                       name: "Timor-Leste",
+                       country_or_region: "tl"
+                   }, {
+                       name: "Togo",
+                       country_or_region: "tg"
+                   }, {
+                       name: "Tokelau",
+                       country_or_region: "tk"
+                   }, {
+                       name: "Tonga",
+                       country_or_region: "to"
+                   }, {
+                       name: "Trinidad and Tobago",
+                       country_or_region: "tt"
+                   }, {
+                       name: "Tunisia (‫تونس‬‎)",
+                       country_or_region: "tn"
+                   }, {
+                       name: "Turkey (Türkiye)",
+                       country_or_region: "tr"
+                   }, {
+                       name: "Turkmenistan",
+                       country_or_region: "tm"
+                   }, {
+                       name: "Turks and Caicos Islands",
+                       country_or_region: "tc"
+                   }, {
+                       name: "Tuvalu",
+                       country_or_region: "tv"
+                   }, {
+                       name: "Uganda",
+                       country_or_region: "ug"
+                   }, {
+                       name: "Ukraine (Україна)",
+                       country_or_region: "ua"
+                   }, {
+                       name: "United Arab Emirates (‫الإمارات العربية المتحدة‬‎)",
+                       country_or_region: "ae"
+                   }, {
+                       name: "United Kingdom",
+                       country_or_region: "gb"
+                   }, {
+                       name: "United States",
+                       country_or_region: "us"
+                   }, {
+                       name: "U.S. Minor Outlying Islands",
+                       country_or_region: "um"
+                   }, {
+                       name: "U.S. Virgin Islands",
+                       country_or_region: "vi"
+                   }, {
+                       name: "Uruguay",
+                       country_or_region: "uy"
+                   }, {
+                       name: "Uzbekistan (Oʻzbekiston)",
+                       country_or_region: "uz"
+                   }, {
+                       name: "Vanuatu",
+                       country_or_region: "vu"
+                   }, {
+                       name: "Vatican City (Città del Vaticano)",
+                       country_or_region: "va"
+                   }, {
+                       name: "Venezuela",
+                       country_or_region: "ve"
+                   }, {
+                       name: "Vietnam (Việt Nam)",
+                       country_or_region: "vn"
+                   }, {
+                       name: "Wallis and Futuna",
+                       country_or_region: "wf"
+                   }, {
+                       name: "Western Sahara (‫الصحراء الغربية‬‎)",
+                       country_or_region: "eh"
+                   }, {
+                       name: "Yemen (‫اليمن‬‎)",
+                       country_or_region: "ye"
+                   }, {
+                       name: "Zambia",
+                       country_or_region: "zm"
+                   }, {
+                       name: "Zimbabwe",
+                       country_or_region: "zw"
+                   } ]*/
             }
 
         },
         computed:{
-            country(){
-                return this.language.country || '';
+            country_or_region(){
+                return this.language.country_or_region || '';
             },
-            country_name(){
+            country_or_region_name(){
+                if(this.isLanguage){
+                    return this.language.language || '';
+                }
                 return this.language.name || '';
             },
             language(){
                 return collect(this.languages).keyBy('value').get(this.val) || {};
             },
             ...mapState([
-               'locales'
+                'locales'
             ]),
             _languages(){
                 return collect(this.languages).filter((item)=>{
@@ -939,24 +967,24 @@
     .flag{
         width:20px
     }
-/*    .flag.be{
-        width:18px
-    }
-    .flag.ch{
-        width:15px
-    }
-    .flag.mc{
-        width:19px
-    }
-    .flag.ne{
-        width:18px
-    }
-    .flag.np{
-        width:13px
-    }
-    .flag.va{
-        width:15px
-    }*/
+    /*    .flag.be{
+            width:18px
+        }
+        .flag.ch{
+            width:15px
+        }
+        .flag.mc{
+            width:19px
+        }
+        .flag.ne{
+            width:18px
+        }
+        .flag.np{
+            width:13px
+        }
+        .flag.va{
+            width:15px
+        }*/
     @media only screen and (-webkit-min-device-pixel-ratio: 2),
     only screen and (min--moz-device-pixel-ratio: 2),
     only screen and (min-device-pixel-ratio: 2),
@@ -966,198 +994,198 @@
             background-size:5630px 15px
         }
     }
-   /* .flag.ac{
-        height:10px;
-        background-position:0px 0px
-    }
-    .flag.ad{
-        height:14px;
-        background-position:-22px 0px
-    }
-    .flag.ae{
-        height:10px;
-        background-position:-44px 0px
-    }
-    .flag.af{
-        height:14px;
-        background-position:-66px 0px
-    }
-    .flag.ag{
-        height:14px;
-        background-position:-88px 0px
-    }
-    .flag.ai{
-        height:10px;
-        background-position:-110px 0px
-    }
-    .flag.al{
-        height:15px;
-        background-position:-132px 0px
-    }
-    .flag.am{
-        height:10px;
-        background-position:-154px 0px
-    }
-    .flag.ao{
-        height:14px;
-        background-position:-176px 0px
-    }
-    .flag.aq{
-        height:14px;
-        background-position:-198px 0px
-    }
-    .flag.ar{
-        height:13px;
-        background-position:-220px 0px
-    }
-    .flag.as{
-        height:10px;
-        background-position:-242px 0px
-    }
-    .flag.at{
-        height:14px;
-        background-position:-264px 0px
-    }
-    .flag.au{
-        height:10px;
-        background-position:-286px 0px
-    }
-    .flag.aw{
-        height:14px;
-        background-position:-308px 0px
-    }
-    .flag.ax{
-        height:13px;
-        background-position:-330px 0px
-    }
-    .flag.az{
-        height:10px;
-        background-position:-352px 0px
-    }
-    .flag.ba{
-        height:10px;
-        background-position:-374px 0px
-    }
-    .flag.bb{
-        height:14px;
-        background-position:-396px 0px
-    }
-    .flag.bd{
-        height:12px;
-        background-position:-418px 0px
-    }
-    .flag.be{
-        height:15px;
-        background-position:-440px 0px
-    }
-    .flag.bf{
-        height:14px;
-        background-position:-460px 0px
-    }
-    .flag.bg{
-        height:12px;
-        background-position:-482px 0px
-    }
-    .flag.bh{
-        height:12px;
-        background-position:-504px 0px
-    }
-    .flag.bi{
-        height:12px;
-        background-position:-526px 0px
-    }
-    .flag.bj{
-        height:14px;
-        background-position:-548px 0px
-    }
-    .flag.bl{
-        height:14px;
-        background-position:-570px 0px
-    }
-    .flag.bm{
-        height:10px;
-        background-position:-592px 0px
-    }
-    .flag.bn{
-        height:10px;
-        background-position:-614px 0px
-    }
-    .flag.bo{
-        height:14px;
-        background-position:-636px 0px
-    }
-    .flag.bq{
-        height:14px;
-        background-position:-658px 0px
-    }
-    .flag.br{
-        height:14px;
-        background-position:-680px 0px
-    }
-    .flag.bs{
-        height:10px;
-        background-position:-702px 0px
-    }
-    .flag.bt{
-        height:14px;
-        background-position:-724px 0px
-    }
-    .flag.bv{
-        height:15px;
-        background-position:-746px 0px
-    }
-    .flag.bw{
-        height:14px;
-        background-position:-768px 0px
-    }
-    .flag.by{
-        height:10px;
-        background-position:-790px 0px
-    }
-    .flag.bz{
-        height:14px;
-        background-position:-812px 0px
-    }
-    .flag.ca{
-        height:10px;
-        background-position:-834px 0px
-    }
-    .flag.cc{
-        height:10px;
-        background-position:-856px 0px
-    }
-    .flag.cd{
-        height:15px;
-        background-position:-878px 0px
-    }
-    .flag.cf{
-        height:14px;
-        background-position:-900px 0px
-    }
-    .flag.cg{
-        height:14px;
-        background-position:-922px 0px
-    }
-    .flag.ch{
-        height:15px;
-        background-position:-944px 0px
-    }
-    .flag.ci{
-        height:14px;
-        background-position:-961px 0px
-    }
-    .flag.ck{
-        height:10px;
-        background-position:-983px 0px
-    }
-    .flag.cl{
-        height:14px;
-        background-position:-1005px 0px
-    }
-    .flag.cm{
-        height:14px;
-        background-position:-1027px 0px
-    } */
+    /* .flag.ac{
+         height:10px;
+         background-position:0px 0px
+     }
+     .flag.ad{
+         height:14px;
+         background-position:-22px 0px
+     }
+     .flag.ae{
+         height:10px;
+         background-position:-44px 0px
+     }
+     .flag.af{
+         height:14px;
+         background-position:-66px 0px
+     }
+     .flag.ag{
+         height:14px;
+         background-position:-88px 0px
+     }
+     .flag.ai{
+         height:10px;
+         background-position:-110px 0px
+     }
+     .flag.al{
+         height:15px;
+         background-position:-132px 0px
+     }
+     .flag.am{
+         height:10px;
+         background-position:-154px 0px
+     }
+     .flag.ao{
+         height:14px;
+         background-position:-176px 0px
+     }
+     .flag.aq{
+         height:14px;
+         background-position:-198px 0px
+     }
+     .flag.ar{
+         height:13px;
+         background-position:-220px 0px
+     }
+     .flag.as{
+         height:10px;
+         background-position:-242px 0px
+     }
+     .flag.at{
+         height:14px;
+         background-position:-264px 0px
+     }
+     .flag.au{
+         height:10px;
+         background-position:-286px 0px
+     }
+     .flag.aw{
+         height:14px;
+         background-position:-308px 0px
+     }
+     .flag.ax{
+         height:13px;
+         background-position:-330px 0px
+     }
+     .flag.az{
+         height:10px;
+         background-position:-352px 0px
+     }
+     .flag.ba{
+         height:10px;
+         background-position:-374px 0px
+     }
+     .flag.bb{
+         height:14px;
+         background-position:-396px 0px
+     }
+     .flag.bd{
+         height:12px;
+         background-position:-418px 0px
+     }
+     .flag.be{
+         height:15px;
+         background-position:-440px 0px
+     }
+     .flag.bf{
+         height:14px;
+         background-position:-460px 0px
+     }
+     .flag.bg{
+         height:12px;
+         background-position:-482px 0px
+     }
+     .flag.bh{
+         height:12px;
+         background-position:-504px 0px
+     }
+     .flag.bi{
+         height:12px;
+         background-position:-526px 0px
+     }
+     .flag.bj{
+         height:14px;
+         background-position:-548px 0px
+     }
+     .flag.bl{
+         height:14px;
+         background-position:-570px 0px
+     }
+     .flag.bm{
+         height:10px;
+         background-position:-592px 0px
+     }
+     .flag.bn{
+         height:10px;
+         background-position:-614px 0px
+     }
+     .flag.bo{
+         height:14px;
+         background-position:-636px 0px
+     }
+     .flag.bq{
+         height:14px;
+         background-position:-658px 0px
+     }
+     .flag.br{
+         height:14px;
+         background-position:-680px 0px
+     }
+     .flag.bs{
+         height:10px;
+         background-position:-702px 0px
+     }
+     .flag.bt{
+         height:14px;
+         background-position:-724px 0px
+     }
+     .flag.bv{
+         height:15px;
+         background-position:-746px 0px
+     }
+     .flag.bw{
+         height:14px;
+         background-position:-768px 0px
+     }
+     .flag.by{
+         height:10px;
+         background-position:-790px 0px
+     }
+     .flag.bz{
+         height:14px;
+         background-position:-812px 0px
+     }
+     .flag.ca{
+         height:10px;
+         background-position:-834px 0px
+     }
+     .flag.cc{
+         height:10px;
+         background-position:-856px 0px
+     }
+     .flag.cd{
+         height:15px;
+         background-position:-878px 0px
+     }
+     .flag.cf{
+         height:14px;
+         background-position:-900px 0px
+     }
+     .flag.cg{
+         height:14px;
+         background-position:-922px 0px
+     }
+     .flag.ch{
+         height:15px;
+         background-position:-944px 0px
+     }
+     .flag.ci{
+         height:14px;
+         background-position:-961px 0px
+     }
+     .flag.ck{
+         height:10px;
+         background-position:-983px 0px
+     }
+     .flag.cl{
+         height:14px;
+         background-position:-1005px 0px
+     }
+     .flag.cm{
+         height:14px;
+         background-position:-1027px 0px
+     } */
     .flag.cn{
         height:14px;
         background-position:-1049px 0px
@@ -1251,41 +1279,41 @@
         background-position:-1533px 0px
     }
     */.flag.es{
-        height:14px;
-        background-position:-1555px 0px
-    }
-   /* .flag.et{
-        height:10px;
-        background-position:-1577px 0px
-    }
-    .flag.eu{
-        height:14px;
-        background-position:-1599px 0px
-    }
-    .flag.fi{
-        height:12px;
-        background-position:-1621px 0px
-    }
-    .flag.fj{
-        height:10px;
-        background-position:-1643px 0px
-    }
-    .flag.fk{
-        height:10px;
-        background-position:-1665px 0px
-    }
-    .flag.fm{
-        height:11px;
-        background-position:-1687px 0px
-    }
-    .flag.fo{
-        height:15px;
-        background-position:-1709px 0px
-    }
-    */.flag.fr{
-        height:14px;
-        background-position:-1731px 0px
-    }
+                height:14px;
+                background-position:-1555px 0px
+            }
+    /* .flag.et{
+         height:10px;
+         background-position:-1577px 0px
+     }
+     .flag.eu{
+         height:14px;
+         background-position:-1599px 0px
+     }
+     .flag.fi{
+         height:12px;
+         background-position:-1621px 0px
+     }
+     .flag.fj{
+         height:10px;
+         background-position:-1643px 0px
+     }
+     .flag.fk{
+         height:10px;
+         background-position:-1665px 0px
+     }
+     .flag.fm{
+         height:11px;
+         background-position:-1687px 0px
+     }
+     .flag.fo{
+         height:15px;
+         background-position:-1709px 0px
+     }
+     */.flag.fr{
+              height:14px;
+              background-position:-1731px 0px
+          }
     .flag.ga{
         height:15px;
         background-position:-1753px 0px
@@ -1475,9 +1503,9 @@
         background-position:-2765px 0px
     }
     */.flag.kr{
-        height:14px;
-        background-position:-2787px 0px
-    }
+              height:14px;
+              background-position:-2787px 0px
+          }
     /*.flag.kw{
         height:10px;
         background-position:-2809px 0px
@@ -1724,9 +1752,9 @@
         background-position:-4119px 0px
     }
     */.flag.pt{
-        height:14px;
-        background-position:-4141px 0px
-    }
+              height:14px;
+              background-position:-4141px 0px
+          }
     /*.flag.pw{
         height:13px;
         background-position:-4163px 0px
@@ -1752,9 +1780,9 @@
         background-position:-4273px 0px
     }
     */.flag.ru{
-        height:14px;
-        background-position:-4295px 0px
-    }
+              height:14px;
+              background-position:-4295px 0px
+          }
     /*.flag.rw{
         height:14px;
         background-position:-4317px 0px
