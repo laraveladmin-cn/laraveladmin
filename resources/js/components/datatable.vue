@@ -59,7 +59,7 @@
                                 <i class="fa" :class="show_export_fields?'fa-angle-double-up':'fa-angle-double-down'"></i>
                                 {{$t("Export fields")}}
                             </button>
-                            <button type="button" :title="$t('Import data')" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                            <button type="button" :title="$t('Import data')" class="btn btn-default import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                 <i class="fa fa-folder-open-o"></i>
                                 {{$t("Bulk import")}}
                                 <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false" />
@@ -83,17 +83,17 @@
                                     <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="_placeholder" class="form-control"  type="text">
                                     <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="_placeholder" type="text" class="form-control">
                                     <div class="input-group-btn">
-                                        <button type="button" :title="$t('Search')" class="btn btn-primary" @click="search">
+                                        <button type="button" :title="$t('Search')" class="btn" :class="'btn-'+theme" @click="search">
                                             <i class="fa fa-search"></i>
                                         </button>
-                                        <button type="button" :title="$t('Reset')" class="btn btn-primary " @click="reset">
+                                        <button type="button" :title="$t('Reset')" class="btn" :class="'btn-'+theme" @click="reset">
                                             <i class="fa fa-repeat"></i>
                                         </button>
                                         <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                               <i class="glyphicon glyphicon-folder-open"></i>
                                               <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
                                           </button>-->
-                                        <button type="button" :title="$t('Export data')" class="btn btn-primary" @click="download" v-if="data.configUrl['exportUrl']">
+                                        <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl']">
                                             <i class="glyphicon glyphicon-download-alt"></i>
                                         </button>
                                         <slot name="input_group_add_btn" :data="data"></slot>
@@ -131,17 +131,17 @@
                                     <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="_placeholder" class="form-control"  type="text">
                                     <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="_placeholder" type="text" class="form-control">
                                     <div class="input-group-btn">
-                                        <button type="button" :title="$t('Search')" class="btn btn-primary" @click="search">
+                                        <button type="button" :title="$t('Search')" class="btn" :class="'btn-'+theme" @click="search">
                                             <i class="fa fa-search"></i>
                                         </button>
-                                        <button type="button" :title="$t('Reset')" class="btn btn-primary " @click="reset">
+                                        <button type="button" :title="$t('Reset')" class="btn" :class="'btn-'+theme" @click="reset">
                                             <i class="fa fa-repeat"></i>
                                         </button>
                                         <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
                                               <i class="glyphicon glyphicon-folder-open"></i>
                                               <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
                                           </button>-->
-                                        <button type="button" :title="$t('Export data')" class="btn btn-primary" @click="download" v-if="data.configUrl['exportUrl']">
+                                        <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl']">
                                             <i class="glyphicon glyphicon-download-alt"></i>
                                         </button>
                                         <slot name="input_group_add_btn" :data="data"></slot>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="row" v-show="btnSizerMore">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <button type="button" class="btn btn-primary pull-right sizer-tool-btn" @click="search">{{$t('Search')}}</button>
+                            <button type="button" class="btn pull-right sizer-tool-btn" :class="'btn-'+theme"  @click="search">{{$t('Search')}}</button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
                             <button type="button" class="btn btn-default sizer-tool-btn" @click="reset">{{$t('Reset')}}</button>
@@ -825,7 +825,8 @@
             ...mapState([
                 '_token',
                 'use_url',
-                'statusClass'
+                'statusClass',
+                'theme'
             ]),
             options_key(){
                 return typeof this.options.optionsKey=="undefined"?'options':this.options.optionsKey;

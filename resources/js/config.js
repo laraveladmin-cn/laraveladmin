@@ -40,6 +40,7 @@ let AppConfig = {
     default_language:'',
     locales:[],
     tinymce_key:'',
+    theme: localStorage.getItem('theme') || 'primary',//主题
     ...(window.AppConfig || {})
 };
 AppConfig.language = (localStorage.getItem('language') || AppConfig.default_language).replace(/\_/g,'-');
