@@ -101,7 +101,8 @@
         },
         computed:{
             ...mapState([
-                'use_url'
+                'use_url',
+                'theme'
             ]),
 
         }

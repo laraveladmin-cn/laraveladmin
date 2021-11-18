@@ -2,7 +2,7 @@
     <div class="admin_technology_index">
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box box-primary" :options="options">
+                <data-table class="box" :class="'box-'+theme" :options="options">
                     <template slot="col" slot-scope="props">
                         <ul class="products-list product-list-in-box" v-if="props.k=='name'">
                             <li class="item">
@@ -66,8 +66,13 @@
                 }
             };
         },
-        computed: {},
+        computed: {
+            ...mapState([
+                'theme'
+            ])
+        },
         methods: {},
+
     };
 </script>
 <style lang="scss" scoped>

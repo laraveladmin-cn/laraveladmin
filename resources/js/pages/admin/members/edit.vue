@@ -1,6 +1,6 @@
 <template>
         <div class="app\_models\_member_edit">
-        <div class="box box-primary">
+        <div class="box" :class="'box-'+theme">
             <div class="box-header with-border">
                 <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
             </div>
@@ -90,7 +90,8 @@
         methods: {},
         computed: {
             ...mapState([
-                'use_url'
+                'use_url',
+                'theme'
             ])
         },
         watch:{

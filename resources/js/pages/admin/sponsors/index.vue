@@ -2,7 +2,7 @@
     <div class="admin_sponsor_index">
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box box-primary" :options="options" ref="table">
+                <data-table class="box" :class="'box-'+theme" :options="options" ref="table">
                     <template slot="col" slot-scope="props">
                        <span v-if="props.field.type =='url'">
                            <a :href="array_get(props.row,props.k)" target="_blank">
@@ -69,7 +69,8 @@
         },
         computed: {
             ...mapState([
-                'use_url'
+                'use_url',
+                'theme'
             ])
         },
         methods: {},
