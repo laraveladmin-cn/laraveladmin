@@ -133,7 +133,7 @@
                                     </li>
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a class="btn btn-default btn-flat">{{$tp('Personal center')}}</a>
+                                            <a @click="toUrl('/admin/personage/index',$event)" class="btn btn-default btn-flat">{{$tp('Personal center')}}</a>
                                         </div>
                                         <div class="pull-right">
                                             <a class="btn btn-default btn-flat" @click="logout">{{$t('Logout')}}</a>
