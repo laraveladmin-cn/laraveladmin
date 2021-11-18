@@ -113,7 +113,6 @@
                             <li>
                                 <a data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                             </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -365,7 +364,7 @@
 
                         <ul class="list-unstyled clearfix">
                             <li class="skin-item" v-for="(item,index) in skins">
-                                <a href="javascript:void(0)" class="clearfix full-opacity-hover" @click="setSkin(item.class)">
+                                <a href="javascript:void(0)" class="clearfix full-opacity-hover" @click="setSkin(item)">
                                     <div>
                                         <span class="span1" :class="item.class1" :style="{background: item.background1}"></span>
                                         <span class="span2" :class="item.class2" :style="{background: item.background2}"></span>
@@ -421,90 +420,102 @@
                 dark:dark,
                 skins: [
                     {
-                    "name": "Blue",
-                    "class": "skin-blue",
-                    "background1": "#367fa9",
-                    "class2": "bg-light-blue",
-                    "background3": "#222d32",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "White",
-                    "class": "skin-black",
-                    "background1": "#fefefe",
-                    "background2": " #fefefe",
-                    "background3": "#222",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "Purple",
-                    "class": "skin-purple",
-                    "class1": "bg-purple-active",
-                    "class2": "bg-purple",
-                    "background3": "#222d32",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "Green",
-                    "class": "skin-green",
-                    "class1": "bg-green-active",
-                    "class2": "bg-green",
-                    "background3": "#222d32",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "Red",
-                    "class": "skin-red",
-                    "class1": "bg-red-active",
-                    "class2": "bg-red",
-                    "background3": "#222d32",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "Yellow",
-                    "class": "skin-yellow",
-                    "class1": "bg-yellow-active",
-                    "class2": "bg-yellow",
-                    "background3": "#222d32",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "Blue Light",
-                    "class": "skin-blue-light",
-                    "background1": "#367fa9",
-                    "class2": "bg-light-blue",
-                    "background3": "#f9fafc",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "All White",
-                    "class": "skin-black-light",
-                    "background1": "#fefefe",
-                    "background2": " #fefefe",
-                    "background3": "#f9fafc",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "Purple Light",
-                    "class": "skin-purple-light",
-                    "class1": "bg-purple-active",
-                    "class2": "bg-purple",
-                    "background3": "#f9fafc",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "Green Light",
-                    "class": "skin-green-light",
-                    "class1": "bg-green-active",
-                    "class2": "bg-green",
-                    "background3": "#f9fafc",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "Red Light",
-                    "class": "skin-red-light",
-                    "class1": "bg-red-active",
-                    "class2": "bg-red",
-                    "background3": "#f9fafc",
-                    "background4": "#f4f5f7"
-                }, {
-                    "name": "Yellow Light",
-                    "class": "skin-yellow-light",
-                    "class1": "bg-yellow-active",
-                    "class2": "bg-yellow",
-                    "background3": "#f9fafc",
-                    "background4": "#f4f5f7"
-                }]
+                        "name": "Blue",
+                        "class": "skin-blue",
+                        "background1": "#367fa9",
+                        "class2": "bg-light-blue",
+                        "background3": "#222d32",
+                        "background4": "#f4f5f7",
+                        "theme": "primary"
+                    }, {
+                        "name": "White",
+                        "class": "skin-black",
+                        "background1": "#fefefe",
+                        "background2": " #fefefe",
+                        "background3": "#222",
+                        "background4": "#f4f5f7",
+                        "theme": "default"
+                    }, {
+                        "name": "Purple",
+                        "class": "skin-purple",
+                        "class1": "bg-purple-active",
+                        "class2": "bg-purple",
+                        "background3": "#222d32",
+                        "background4": "#f4f5f7",
+                        "theme": "info"
+                    }, {
+                        "name": "Green",
+                        "class": "skin-green",
+                        "class1": "bg-green-active",
+                        "class2": "bg-green",
+                        "background3": "#222d32",
+                        "background4": "#f4f5f7",
+                        "theme": "success"
+                    }, {
+                        "name": "Red",
+                        "class": "skin-red",
+                        "class1": "bg-red-active",
+                        "class2": "bg-red",
+                        "background3": "#222d32",
+                        "background4": "#f4f5f7",
+                        "theme": "danger"
+                    }, {
+                        "name": "Yellow",
+                        "class": "skin-yellow",
+                        "class1": "bg-yellow-active",
+                        "class2": "bg-yellow",
+                        "background3": "#222d32",
+                        "background4": "#f4f5f7",
+                        "theme": "warning"
+                    }, {
+                        "name": "Blue Light",
+                        "class": "skin-blue-light",
+                        "background1": "#367fa9",
+                        "class2": "bg-light-blue",
+                        "background3": "#f9fafc",
+                        "background4": "#f4f5f7",
+                        "theme": "primary"
+                    }, {
+                        "name": "All White",
+                        "class": "skin-black-light",
+                        "background1": "#fefefe",
+                        "background2": " #fefefe",
+                        "background3": "#f9fafc",
+                        "background4": "#f4f5f7",
+                        "theme": "default"
+                    }, {
+                        "name": "Purple Light",
+                        "class": "skin-purple-light",
+                        "class1": "bg-purple-active",
+                        "class2": "bg-purple",
+                        "background3": "#f9fafc",
+                        "background4": "#f4f5f7",
+                        "theme": "info"
+                    }, {
+                        "name": "Green Light",
+                        "class": "skin-green-light",
+                        "class1": "bg-green-active",
+                        "class2": "bg-green",
+                        "background3": "#f9fafc",
+                        "background4": "#f4f5f7",
+                        "theme": "success"
+                    }, {
+                        "name": "Red Light",
+                        "class": "skin-red-light",
+                        "class1": "bg-red-active",
+                        "class2": "bg-red",
+                        "background3": "#f9fafc",
+                        "background4": "#f4f5f7",
+                        "theme": "danger"
+                    }, {
+                        "name": "Yellow Light",
+                        "class": "skin-yellow-light",
+                        "class1": "bg-yellow-active",
+                        "class2": "bg-yellow",
+                        "background3": "#f9fafc",
+                        "background4": "#f4f5f7",
+                        "theme": "warning"
+                    }]
             };
         },
         mounted(){
@@ -552,9 +563,12 @@
                 return res;
             },
             //设置主题
-            setSkin(value){
+            setSkin(item){
+                let value = item.class;
                 this.skin = value;
                 localStorage.setItem('skin',value);
+                localStorage.setItem('theme',item.theme);
+                this.set({key:'theme',theme:item.theme});
             },
             load(){
                 //重载触发事件绑定
@@ -572,6 +586,7 @@
             ...mapMutations({
                 menuSet:'menu/set',  //设置当前路由,用于菜单选中
                 setLanguage:'setLanguage',
+                set:'set'
             }),
             search(){
                 this.menuSet({

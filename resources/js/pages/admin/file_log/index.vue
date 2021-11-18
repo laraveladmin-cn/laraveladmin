@@ -2,7 +2,7 @@
     <div class="file_log_index">
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box box-primary" :options="options">
+                <data-table class="box" :class="'box-'+theme" :options="options">
                     <template slot="col-operation" slot-scope="props">
                         <a :title="$t('Download')"
                            :href="props.row.url"
@@ -71,9 +71,10 @@
         methods: {},
         computed: {
             ...mapState([
-                'use_url'
+                'use_url',
+                'theme'
             ])
-        },
+        }
     };
 </script>
 <style scoped>

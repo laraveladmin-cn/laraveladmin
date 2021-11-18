@@ -51,7 +51,7 @@ export default {
         },
         //退出登录
         logout({ dispatch,state, commit, rootState }){
-            axios.post(rootState['web_url']+'/open/logout',{_token:rootState._token}).then(function (response) {
+            let callback = function(){
                 dispatch('refreshToken',null,{root:true}); //刷新token
                 //清空用户数据
                 commit({
@@ -60,7 +60,13 @@ export default {
                     user: {}
                 });
                 setCookie('Authorization','',0);
+            };
+            axios.post(rootState['web_url']+'/open/logout',{_token:rootState._token}).then(function (response) {
+                callback();
             }).catch(function (error) {
+                if(error.response.status==302){
+                    callback();
+                }
             });
         }
     },
