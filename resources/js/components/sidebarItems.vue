@@ -7,7 +7,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
-        <ul class="treeview-menu" v-show="menu['childrens'] && open" >
+        <ul class="treeview-menu" v-if="menu['childrens'] && menu['childrens'].length" v-show="open" >
             <li is="sidebar-items"
                 v-for="children in menu['childrens']"
                 :class="{active:children['active'],'menu-open':children['active']}"
