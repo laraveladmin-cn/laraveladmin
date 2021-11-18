@@ -171,7 +171,8 @@
         },
         computed:{
             ...mapState([
-                'use_url'
+                'use_url',
+                'theme'
             ]),
             ...mapState('user',{
                 user:state => state.user
