@@ -1,6 +1,6 @@
 <template>
     <div class="admin_user_edit">
-        <div class="box box-primary">
+        <div class="box" :class="'box-'+theme">
             <div class="box-header with-border">
                 <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
             </div>
@@ -120,6 +120,11 @@
                     params:this.$router.currentRoute.query || {}
                 },
             };
+        },
+        computed:{
+            ...mapState([
+                'theme'
+            ])
         }
     };
 </script>

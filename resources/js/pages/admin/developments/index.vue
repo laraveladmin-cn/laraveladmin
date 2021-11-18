@@ -260,7 +260,8 @@
         },
         computed:{
             ...mapState([
-                'use_url'
+                'use_url',
+                'theme'
             ]),
             _commands(){
                 return collect(this.commands).map((item)=>{

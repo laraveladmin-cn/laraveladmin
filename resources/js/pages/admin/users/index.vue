@@ -5,7 +5,7 @@
         </modal>
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box box-primary" :options="options" ref="table">
+                <data-table class="box" :class="'box-'+theme" :options="options" ref="table">
                     <template slot="add" slot-scope="props">
                         <button class="btn btn-info" @click="openModal(props.url)">
                             <i class="fa fa-plus"></i> {{$t('New')}}
@@ -98,7 +98,9 @@
             };
         },
         computed:{
-
+            ...mapState([
+                'theme'
+            ]),
         },
         methods:{
             openModal(val){
