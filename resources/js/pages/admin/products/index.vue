@@ -2,7 +2,7 @@
     <div class="admin_user_index">
         <div class="row">
             <div class="col-xs-12">
-                <data-table ref="table" class="box box-primary" :options="options">
+                <data-table ref="table" class="box" :class="'box-'+theme" :options="options">
                     <template slot="header" slot-scope="props">
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
@@ -183,7 +183,8 @@
         },
         computed:{
             ...mapState([
-                'use_url'
+                'use_url',
+                'theme'
             ]),
             pie_optons(){
                 let count_status = this.$refs['table'].data.list.count_status || {};

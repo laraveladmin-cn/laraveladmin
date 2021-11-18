@@ -2,7 +2,7 @@
     <div class="admin_user_index">
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box box-primary" ref="table" :options="options">
+                <data-table class="box" :class="'box-'+theme" ref="table" :options="options">
                     <template slot="col" slot-scope="props">
                         <span v-if="props.field.type =='label'">
                             <span class="label" :class="'label-'+statusClass[props.row[props.k]%statusClass.length]">
@@ -68,7 +68,8 @@
         },
         computed:{
             ...mapState([
-                'use_url'
+                'use_url',
+                'theme'
             ]),
         },
         methods:{
