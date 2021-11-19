@@ -187,7 +187,7 @@
                                 <li v-for="v in pageLength" v-show="data.list['current_page']-pageLength+v-1>0">
                                     <a @click="toPage(data.list['current_page']-pageLength+v-1)">{{data.list['current_page']-pageLength+v-1}}</a>
                                 </li>
-                                <li class="active">
+                                <li class="active" :class="'pagination-'+theme" >
                                     <a>{{data.list['current_page'] || 1}}</a>
                                 </li>
                                 <li v-for="v in pageLength" v-show="data.list['current_page']+v<=data.list['last_page']">
@@ -356,7 +356,7 @@
                                 <li v-for="v in pageLength" v-show="data.list['current_page']-pageLength+v-1>0">
                                     <a @click="toPage(data.list['current_page']-pageLength+v-1)">{{data.list['current_page']-pageLength+v-1}}</a>
                                 </li>
-                                <li class="active">
+                                <li class="active" :class="'pagination-'+theme" >
                                     <a>{{data.list['current_page'] || 1}}</a>
                                 </li>
                                 <li v-for="v in pageLength" v-show="data.list['current_page']+v<=data.list['last_page']">
@@ -936,7 +936,8 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "../../sass/_variables.scss";
     .table{
         overflow: hidden;
         position: relative;
@@ -1086,6 +1087,21 @@
         }
         .skin-dark .table-responsive>.table-bordered {
             border: 1px solid #444;
+        }
+    }
+    @each $i in $themes {
+        $item:map-get($btns, $i);
+        .pagination>.pagination-#{$i}>a,
+        .pagination>.pagination-#{$i}>span,
+        {
+            background-color: map-get($item,'bg');
+            border-color: map-get($item,'border');
+        }
+        .pagination>.pagination-#{$i}>a:focus,
+        .pagination>.pagination-#{$i}>a:hover,
+        .pagination>.pagination-#{$i}>span:focus,
+        .pagination>.pagination-#{$i}>span:hover{
+            background-color: map-get($item,'hover');
         }
     }
 
