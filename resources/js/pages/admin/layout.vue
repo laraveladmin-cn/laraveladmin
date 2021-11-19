@@ -756,13 +756,6 @@
                 editormdJs.src = 'https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js';
                 document.body.appendChild(editormdJs);
             }
-            if(!document.getElementById('velocity-js')){
-                let velocityJs = document.createElement('script');
-                velocityJs.id = 'bootstrap-js';
-                velocityJs.type = 'text/javascript';
-                velocityJs.src = 'https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js';
-                document.body.appendChild(velocityJs);
-            }
             this.menuSet({
                 key:'path',
                 path:this.$router.currentRoute.matched[1].path.replace(':id','{id}')

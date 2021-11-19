@@ -1,27 +1,21 @@
-// Body
-$body-bg: #f8fafc;
-
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
-
-// Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
-
+$themes: 'primary' 'info' 'success' 'warning' 'danger';
+$error: #d73925;
 // Brands
-$brand-primary: #3097D1;
-$brand-info: #8eb4cb;
-$brand-success: #2ab27b;
-$brand-warning: #cbb956;
-$brand-danger: #bf5329;
-$error: #dd4b39;
+$brands:(
+    primary:#3c8dbc,
+    info:#00c0ef,
+    success:#00a65a,
+    warning:#f39c12,
+    danger:#dd4b39
+);
+$btns:();
+@each $i in $themes {
+    $btns: map-merge($btns, (
+        $i:(
+                bg:map-get($brands, $i),
+                border:darken(map-get($brands, $i), 5%),
+                hover:darken(map-get($brands, $i), 5%)
+            )
+        )
+    ) !global
+}
