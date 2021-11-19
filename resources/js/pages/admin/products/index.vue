@@ -40,7 +40,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <echart :options="pie_optons" style="height:200px;"></echart>
+                                <echart :options="pie_optons" style="height:200px;" v-if="array_get(props,'data.list.total')"></echart>
                             </div>
                         </div>
                     </template>
