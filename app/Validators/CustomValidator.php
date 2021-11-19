@@ -198,6 +198,13 @@ class CustomValidator extends Validator{
 
     }
 
+    public function validateAlphaDashSpace($attribute, $value,$parameters){
+        if (! is_string($value) && ! is_numeric($value)) {
+            return false;
+        }
+        return preg_match('/^[\pL\pM\pN _-]+$/u', $value) > 0;
+    }
+
 
 
 

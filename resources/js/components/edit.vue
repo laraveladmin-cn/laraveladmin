@@ -183,9 +183,9 @@
                         }
                     }).catch((error) =>{
                         //this.error = catchError(error);
-                        this.validation.setErrors(catchError(error));
                         this.submiting = false;
                         if(error.response && error.response.status==422){
+                            this.validation.setErrors(catchError(error));
                             this.pushMessage({
                                 'showClose':true,
                                 'title':this.$t('{action} failed!',{action:this.$t('Submission')}),
