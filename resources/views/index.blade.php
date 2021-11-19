@@ -21,9 +21,6 @@
 <body>
 <div class="hide">
     <h1>LaravelAdmin</h1>
-    <p><a href="https://gitee.com/laravel-admin/laraveladmin"><img src="https://img.shields.io/packagist/l/encore/laravel-admin.svg?maxAge=2592000" alt="Packagist" /></a></p>
-    <p><a href="https://gitee.com/laravel-admin/laraveladmin"><img src="https://img.shields.io/packagist/dt/zsping1989/laravel-admin.svg?style=flat-square" alt="Total Downloads" /></a></p>
-    <p><a href="https://gitee.com/laravel-admin/laraveladmin"><img src="https://img.shields.io/badge/Awesome-laraveladmin-green" alt="Awesome Laravel" /></a></p>
     <center>
         <img src="https://www.laraveladmin.cn/dist/img/logo1.png" data-origin="httpw://www.laraveladmin.cn/dist/img/logo1.png" alt="Logo" style="width: 200px" />
     </center>
