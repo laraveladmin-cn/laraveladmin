@@ -2,18 +2,6 @@
     <img src="https://www.laraveladmin.cn/dist/img/logo1.png" width="200px" data-origin="httpw://www.laraveladmin.cn/dist/img/logo1.png" alt="Logo" style="width: 200px" />
 </p>
 
-<p align="center">
-    <a href="https://gitee.com/laravel-admin/laraveladmin" target="_blank" rel="noopener">
-        <img src="https://img.shields.io/packagist/l/encore/laravel-admin.svg?maxAge=2592000" data-origin="https://img.shields.io/packagist/l/encore/laravel-admin.svg?maxAge=2592000" alt="Packagist">
-    </a>  
-    <a href="https://gitee.com/laravel-admin/laraveladmin" target="_blank" rel="noopener">
-        <img src="https://img.shields.io/packagist/dt/zsping1989/laravel-admin.svg?style=flat-square" data-origin="https://img.shields.io/packagist/dt/zsping1989/laravel-admin.svg?style=flat-square" alt="Total Downloads">
-    </a>
-    <a href="https://gitee.com/laravel-admin/laraveladmin" target="_blank" rel="noopener">
-        <img src="https://img.shields.io/badge/Awesome-laraveladmin-green" data-origin="https://img.shields.io/badge/Awesome-laraveladmin-green" alt="Awesome Laravel">
-    </a>
-</p>
-
 # LaravelAdmin
 
 ## 项目简介
