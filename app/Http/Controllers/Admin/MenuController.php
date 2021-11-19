@@ -189,7 +189,7 @@ class MenuController extends Controller
         $_type = Request::input('_type',0);
         $validate = [
             'name' => 'required',
-            'icons' => 'nullable|alpha_dash',
+            'icons' => 'nullable|alpha_dash_space',
             'parent_id' => 'sometimes|required|exists:menus,id,deleted_at,NULL',
             'is_page' => 'in:0,1',
             'status' => 'in:1,2',
