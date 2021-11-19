@@ -47,7 +47,7 @@
         {
             "id": 5,
             "name": "Backstage home page",
-            "icons": "fa-home",
+            "icons": "fa-home text-red",
             "description": "Backstage home page",
             "url": "/admin/index",
             "parent_id": 2,
@@ -78,7 +78,7 @@
         {
             "id": 6,
             "name": "User management",
-            "icons": "fa-users",
+            "icons": "fa-users text-yellow",
             "description": "User management group",
             "parent_id": 2,
             "method": [],
@@ -88,7 +88,7 @@
         {
             "id": 7,
             "name": "Other settings",
-            "icons": "fa-gears",
+            "icons": "fa-gears text-yellow",
             "description": "Other settings group",
             "parent_id": 2,
             "method": [],
@@ -203,7 +203,7 @@
         {
             "id": 8,
             "name": "Personal Center",
-            "icons": "fa-user",
+            "icons": "fa-user text-light-blue",
             "description": "Personal Center Group",
             "parent_id": 2,
             "method": [],
@@ -271,7 +271,7 @@
         {
             "id": 81,
             "name": "Insurance management",
-            "icons": "fa-cubes",
+            "icons": "fa-cubes text-aqua",
             "description": "Insurance management",
             "parent_id": 2,
             "method": [],
@@ -281,7 +281,7 @@
         {
             "id": 82,
             "name": "Cooperation channel",
-            "icons": "fa-globe",
+            "icons": "fa-globe text-green",
             "description": "Insurance management",
             "parent_id": 2,
             "method": [],
