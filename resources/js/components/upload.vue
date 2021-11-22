@@ -15,7 +15,7 @@
                        :accept="accept_str"
                        :on-success="handleSuccess">
                 <slot>
-                    <button class="btn btn-primary">{{$t('Click Upload')}}</button>
+                    <button class="btn" :class="'btn-'+theme">{{$t('Click Upload')}}</button>
                 </slot>
             </el-upload>
         </div>
@@ -201,6 +201,7 @@
             ...mapState([
                 '_token',
                 'use_url',
+                'theme'
             ]),
             headers(){
                 let headers = {
