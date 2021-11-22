@@ -263,3 +263,8 @@
         }
     };
 </script>
+<style scoped>
+    .edit-item-content-min{
+        min-height: 36px
+    }
+</style>
