@@ -80,6 +80,8 @@
     }
 </script>
 
-<style scoped>
-
+<style>
+    .json-view-container .json-view{
+        padding-left: 3rem !important;
+    }
 </style>
