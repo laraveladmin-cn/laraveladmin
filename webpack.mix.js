@@ -30,10 +30,10 @@ mix.webpackConfig({
         chunkFilename: jsPath+'/components/[name].js?id=[chunkhash]',
     }
 });
-mix//.less('resources/less/skins.less', 'public/css')
-    //.sass('resources/sass/app.scss', 'public/css')
-    .js('resources/js/bootstrap.js', 'public/'+jsPath)
-    .js('resources/js/app.js', 'public/'+jsPath)
+mix.less('resources/less/skins.less', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css')
+    //.js('resources/js/bootstrap.js', 'public/'+jsPath)
+    //.js('resources/js/app.js', 'public/'+jsPath)
     .version();
 if (!mix.inProduction()) {
     mix.sourceMaps();
