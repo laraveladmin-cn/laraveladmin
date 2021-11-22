@@ -38,7 +38,7 @@
     "icheck": "^1.0.2",
     "md5": "^2.2.1",
     "qiniu-js": "^2.5.5",
-    "select2": "^4.0.12",
+    "select2": "^4.0.10",
     "sortablejs": "^1.10.2",
     "ueditor": "^1.2.3",
     "vee-validate": "^3.4.0",

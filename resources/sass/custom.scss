@@ -3,6 +3,21 @@ body {
     background: $gray-lte;
     height: 100% !important;
 }
+@each $i in $themes {
+    $item:map-get($btns, $i);
+    .#{$i} {
+        .form-control:focus,.el-input__inner:focus,.avatar-uploader .el-upload:hover{
+            border-color:map-get($item,'border');
+        }
+        .el-switch__label.is-active{
+            color: map-get($item,'bg');
+        }
+        .el-switch.is-checked .el-switch__core{
+            border-color:map-get($item,'border');
+            background-color: map-get($item,'bg');
+        }
+    }
+}
 body {
     .btn-default,
     .btn-primary,
@@ -151,9 +166,7 @@ body {
             color: black;
         }
     }
-    .avatar-uploader .el-upload:hover{
-        border-color:$--border-color-light;
-    }
+
     .el-input.is-disabled .el-input__inner{
         background-color: #eee;
         border-color: #d2d6de;

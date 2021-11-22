@@ -35,14 +35,11 @@ $--color-text-placeholder: $gray-lte;//未选择颜色
 $--color-text-secondary: $secondary;//次要字体颜色
 //边框颜色
 $--border-color-base:$gray-lte;
-$--border-color-light:$light-blue;
-$--border-color-lighter:$light-blue;
-$--border-color-extra-light:$light-blue;
 //背景颜色
 $--color-white:$white;
 $--color-black:$black;
 $--background-color-base:$body-bg;
-$--border-radius-base:0;
+$--input-border-radius:0;
 
 $themes: 'primary' 'info' 'success' 'warning' 'danger';
 $error: #d73925;

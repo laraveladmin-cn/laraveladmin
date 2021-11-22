@@ -596,11 +596,14 @@
             },
             //设置主题
             setSkin(item){
+                $('body').removeClass(this.theme);
+                $('body').addClass(item.theme);
                 let value = item.class;
                 this.skin = value;
                 localStorage.setItem('skin',value);
                 localStorage.setItem('theme',item.theme);
                 this.set({key:'theme',theme:item.theme});
+
             },
             load(){
                 //重载触发事件绑定
@@ -673,7 +676,8 @@
                 'icp',
                 'alerts',
                 'language',
-                'locales'
+                'locales',
+                'theme'
             ]),
             ...mapState('menu',{
                 menus:state => state.menus,
@@ -845,3 +849,4 @@
         background:url('/dist/img/wangjing.png') no-repeat
     }
 </style>
+
