@@ -32,7 +32,7 @@
                                 </button>
                             </div>
                         </div>
-                  </form>
+                    </form>
                 </validation-observer>
                 <div class="social-auth-links text-center other-login" v-if="otherLogin.length && !other">
                     <p>---------------- {{$tp('Other login methods')}} ----------------</p>
@@ -58,7 +58,6 @@
 
     </div>
 </template>
-
 <script>
     import { mapState, mapActions,mapMutations } from 'vuex';
     import {ValidationObserver} from 'vee-validate';
@@ -99,7 +98,7 @@
                 return this.$tp('Please enter your account/email/mobile phone number');
             },
             placeholderPassword(){
-              return this.$t('enter',{name:this.$t('password')});
+                return this.$t('enter',{name:this.$t('password')});
             },
             //登录成功后处理
             loginSucces(res){
@@ -250,7 +249,7 @@
 
     };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .open_login {
         position: relative;
         background: url('/dist/img/login-bg.jpg') no-repeat;
@@ -258,8 +257,17 @@
         -webkit-background-size: cover;
         -o-background-size: cover;
         background-position: center 0;
+        .form-group.has-error label.control-label span{
+            color: #dd4b39;
+        }
     }
-
+    .login-page .control-label{
+        margin-bottom: 0px;
+        span{
+            color: #a4aaae;
+            font-weight: normal;
+        }
+    }
     .login-box {
         position: absolute;
         left: 0;
@@ -274,6 +282,32 @@
     .geetest-code{
         margin-top: 5px;
     }
+    .other-login{
+        div a{
+            margin-top: 10px;
+        }
+        p{
+            margin-bottom: 0px;
+        }
+    }
+    .login-icon {
+        height: 32px;
+        width: 32px;
+        background: #C9C9C9;
+        font-size: 22px;
+        color: #FFFFFF;
+    }
+    .other-login a,.other-login a .img-circle{
+        display: block;
+        margin: 0 auto;
+    }
+    .login-box-msg, .register-box-msg{
+        padding-bottom: 0px;
+    }
+    @media screen and (min-width: 768px) {
+        .en .login-box,
+        .register-box {
+            width: 400px;
+        }
+    }
 </style>
-
-

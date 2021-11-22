@@ -828,5 +828,20 @@
             top: 50px
         }
     }
-
+    .main-sidebar{
+        padding-top:0px;
+    }
+    @media (max-width: 767px) {
+        .main-sidebar {
+            padding-top:0px;
+        }
+    }
+    .main-header{
+        max-height: unset;
+    }
+    .wangjing{
+        height: 19px;
+        width: 19px;
+        background:url('/dist/img/wangjing.png') no-repeat
+    }
 </style>

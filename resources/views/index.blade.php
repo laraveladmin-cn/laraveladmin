@@ -12,6 +12,7 @@
     <meta name="description" content="{{$app_name}},简洁、直观、强悍的前端后端开发框架，让全栈开发更迅速的SPA单页面应用。企业官网:https://www.laraveladmin.cn" />
     <link rel="icon" type="image/x-icon" href="{{config('laravel_admin.logo')}}">
     <link href="/css/app.css?{{$time_str}}" rel="stylesheet">
+    <link href="/css/skins.css?{{$time_str}}" rel="stylesheet">
     <script src="{{config('app.url').getRoutePrefix(config('laravel_admin.web_api_model'))}}/open/config?script=AppConfig{{$time_str}}" type="application/javascript"></script>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>

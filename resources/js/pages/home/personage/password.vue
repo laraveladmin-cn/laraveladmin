@@ -114,3 +114,13 @@
         },
     };
 </script>
+<style lang="scss" scoped>
+    .other-login{
+        div a{
+            margin-top: 10px;
+        }
+        p{
+            margin-bottom: 0px;
+        }
+    }
+</style>

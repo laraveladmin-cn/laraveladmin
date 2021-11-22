@@ -383,4 +383,8 @@
     .has-error .select2-container .select2-selection--single{
         border-color: #dd4b39;
     }
+    body .select2-dropdown {
+        border: 1px solid #d2d6de;
+        border-radius: 0;
+    }
 </style>

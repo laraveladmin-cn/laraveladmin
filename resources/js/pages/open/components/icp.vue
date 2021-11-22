@@ -18,5 +18,12 @@
 </script>
 
 <style scoped>
-
+    .wangjing{
+        height: 19px;
+        width: 19px;
+        background:url('/dist/img/wangjing.png') no-repeat
+    }
+    .icp{
+        margin-top: 10px;
+    }
 </style>
