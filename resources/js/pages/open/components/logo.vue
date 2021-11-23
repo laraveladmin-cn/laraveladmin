@@ -21,5 +21,7 @@
 </script>
 
 <style scoped>
-
+.login-logo{
+    margin-bottom: 10px;
+}
 </style>

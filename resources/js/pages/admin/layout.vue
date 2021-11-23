@@ -221,8 +221,9 @@
                     <section class="content">
                         <transition name="fade"
                                     mode="out-in"
-                                    enter-active-class="animated lightSpeedIn faster"
-                                    leave-active-class="animated lightSpeedOut faster">
+                                    enter-active-class="animated fadeIn faster"
+                                    leave-active-class="animated fadeOut faster">
+
                             <router-view></router-view>
                         </transition>
                     </section>
@@ -564,11 +565,14 @@
             },
             //设置主题
             setSkin(item){
+                $('body').removeClass(this.theme);
+                $('body').addClass(item.theme);
                 let value = item.class;
                 this.skin = value;
                 localStorage.setItem('skin',value);
                 localStorage.setItem('theme',item.theme);
                 this.set({key:'theme',theme:item.theme});
+
             },
             load(){
                 //重载触发事件绑定
@@ -642,7 +646,8 @@
                 'alerts',
                 'name',
                 'language',
-                'locales'
+                'locales',
+                'theme'
             ]),
             ...mapState('menu',{
                 menus:state => state.menus,
@@ -806,10 +811,30 @@
             top: 50px
         }
     }
+<<<<<<< HEAD
     .dropdown-menu .footer{
          padding: 0px;
          border-top: none;
          margin-top: 0px;
     }
 
+=======
+    .main-sidebar{
+        padding-top:0px;
+    }
+    @media (max-width: 767px) {
+        .main-sidebar {
+            padding-top:0px;
+        }
+    }
+    .main-header{
+        max-height: unset;
+    }
+    .wangjing{
+        height: 19px;
+        width: 19px;
+        background:url('/dist/img/wangjing.png') no-repeat
+    }
+>>>>>>> 14be89a9056ff5c65b28d7f91391331395c282c5
 </style>
+

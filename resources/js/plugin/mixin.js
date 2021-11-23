@@ -6,7 +6,8 @@ export default {
             'statusClass',
             'use_url',
             'url',
-            'lifetime'
+            'lifetime',
+            'theme'
         ])
     },
     methods:{
@@ -28,6 +29,7 @@ export default {
     created(){
         //默认语言包
         this.setLanguage(config.language);
+        $('body').addClass(this.theme);
         //添加弹窗拦截器
         window.axios.interceptors.response.use((response)=>{
             //跳转
@@ -132,7 +134,8 @@ export default {
             this.refreshToken();
         },7200000);
 
-    }
+    },
+
 
 
 };

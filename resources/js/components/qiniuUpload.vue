@@ -1,7 +1,7 @@
 <template>
     <div>
         <input v-show="false" type="file" ref="file" @change="changeFile" :accept="accept" />
-        <button class="btn btn-primary btn-sm inline-block"
+        <button class="btn btn-sm inline-block" :class="'btn-'+theme"
                 onclick="return false;"
                 :disabled="file.name && uping==1"
                 @click="selectFile">
@@ -265,6 +265,7 @@
             ...mapState([
                 '_token',
                 'use_url',
+                'theme'
             ]),
             button_show(){
                 return this.uping==0?this.$t('Select the file'):this.$t('Reselect');//'选择文件':'重新选择';

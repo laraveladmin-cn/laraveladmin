@@ -357,6 +357,18 @@
 </script>
 <style lang="scss">
     @import url('https://cdn.bootcss.com/select2/4.0.10/css/select2.min.css');
+    @import "sass/_variables.scss";
+    @each $i in $themes {
+        $item:map-get($btns, $i);
+        .#{$i} {
+            .select2-container--default .select2-results__option--highlighted[aria-selected]{
+                background-color: map-get($item,'hover');
+            }
+            .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default .select2-search--dropdown .select2-search__field{
+                border-color:map-get($item,'border') !important;
+            }
+        }
+    }
     .select2-container--default .select2-results__option--highlighted[aria-selected] {
         background-color: #3c8dbc;
     }
@@ -382,5 +394,9 @@
     }
     .has-error .select2-container .select2-selection--single{
         border-color: #dd4b39;
+    }
+    body .select2-dropdown {
+        border: 1px solid #d2d6de;
+        border-radius: 0;
     }
 </style>

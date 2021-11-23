@@ -264,4 +264,13 @@
     .control-label{
         margin-bottom:0px;
     }
+    .login-box-msg, .register-box-msg{
+        padding-bottom: 0px;
+    }
+    @media screen and (min-width: 768px) {
+        .en .login-box,
+        .register-box {
+            width: 400px;
+        }
+    }
 </style>

@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <transition name="fade" enter-active-class="animated lightSpeedIn faster" mode="out-in"  leave-active-class="animated lightSpeedOut faster">
+        <transition name="fade" enter-active-class="animated fadeIn faster" mode="out-in"  leave-active-class="animated fadeOut faster">
             <router-view class="open-content"></router-view>
         </transition>
         <footer>

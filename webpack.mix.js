@@ -23,6 +23,7 @@ mix.webpackConfig({
             "pages": path.resolve(__dirname, 'resources/js/pages'),
             "bower_components_path": path.resolve(__dirname, 'public/bower_components'),
             "public": path.resolve(__dirname, 'public'),
+            "sass":path.resolve(__dirname, 'resources/sass'),
         },
     },
     output: {
@@ -30,10 +31,15 @@ mix.webpackConfig({
         chunkFilename: jsPath+'/components/[name].js?id=[chunkhash]',
     }
 });
-mix.js('resources/js/app.js', 'public/'+jsPath)
-    .js('resources/js/bootstrap.js', 'public/'+jsPath)
-//    .sass('resources/sass/app.scss', 'public/css')
-    .version();
+if(process.argv.includes('--css')){
+    global.Mix.manifest.name = 'mix-manifest-css.json';
+    mix.less('resources/less/skins.less', 'public/css')
+        .sass('resources/sass/app.scss', 'public/css');
+}else {
+    mix.js('resources/js/bootstrap.js', 'public/'+jsPath)
+        .js('resources/js/app.js', 'public/'+jsPath);
+}
+mix.version();
 if (!mix.inProduction()) {
     mix.sourceMaps();
 }
