@@ -85,7 +85,7 @@
                 let editormdJs = document.createElement('script');
                 editormdJs.id = 'echarts-js';
                 editormdJs.type = 'text/javascript';
-                editormdJs.src = 'https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js';
+                editormdJs.src = '/bower_components/echarts/dist/echarts.min.js';
                 document.body.appendChild(editormdJs);
             }
         },

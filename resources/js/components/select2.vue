@@ -23,6 +23,7 @@
                 return i > -1;
             };
     }
+    import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
     export default {
         data(){
             return {
@@ -119,6 +120,9 @@
             }
         },
         computed: {
+            ...mapState([
+                'language'
+            ]),
             options(){
                 let options = this.defaultOptions;
                 if(!options){
@@ -175,7 +179,7 @@
                         placeholder:$this._placeholder,
                         maximumSelectionLength: 10,
                         minimumResultsForSearch:9,
-                        language: "zh-CN",
+                        language: this.language,
                         ajax: {
                             url: this.url,
                             dataType: 'json',
@@ -247,7 +251,7 @@
                     });
                 }else {
                     $(this.$el).find('select').select2({
-                        language: "zh-CN",
+                        language: this.language,
                         maximumSelectionLength: 10,
                         minimumResultsForSearch:9,
                         templateResult:$this.templateResult ? $this.templateResult : function(state){
@@ -285,7 +289,7 @@
                             $(this.$el).find('.select2-selection__rendered').removeClass('placeholder');
                         }
                     }
-                },100);
+                },50);
             }
         },
         watch: {
@@ -307,6 +311,18 @@
                 $show.attr('html',show);
                 this.initSelect2();
                 this.placeholderStyle();
+            },
+            language(val,old){
+                let language = val;
+                let id = 'select2-js-lan-'+language;
+                if(!document.getElementById(id)){
+                    let $script = document.createElement('script');
+                    $script.id = id;
+                    $script.type = 'text/javascript';
+                    $script.async = false;
+                    $script.src = '/bower_components/select2/dist/js/i18n/'+language+'.js';
+                    document.body.appendChild($script);
+                }
             }
         },
         mounted() {
@@ -332,8 +348,8 @@
             },100);
         },
         updated(){
-            this.initSelect2();
-            this.placeholderStyle();
+            //this.initSelect2();
+            //this.placeholderStyle();
         },
         created() {
             //动态加载js文件
@@ -345,18 +361,19 @@
                 $script.async = false;
                 document.body.appendChild($script);
                 $script = document.createElement('script');
-                $script.id = 'select2-js-lan';
+                let language = this.language;
+                $script.id = 'select2-js-lan-'+language;
                 $script.type = 'text/javascript';
                 $script.async = false;
-                $script.src = 'https://cdn.bootcss.com/select2/4.0.10/js/i18n/zh-CN.js';
+                $script.src = '/bower_components/select2/dist/js/i18n/'+language+'.js';
                 document.body.appendChild($script);
-
             }
         }
     }
 </script>
 <style lang="scss">
-    @import url('https://cdn.bootcss.com/select2/4.0.10/css/select2.min.css');
+    @import url('/bower_components/select2/dist/css/select2.min.css');
+    //@import "~select2/dist/css/select2.min.css";
     @import "sass/_variables.scss";
     @each $i in $themes {
         $item:map-get($btns, $i);

@@ -757,7 +757,7 @@
                 let editormdJs = document.createElement('script');
                 editormdJs.id = 'bootstrap-js';
                 editormdJs.type = 'text/javascript';
-                editormdJs.src = 'https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js';
+                editormdJs.src = '/bower_components/bootstrap/dist/js/bootstrap.min.js';
                 document.body.appendChild(editormdJs);
             }
             this.menuSet({

@@ -84,13 +84,12 @@
                 let editormdJs = document.createElement('script');
                 editormdJs.id = 'colorpicker-js';
                 editormdJs.type = 'text/javascript';
-                editormdJs.src = 'https://cdn.bootcss.com/bootstrap-colorpicker/3.0.0-beta.3/js/bootstrap-colorpicker.min.js';
+                editormdJs.src = '/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js';
                 document.body.appendChild(editormdJs);
             }
         },
-
     }
 </script>
 <style lang="scss">
-    @import url('https://cdn.bootcss.com/bootstrap-colorpicker/3.0.0-beta.3/css/bootstrap-colorpicker.min.css');
+    @import url('/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css');
 </style>
