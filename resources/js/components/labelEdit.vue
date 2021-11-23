@@ -4,7 +4,7 @@
            role="button"
            v-for="(item, index) in maps"
            :key="index"
-           :class="active(item.value)?'btn-primary':'btn-default'"
+           :class="active(item.value)?'btn-'+theme:'btn-default'"
            @click="onChange(item.value)">
             {{ showName(item) }}
         </a>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex';
     export default {
         name: "labelEdit",
         props: {
@@ -144,7 +145,10 @@
             },
             has_map(){
                 return collect(this.maps).count();
-            }
+            },
+            ...mapState([
+                'theme'
+            ])
         }
     }
 </script>

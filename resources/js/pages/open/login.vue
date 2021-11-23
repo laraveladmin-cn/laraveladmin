@@ -25,7 +25,8 @@
                             </div>
                             <div class="col-xs-4">
                                 <button type="button"
-                                        class="btn btn-primary btn-block btn-flat"
+                                        class="btn btn-block btn-flat"
+                                        :class="'btn-'+theme"
                                         :disabled="logining"
                                         @click="postLogin(invalid,validate)">
                                     {{logining?$tp('Loading in'):$t('Login')}}
@@ -234,7 +235,7 @@
                 let other_col = Math.ceil(12/count);
                 return other_col<2?2:other_col;
             },
-            ...mapState(['_token','verify','use_url','web_url']),
+            ...mapState(['_token','verify','use_url','web_url','theme']),
             loaded(){
                 return !this.loading;
             }
