@@ -655,11 +655,12 @@
                 options['get_count'] = 1;
                 this.getData(options);
             },
-            selectAll(){
+            selectAll(val){
                 if(this.check_ids_change){
                     this.check_ids_change = false;
                     return;
                 }
+                this.select_all = val;
                 if(this.select_all.length){
                     let ids = collect(array_get(this.data,'list.data',[])).pluck(this.options.primaryKey||'id').all();
                     let ids1 = [];
@@ -914,7 +915,7 @@
                 let $script = document.createElement('script');
                 $script.id = 'xlsx-js';
                 $script.type = 'text/javascript';
-                $script.src = 'https://cdn.bootcss.com/xlsx/0.15.1/xlsx.full.min.js';
+                $script.src = '/bower_components/xlsx/dist/xlsx.full.min.js';
                 document.body.appendChild($script);
             }
             //获取数据

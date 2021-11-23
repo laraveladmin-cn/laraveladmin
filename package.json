@@ -31,16 +31,17 @@
     "admin-lte-wang": "^2.4.8",
     "animate.css": "^3.7.2",
     "bootstrap": "^3.4.1",
+    "bootstrap-colorpicker": "^3.0.0-beta.3",
     "bootstrap-sass": "^3.4.1",
     "collect.js": "^4.25.0",
-    "echarts": "^4.6.0",
+    "echarts": "^4.4.0-rc.1",
     "editor.md": "^1.5.0",
     "element-ui": "^2.13.0",
     "es6-promise": "^4.2.8",
     "icheck": "^1.0.2",
     "md5": "^2.2.1",
     "qiniu-js": "^2.5.5",
-    "select2": "^4.0.10",
+    "select2": "4.0.10",
     "sortablejs": "^1.10.2",
     "ueditor": "^1.2.3",
     "vee-validate": "^3.4.0",
@@ -50,6 +51,7 @@
     "vue-json-views": "^1.1.0",
     "vue-router": "^3.1.2",
     "vuex": "^3.1.1",
+    "xlsx": "^0.15.1",
     "ztree": "^3.5.24"
   }
 }

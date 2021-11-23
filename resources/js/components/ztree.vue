@@ -252,5 +252,5 @@
     }
 </script>
 <style lang="scss">
-    @import url('https://cdn.bootcss.com/zTree.v3/3.5.40/css/zTreeStyle/zTreeStyle.css');
+    @import "~ztree/css/zTreeStyle/zTreeStyle.css";
 </style>

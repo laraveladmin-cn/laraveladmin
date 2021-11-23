@@ -24,6 +24,7 @@ mix.webpackConfig({
             "bower_components_path": path.resolve(__dirname, 'public/bower_components'),
             "public": path.resolve(__dirname, 'public'),
             "sass":path.resolve(__dirname, 'resources/sass'),
+            "@":path.resolve(__dirname, 'node_modules'),
         },
     },
     output: {
