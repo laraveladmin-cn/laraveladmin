@@ -7,7 +7,7 @@
         </div>
       <!--  <div>{{$tp('Header')}}</div>
         <div>{{$tp('Menu field')}}</div>-->
-        <transition name="fade" enter-active-class="animated lightSpeedIn faster" mode="out-in" leave-active-class="animated lightSpeedOut faster">
+        <transition name="fade" enter-active-class="animated fadeIn faster" mode="out-in" leave-active-class="animated fadeOut faster">
             <router-view></router-view>
         </transition>
    <!--     <div>{{$tp('Footer')}}</div>-->
