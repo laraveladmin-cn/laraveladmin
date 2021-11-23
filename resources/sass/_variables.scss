@@ -1,4 +1,5 @@
 //主题颜色
+/** Adminlte主题变量 **/
 $light-blue: #3c8dbc; // Primary
 $red: #dd4b39; // Danger
 $green: #00a65a; // Success
@@ -22,6 +23,7 @@ $white:#fff;
 $black:#000;
 $body-bg:#ecf0f5;
 
+/** 饿了么主题变量 **/
 //品牌颜色
 $--color-primary:$light-blue;
 $--color-success:$green;
@@ -41,6 +43,14 @@ $--color-black:$black;
 $--background-color-base:$body-bg;
 $--input-border-radius:0;
 
+/** Bootstarp主题变量 **/
+$brand-primary:$light-blue;
+$brand-success:$green;
+$brand-info:$aqua;
+$brand-warning:$yellow;
+$brand-danger:$red;
+
+/** 自定义主题变量 **/
 $themes: 'primary' 'info' 'success' 'warning' 'danger';
 $error: #d73925;
 // Brands
