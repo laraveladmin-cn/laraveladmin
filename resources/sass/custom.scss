@@ -19,6 +19,12 @@ body {
     }
 }
 body {
+    .el-input-number__decrease{
+        border-radius:$--input-border-radius 0px 0px $--input-border-radius;
+    }
+    .el-input-number__increase{
+        border-radius: 0px $--input-border-radius $--input-border-radius 0px;
+    }
     .btn-default,
     .btn-primary,
     .btn-success,

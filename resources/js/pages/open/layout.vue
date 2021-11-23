@@ -7,7 +7,7 @@
         </div>
         <message></message>
         <modal></modal>
-        <transition name="fade" enter-active-class="animated lightSpeedIn faster" mode="out-in" leave-active-class="animated lightSpeedOut faster">
+        <transition name="fade" enter-active-class="animated fadeIn faster" mode="out-in" leave-active-class="animated fadeOut faster">
             <router-view></router-view>
         </transition>
     </div>
