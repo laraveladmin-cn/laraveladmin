@@ -514,7 +514,7 @@
                         "background2": " #fefefe",
                         "background3": "#f9fafc",
                         "background4": "#f4f5f7",
-                        "theme": "default"
+                        "theme": "primary"
                     }, {
                         "name": "Purple Light",
                         "class": "skin-purple-light",

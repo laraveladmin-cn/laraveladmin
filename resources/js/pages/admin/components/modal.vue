@@ -16,7 +16,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" @click="close">{{modal['cancelText'] || $t('Close')}}</button>
-                        <button type="button" class="btn btn-primary" @click="affirm">{{modal['affirmText'] || $t('Confirm')}}</button>
+                        <button type="button" class="btn" :class="'btn-'+theme" @click="affirm">{{modal['affirmText'] || $t('Confirm')}}</button>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,8 @@
         },
         computed: {
             ...mapState([
-                'modal'
+                'modal',
+                'theme'
             ]),
             showShade(){
                 if(!!this.modal){

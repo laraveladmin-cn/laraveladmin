@@ -20,7 +20,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li v-for="(option,index) in options" v-if="options.length>0">
                         <a href="javascript:void(0)">
-                            <span class="label label-primary">
+                            <span class="label" :class="'label-'+theme">
                                 {{showName(option)}}
                             </span>
                             <span class="pull-right text-red" :class="{disabled:disabled}" :title="$t('Delete')" @click="remove(option)">
@@ -180,6 +180,7 @@
         computed:{
             ...mapState([
                 'use_url',
+                'theme'
             ])
         }
     }
