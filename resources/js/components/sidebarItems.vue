@@ -1,6 +1,6 @@
 <template>
     <li class="treeview">
-        <a @click="toUrl(menu['url'],$event)" :href="menu['url']?menu['url']:null" :class="{'no-childrens':!(menu['childrens'] && menu['childrens'].length)}">
+        <a class="menu-a" @click="toUrl(menu['url'],$event)" :href="menu['url']?menu['url']:null" :class="{'no-childrens':!(menu['childrens'] && menu['childrens'].length)}">
             <i class="fa" :class="menu['icons']"></i>
             <span>{{$tp(menu['name'])}}</span>
             <span class="pull-right-container" v-if="menu['childrens']">
