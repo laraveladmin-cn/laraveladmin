@@ -1,6 +1,6 @@
 <template>
     <li class="treeview">
-        <a @click="toUrl(menu['url'],$event)" :href="menu['url']?menu['url']:null">
+        <a class="menu-a" @click="toUrl(menu['url'],$event)" :href="menu['url']?menu['url']:null" :class="{'no-childrens':!(menu['childrens'] && menu['childrens'].length)}">
             <i class="fa" :class="menu['icons']"></i>
             <span>{{$tp(menu['name'])}}</span>
             <span class="pull-right-container" v-if="menu['childrens']">
@@ -62,11 +62,30 @@
         },
     }
 </script>
-<style scoped>
-    .treeview a{
+<style>
+    .sidebar-menu>li>a,.treeview>a{
         cursor:pointer;
         overflow:hidden;
         text-overflow:ellipsis;
         white-space:nowrap;
+        padding-right: 25px;
     }
+    @media (min-width: 768px){
+        .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>.treeview-menu,
+        .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>a>span:not(.pull-right) {
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            padding-right: 25px;
+        }
+        .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>a>.pull-right-container {
+            padding-right: 0px !important;
+            padding-left: 0px;
+            left: 200px!important;
+        }
+        .sidebar-mini.sidebar-collapse .sidebar-menu>li>a {
+            overflow:unset;
+        }
+    }
+
 </style>

@@ -1045,7 +1045,7 @@ throw new Error('AdminLTE requires jQuery')
     if (!parentLi.is(Selector.treeview)) {
       return;
     }
-    if (link.attr('switching')==1){
+    if (link.attr('switching')==1 || (link.hasClass('menu-a') && $('.sidebar-collapse')[0])){
         event.preventDefault();
         return;
     }
