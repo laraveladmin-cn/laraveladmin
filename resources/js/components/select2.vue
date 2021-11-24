@@ -368,6 +368,9 @@
                 $script.src = '/bower_components/select2/dist/js/i18n/'+language+'.js';
                 document.body.appendChild($script);
             }
+        },
+        beforeDestroy() {
+            $(this.$el).find('select').select2('destroy');
         }
     }
 </script>
