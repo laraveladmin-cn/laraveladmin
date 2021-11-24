@@ -101,10 +101,11 @@
         },
     };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .attachment-img{
         max-width: 100px;
         max-height: 100px;
+        border-radius: 6px;
     }
     .no-img{
         width: 100px;
