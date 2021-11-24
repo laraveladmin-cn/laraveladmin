@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-tailwind');
 if(typeof path=="undefined"){
     var path = require('path');
 }
@@ -39,8 +40,10 @@ if(process.argv.includes('--css')){
 }else {
     mix.js('resources/js/bootstrap.js', 'public/'+jsPath)
         .js('resources/js/app.js', 'public/'+jsPath);
+
 }
-mix.version();
+mix.version()
+    .tailwind();
 if (!mix.inProduction()) {
     mix.sourceMaps();
 }
