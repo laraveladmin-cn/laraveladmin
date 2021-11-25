@@ -48,7 +48,9 @@ if(process.argv.includes('--css')){
 }else {
     let pathValue = basePath+jsPath;
     mix.js('resources/js/bootstrap.js', pathValue)
-        .js('resources/js/app.js', pathValue);
+        .js('resources/js/app.js', pathValue)
+        //.tailwind()
+    ;
 }
 mix.version();
 if (!mix.inProduction()) {
