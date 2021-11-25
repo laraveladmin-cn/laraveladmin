@@ -37,13 +37,16 @@ if(process.argv.includes('--css')){
     global.Mix.manifest.name = 'mix-manifest-css.json';
     mix.less('resources/less/skins.less', 'public/css')
         .sass('resources/sass/app.scss', 'public/css');
+}else if(process.argv.includes('--tailwindcss')){
+    global.Mix.manifest.name = 'mix-manifest-tailwindcss.json';
+    mix.sass('resources/sass/tailwindcss.scss', 'public/css')
+        .tailwind();
 }else {
     mix.js('resources/js/bootstrap.js', 'public/'+jsPath)
-        .js('resources/js/app.js', 'public/'+jsPath);
-
+        .js('resources/js/app.js', 'public/'+jsPath)
+        .tailwind();
 }
-mix.version()
-    .tailwind();
+mix.version();
 if (!mix.inProduction()) {
     mix.sourceMaps();
 }

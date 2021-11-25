@@ -1,3 +1,4 @@
+
 @import 'variables';
 //字体
 @import url('/bower_components/googleapis-fonts/fonts.css');
@@ -17,8 +18,3 @@
 @import "~admin-lte-wang/dist/css/AdminLTE.min";
 //自定义样式
 @import "custom.scss";
-
-//tailwindcss
-@import "~tailwindcss/base";
-@import "~tailwindcss/components";
-@import "~tailwindcss/utilities";

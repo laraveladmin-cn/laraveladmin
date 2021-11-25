@@ -13,6 +13,7 @@
     <link rel="icon" type="image/x-icon" href="{{config('laravel_admin.logo')}}">
     <link href="/css/app.css?{{$time_str}}" rel="stylesheet">
     <link href="/css/skins.css?{{$time_str}}" rel="stylesheet">
+    {{--<link href="/css/tailwindcss.css?{{$time_str}}" rel="stylesheet">--}}
     <script src="{{config('app.url').getRoutePrefix(config('laravel_admin.web_api_model'))}}/open/config?script=AppConfig{{$time_str}}" type="application/javascript"></script>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>

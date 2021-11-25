@@ -848,5 +848,8 @@
         width: 19px;
         background:url('/dist/img/wangjing.png') no-repeat
     }
+    .main-header .logo .logo-mini{
+        height: 30px;
+    }
 </style>
 
