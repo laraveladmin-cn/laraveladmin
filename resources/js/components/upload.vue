@@ -15,7 +15,7 @@
                        :accept="accept_str"
                        :on-success="handleSuccess">
                 <slot>
-                    <button class="btn" :class="'btn-'+theme">{{$t('Click Upload')}}</button>
+                    <button type="button" class="btn" :class="'btn-'+theme">{{$t('Click Upload')}}</button>
                 </slot>
             </el-upload>
         </div>

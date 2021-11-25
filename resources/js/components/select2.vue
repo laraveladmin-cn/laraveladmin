@@ -169,6 +169,14 @@
             copyObj:function(obj){
                 return JSON.parse(JSON.stringify(obj));
             },
+            autofocus(){
+                setTimeout(()=>{
+                    if($('.select2-search__field')[0]){
+                        $('.select2-search__field').attr('autofocus','autofocus');
+                        $('.select2-search__field')[0].focus();
+                    }
+                },50);
+            },
             initSelect2(){
                 let $this = this;
                 if(typeof $.fn.select2!="function"){
@@ -248,7 +256,8 @@
                         templateResult: $this.templateResult ? $this.templateResult : function(state){
                             return state.text;
                         }
-                    });
+                    })
+                        .on("select2:open",this.autofocus);
                 }else {
                     $(this.$el).find('select').select2({
                         language: this.language,
@@ -257,7 +266,7 @@
                         templateResult:$this.templateResult ? $this.templateResult : function(state){
                             return state.text;
                         }
-                    });
+                    }).on("select2:open",this.autofocus);;
                 }
 
             },
@@ -323,6 +332,10 @@
                     $script.src = '/bower_components/select2/dist/js/i18n/'+language+'.js';
                     document.body.appendChild($script);
                 }
+                setTimeout(()=>{
+                    this.initSelect2();
+                    this.placeholderStyle();
+                },50);
             }
         },
         mounted() {
@@ -348,8 +361,7 @@
             },100);
         },
         updated(){
-            //this.initSelect2();
-            //this.placeholderStyle();
+
         },
         created() {
             //动态加载js文件
@@ -378,24 +390,13 @@
     @import url('/bower_components/select2/dist/css/select2.min.css');
     //@import "~select2/dist/css/select2.min.css";
     @import "sass/_variables.scss";
-    @each $i in $themes {
-        $item:map-get($btns, $i);
-        .#{$i} {
-            .select2-container--default .select2-results__option--highlighted[aria-selected]{
-                background-color: map-get($item,'hover');
-            }
-            .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default .select2-search--dropdown .select2-search__field{
-                border-color:map-get($item,'border') !important;
-            }
-        }
-    }
     .select2-container--default .select2-results__option--highlighted[aria-selected] {
-        background-color: #3c8dbc;
+        background-color: $brand-primary;
     }
     .select2-container .select2-selection--single{
         height: 34px;
-        border-radius:0px;
-        border: 1px solid #d2d6de;
+        border-radius:$--input-border-radius;
+        border: 1px solid $gray-lte;
     }
     .select2-container .select2-selection--single .select2-selection__rendered{
         padding-left: 0px;
@@ -404,19 +405,38 @@
         margin-top: 3px;
     }
     .main-select2 .select2-container--default .select2-selection--single .placeholder{
-        color: #a4aaae;
+        color: $secondary;
     }
     .main-select2 .select2-dropdown{
         border-radius:0px;
     }
     .placeholder-show .select2-container--default .select2-selection--single .select2-selection__rendered{
-        color: #a4aaae;
+        color: $secondary;
     }
     .has-error .select2-container .select2-selection--single{
-        border-color: #dd4b39;
+        border-color: $red;
     }
     body .select2-dropdown {
-        border: 1px solid #d2d6de;
+        border: 1px solid $gray-lte;
         border-radius: 0;
+    }
+    @each $i in $themes {
+        $item:map-get($btns, $i);
+        .#{$i} {
+            .select2-container--default .select2-results__option--highlighted[aria-selected]{
+                background-color: map-get($item,'hover');
+            }
+            .select2-container--default.select2-container--focus .select2-selection--multiple,
+            .select2-container--default .select2-search--dropdown .select2-search__field{
+                border-color:map-get($item,'border') !important;
+            }
+            .select2-container {
+                .select2-selection--single{
+                    &:hover, &:active, &.hover,&:focus {
+                        border-color:map-get($item,'border');
+                    }
+                }
+            }
+        }
     }
 </style>

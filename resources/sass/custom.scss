@@ -17,6 +17,11 @@ body {
             background-color: map-get($item,'bg');
         }
     }
+    .btn-#{$i} {
+        &:focus {
+            background-color: darken(map-get($item,'bg'), 5%);
+        }
+    }
 }
 body {
     .el-input-number__decrease{
