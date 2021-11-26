@@ -428,8 +428,16 @@
             .select2-container--default .select2-search--dropdown .select2-search__field{
                 border-color:map-get($item,'border') !important;
             }
+            .select2-container.select2-container--disabled{
+                .select2-selection--single{
+                    border-color: $gray-lte !important;
+                    cursor: not-allowed;
+                }
+            }
             .select2-container {
                 .select2-selection--single{
+                    height: 36px;
+                    padding-top: 7px;
                     &:hover, &:active, &.hover,&:focus {
                         border-color:map-get($item,'border');
                     }
