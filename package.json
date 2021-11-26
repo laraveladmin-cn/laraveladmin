@@ -32,7 +32,7 @@
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
-    "admin-lte-wang": "^2.4.8",
+    "admin-lte": "^2.4.8",
     "animate.css": "^3.7.2",
     "bootstrap": "^3.4.1",
     "bootstrap-colorpicker": "^3.0.0-beta.3",
