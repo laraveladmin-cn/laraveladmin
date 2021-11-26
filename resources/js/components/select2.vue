@@ -291,12 +291,10 @@
             },
             placeholderStyle(){
                 setTimeout(()=>{
-                    if(!this.multiple && this.placeholder){
-                        if(this.value==this.placeholderValue){
-                            $(this.$el).find('.select2-selection__rendered').addClass('placeholder');
-                        }else {
-                            $(this.$el).find('.select2-selection__rendered').removeClass('placeholder');
-                        }
+                    let $search = $('.select2-container--open .select2-search__field');
+                    if($search[0]){
+                        $search.attr('autofocus','autofocus');
+                        $search[0].focus();
                     }
                 },50);
             }
