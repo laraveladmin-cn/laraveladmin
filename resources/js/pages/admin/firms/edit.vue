@@ -92,7 +92,7 @@
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="logo" :options='{"name": props.transField("Brand logo"), "required": false}' :datas="props">
                                 <template slot="input-item">
-                                    <upload :width="370" :height="201"
+                                    <upload :width="355" :height="200"
                                         v-model="props.data.row['logo']"
                                         :disabled="!props.url"
                                         :value-key="'url'">
@@ -157,6 +157,7 @@
                                         <qiniu-upload :token-url="'/open/qi-niu/token?disk=qiniu_public'"
                                                       :root-path="'uploads/pdfs/'"
                                                       :accept="'.pdf'"
+                                                      :disabled="!props.url"
                                                       v-model="props.data.row['receipt_url']">
                                         </qiniu-upload>
                                     </div>
@@ -171,6 +172,7 @@
                                                  :url="'/admin/banks/list'"
                                                  :keyword-key="'name'"
                                                  :item-url="'/admin/banks/'"
+                                                 :disabled="!props.url"
                                     >
                                     </select-many>
                                 </template>
