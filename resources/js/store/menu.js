@@ -1,6 +1,5 @@
 //菜单数据存储
 //把返回的数据集转换成Tree
-import {retrieveColumnLayout} from "echarts/src/layout/barGrid";
 import i18n from '../i18n';
 let list_to_tree = function(data, pk='id', pid = 'parent_id', child = 'childs'){
     // 删除 所有 children,以防止多次调用
