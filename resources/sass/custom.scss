@@ -34,7 +34,9 @@ body {
         .el-select-dropdown__item.hover,
         .el-select-dropdown__item:hover,
         .input-group-addon a,
-        .theme-a
+        .theme-a,
+        .el-picker-panel__icon-btn,
+        .el-date-table td.today span
         {
             color: map-get($item,'bg');
         }
@@ -44,8 +46,12 @@ body {
                 color: lighten(map-get($item,'bg'),12%);
             }
         }
-        .el-switch.is-checked .el-switch__core{
+        .el-switch.is-checked .el-switch__core,
+        .el-date-table td.current:not(.disabled) span{
             background-color: map-get($item,'bg');
+        }
+        .el-date-table td.current:not(.disabled) span{
+            color: $white;
         }
     }
     .btn-#{$i} {
@@ -232,6 +238,9 @@ body {
 
     .el-input.is-disabled .el-input__inner{
         color: #555;
+    }
+    .json-view-container .json-view .angle{
+        left: 0px !important;
     }
 
 }

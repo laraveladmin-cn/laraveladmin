@@ -387,6 +387,7 @@
 </template>
 
 <script>
+    window.AdminLTEBody = '.main_body';
     require('public/dist/js/adminlte.js');
     import SidebarItems from 'common_components/sidebarItems.vue';
     import Message from 'admin_components/message.vue';
