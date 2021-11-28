@@ -186,25 +186,23 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "sass/_variables.scss";
     .title{
         display: inline-block;
-        color: #a4aaae;
+        color: $secondary;
     }
     .required{
-        color: #dd4b39;
+        color: $red;
     }
     .edit-item{
         overflow:hidden;
-    }
-    .edit-item .form-control{
-        height: 36px;
     }
     .edit-item textarea.form-control {
         height: auto;
     }
     .edit-item .edit-item-content{
-        height: 36px;
+        height: $input-height-base;
     }
     .edit-item textarea.edit-item-content{
         height: auto;

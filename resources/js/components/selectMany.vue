@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="select-many">
         <div class="input-group">
             <select2 v-model="val_id"
                      :disabled="disabled"
@@ -11,7 +11,11 @@
                      :show="show"
                      :is-ajax="true">
             </select2>
-            <span class="input-group-addon btn btn-block btn-default" :class="{disabled:disabled}" :title="$t('Confirm to add')" @click="add">
+            <span class="input-group-addon btn btn-block btn-default"
+                  :disabled="disabled"
+                  :class="{disabled:disabled}"
+                  :title="$t('Confirm to add')"
+                  @click="add">
                 <i class="fa fa-plus"></i>
             </span>
         </div>
@@ -23,7 +27,10 @@
                             <span class="label" :class="'label-'+theme">
                                 {{showName(option)}}
                             </span>
-                            <span class="pull-right text-red" :class="{disabled:disabled}" :title="$t('Delete')" @click="remove(option)">
+                            <span class="pull-right text-red"
+                                  :class="{disabled:disabled}"
+                                  :title="$t('Delete')"
+                                  @click="remove(option)">
                                 <i class="fa fa-trash-o"></i>
                             </span>
                         </a>
@@ -221,5 +228,8 @@
     }
     .loading{
         padding: 5px;
+    }
+    .disabled{
+        cursor: not-allowed;
     }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="{'disabled':disabled}">
         <div v-if="isArray">
             <el-upload name="file"
                        class="avatar-uploader"
@@ -8,6 +8,7 @@
                        :file-list="val"
                        :data="{_token:_token}"
                        :headers="headers"
+                       :disabled="disabled"
                        @click="$emit('blur')"
                        :before-upload="beforeAvatarUpload"
                        :on-error="handleAvatarError"
@@ -15,7 +16,7 @@
                        :accept="accept_str"
                        :on-success="handleSuccess">
                 <slot>
-                    <button type="button" class="btn" :class="'btn-'+theme">{{$t('Click Upload')}}</button>
+                    <button type="button" class="btn" :class="'btn-'+theme" :disabled="disabled">{{$t('Click Upload')}}</button>
                 </slot>
             </el-upload>
         </div>
@@ -29,6 +30,7 @@
                        :data="{_token:_token}"
                        :headers="headers"
                        :accept="accept_str"
+                       :disabled="disabled"
                        :before-upload="beforeAvatarUpload">
                 <slot>
                     <img v-if="value || placeholderValue" :src="showurl" class="avatar" :width="width+'px'" :height="height+'px'">
