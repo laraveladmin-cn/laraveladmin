@@ -168,6 +168,7 @@
     };
 </script>
 <style scoped>
+    @import url('/dist/css/site.min.css');
     .navbar-fixed-top{
         position:relative;
     }

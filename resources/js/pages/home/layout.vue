@@ -225,6 +225,7 @@
 <style scoped>
     .navbar-brand{
         padding: 5px 15px;
+        line-height: 42px;
     }
     .logo{
         background-color:unset;
