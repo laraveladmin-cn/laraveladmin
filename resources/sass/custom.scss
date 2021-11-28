@@ -6,14 +6,42 @@ body {
 @each $i in $themes {
     $item:map-get($btns, $i);
     .#{$i} {
-        .form-control:focus,.el-input__inner:focus,.avatar-uploader .el-upload:hover{
+        .el-cascader .el-input .el-input__inner:focus,
+        .el-cascader .el-input .el-input__inner:hover,
+        .form-control:focus,
+        .form-control:hover,
+        .el-input__inner:focus,
+        .el-input__inner:hover,
+        .el-input-number__increase:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled),
+        .el-input-number__decrease:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled),
+        .avatar-uploader .el-upload:hover,
+        .el-switch.is-checked .el-switch__core,
+        .el-select .el-input.is-focus .el-input__inner{
             border-color:map-get($item,'border');
         }
-        .el-switch__label.is-active{
+        .el-cascader-node.in-active-path,
+        .el-cascader-node.is-selectable.in-checked-path,
+        .el-cascader-node.is-active,
+        .el-switch__label.is-active,
+        .el-input-number__increase:hover,
+        .el-input-number__decrease:hover,
+        .el-input-number__increase:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled),
+        .el-input-number__decrease:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled),
+        .el-select-dropdown__item.selected,
+        .el-select-dropdown__item.hover,
+        .el-select-dropdown__item:hover,
+        .input-group-addon a,
+        .theme-a
+        {
             color: map-get($item,'bg');
         }
+        .input-group-addon a,
+        .theme-a{
+            &:hover,&:active,&:focus{
+                color: lighten(map-get($item,'bg'),12%);
+            }
+        }
         .el-switch.is-checked .el-switch__core{
-            border-color:map-get($item,'border');
             background-color: map-get($item,'bg');
         }
     }
@@ -23,13 +51,34 @@ body {
         }
     }
 }
+.btn:not(.btn-xs):not(.btn-lg):not(.btn-sm):not(.btn-xs){
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
 body {
+    .el-input-number__increase.is-disabled, .el-input-number__decrease.is-disabled{
+        color: $gray-lte !important;
+    }
+    .form-control:disabled,
+    .disabled .avatar-uploader .el-upload,
+    .el-input-number.is-disabled .el-input-number__increase,
+    .el-input-number.is-disabled .el-input-number__decrease,
+    .el-input.is-disabled .el-input__inner{
+        border-color: $gray-lte !important;
+        background-color: $disabled-bg;
+        cursor: not-allowed;
+    }
+    .form-control{
+        height: $input-height-base;
+    }
     .el-input-number__decrease{
         border-radius:$--input-border-radius 0px 0px $--input-border-radius;
     }
     .el-input-number__increase{
         border-radius: 0px $--input-border-radius $--input-border-radius 0px;
     }
+
     .btn-default,
     .btn-primary,
     .btn-success,
@@ -179,10 +228,9 @@ body {
     }
 
     .el-input.is-disabled .el-input__inner{
-        background-color: #eee;
-        border-color: #d2d6de;
         color: #555;
     }
+
 }
 
 

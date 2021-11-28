@@ -22,6 +22,7 @@ $input-color-placeholder:#999;//表单占位字体颜色
 $white:#fff;
 $black:#000;
 $body-bg:#ecf0f5;
+$disabled-bg:#eee;
 
 /** 饿了么主题变量 **/
 //品牌颜色
@@ -49,6 +50,7 @@ $brand-success:$green;
 $brand-info:$aqua;
 $brand-warning:$yellow;
 $brand-danger:$red;
+$input-height-base:36px;
 
 /** 自定义主题变量 **/
 $themes: 'primary' 'info' 'success' 'warning' 'danger';
