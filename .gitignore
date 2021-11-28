@@ -1,11 +1,16 @@
 /node_modules
+
 /public/mix-manifest.json
 /public/mix-manifest-css.json
+/public/mix-manifest-tailwindcss.json
 /public/hot
 /public/storage
 /storage/*.key
 /public/index.html
 /public/js
+/public/fonts
+/public/images
+/public/css
 /public/api
 /public/web-api
 /vendor

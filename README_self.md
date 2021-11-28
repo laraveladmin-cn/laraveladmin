@@ -116,6 +116,10 @@ php artisan db:seed --force #初始化数据
 
 4. 配置nginx访问请参照"docker/nginx/vhost_dev/local.laraveladmin.cn.conf"
 
+> phpstudy直接将所有内容复制替换到新建的Nginx站点配置中,修改红色部分即可!设置项"fastcgi_pass"为phpstudy配置中原来的值
+
+![nginx配置](https://www.laraveladmin.cn/storage/uploads/images/2021/11/28/untMoBQY0QD8TGxhxEaYfdpWLEgqNdZBCl3on9jg.jpg?)
+
 5. 访问
 
 本地开发环境绑定hosts后就可以进行访问了

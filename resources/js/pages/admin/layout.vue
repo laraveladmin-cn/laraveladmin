@@ -483,7 +483,7 @@
                         "background2": " #fefefe",
                         "background3": "#f9fafc",
                         "background4": "#f4f5f7",
-                        "theme": "default"
+                        "theme": "primary"
                     }, {
                         "name": "Purple Light",
                         "class": "skin-purple-light",
@@ -727,7 +727,7 @@
                 let editormdJs = document.createElement('script');
                 editormdJs.id = 'bootstrap-js';
                 editormdJs.type = 'text/javascript';
-                editormdJs.src = 'https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js';
+                editormdJs.src = '/bower_components/bootstrap/dist/js/bootstrap.min.js';
                 document.body.appendChild(editormdJs);
             }
             this.menuSet({
@@ -811,14 +811,11 @@
             top: 50px
         }
     }
-<<<<<<< HEAD
     .dropdown-menu .footer{
          padding: 0px;
          border-top: none;
          margin-top: 0px;
     }
-
-=======
     .main-sidebar{
         padding-top:0px;
     }
@@ -835,6 +832,8 @@
         width: 19px;
         background:url('/dist/img/wangjing.png') no-repeat
     }
->>>>>>> 14be89a9056ff5c65b28d7f91391331395c282c5
+    .main-header .logo .logo-mini{
+        height: 30px;
+    }
 </style>
 

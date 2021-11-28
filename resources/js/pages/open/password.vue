@@ -27,7 +27,7 @@
                         <form-item v-model="password" :options="{key:'password',type:'password',name:$tp('new password'),rules:'required|min:6|max:18',icon:'glyphicon-lock',placeholder:$tp('Please enter a new password')}"></form-item>
                         <form-item v-model="confirm_password" :options="{key:'confirm_password',type:'password',name:$tp('confirm the new password'),rules:'required|confirmed:password',icon:'glyphicon-log-in',placeholder:$tp('Please enter to confirm your new password')}"></form-item>
                         <div class="social-auth-links form-group">
-                            <button type="button" class="btn btn-primary btn-block btn-flat" :disabled="submiting" @click="postPassword(invalid,validate)">
+                            <button type="button" class="btn btn-block btn-flat" :class="'btn-'+theme"  :disabled="submiting" @click="postPassword(invalid,validate)">
                                 {{submiting?$tp('Resetting'):$tp('Reset password')}}
                             </button>
                         </div>
@@ -79,7 +79,7 @@
             }
         },
         computed:{
-            ...mapState(['_token','verify','use_url']),
+            ...mapState(['_token','verify','use_url','theme']),
             ...mapState('user',{
                 loadingUser:state => state.loading
             }),

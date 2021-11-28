@@ -23,6 +23,7 @@
                 return i > -1;
             };
     }
+    import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
     export default {
         data(){
             return {
@@ -119,6 +120,9 @@
             }
         },
         computed: {
+            ...mapState([
+                'language'
+            ]),
             options(){
                 let options = this.defaultOptions;
                 if(!options){
@@ -165,6 +169,14 @@
             copyObj:function(obj){
                 return JSON.parse(JSON.stringify(obj));
             },
+            autofocus(){
+                setTimeout(()=>{
+                    if($('.select2-search__field')[0]){
+                        $('.select2-search__field').attr('autofocus','autofocus');
+                        $('.select2-search__field')[0].focus();
+                    }
+                },50);
+            },
             initSelect2(){
                 let $this = this;
                 if(typeof $.fn.select2!="function"){
@@ -175,7 +187,7 @@
                         placeholder:$this._placeholder,
                         maximumSelectionLength: 10,
                         minimumResultsForSearch:9,
-                        language: "zh-CN",
+                        language: this.language,
                         ajax: {
                             url: this.url,
                             dataType: 'json',
@@ -244,16 +256,17 @@
                         templateResult: $this.templateResult ? $this.templateResult : function(state){
                             return state.text;
                         }
-                    });
+                    })
+                        .on("select2:open",this.autofocus);
                 }else {
                     $(this.$el).find('select').select2({
-                        language: "zh-CN",
+                        language: this.language,
                         maximumSelectionLength: 10,
                         minimumResultsForSearch:9,
                         templateResult:$this.templateResult ? $this.templateResult : function(state){
                             return state.text;
                         }
-                    });
+                    }).on("select2:open",this.autofocus);;
                 }
 
             },
@@ -278,14 +291,12 @@
             },
             placeholderStyle(){
                 setTimeout(()=>{
-                    if(!this.multiple && this.placeholder){
-                        if(this.value==this.placeholderValue){
-                            $(this.$el).find('.select2-selection__rendered').addClass('placeholder');
-                        }else {
-                            $(this.$el).find('.select2-selection__rendered').removeClass('placeholder');
-                        }
+                    let $search = $('.select2-container--open .select2-search__field');
+                    if($search[0]){
+                        $search.attr('autofocus','autofocus');
+                        $search[0].focus();
                     }
-                },100);
+                },50);
             }
         },
         watch: {
@@ -307,6 +318,22 @@
                 $show.attr('html',show);
                 this.initSelect2();
                 this.placeholderStyle();
+            },
+            language(val,old){
+                let language = val;
+                let id = 'select2-js-lan-'+language;
+                if(!document.getElementById(id)){
+                    let $script = document.createElement('script');
+                    $script.id = id;
+                    $script.type = 'text/javascript';
+                    $script.async = false;
+                    $script.src = '/bower_components/select2/dist/js/i18n/'+language+'.js';
+                    document.body.appendChild($script);
+                }
+                setTimeout(()=>{
+                    this.initSelect2();
+                    this.placeholderStyle();
+                },50);
             }
         },
         mounted() {
@@ -332,8 +359,7 @@
             },100);
         },
         updated(){
-            this.initSelect2();
-            this.placeholderStyle();
+
         },
         created() {
             //动态加载js文件
@@ -345,37 +371,30 @@
                 $script.async = false;
                 document.body.appendChild($script);
                 $script = document.createElement('script');
-                $script.id = 'select2-js-lan';
+                let language = this.language;
+                $script.id = 'select2-js-lan-'+language;
                 $script.type = 'text/javascript';
                 $script.async = false;
-                $script.src = 'https://cdn.bootcss.com/select2/4.0.10/js/i18n/zh-CN.js';
+                $script.src = '/bower_components/select2/dist/js/i18n/'+language+'.js';
                 document.body.appendChild($script);
-
             }
+        },
+        beforeDestroy() {
+            $(this.$el).find('select').select2('destroy');
         }
     }
 </script>
 <style lang="scss">
-    @import url('https://cdn.bootcss.com/select2/4.0.10/css/select2.min.css');
+    @import url('/bower_components/select2/dist/css/select2.min.css');
+    //@import "~select2/dist/css/select2.min.css";
     @import "sass/_variables.scss";
-    @each $i in $themes {
-        $item:map-get($btns, $i);
-        .#{$i} {
-            .select2-container--default .select2-results__option--highlighted[aria-selected]{
-                background-color: map-get($item,'hover');
-            }
-            .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default .select2-search--dropdown .select2-search__field{
-                border-color:map-get($item,'border') !important;
-            }
-        }
-    }
     .select2-container--default .select2-results__option--highlighted[aria-selected] {
-        background-color: #3c8dbc;
+        background-color: $brand-primary;
     }
     .select2-container .select2-selection--single{
         height: 34px;
-        border-radius:0px;
-        border: 1px solid #d2d6de;
+        border-radius:$--input-border-radius;
+        border: 1px solid $gray-lte;
     }
     .select2-container .select2-selection--single .select2-selection__rendered{
         padding-left: 0px;
@@ -384,19 +403,46 @@
         margin-top: 3px;
     }
     .main-select2 .select2-container--default .select2-selection--single .placeholder{
-        color: #a4aaae;
+        color: $secondary;
     }
     .main-select2 .select2-dropdown{
         border-radius:0px;
     }
     .placeholder-show .select2-container--default .select2-selection--single .select2-selection__rendered{
-        color: #a4aaae;
+        color: $secondary;
     }
     .has-error .select2-container .select2-selection--single{
-        border-color: #dd4b39;
+        border-color: $red;
     }
     body .select2-dropdown {
-        border: 1px solid #d2d6de;
+        border: 1px solid $gray-lte;
         border-radius: 0;
+    }
+    @each $i in $themes {
+        $item:map-get($btns, $i);
+        .#{$i} {
+            .select2-container--default .select2-results__option--highlighted[aria-selected]{
+                background-color: map-get($item,'hover');
+            }
+            .select2-container--default.select2-container--focus .select2-selection--multiple,
+            .select2-container--default .select2-search--dropdown .select2-search__field{
+                border-color:map-get($item,'border') !important;
+            }
+            .select2-container.select2-container--disabled{
+                .select2-selection--single{
+                    border-color: $gray-lte !important;
+                    cursor: not-allowed;
+                }
+            }
+            .select2-container {
+                .select2-selection--single{
+                    height: 36px;
+                    padding-top: 7px;
+                    &:hover, &:active, &.hover,&:focus {
+                        border-color:map-get($item,'border');
+                    }
+                }
+            }
+        }
     }
 </style>

@@ -1045,11 +1045,17 @@ throw new Error('AdminLTE requires jQuery')
     if (!parentLi.is(Selector.treeview)) {
       return;
     }
-
+    if (link.attr('switching')==1 || (link.hasClass('menu-a') && $('.sidebar-collapse')[0])){
+        event.preventDefault();
+        return;
+    }
     if (!this.options.followLink || link.attr('href') === '#') {
       event.preventDefault();
     }
-
+    link.attr('switching',1);
+    setTimeout(function () {
+        link.attr('switching',0);
+    },500);
     if (isOpen) {
       this.collapse(treeviewMenu, parentLi);
     } else {

@@ -60,7 +60,7 @@
                                                     <i class="fa" :class="'fa-'+array_get(getOuser(item,props.maps),'icon','')+' ouser-span-'+array_get(getOuser(item,props.maps),'class','')"></i>
                                                     {{array_get(getOuser(item,props.maps),'name','')}}<br>
                                                     ({{item | array_get('data.nickname','--') | str_limit(10)}})<br>
-                                                    <button type="button" class="btn btn-block btn-primary btn-xs" @click="unbind(item['id'],array_get(props,'data.row',{}))">解绑</button>
+                                                    <button type="button" class="btn btn-block btn-xs" :class="'btn-'+theme" @click="unbind(item['id'],array_get(props,'data.row',{}))">解绑</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -1,4 +1,3 @@
-
 //对数据集合进行处理
 window.collect = require('collect.js');
 //加载jQuery

@@ -54,7 +54,7 @@
             },
             //提交请求地址
             url(){
-                return this.primary_key_id?this.data.configUrl['updateUrl'].replace('{id}',this.primary_key_id):this.data.configUrl['createUrl'];
+                return this.primary_key_id?(this.data.configUrl['updateUrl'] || '').replace('{id}',this.primary_key_id):this.data.configUrl['createUrl'];
             },
             primary_key(){
               return this.options.primaryKey||'id';

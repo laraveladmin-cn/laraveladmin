@@ -1,9 +1,9 @@
 <template>
     <div>
         <input v-show="false" type="file" ref="file" @change="changeFile" :accept="accept" />
-        <button class="btn btn-sm inline-block" :class="'btn-'+theme"
+        <button class="btn inline-block" :class="'btn-'+theme"
                 onclick="return false;"
-                :disabled="file.name && uping==1"
+                :disabled="disabled_value"
                 @click="selectFile">
             {{button_show}}
         </button>
@@ -74,6 +74,11 @@
             },
             autoStart:{
                 type:[Boolean],
+                default: function () {
+                    return false;
+                }
+            },
+            disabled:{
                 default: function () {
                     return false;
                 }
@@ -272,6 +277,9 @@
             },
             operation_show(){
                 return this.uping==0?this.$t('Start uploading'):(this.uping==3?this.$t('Upload completed'):this.$t('Keep uploading'));//'开始上传':(this.uping==3?'上传完成':'继续上传')
+            },
+            disabled_value(){
+                return this.disabled || (this.file.name && this.uping==1);
             }
         },
         watch:{
