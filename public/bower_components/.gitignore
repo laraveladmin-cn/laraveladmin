@@ -1,0 +1,10 @@
+animate.css/animate.min.css
+bootstrap/dist
+bootstrap-colorpicker/dist
+echarts/dist
+editor.md
+font-awesome
+ionicons
+select2/dist
+xlsx/dist
+!.gitignore

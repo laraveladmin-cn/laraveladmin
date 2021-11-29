@@ -105,7 +105,19 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('storage') => '../storage/app/public', //文件上传目录
     ],
+    'init_links'=>[
+        base_path('node_modules/admin-lte/build/less/variables.less') => '../../../../resources/less/variables.less', //主题配色变量
 
+        public_path('bower_components/animate.css/animate.min.css') => '../../../node_modules/animate.css/animate.min.css', //动画样式
+        public_path('bower_components/bootstrap/dist') => '../../../node_modules/bootstrap/dist',//bootstrap静态资源
+        public_path('bower_components/bootstrap-colorpicker/dist') => '../../../node_modules/bootstrap-colorpicker/dist', //bootstrap颜色选择器静态资源
+        public_path('bower_components/echarts/dist') => '../../../node_modules/echarts/dist',//echarts图表静态资源
+        public_path('bower_components/editor.md') => '../../node_modules/editor.md',//editor.md编辑器静态资源
+        public_path('bower_components/font-awesome') => '../../node_modules/font-awesome',
+        public_path('bower_components/select2/dist') => '../../../node_modules/select2/dist',
+        public_path('bower_components/xlsx/dist') => '../../../node_modules/xlsx/dist',
+        public_path('bower_components/ionicons') => '../../node_modules/ionicons/dist',
+    ]
 ];

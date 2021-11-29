@@ -193,27 +193,17 @@ body {
         border-radius: .25rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
     }
-
-    .sizer .el-input__inner {
-        height: 34px;
-        line-height: 34px;
-    }
-
-    .sizer .el-input__icon {
-        line-height: 34px
-    }
-
     .el-input__inner {
-        height: 36px;
-        line-height: 36px;
+        height: $input-height-base;
+        line-height: $input-height-base;
     }
 
     .el-switch__label {
-        color: #a4aaae;
+        color: $secondary;
     }
 
     .el-cascader {
-        line-height: 36px;
+        line-height: $input-height-base;
     }
 
     .skin-black-light .main-header .navbar .navbar-custom-menu .navbar-nav > li > a, .skin-black-light .main-header .navbar .navbar-right > li > a,
@@ -241,6 +231,9 @@ body {
     }
     .json-view-container .json-view .angle{
         left: 0px !important;
+    }
+    .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+        border-bottom-width: 1px;
     }
 
 }
