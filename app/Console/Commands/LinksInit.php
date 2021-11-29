@@ -34,7 +34,7 @@ class LinksInit extends BaseCommand
         $relative = $this->option('relative');
         $force = $this->option('force');
         collect($this->links())->merge($this->initLinks())->each(function ($target,$link)use($relative,$force){
-            if ($force && file_exists($link)) {
+            if (($force || $link==base_path('node_modules/admin-lte/build/less/variables.less')) && file_exists($link)) {
                 $this->laravel->make('files')->delete($link);
             }
             if (file_exists($link)) {
