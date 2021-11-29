@@ -367,6 +367,33 @@
         "name": "Create data fill"
     },
     {
+        "command": "links:init",
+        "name": "初始化创建软连接",
+        "parameters": [
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "Force generation",
+                "name": "Force generation",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "f"
+            },
+            {
+                "key": "relative",
+                "value": 0,
+                "rules": "",
+                "title": "使用相对路径创建软连接",
+                "name": "使用相对路径",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
+    },
+    {
         "command": "migrate:all",
         "name": "Perform all directory migration files"
     },
@@ -927,7 +954,19 @@
     },
     {
         "command": "storage:link",
-        "name": "Create a symbolic link"
+        "name": "Create a symbolic link",
+        "parameters": [
+            {
+                "key": "relative",
+                "value": 0,
+                "rules": "",
+                "title": "使用相对路径创建软连接",
+                "name": "使用相对路径",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
     },
     {
         "command": "vendor:publish",
