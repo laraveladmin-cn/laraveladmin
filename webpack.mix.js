@@ -38,7 +38,7 @@ mix.webpackConfig({
 if(process.argv.includes('--css')){
     global.Mix.manifest.name = 'mix-manifest-css.json';
     let pathValue = basePath+cssPath;
-    mix.less('resources/less/skins.less', pathValue)
+    mix.less('resources/less/adminlte.less', pathValue)
         .sass('resources/sass/app.scss', pathValue);
 }else if(process.argv.includes('--tailwindcss')){
     global.Mix.manifest.name = 'mix-manifest-tailwindcss.json';
