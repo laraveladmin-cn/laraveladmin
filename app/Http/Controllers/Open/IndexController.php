@@ -58,7 +58,6 @@ class IndexController extends Controller
      */
     public function config(){
         $app_url = config('app.url');
-        $app_url = config('app.url');
         $app_url = $this->checkUrl($app_url);
         $data['logo'] = config('laravel_admin.logo');
         $data['name'] = config('app.name');
