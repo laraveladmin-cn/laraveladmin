@@ -33,7 +33,8 @@ class LinksInit extends BaseCommand
     {
         $relative = $this->option('relative');
         $force = $this->option('force');
-        collect($this->links())->merge($this->initLinks())->each(function ($target,$link)use($relative,$force){
+        $flog = false;
+        collect($this->links())->merge($this->initLinks())->each(function ($target,$link)use($relative,$force,&$flog){
             if (($force || $link==base_path('node_modules/admin-lte/build/less/variables.less')) && file_exists($link)) {
                 $this->laravel->make('files')->delete($link);
             }
@@ -56,17 +57,18 @@ class LinksInit extends BaseCommand
             } else {
                 $res = $this->laravel->make('files')->link($target, $link);
             }
-            if($res){
+            if($res!==false){
                 $this->info(
                     trans_path(   'The ":link" link has been connected to ":target"',$this->transPath,['link'=>$link,'target'=>$target])
                 );
             }else{
+                $flog = false;
                 $this->error(
                     trans_path(   'Failed to create file ":file"',$this->transPath,['file'=>$link])
                 );
             }
         });
-        $this->info( trans_path( 'The links have been created',$this->transPath));
+        $flog and $this->info( trans_path( 'The links have been created',$this->transPath));
     }
 
     /**
@@ -89,16 +91,17 @@ class LinksInit extends BaseCommand
     {
         return $this->laravel['config']['filesystems.init_links'] ??
             [
-                base_path('node_modules/admin-lte/build/less/variables.less') => '../../../../resources/less/variables.less', //主题配色变量
+                base_path('node_modules/admin-lte/build/less/variables.less') => resource_path('less/variables.less'), //主题配色变量
 
-                public_path('bower_components/animate.css/animate.min.css') => '../../../node_modules/animate.css/animate.min.css', //动画样式
-                public_path('bower_components/bootstrap/dist') => '../../../node_modules/bootstrap/dist',//bootstrap静态资源
-                public_path('bower_components/bootstrap-colorpicker/dist') => '../../../node_modules/bootstrap-colorpicker/dist', //bootstrap颜色选择器静态资源
-                public_path('bower_components/echarts/dist') => '../../../node_modules/echarts/dist',//echarts图表静态资源
-                public_path('bower_components/editor.md') => '../../node_modules/editor.md',//editor.md编辑器静态资源
-                public_path('bower_components/font-awesome') => '../../node_modules/font-awesome',
-                public_path('bower_components/select2/dist') => '../../../node_modules/select2/dist',
-                public_path('bower_components/xlsx/dist') => '../../../node_modules/xlsx/dist',
+                public_path('bower_components/animate.css/animate.min.css') => base_path('node_modules/animate.css/animate.min.css'), //动画样式
+                public_path('bower_components/bootstrap/dist') => base_path('node_modules/bootstrap/dist'),//bootstrap静态资源
+                public_path('bower_components/bootstrap-colorpicker/dist') => base_path('node_modules/bootstrap-colorpicker/dist'), //bootstrap颜色选择器静态资源
+                public_path('bower_components/echarts/dist') => base_path('node_modules/echarts/dist'),//echarts图表静态资源
+                public_path('bower_components/editor.md') => base_path('node_modules/editor.md'),//editor.md编辑器静态资源
+                public_path('bower_components/font-awesome') => base_path('node_modules/font-awesome'),
+                public_path('bower_components/select2/dist') => base_path('node_modules/select2/dist'),
+                public_path('bower_components/xlsx/dist') => base_path('node_modules/xlsx/dist'),
+                public_path('bower_components/ionicons') => base_path('node_modules/ionicons/dist'),
             ];
     }
 
