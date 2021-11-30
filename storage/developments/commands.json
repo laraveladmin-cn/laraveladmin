@@ -368,7 +368,7 @@
     },
     {
         "command": "links:init",
-        "name": "初始化创建软连接",
+        "name": "Initialize create soft connection",
         "parameters": [
             {
                 "key": "force",
@@ -385,8 +385,8 @@
                 "key": "relative",
                 "value": 0,
                 "rules": "",
-                "title": "使用相对路径创建软连接",
-                "name": "使用相对路径",
+                "title": "Create a soft connection using a relative path",
+                "name": "Use relative path",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -960,8 +960,8 @@
                 "key": "relative",
                 "value": 0,
                 "rules": "",
-                "title": "使用相对路径创建软连接",
-                "name": "使用相对路径",
+                "title": "Create a soft connection using a relative path",
+                "name": "Use relative path",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true

@@ -71,6 +71,12 @@ class Translation extends Seeder
                                 break;
                             }catch (\Exception $exception){
                                 $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
+                                $msg = $exception->getMessage();
+                                $this->command->warn($exception->getMessage());
+                                if($msg=='客户端IP非法'){
+                                    $origin = Arr::get(json_decode(file_get_contents('http://www.httpbin.org/ip'),true),'origin');
+                                    $origin and $this->command->info($origin);
+                                }
                                 sleep(1);
                             }
                         }
@@ -146,7 +152,7 @@ class Translation extends Seeder
         collect($files)->map(function ($file)use($model_path,&$tables){
             $file_path = $model_path.'/'.$file;
             if(is_file($file_path) && Str::endsWith($file,'.php')
-               // && $file=='Menu.php'
+                // && $file=='Menu.php'
             ){
                 $model_class = 'App\Models\\'.Str::replaceLast('.php','',$file);
                 $model = new $model_class();
@@ -186,41 +192,44 @@ class Translation extends Seeder
                         return trans($value);
                     })->toArray())
                         ->each(function ($name,$key)use(&$file_content,&$fields,&$index_content,&$edit_content,$at,$at_keys){
-                        if($name && is_string($name) && !$this->isEnglish($name)){
-                            if(!in_array($key,$at_keys)){
-                                while (true) {
-                                    try {
-                                        $new = Str::ucfirst(trim(Translate::setFromAndTo($this->lang,'en')->translate($name)));
-                                        break;
-                                    }catch (\Exception $exception){
-                                        $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
-                                        sleep(1);
+                            if($name && is_string($name) && !$this->isEnglish($name)){
+                                if(!in_array($key,$at_keys)){
+                                    while (true) {
+                                        try {
+                                            $new = Str::ucfirst(trim(Translate::setFromAndTo($this->lang,'en')->translate($name)));
+                                            break;
+                                        }catch (\Exception $exception){
+                                            $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
+                                            sleep(1);
+                                        }
                                     }
+                                    $this->command->info(trans_path('From ":old" to ":new"',$this->transPath,['old'=>$name,'new'=>$new]));
+                                }else{
+                                    $new = $at[$key];
                                 }
-                                $this->command->info(trans_path('From ":old" to ":new"',$this->transPath,['old'=>$name,'new'=>$new]));
-                            }else{
-                                $new = $at[$key];
+                                //替换代码内容
+                                $file_content = str_replace($name,$new,$file_content);
+                                //列表页面视图翻译
+                                if($index_content){
+                                    $index_content = str_replace("\"'{$name}'\"","\"props.transField('{$new}')\"",$index_content);
+                                    $index_content = str_replace("props.data.maps","props.maps",$index_content);
+                                    $index_content = str_replace($name,$new,$index_content);
+                                    $index_content = str_replace("请输入关键字","Please enter keywords",$index_content);
+                                }
+                                if($edit_content){
+                                    $edit_content = str_replace("'{$name}'","props.transField('{$new}')",$edit_content);
+                                    $edit_content = str_replace("\"{$name}\"","props.transField(\"{$new}\")",$edit_content);
+                                    $edit_content = str_replace("props.data.maps","props.maps",$edit_content);
+                                    $edit_content = str_replace('"提示信息"','$t("Prompt message")',$edit_content);
+                                    $edit_content = str_replace("'提示信息'","\$t('Prompt message')",$edit_content);
+                                    $edit_content = str_replace("快速填写","{{\$t('Quickly fill in')}}",$edit_content);
+                                }
+                                //翻译内容设置
+                                if(!Arr::get($fields,$new)){
+                                    $fields[$new] = $name;
+                                }
                             }
-                            //替换代码内容
-                            $file_content = str_replace($name,$new,$file_content);
-                            //列表页面视图翻译
-                            if($index_content){
-                                $index_content = str_replace("\"'{$name}'\"","\"props.transField('{$new}')\"",$index_content);
-                                $index_content = str_replace("props.data.maps","props.maps",$index_content);
-                                $index_content = str_replace($name,$new,$index_content);
-                                $index_content = str_replace("请输入关键字","Please enter keywords",$index_content);
-                            }
-                            if($edit_content){
-                                $edit_content = str_replace("'{$name}'","props.transField('{$new}')",$edit_content);
-                                $edit_content = str_replace("\"{$name}\"","props.transField(\"{$new}\")",$edit_content);
-                                $edit_content = str_replace("props.data.maps","props.maps",$edit_content);
-                            }
-                            //翻译内容设置
-                            if(!Arr::get($fields,$new)){
-                                $fields[$new] = $name;
-                            }
-                        }
-                    });
+                        });
                 }
                 //翻译值映射
                 $fields_map = $model_class::getFieldsMap();
@@ -448,25 +457,25 @@ class Translation extends Seeder
     public function outPutData($data,$file,$local,$lang_prefix=true){
         collect(config('laravel_admin.locales',[]))
             ->filter(function ($value)use($local){ //排除本地文件
-            return str_replace('_','-',$value)!=$local;
-        })->map(function ($lang)use($data,$file,$local,$lang_prefix){
-            $lang = str_replace('_','-',$lang);
-            if($lang_prefix){
-                $file_path = resource_path(str_replace('_','-',"lang/{$lang}")."/{$file}");
-            }else{
-                $file_path = resource_path(str_replace('_','-',"lang/{$lang}.json"));
-            }
-            $data_back = array_merge(array(), $data);
-            if(file_exists($file_path)){
-                $old_data = json_decode(file_get_contents($file_path),true)?:[];
-            }else{
-                $old_data = [];
-            }
-            $_lang = Arr::get($this->langMap,$lang,explode('-',$lang)[0]);
-            $_local = Arr::get($this->langMap,$local,explode('-',$local)[0]);
-            $data_back = $this->handelData($data_back,$old_data,$_lang,$_local);
-            file_put_contents($file_path,json_encode( $data_back ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
-        });
+                return str_replace('_','-',$value)!=$local;
+            })->map(function ($lang)use($data,$file,$local,$lang_prefix){
+                $lang = str_replace('_','-',$lang);
+                if($lang_prefix){
+                    $file_path = resource_path(str_replace('_','-',"lang/{$lang}")."/{$file}");
+                }else{
+                    $file_path = resource_path(str_replace('_','-',"lang/{$lang}.json"));
+                }
+                $data_back = array_merge(array(), $data);
+                if(file_exists($file_path)){
+                    $old_data = json_decode(file_get_contents($file_path),true)?:[];
+                }else{
+                    $old_data = [];
+                }
+                $_lang = Arr::get($this->langMap,$lang,explode('-',$lang)[0]);
+                $_local = Arr::get($this->langMap,$local,explode('-',$local)[0]);
+                $data_back = $this->handelData($data_back,$old_data,$_lang,$_local);
+                file_put_contents($file_path,json_encode( $data_back ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+            });
     }
 
     /**
