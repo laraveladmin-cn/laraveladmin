@@ -230,9 +230,7 @@ class Translation extends Seeder
                                 }
                                 $this->command->info(trans_path('From ":old" to ":new"',$this->transPath,['old'=>$name,'new'=>$new]));
                             }elseif(Arr::get($at,$key)){
-
                                 $new = $at[$key];
-                                dd($name,$key,$new);
                             }else{
                                 return;
                             }
