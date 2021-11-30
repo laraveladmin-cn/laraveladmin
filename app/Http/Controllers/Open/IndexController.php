@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class IndexController extends Controller
@@ -22,12 +23,21 @@ class IndexController extends Controller
      * @return array
      */
     public function indexData(){
+        $config_url = config('app.url').getRoutePrefix(config('laravel_admin.web_api_model'));
+        $config_url = $this->checkUrl($config_url);
+
         return [
             'time_str'=>'&time='.time(),
-            'app_name'=>config('app.name')
+            'app_name'=>config('app.name'),
+            'config_url'=>$config_url
         ];
     }
 
+    protected function checkUrl($url){
+        return (!$url || Str::startsWith($url,'http://') ||
+            Str::startsWith($url,'https://') ||
+            Str::startsWith($url,'/'))?$url:'//'.$url;
+    }
     /**
      * 所有页面显示
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
@@ -51,6 +61,7 @@ class IndexController extends Controller
      */
     public function config(){
         $app_url = config('app.url');
+        $app_url = $this->checkUrl($app_url);
         $data['logo'] = config('laravel_admin.logo');
         $data['name'] = config('app.name');
         $data['name_short'] = config('laravel_admin.name_short');
