@@ -228,32 +228,6 @@ class Translation extends Seeder
                                 if(!Arr::get($fields,$new)){
                                     $fields[$new] = $name;
                                 }
-                                $this->command->info(trans_path('From ":old" to ":new"',$this->transPath,['old'=>$name,'new'=>$new]));
-                            }elseif(Arr::get($at,$key)){
-                                $new = $at[$key];
-                            }else{
-                                return;
-                            }
-                            //替换代码内容
-                            $file_content = str_replace($name,$new,$file_content);
-                            //列表页面视图翻译
-                            if($index_content){
-                                $index_content = str_replace("\"'{$name}'\"","\"props.transField('{$new}')\"",$index_content);
-                                $index_content = str_replace("props.data.maps","props.maps",$index_content);
-                                $index_content = str_replace($name,$new,$index_content);
-                                $index_content = str_replace("请输入关键字","Please enter keywords",$index_content);
-                            }
-                            if($edit_content){
-                                $edit_content = str_replace("'{$name}'","props.transField('{$new}')",$edit_content);
-                                $edit_content = str_replace("\"{$name}\"","props.transField(\"{$new}\")",$edit_content);
-                                $edit_content = str_replace("props.data.maps","props.maps",$edit_content);
-                                $edit_content = str_replace('"提示信息"','$t("Prompt message")',$edit_content);
-                                $edit_content = str_replace("'提示信息'","\$t('Prompt message')",$edit_content);
-                                $edit_content = str_replace("快速填写","{{\$t('Quickly fill in')}}",$edit_content);
-                            }
-                            //翻译内容设置
-                            if(!Arr::get($fields,$new)){
-                                $fields[$new] = $name;
                             }
                         });
                 }
