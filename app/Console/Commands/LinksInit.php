@@ -50,14 +50,21 @@ class LinksInit extends BaseCommand
             if (is_link($link)) {
                 $this->laravel->make('files')->delete($link);
             }
+
             if ($relative) {
-                $this->laravel->make('files')->relativeLink($target, $link);
+                $res = $this->laravel->make('files')->relativeLink($target, $link);
             } else {
-                $this->laravel->make('files')->link($target, $link);
+                $res = $this->laravel->make('files')->link($target, $link);
             }
-            $this->info(
-                trans_path(   'The ":link" link has been connected to ":target"',$this->transPath,['link'=>$link,'target'=>$target])
-            );
+            if($res){
+                $this->info(
+                    trans_path(   'The ":link" link has been connected to ":target"',$this->transPath,['link'=>$link,'target'=>$target])
+                );
+            }else{
+                $this->error(
+                    trans_path(   'Failed to create file ":file"',$this->transPath,['file'=>$link])
+                );
+            }
         });
         $this->info( trans_path( 'The links have been created',$this->transPath));
     }
