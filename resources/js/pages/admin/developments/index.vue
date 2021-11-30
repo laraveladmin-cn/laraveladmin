@@ -114,6 +114,21 @@
                                                 </template>
                                             </edit-item>
                                             <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-else-if="item.type=='number'"
+                                                       :options="transItem(item)"
+                                                       :datas="props"
+                                                       :key="index">
+                                                <template slot="input-item">
+                                                    <div class="edit-item-content">
+                                                        <el-input-number v-model="item.value"
+                                                                         class="w-100"
+                                                                         size="medium"
+                                                                         :step="1">
+                                                        </el-input-number>
+                                                    </div>
+                                                </template>
+                                            </edit-item>
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
                                                        v-else
                                                        :options="transItem(item)"
                                                        :disabled="false"
@@ -217,6 +232,7 @@
             "edit-item": () => import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             "el-switch": ()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
+            "el-input-number": ()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
             "menus": ()=>import(/* webpackChunkName: "pages/admin/developments/menus" */ 'pages/admin/developments/menus.vue'),
             "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
 

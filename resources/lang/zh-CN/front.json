@@ -608,7 +608,21 @@
                 "Automatic scanning to generate API document data": "自动扫描生成Api文档数据",
                 "Initialize create soft connection": "初始化创建软连接",
                 "Create a soft connection using a relative path": "使用相对路径创建软连接",
-                "Use relative path": "使用相对路径"
+                "Use relative path": "使用相对路径",
+                "Database": "数据库",
+                "Directory path of the file": "文件所在目录路径",
+                "Route": "路径",
+                "Path to the mode dump file": "模式转储文件的路径",
+                "SQL file path": "sql文件路径",
+                "Force migrations to run so that they can be rolled back individually": "强制运行迁移，以便可以分别回滚它们",
+                "Number of steps": "步骤数",
+                "Is it an absolute path": "是否为绝对路径",
+                "Full path": "全路径",
+                "Dump the SQL query to be run": "转储将要运行的SQL查询",
+                "Pretend": "假装",
+                "Reset data": "是否重置数据",
+                "Data filling": "数据填充",
+                "Force the operation in the production environment (no confirmation message)": "在生产环境中强制运行该操作(不弹确认信息)"
             },
             "menus": {
                 "Drag shift": "拖拽移位",

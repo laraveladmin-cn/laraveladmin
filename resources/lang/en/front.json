@@ -608,7 +608,21 @@
                 "Automatic scanning to generate API document data": "Automatic scanning to generate API document data",
                 "Initialize create soft connection": "Initialize create soft connection",
                 "Create a soft connection using a relative path": "Create a soft connection using a relative path",
-                "Use relative path": "Use relative path"
+                "Use relative path": "Use relative path",
+                "Database": "Database",
+                "Directory path of the file": "Directory path of the file",
+                "Route": "Route",
+                "Path to the mode dump file": "Path to the mode dump file",
+                "SQL file path": "SQL file path",
+                "Force migrations to run so that they can be rolled back individually": "Force migrations to run so that they can be rolled back individually",
+                "Number of steps": "Number of steps",
+                "Is it an absolute path": "Is it an absolute path",
+                "Full path": "Full path",
+                "Dump the SQL query to be run": "Dump the SQL query to be run",
+                "Pretend": "Pretend",
+                "Reset data": "Reset data",
+                "Data filling": "Data filling",
+                "Force the operation in the production environment (no confirmation message)": "Force the operation in the production environment (no confirmation message)"
             },
             "menus": {
                 "Drag shift": "Drag shift",

@@ -467,7 +467,85 @@
     },
     {
         "command": "migrate",
-        "name": "Run the database migrations"
+        "name": "Run the database migrations",
+        "parameters": [
+            {
+                "key": "database",
+                "value": "",
+                "rules": "",
+                "title": "Database connection",
+                "name": "Database",
+                "placeholder": "mysql",
+                "is_option": true
+            },
+            {
+                "key": "path",
+                "value": "",
+                "rules": "",
+                "title": "Directory path of the file",
+                "name": "Route",
+                "placeholder": "database/migrations/2014",
+                "is_option": true
+            },
+            {
+                "key": "schema-path",
+                "value": "",
+                "rules": "",
+                "title": "Path to the mode dump file",
+                "name": "SQL file path",
+                "placeholder": "",
+                "is_option": true
+            },
+            {
+                "key": "step",
+                "value": 0,
+                "rules": "",
+                "title": "Force migrations to run so that they can be rolled back individually",
+                "name": "Number of steps",
+                "type": "number",
+                "is_option": true
+            },
+            {
+                "key": "realpath",
+                "value": 0,
+                "rules": "",
+                "title": "Is it an absolute path",
+                "name": "Full path",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "pretend",
+                "value": 0,
+                "rules": "",
+                "title": "Dump the SQL query to be run",
+                "name": "Pretend",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "seed",
+                "value": 0,
+                "rules": "",
+                "title": "Reset data",
+                "name": "Data filling",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "Force the operation in the production environment (no confirmation message)",
+                "name": "Enforcement",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
     },
     {
         "command": "optimize",
