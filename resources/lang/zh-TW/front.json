@@ -893,7 +893,21 @@
                 "Automatic scanning to generate API document data": "自動掃描生成Api檔案數據",
                 "Initialize create soft connection": "初始化創建軟連接",
                 "Create a soft connection using a relative path": "使用相對路徑創建軟連接",
-                "Use relative path": "使用相對路徑"
+                "Use relative path": "使用相對路徑",
+                "Database": "資料庫",
+                "Directory path of the file": "檔案所在目錄路徑",
+                "Route": "路徑",
+                "Path to the mode dump file": "模式轉儲檔案的路徑",
+                "SQL file path": "sql檔案路徑",
+                "Force migrations to run so that they can be rolled back individually": "強制運行遷移，以便可以分別回滾它們",
+                "Number of steps": "步驟數",
+                "Is it an absolute path": "是否為絕對路徑",
+                "Full path": "全路徑",
+                "Dump the SQL query to be run": "轉儲將要運行的SQL査詢",
+                "Pretend": "假裝",
+                "Reset data": "是否重置數據",
+                "Data filling": "數據填充",
+                "Force the operation in the production environment (no confirmation message)": "在生產環境中強制運行該操作（不彈確認資訊）"
             },
             "menus": {
                 "Drag shift": "拖拽移位",
