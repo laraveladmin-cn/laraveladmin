@@ -893,7 +893,21 @@
                 "Automatic scanning to generate API document data": "Verificação automática para Gerar dados do documento API",
                 "Initialize create soft connection": "Inicializar criar uma conexão suave",
                 "Create a soft connection using a relative path": "Criar uma conexão suave usando um caminho relativo",
-                "Use relative path": "Usar o caminho relativo"
+                "Use relative path": "Usar o caminho relativo",
+                "Database": "Base de dados",
+                "Directory path of the file": "Localização da pasta do ficheiro",
+                "Route": "Rota",
+                "Path to the mode dump file": "Localização do ficheiro de despejo de modo",
+                "SQL file path": "Localização do ficheiro SQL",
+                "Force migrations to run so that they can be rolled back individually": "Forçar as migrações a correr para que possam ser roladas de volta individualmente",
+                "Number of steps": "Número de etapas",
+                "Is it an absolute path": "É um caminho absoluto",
+                "Full path": "Caminho completo",
+                "Dump the SQL query to be run": "Despeje a consulta SQL para ser executada",
+                "Pretend": "Fingir",
+                "Reset data": "Reiniciar os dados",
+                "Data filling": "Preenchimento de dados",
+                "Force the operation in the production environment (no confirmation message)": "Forçar a operação no ambiente de produção (sem mensagem de confirmação)"
             },
             "menus": {
                 "Drag shift": "Arrastar mudança",

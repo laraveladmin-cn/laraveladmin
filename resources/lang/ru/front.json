@@ -893,7 +893,21 @@
                 "Automatic scanning to generate API document data": "генерировать данные для документа Api",
                 "Initialize create soft connection": "инициализация создания мягких соединений",
                 "Create a soft connection using a relative path": "Использовать относительный путь для создания мягких соединений",
-                "Use relative path": "Использовать относительный путь"
+                "Use relative path": "Использовать относительный путь",
+                "Database": "база данных",
+                "Directory path of the file": "путь к папке",
+                "Route": "путь",
+                "Path to the mode dump file": "путь к файлу",
+                "SQL file path": "путь к файлу sql",
+                "Force migrations to run so that they can be rolled back individually": "принудительное перемещение, чтобы можно было отдельно их переворачивать",
+                "Number of steps": "количество шагов",
+                "Is it an absolute path": "абсолютный путь",
+                "Full path": "полный путь",
+                "Dump the SQL query to be run": "дамп будет запущен Запрос SQL",
+                "Pretend": "притворяться",
+                "Reset data": "сбросить данные",
+                "Data filling": "заполнение данных",
+                "Force the operation in the production environment (no confirmation message)": "принудительное выполнение этой операции в производственной среде (без подтверждения патрона)"
             },
             "menus": {
                 "Drag shift": "буксирный сдвиг",

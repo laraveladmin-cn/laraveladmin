@@ -893,7 +893,21 @@
                 "Automatic scanning to generate API document data": "자동 검색 으로 Api 문서 데이터 생 성",
                 "Initialize create soft connection": "소프트 연결 생성 초기화",
                 "Create a soft connection using a relative path": "상대 경로를 사용하여 소프트 연결 생성하기",
-                "Use relative path": "상대 경로 사용"
+                "Use relative path": "상대 경로 사용",
+                "Database": "데이터베이스",
+                "Directory path of the file": "파일이 있는 디렉토리 경로",
+                "Route": "경로",
+                "Path to the mode dump file": "모드 덤프 파일의 경로",
+                "SQL file path": "ql 파일 경로",
+                "Force migrations to run so that they can be rolled back individually": "마이그레이션을 강제로 실행하여 각각 롤백할 수 있습니다.",
+                "Number of steps": "단계 수",
+                "Is it an absolute path": "절대 경로인지 여부",
+                "Full path": "전체 경로",
+                "Dump the SQL query to be run": "실행할 SQL 쿼리 덤프",
+                "Pretend": "... 인 체하다",
+                "Reset data": "데이터 재설정 여부",
+                "Data filling": "데이터 충전",
+                "Force the operation in the production environment (no confirmation message)": "프로덕션 환경에서 작업을 강제로 실행합니다(확인 메시지 없음)."
             },
             "menus": {
                 "Drag shift": "드래그 자리 이동",

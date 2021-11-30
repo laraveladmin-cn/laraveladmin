@@ -893,7 +893,21 @@
                 "Automatic scanning to generate API document data": "自動スキャンでApi文書データを生成します。",
                 "Initialize create soft connection": "ソフト接続の作成を初期化",
                 "Create a soft connection using a relative path": "相対パスを使用したソフト接続の作成",
-                "Use relative path": "相対パスの使用"
+                "Use relative path": "相対パスの使用",
+                "Database": "データベース#データベース#",
+                "Directory path of the file": "ファイルが存在するディレクトリのパス",
+                "Route": "パス",
+                "Path to the mode dump file": "モードダンプファイルのパス",
+                "SQL file path": "sqlファイルパス",
+                "Force migrations to run so that they can be rolled back individually": "移行を強制的に実行し、個別にロールバックできるようにします。",
+                "Number of steps": "ステップ数",
+                "Is it an absolute path": "絶対パスかどうか",
+                "Full path": "フルパス",
+                "Dump the SQL query to be run": "実行するSQLクエリーのダンプ",
+                "Pretend": "ふりを",
+                "Reset data": "データをリセットするかどうか",
+                "Data filling": "データの移入",
+                "Force the operation in the production environment (no confirmation message)": "この操作を本番環境で強制的に実行します(確認情報を弾かない)"
             },
             "menus": {
                 "Drag shift": "ドラッグ操作",
