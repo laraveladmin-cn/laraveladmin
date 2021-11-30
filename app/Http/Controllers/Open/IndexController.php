@@ -25,6 +25,7 @@ class IndexController extends Controller
     public function indexData(){
         $config_url = config('app.url').getRoutePrefix(config('laravel_admin.web_api_model'));
         $config_url = $this->checkUrl($config_url);
+
         return [
             'time_str'=>'&time='.time(),
             'app_name'=>config('app.name'),
@@ -33,7 +34,9 @@ class IndexController extends Controller
     }
 
     protected function checkUrl($url){
-        return (Str::startsWith($url,'http://') || Str::startsWith($url,'https://'))?$url:'//'.$url;
+        return (!$url || Str::startsWith($url,'http://') ||
+            Str::startsWith($url,'https://') ||
+            Str::startsWith($url,'/'))?$url:'//'.$url;
     }
     /**
      * 所有页面显示
