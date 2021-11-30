@@ -890,7 +890,10 @@
                 "Event class name": "事件類名",
                 "Service provider": "服務提供者",
                 "Is the table name prefixed": "錶名是否帶首碼",
-                "Automatic scanning to generate API document data": "自動掃描生成Api檔案數據"
+                "Automatic scanning to generate API document data": "自動掃描生成Api檔案數據",
+                "Initialize create soft connection": "初始化創建軟連接",
+                "Create a soft connection using a relative path": "使用相對路徑創建軟連接",
+                "Use relative path": "使用相對路徑"
             },
             "menus": {
                 "Drag shift": "拖拽移位",

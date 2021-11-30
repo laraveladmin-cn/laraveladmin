@@ -890,7 +890,10 @@
                 "Event class name": "事件类名",
                 "Service provider": "服务提供者",
                 "Is the table name prefixed": "表名是否带前缀",
-                "Automatic scanning to generate API document data": "自动扫描生成Api文档数据"
+                "Automatic scanning to generate API document data": "自动扫描生成Api文档数据",
+                "Initialize create soft connection": "初始化创建软连接",
+                "Create a soft connection using a relative path": "使用相对路径创建软连接",
+                "Use relative path": "使用相对路径"
             },
             "menus": {
                 "Drag shift": "拖拽移位",

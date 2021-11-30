@@ -890,7 +890,10 @@
                 "Event class name": "イベント名",
                 "Service provider": "サービスプロバイダ",
                 "Is the table name prefixed": "テーブル名にプレフィックスが付いていますか？",
-                "Automatic scanning to generate API document data": "自動スキャンでApi文書データを生成します。"
+                "Automatic scanning to generate API document data": "自動スキャンでApi文書データを生成します。",
+                "Initialize create soft connection": "ソフト接続の作成を初期化",
+                "Create a soft connection using a relative path": "相対パスを使用したソフト接続の作成",
+                "Use relative path": "相対パスの使用"
             },
             "menus": {
                 "Drag shift": "ドラッグ操作",

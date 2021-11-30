@@ -34,9 +34,11 @@ class IndexController extends Controller
     }
 
     protected function checkUrl($url){
-        return (!$url || Str::startsWith($url,'http://') ||
+        return (!$url ||
+            Str::startsWith($url,'http://') ||
             Str::startsWith($url,'https://') ||
-            Str::startsWith($url,'/'))?$url:'//'.$url;
+            Str::startsWith($url,'/')
+        )?$url:'//'.$url;
     }
     /**
      * 所有页面显示

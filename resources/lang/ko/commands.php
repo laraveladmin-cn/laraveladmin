@@ -20,7 +20,10 @@ $str = <<<'str'
     "Failed to translate \":old\"": "번역 실패",
     "Failed to translate \":old\" into \":lang\"": "번역 실패",
     "This command can only be executed in the development environment": "개발 환경 에서 만 명령 을 수행 할 수 있 습 니 다.",
-    "Automatic scan to generate Api document data": "자동 검색 으로 Api 문서 데이터 생 성"
+    "Automatic scan to generate Api document data": "자동 검색 으로 Api 문서 데이터 생 성",
+    "Initializing the creation of a soft connection": "소프트 연결 생성 초기화",
+    "The \":link\" link has been connected to \":target\"": "소프트 연결 \":link\" 이 \":target\" 에 연결되었습니다",
+    "The links have been created": "링크가 모두 만들어졌습니다."
 }
 str;
 return json_decode($str,true);

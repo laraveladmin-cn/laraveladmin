@@ -890,7 +890,10 @@
                 "Event class name": "Nombre de la clase de evento",
                 "Service provider": "Proveedor de servicios",
                 "Is the table name prefixed": "Si el nombre de la tabla está prefijado",
-                "Automatic scanning to generate API document data": "Escaneo automático para generar datos de documentos API"
+                "Automatic scanning to generate API document data": "Escaneo automático para generar datos de documentos API",
+                "Initialize create soft connection": "Inicializar para crear una conexión suave",
+                "Create a soft connection using a relative path": "Crear conexiones suaves usando rutas relativas",
+                "Use relative path": "Usar ruta relativa"
             },
             "menus": {
                 "Drag shift": "Desplazamiento de arrastre",

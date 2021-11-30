@@ -890,7 +890,10 @@
                 "Event class name": "имя категории событий",
                 "Service provider": "поставщик услуг",
                 "Is the table name prefixed": "Название таблицы с префиксом",
-                "Automatic scanning to generate API document data": "генерировать данные для документа Api"
+                "Automatic scanning to generate API document data": "генерировать данные для документа Api",
+                "Initialize create soft connection": "инициализация создания мягких соединений",
+                "Create a soft connection using a relative path": "Использовать относительный путь для создания мягких соединений",
+                "Use relative path": "Использовать относительный путь"
             },
             "menus": {
                 "Drag shift": "буксирный сдвиг",

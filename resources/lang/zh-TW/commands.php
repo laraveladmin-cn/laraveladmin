@@ -20,7 +20,10 @@ $str = <<<'str'
     "Failed to translate \":old\"": "翻譯“：old”失敗",
     "Failed to translate \":old\" into \":lang\"": "翻譯“：old”成“：lang”失敗",
     "This command can only be executed in the development environment": "只能在開發環境才可執行該命令",
-    "Automatic scan to generate Api document data": "自動掃描生成Api檔案數據"
+    "Automatic scan to generate Api document data": "自動掃描生成Api檔案數據",
+    "Initializing the creation of a soft connection": "初始化創建軟連接",
+    "The \":link\" link has been connected to \":target\"": "軟連接“：link”已經連接到“：target”",
+    "The links have been created": "連結已經全部創建"
 }
 str;
 return json_decode($str,true);

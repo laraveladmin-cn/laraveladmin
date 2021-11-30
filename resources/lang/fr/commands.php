@@ -20,7 +20,10 @@ $str = <<<'str'
     "Failed to translate \":old\"": "La traduction «: old» a échoué",
     "Failed to translate \":old\" into \":lang\"": "Impossible de traduire «: Old » en «: Lang »",
     "This command can only be executed in the development environment": "Cette commande ne peut être exécutée que dans un environnement de développement",
-    "Automatic scan to generate Api document data": "Numériser automatiquement les données du document API généré"
+    "Automatic scan to generate Api document data": "Numériser automatiquement les données du document API généré",
+    "Initializing the creation of a soft connection": "Initialiser la création d'une connexion souple",
+    "The \":link\" link has been connected to \":target\"": "La connexion souple «: Link » est déjà connectée à «: target »",
+    "The links have been created": "Tous les liens ont été créés"
 }
 str;
 return json_decode($str,true);
