@@ -20,11 +20,11 @@
                 <h3 class="red">
                     {{$tp('Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use')}}
                 </h3>
-                <h1>
+                <h3>
                     <a href="https://www.laraveladmin.cn">
                         {{$tp('Official environment official website')}}https://www.laraveladmin.cn
                     </a>
-                </h1>
+                </h3>
                 <div>
                     {{$tp('Home page of official website')}}
                 </div>
@@ -77,6 +77,11 @@
 
     .title {
         font-size: 84px;
+    }
+    @media (max-width: 767px) {
+        .title {
+            font-size: 55px;
+        }
     }
 
     .links > a {
