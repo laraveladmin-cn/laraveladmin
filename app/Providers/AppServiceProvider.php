@@ -58,19 +58,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(ResponseFactory $factory)
     {
         Schema::defaultStringLength(191);
-        //注册创建代码命令
-        if ($this->app->environment() == 'local')  {
-            //开发环境注册
-            $commands = [];
-            $commands[] = CreateModel::class;
-            $commands[] = CreateSeed::class;
-            $commands[] = CreateController::class;
-            $commands[] = CreateView::class;
-            $commands[] = CreateAll::class;
-            $commands[] = BuildApiDoc::class;
-            $this->commands($commands);
-        }
-
         //响应返回
         $factory->macro('returns', function ($value=[],$status=200,array $headers = []) use ($factory) {
             $value = collect(LifeData::all())->only(['options','list'])->merge($value)->toArray();
