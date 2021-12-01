@@ -34,6 +34,7 @@ return [
     'Automatic scan to generate Api document data'=>'自动扫描生成Api文档数据',
     'Initializing the creation of a soft connection'=>'初始化创建软连接',
     'The ":link" link has been connected to ":target"'=>'软连接":link"已经连接到":target"',
-    'The links have been created'=>'链接已经全部创建'
+    'The links have been created'=>'链接已经全部创建',
+    'Generate software code text for software copyright application'=>'生成申请软件著作权的软件代码文本'
 
 ];
