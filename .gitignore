@@ -27,3 +27,4 @@ __MACOSX
 .idea
 composer.lock
 *.DS_Store
+front_end

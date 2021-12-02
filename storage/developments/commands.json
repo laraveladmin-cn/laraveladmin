@@ -389,7 +389,8 @@
                 "name": "Use relative path",
                 "type": "switch",
                 "is_option": true,
-                "is_boolean": true
+                "is_boolean": true,
+                "key_as": "r"
             }
         ]
     },

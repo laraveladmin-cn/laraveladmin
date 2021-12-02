@@ -127,6 +127,12 @@ class Translation extends Seeder
                     break;
                 }catch (\Exception $exception){
                     $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
+                    $msg = $exception->getMessage();
+                    $this->command->warn($exception->getMessage());
+                    if($msg=='客户端IP非法'){
+                        $origin = Arr::get(json_decode(file_get_contents('http://www.httpbin.org/ip'),true),'origin');
+                        $origin and $this->command->info($origin);
+                    }
                     sleep(1);
                 }
             }
@@ -200,6 +206,12 @@ class Translation extends Seeder
                                             break;
                                         }catch (\Exception $exception){
                                             $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
+                                            $msg = $exception->getMessage();
+                                            $this->command->warn($exception->getMessage());
+                                            if($msg=='客户端IP非法'){
+                                                $origin = Arr::get(json_decode(file_get_contents('http://www.httpbin.org/ip'),true),'origin');
+                                                $origin and $this->command->info($origin);
+                                            }
                                             sleep(1);
                                         }
                                     }
@@ -244,6 +256,12 @@ class Translation extends Seeder
                                         break;
                                     }catch (\Exception $exception){
                                         $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
+                                        $msg = $exception->getMessage();
+                                        $this->command->warn($exception->getMessage());
+                                        if($msg=='客户端IP非法'){
+                                            $origin = Arr::get(json_decode(file_get_contents('http://www.httpbin.org/ip'),true),'origin');
+                                            $origin and $this->command->info($origin);
+                                        }
                                         sleep(1);
                                     }
                                 }
@@ -308,7 +326,12 @@ class Translation extends Seeder
                                 break;
                             }catch (\Exception $exception){
                                 $this->command->error(trans_path('Failed to translate ":old"',$this->transPath,['old'=>$name]));
-                                //return ;
+                                $msg = $exception->getMessage();
+                                $this->command->warn($exception->getMessage());
+                                if($msg=='客户端IP非法'){
+                                    $origin = Arr::get(json_decode(file_get_contents('http://www.httpbin.org/ip'),true),'origin');
+                                    $origin and $this->command->info($origin);
+                                }
                                 sleep(1);
                             }
                         }
@@ -509,7 +532,12 @@ class Translation extends Seeder
                                     break;
                                 }catch (\Exception $exception){
                                     $this->command->error(trans_path('Failed to translate ":old" into ":lang"',$this->transPath,['old'=>$value,'lang'=>$lang]));
-                                    //unset($data[$key]);
+                                    $msg = $exception->getMessage();
+                                    $this->command->warn($exception->getMessage());
+                                    if($msg=='客户端IP非法'){
+                                        $origin = Arr::get(json_decode(file_get_contents('http://www.httpbin.org/ip'),true),'origin');
+                                        $origin and $this->command->info($origin);
+                                    }
                                     sleep(1);
                                 }
                             }
