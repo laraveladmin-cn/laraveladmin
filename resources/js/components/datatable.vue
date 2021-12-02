@@ -441,11 +441,12 @@
                 select_all:[], //全选
                 pageLength:2, //当前页面前后长度
                 input_page:'', //输入页码
-                keywordKey:'',
+                keywordKey:'', //关键字搜索key
                 check_ids_change:false,
                 options_str:'',
                 per_page_options:[10,15,20,30,50,100,200],
-                input_per_page:15
+                input_per_page:15,
+                import_per_page:200
             };
         },
         methods:{
@@ -762,6 +763,7 @@
                                 file:file,
                                 sheet:sheet,
                                 url:this.data.configUrl.importUrl,
+                                import_per_page:this.importPerPageValue,
                                 callback:()=>{
                                     this.refresh();
                                 }
@@ -900,6 +902,12 @@
                     return this.options.per_page_options;
                 }
                 return this.per_page_options;
+            },
+            importPerPageValue(){
+                if(this.options.import_per_page){
+                    return this.options.import_per_page;
+                }
+                return this.import_per_page;
             },
             //翻译后的显示数据项
             _maps(){
