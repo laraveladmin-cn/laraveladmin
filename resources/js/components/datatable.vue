@@ -463,12 +463,12 @@
             }),
             transField(name,key,table){
                 let sheet = array_get(this.data,'excel.sheet','');
-                if(!this.options.lang_table && !sheet){
+                if(!this.options.lang_table && !this.options.langTable && !sheet){
                     return name;
                 }
                 if(!table){
                     if(!key || key.indexOf('.')==-1){
-                        table = this.options.lang_table || sheet;
+                        table = this.options.langTable || this.options.lang_table || sheet;
                     }else {
                         let arr = key.replace('.$index','').split('.');
                         arr.pop();
@@ -488,11 +488,11 @@
             },
             transMap(name,field,table){
                 let sheet = array_get(this.data,'excel.sheet','');
-                if(!this.options.lang_table && !sheet){
+                if(!this.options.lang_table && !this.options.langTable && !sheet){
                     return name;
                 }
                 if(!table){
-                    table = this.options.lang_table || sheet;
+                    table = this.options.langTable || this.options.lang_table || sheet;
                 }
                 return this.$tp(name,{
                     "{lang_path}": '_shared.tables.'+table+'.maps.'+field,
@@ -898,12 +898,18 @@
                 return (this.options.btnRefresh || typeof this.options.btnRefresh=="undefined" );
             },
             perPageOptions(){
+                if(this.options.perPageOptions){
+                    return this.options.perPageOptions;
+                }
                 if(this.options.per_page_options){
                     return this.options.per_page_options;
                 }
                 return this.per_page_options;
             },
             importPerPageValue(){
+                if(this.options.importPerPage){
+                    return this.options.importPerPage;
+                }
                 if(this.options.import_per_page){
                     return this.options.import_per_page;
                 }
