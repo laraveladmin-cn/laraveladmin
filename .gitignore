@@ -13,6 +13,8 @@
 /public/css
 /public/api
 /public/web-api
+/public/bower_components
+/public/dist
 /vendor
 .env
 .env.backup
@@ -27,3 +29,12 @@ __MACOSX
 .idea
 composer.lock
 *.DS_Store
+/front_end
+webpack.mix.js
+tailwind.js
+package.json
+/resources/js
+/resources/less
+/resources/sass
+/resources/theme
+
