@@ -178,7 +178,7 @@
                                 });
                         };
                         options.init_instance_callback = ()=>{
-                            this.editorMd = tinyMCE.editors[this.id];
+                            this.editorMd = tinymce.editors[this.id];
                             this.show=true;
                             this.setDisabled(this.disabled);
                         };
@@ -204,8 +204,8 @@
                 this.$emit('blur'); //修改值
             },
             destroy(){
-                if(tinyMCE && tinyMCE.editors && tinyMCE.editors[this.id]){
-                    tinyMCE.editors[this.id].destroy();
+                if(this.editorMd){
+                    this.editorMd.destroy();
                 }
             }
         },

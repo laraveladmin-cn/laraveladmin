@@ -337,7 +337,7 @@ export default {
                         return item;
                     });
                     let total = datas.count();
-                    datas = datas.chunk(200);
+                    datas = datas.chunk(parms.import_per_page || 200);
                     let count = datas.count() || 1; //总请求数
                     data = datas.shift(); //第一组数据
                     if(!importCallback){
