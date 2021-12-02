@@ -17,7 +17,7 @@ class GenerateSoftCode extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'generate:soft-code {--f|force} {--f|output}';
+    protected $signature = 'generate:soft-code {--f|force} {--o|output}';
 
     /**
      * The console command description.
