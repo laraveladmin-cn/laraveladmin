@@ -25,7 +25,6 @@ class IndexController extends Controller
     public function indexData(){
         $config_url = config('app.url').getRoutePrefix(config('laravel_admin.web_api_model'));
         $config_url = $this->checkUrl($config_url);
-
         return [
             'time_str'=>'&time='.time(),
             'app_name'=>config('app.name'),
@@ -45,7 +44,6 @@ class IndexController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(){
-        //dd(trans_path('The application language is not set to English to execute','commands'));
         return view('index',$this->indexData());
     }
 

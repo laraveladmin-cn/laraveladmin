@@ -44,7 +44,7 @@ class Translation extends Seeder
         }
         $this->local = str_replace('_','-',config('app.locale','en'));//当前默认设置使用地区语言
         $this->lang = Arr::get($this->langMap,$this->local,explode('-',$this->local)[0]);//语言代码
-        $this->frontJsonPath = resource_path('lang/'.config('app.locale','en').'/front.json');
+        $this->frontJsonPath = resource_path('shared_lang/'.str_replace('_','-',config('app.locale','en')).'/front.json');
         $this->commandsJsonPath = storage_path('/developments/commands.json');
         $this->transMenu();
         $this->transModels();
@@ -310,7 +310,7 @@ class Translation extends Seeder
         }*/
         $this->lang = Arr::get($this->langMap,$this->local,explode('-',$this->local)[0]);//语言代码
         $this->routeJsonPath = base_path('routes/route.json');
-        $this->frontJsonPath = resource_path('lang/'.config('app.locale','en').'/front.json');
+        $this->frontJsonPath = resource_path('shared_lang/'.str_replace('_','-',config('app.locale','en')).'/front.json');
         $routes_json = file_get_contents($this->routeJsonPath);
         $front_json = json_decode(file_get_contents($this->frontJsonPath),true);
         $this->outMenus = Arr::get($front_json,'_shared.menus',[]);
@@ -369,13 +369,17 @@ class Translation extends Seeder
     public function transAll(){
         //发布语言
         collect(config('laravel_admin.locales',[]))->map(function ($local){
-            $local_path = resource_path("lang/{$local}");
+            $local_path = resource_path('lang/'.str_replace('_','-',"{$local}"));
+            $local_path1 = resource_path('shared_lang/'.str_replace('_','-',"{$local}"));
             $exists = is_dir($local_path);
             if(!$exists){
                 Artisan::call("lang:publish",["locales"=>$local]);
             }
             if(!is_dir($local_path)){
-                mkdir(resource_path("lang/{$local}"));
+                mkdir($local_path);
+            }
+            if(!is_dir($local_path1)){
+                mkdir($local_path1);
             }
             if(!$exists){
                 $validate_path = base_path("node_modules/vee-validate/dist/locale/{$local}.json");
@@ -386,12 +390,12 @@ class Translation extends Seeder
                 $data = [
                     'validations'=>$validate_data
                 ];
-                file_put_contents($local_path.'/front.json',json_encode( $data ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+                file_put_contents($local_path1.'/front.json',json_encode( $data ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
             }
         });
         $local = config('app.locale','en');
         $local = str_replace('_','-',$local);//当前默认设置使用地区语言
-        $local_path = resource_path(str_replace('_','-',"lang/{$local}"));
+        $local_path = resource_path("lang/".str_replace('_','-',"{$local}"));
         $files = scandir($local_path);
         collect($files)->map(function ($file)use($local_path,$local){
             $file_path = "{$local_path}/{$file}";
@@ -409,7 +413,11 @@ class Translation extends Seeder
                 }
             }
         });
-        $local_path1 = resource_path(str_replace('_','-',"lang/{$local}.json"));
+        $local_path1 = resource_path("shared_lang/{$local}/front.json");
+        $data = json_decode(file_get_contents($local_path1),true)?:[];
+        $this->outPutData($data,'front.json',$local);
+
+        $local_path1 = resource_path("lang/"."{$local}.json");
         $data = json_decode(file_get_contents($local_path1),true)?:[];
         $this->outPutData($data,'',$local,false);
     }
@@ -428,13 +436,13 @@ class Translation extends Seeder
             })->map(function ($lang)use($data,$file,$local,$lang_prefix){
                 $lang = str_replace('_','-',$lang);
                 if($lang_prefix){
-                    $file_path = resource_path(str_replace('_','-',"lang/{$lang}")."/{$file}");
+                    $file_path = resource_path("lang/".str_replace('_','-',"{$lang}")."/{$file}");
                 }else{
-                    $file_path = resource_path(str_replace('_','-',"lang/{$file}"));
+                    $file_path = resource_path("lang/".str_replace('_','-',"{$file}"));
                 }
                 $data_back = array_merge(array(), $data);
                 if(file_exists($file_path)){
-                    $old_data = trans(Str::replaceLast('.php','',$file),[],str_replace('-','_',$lang));;
+                    $old_data = trans(Str::replaceLast('.php','',$file),[],$lang);;
                 }else{
                     $old_data = [];
                 }
@@ -464,7 +472,7 @@ class Translation extends Seeder
                 return str_replace('_','-',$value)!=$local;
             })->map(function ($lang)use($file_path,$file,$local){
                 $lang = str_replace('_','-',$lang);
-                $file_path1 = resource_path(str_replace('_','-',"lang/{$lang}")."/{$file}");
+                $file_path1 = resource_path("lang/".str_replace('_','-',"{$lang}")."/{$file}");
                 if(!file_exists($file_path1)){
                     copy($file_path,$file_path1);
                 }
@@ -484,9 +492,9 @@ class Translation extends Seeder
             })->map(function ($lang)use($data,$file,$local,$lang_prefix){
                 $lang = str_replace('_','-',$lang);
                 if($lang_prefix){
-                    $file_path = resource_path(str_replace('_','-',"lang/{$lang}")."/{$file}");
+                    $file_path = resource_path("shared_lang/".str_replace('_','-',"{$lang}")."/{$file}");
                 }else{
-                    $file_path = resource_path(str_replace('_','-',"lang/{$lang}.json"));
+                    $file_path = resource_path("lang/".str_replace('_','-',"{$lang}.json"));
                 }
                 $data_back = array_merge(array(), $data);
                 if(file_exists($file_path)){
