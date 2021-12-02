@@ -250,6 +250,12 @@
                 }
                 return headers;
             }
+        },
+        beforeDestroy(){
+            if(this.editorMd){
+                this.editorMd.editor.remove();
+                this.editorMd = null;
+            }
         }
     }
 </script>

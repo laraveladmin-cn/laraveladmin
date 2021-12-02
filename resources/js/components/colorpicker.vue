@@ -88,6 +88,12 @@
                 document.body.appendChild(editormdJs);
             }
         },
+        beforeDestroy() {
+            if(this.colorpicker){
+                this.colorpicker.colorpicker('destroy');
+                this.colorpicker = null;
+            }
+        }
     }
 </script>
 <style lang="scss">
