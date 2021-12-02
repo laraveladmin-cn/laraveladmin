@@ -29,7 +29,7 @@ __MACOSX
 .idea
 composer.lock
 *.DS_Store
-/front_end
+front_end
 webpack.mix.js
 tailwind.js
 package.json
@@ -37,4 +37,3 @@ package.json
 /resources/less
 /resources/sass
 /resources/theme
-

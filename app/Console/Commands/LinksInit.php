@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Console\BaseCommand;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
 class LinksInit extends BaseCommand
 {
@@ -14,7 +15,7 @@ class LinksInit extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'links:init {--f|force} {--relative}';
+    protected $signature = 'links:init {--f|force} {--r|relative}';
 
     /**
      * The console command description.
@@ -53,7 +54,20 @@ class LinksInit extends BaseCommand
             }
 
             if ($relative) {
-                $res = $this->laravel->make('files')->relativeLink($target, $link);
+                if(!is_dir($target)){ //文件
+                    if (! class_exists(SymfonyFilesystem::class)) {
+                        throw new \RuntimeException(
+                            trans_path(   'To enable support for relative links, please install the symfony/filesystem package',$this->transPath)
+                        );
+                    }
+                    $relativeTarget = (new SymfonyFilesystem)->makePathRelative($target, dirname($link));
+                    if(Str::endsWith($relativeTarget,'/')){
+                        $relativeTarget = Str::replaceLast('/','',$relativeTarget);
+                    }
+                    $res = $this->laravel->make('files')->link($relativeTarget, $link);
+                }else{
+                    $res = $this->laravel->make('files')->relativeLink($target, $link);
+                }
             } else {
                 $res = $this->laravel->make('files')->link($target, $link);
             }
