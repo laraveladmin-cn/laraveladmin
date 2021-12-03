@@ -125,16 +125,6 @@ return [
         base_path('front_end/resources/theme/echarts.theme.json') => base_path('front_end/resources/js/components/echarts.theme.json'),
         base_path('front_end/resources/theme/variables.less') => base_path('front_end/resources/less/variables.less'),
 
-        base_path('webpack.mix.js') => base_path('front_end/webpack.mix.js'),
-        base_path('tailwind.js') => base_path('front_end/tailwind.js'),
-        base_path('package.json') => base_path('front_end/package.json'),
-        public_path('bower_components') => base_path('front_end/public/bower_components'),
-        public_path('dist') => base_path('front_end/public/dist'),
-
-        resource_path('js') => base_path('front_end/resources/js'),
-        resource_path('less') => base_path('front_end/resources/less'),
-        resource_path('sass') => base_path('front_end/resources/sass'),
-        resource_path('theme') => base_path('front_end/resources/theme'),
         resource_path('shared_lang') => base_path('front_end/resources/shared_lang'),
     ]
 ];
