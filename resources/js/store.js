@@ -68,7 +68,7 @@ export default {
             let lang_dir = lang.replace(/\_/g,'-');
 
             // 如果尚未加载语言
-            return import(/* webpackChunkName: "lang-[request]" */ `../lang/${lang_dir}/front.json`).then(
+            return import(/* webpackChunkName: "lang-[request]" */ `../shared_lang/${lang_dir}/front.json`).then(
                 messages => {
                     i18n.setLocaleMessage(lang, messages.default)
                     loadedLanguages.push(lang)
