@@ -108,20 +108,33 @@ return [
         public_path('storage') => storage_path('app/public'), //文件上传目录
     ],
     'init_links'=>[
-        base_path('node_modules/admin-lte/build/less/variables.less') => resource_path('less/variables.less'), //主题配色变量
+        base_path('front_end/public/storage') => storage_path('app/public'), //上传文件目录
+        base_path('front_end/node_modules/admin-lte/build/less/variables.less') => base_path('front_end/resources/less/variables.less'), //主题配色变量
 
-        public_path('bower_components/animate.css/animate.min.css') => base_path('node_modules/animate.css/animate.min.css'), //动画样式
-        public_path('bower_components/bootstrap/dist') => base_path('node_modules/bootstrap/dist'),//bootstrap静态资源
-        public_path('bower_components/bootstrap-colorpicker/dist') => base_path('node_modules/bootstrap-colorpicker/dist'), //bootstrap颜色选择器静态资源
-        public_path('bower_components/echarts/dist') => base_path('node_modules/echarts/dist'),//echarts图表静态资源
-        public_path('bower_components/editor.md') => base_path('node_modules/editor.md'),//editor.md编辑器静态资源
-        public_path('bower_components/font-awesome') => base_path('node_modules/font-awesome'),
-        public_path('bower_components/select2/dist') => base_path('node_modules/select2/dist'),
-        public_path('bower_components/xlsx/dist') => base_path('node_modules/xlsx/dist'),
-        public_path('bower_components/ionicons') => base_path('node_modules/ionicons/dist'),
+        base_path('front_end/public/bower_components/animate.css/animate.min.css') => base_path('front_end/node_modules/animate.css/animate.min.css'), //动画样式
+        base_path('front_end/public/bower_components/bootstrap/dist') => base_path('front_end/node_modules/bootstrap/dist'),//bootstrap静态资源
+        base_path('front_end/public/bower_components/bootstrap-colorpicker/dist') => base_path('front_end/node_modules/bootstrap-colorpicker/dist'), //bootstrap颜色选择器静态资源
+        base_path('front_end/public/bower_components/echarts/dist') => base_path('front_end/node_modules/echarts/dist'),//echarts图表静态资源
+        base_path('front_end/public/bower_components/editor.md') => base_path('front_end/node_modules/editor.md'),//editor.md编辑器静态资源
+        base_path('front_end/public/bower_components/font-awesome') => base_path('front_end/node_modules/font-awesome'),
+        base_path('front_end/public/bower_components/select2/dist') => base_path('front_end/node_modules/select2/dist'),
+        base_path('front_end/public/bower_components/xlsx/dist') => base_path('front_end/node_modules/xlsx/dist'),
+        base_path('front_end/public/bower_components/ionicons') => base_path('front_end/node_modules/ionicons/dist'),
 
-        resource_path('theme/_variables.scss') => resource_path('sass/_variables.scss'), //主题
-        resource_path('theme/echarts.theme.json') => resource_path('js/components/echarts.theme.json'),
-        resource_path('theme/variables.less') => resource_path('less/variables.less'),
+        base_path('front_end/resources/theme/_variables.scss') => base_path('front_end/resources/sass/_variables.scss'), //主题
+        base_path('front_end/resources/theme/echarts.theme.json') => base_path('front_end/resources/js/components/echarts.theme.json'),
+        base_path('front_end/resources/theme/variables.less') => base_path('front_end/resources/less/variables.less'),
+
+        base_path('webpack.mix.js') => base_path('front_end/webpack.mix.js'),
+        base_path('tailwind.js') => base_path('front_end/tailwind.js'),
+        base_path('package.json') => base_path('front_end/package.json'),
+        public_path('bower_components') => base_path('front_end/public/bower_components'),
+        public_path('dist') => base_path('front_end/public/dist'),
+
+        resource_path('js') => base_path('front_end/resources/js'),
+        resource_path('less') => base_path('front_end/resources/less'),
+        resource_path('sass') => base_path('front_end/resources/sass'),
+        resource_path('theme') => base_path('front_end/resources/theme'),
+        resource_path('shared_lang') => base_path('front_end/resources/shared_lang'),
     ]
 ];
