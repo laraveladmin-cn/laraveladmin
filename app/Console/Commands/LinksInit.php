@@ -63,7 +63,7 @@ class LinksInit extends BaseCommand
                 $this->laravel->make('files')->delete($link);
             }
 
-            if ($relative) {
+            if ($relative && !windows_os()) {
                 if(!is_dir($target)){ //文件
                     if (! class_exists(SymfonyFilesystem::class)) {
                         throw new \RuntimeException(
