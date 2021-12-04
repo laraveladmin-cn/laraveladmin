@@ -147,7 +147,7 @@ docker-compose run --rm php composer global require laravel/envoy -vvv #该命�
 docker-compose run --rm php composer global dump-autoload
 docker-compose run --rm node cnpm install #前端编译扩展包安装
 docker-compose run --rm node npm run prod #编译前端页面js
-docker-compose run --rm php envoy run init --branch=master #项目初始化
+docker-compose run --rm php envoy run init --branch=separate #项目初始化
 docker-compose up -d #启动服务
 ```
 
@@ -216,13 +216,13 @@ git remote add origin https://用户名:密码@gitee.com/自己代码仓库.git
 10. 本地开发环境更新到laraveladmin最新代码
 
 ```shell
-git pull laraveladmin master
+git pull laraveladmin separate
 ```
 
 11. 线上代码更新升级部署
 
 ```shell
-docker-compose exec php envoy run update --branch=master
+docker-compose exec php envoy run update --branch=separate
 ```
 
 ## 使用说明

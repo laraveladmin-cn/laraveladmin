@@ -163,7 +163,7 @@ npm run watch
 > Linux,Mac系统执行
 
 ```shell
-envoy run update --branch=master --self=1
+envoy run update --branch=separate --self=1
 ```
 
 8. 添加自己的代码仓库源
@@ -176,7 +176,7 @@ git remote add origin https://用户名:密码@gitee.com/自己代码仓库.git
 9. 本地开发环境更新到laraveladmin最新代码
 
 ```shell
-git pull laraveladmin master
+git pull laraveladmin separate
 ```
 
 10. 定时任务,队列,守护进程管理请自己手动添加

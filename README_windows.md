@@ -226,13 +226,13 @@ git remote add origin https://用户名:密码@gitee.com/自己代码仓库.git
 10. 本地开发环境更新到laraveladmin最新代码
 
 ```shell
-git pull laraveladmin master
+git pull laraveladmin separate
 ```
 
 11. 线上代码更新升级部署
 
 ```shell
-docker-compose exec php envoy run update --branch=master
+docker-compose exec php envoy run update --branch=separate
 ```
 
 
