@@ -864,7 +864,8 @@ trait ResourceController
                 } else {
                     $value = is_null($item) ? Arr::get($default, $key) : trim($item);
                 }
-                if (isset($relation_keys[$key]) || (($keys = explode('.', $key)) && Arr::get($keys, 1) == '$index' && count($keys) == 3)) {
+                $keys = explode('.', $key);
+                if (isset($relation_keys[$key]) || ($keys && Arr::get($keys, 1) == '$index' && count($keys) == 3)) {
                     $relation_keys[$key] = Str::singular(Arr::get($keys, 0)) . '_ids';
                     $relation = Arr::get($keys, 0);
                     $relationModel = $model->$relation()->getClassName();

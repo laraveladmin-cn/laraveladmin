@@ -48,7 +48,10 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
-
+        if ($this->app->environment() == 'local')  {
+            //开发环境注册
+            $this->load(__DIR__.'/DevelopCommands');
+        }
         require base_path('routes/console.php');
     }
 }

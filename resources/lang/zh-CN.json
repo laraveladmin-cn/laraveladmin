@@ -98,5 +98,7 @@
     "Updated At": "修改时间",
     "Deleted At": "删除时间",
     "The operation successful!": "操作成功！",
-    "Three-party Login service provider": "三方登录服务商"
+    "Three-party Login service provider": "三方登录服务商",
+    "The resource you visited does not exist": "你访问的资源不存在！",
+    "Routing address error": "路由地址错误！"
 }

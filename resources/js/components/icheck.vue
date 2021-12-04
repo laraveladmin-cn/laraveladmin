@@ -116,6 +116,12 @@
             clickFun(){
                 this.$emit('click');
             }
+        },
+        beforeDestroy(){
+            if(this.icheck){
+                this.icheck.iCheck('destroy');
+                this.icheck = null;
+            }
         }
     }
 </script>

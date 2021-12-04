@@ -25,6 +25,7 @@
         "spatie/laravel-backup": "^6.12",
         "swooletw/laravel-swoole": "^2.6",
         "zbrettonye/geetest": "^1.2",
+        "symfony/filesystem": "^5.4",
         "zgldh/qiniu-laravel-storage": "^0.10.3",
         "zhuzhichao/ip-location-zh": "^2.4"
     },

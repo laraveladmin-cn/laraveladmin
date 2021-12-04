@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class IndexController extends Controller
@@ -48,19 +49,28 @@ class IndexController extends Controller
     public function indexData(){
         $file = public_path(getRoutePrefix(config('laravel_admin.web_api_model')).'/home/docs/README.md');
         $markdown = file_exists($file)?file_get_contents($file):Doc::query()->where('name','README.md')->value('description');
+        $config_url = config('app.url').getRoutePrefix(config('laravel_admin.web_api_model'));
+        $config_url = $this->checkUrl($config_url);
         return [
             'time_str'=>'&time='.time(),
             'app_name'=>config('app.name'),
-            'markdown'=>Markdown::parse($markdown?:'')
+            'markdown'=>Markdown::parse($markdown?:''),
+            'config_url'=>$config_url
         ];
     }
 
+    protected function checkUrl($url){
+        return (!$url ||
+            Str::startsWith($url,'http://') ||
+            Str::startsWith($url,'https://') ||
+            Str::startsWith($url,'/')
+        )?$url:'//'.$url;
+    }
     /**
      * 所有页面显示
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(){
-        //dd(trans_path('The application language is not set to English to execute','commands'));
         return view('index',$this->indexData());
     }
 
@@ -78,6 +88,7 @@ class IndexController extends Controller
      */
     public function config(){
         $app_url = config('app.url');
+        $app_url = $this->checkUrl($app_url);
         $data['logo'] = config('laravel_admin.logo');
         $data['name'] = config('app.name');
         $data['name_short'] = config('laravel_admin.name_short');
@@ -254,6 +265,13 @@ class IndexController extends Controller
             ->find($id);
         return Response::returns(['row'=>$row]);
 
+    }
+
+    public function api404(){
+        return Response::returns([
+            'errors' => ['roue'=>trans('Routing address error')],
+            'message' => trans('The resource you visited does not exist')
+        ],404);
     }
 
 

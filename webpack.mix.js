@@ -16,6 +16,7 @@ if(typeof path=="undefined"){
 let basePath = 'public/';
 let jsPath = 'js';
 let cssPath = 'css';
+mix.setPublicPath(basePath);
 mix.webpackConfig({
     resolve: {
         alias: {
@@ -25,7 +26,7 @@ mix.webpackConfig({
             "pages_components": path.resolve(__dirname, 'resources/js/pages/components'),
             "pages": path.resolve(__dirname, 'resources/js/pages'),
             "bower_components_path": path.resolve(__dirname, 'public/bower_components'),
-            "public": path.resolve(__dirname, 'public'),
+            "public_path": path.resolve(__dirname, 'public'),
             "sass":path.resolve(__dirname, 'resources/sass'),
             "@":path.resolve(__dirname, 'node_modules'),
         },
@@ -37,18 +38,16 @@ mix.webpackConfig({
 });
 if(process.argv.includes('--css')){
     global.Mix.manifest.name = 'mix-manifest-css.json';
-    let pathValue = basePath+cssPath;
-    mix.less('resources/less/adminlte.less', pathValue)
-        .sass('resources/sass/app.scss', pathValue);
+    mix.less('resources/less/adminlte.less', cssPath)
+        .sass('resources/sass/app.scss', cssPath);
 }else if(process.argv.includes('--tailwindcss')){
     global.Mix.manifest.name = 'mix-manifest-tailwindcss.json';
-    let pathValue = basePath+cssPath;
-    mix.sass('resources/sass/tailwindcss.scss', pathValue)
+    mix.sass('resources/sass/tailwindcss.scss', cssPath)
         .tailwind();
 }else {
-    let pathValue = basePath+jsPath;
-    mix.js('resources/js/bootstrap.js', pathValue)
-        .js('resources/js/app.js', pathValue)
+    global.Mix.manifest.name = 'mix-manifest.json';
+    mix.js('resources/js/bootstrap.js', jsPath)
+        .js('resources/js/app.js', jsPath)
         //.tailwind()
     ;
 }

@@ -441,11 +441,12 @@
                 select_all:[], //全选
                 pageLength:2, //当前页面前后长度
                 input_page:'', //输入页码
-                keywordKey:'',
+                keywordKey:'', //关键字搜索key
                 check_ids_change:false,
                 options_str:'',
                 per_page_options:[10,15,20,30,50,100,200],
-                input_per_page:15
+                input_per_page:15,
+                import_per_page:200
             };
         },
         methods:{
@@ -462,12 +463,12 @@
             }),
             transField(name,key,table){
                 let sheet = array_get(this.data,'excel.sheet','');
-                if(!this.options.lang_table && !sheet){
+                if(!this.options.lang_table && !this.options.langTable && !sheet){
                     return name;
                 }
                 if(!table){
                     if(!key || key.indexOf('.')==-1){
-                        table = this.options.lang_table || sheet;
+                        table = this.options.langTable || this.options.lang_table || sheet;
                     }else {
                         let arr = key.replace('.$index','').split('.');
                         arr.pop();
@@ -487,11 +488,11 @@
             },
             transMap(name,field,table){
                 let sheet = array_get(this.data,'excel.sheet','');
-                if(!this.options.lang_table && !sheet){
+                if(!this.options.lang_table && !this.options.langTable && !sheet){
                     return name;
                 }
                 if(!table){
-                    table = this.options.lang_table || sheet;
+                    table = this.options.langTable || this.options.lang_table || sheet;
                 }
                 return this.$tp(name,{
                     "{lang_path}": '_shared.tables.'+table+'.maps.'+field,
@@ -762,6 +763,7 @@
                                 file:file,
                                 sheet:sheet,
                                 url:this.data.configUrl.importUrl,
+                                import_per_page:this.importPerPageValue,
                                 callback:()=>{
                                     this.refresh();
                                 }
@@ -896,10 +898,22 @@
                 return (this.options.btnRefresh || typeof this.options.btnRefresh=="undefined" );
             },
             perPageOptions(){
+                if(this.options.perPageOptions){
+                    return this.options.perPageOptions;
+                }
                 if(this.options.per_page_options){
                     return this.options.per_page_options;
                 }
                 return this.per_page_options;
+            },
+            importPerPageValue(){
+                if(this.options.importPerPage){
+                    return this.options.importPerPage;
+                }
+                if(this.options.import_per_page){
+                    return this.options.import_per_page;
+                }
+                return this.import_per_page;
             },
             //翻译后的显示数据项
             _maps(){
