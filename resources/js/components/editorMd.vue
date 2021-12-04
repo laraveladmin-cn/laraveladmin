@@ -266,17 +266,46 @@
         z-index: 9999;
     }
     @media screen and (max-width: 750px) {
-        .editormd-image-dialog{
-            left: 3% !important;
+        .editormd-image-dialog,.editormd-dialog{
             width: 94% !important;
-            height: 368px !important;
             max-width: 465px !important;
-            top:0 !important;
+            left: 3% !important;
+          /*  top:0 !important;
             bottom: 0 !important;
             margin: auto !important;
+            */
+        }
+        .editormd-dialog{
+            height: 510px !important;
+        }
+        .editormd-preformatted-text-dialog{
+            height: 535px !important;
+        }
+        .editormd-code-block-dialog{
+            height: 555px !important;
+        }
+        .editormd-image-dialog{
+            height: 368px !important;
+        }
+        .editormd-emoji-dialog{
+            height: 465px !important;
+        }
+        .editormd-goto-line-dialog{
+            height: 180px !important;
+        }
+        .editormd-dialog-info{
+            height: 200px !important;
+        }
+        .editormd-emoji-dialog .editormd-dialog-container{
+            overflow-x: scroll;
         }
         .editormd-image-dialog .editormd-form label{
             float: unset;
+        }
+    }
+    @media screen and (max-width: 360px) {
+        .editormd-form > input:nth-child(3) {
+            width: 175px;
         }
     }
 

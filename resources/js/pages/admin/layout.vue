@@ -852,5 +852,12 @@
     .main-header .logo .logo-mini{
         height: 30px;
     }
+    @media (max-width: 320px) {
+        .nav>li>a{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
 </style>
 
