@@ -248,7 +248,7 @@ class RouteService
 
             });
         });
-        Route::get('{any}',self::$api404)->where('any','(.*)');
+        $route_prefix OR Route::get('{any}',self::$api404)->where('any','(.*)');
     }
 
     public static function getClass($value){
@@ -396,6 +396,7 @@ class RouteService
             self::routeRegisterApi(self::$web_route_prefix);
         }
         //404页面
+        Route::get('/web-api',self::$api404);
         Route::get('/web-api/{any}',self::$api404)->where('any','(.*)');
         Route::get('{any}',self::$pager404)->where('any','(.*)');
     }
