@@ -25,7 +25,8 @@ $str = <<<'str'
     "The \":link\" link has been connected to \":target\"": "гибкое соединение \": link\" уже соединено с \"target\"",
     "The links have been created": "Все ссылки созданы",
     "Generate software code text for software copyright application": "текст программного обеспечения для получения авторских прав на программное обеспечение",
-    "To enable support for relative links, please install the symfony/filesystem package": "чтобы включить поддержку относительных ссылок, установите пакет symfony / fileSystem"
+    "To enable support for relative links, please install the symfony/filesystem package": "чтобы включить поддержку относительных ссылок, установите пакет symfony / fileSystem",
+    "Failed to delete file \":file\"": "Ошибка удаления файла: file"
 }
 str;
 return json_decode($str,true);
