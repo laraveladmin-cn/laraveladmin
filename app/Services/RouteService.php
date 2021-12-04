@@ -232,13 +232,13 @@ class RouteService
                             $options = Arr::get($item,'options',[]);
                             $only = Arr::get($options, 'only');
                             if($only){
-                              if(is_array(collect($only)->first())){
-                                  $only[] = [
-                                      'name'=>'index'
-                                  ];
-                              }else{
-                                  $only[] = 'index';
-                              }
+                                if(is_array(collect($only)->first())){
+                                    $only[] = [
+                                        'name'=>'index'
+                                    ];
+                                }else{
+                                    $only[] = 'index';
+                                }
                                 $options['only'] = $only;
                             }
                             self::createResourceRoute($value,$class,$options);
@@ -409,10 +409,10 @@ class RouteService
     }
 
     protected static function name($route,$name){
-       if(isset(self::$named[$name])){
-           $route->name($name);
-           self::$named[$name] = $route;
-       };
+        if(isset(self::$named[$name])){
+            $route->name($name);
+            self::$named[$name] = $route;
+        };
     }
 
     /**
