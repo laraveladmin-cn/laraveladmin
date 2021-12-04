@@ -137,7 +137,7 @@
 </template>
 
 <script>
-    require('public/dist/js/adminlte.js');
+    require('public_path/dist/js/adminlte.js');
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     import userMenu from 'pages_components/userMenu.vue';
     import Message from 'admin_components/message.vue';
