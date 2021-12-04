@@ -240,6 +240,13 @@ class IndexController extends Controller
 
     }
 
+    public function api404(){
+        return Response::returns([
+            'errors' => ['roue'=>trans('Routing address error')],
+            'message' => trans('The resource you visited does not exist')
+        ],404);
+    }
+
 
 
 
