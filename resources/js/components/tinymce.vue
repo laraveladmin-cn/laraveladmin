@@ -1,6 +1,6 @@
 <template>
-    <div v-show="show">
-        <textarea :id="id" placeholder="">
+    <div v-show="show" @mouseout="mouseoutEvent">
+        <textarea :id="id" :placeholder="$t(options.placeholder)">
             {{value}}
         </textarea>
     </div>
