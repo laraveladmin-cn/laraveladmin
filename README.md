@@ -104,6 +104,11 @@ cd laraveladmin
 git remote add laraveladmin https://gitee.com/laravel-admin/laraveladmin.git
 ```
 
+1.1 下载前端代码
+```shell
+git clone https://gitee.com/laravel-admin/front_end.git
+```
+
 2. 参照.env.example配置[.env](env.md)文件(务必设置好mysql密码,redis密码)
 
 - 数据库连接用户请使用root,程序需要检查数据库是否存在并创建数据库,开发环境的代码生成是通过读取数据表结构进行代码生成的
@@ -165,7 +170,7 @@ vim docker-compose.yml
 server
 {
     listen 80;
-    server_name local.laraveladmin.cn;
+    server_name local.laraveladmin.cn front.laraveladmin.cn;
     location / {
           proxy_http_version 1.1;
           proxy_set_header X-Real-IP $remote_addr;
@@ -188,6 +193,7 @@ server
 
 ```
 127.0.0.1 local.laraveladmin.cn
+127.0.0.1 front.laraveladmin.cn
 ```
 
 > 登录用户名及密码参照.env中的"ADMIN_USER_NAME","ADMIN_PASSWORD"设置项

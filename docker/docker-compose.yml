@@ -65,5 +65,6 @@ services: #服务
     image: laraveladmin/node #镜像源
     volumes:
       - .:/var/www/laravel/laraveladmin #代码目录
+    working_dir: /var/www/laravel/laraveladmin/front_end
 #    command:
 #      npm run watch

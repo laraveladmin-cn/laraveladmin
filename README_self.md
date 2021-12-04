@@ -85,6 +85,11 @@ cd laraveladmin
 git remote add laraveladmin https://gitee.com/laravel-admin/laraveladmin.git
 ```
 
+1.1 下载前端代码
+```shell
+git clone https://gitee.com/laravel-admin/front_end.git
+```
+
 2. 参照.env.example配置[.env](env.md)文件(务必设置好mysql密码,redis密码)
 
 - 数据库连接用户请使用root,程序需要检查数据库是否存在并创建数据库,开发环境的代码生成是通过读取数据表结构进行代码生成的
@@ -111,8 +116,10 @@ composer install
 3-1. 直接命令安装
 
 ```shell
+cd front_end #进入前端项目
 cnpm install #前端编译扩展包安装
 npm run prod #编译前端页面js
+cd ../ #返回项目根目录
 php artisan config:clear #清理配置缓存
 php artisan cache:clear #清理缓存
 php artisan key:generate --force #生成APP_KEY
@@ -138,6 +145,7 @@ php artisan db:seed --force #初始化数据
 
 ```
 127.0.0.1 local.laraveladmin.cn
+127.0.0.1 front.laraveladmin.cn
 ```
 
 > 登录用户名及密码参照.env中的"ADMIN_USER_NAME","ADMIN_PASSWORD"设置项
@@ -146,6 +154,7 @@ php artisan db:seed --force #初始化数据
 6. 开发环境前端实时编译启动
 
 ```shell
+cd front_end
 npm run watch
 ```
 
