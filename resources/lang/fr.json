@@ -98,5 +98,7 @@
     "Updated At": "Temps de modification",
     "Deleted At": "Supprimer le temps",
     "The operation successful!": "Opération réussie!",
-    "Three-party Login service provider": "Fournisseur de services de connexion à trois parties"
+    "Three-party Login service provider": "Fournisseur de services de connexion à trois parties",
+    "The resource you visited does not exist": "La ressource que vous avez visitée n'existe pas!",
+    "Routing address error": "Mauvaise adresse de routage!"
 }

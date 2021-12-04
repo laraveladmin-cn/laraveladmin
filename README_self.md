@@ -116,7 +116,7 @@ npm run prod #编译前端页面js
 php artisan config:clear #清理配置缓存
 php artisan cache:clear #清理缓存
 php artisan key:generate --force #生成APP_KEY
-php artisan links:init #创建上传文件目录软连接
+php artisan links:init --force --relative #创建上传文件目录软连接
 php artisan db:seed --class=CheckDatabaseSeeder --force #检查并创建数据库
 php artisan migrate:all #创建数据表
 php artisan db:seed --force #初始化数据

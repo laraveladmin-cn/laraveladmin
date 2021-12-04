@@ -98,5 +98,7 @@
     "Updated At": "変更時間",
     "Deleted At": "削除時間",
     "The operation successful!": "操作成功！",
-    "Three-party Login service provider": "サードパーティ登録サービスプロバイダ"
+    "Three-party Login service provider": "サードパーティ登録サービスプロバイダ",
+    "The resource you visited does not exist": "あなたがアクセスするリソースは存在しません!",
+    "Routing address error": "ルーティングアドレスエラー!"
 }

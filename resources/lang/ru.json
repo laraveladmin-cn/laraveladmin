@@ -98,5 +98,7 @@
     "Updated At": "время изменения",
     "Deleted At": "время удаления",
     "The operation successful!": "операция выполнена!",
-    "Three-party Login service provider": "тройной вход"
+    "Three-party Login service provider": "тройной вход",
+    "The resource you visited does not exist": "ваши ресурсы не существуют!",
+    "Routing address error": "Неверный маршрут!"
 }

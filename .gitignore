@@ -28,3 +28,4 @@ __MACOSX
 .DS_Store
 composer.lock
 *.DS_Store
+front_end

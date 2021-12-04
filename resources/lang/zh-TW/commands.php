@@ -23,7 +23,9 @@ $str = <<<'str'
     "Automatic scan to generate Api document data": "自動掃描生成Api檔案數據",
     "Initializing the creation of a soft connection": "初始化創建軟連接",
     "The \":link\" link has been connected to \":target\"": "軟連接“：link”已經連接到“：target”",
-    "The links have been created": "連結已經全部創建"
+    "The links have been created": "連結已經全部創建",
+    "Generate software code text for software copyright application": "生成申請軟件著作權的軟件程式碼文字",
+    "To enable support for relative links, please install the symfony/filesystem package": "要啟用相對連結的支持，請安裝symfony/filesystem包"
 }
 str;
 return json_decode($str,true);

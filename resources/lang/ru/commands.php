@@ -23,7 +23,9 @@ $str = <<<'str'
     "Automatic scan to generate Api document data": "генерировать данные для документа Api",
     "Initializing the creation of a soft connection": "инициализация создания мягких соединений",
     "The \":link\" link has been connected to \":target\"": "гибкое соединение \": link\" уже соединено с \"target\"",
-    "The links have been created": "Все ссылки созданы"
+    "The links have been created": "Все ссылки созданы",
+    "Generate software code text for software copyright application": "текст программного обеспечения для получения авторских прав на программное обеспечение",
+    "To enable support for relative links, please install the symfony/filesystem package": "чтобы включить поддержку относительных ссылок, установите пакет symfony / fileSystem"
 }
 str;
 return json_decode($str,true);

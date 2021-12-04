@@ -98,5 +98,7 @@
     "Updated At": "수정 시간",
     "Deleted At": "삭제 시간",
     "The operation successful!": "조작 성공!",
-    "Three-party Login service provider": "삼자 로그 인 서비스 업 체"
+    "Three-party Login service provider": "삼자 로그 인 서비스 업 체",
+    "The resource you visited does not exist": "당신이 방문한 자원이 존재하지 않습니다!",
+    "Routing address error": "라우팅 주소 오류!"
 }

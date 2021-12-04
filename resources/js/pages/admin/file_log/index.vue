@@ -41,7 +41,7 @@
     export default {
         components: {
             'data-table': () => import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
-            'file-preview': () => import(/* webpackChunkName: "./filePreview.vue" */ './filePreview.vue')
+            'file-preview': () => import(/* webpackChunkName: "pages/admin/file_log/filePreview.vue" */ 'pages/admin/file_log/filePreview.vue')
         },
         props: {},
         data() {

@@ -98,5 +98,7 @@
     "Updated At": "Tiempo de modificación",
     "Deleted At": "Tiempo de eliminación",
     "The operation successful!": "¡Operación exitosa!",
-    "Three-party Login service provider": "Proveedor de servicios de inicio de sesión tripartito"
+    "Three-party Login service provider": "Proveedor de servicios de inicio de sesión tripartito",
+    "The resource you visited does not exist": "¡Los recursos a los que accedes no existen!",
+    "Routing address error": "¡Error de dirección de enrutamiento!"
 }
