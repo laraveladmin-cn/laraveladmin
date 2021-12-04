@@ -180,7 +180,7 @@
 
                         </div>
                         <div class="move-items col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <edit-item :options='{"name": props.transField("Content template")}' :key-name="'receipt_tmp'" v-show="props.data.row['receipt_type']==1" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <edit-item :options='{"name": props.transField("Content template")}' :key-name="'receipt_tmp'" v-show="props.data.row['receipt_type']==1">
                                 <template slot="input-item">
                                     <div>
                                         <tinymce v-model="props.data.row['receipt_tmp']" :disabled="!props.url">
@@ -188,7 +188,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item :options='{"name": props.transField("Insurance notice"), "required": false,"title":$t("Prompt message")}' :key-name="'insure_notify'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <edit-item :options='{"name": props.transField("Insurance notice"), "required": false,"title":$t("Prompt message")}' :key-name="'insure_notify'">
                                 <template slot="input-item">
                                     <div>
                                         <editor-md v-model="props.data.row['insure_notify']" :disabled="!props.url">
