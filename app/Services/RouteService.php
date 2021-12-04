@@ -15,6 +15,7 @@ class RouteService
     public static $routes = 'routes/route.json';
     protected static $pager = '\App\Http\Controllers\Open\IndexController@index';
     protected static $pager404 = '\App\Http\Controllers\Open\IndexController@page404';
+    protected static $api404 = '\App\Http\Controllers\Open\IndexController@api404';
     protected static $web_route_prefix = '';
     protected static $named=[];
     protected static $env = '';
@@ -247,6 +248,7 @@ class RouteService
 
             });
         });
+        Route::get('{any}',self::$api404)->where('any','(.*)');
     }
 
     public static function getClass($value){
@@ -394,6 +396,7 @@ class RouteService
             self::routeRegisterApi(self::$web_route_prefix);
         }
         //404页面
+        Route::get('/web-api/{any}',self::$api404)->where('any','(.*)');
         Route::get('{any}',self::$pager404)->where('any','(.*)');
     }
 
