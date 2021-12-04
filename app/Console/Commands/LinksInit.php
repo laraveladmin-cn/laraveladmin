@@ -37,7 +37,17 @@ class LinksInit extends BaseCommand
         $flog = false;
         collect($this->links())->merge($this->initLinks())->each(function ($target,$link)use($relative,$force,&$flog){
             if (($force || $link==base_path('node_modules/admin-lte/build/less/variables.less')) && file_exists($link)) {
-                $this->laravel->make('files')->delete($link);
+                if(is_dir($link) && !is_link($link)){
+                    $res = $this->laravel->make('files')->deleteDirectory($link);
+                }else{
+                    $res = $this->laravel->make('files')->delete($link);
+                }
+                if($res===false){
+                    $this->error(
+                        trans_path('Failed to delete file ":file"',$this->transPath,['file'=>$link])
+                    );
+                    return;
+                }
             }
             if (file_exists($link)) {
                 $this->error(

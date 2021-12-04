@@ -24,7 +24,8 @@ $str = <<<'str'
     "Initializing the creation of a soft connection": "初始化創建軟連接",
     "The \":link\" link has been connected to \":target\"": "軟連接“：link”已經連接到“：target”",
     "The links have been created": "連結已經全部創建",
-    "To enable support for relative links, please install the symfony/filesystem package": "要啟用相對連結的支持，請安裝symfony/filesystem包"
+    "To enable support for relative links, please install the symfony/filesystem package": "要啟用相對連結的支持，請安裝symfony/filesystem包",
+    "Failed to delete file \":file\"": "Failed to delete file“：file”"
 }
 str;
 return json_decode($str,true);
