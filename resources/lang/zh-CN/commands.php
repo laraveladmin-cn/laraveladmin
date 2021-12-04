@@ -36,6 +36,6 @@ return [
     'The ":link" link has been connected to ":target"'=>'软连接":link"已经连接到":target"',
     'The links have been created'=>'链接已经全部创建',
     'Generate software code text for software copyright application'=>'生成申请软件著作权的软件代码文本',
-    'To enable support for relative links, please install the symfony/filesystem package'=>'要启用相对链接的支持，请安装symfony/filesystem包'
-
+    'To enable support for relative links, please install the symfony/filesystem package'=>'要启用相对链接的支持，请安装symfony/filesystem包',
+    'Failed to delete file ":file"'=>'删除文件”:file”失败'
 ];
