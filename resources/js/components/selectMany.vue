@@ -8,6 +8,7 @@
                      :url="use_url+url"
                      :keyword-key="keywordKey"
                      :primary-key="primaryKey"
+                     :params="params"
                      :show="show"
                      :is-ajax="true">
             </select2>
@@ -104,6 +105,13 @@
                 type:[Array],
                 default: function () {
                     return ['name'];
+                }
+            },
+            //请求参数
+            params:{
+                type: [Object,Array],
+                default: function () {
+                    return {where:{},order:{}};
                 }
             },
         },
