@@ -113,6 +113,7 @@ export default {
             if(language){
                 config.headers.Language= decodeURIComponent(language);
             }
+            config.headers.RefererPage = window.location.href;
             config.paramsSerializer = function (params) {
                 params = JSON.parse(JSON.stringify(params));
                 params['json'] = 1;

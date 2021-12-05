@@ -156,6 +156,9 @@
                     }
                     post_data['remember'] = this.remember ? 1 : undefined;
                     post_data['other'] = this.other;
+                    if(typeof this.$route.query['back_url']!="undefined"){ //跳转url
+                        post_data['back_url'] = this.$route.query['back_url'];
+                    }
                     axios.post(this.web_url+this.$router.currentRoute.path,post_data)
                         .then(this.loginSucces)
                         .catch((error)=>{

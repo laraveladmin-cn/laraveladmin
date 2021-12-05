@@ -150,7 +150,8 @@ class LifeDataRepository implements ArrayAccess, ConfigContract
      */
     public function offsetUnset($key)
     {
-        $this->set($key, null);
+        unset($this->items[$key]);
+        $this->items_modified[] = $key;
     }
 
 
