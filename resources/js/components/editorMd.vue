@@ -61,6 +61,7 @@
                       flowChart : true,             // 开启流程图支持，默认关闭
                       sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
                       //dialogLockScreen : false,   // 设置弹出层对话框不锁屏，全局通用，默认为true
+                      //lockScreen:false,
                       //dialogShowMask : false,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
                       //dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
                       //dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
@@ -234,6 +235,7 @@
         },
         mounted() {
             this.init();
+            $('html,body').addClass('editormd-html');
         },
         computed:{
             ...mapState([
@@ -255,6 +257,9 @@
             if(this.editorMd){
                 this.editorMd.editor.remove();
                 this.editorMd = null;
+            }
+            if(!$('.editormd').length){
+                $('html,body').removeClass('editormd-html');
             }
         }
     }
@@ -307,6 +312,9 @@
         .editormd-form > input:nth-child(3) {
             width: 175px;
         }
+    }
+    html.editormd-html,body.editormd-html{
+        height: unset !important;
     }
 
 </style>
