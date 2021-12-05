@@ -173,6 +173,7 @@
                                                  :keyword-key="'name'"
                                                  :item-url="'/admin/banks/'"
                                                  :disabled="!props.url"
+                                                 :params="{where:{'id':props.data.row['bank_ids']},order:{}}"
                                     >
                                     </select-many>
                                 </template>

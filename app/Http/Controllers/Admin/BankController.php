@@ -19,7 +19,8 @@ class BankController extends Controller
 
     protected $sizer=[
         'name'=>'like',
-        'firms.firm_id'=>'='
+        'firms.firm_id'=>'=',
+        'id'=>'not_in'
     ];
     /**
      * Index页面字段名称显示
