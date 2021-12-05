@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Open\Traits;
 
 use App\Facades\Formatter;
+use App\Facades\LifeData;
 use App\Models\Menu;
 use App\Models\Ouser;
 use App\Providers\RouteServiceProvider;
@@ -35,6 +36,7 @@ trait LoginResponseController
      */
     protected function sendLoginResponse(Request $request)
     {
+        LifeData::offsetUnset('_menus_main');
         //用户数据记录
         $this->setLoginFailedNum(0);
         //如果是登录并绑定
@@ -46,17 +48,23 @@ trait LoginResponseController
             $rememberTokenCookieKey = Auth::getRecallerName();
             Cookie::queue($rememberTokenCookieKey, Cookie::get($rememberTokenCookieKey), $lifetime);
         }
-        if(Arr::get($user,'admin') ){
-            $hasPermission = Menu::hasPermission($this->redirectTo,'get',false);
-            if(!$hasPermission){
-               $url = Menu::mainAdmin()->where('is_page',1)->orderBy('left_margin','asc')->value('url');
-               if($url){
-                   $this->redirectTo = $url;
-               }
-            }
-            $redirect = $this->redirectTo;
+        $back_url = $request->instance()->input('back_url',''); //返回url
+        $redirect_to = Arr::get(parse_url($back_url),'path','');
+        if($redirect_to && Menu::hasPermission($redirect_to,'get')){ //会跳路径有权限
+            $redirect = $back_url;
         }else{
-            $redirect = $this->redirectToTourist;
+            if(Arr::get($user,'admin') ){
+                $hasPermission = Menu::hasPermission($this->redirectTo,'get',false);
+                if(!$hasPermission){
+                    $url = Menu::mainAdmin()->where('is_page',1)->orderBy('left_margin','asc')->value('url');
+                    if($url){
+                        $this->redirectTo = $url;
+                    }
+                }
+                $redirect = $this->redirectTo;
+            }else{
+                $redirect = $this->redirectToTourist;
+            }
         }
         $token = $user->createToken('apiToken',$remember?['remember']:['*'])->plainTextToken;
         $domain = config('session.domain');
