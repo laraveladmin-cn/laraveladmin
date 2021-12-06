@@ -33,12 +33,14 @@ let AppConfig = {
     },
     debug:true,
     client_id:'',
-    api_url_model:'api',
+    api_url_model:'web',
     use_url:'',
     env:'',
     language:'',
     default_language:'',
-    locales:[],
+    locales:[
+        'zh-CN','en'
+    ],
     tinymce_key:'',
     theme: localStorage.getItem('theme') || 'primary',//主题
     ...(window.AppConfig || {})
