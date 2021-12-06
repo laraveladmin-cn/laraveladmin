@@ -178,6 +178,11 @@
                         //"created_at": {"name": "Created At", "order": true},
                         "updated_at": {"name": "Updated At", "order": true},
                     },
+                    mapsRelations:{
+                        "firm": "firms",
+                        "classify": "classifys",
+                        "classify2": "classifys"
+                    }
                 }
             };
         },

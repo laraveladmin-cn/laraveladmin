@@ -42,6 +42,9 @@
                         created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}
                     },
+                    "mapsRelations": {
+                        "parent": "areas"
+                    },
                 }
             };
         },

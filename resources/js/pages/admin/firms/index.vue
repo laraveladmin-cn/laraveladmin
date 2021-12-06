@@ -90,6 +90,9 @@
                         "products_count_status.value2":{"name": "Number of discontinued insurance types", "order": false},
                         "updated_at": {"name": "Updated At", "order": true},
                     },
+                    "mapsRelations": {
+                        "products_count_status": "products"
+                    }
                 }
             };
         },

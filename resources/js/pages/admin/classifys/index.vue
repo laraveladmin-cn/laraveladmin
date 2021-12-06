@@ -56,6 +56,9 @@
                         "created_at": {"name": "Created At", "order": true},
                         "updated_at": {"name": "Updated At", "order": true},
                     },
+                    "mapsRelations": {
+                        "parent": "classifys"
+                    },
                 }
             };
         },
