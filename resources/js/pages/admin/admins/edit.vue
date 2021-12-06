@@ -130,8 +130,13 @@
                         if(row.user_id==this.user.id){
                             this.getUser(1);
                         }
-                    }
-                }
+                    },
+                    "mapsRelations": {
+                        "user": "users",
+                        "roles": "roles"
+                    },
+                },
+
             };
         },
         methods:{
