@@ -945,6 +945,9 @@
             }else if(options['page']==1){
                 delete options['page'];
             }
+            if(this.options.mapsRelations){
+                this.data.mapsRelations = this.options.mapsRelations;
+            }
             this.getData(options);
         },
 
