@@ -52,10 +52,13 @@ trait LoginResponseController
             SessionService::forget($this->backUrlKey);
         }
         $back_url = $request->input('back_url',$back_url); //返回url
-        $redirect_to = Arr::get(parse_url($back_url),'path','');
-        $route = app('routes')->match(\Illuminate\Support\Facades\Request::create($redirect_to));
-        if($route){
-            $redirect_to = $route->uri;
+        $redirect_to = '';
+        if($back_url){
+            $redirect_to = Arr::get(parse_url($back_url),'path','');
+            $route = app('routes')->match(\Illuminate\Support\Facades\Request::create($redirect_to));
+            if($route){
+                $redirect_to = $route->uri;
+            }
         }
         if($redirect_to && Menu::hasPermission($redirect_to,'get')){ //会跳路径有权限
             $redirect = $back_url;
