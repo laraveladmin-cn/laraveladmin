@@ -53,6 +53,7 @@ trait LoginResponseController
         }
         $back_url = $request->input('back_url',$back_url); //返回url
         $redirect_to = Arr::get(parse_url($back_url),'path','');
+        $redirect_to = app('routes')->match(\Illuminate\Support\Facades\Request::create($redirect_to))->uri;
         if($redirect_to && Menu::hasPermission($redirect_to,'get')){ //会跳路径有权限
             $redirect = $back_url;
         }else{
