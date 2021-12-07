@@ -40,7 +40,8 @@ return [
          * 用于绑定登录用户,及绑定注册用户
          */
         'other_login'=>[
-            'key'=>'other_login'
+            'key'=>'other_login',
+            'back_url'=>'other_login_back_url'
         ],
 
         'verify'=>[

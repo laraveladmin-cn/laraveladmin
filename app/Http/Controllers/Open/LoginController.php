@@ -60,6 +60,8 @@ class LoginController extends Controller
         //['type'=>'weibo','url'=>'/open/other-login/weibo','class'=>'hover-danger']
     ];
 
+    protected $backUrlKey ='';
+
 
     /**
      * Create a new controller instance.
@@ -71,6 +73,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->loginNumIp = config('laravel_admin.store_keys.verify.login_num_key').':'.RequestFacade::header('x-real-ip',RequestFacade::ip());
         $this->loginNumUname = config('laravel_admin.store_keys.verify.login_num_key').':'.app('request')->get($this->loginUsername());
+        $this->backUrlKey = config('laravel_admin.store_keys.other_login.back_url');
     }
 
     /**
@@ -88,6 +91,11 @@ class LoginController extends Controller
             throw ValidationException::withMessages($validator->errors()->toArray());
         }
         $type = $request->input('type');
+        if($back_url = $request->input('back_url','')){
+            SessionService::put($this->backUrlKey,$back_url);
+        }else{
+            SessionService::forget($this->backUrlKey);
+        }
         return Socialite::with($type)->redirect();
     }
 
