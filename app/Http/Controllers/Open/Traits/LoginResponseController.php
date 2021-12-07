@@ -48,7 +48,10 @@ trait LoginResponseController
             $rememberTokenCookieKey = Auth::getRecallerName();
             Cookie::queue($rememberTokenCookieKey, Cookie::get($rememberTokenCookieKey), $lifetime);
         }
-        $back_url = $request->instance()->input('back_url',''); //返回url
+        if($back_url = SessionService::get($this->backUrlKey)){
+            SessionService::forget($this->backUrlKey);
+        }
+        $back_url = $request->input('back_url',$back_url); //返回url
         $redirect_to = Arr::get(parse_url($back_url),'path','');
         if($redirect_to && Menu::hasPermission($redirect_to,'get')){ //会跳路径有权限
             $redirect = $back_url;

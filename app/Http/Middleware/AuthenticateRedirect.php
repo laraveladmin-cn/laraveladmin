@@ -21,7 +21,7 @@ class AuthenticateRedirect{
             $url = '/open/login';
             $referer_page = \Illuminate\Support\Facades\Request::instance()->header('RefererPage','');
             if($referer_page){
-                $url .='?'.http_build_query(['back_url'=>$this->getRequestUri($referer_page)]);
+                $url .='?back_url='.$this->getRequestUri($referer_page);
             }
             return orRedirect($url,302);
         }

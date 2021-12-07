@@ -39,7 +39,7 @@
                     <p>---------------- {{$tp('Other login methods')}} ----------------</p>
                     <div class="row">
                         <div :class="'col-xs-'+other_col" v-for="item in otherLogin">
-                            <a :href="web_url+item['url']">
+                            <a :href="otherLoginUrl(item['url'])">
                                 <div class="img-circle icon login-icon" :class="item['class']">
                                     <i class="fa" :class="'fa-'+item['type']"></i>
                                 </div>
@@ -95,6 +95,13 @@
             }
         },
         methods:{
+            otherLoginUrl(url){
+                let str_url = this.web_url+url;
+                if(typeof this.$route.query['back_url']!="undefined"){ //跳转url
+                    str_url +='?back_url='+encodeURI(this.$route.query['back_url']);
+                }
+                return str_url;
+            },
             placeholderUsername(){
                 return this.$tp('Please enter your account/email/mobile phone number');
             },
