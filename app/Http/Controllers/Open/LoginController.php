@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -412,20 +413,35 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        if(ClientAuth::isApi()){
+        try {
             $user = $request->user();
             if($user){
-                $user->currentAccessToken()->delete();
+                $token = $user->currentAccessToken();
+                if($token){
+                    $token->delete();
+                }
             }
-        }else{
-            $this->guard()->logout();
+        }catch (\Exception $exception){
+
+        }
+        try {
+            $guard = $this->guard();
+            if($guard){
+                $guard->logout();
+            }
+        }catch (\Exception $exception){
+
         }
         return $this->loggedOut($request);
     }
 
     protected function loggedOut(Request $request)
     {
-        return orRedirect($this->redirectAfterLogout,302);
+        return Response::returns([
+            'title'=>Lang::get('status.status302'),
+            'content'=>Lang::get('status.redirectTo').$this->redirectAfterLogout,
+            'redirect' => $this->redirectAfterLogout
+        ],302);
     }
 
     /**

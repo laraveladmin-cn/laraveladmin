@@ -42,6 +42,7 @@ trait LoginResponseController
         //如果是登录并绑定
         $user = Auth::user();
         $this->bindOuser($user);
+        $user->update(['client_id'=>SessionService::getId()]); //登录信息
         $remember = $request->has('remember');
         $lifetime = (!$remember)?config('laravel_admin.no_remember_lifetime'):config('session.lifetime');
         if($remember){
@@ -52,10 +53,13 @@ trait LoginResponseController
             SessionService::forget($this->backUrlKey);
         }
         $back_url = $request->input('back_url',$back_url); //返回url
-        $redirect_to = Arr::get(parse_url($back_url),'path','');
-        $route = app('routes')->match(\Illuminate\Support\Facades\Request::create($redirect_to));
-        if($route){
-            $redirect_to = $route->uri;
+        $redirect_to = '';
+        if($back_url){
+            $redirect_to = Arr::get(parse_url($back_url),'path','');
+            $route = app('routes')->match(\Illuminate\Support\Facades\Request::create($redirect_to));
+            if($route){
+                $redirect_to = $route->uri;
+            }
         }
         if($redirect_to && Menu::hasPermission($redirect_to,'get')){ //会跳路径有权限
             $redirect = $back_url;

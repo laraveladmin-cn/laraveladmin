@@ -1094,5 +1094,7 @@
     "Click Upload": "点击上传",
     "Only picture files can be uploaded and no more than {size}": "只能上传图片文件，且不超过{size}",
     "Total number": "总数",
-    "Confirm to add": "确认添加"
+    "Confirm to add": "确认添加",
+    "Confirm to add": "确认添加",
+    "Your account has been logged in elsewhere": "您的帐号已在其他地方登录！"
 }

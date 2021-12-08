@@ -218,6 +218,7 @@ class AdminController extends Controller
         if ( Arr::get($data,'user.id') == 1 ) {
             unset($data['user']['status']);
         }
+        unset($data['user']['client_id']);
         //创建或修改用户
         $user = Arr::get($data,'user', []);
         $user = User::updateOrCreate([
