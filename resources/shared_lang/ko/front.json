@@ -1094,5 +1094,6 @@
     "Click Upload": "클릭 하여 업로드",
     "Only picture files can be uploaded and no more than {size}": "이미지 파일 만 올 릴 수 있 고 {size} 을 초과 하지 않 습 니 다.",
     "Total number": "총수",
-    "Confirm to add": "추가 확인"
+    "Confirm to add": "추가 확인",
+    "Your account has been logged in elsewhere": "당신의 계정은 이미 다른 곳에서 로그인하였습니다!"
 }

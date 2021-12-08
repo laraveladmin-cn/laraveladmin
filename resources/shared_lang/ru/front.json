@@ -1094,5 +1094,6 @@
     "Click Upload": "Нажмите для загрузки",
     "Only picture files can be uploaded and no more than {size}": "только для загрузки фотофайлов и не более {size}",
     "Total number": "итог",
-    "Confirm to add": "подтверждать Добавление"
+    "Confirm to add": "подтверждать Добавление",
+    "Your account has been logged in elsewhere": "Ваш счёт был зарегистрирован в другом месте!"
 }

@@ -1094,5 +1094,6 @@
     "Click Upload": "クリックしてアップロード",
     "Only picture files can be uploaded and no more than {size}": "画像ファイルのみアップロードできます。",
     "Total number": "合計",
-    "Confirm to add": "追加の確認"
+    "Confirm to add": "追加の確認",
+    "Your account has been logged in elsewhere": "アカウントは他の場所に登録されています。"
 }
