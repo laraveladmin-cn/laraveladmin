@@ -117,7 +117,7 @@ class UserController extends Controller
         if ( Arr::get($data,'id') == 1 ) {
             unset($data['status']);
         }
-
+        unset($data['client_id']);
         return $data;
     }
 

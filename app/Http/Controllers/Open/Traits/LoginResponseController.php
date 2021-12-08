@@ -42,6 +42,7 @@ trait LoginResponseController
         //如果是登录并绑定
         $user = Auth::user();
         $this->bindOuser($user);
+        $user->update(['client_id'=>SessionService::getId()]); //登录信息
         $remember = $request->has('remember');
         $lifetime = (!$remember)?config('laravel_admin.no_remember_lifetime'):config('session.lifetime');
         if($remember){

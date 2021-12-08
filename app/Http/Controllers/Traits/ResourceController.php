@@ -886,7 +886,6 @@ trait ResourceController
                 //去除关联添加数据
                 $item = collect($item)->except($relation_keys)->toArray();
                 //数据转码
-                $item = collect($item)->except($relation_keys)->toArray();
                 $item = collect($item)->map(function ($value, $key) use ($item, $maps1, $multipleFields) {
                     $map = Arr::get($maps1, $key);
                     if (in_array($key, $multipleFields)) {
