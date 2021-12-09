@@ -428,8 +428,12 @@ trait ResourceController
         foreach ($showFields as $k => $showField) {
             if (is_array($showField)) {
                 $key = $prefix ? $prefix . '.' . $k : $k;
-                $res[$key] = $model->$k()->getModel()->getTable();
-                $this->mapsRelations($showField, $model->$k()->getRelated());
+                $relation = $model->$k();
+                if($relation){
+                    $res[$key] = $relation->getModel()->getTable();
+                    $this->mapsRelations($showField, $relation->getRelated());
+                }
+
             }
         }
         return $res;
@@ -652,7 +656,12 @@ trait ResourceController
         });
         $res = collect($res)->map(function ($value, $key) use ($model) {
             if (is_array($value) && $key != '$index') {
-                return $this->relationName($value, $model->$key()->getModel(), true);
+                $relation = $model->$key();
+                if($relation){
+                    return $this->relationName($value, $relation->getModel(), true);
+                }else{
+                    return $value;
+                }
             } else {
                 return $value;
             }
@@ -756,6 +765,7 @@ trait ResourceController
             $fields_key = $keys;
         }
         $mapsRelations = $this->mapsRelations($this->exportFields, $model);
+
         $title = collect($fields_key)->map(function ($item) use ($all_titles, $exportFieldsName,$mapsRelations) {
             $value = isset($exportFieldsName[$item]) ? $exportFieldsName[$item] : Arr::get($all_titles, $item, '');
             $value = $this->transField($value, $this->getTable($item,$mapsRelations));
@@ -910,6 +920,8 @@ trait ResourceController
             return $flog;
         })->toArray(); //读取数据
         foreach ($datas as $row) {
+            $row = getRelationData($row); //将一维数组转成多维数组
+            $this->handlePostEditReturn($row);
             $item = $bindModel::updateOrCreate([$key_name => Arr::get($row, $key_name) ?: null], $row); //更新,创建数据
             $this->saveRelation($item, $row);
             $this->handlePostEdit($item, $row);

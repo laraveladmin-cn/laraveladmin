@@ -81,6 +81,9 @@ body {
     .form-control{
         height: $input-height-base;
     }
+    textarea.form-control{
+        height:auto;
+    }
     .el-input-number__decrease{
         border-radius:$--input-border-radius 0px 0px $--input-border-radius;
     }
