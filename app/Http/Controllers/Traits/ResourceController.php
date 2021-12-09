@@ -872,7 +872,7 @@ trait ResourceController
                         $value = Arr::get($map, trim($item), Arr::get($default, $key));
                     }
                 } else {
-                    $value = is_null($item) ? Arr::get($default, $key) : trim($item);
+                    $value = is_null($item) ? Arr::get($default, $key) : (is_string($item)?trim($item):$item);
                 }
                 $keys = explode('.', $key);
                 if (isset($relation_keys[$key]) || ($keys && Arr::get($keys, 1) == '$index' && count($keys) == 3)) {
@@ -887,7 +887,7 @@ trait ResourceController
 
             return $row;
         })->filter(function ($item) use (&$errors, $key_name, $relation_keys, $maps1, $multipleFields) { //数据验证
-            $validator = Validator::make($item, $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
+            $validator = Validator::make(getRelationData($item), $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
             $flog = !$validator->fails(); //验证状态
             if ($validator->fails()) {
                 $item['error'] = collect($validator->errors()->toArray())->map(function ($v, $k) {
