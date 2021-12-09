@@ -1,5 +1,5 @@
 <template>
-    <div class="open_register hold-transition register-page h100" v-if="!loading">
+    <div class="open_register hold-transition register-page h100" v-if="!loading_init">
         <div class="register-box">
             <logo></logo>
             <div class="register-box-body">
@@ -92,7 +92,8 @@
                 sending:false,
                 sendUrl:'/open/register/send',
                 submitUrl:'/open/register',
-                other:this.$router.currentRoute.query.other || ''
+                other:this.$router.currentRoute.query.other || '',
+                loading:false
             }
         },
         methods:{
@@ -210,7 +211,7 @@
                 'isAdmin'
             ]),
             //数据加载状态
-            loading(){
+            loading_init(){
                 //已经登录
                 if(!this.loadingUser && this.isLogined){
                     if(this.isAdmin){
