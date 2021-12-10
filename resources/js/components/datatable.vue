@@ -207,7 +207,7 @@
                 </slot>
             </div>
             <div class="box-body table-responsive">
-                <slot name="table" :data="data" :check_ids="check_ids" :remove="remove">
+                <slot name="table" :data="data" :loading="loading" :check_ids="check_ids" :remove="remove" :getItems="getItems" :checkboxClass="checkboxClass" >
                     <table class="table table-hover table-bordered table-striped text-center dataTable">
                         <thead>
                         <slot name="thead"
@@ -415,7 +415,9 @@
                     },
                     maps:{
                     },
-                    list:{},
+                    list:{
+                        data:[]
+                    },
                     configUrl:{
                         indexUrl:'',
                         listUrl:'',

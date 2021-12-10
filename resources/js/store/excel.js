@@ -322,6 +322,8 @@ export default {
                     });
                     let datas = collect(XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]));
                     let title = collect(datas.shift()); //去掉表头
+                    let error_title = collect(JSON.parse(JSON.stringify(title.all())));
+                    error_title.put('error',i18n.t('Error message')); //错误信息
                     datas = datas.map( (item) =>{
                         collect(title).each((name,key)=>{
                             if(typeof item[key]=="undefined"){
@@ -361,7 +363,12 @@ export default {
                                 });
                                 if(typeof response.data.errors!="undefined" && response.data.errors.length){
                                     errors = collect(errors).merge(collect(response.data.errors).map(function (row) {
-                                        return collect(row).values().all();
+                                        //重新整理排序
+                                        let item = [];
+                                        error_title.each((val,key)=>{
+                                            item[item.length] = row[key];
+                                        });
+                                        return item;
                                     }).all()).all(); //存放错误数据
                                 }
                             }else {
@@ -387,10 +394,9 @@ export default {
                                                     error_number:errors.length
                                                 }),//'成功导入'+(total-errors.length)+'条数据,导入失败'+errors.length+'数据!是否下载错误数据?',
                                             callback:()=>{
-                                                title.put('error',i18n.t('Error message')); //错误信息
                                                 let data = collect(errors)
-                                                    .prepend(title.values().all())
-                                                    .prepend(title.keys().all()).all();
+                                                    .prepend(error_title.values().all())
+                                                    .prepend(error_title.keys().all()).all();
                                                 exportExcel(data,parms.sheet,i18n.t('Wrong data'));//错误数据
                                                 errors = [];
                                                 if(typeof parms.callback=="function"){
