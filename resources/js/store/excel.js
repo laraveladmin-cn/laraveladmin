@@ -290,7 +290,9 @@ export default {
             }
             let url = rootState['use_url']+parms.url;
             errors = []; //错误数据项
-            if(!reader){
+            //if(!reader){
+            let reader;
+            if(true){
                 reader = new FileReader();
                 reader.onload = function(e) {
                     let workbook = XLSX.read(e.target.result, {type: 'binary'});
