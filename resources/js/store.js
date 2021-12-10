@@ -43,7 +43,9 @@ export default {
         },
         //关闭消息
         closeMessage(state,payload){
-            state.alerts[payload.key].show = false;
+            if(state.alerts[payload.key]){
+                state.alerts[payload.key].show = false;
+            }
             //消息关闭完后清空所有消息
             if(!collect(state.alerts).filter( (item) =>{
                 return item['show'];
