@@ -283,7 +283,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        bottom: 40px;
+        bottom: 0;
         right: 0;
         margin: auto;
     }
