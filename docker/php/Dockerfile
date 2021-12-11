@@ -5,6 +5,8 @@ apt-get update && \
 pecl channel-update pecl.php.net
 #安装php扩展
 RUN apt-get install -y \
+        libwebp-dev \
+        libxpm-dev \
         libfreetype6-dev \
         libtool \
         libjpeg62-turbo-dev \
@@ -16,18 +18,19 @@ RUN apt-get install -y \
         zip \
         unzip \
     ##安装扩展
-    && docker-php-source extract \
-    && docker-php-ext-install -j$(nproc) iconv \
-    && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install -j$(nproc) bcmath \
-    && docker-php-ext-install -j$(nproc) pdo \
-    && docker-php-ext-install -j$(nproc) mbstring \
-    && docker-php-ext-install -j$(nproc) pdo_mysql \
-    && docker-php-ext-install -j$(nproc) opcache \
-    && docker-php-ext-install -j$(nproc) mysqli \
-    && docker-php-ext-install -j$(nproc) zip \
-    && docker-php-ext-install -j$(nproc) pcntl \
-    && docker-php-ext-install -j$(nproc) tokenizer
+    && docker-php-source extract; \
+    docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp; \
+    docker-php-ext-install -j "$(nproc)" gd \
+        iconv \
+        bcmath \
+        pdo \
+        mbstring \
+        pdo_mysql \
+        opcache \
+        mysqli \
+        zip \
+        pcntl \
+        tokenizer
 ##扩展安装
 RUN pecl install redis-4.0.1 \
     && docker-php-ext-enable redis
