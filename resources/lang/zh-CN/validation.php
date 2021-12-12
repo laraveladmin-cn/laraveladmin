@@ -120,6 +120,7 @@ return [
     'array_in_array'                   => '已选的属性 :attribute 非法。',
     'sting_or_array'                   => '已选的属性 :attribute 非法。',
     'url_path'=>':attribute 格式不正确。',
+    'captcha'=>':attribute 验证错误。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -182,6 +183,7 @@ return [
         'old_password'=>'旧密码',
         'file'=>'文件',
         'order'=>'排序',
-        'where'=>'筛选条件'
+        'where'=>'筛选条件',
+        'verify'=>'验证码'
     ],
 ];

@@ -214,23 +214,34 @@ class LoginController extends Controller
         $uname = $this->loginUsername();
         $validate = [];
         $login_num = $this->getLoginFailedNum();
+        $verify_type = config('laravel_admin.verify.type');
         if($login_num>=config('laravel_admin.verify.login_pass_num')){
-            $validate['verify'] = 'required|'.config('laravel_admin.verify.type');
+            $validate['verify'] = 'required|'.$verify_type;
         }
-        $validate[$uname] = 'required|exists:users,' . $uname . ',status,1';
+        $validate[$uname] = 'required';
         $validate['password'] = 'required';
         $login_num++;
         $this->setLoginFailedNum($login_num);
-        $validator = Validator::make($request->all(), $validate, [
-            $uname . '.exists' => trans('Incorrect user name or password!')//'用户名或密码错误',
-        ]);
+        $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
-            if(!isset($errors['verify']) && $this->mustVerify()){
+            if(!isset($errors['verify']) && $this->mustVerify() && $verify_type!='captcha'){
                 $errors['verify'] = [
                     trans('Captcha code required!')//'验证码必填'
                 ];
             }
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => trans('The given data was invalid.')
+            ], 422);
+        }
+        $validate = [
+            $uname=>'exists:users,' . $uname . ',status,1'
+        ];
+        $validator = Validator::make($request->all(), $validate, [
+            $uname . '.exists' => trans('Incorrect user name or password!')//'用户名或密码错误',
+        ]);
+        if($validator->fails()){
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
                 'message' => trans('The given data was invalid.')
