@@ -25,7 +25,7 @@
                                     <i class="fa fa-plus"></i> {{$t("New")}}
                                 </router-link>
                             </slot>
-                            <slot name="refresh">
+                            <slot name="refresh" :data="data" >
                                 <button class="btn btn-success"
                                         v-show="btnRefresh"
                                         type="button"

@@ -286,7 +286,9 @@ trait ResourceController
         $res = false;
         if ($ids) {
             $primaryKey = $this->newBindModel()->getKeyName() ?: 'id';
-            $res = $this->bindModel->whereIn($primaryKey, $ids)->delete();
+            $obj = $this->bindModel->whereIn($primaryKey, $ids);
+            $obj = $this->handleDestroyObj($obj);
+            $res = $obj->delete();
         }
         if ($res === false) {
             return Response::returns(['alert' => alert([
@@ -365,6 +367,7 @@ trait ResourceController
                 'message' => trans('Data does not exist!')//'数据不存在!'
             ], 404)], 404);
         }
+        $data = $this->handlePostEditFindReturn($data,$item);
         $res = $item->update($data);
         if ($res === false) {
             return Response::returns(['alert' => alert([
@@ -997,6 +1000,16 @@ trait ResourceController
     }
 
     /**
+     * 执行修改前查询到数据结果后对数据进行处理
+     * @param $data
+     * @param $item
+     * @return mixed
+     */
+    protected function handlePostEditFindReturn(&$data,$item){
+        return $data;
+    }
+
+    /**
      * 执行删除数据前对数据进行处理
      * @param $data
      * @return mixed
@@ -1024,6 +1037,15 @@ trait ResourceController
     protected function handlePostEdit($item, $data)
     {
         //
+    }
+
+    /**
+     * 执行删除前处理删除模型
+     * @param $obj
+     * @return mixed
+     */
+    protected function handleDestroyObj(&$obj){
+        return $obj;
     }
 
 
