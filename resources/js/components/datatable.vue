@@ -39,16 +39,18 @@
                                     v-show="checkbox && data.configUrl['deleteUrl']">
                                 <i class="fa fa-trash-o"></i> {{$t("Delete selected")}}
                             </button>
-                            <button class="btn btn-primary"
-                                    type="button"
-                                    v-show="btnSizerMore"
-                                    @click="sizer_more = !sizer_more"
-                                    data-toggle="collapse"
-                                    :data-target="'#'+id+' .sizer_more'"
-                                    aria-expanded="false">
-                                <i class="fa" :class="sizer_more?'fa-angle-double-up':'fa-angle-double-down'"></i>
-                                {{$t("More screening")}}
-                            </button>
+                            <slot name="sizer_more" :data="data" >
+                                <button class="btn btn-primary"
+                                        type="button"
+                                        v-show="btnSizerMore"
+                                        @click="sizer_more = !sizer_more"
+                                        data-toggle="collapse"
+                                        :data-target="'#'+id+' .sizer_more'"
+                                        aria-expanded="false">
+                                    <i class="fa" :class="sizer_more?'fa-angle-double-up':'fa-angle-double-down'"></i>
+                                    {{$t("More screening")}}
+                                </button>
+                            </slot>
                             <button class="btn btn-warning"
                                     type="button"
                                     v-show="count(data.excel.exportFields) && data.configUrl['exportUrl']"
