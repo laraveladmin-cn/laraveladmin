@@ -589,7 +589,9 @@ trait ResourceController
      * 新增或修改,验证规则获取
      * @return mixed
      */
-    abstract protected function getValidateRule($id=0);
+    protected function getValidateRule($id=0){
+        return [];
+    }
 
     /**
      * 导入验证规则
