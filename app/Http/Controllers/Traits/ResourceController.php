@@ -329,7 +329,7 @@ trait ResourceController
             ], 500)], 500);
         }
         $this->saveRelation($item, $data);
-        $this->handlePostEdit($item, $data);
+        $this->handlePostEdit($item, $data,[]);
         $primaryKey = $this->newBindModel()->getKeyName() ?: 'id';
 
         return Response::returns([
@@ -362,6 +362,7 @@ trait ResourceController
         $data = $this->handDateFields($data, $this->importExcelDateFields);
         $data = $this->handlePostEditReturn($data);
         $item = $this->bindModel->find($id);
+        $old = collect($item)->toArray();
         if (!$item) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Data does not exist!')//'数据不存在!'
@@ -375,7 +376,7 @@ trait ResourceController
             ], 500)], 500);
         }
         $this->saveRelation($item, $data);
-        $this->handlePostEdit($item, $data);
+        $this->handlePostEdit($item, $data,$old);
 
         return Response::returns(['alert' => alert([
             'message' => trans('Modify the success!') //修改成功
@@ -925,9 +926,16 @@ trait ResourceController
         foreach ($datas as $row) {
             $row = getRelationData($row); //将一维数组转成多维数组
             $this->handlePostEditReturn($row);
-            $item = $bindModel::updateOrCreate([$key_name => Arr::get($row, $key_name) ?: null], $row); //更新,创建数据
+            $item = $bindModel::where($key_name,Arr::get($row, $key_name) ?: null)->first();
+            if($item){ //更新数据
+                $old_data = collect($item)->toArray();
+                $item->update($row);
+            }else{ //创建数据
+                $old_data = [];
+                $item = $bindModel::create($row);
+            }
             $this->saveRelation($item, $row);
-            $this->handlePostEdit($item, $row);
+            $this->handlePostEdit($item, $row,$old_data);
         }
 
         return [
@@ -1034,7 +1042,7 @@ trait ResourceController
      * @param $item
      * @param $data
      */
-    protected function handlePostEdit($item, $data)
+    protected function handlePostEdit($item, $data,$old_data=[])
     {
         //
     }
