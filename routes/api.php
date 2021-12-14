@@ -15,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 RouteService::routeRegisterApi();
+//错误路由匹配
+RouteService::any(false);
