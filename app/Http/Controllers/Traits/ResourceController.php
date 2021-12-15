@@ -321,6 +321,7 @@ trait ResourceController
         $data = $this->handDateFields($data, $this->importExcelDateFields);
         $data = $this->handlePostEditReturn($data);
         $data['updated_at'] = date('Y-m-d H:i:s');
+        $data = $this->handlePostEditFindReturn($data,[]);
         //新增
         $item = $this->bindModel->create($data);
         if ($item === false) {
