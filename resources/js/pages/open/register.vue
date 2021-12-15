@@ -6,7 +6,7 @@
                 <p class="login-box-msg">{{$tp('Registered user')}}</p>
                 <validation-observer ref="register" v-slot="{invalid,validate}">
                     <form method="post">
-                        <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18',icon:'fa-user',placeholder:placeholderUsername}"></form-item>
+                        <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18|user_name',icon:'fa-user',placeholder:placeholderUsername}"></form-item>
                         <form-item v-model="email" :options="{key:'email',name:$t('Email'),type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:$tp('Please enter email address')}"></form-item>
                         <form-item v-model="mobile_phone" :options="{key:'mobile_phone',name:$t('Mobile phone number'),rules:email?'':'required|mobile',icon:'glyphicon-phone',placeholder:$tp('Please enter your mobile phone number')}"></form-item>
                         <form-item v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'required'+(verify['type']=='captcha'?'|length:'+verify['length']:''),label:verify['type']=='captcha'}">

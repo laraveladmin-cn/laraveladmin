@@ -78,7 +78,8 @@ class CustomValidator extends Validator{
     public function validateUserName($attribute, $value, $parameters)
     {
         if(!$value) return true;
-        return preg_match("/^[a-zA-Z][A-Za-z0-9_]{3,15}$/", $value);
+        return preg_match("/^[a-zA-Z][A-Za-z0-9_]{1,}$/", $value) &&
+            !preg_match("/^[0-9]{1,}$/", $value);
     }
 
     /**

@@ -121,6 +121,7 @@ return [
     'sting_or_array'                   => '已选的属性 :attribute 非法。',
     'url_path'=>':attribute 格式不正确。',
     'captcha'=>':attribute 验证错误。',
+    'user_name'=>':attribute 必须是由字母、数字、下划线组成的非纯数字。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

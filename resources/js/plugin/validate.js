@@ -112,3 +112,16 @@ extend('boolean', {
     params: [],
     computesRequired: false
 });
+//同意
+let user_name =  {
+    validate:(value) => {
+        if(!value) return true;
+        let patt = /^[a-zA-Z][A-Za-z0-9_]{1,}$/;
+        let patt1 = /^[0-9]{1,}$/;
+        return patt.test(value) &&
+            !patt1.test(value);
+    },
+    params: [],
+    computesRequired: false
+};
+extend('user_name', user_name);
