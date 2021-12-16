@@ -622,7 +622,8 @@
             "size": "The {_field_} field size must be less than {size}KB",
             "double": "The {_field_} field must be a valid decimal",
             "mobile": "The {_field_} is not properly formed",
-            "digits_between": "The {_field_} must be between {min} and {max} digits"
+            "digits_between": "The {_field_} must be between {min} and {max} digits",
+            "user_name": "user_name"
         },
         "attributes": {
             "mobile": "mobile",

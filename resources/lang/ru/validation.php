@@ -144,14 +144,17 @@ $str = <<<'str'
         "old_password": "старый пароль",
         "file": "Документация",
         "order": "сортировка",
-        "where": "условие отбора"
+        "where": "условие отбора",
+        "verify": "код проверки"
     },
     "ckeck_password": ": это неправильно.",
     "mobile_phone": ": это неправильно.",
     "array_keys_in_array": "Выбранные атрибуты :attribute.",
     "array_in_array": "Выбранные атрибуты :attribute.",
     "sting_or_array": "Выбранные атрибуты :attribute.",
-    "url_path": ": неверный формат :attribute."
+    "url_path": ": неверный формат :attribute.",
+    "captcha": ": Ошибка проверки attribute.",
+    "user_name": ": attribute должно быть не чисто число, состоящее из букв, цифр, подчёркнутых."
 }
 str;
 return json_decode($str,true);

@@ -151,7 +151,7 @@
                 }).values().all();
             },
             getUrl(res){
-                let url = array_get(res,this.valueKey,'') || res.title;
+                let url = array_get(res,this.valueKey,'') || res.title || '';
                 if(this.noparm){
                     let urls = url.split("?");
                     this.parm = urls[1];

@@ -144,14 +144,17 @@ $str = <<<'str'
         "old_password": "Contraseña antigua",
         "file": "Documentación",
         "order": "Ordenar",
-        "where": "Condiciones de selección"
+        "where": "Condiciones de selección",
+        "verify": "Código de verificación"
     },
     "ckeck_password": ":attribute incorrecto.",
     "mobile_phone": ":attribute incorrecto.",
     "array_keys_in_array": "Atributo seleccionado :attribute ilegal.",
     "array_in_array": "Atributo seleccionado :attribute ilegal.",
     "sting_or_array": "Atributo seleccionado :attribute ilegal.",
-    "url_path": "El formato del atributo no es correcto."
+    "url_path": "El formato del atributo no es correcto.",
+    "captcha": ": error de validación de atributos.",
+    "user_name": "El atributo debe ser un número impuro compuesto por letras, números y subrayado."
 }
 str;
 return json_decode($str,true);

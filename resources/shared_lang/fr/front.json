@@ -622,7 +622,8 @@
             "size": "Le champ {_field_} doit avoir un poids inférieur à {size}KB",
             "double": "Le champ {_field_} doit être une décimale valide",
             "mobile": "- Oui.Champ}Format incorrect",
-            "digits_between": "- Oui.Champ}La longueur doit être comprise entre {Min}Et {Max}Entre les bits"
+            "digits_between": "- Oui.Champ}La longueur doit être comprise entre {Min}Et {Max}Entre les bits",
+            "user_name": "{\\ Field} Doit être un nombre non pur composé de lettres, de chiffres, de soulignements."
         },
         "attributes": {
             "mobile": "Numéro de téléphone portable",

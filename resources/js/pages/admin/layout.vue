@@ -167,9 +167,9 @@
                             </div>
                         </div>
                         <div class="sidebar-form">
-                            <div class="input-group">
+                            <div :class="{'input-group':keywords}">
                                 <input @keydown.enter="search" @keyup="waitSearch" v-model="keywords" type="text" name="keywords" class="form-control" :placeholder="$tp('Search menu')">
-                                <span class="input-group-btn">
+                                <span class="input-group-btn" v-show="keywords">
                                   <button @click="cancelSearch" type="button" class="btn btn-flat">
                                       <i class="fa fa-times-circle"></i>
                                   </button>

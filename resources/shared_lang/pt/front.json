@@ -622,7 +622,8 @@
             "size": "Tchau.Campo de concentraçãoDeve ser Menos do que {tamanho} KB",
             "double": "Tchau.Campo de concentraçãoO Campo deve ser UMA Casa decimal válida",
             "mobile": "Tchau.Campo de concentraçãoFormato incorreto",
-            "digits_between": "Tchau.Campo de concentraçãoO comprimento deve ESTAR entreMINHA GARANTIAE AINDAMáximo de EmbaixadaEntre OS bits"
+            "digits_between": "Tchau.Campo de concentraçãoO comprimento deve ESTAR entreMINHA GARANTIAE AINDAMáximo de EmbaixadaEntre OS bits",
+            "user_name": "Feliz campo, Josué. Deve ser um número não puro composto de letras, números e subnúcleos."
         },
         "attributes": {
             "mobile": "Número de telefone",

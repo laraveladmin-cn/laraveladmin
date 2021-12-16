@@ -622,7 +622,8 @@
             "size": "{_field_} 항목의 크기는 {size}KB보다 작아야 합니다",
             "double": "{_field_} 필드는 유효한 십진수 여야합니다",
             "mobile": "{field}부정 확 하 다",
-            "digits_between": "{field}길 이 는 {min}와 {max}비트 사이"
+            "digits_between": "{field}길 이 는 {min}와 {max}비트 사이",
+            "user_name": "{_field_} 문자, 숫자, 밑줄로 이루어진 비순수 숫자여야 합니다."
         },
         "attributes": {
             "mobile": "핸드폰 번호",

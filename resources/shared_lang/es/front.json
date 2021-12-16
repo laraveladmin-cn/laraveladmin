@@ -622,7 +622,8 @@
             "size": "El campo {_field_} debe ser menor a {size}KB",
             "double": "El campo {_field_} debe ser un decimal válido",
             "mobile": "{Field}Formato incorrecto",
-            "digits_between": "{Field}La longitud debe estar entre {yMin}Y {nMax}Entre bits"
+            "digits_between": "{Field}La longitud debe estar entre {yMin}Y {nMax}Entre bits",
+            "user_name": "{Field} Debe ser un número impuro de letras, números y subrayado."
         },
         "attributes": {
             "mobile": "Número de teléfono móvil",

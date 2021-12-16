@@ -144,14 +144,17 @@ $str = <<<'str'
         "old_password": "Ancien mot de passe",
         "file": "Documentation",
         "order": "Trier",
-        "where": "Critères de filtrage"
+        "where": "Critères de filtrage",
+        "verify": "Code de vérification"
     },
     "ckeck_password": ":attribute incorrect.",
     "mobile_phone": ":attribute incorrect.",
     "array_keys_in_array": "Attribut sélectionné :attribute illégal.",
     "array_in_array": "Attribut sélectionné :attribute illégal.",
     "sting_or_array": "Attribut sélectionné :attribute illégal.",
-    "url_path": ":attribute mal formé."
+    "url_path": ":attribute mal formé.",
+    "captcha": ": erreur de validation de l'attribut.",
+    "user_name": ": l'attribut doit être un nombre non pur composé de lettres, de chiffres et de soulignements."
 }
 str;
 return json_decode($str,true);
