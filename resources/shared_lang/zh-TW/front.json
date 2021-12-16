@@ -386,7 +386,8 @@
             "size": "{_field_} 的檔案須小於 {size}KB",
             "double": "{_field_}字段必須為有效的小數",
             "mobile": "{_field_}不格式正確",
-            "digits_between": "{_field_}長度必須是介於{_min_}和{_max_}比特之間"
+            "digits_between": "{_field_}長度必須是介於{_min_}和{_max_}比特之間",
+            "user_name": "{_field_} 必須是由字母、數位、底線組成的非純數位。"
         },
         "attributes": {
             "mobile": "手機號碼",

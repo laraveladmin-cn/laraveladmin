@@ -144,14 +144,17 @@ $str = <<<'str'
         "old_password": "舊密碼",
         "file": "檔案",
         "order": "排序",
-        "where": "篩選條件"
+        "where": "篩選條件",
+        "verify": "驗證碼"
     },
     "ckeck_password": "：attribute不正確。",
     "mobile_phone": "：attribute不正確。",
     "array_keys_in_array": "已選的内容：attribute非法。",
     "array_in_array": "已選的内容：attribute非法。",
     "sting_or_array": "已選的内容：attribute非法。",
-    "url_path": "：attribute格式不正確。"
+    "url_path": "：attribute格式不正確。",
+    "captcha": "：attribute驗證錯誤。",
+    "user_name": "：attribute必須是由字母、數位、底線組成的非純數位。"
 }
 str;
 return json_decode($str,true);
