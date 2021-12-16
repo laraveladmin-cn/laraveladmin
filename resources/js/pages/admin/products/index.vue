@@ -8,7 +8,7 @@
                             <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
                                 <div class="small-box bg-aqua">
                                     <div class="inner">
-                                        <h4 class="text-center">{{props | array_get('data.list.total')}}</h4>
+                                        <h4 class="text-center">{{props | array_get('data.list.total','--')}}</h4>
                                     </div>
                                     <div class="small-box-footer">{{$t('Total number')}}</div>
                                 </div>
@@ -16,25 +16,25 @@
                             <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
                                 <div class="small-box bg-green" >
                                     <div class="inner" >
-                                        <h4 class="text-center">{{props | array_get('data.list.count_status.value0')}}</h4>
+                                        <h4 class="text-center">{{props | array_get('data.list.count_status.value0','--')}}</h4>
                                     </div>
-                                    <div class="small-box-footer">{{props | array_get('maps.status.0')}}</div>
+                                    <div class="small-box-footer">{{props | array_get('maps.status.0','--')}}</div>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
                                 <div class="small-box bg-yellow" >
                                     <div class="inner" >
-                                        <h4 class="text-center">{{props | array_get('data.list.count_status.value1')}}</h4>
+                                        <h4 class="text-center">{{props | array_get('data.list.count_status.value1','--')}}</h4>
                                     </div>
-                                    <div class="small-box-footer">{{props | array_get('maps.status.1')}}</div>
+                                    <div class="small-box-footer">{{props | array_get('maps.status.1','--')}}</div>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-6 sizer-item">
                                 <div class="small-box bg-red" >
                                     <div class="inner" >
-                                        <h4 class="text-center">{{props | array_get('data.list.count_status.value2')}}</h4>
+                                        <h4 class="text-center">{{props | array_get('data.list.count_status.value2','--')}}</h4>
                                     </div>
-                                    <div class="small-box-footer">{{props | array_get('maps.status.2')}}</div>
+                                    <div class="small-box-footer">{{props | array_get('maps.status.2','--')}}</div>
                                 </div>
                             </div>
                         </div>

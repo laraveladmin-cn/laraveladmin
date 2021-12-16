@@ -191,7 +191,7 @@
                             </edit-item>
                             <edit-item key-name="images" :options="{name: props.transField('Preview Poster'), required: false,title:$t('Only picture files can be uploaded and no more than {size}',{size:'2MB'})}"  :datas="props">
                                 <template slot="input-item">
-                                    <upload  v-model="props.data.row['images']"
+                                    <upload  v-model="props.data.row['images'] || images"
                                             :disabled="!props.url"
                                             :value-key="'url'">
                                     </upload>
@@ -249,7 +249,8 @@
                     id:'edit', //多个组件同时使用时唯一标识
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}
-                }
+                },
+                images:[]
             };
         },
         methods: {
