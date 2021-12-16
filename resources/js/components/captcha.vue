@@ -1,15 +1,15 @@
 <template>
     <div class="row">
-        <div class="col-sm-6">
-            <img :src="url+'&time='+time" @click="switchImg">
-        </div>
-        <div class="col-sm-6">
+        <div class="col-xs-6 col-sm-6">
             <input type="text"
                    name="verify"
                    v-model="captcha"
                    @blur="$emit('blur')"
                    class="form-control"
                    :placeholder="$t('enter',{name:$t('captcha')})">
+        </div>
+        <div class="col-xs-6 col-sm-6 captcha-img">
+            <img :src="url+'&time='+time" @click="switchImg">
         </div>
     </div>
 </template>
@@ -69,3 +69,11 @@
         }
     }
 </script>
+<style scoped>
+    .form-control{
+        padding-right: 12px;
+    }
+    .captcha-img{
+        padding-left: 0px;
+    }
+</style>

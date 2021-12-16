@@ -7,7 +7,7 @@
                 <validation-observer ref="password" v-slot="{invalid,validate}">
                     <form method="post">
                         <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18',icon:'fa-user',placeholder:$tp('Please enter your account/email/mobile phone number')}"></form-item>
-                        <form-item  v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'',label:false}">
+                        <form-item  v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'required'+(verify['type']=='captcha'?'|length:'+verify['length']:''),label:verify['type']=='captcha'}">
                             <geetest style="width: 150px"  v-if="verify['type']=='geetest'" :url="use_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></geetest>
                             <captcha v-if="verify['type']=='captcha'" :url="verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></captcha>
                         </form-item>
@@ -242,10 +242,10 @@
     }
     .register-box{
         position: absolute;
-        height: 530px;
+        height: fit-content;
         left: 0;
         top: 0;
-        bottom: 40px;
+        bottom:0;
         right: 0;
         margin: auto;
     }

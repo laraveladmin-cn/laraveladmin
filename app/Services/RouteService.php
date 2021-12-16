@@ -248,7 +248,6 @@ class RouteService
 
             });
         });
-        $route_prefix OR Route::get('{any}',self::$api404)->where('any','(.*)');
     }
 
     public static function getClass($value){
@@ -395,10 +394,21 @@ class RouteService
         if(config('laravel_admin.web_api_model')=='web'){
             self::routeRegisterApi(self::$web_route_prefix);
         }
-        //404页面
-        Route::get('/web-api',self::$api404);
-        Route::get('/web-api/{any}',self::$api404)->where('any','(.*)');
-        Route::get('{any}',self::$pager404)->where('any','(.*)');
+
+    }
+
+    /**
+     *
+     * @param bool $is_web
+     */
+    public static function any($is_web=true){
+        if($is_web){
+            Route::get('/web-api',self::$api404);
+            Route::get('/web-api/{any}',self::$api404)->where('any','(.*)');
+            Route::get('{any}',self::$pager404)->where('any','(.*)');
+        }else{
+            Route::get('{any}',self::$api404)->where('any','(.*)');
+        }
     }
 
     /**

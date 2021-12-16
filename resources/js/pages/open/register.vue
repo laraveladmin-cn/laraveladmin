@@ -1,15 +1,15 @@
 <template>
-    <div class="open_register hold-transition register-page h100" v-if="!loading">
+    <div class="open_register hold-transition register-page h100" v-if="!loading_init">
         <div class="register-box">
             <logo></logo>
             <div class="register-box-body">
                 <p class="login-box-msg">{{$tp('Registered user')}}</p>
                 <validation-observer ref="register" v-slot="{invalid,validate}">
                     <form method="post">
-                        <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18',icon:'fa-user',placeholder:placeholderUsername}"></form-item>
+                        <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18|user_name',icon:'fa-user',placeholder:placeholderUsername}"></form-item>
                         <form-item v-model="email" :options="{key:'email',name:$t('Email'),type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:$tp('Please enter email address')}"></form-item>
                         <form-item v-model="mobile_phone" :options="{key:'mobile_phone',name:$t('Mobile phone number'),rules:email?'':'required|mobile',icon:'glyphicon-phone',placeholder:$tp('Please enter your mobile phone number')}"></form-item>
-                        <form-item v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'',label:false}">
+                        <form-item v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'required'+(verify['type']=='captcha'?'|length:'+verify['length']:''),label:verify['type']=='captcha'}">
                             <geetest style="width: 150px"  v-if="verify['type']=='geetest'" :url="web_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></geetest>
                             <captcha v-if="verify['type']=='captcha'" :url="verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></captcha>
                         </form-item>
@@ -92,7 +92,8 @@
                 sending:false,
                 sendUrl:'/open/register/send',
                 submitUrl:'/open/register',
-                other:this.$router.currentRoute.query.other || ''
+                other:this.$router.currentRoute.query.other || '',
+                loading:false
             }
         },
         methods:{
@@ -210,7 +211,7 @@
                 'isAdmin'
             ]),
             //数据加载状态
-            loading(){
+            loading_init(){
                 //已经登录
                 if(!this.loadingUser && this.isLogined){
                     if(this.isAdmin){
@@ -247,10 +248,10 @@
     }
     .register-box{
         position: absolute;
-        height: 695px;
+        height: fit-content;
         left: 0;
         top: 0;
-        bottom: 40px;
+        bottom: 0;
         right: 0;
         margin: auto;
     }

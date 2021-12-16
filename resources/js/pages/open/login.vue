@@ -11,7 +11,7 @@
                             <password-edit v-model="password" :placeholder="placeholderPassword" @keydown-enter="postLogin(invalid,validate)">
                             </password-edit>
                         </form-item>
-                        <form-item v-if="mustVerify" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'required',messages:{required:$tp('{_field_} must be verified')}}">
+                        <form-item v-if="mustVerify" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'required'+(verify['type']=='captcha'?'|length:'+verify['length']:''),messages:{required:$tp('{_field_} must be verified')}}">
                             <geetest v-if="verify['type']=='geetest' && mustVerify" :url="web_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']" class="geetest-code"></geetest>
                             <captcha v-if="verify['type']=='captcha' && mustVerify" :url="verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></captcha>
                         </form-item>
@@ -283,7 +283,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        bottom: 40px;
+        bottom: 0;
         right: 0;
         margin: auto;
     }

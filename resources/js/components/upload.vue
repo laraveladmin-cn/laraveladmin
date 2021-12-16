@@ -1,9 +1,9 @@
 <template>
     <div :class="{'disabled':disabled}">
         <div v-if="isArray">
-            <el-upload name="file"
+            <el-upload :name="fileKey"
                        class="avatar-uploader"
-                       :action="use_url+action"
+                       :action="url"
                        :list-type="listType"
                        :file-list="val"
                        :data="{_token:_token}"
@@ -22,7 +22,8 @@
         </div>
         <div v-else class="single">
             <el-upload class="avatar-uploader"
-                       :action="use_url+action"
+                       :name="fileKey"
+                       :action="url"
                        :show-file-list="false"
                        :on-success="handleAvatarSuccess"
                        :on-error="handleAvatarError"
@@ -33,7 +34,7 @@
                        :disabled="disabled"
                        :before-upload="beforeAvatarUpload">
                 <slot>
-                    <img v-if="value || placeholderValue" :src="showurl" class="avatar" :width="width+'px'" :height="height+'px'">
+                    <img v-if="value || placeholderValue" :src="show_url" class="avatar" :width="width+'px'" :height="height+'px'">
                     <i v-else class="el-icon-plus avatar-uploader-icon avatar" :style="'line-height: '+height+'px;height:'+height+'px;width:'+width+'px'"></i>
                 </slot>
             </el-upload>
@@ -129,6 +130,12 @@
                     return '';
                 }
             },
+            fileKey:{
+                type:[String],
+                default: function () {
+                    return 'file';
+                }
+            }
         },
         methods:{
             ...mapActions({
@@ -143,27 +150,46 @@
                     return item['url'] != file[this.valueKey];
                 }).values().all();
             },
+            getUrl(res){
+                let url = array_get(res,this.valueKey,'') || res.title;
+                if(this.noparm){
+                    let urls = url.split("?");
+                    this.parm = urls[1];
+                    url = urls[0];
+                }
+                return url;
+            },
             handleSuccess(file, fileList) {
-                file.url = file[this.valueKey];
+                file.url = this.getUrl(file);
                 this.val.push(file);
             },
             handleAvatarSuccess(res, file){
                 this.refreshToken();
-                let $this = this;
-                //弹窗
-                if (typeof res != 'undefined' && typeof res.alert != 'undefined' && res.alert) {
-                    this.pushMessage(res.alert);
-                }
-                if(res.state=='SUCCESS'){
-                    let url = res.url;
-                    if(this.noparm){
-                        let urls = url.split("?");
-                        this.parm = urls[1];
-                        url = urls[0];
+                let url = this.getUrl(res);
+                if(url){
+                    //弹窗
+                    if (typeof res != 'undefined' && typeof res.alert != 'undefined' && res.alert) {
+                        this.pushMessage(res.alert);
                     }
-                    url = this.valueKey=='url'?url:res.title;
                     this.$emit('input',url); //修改值
                     this.$emit('change',url); //修改值
+                }else {
+                    //弹窗
+                    if (typeof res != 'undefined' && typeof res.alert != 'undefined' && res.alert) {
+                        this.pushMessage(res.alert);
+                    }else {
+                        this.pushMessage({
+                            'showClose':true,
+                            'title':this.$t('{action} failed!',{action:this.$t('Upload')}),
+                            'message':this.$t('{action} failed!',{action:this.$t('Upload')}),
+                            'type':'danger',
+                            'position':'top',
+                            'iconClass':'fa-warning',
+                            'customClass':'',
+                            'duration':3000,
+                            'show':true
+                        });
+                    }
                 }
             },
             beforeAvatarUpload(){
@@ -191,7 +217,7 @@
               }
               return collect(this.accept).implode(',');
             },
-            showurl(){
+            show_url(){
                 if(!this.value){
                     return this.placeholderValue;
                 }
@@ -217,6 +243,12 @@
             },
             isArray(){
                 return typeof this.val=="object" && this.val!==null;
+            },
+            url(){
+                if(this.action.indexOf('https://')==0 || this.action.indexOf('http://')==0 || this.action.indexOf('//')==0){
+                    return this.action;
+                }
+                return this.use_url+this.action;
             }
         },
         watch:{

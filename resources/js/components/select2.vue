@@ -380,7 +380,9 @@
             }
         },
         beforeDestroy() {
-            $(this.$el).find('select').select2('destroy');
+            if($(this.$el).find('select').select2){
+                $(this.$el).find('select').select2('destroy');
+            }
         }
     }
 </script>
