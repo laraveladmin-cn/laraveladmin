@@ -281,12 +281,13 @@
                     }
                     return flog ? 'selected' : null;
                 }else {
+                    let res;
                     if(this.placeholderValue===value){
-                        return value==this.value ? 'selected':null;
+                        res = value==this.value ? 'selected':null;
                     }else {
-                        return value==this.value && (this.value!=='' && value!==0) ? 'selected':null;
+                        res = value==this.value && (this.value!==this.placeholderValue) ? 'selected':null;
                     }
-
+                    return res;
                 }
             },
             placeholderStyle(){
