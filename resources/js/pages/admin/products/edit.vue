@@ -18,7 +18,7 @@
                                                  :url="use_url+'/admin/firms/list'"
                                                  :keyword-key="'name'"
                                                  :disabled="!props.url"
-                                                 :placeholder-value="'0'"
+                                                 :placeholder-value="0"
                                                  :is-ajax="true" >
                                         </select2>
                                     </div>
@@ -46,7 +46,7 @@
                                         <select2 v-model="props.data.row['classify_id']"
                                                  :disabled="!props.url"
                                                  :default-options="props.maps['classify_id']"
-                                                 :placeholder-value="'0'"
+                                                 :placeholder-value="0"
                                                  @change="props.data.row['classify2_id']=0"
                                                  :is-ajax="false" >
                                         </select2>
@@ -59,7 +59,7 @@
                                         <select2 v-model="props.data.row['classify2_id']"
                                                  :disabled="!props.url"
                                                  :default-options="array_get(props,'data.maps.classify_id.'+props.data.row['classify_id']+'.children',[])"
-                                                 :placeholder-value="'0'"
+                                                 :placeholder-value="0"
                                                  :is-ajax="false" >
                                         </select2>
                                     </div>

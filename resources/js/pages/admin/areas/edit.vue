@@ -18,7 +18,7 @@
                                                  :url="use_url+'/admin/areas/list?optional_parent_id='+(props.data.row.id||0)"
                                                  :keyword-key="'name'"
                                                  :disabled="!props.url"
-                                                 :placeholder-value="'0'"
+                                                 :placeholder-value="0"
                                                  :is-ajax="true" >
                                         </select2>
                                     </div>
