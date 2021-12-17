@@ -31,7 +31,7 @@
                                                  :url="use_url+'/admin/users/list'"
                                                  :keyword-key="'name|uname'"
                                                  :disabled="!props.url"
-                                                 :placeholder-value="'0'"
+                                                 :placeholder-value="0"
                                                  :params="{where:{admin:0,id:props.data.row['user_id_back']}}"
                                                  :show="['name','uname']"
                                                  :is-ajax="true" >
