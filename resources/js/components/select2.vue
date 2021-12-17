@@ -1,7 +1,7 @@
 <template>
     <span class="main-select2" :class="{'placeholder-show':placeholder_show}">
         <select class="form-control" :disabled="disabled" :multiple="multiple" style="width: 100%;">
-            <option v-if="!multiple && placeholder" :value="placeholderValue" :selected="placeholderValue===value?'selected':null">{{_placeholder}}</option>
+            <option :value="placeholderValue" :selected="placeholderValue===value?'selected':null">{{_placeholder}}</option>
             <option v-for="option in options" :value="option['id']" :selected="selected(option['id'])">
                 {{option['text']}}
             </option>
@@ -23,11 +23,12 @@
                 return i > -1;
             };
     }
-    import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
+    import { mapState } from 'vuex';
     export default {
         data(){
             return {
-                intervalTime:null
+                intervalTime:null,
+                data:this.copyObj(this.value),
             };
         },
         props:{
@@ -156,7 +157,7 @@
                 return options;
             },
             placeholder_show(){
-                return !this.multiple && this.placeholder && this.value===this.placeholderValue;
+                return this.value===this.placeholderValue || this.value===(this.placeholderValue+'');
             },
             _placeholder(){
                 if(typeof this.placeholderShow=="function"){
@@ -170,10 +171,16 @@
                 return JSON.parse(JSON.stringify(obj));
             },
             autofocus(){
+                if(!this.placeholder){
+                    $('.select2-container--open').addClass('main-select2-no-placeholder');
+                }
                 setTimeout(()=>{
-                    if($('.select2-search__field')[0]){
-                        $('.select2-search__field').attr('autofocus','autofocus');
-                        $('.select2-search__field')[0].focus();
+                    let $search = $('.select2-search__field');
+                    if($search[0]){
+                        $search.css({width:'100%'});
+                        $search.attr('placeholder',this.$t('Please enter keywords'));
+                        $search.attr('autofocus','autofocus');
+                        $search[0].focus();
                     }
                 },50);
             },
@@ -182,9 +189,10 @@
                 if(typeof $.fn.select2!="function"){
                     return;
                 }
+                let $select2 = $(this.$el).find('select');
                 if(this.isAjax){
-                    $(this.$el).find('select').select2({
-                        placeholder:$this._placeholder,
+                    $select2.select2({
+                        placeholder:this.$t('Please enter keywords'),
                         maximumSelectionLength: 10,
                         minimumResultsForSearch:9,
                         language: this.language,
@@ -256,19 +264,29 @@
                         templateResult: $this.templateResult ? $this.templateResult : function(state){
                             return state.text;
                         }
-                    })
-                        .on("select2:open",this.autofocus);
+                    });
                 }else {
-                    $(this.$el).find('select').select2({
+                    $select2.select2({
+                        placeholder:$this.$t('Please enter keywords'),
                         language: this.language,
                         maximumSelectionLength: 10,
                         minimumResultsForSearch:9,
                         templateResult:$this.templateResult ? $this.templateResult : function(state){
                             return state.text;
                         }
-                    }).on("select2:open",this.autofocus);;
+                    });
                 }
-
+                //打开自动获取焦点
+                $select2.on("select2:open",this.autofocus);
+                //修改值提交修改
+                $select2.on('change',function(){
+                    let value = $(this).val();
+                    $this.$emit('input', value); //修改值
+                    $this.$emit('change',value); //修改值
+                    $this.data = value;
+                }).on('select2:close',()=>{
+                    $this.$emit('blur');
+                });
             },
             selected(value){
                 if(this.multiple){
@@ -290,35 +308,20 @@
                     return res;
                 }
             },
-            placeholderStyle(){
-                setTimeout(()=>{
-                    let $search = $('.select2-container--open .select2-search__field');
-                    if($search[0]){
-                        $search.attr('autofocus','autofocus');
-                        $search[0].focus();
-                    }
-                },50);
+            destroy(){
+                if($(this.$el).find('select').select2){
+                    $(this.$el).find('select').select2('destroy');
+                }
             }
         },
         watch: {
             value(val,old){
-                let $select = $(this.$el).find('select');
-                let $show = $(this.$el).find('select2-selection__rendered');
-                if(!val || (typeof val=="object" && !val.length)){
-                    $select.val(this.placeholderValue);
-                    setTimeout(()=>{
-                        let $input = $(this.$el).find('.select2-selection--multiple .select2-search__field');
-                        $input.attr('placeholder',this._placeholder);
-                        $input.css({
-                            "width":"100%"
-                        });
-                    },100);
+                if(this.data!==val){
+                    let $select2 = $(this.$el).find('select');
+                    $select2.val(val);
+                    this.destroy();
+                    this.initSelect2();
                 }
-                let show = $select.find('option:selected').html();
-                $show.attr('title',show);
-                $show.attr('html',show);
-                this.initSelect2();
-                this.placeholderStyle();
             },
             language(val,old){
                 let language = val;
@@ -332,8 +335,8 @@
                     document.body.appendChild($script);
                 }
                 setTimeout(()=>{
+                    this.destroy();
                     this.initSelect2();
-                    this.placeholderStyle();
                 },50);
             }
         },
@@ -343,19 +346,6 @@
                 if(typeof $.fn.select2=="function"){
                     clearInterval(this.intervalTime);
                     this.initSelect2();
-                    $(this.$el).find('select').on('change',function(){
-                        let value = $(this).val();
-                        $this.$emit('input', value); //修改值
-                        $this.$emit('change',value); //修改值
-                    }).on('select2:close',()=>{
-                        $this.$emit('blur');
-                    });
-                    let $input = $(this.$el).find('.select2-selection--multiple .select2-search__field');
-                    $input.attr('placeholder',this._placeholder);
-                    $input.css({
-                        "width":"100%"
-                    });
-                    $this.placeholderStyle();
                 }
             },100);
         },
@@ -381,9 +371,7 @@
             }
         },
         beforeDestroy() {
-            if($(this.$el).find('select').select2){
-                $(this.$el).find('select').select2('destroy');
-            }
+            this.destroy();
         }
     }
 </script>
@@ -447,5 +435,8 @@
                 }
             }
         }
+    }
+    .main-select2-no-placeholder .select2-results .select2-results__options .select2-results__option:first-child{
+        display: none !important;
     }
 </style>

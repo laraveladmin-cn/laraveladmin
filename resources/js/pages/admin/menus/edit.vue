@@ -68,7 +68,7 @@
                                                  :url="use_url+'/admin/menus/list'"
                                                  :keyword-key="'name'"
                                                  :disabled="true"
-                                                 :placeholder-value="'0'"
+                                                 :placeholder-value="0"
                                                  :params="{where:{resource_id:-1}}"
                                                  :show="['name','id']"
                                                  :is-ajax="true">
