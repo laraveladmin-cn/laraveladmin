@@ -97,7 +97,8 @@
             "Menu details": "菜单详情",
             "500 page": "500页面",
             "403 page": "403页面",
-            "404 page": "404页面"
+            "404 page": "404页面",
+            "Log statistics": "日志统计"
         },
         "tables": {
             "_file_logs": {
@@ -741,6 +742,9 @@
             "Biology": "生物 ",
             "Radar map": "雷达图",
             "Transcript": "成绩单",
+            "Last Week": "最近一周",
+            "Last month": "最近一月",
+            "Last three months": "最近三月",
             "users": {
                 "username": "用户昵称",
                 "Must be {min}-{max} non-Chinese characters": "必须是{min}-{max}位的非中文字符",

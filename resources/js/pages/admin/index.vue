@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 over">
-                <echart :options="option4" style="height:400px;"></echart>
+              <log-counts></log-counts>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 over">
                 <echart :options="option1" style="height:400px;"></echart>
@@ -50,6 +50,7 @@
         },
         components:{
             'echart':()=>import(/* webpackChunkName: "common_components/echart.vue" */ 'common_components/echart.vue'),
+            'log-counts':()=>import(/* webpackChunkName: "pages/admin/log_counts/index.vue" */ 'pages/admin/log_counts/index.vue'),
         },
         data(){
             return {
@@ -343,40 +344,7 @@
             this.getData({},'','data');
         },
         computed:{
-            option4(){
-                let access = this.data.access||[];
-                return {
-                    title: {
-                        text: this.$tp('Log in to access the statistics chart') //登录访问统计图
-                    },
-                    tooltip: {},
-                    legend: {
-                        data:[
-                            this.$tp('Number of successful login'),//'成功登录次数'
-                            this.$tp('IP row of heavy'), //IP去重
-                        ]
-                    },
-                    xAxis: {
-                        type: 'category',
-                        data: collect(access).pluck('date').all()//['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: [{
-                        name: this.$tp('Number of successful login'),
-                        data: collect(access).pluck('value').all(),//[820, 932, 901, 934, 1290, 1330, 1320],
-                        type: 'line',
-                        smooth: true
-                    },{
-                        name: this.$tp('IP row of heavy'),
-                        data: collect(access).pluck('distinct_value').all(),//[820, 932, 901, 934, 1290, 1330, 1320],
-                        type: 'line',
-                        smooth: true
-                    }]
-                };
 
-            },
             option5(){
                 return {
                     title: {

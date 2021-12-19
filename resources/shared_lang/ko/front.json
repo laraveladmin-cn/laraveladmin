@@ -97,7 +97,8 @@
             "Menu details": "메뉴 정보",
             "500 page": "500 쪽",
             "403 page": "403 쪽",
-            "404 page": "404 페이지"
+            "404 page": "404 페이지",
+            "Log statistics": "로그 통계"
         },
         "tables": {
             "_file_logs": {
@@ -741,6 +742,9 @@
             "Biology": "생물.",
             "Radar map": "레이더 도",
             "Transcript": "성적 표",
+            "Last Week": "최근 일주일",
+            "Last month": "최근 1 월",
+            "Last three months": "최근 3 월",
             "users": {
                 "username": "사용자 닉네임",
                 "Must be {min}-{max} non-Chinese characters": "{min} 이 어야 합 니 다. - {max} 비트 비 중국어 문자.",

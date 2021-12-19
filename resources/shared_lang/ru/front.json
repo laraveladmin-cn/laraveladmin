@@ -97,7 +97,8 @@
             "Menu details": "меню",
             "500 page": "500 страниц",
             "403 page": "страница",
-            "404 page": "Страница 404"
+            "404 page": "Страница 404",
+            "Log statistics": "журнал"
         },
         "tables": {
             "_file_logs": {
@@ -741,6 +742,9 @@
             "Biology": "организм",
             "Radar map": "радиолокационная карта",
             "Transcript": "табель успеваемости",
+            "Last Week": "Последняя неделя",
+            "Last month": "последний месяц",
+            "Last three months": "последний март",
             "users": {
                 "username": "Имя пользователя",
                 "Must be {min}-{max} non-Chinese characters": "Должно быть не китайский символ - {min} - {max} бит",

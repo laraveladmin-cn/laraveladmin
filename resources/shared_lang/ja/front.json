@@ -97,7 +97,8 @@
             "Menu details": "メニュー詳細",
             "500 page": "500ページ",
             "403 page": "403ページ",
-            "404 page": "404ページ"
+            "404 page": "404ページ",
+            "Log statistics": "ログ統計"
         },
         "tables": {
             "_file_logs": {
@@ -741,6 +742,9 @@
             "Biology": "生物",
             "Radar map": "レーダー図",
             "Transcript": "成績表",
+            "Last Week": "最近の1週間",
+            "Last month": "最近の1月",
+            "Last three months": "最近の3月",
             "users": {
                 "username": "ユーザーのニックネーム",
                 "Must be {min}-{max} non-Chinese characters": "{min}-{max}ビットの非中国語文字である必要があります。",

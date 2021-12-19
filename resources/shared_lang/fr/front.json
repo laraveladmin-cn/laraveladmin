@@ -97,7 +97,8 @@
             "Menu details": "Détails du menu",
             "500 page": "500 pages",
             "403 page": "403 pages",
-            "404 page": "404 pages"
+            "404 page": "404 pages",
+            "Log statistics": "Statistiques des journaux"
         },
         "tables": {
             "_file_logs": {
@@ -741,6 +742,9 @@
             "Biology": "Biologie",
             "Radar map": "Redatu",
             "Transcript": "Transcription",
+            "Last Week": "Dernière semaine",
+            "Last month": "Janvier dernier",
+            "Last three months": "Mars dernier",
             "users": {
                 "username": "Surnom de l'utilisateur",
                 "Must be {min}-{max} non-Chinese characters": "Doit être un caractère non chinois du BIT {min} - {max}.",

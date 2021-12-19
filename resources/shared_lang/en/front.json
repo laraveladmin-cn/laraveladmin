@@ -97,7 +97,8 @@
             "Menu details": "Menu details",
             "500 page": "500 page",
             "403 page": "403 page",
-            "404 page": "404 page"
+            "404 page": "404 page",
+            "Log statistics": "Log statistics"
         },
         "tables": {
             "_file_logs": {
@@ -741,6 +742,9 @@
             "Biology": "Biology",
             "Radar map": "Radar map",
             "Transcript": "Transcript",
+            "Last Week": "Last Week",
+            "Last month": "Last month",
+            "Last three months": "Last three months",
             "users": {
                 "username": "username",
                 "Must be {min}-{max} non-Chinese characters": "Must be {min}-{max} non-Chinese characters",
