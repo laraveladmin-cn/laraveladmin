@@ -249,7 +249,7 @@ trait ResourceController
         //判断是否包含主键字段,没有包含自动添加
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();
-        if($primary_key && $fields){
+        if($primary_key && $fields && (!isset($this->noPrimaryKey) || !$this->noPrimaryKey)){
             $primary_key1 = $model->getTable().'.'.$primary_key;
             $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
             $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
