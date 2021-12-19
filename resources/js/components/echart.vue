@@ -34,6 +34,9 @@
         },
         methods:{
             init(){
+                if(this.intervalTime){
+                    return;
+                }
                 this.intervalTime = setInterval(()=>{
                     if(typeof echarts!="undefined" && this.$el.clientWidth){
                         if(!echarts.theme_registered){
@@ -41,11 +44,13 @@
                             echarts.registerTheme('main', theme);
                         }
                         clearInterval(this.intervalTime);
+                        this.intervalTime = null;
                         if(this.initing){
                             return ;
                         }
                         this.initing = true;
                         this.$el.style.display = 'block'; //显示节点
+                        this.destroy();
                         this.chart = echarts.init(this.$el,'main');
                         let options = this.options;
                         if(typeof this.options=="function"){
@@ -68,6 +73,11 @@
                     this.$el.style.display = 'block'; //显示节点
                     this.chart.resize();
                     this.$el.style.display = null; //删除节点样式
+                }
+            },
+            destroy(){
+                if(this.chart){
+                    this.chart.dispose();
                 }
             }
         },
@@ -120,7 +130,6 @@
             },
             language(){
                 if(this.chart){
-                    this.chart.dispose();
                     this.init();
                 }
             }
@@ -128,10 +137,10 @@
         beforeDestroy() {
             if(this.intervalTimeWidth){
                 clearInterval(this.intervalTimeWidth);
+                this.intervalTimeWidth = null;
             }
-            if(this.chart){
-                this.chart.dispose();
-            }
+            this.destroy();
+
         }
 
     }

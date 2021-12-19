@@ -16,7 +16,7 @@
                       :trans-field="transField"
                       :search="search"
                       :reset="reset"
-
+                      :where="data.options.where"
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
@@ -112,55 +112,57 @@
                         </div>
                     </slot>
                 </div>
-                <div class="collapse sizer_more in">
-                    <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps"  :trans-field="transField">
-                    </slot>
-                    <div class="row hidden-md hidden-lg">
-                        <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
-                            <div class="box-tools">
-                                <div class="input-group">
-                                    <div class="input-group-btn" v-if="options.keywordGroup">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            {{$tp(data.keywordsMap[data.options.where['_key']])}}
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li v-for="(value,index) in data.keywordsMap" @click="changeKeywords(index)">
-                                                <a>{{$tp(value)}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="_placeholder" class="form-control"  type="text">
-                                    <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="_placeholder" type="text" class="form-control">
-                                    <div class="input-group-btn">
-                                        <button type="button" :title="$t('Search')" class="btn" :class="'btn-'+theme" @click="search">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                        <button type="button" :title="$t('Reset')" class="btn" :class="'btn-'+theme" @click="reset">
-                                            <i class="fa fa-repeat"></i>
-                                        </button>
-                                        <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
-                                              <i class="glyphicon glyphicon-folder-open"></i>
-                                              <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
-                                          </button>-->
-                                        <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl']">
-                                            <i class="glyphicon glyphicon-download-alt"></i>
-                                        </button>
-                                        <slot name="input_group_add_btn" :data="data"></slot>
+                <slot name="sizer-min">
+                    <div class="collapse sizer_more in">
+                        <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps"  :trans-field="transField">
+                        </slot>
+                        <div class="row hidden-md hidden-lg">
+                            <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
+                                <div class="box-tools">
+                                    <div class="input-group">
+                                        <div class="input-group-btn" v-if="options.keywordGroup">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {{$tp(data.keywordsMap[data.options.where['_key']])}}
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li v-for="(value,index) in data.keywordsMap" @click="changeKeywords(index)">
+                                                    <a>{{$tp(value)}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="_placeholder" class="form-control"  type="text">
+                                        <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="_placeholder" type="text" class="form-control">
+                                        <div class="input-group-btn">
+                                            <button type="button" :title="$t('Search')" class="btn" :class="'btn-'+theme" @click="search">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                            <button type="button" :title="$t('Reset')" class="btn" :class="'btn-'+theme" @click="reset">
+                                                <i class="fa fa-repeat"></i>
+                                            </button>
+                                            <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                                                  <i class="glyphicon glyphicon-folder-open"></i>
+                                                  <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
+                                              </button>-->
+                                            <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl']">
+                                                <i class="glyphicon glyphicon-download-alt"></i>
+                                            </button>
+                                            <slot name="input_group_add_btn" :data="data"></slot>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" v-show="btnSizerMore">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <button type="button" class="btn pull-right sizer-tool-btn" :class="'btn-'+theme"  @click="search">{{$t('Search')}}</button>
+                        <div class="row" v-show="btnSizerMore">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <button type="button" class="btn pull-right sizer-tool-btn" :class="'btn-'+theme"  @click="search">{{$t('Search')}}</button>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+                                <button type="button" class="btn btn-default sizer-tool-btn" @click="reset">{{$t('Reset')}}</button>
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
-                            <button type="button" class="btn btn-default sizer-tool-btn" @click="reset">{{$t('Reset')}}</button>
-                        </div>
                     </div>
-                </div>
+                </slot>
             </div>
             <div class="box-footer box-footer-top clearfix pager-tool" v-if="!options.hideTopPagerTool">
                 <slot name="pager" :data="data">
