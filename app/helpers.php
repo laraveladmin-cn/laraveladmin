@@ -325,7 +325,7 @@ if (! function_exists('trans_path')) {
             $key = $prefix.$key;
         }
         $res = trans($key,$replace,$locale);
-        if($prefix && !is_null($key) && \Illuminate\Support\Str::startsWith($res,$prefix)){
+        if(is_string($res) && $prefix && !is_null($key) && \Illuminate\Support\Str::startsWith($res,$prefix)){
             return \Illuminate\Support\Str::replaceFirst($prefix,'',$res);
         }
         return $res;
