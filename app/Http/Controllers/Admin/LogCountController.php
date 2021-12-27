@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\Request;
 class LogCountController extends Controller
 {
     use ResourceController;
+
+    public function __construct()
+    {
+        $this->sizerDefault = [
+            'created_at' => [
+                Carbon::now()->subDay(7)->startOfDay()->toDateTimeString(),
+                '',
+            ],
+            'user_id' => 0,
+            'menu.method' => 2,
+            'menu.url' => '/open/login'
+        ];
+    }
+
     /**
      * 默认排序
      * @var array
@@ -71,6 +85,12 @@ class LogCountController extends Controller
     ];
 
     protected $noPrimaryKey = true;
+
+    /**
+     * 默认每页取多少条
+     * @var int
+     */
+    protected $per_page = 200;
 
 
 

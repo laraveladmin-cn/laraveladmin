@@ -5,14 +5,18 @@
                 <data-table :options="options" ref="table">
                     <template slot="sizer" slot-scope="props">
                         <div>
-                            <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12 pull-right">
-                                <label-edit v-model="props.where['created_at'][0]"
-                                            v-if="props.where && props.where['created_at']"
-                                            @change="props.search"
-                                            :map="_map_date">
-                                </label-edit>
+                            <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+                                <h4>{{$tp('Log in to access the statistics chart')}}</h4>
                             </div>
-
+                            <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+                                <div class="pull-right">
+                                    <label-edit v-model="props.where['created_at'][0]"
+                                                v-if="props.where && props.where['created_at']"
+                                                @change="props.search"
+                                                :map="_map_date">
+                                    </label-edit>
+                                </div>
+                            </div>
                         </div>
                     </template>
                     <template slot="sizer-min" slot-scope="props">
@@ -49,19 +53,7 @@
                 {day:30,show:'Last month'},
                 {day:90,show:'Last three months'}
             ];
-            let parms = {
-                per_page:200,
-                where:{
-                    created_at:[
-                        date_format(timestamp-3600*24*map_date[0].day,'yyyy-MM-dd 00:00:00'),
-                        ''
-                    ],
-                    user_id:0,
-                    'menu.method':2,
-                    'menu.url':'/open/login'
-                }
-            };
-            let def_options = JSON.parse(this.$router.currentRoute.query.options || JSON.stringify(parms));
+            let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             let data = {
                 "{lang_path}":'admin',
                 options:{
@@ -98,7 +90,7 @@
                 let access = this.access;
                 return {
                     title: {
-                        text: this.$tp('Log in to access the statistics chart') //登录访问统计图
+                        text: ''//this.$tp('Log in to access the statistics chart') //登录访问统计图
                     },
                     tooltip: {},
                     legend: {
