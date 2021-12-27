@@ -24,7 +24,7 @@
                     </template>
                     <template slot="table" slot-scope="props">
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 over">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <echart :options="optionLine(props.data.list.data)" style="height:400px;"></echart>
                             </div>
                         </div>
@@ -136,7 +136,5 @@
     };
 </script>
 <style lang="scss" scoped>
-    .over{
-        overflow-x: scroll;
-    }
+
 </style>

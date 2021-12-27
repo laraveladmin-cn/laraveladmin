@@ -21462,7 +21462,7 @@
         }
     };
 </script>
-<style>
+<style scoped>
     .over{
         overflow-x: scroll;
     }
