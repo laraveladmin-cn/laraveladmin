@@ -200,11 +200,18 @@ class RouteService
                             $method = Arr::get($item,'method',0);
                             $route = [];
                             $methods = Menu::getFieldsMap('method');
-                            collect($methods)->each(function ($type,$val)use(&$route,$method,$path,$action){
+                            $methods = collect($methods)->filter(function ($type,$val)use(&$route,$method){
                                 if((is_numeric($method) && $method&$val) || (is_array($method) && in_array($val,$method))){
-                                    $route =  Route::$type($path, $action);
+                                    return $type;
                                 }
-                            });
+                            })->values()
+                                ->toArray();
+                            if($methods && count($methods)==1){
+                                $type = $methods[0];
+                                $route =  Route::$type($path, $action);
+                            }else{
+                                $route =  Route::match($methods,$path, $action);
+                            }
                             if($route && $as = Arr::get($item,'as','')){
                                 self::name($route,$as);
                             }
@@ -311,11 +318,18 @@ class RouteService
                             $method = Arr::get($item,'method',0);
                             $route = [];
                             $methods = Menu::getFieldsMap('method');
-                            collect($methods)->each(function ($type,$val)use(&$route,$method,$path,$action){
+                            $methods = collect($methods)->filter(function ($type,$val)use(&$route,$method){
                                 if((is_numeric($method) && $method&$val) || (is_array($method) && in_array($val,$method))){
-                                    $route =  Route::$type($path, $action);
+                                   return $type;
                                 }
-                            });
+                            })->values()
+                                ->toArray();
+                            if($methods && count($methods)==1){
+                                $type = $methods[0];
+                                $route =  Route::$type($path, $action);
+                            }else{
+                                $route =  Route::match($methods,$path, $action);
+                            }
                             if($route && $as = Arr::get($item,'as','')){
                                 self::name($route,$as);
                             }
