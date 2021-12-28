@@ -13,7 +13,7 @@ configure({
 });
 Vue.use(VueI18n);
 const locales = {
-    //'en':require('../shared_lang/en/front.json'),
+    'en':require('../shared_lang/en/front.json'),
     'zh-CN':require('../shared_lang/zh-CN/front.json')
 };
 const i18n = new VueI18n({

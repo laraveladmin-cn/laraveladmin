@@ -21,4 +21,14 @@ class BaseCommand extends Command
         return trans_path($this->description,$this->transPath);
     }
 
+    /**
+     * 语言翻译
+     * @param $key
+     * @param array $replace
+     * @return array|\Illuminate\Contracts\Translation\Translator|string|null
+     */
+    public function trans($key,$replace=[],$path='',$locale = null){
+        return trans_path($key,$path?$this->transPath.'.'.$path:$this->transPath,$replace,$locale);
+    }
+
 }
