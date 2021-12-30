@@ -4,9 +4,9 @@
             <div class="col-xs-12">
                 <data-table :options="options" ref="table">
                     <template slot="sizer" slot-scope="props">
-                        <div>
+                        <div class="row">
                             <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
-                                <h4>{{$tp('Log in to access the statistics chart')}}</h4>
+                                <h4><strong>{{$tp('Log in to access the statistics chart')}}</strong></h4>
                             </div>
                             <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
                                 <div class="pull-right">
