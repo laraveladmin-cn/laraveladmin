@@ -44,7 +44,8 @@ class Config extends Model
             '2'=>'textarea',
             '3'=>'markdown',
             '4'=>'json',
-            '5'=>'switch'
+            '5'=>'switch',
+            '6'=>'number'
         ]
     ];
 

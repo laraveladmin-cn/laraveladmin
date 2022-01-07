@@ -88,6 +88,15 @@
                                                    :inactive-value="0">
                                         </el-switch>
                                     </div>
+                                    <div class="edit-item-content" v-else-if="props.data.row['itype']==6">
+                                        <el-input-number
+                                            v-model="props.data.row['value']"
+                                            class="w-100"
+                                            size="medium"
+                                            :disabled="!props.url"
+                                            :step="1">
+                                        </el-input-number>
+                                    </div>
                                 </template>
                             </edit-item>
                         </div>
