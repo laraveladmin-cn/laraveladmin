@@ -1,0 +1,51 @@
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+upstream e_keduck_xyz {
+    # Connect IP:Port
+    server phpswoole:1215 weight=5 max_fails=3 fail_timeout=30s;
+    keepalive 16;
+}
+server {
+    listen 80 default_server;
+    root   /var/www/laravel/laraveladmin/public;
+    server_name e.keduck.xyz;
+    index  index.shtml index.html index.htm;
+
+    #access_log  /data/logs/nginx80_access.log  main;
+    #error_log   /data/logs/nginx80_error.log;
+    client_max_body_size 100m;
+   location ~* \.php$ {
+        try_files $uri $uri/index.html @www_laraveladmin_cn_http;
+    }
+    location = / {
+         try_files $uri $uri/index.html @www_laraveladmin_cn_http;
+    }
+    location ^~ /web-api/ {
+        try_files $uri $uri/ @www_laraveladmin_cn_http;
+    }
+    location ^~ /api/ {
+         try_files $uri $uri/ @www_laraveladmin_cn_http;
+    }
+    location / {
+        try_files $uri $uri/ @www_laraveladmin_cn_http;
+    }
+    location @www_laraveladmin_cn_http {
+        proxy_http_version 1.1;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Real-PORT $remote_port;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header Scheme $scheme;
+        proxy_set_header Server-Protocol $server_protocol;
+        proxy_set_header Server-Name $server_name;
+        proxy_set_header Server-Addr $server_addr;
+        proxy_set_header Server-Port $server_port;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_pass http://e_keduck_xyz;
+    }
+}
+

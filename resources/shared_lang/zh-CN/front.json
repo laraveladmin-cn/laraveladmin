@@ -506,7 +506,8 @@
             "size": "{_field_} 必须小于{size}KB",
             "double": "{_field_}字段必须为有效的小数",
             "mobile": "{_field_} 不格式正确",
-            "digits_between": "{_field_} 长度必须是介于{_min_}和{_max_}位之间"
+            "digits_between": "{_field_} 长度必须是介于{_min_}和{_max_}位之间",
+            "user_name": "{_field_} 必须是由字母、数字、下划线组成的非纯数字。"
         },
         "attributes": {
             "mobile": "手机号码",
@@ -948,5 +949,6 @@
     "Click Upload": "点击上传",
     "Only picture files can be uploaded and no more than {size}": "只能上传图片文件，且不超过{size}",
     "Please enter the link address": "请输入链接地址",
-    "Confirm to add":"确认添加"
+    "Confirm to add": "确认添加",
+    "Your account has been logged in elsewhere": "您的帐号已在其他地方登录！"
 }

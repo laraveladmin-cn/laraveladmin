@@ -277,6 +277,9 @@
                 id = id-0;
             }
             this.setLastMenuShow(id);
+            if(this.options.mapsRelations){
+                this.data.mapsRelations = this.options.mapsRelations;
+            }
             //获取数据
             let params = this.options.params || this.$router.currentRoute.query;
             this.getData(params);

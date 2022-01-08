@@ -40,7 +40,8 @@ return [
          * 用于绑定登录用户,及绑定注册用户
          */
         'other_login'=>[
-            'key'=>'other_login'
+            'key'=>'other_login',
+            'back_url'=>'other_login_back_url'
         ],
 
         'verify'=>[
@@ -67,6 +68,7 @@ return [
     'disabled_menus'=>env('DISABLED_MENUS', ''), //禁用菜单位(将禁用其所有子集)
     'locales'=>['zh-CN','zh-TW','en'], //支持语言
     'trans_prefix'=>'_trans_', //翻译语言前缀
-    'tinymce_key'=>env('TINYMCE_KEY','') //tinymce编辑器key
+    'tinymce_key'=>env('TINYMCE_KEY',''), //tinymce编辑器key
+    'sso'=>env('SINGLE_SIGN_ON',false) //是否单点登录
 
 ];

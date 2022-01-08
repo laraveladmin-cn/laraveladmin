@@ -56,4 +56,13 @@ class SessionService
         }
     }
 
+    /**
+     * 获取唯一标识
+     * @return string
+     */
+    static public function getId(){
+        ClientAuth::id() or ClientAuth::auth();
+        return ClientAuth::id()?: session()->getId();
+    }
+
 }

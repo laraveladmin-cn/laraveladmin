@@ -11,7 +11,7 @@
                             <password-edit v-model="password" :placeholder="placeholderPassword" @keydown-enter="postLogin(invalid,validate)">
                             </password-edit>
                         </form-item>
-                        <form-item v-if="mustVerify" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'required',messages:{required:$tp('{_field_} must be verified')}}">
+                        <form-item v-if="mustVerify" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'required'+(verify['type']=='captcha'?'|length:'+verify['length']:''),messages:{required:$tp('{_field_} must be verified')}}">
                             <geetest v-if="verify['type']=='geetest' && mustVerify" :url="web_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']" class="geetest-code"></geetest>
                             <captcha v-if="verify['type']=='captcha' && mustVerify" :url="verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></captcha>
                         </form-item>
@@ -39,7 +39,7 @@
                     <p>---------------- {{$tp('Other login methods')}} ----------------</p>
                     <div class="row">
                         <div :class="'col-xs-'+other_col" v-for="item in otherLogin">
-                            <a :href="web_url+item['url']">
+                            <a :href="otherLoginUrl(item['url'])">
                                 <div class="img-circle icon login-icon" :class="item['class']">
                                     <i class="fa" :class="'fa-'+item['type']"></i>
                                 </div>
@@ -95,6 +95,13 @@
             }
         },
         methods:{
+            otherLoginUrl(url){
+                let str_url = this.web_url+url;
+                if(typeof this.$route.query['back_url']!="undefined"){ //跳转url
+                    str_url +='?back_url='+encodeURI(this.$route.query['back_url']);
+                }
+                return str_url;
+            },
             placeholderUsername(){
                 return this.$tp('Please enter your account/email/mobile phone number');
             },
@@ -157,6 +164,9 @@
                     }
                     post_data['remember'] = this.remember ? 1 : undefined;
                     post_data['other'] = this.other;
+                    if(typeof this.$route.query['back_url']!="undefined"){ //跳转url
+                        post_data['back_url'] = this.$route.query['back_url'];
+                    }
                     axios.post(this.web_url+this.$router.currentRoute.path,post_data)
                         .then(this.loginSucces)
                         .catch((error)=>{
@@ -275,7 +285,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        bottom: 40px;
+        bottom: 0;
         right: 0;
         margin: auto;
     }

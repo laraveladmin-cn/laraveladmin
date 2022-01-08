@@ -133,6 +133,7 @@ winpty docker-compose up -d #启动服务
 ```
 
 > 执行命令winpty docker-compose ps显示php容器一直restart的状态是部分Windows docker对"docker/php/run.sh"的文件编码不能识别问题!请执行如下操作
+> 或者使用标准的代码编辑器(phpstorm之类的)将第一行空白内容删除掉保存
 ```shell
 winpty docker-compose down
 winpty docker-compose run --rm php bash

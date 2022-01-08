@@ -144,14 +144,17 @@ $str = <<<'str'
         "old_password": "old password",
         "file": "file",
         "order": "order",
-        "where": "where"
+        "where": "where",
+        "verify": "verify"
     },
     "ckeck_password": ":attribute error。",
     "mobile_phone": ":attribute error。",
     "array_keys_in_array": "The :attribute field does not exist in :other.",
     "array_in_array": "The :attribute field does not exist in :other.",
     "sting_or_array": "The :attribute field does not exist in :other.",
-    "url_path": "url_path"
+    "url_path": "url_path",
+    "captcha": "captcha",
+    "user_name": "user_name"
 }
 str;
 return json_decode($str,true);

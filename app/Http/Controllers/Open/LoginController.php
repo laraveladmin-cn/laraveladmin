@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -60,6 +61,8 @@ class LoginController extends Controller
         //['type'=>'weibo','url'=>'/open/other-login/weibo','class'=>'hover-danger']
     ];
 
+    protected $backUrlKey ='';
+
 
     /**
      * Create a new controller instance.
@@ -71,6 +74,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->loginNumIp = config('laravel_admin.store_keys.verify.login_num_key').':'.RequestFacade::header('x-real-ip',RequestFacade::ip());
         $this->loginNumUname = config('laravel_admin.store_keys.verify.login_num_key').':'.app('request')->get($this->loginUsername());
+        $this->backUrlKey = config('laravel_admin.store_keys.other_login.back_url');
     }
 
     /**
@@ -88,6 +92,11 @@ class LoginController extends Controller
             throw ValidationException::withMessages($validator->errors()->toArray());
         }
         $type = $request->input('type');
+        if($back_url = $request->input('back_url','')){
+            SessionService::put($this->backUrlKey,$back_url);
+        }else{
+            SessionService::forget($this->backUrlKey);
+        }
         return Socialite::with($type)->redirect();
     }
 
@@ -205,23 +214,34 @@ class LoginController extends Controller
         $uname = $this->loginUsername();
         $validate = [];
         $login_num = $this->getLoginFailedNum();
+        $verify_type = config('laravel_admin.verify.type');
         if($login_num>=config('laravel_admin.verify.login_pass_num')){
-            $validate['verify'] = 'required|'.config('laravel_admin.verify.type');
+            $validate['verify'] = 'required|'.$verify_type;
         }
-        $validate[$uname] = 'required|exists:users,' . $uname . ',status,1';
+        $validate[$uname] = 'required';
         $validate['password'] = 'required';
         $login_num++;
         $this->setLoginFailedNum($login_num);
-        $validator = Validator::make($request->all(), $validate, [
-            $uname . '.exists' => trans('Incorrect user name or password!')//'用户名或密码错误',
-        ]);
+        $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
-            if(!isset($errors['verify']) && $this->mustVerify()){
+            if(!isset($errors['verify']) && $this->mustVerify() && $verify_type!='captcha'){
                 $errors['verify'] = [
                     trans('Captcha code required!')//'验证码必填'
                 ];
             }
+            return Response::returns([
+                'errors' => $validator->errors()->toArray(),
+                'message' => trans('The given data was invalid.')
+            ], 422);
+        }
+        $validate = [
+            $uname=>'exists:users,' . $uname . ',status,1'
+        ];
+        $validator = Validator::make($request->all(), $validate, [
+            $uname . '.exists' => trans('Incorrect user name or password!')//'用户名或密码错误',
+        ]);
+        if($validator->fails()){
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
                 'message' => trans('The given data was invalid.')
@@ -404,20 +424,35 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        if(ClientAuth::isApi()){
+        try {
             $user = $request->user();
             if($user){
-                $user->currentAccessToken()->delete();
+                $token = $user->currentAccessToken();
+                if($token){
+                    $token->delete();
+                }
             }
-        }else{
-            $this->guard()->logout();
+        }catch (\Exception $exception){
+
+        }
+        try {
+            $guard = $this->guard();
+            if($guard){
+                $guard->logout();
+            }
+        }catch (\Exception $exception){
+
         }
         return $this->loggedOut($request);
     }
 
     protected function loggedOut(Request $request)
     {
-        return orRedirect($this->redirectAfterLogout,302);
+        return Response::returns([
+            'title'=>Lang::get('status.status302'),
+            'content'=>Lang::get('status.redirectTo').$this->redirectAfterLogout,
+            'redirect' => $this->redirectAfterLogout
+        ],302);
     }
 
     /**

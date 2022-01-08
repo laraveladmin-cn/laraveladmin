@@ -30,7 +30,8 @@ class User extends Authenticatable
         'mobile_phone',
         'status',
         'description',
-        'avatar'
+        'avatar',
+        'client_id'
     ];
 
     /**
@@ -41,7 +42,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'deleted_at'
+        'deleted_at',
+        'client_id'
         //'uname','email'
     ];
 
@@ -83,7 +85,8 @@ class User extends Authenticatable
         'remember_token'=>null,
         'status'=>1,
         'description'=>null,
-        'avatar'=>''
+        'avatar'=>'',
+        'client_id'=>''
     ];
 
     //字段默认值
@@ -97,6 +100,7 @@ class User extends Authenticatable
         //'remember_token' => '记住登录',
         'status' => 'State',
         'description' => 'Remarks',
+        //'client_id'=>'登录连接唯一标识',
         //'created_at' => 'Created At',
         //'updated_at' => 'Updated At',
         //'deleted_at' => 'Deleted At',

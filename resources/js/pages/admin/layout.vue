@@ -130,15 +130,15 @@
                             </div>
                         </div>
                         <div class="sidebar-form">
-                              <div class="input-group">
-                                  <input @keydown.enter="search" @keyup="waitSearch" v-model="keywords" type="text" name="keywords" class="form-control" :placeholder="$tp('Search menu')">
-                                  <span class="input-group-btn">
-                                  <button @click="search" type="button" class="btn btn-flat">
-                                      <i class="fa fa-search"></i>
+                            <div :class="{'input-group':keywords}">
+                                <input @keydown.enter="search" @keyup="waitSearch" v-model="keywords" type="text" name="keywords" class="form-control" :placeholder="$tp('Search menu')">
+                                <span class="input-group-btn" v-show="keywords">
+                                  <button @click="cancelSearch" type="button" class="btn btn-flat">
+                                      <i class="fa fa-times-circle"></i>
                                   </button>
                                 </span>
-                              </div>
-                          </div>
+                            </div>
+                        </div>
                         <transition-group
                             name="staggered-fade"
                             tag="ul"
@@ -539,11 +539,11 @@
                 localStorage.setItem('dark',this.dark);
             },
             switchDark(){
-               this.dark = this.dark?0:1;
-               this.checkDark();
+                this.dark = this.dark?0:1;
+                this.checkDark();
             },
             openLanguage(){
-              this.$refs['language'].open();
+                this.$refs['language'].open();
             },
             translation(item,key){
                 let value = array_get(item,key,'');
@@ -606,6 +606,12 @@
                         this.search();
                     }
                 },210)
+            },
+            cancelSearch(){
+                if(this.keywords){
+                    this.keywords = '';
+                    this.search();
+                }
             },
             beforeEnter: function (el) {
                 el.style.opacity = 0;
@@ -836,5 +842,12 @@
     .main-header .logo .logo-mini{
         height: 30px;
     }
+    @media (max-width: 320px) {
+        .nav>li>a{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
 </style>
 

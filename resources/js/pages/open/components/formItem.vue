@@ -2,7 +2,7 @@
     <validation-provider :vid="options.key" :custom-messages="options.messages || null"  :name="options.name" :rules="options.rules || ''" v-slot="{ errors }">
         <div class="form-group has-feedback"  :class="{'has-error':errors.length>0}">
             <label class="control-label" v-if="options.label!==false || (errors.length && options.messages!==false)">
-                {{options.label!==false?options.name+'：':''}}
+                <span class="required">*</span>{{options.label!==false?options.name+'：':''}}
             </label>
             <label class="control-label pull-right text-light-blue title-label" v-show="options.title && (!errors.length || options.messages===false)">
                 <i class="fa fa-info-circle"></i>
@@ -63,6 +63,9 @@
                 }
                 return this.options.placeholder || this.$t('enter',{name:this.options.name});
             },
+            required(){
+                return (this.options.rules || '').indexOf('required')!=-1;
+            }
         },
         data(){
             return {
@@ -88,7 +91,8 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "sass/_variables.scss";
     .has-feedback label~.form-control-feedback{
         top: 0px;
     }
@@ -101,6 +105,9 @@
     }
     .form-input{
         position: relative;
+    }
+    .required{
+        color: $red;
     }
 
 </style>

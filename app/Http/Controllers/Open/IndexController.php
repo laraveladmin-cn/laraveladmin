@@ -160,6 +160,7 @@ class IndexController extends Controller
             'type'=>'captcha',
             'dataUrl'=> captcha_src(), //验证码图片地址
             'data'=>[],
+            'length'=>config('captcha.default.length'),
         ];
     }
 
@@ -226,12 +227,12 @@ class IndexController extends Controller
                     $common_responses = Arr::get($common_responses_data,'common_responses',[]);
                     collect(Arr::get($common_responses_data,'common_responses_list',[]))
                         ->each(function ($item)use(&$common_responses){
-                        $common_responses[] = $item;
-                        $common_responses[] = [
-                            'name'=>'list.'.$item['name'],
-                            'description'=>$item['description']
-                        ];
-                    });
+                            $common_responses[] = $item;
+                            $common_responses[] = [
+                                'name'=>'list.'.$item['name'],
+                                'description'=>$item['description']
+                            ];
+                        });
                     $this->common_responses = $common_responses;
                 }
             }
@@ -242,7 +243,7 @@ class IndexController extends Controller
                 $item[config('laravel_admin.trans_prefix').'name'] = Menu::trans($item,'name');
                 $item[config('laravel_admin.trans_prefix').'description'] = Menu::trans($item,'description');
                 return $item;
-        });
+            });
 
         return Response::returns($data);
     }

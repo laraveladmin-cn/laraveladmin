@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Open\Traits;
 
 use App\Facades\Formatter;
+use App\Facades\LifeData;
 use App\Models\Menu;
 use App\Models\Ouser;
 use App\Providers\RouteServiceProvider;
@@ -35,28 +36,46 @@ trait LoginResponseController
      */
     protected function sendLoginResponse(Request $request)
     {
+        LifeData::offsetUnset('_menus_main');
         //用户数据记录
         $this->setLoginFailedNum(0);
         //如果是登录并绑定
         $user = Auth::user();
         $this->bindOuser($user);
+        $user->update(['client_id'=>SessionService::getId()]); //登录信息
         $remember = $request->has('remember');
         $lifetime = (!$remember)?config('laravel_admin.no_remember_lifetime'):config('session.lifetime');
         if($remember){
             $rememberTokenCookieKey = Auth::getRecallerName();
             Cookie::queue($rememberTokenCookieKey, Cookie::get($rememberTokenCookieKey), $lifetime);
         }
-        if(Arr::get($user,'admin') ){
-            $hasPermission = Menu::hasPermission($this->redirectTo,'get',false);
-            if(!$hasPermission){
-               $url = Menu::mainAdmin()->where('is_page',1)->orderBy('left_margin','asc')->value('url');
-               if($url){
-                   $this->redirectTo = $url;
-               }
+        if($back_url = SessionService::get($this->backUrlKey)){
+            SessionService::forget($this->backUrlKey);
+        }
+        $back_url = $request->input('back_url',$back_url); //返回url
+        $redirect_to = '';
+        if($back_url){
+            $redirect_to = Arr::get(parse_url($back_url),'path','');
+            $route = app('routes')->match(\Illuminate\Support\Facades\Request::create($redirect_to));
+            if($route){
+                $redirect_to = $route->uri;
             }
-            $redirect = $this->redirectTo;
+        }
+        if($redirect_to && Menu::hasPermission($redirect_to,'get')){ //会跳路径有权限
+            $redirect = $back_url;
         }else{
-            $redirect = $this->redirectToTourist;
+            if(Arr::get($user,'admin') ){
+                $hasPermission = Menu::hasPermission($this->redirectTo,'get',false);
+                if(!$hasPermission){
+                    $url = Menu::mainAdmin()->where('is_page',1)->orderBy('left_margin','asc')->value('url');
+                    if($url){
+                        $this->redirectTo = $url;
+                    }
+                }
+                $redirect = $this->redirectTo;
+            }else{
+                $redirect = $this->redirectToTourist;
+            }
         }
         $token = $user->createToken('apiToken',$remember?['remember']:['*'])->plainTextToken;
         $domain = config('session.domain');

@@ -43,7 +43,9 @@ export default {
         },
         //关闭消息
         closeMessage(state,payload){
-            state.alerts[payload.key].show = false;
+            if(state.alerts[payload.key]){
+                state.alerts[payload.key].show = false;
+            }
             //消息关闭完后清空所有消息
             if(!collect(state.alerts).filter( (item) =>{
                 return item['show'];
@@ -56,23 +58,26 @@ export default {
             state[payload.key] = payload[payload.key];
         },
         setLanguage(state,lang) {
+            if(!lang){
+                return false;
+            }
             // 如果语言相同
             if (i18n.locale === lang) {
-                return Promise.resolve(setI18nLanguage(state,lang))
+                return Promise.resolve(setI18nLanguage(state,lang));
             }
 
             // 如果语言已经加载
             if (loadedLanguages.includes(lang)) {
-                return Promise.resolve(setI18nLanguage(state,lang))
+                return Promise.resolve(setI18nLanguage(state,lang));
             }
             let lang_dir = lang.replace(/\_/g,'-');
 
             // 如果尚未加载语言
             return import(/* webpackChunkName: "lang-[request]" */ `../shared_lang/${lang_dir}/front.json`).then(
                 messages => {
-                    i18n.setLocaleMessage(lang, messages.default)
-                    loadedLanguages.push(lang)
-                    return setI18nLanguage(state,lang)
+                    i18n.setLocaleMessage(lang, messages.default);
+                    loadedLanguages.push(lang);
+                    return setI18nLanguage(state,lang);
                 }
             )
         }

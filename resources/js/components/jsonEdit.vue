@@ -84,4 +84,7 @@
     .json-view-container .json-view{
         padding-left: 3rem !important;
     }
+    body textarea.form-control{
+        height:auto;
+    }
 </style>

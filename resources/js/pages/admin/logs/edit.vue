@@ -16,7 +16,7 @@
                                                  :url="use_url+'/admin/menus/list'"
                                                  :keyword-key="'name|url'"
                                                  :disabled="!props.url"
-                                                 :placeholder-value="'0'"
+                                                 :placeholder-value="0"
                                                  :is-ajax="true" >
                                         </select2>
                                     </div>
@@ -30,7 +30,7 @@
                                                  :url="use_url+'/admin/users/list'"
                                                  :keyword-key="'name'"
                                                  :disabled="!props.url"
-                                                 :placeholder-value="'0'"
+                                                 :placeholder-value="0"
                                                  :is-ajax="true" >
                                         </select2>
                                     </div>

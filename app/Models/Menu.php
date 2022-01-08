@@ -439,6 +439,24 @@ class Menu extends Model
     }
 
     /**
+     * 通过访问路径直接判断是否拥有权限
+     * @param $query
+     * @param $path
+     * @param string $method
+     * @param bool $is_bool
+     * @return bool|\Illuminate\Support\Collection
+     */
+    public function scopeHasPermissionPath($query,$path,$method='get',$is_bool=true){
+        $route = app('routes')->match(\Illuminate\Support\Facades\Request::create($path));
+        if($route){
+            $url = $route->uri;
+            return self::isUrlInMenus($url,self::getMain(),$method,$is_bool);
+        }else{
+            return $is_bool?false:collect([]);
+        }
+    }
+
+    /**
      * 获取权限地址
      * @param $query
      * @param $url

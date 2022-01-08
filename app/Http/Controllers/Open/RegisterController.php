@@ -34,7 +34,7 @@ class RegisterController extends Controller
     protected $redirectAfterLogout = '/open/login'; //未登录跳转登录
     protected $redirectToHome = RouteServiceProvider::HOME; //普通用户跳转
     protected $emailActivateTime = 3600; //注册邮箱激活失效时间
-
+    protected $backUrlKey ='';
     /**
      * Create a new controller instance.
      *
@@ -47,6 +47,7 @@ class RegisterController extends Controller
         $this->sms_template = 'laravel_admin.ali_dayu.template_codes.register';
         $this->sms_key='mobile_phone';
         $this->email_key = 'email';
+        $this->backUrlKey = config('laravel_admin.store_keys.other_login.back_url');
     }
 
     /**
@@ -94,7 +95,7 @@ class RegisterController extends Controller
     protected function validator(Request $request)
     {
         $validator = [
-            'username' => 'required|alpha_dash|between:6,18|unique:users,uname', //用户名
+            'username' => 'required|alpha_dash|user_name|between:5,18|unique:users,uname', //用户名
             'password' => 'required|string|min:6|confirmed', //密码
             'password_confirmation' => 'required', //确认密码
             'agree' => 'accepted',

@@ -325,7 +325,7 @@ if (! function_exists('trans_path')) {
             $key = $prefix.$key;
         }
         $res = trans($key,$replace,$locale);
-        if($prefix && !is_null($key) && \Illuminate\Support\Str::startsWith($res,$prefix)){
+        if(is_string($res) && $prefix && !is_null($key) && \Illuminate\Support\Str::startsWith($res,$prefix)){
             return \Illuminate\Support\Str::replaceFirst($prefix,'',$res);
         }
         return $res;
@@ -353,6 +353,44 @@ if (! function_exists('front_trans_conversion')) {
             }
         }
         return $data;
+    }
+}
+
+if (! function_exists('excelDate')) {
+    /***
+     * excel导入的时间格式处理
+     * @param $date
+     * @return mixed|string|null
+     */
+    function excelDate($date){
+        $date = trim($date);
+        if(!$date){
+            return null;
+        }elseif (gettype($date)=='object'){ //时间对象
+            $date = $date->toDateString();
+        }elseif (is_numeric($date)){
+            if(strlen($date)==6 && checkdate(substr($date,0,4),substr($date,4,2),'01')){
+                $date = substr($date,0,4).'-'.substr($date,4,2);
+            }else{
+                $date = gmdate('Y-m-d',($date - 25569) * 3600 * 24);//格式化时间,不是用date哦, 时区相差8小时的
+            }
+        }elseif(str_contains($date,'.')){
+            $date = str_replace('.','-',$date);
+        }elseif(str_contains($date,'/')){
+            $date = str_replace('/','-',$date);
+        }elseif(!str_contains($date,'-') && strlen($date)==8){
+            $date = substr($date,0,4).'-'.substr($date,4,2).'-'.substr($date,6,2);
+        }
+        if(count(explode('-',$date))<3){
+            $date = $date.'-01';
+        }
+        if($date){
+            $date_array = explode('-',preg_replace("/ [0-9]{2}:[0-9]{2}:[0-9]{2}/",'',$date));
+            if(!strtotime($date) || !checkdate(Arr::get($date_array,1),Arr::get($date_array,2),Arr::get($date_array,0))){ //错误时间格式
+                $date = null;
+            }
+        }
+        return $date;
     }
 }
 

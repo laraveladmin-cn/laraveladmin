@@ -200,11 +200,18 @@ class RouteService
                             $method = Arr::get($item,'method',0);
                             $route = [];
                             $methods = Menu::getFieldsMap('method');
-                            collect($methods)->each(function ($type,$val)use(&$route,$method,$path,$action){
+                            $methods = collect($methods)->filter(function ($type,$val)use(&$route,$method){
                                 if((is_numeric($method) && $method&$val) || (is_array($method) && in_array($val,$method))){
-                                    $route =  Route::$type($path, $action);
+                                    return $type;
                                 }
-                            });
+                            })->values()
+                                ->toArray();
+                            if($methods && count($methods)==1){
+                                $type = $methods[0];
+                                $route =  Route::$type($path, $action);
+                            }else{
+                                $route =  Route::match($methods,$path, $action);
+                            }
                             if($route && $as = Arr::get($item,'as','')){
                                 self::name($route,$as);
                             }
@@ -248,7 +255,6 @@ class RouteService
 
             });
         });
-        $route_prefix OR Route::get('{any}',self::$api404)->where('any','(.*)');
     }
 
     public static function getClass($value){
@@ -312,11 +318,18 @@ class RouteService
                             $method = Arr::get($item,'method',0);
                             $route = [];
                             $methods = Menu::getFieldsMap('method');
-                            collect($methods)->each(function ($type,$val)use(&$route,$method,$path,$action){
+                            $methods = collect($methods)->filter(function ($type,$val)use(&$route,$method){
                                 if((is_numeric($method) && $method&$val) || (is_array($method) && in_array($val,$method))){
-                                    $route =  Route::$type($path, $action);
+                                   return $type;
                                 }
-                            });
+                            })->values()
+                                ->toArray();
+                            if($methods && count($methods)==1){
+                                $type = $methods[0];
+                                $route =  Route::$type($path, $action);
+                            }else{
+                                $route =  Route::match($methods,$path, $action);
+                            }
                             if($route && $as = Arr::get($item,'as','')){
                                 self::name($route,$as);
                             }
@@ -395,10 +408,21 @@ class RouteService
         if(config('laravel_admin.web_api_model')=='web'){
             self::routeRegisterApi(self::$web_route_prefix);
         }
-        //404页面
-        Route::get('/web-api',self::$api404);
-        Route::get('/web-api/{any}',self::$api404)->where('any','(.*)');
-        Route::get('{any}',self::$pager404)->where('any','(.*)');
+
+    }
+
+    /**
+     *
+     * @param bool $is_web
+     */
+    public static function any($is_web=true){
+        if($is_web){
+            Route::get('/web-api',self::$api404);
+            Route::get('/web-api/{any}',self::$api404)->where('any','(.*)');
+            Route::get('{any}',self::$pager404)->where('any','(.*)');
+        }else{
+            Route::get('{any}',self::$api404)->where('any','(.*)');
+        }
     }
 
     /**

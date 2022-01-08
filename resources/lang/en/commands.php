@@ -24,7 +24,8 @@ $str = <<<'str'
     "Initializing the creation of a soft connection": "Initializing the creation of a soft connection",
     "The \":link\" link has been connected to \":target\"": "The \":link\" link has been connected to \":target\"",
     "The links have been created": "The links have been created",
-    "To enable support for relative links, please install the symfony/filesystem package": "To enable support for relative links, please install the symfony/filesystem package"
+    "To enable support for relative links, please install the symfony/filesystem package": "To enable support for relative links, please install the symfony/filesystem package",
+    "Failed to delete file \":file\"": "Failed to delete file \":file\""
 }
 str;
 return json_decode($str,true);

@@ -16,7 +16,7 @@
                       :trans-field="transField"
                       :search="search"
                       :reset="reset"
-
+                      :where="data.options.where"
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
@@ -25,7 +25,7 @@
                                     <i class="fa fa-plus"></i> {{$t("New")}}
                                 </router-link>
                             </slot>
-                            <slot name="refresh">
+                            <slot name="refresh" :data="data" >
                                 <button class="btn btn-success"
                                         v-show="btnRefresh"
                                         type="button"
@@ -39,16 +39,18 @@
                                     v-show="checkbox && data.configUrl['deleteUrl']">
                                 <i class="fa fa-trash-o"></i> {{$t("Delete selected")}}
                             </button>
-                            <button class="btn btn-primary"
-                                    type="button"
-                                    v-show="btnSizerMore"
-                                    @click="sizer_more = !sizer_more"
-                                    data-toggle="collapse"
-                                    :data-target="'#'+id+' .sizer_more'"
-                                    aria-expanded="false">
-                                <i class="fa" :class="sizer_more?'fa-angle-double-up':'fa-angle-double-down'"></i>
-                                {{$t("More screening")}}
-                            </button>
+                            <slot name="sizer_more" :data="data" >
+                                <button class="btn btn-primary"
+                                        type="button"
+                                        v-show="btnSizerMore"
+                                        @click="sizer_more = !sizer_more"
+                                        data-toggle="collapse"
+                                        :data-target="'#'+id+' .sizer_more'"
+                                        aria-expanded="false">
+                                    <i class="fa" :class="sizer_more?'fa-angle-double-up':'fa-angle-double-down'"></i>
+                                    {{$t("More screening")}}
+                                </button>
+                            </slot>
                             <button class="btn btn-warning"
                                     type="button"
                                     v-show="count(data.excel.exportFields) && data.configUrl['exportUrl']"
@@ -110,55 +112,57 @@
                         </div>
                     </slot>
                 </div>
-                <div class="collapse sizer_more in">
-                    <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps"  :trans-field="transField">
-                    </slot>
-                    <div class="row hidden-md hidden-lg">
-                        <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
-                            <div class="box-tools">
-                                <div class="input-group">
-                                    <div class="input-group-btn" v-if="options.keywordGroup">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            {{$tp(data.keywordsMap[data.options.where['_key']])}}
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li v-for="(value,index) in data.keywordsMap" @click="changeKeywords(index)">
-                                                <a>{{$tp(value)}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="_placeholder" class="form-control"  type="text">
-                                    <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="_placeholder" type="text" class="form-control">
-                                    <div class="input-group-btn">
-                                        <button type="button" :title="$t('Search')" class="btn" :class="'btn-'+theme" @click="search">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                        <button type="button" :title="$t('Reset')" class="btn" :class="'btn-'+theme" @click="reset">
-                                            <i class="fa fa-repeat"></i>
-                                        </button>
-                                        <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
-                                              <i class="glyphicon glyphicon-folder-open"></i>
-                                              <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
-                                          </button>-->
-                                        <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl']">
-                                            <i class="glyphicon glyphicon-download-alt"></i>
-                                        </button>
-                                        <slot name="input_group_add_btn" :data="data"></slot>
+                <slot name="sizer-min">
+                    <div class="collapse sizer_more in">
+                        <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps"  :trans-field="transField">
+                        </slot>
+                        <div class="row hidden-md hidden-lg">
+                            <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
+                                <div class="box-tools">
+                                    <div class="input-group">
+                                        <div class="input-group-btn" v-if="options.keywordGroup">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {{$tp(data.keywordsMap[data.options.where['_key']])}}
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li v-for="(value,index) in data.keywordsMap" @click="changeKeywords(index)">
+                                                    <a>{{$tp(value)}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <input v-if="options.keywordGroup" @keyup.enter="search" v-model="data.options.where[data.options.where['_key']]" :placeholder="_placeholder" class="form-control"  type="text">
+                                        <input v-else @keyup.enter="search"  v-model="data.options.where[options.keywordKey]" :placeholder="_placeholder" type="text" class="form-control">
+                                        <div class="input-group-btn">
+                                            <button type="button" :title="$t('Search')" class="btn" :class="'btn-'+theme" @click="search">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                            <button type="button" :title="$t('Reset')" class="btn" :class="'btn-'+theme" @click="reset">
+                                                <i class="fa fa-repeat"></i>
+                                            </button>
+                                            <!--  <button type="button" title="导入数据" class="btn btn-primary import" @click="importExcel" v-show="data.configUrl['importUrl']">
+                                                  <i class="glyphicon glyphicon-folder-open"></i>
+                                                  <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
+                                              </button>-->
+                                            <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl']">
+                                                <i class="glyphicon glyphicon-download-alt"></i>
+                                            </button>
+                                            <slot name="input_group_add_btn" :data="data"></slot>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" v-show="btnSizerMore">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <button type="button" class="btn pull-right sizer-tool-btn" :class="'btn-'+theme"  @click="search">{{$t('Search')}}</button>
+                        <div class="row" v-show="btnSizerMore">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <button type="button" class="btn pull-right sizer-tool-btn" :class="'btn-'+theme"  @click="search">{{$t('Search')}}</button>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+                                <button type="button" class="btn btn-default sizer-tool-btn" @click="reset">{{$t('Reset')}}</button>
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
-                            <button type="button" class="btn btn-default sizer-tool-btn" @click="reset">{{$t('Reset')}}</button>
-                        </div>
                     </div>
-                </div>
+                </slot>
             </div>
             <div class="box-footer box-footer-top clearfix pager-tool" v-if="!options.hideTopPagerTool">
                 <slot name="pager" :data="data">
@@ -206,63 +210,64 @@
                     </div>
                 </slot>
             </div>
-            <div class="box-body table-responsive">
-                <slot name="table" :data="data" :check_ids="check_ids" :remove="remove">
-                    <table class="table table-hover table-bordered table-striped text-center dataTable">
-                        <thead>
-                        <slot name="thead"
-                              :select-all="select_all"
-                              :operation="operation"
-                              :trans-field="transField"
-                              :checkbox="checkbox"
-                              :select-all-method="selectAll"
-                              :order-by-method="orderBy"
-                              :order-by="orderBy"
-                              :show-fields="show_fields">
-                            <tr>
-                                <th class="id" v-if="checkbox">
-                                    <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
-                                    <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
-                                </th>
-                                <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
-                                    {{transField(field.name,index)}}
-                                </th>
-                                <slot name="thead-operate" :operation="operation">
-                                    <th class="operate" v-if="operation">{{$t('Operation')}}</th>
-                                </slot>
-                            </tr>
-                        </slot>
-                        </thead>
-                        <tbody>
-                        <tr v-for="(row,i) in (data.list?data.list.data:[])">
-                            <td v-if="checkbox">
-                                <!--<input type="checkbox" v-model="check_ids" :value="row[options.primaryKey]" />-->
-                                <slot name="col-checkbox" :check_ids="check_ids" :data="data" :row="row">
-                                    <icheck v-model="check_ids" :option="row[options.primaryKey]" class="ids" :disabled-label="true"></icheck>
-                                </slot>
-                            </td>
-                            <td v-for="(field,k) in show_fields" :class="field['class']">
-                                <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass">
+            <div class="box-body">
+                <slot name="table" :data="data" :loading="loading" :check_ids="check_ids" :remove="remove" :getItems="getItems" :checkboxClass="checkboxClass" >
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered table-striped text-center dataTable">
+                            <thead>
+                            <slot name="thead"
+                                  :select-all="select_all"
+                                  :operation="operation"
+                                  :trans-field="transField"
+                                  :checkbox="checkbox"
+                                  :select-all-method="selectAll"
+                                  :order-by-method="orderBy"
+                                  :order-by="orderBy"
+                                  :show-fields="show_fields">
+                                <tr>
+                                    <th class="id" v-if="checkbox">
+                                        <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
+                                        <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
+                                    </th>
+                                    <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">
+                                        {{transField(field.name,index)}}
+                                    </th>
+                                    <slot name="thead-operate" :operation="operation">
+                                        <th class="operate" v-if="operation">{{$t('Operation')}}</th>
+                                    </slot>
+                                </tr>
+                            </slot>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(row,i) in (data.list?data.list.data:[])">
+                                <td v-if="checkbox">
+                                    <!--<input type="checkbox" v-model="check_ids" :value="row[options.primaryKey]" />-->
+                                    <slot name="col-checkbox" :check_ids="check_ids" :data="data" :row="row">
+                                        <icheck v-model="check_ids" :option="row[options.primaryKey]" class="ids" :disabled-label="true"></icheck>
+                                    </slot>
+                                </td>
+                                <td v-for="(field,k) in show_fields" :class="field['class']">
+                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass">
                                         <span v-if="field.type =='label' || field.type =='radio'">
                                             <span class="label" :class="labelClass(row,k)">
                                                 {{ _maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
                                             </span>
                                         </span>
-                                    <span v-else-if="field.type =='labels' || field.type =='checkbox'">
+                                        <span v-else-if="field.type =='labels' || field.type =='checkbox'">
                                             <span v-for="value in getItems(row,k)" class="label labels-m" :class="checkboxClass(value,2,statusClass,k)">
                                                 {{ _maps | array_get(k.replace('.$index','')) | array_get(value) }}
                                             </span>
                                         </span>
-                                    <span v-else-if="field.type =='icon'">
+                                        <span v-else-if="field.type =='icon'">
                                                   <i class="fa" :class="array_get(row,k,'')"></i>
                                         </span>
-                                    <span v-else-if="field.type =='color'">
+                                        <span v-else-if="field.type =='color'">
                                             <span class="input-group-addon1" style="border: none">
                                                 <i style="background-color:transparent;" v-if="!array_get(row,k,'')"></i>
                                                 <i :style="'background-color:'+array_get(row,k,'')" v-else></i>
                                             </span>
                                         </span>
-                                    <span v-else-if="field.type =='level'">
+                                        <span v-else-if="field.type =='level'">
                                             {{ row[field.levelName || 'level'] | deep}}
                                              <span v-if="field.limit" :title="array_get(row,k,'')">
                                                  {{row | array_get(k) | str_limit(field.limit)}}
@@ -271,7 +276,7 @@
                                                   {{row | array_get(k)}}
                                             </span>
                                         </span>
-                                    <span v-else-if="field.type =='code'">
+                                        <span v-else-if="field.type =='code'">
                                             <code v-if="field.limit">
                                                 {{row | array_get(k) | str_limit(field.limit)}}
                                             </code>
@@ -279,7 +284,7 @@
                                                   {{row | array_get(k)}}
                                             </code>
                                         </span>
-                                    <span v-else-if="field.type =='pre'">
+                                        <span v-else-if="field.type =='pre'">
                                             <pre v-if="field.limit">
                                                 {{row | array_get(k) | str_limit(field.limit)}}
                                             </pre>
@@ -287,7 +292,7 @@
                                                   {{row | array_get(k)}}
                                             </pre>
                                         </span>
-                                    <span v-else>
+                                        <span v-else>
                                              <span v-if="field.limit" :title="array_get(row,k,'')">
                                                    {{row | array_get(k) | str_limit(field.limit)}}
                                              </span>
@@ -295,38 +300,39 @@
                                                      {{row | array_get(k)}}
                                             </span>
                                         </span>
-                                </slot>
-                            </td>
-                            <td class="operate" v-if="operation">
-                                <slot name="col-operation" :data="data" :row="row" :remove="remove">
-                                    <button v-show="data.configUrl['deleteUrl']" :title="$t('Delete selected')" type="button" class="btn btn-danger btn-xs" @click="remove([row[options.primaryKey]])">
-                                        <i class="fa fa-trash-o"></i>
-                                    </button>
-                                    <router-link class="btn btn-info btn-xs" :title="$t('Edit')"  :to="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])" v-if="data.configUrl['showUrl']">
-                                        <i class="fa fa-edit"></i>
-                                    </router-link>
-                                </slot>
-                            </td>
-                        </tr>
-                        <tr v-show="is_empty">
-                            <td :colspan="col_num" class="empty">
-                                {{$t('Temporarily no data')}}
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot >
-                        <tr class="loading" v-if="loading">
-                            <td colspan="6" class="overlay">
-                                <div class="fa">
-                                    <i class="fa fa-refresh fa-spin"></i>
-                                    <div class="explain">
-                                        {{$t('Loading')}}...
+                                    </slot>
+                                </td>
+                                <td class="operate" v-if="operation">
+                                    <slot name="col-operation" :data="data" :row="row" :remove="remove">
+                                        <button v-show="data.configUrl['deleteUrl']" :title="$t('Delete selected')" type="button" class="btn btn-danger btn-xs" @click="remove([row[options.primaryKey]])">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                        <router-link class="btn btn-info btn-xs" :title="$t('Edit')"  :to="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])" v-if="data.configUrl['showUrl']">
+                                            <i class="fa fa-edit"></i>
+                                        </router-link>
+                                    </slot>
+                                </td>
+                            </tr>
+                            <tr v-show="is_empty">
+                                <td :colspan="col_num" class="empty">
+                                    {{$t('Temporarily no data')}}
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot >
+                            <tr class="loading" v-if="loading">
+                                <td colspan="6" class="overlay">
+                                    <div class="fa">
+                                        <i class="fa fa-refresh fa-spin"></i>
+                                        <div class="explain">
+                                            {{$t('Loading')}}...
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tfoot>
-                    </table>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </slot>
             </div>
             <div class="box-footer clearfix pager-tool" v-if="!options.hideBottomPagerTool">
@@ -415,7 +421,9 @@
                     },
                     maps:{
                     },
-                    list:{},
+                    list:{
+                        data:[]
+                    },
                     configUrl:{
                         indexUrl:'',
                         listUrl:'',
@@ -944,6 +952,9 @@
                 options['get_count'] = 1;
             }else if(options['page']==1){
                 delete options['page'];
+            }
+            if(this.options.mapsRelations){
+                this.data.mapsRelations = this.options.mapsRelations;
             }
             this.getData(options);
         },

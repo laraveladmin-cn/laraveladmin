@@ -249,7 +249,7 @@ trait ResourceController
         //判断是否包含主键字段,没有包含自动添加
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();
-        if($primary_key && $fields){
+        if($primary_key && $fields && (!isset($this->noPrimaryKey) || !$this->noPrimaryKey)){
             $primary_key1 = $model->getTable().'.'.$primary_key;
             $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
             $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
@@ -286,7 +286,9 @@ trait ResourceController
         $res = false;
         if ($ids) {
             $primaryKey = $this->newBindModel()->getKeyName() ?: 'id';
-            $res = $this->bindModel->whereIn($primaryKey, $ids)->delete();
+            $obj = $this->bindModel->whereIn($primaryKey, $ids);
+            $obj = $this->handleDestroyObj($obj);
+            $res = $obj->delete();
         }
         if ($res === false) {
             return Response::returns(['alert' => alert([
@@ -319,6 +321,7 @@ trait ResourceController
         $data = $this->handDateFields($data, $this->importExcelDateFields);
         $data = $this->handlePostEditReturn($data);
         $data['updated_at'] = date('Y-m-d H:i:s');
+        $data = $this->handlePostEditFindReturn($data,[]);
         //新增
         $item = $this->bindModel->create($data);
         if ($item === false) {
@@ -327,7 +330,7 @@ trait ResourceController
             ], 500)], 500);
         }
         $this->saveRelation($item, $data);
-        $this->handlePostEdit($item, $data);
+        $this->handlePostEdit($item, $data,[]);
         $primaryKey = $this->newBindModel()->getKeyName() ?: 'id';
 
         return Response::returns([
@@ -360,11 +363,13 @@ trait ResourceController
         $data = $this->handDateFields($data, $this->importExcelDateFields);
         $data = $this->handlePostEditReturn($data);
         $item = $this->bindModel->find($id);
+        $old = collect($item)->toArray();
         if (!$item) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Data does not exist!')//'数据不存在!'
             ], 404)], 404);
         }
+        $data = $this->handlePostEditFindReturn($data,$item);
         $res = $item->update($data);
         if ($res === false) {
             return Response::returns(['alert' => alert([
@@ -372,7 +377,7 @@ trait ResourceController
             ], 500)], 500);
         }
         $this->saveRelation($item, $data);
-        $this->handlePostEdit($item, $data);
+        $this->handlePostEdit($item, $data,$old);
 
         return Response::returns(['alert' => alert([
             'message' => trans('Modify the success!') //修改成功
@@ -428,8 +433,12 @@ trait ResourceController
         foreach ($showFields as $k => $showField) {
             if (is_array($showField)) {
                 $key = $prefix ? $prefix . '.' . $k : $k;
-                $res[$key] = $model->$k()->getModel()->getTable();
-                $this->mapsRelations($showField, $model->$k()->getRelated());
+                $relation = $model->$k();
+                if($relation){
+                    $res[$key] = $relation->getModel()->getTable();
+                    $this->mapsRelations($showField, $relation->getRelated());
+                }
+
             }
         }
         return $res;
@@ -581,7 +590,9 @@ trait ResourceController
      * 新增或修改,验证规则获取
      * @return mixed
      */
-    abstract protected function getValidateRule($id=0);
+    protected function getValidateRule($id=0){
+        return [];
+    }
 
     /**
      * 导入验证规则
@@ -652,7 +663,12 @@ trait ResourceController
         });
         $res = collect($res)->map(function ($value, $key) use ($model) {
             if (is_array($value) && $key != '$index') {
-                return $this->relationName($value, $model->$key()->getModel(), true);
+                $relation = $model->$key();
+                if($relation){
+                    return $this->relationName($value, $relation->getModel(), true);
+                }else{
+                    return $value;
+                }
             } else {
                 return $value;
             }
@@ -756,6 +772,7 @@ trait ResourceController
             $fields_key = $keys;
         }
         $mapsRelations = $this->mapsRelations($this->exportFields, $model);
+
         $title = collect($fields_key)->map(function ($item) use ($all_titles, $exportFieldsName,$mapsRelations) {
             $value = isset($exportFieldsName[$item]) ? $exportFieldsName[$item] : Arr::get($all_titles, $item, '');
             $value = $this->transField($value, $this->getTable($item,$mapsRelations));
@@ -862,7 +879,7 @@ trait ResourceController
                         $value = Arr::get($map, trim($item), Arr::get($default, $key));
                     }
                 } else {
-                    $value = is_null($item) ? Arr::get($default, $key) : trim($item);
+                    $value = is_null($item) ? Arr::get($default, $key) : (is_string($item)?trim($item):$item);
                 }
                 $keys = explode('.', $key);
                 if (isset($relation_keys[$key]) || ($keys && Arr::get($keys, 1) == '$index' && count($keys) == 3)) {
@@ -877,7 +894,7 @@ trait ResourceController
 
             return $row;
         })->filter(function ($item) use (&$errors, $key_name, $relation_keys, $maps1, $multipleFields) { //数据验证
-            $validator = Validator::make($item, $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
+            $validator = Validator::make(getRelationData($item), $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
             $flog = !$validator->fails(); //验证状态
             if ($validator->fails()) {
                 $item['error'] = collect($validator->errors()->toArray())->map(function ($v, $k) {
@@ -886,7 +903,6 @@ trait ResourceController
                 //去除关联添加数据
                 $item = collect($item)->except($relation_keys)->toArray();
                 //数据转码
-                $item = collect($item)->except($relation_keys)->toArray();
                 $item = collect($item)->map(function ($value, $key) use ($item, $maps1, $multipleFields) {
                     $map = Arr::get($maps1, $key);
                     if (in_array($key, $multipleFields)) {
@@ -911,9 +927,18 @@ trait ResourceController
             return $flog;
         })->toArray(); //读取数据
         foreach ($datas as $row) {
-            $item = $bindModel::updateOrCreate([$key_name => Arr::get($row, $key_name) ?: null], $row); //更新,创建数据
+            $row = getRelationData($row); //将一维数组转成多维数组
+            $this->handlePostEditReturn($row);
+            $item = $bindModel::where($key_name,Arr::get($row, $key_name) ?: null)->first();
+            if($item){ //更新数据
+                $old_data = collect($item)->toArray();
+                $item->update($row);
+            }else{ //创建数据
+                $old_data = [];
+                $item = $bindModel::create($row);
+            }
             $this->saveRelation($item, $row);
-            $this->handlePostEdit($item, $row);
+            $this->handlePostEdit($item, $row,$old_data);
         }
 
         return [
@@ -986,6 +1011,16 @@ trait ResourceController
     }
 
     /**
+     * 执行修改前查询到数据结果后对数据进行处理
+     * @param $data
+     * @param $item
+     * @return mixed
+     */
+    protected function handlePostEditFindReturn(&$data,$item){
+        return $data;
+    }
+
+    /**
      * 执行删除数据前对数据进行处理
      * @param $data
      * @return mixed
@@ -1010,9 +1045,18 @@ trait ResourceController
      * @param $item
      * @param $data
      */
-    protected function handlePostEdit($item, $data)
+    protected function handlePostEdit($item, $data,$old_data=[])
     {
         //
+    }
+
+    /**
+     * 执行删除前处理删除模型
+     * @param $obj
+     * @return mixed
+     */
+    protected function handleDestroyObj(&$obj){
+        return $obj;
     }
 
 
