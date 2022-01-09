@@ -35,11 +35,12 @@ class ConfigController extends Controller
      */
     protected function getValidateRule(){
         $id = Request::input('id',0);
+        $model_class = $this->getModelClass();
         return [
             'name' => 'required',
             'key' => 'required|alpha_dash|unique:configs,key,'.$id.',id,deleted_at,NULL',
-            'type'=>'required|in:1,2,3',
-            'itype'=>'required|in:1,2,3,4,5'
+            'type'=>'required|in:'.$model_class::commaMapValue('type'),
+            'itype'=>'required|in:'.$model_class::commaMapValue('itype')
         ];
     }
 

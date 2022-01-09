@@ -79,7 +79,7 @@ class Config extends Model
      * @return bool|string
      */
     public function getOptionsAttribute($value){
-        return json_decode($value,true)?:[];
+        return json_decode($value,true)?:new \stdClass();
     }
     public function setOptionsAttribute($value){
         $this->attributes['options'] = json_encode($value);

@@ -56,12 +56,14 @@
                                         type="text"
                                         v-model="props.data.row['value']"
                                         class="form-control"
+                                        v-bind="props.data.row['options']||{}"
                                         :disabled="!props.url"
-                                        :placeholder="$t('Please enter')">
+                                        :placeholder="$t('Please enter')" />
                                     <textarea
                                         v-else-if="props.data.row['itype']==2"
                                         v-model="props.data.row['value']"
                                         class="form-control"
+                                        v-bind="props.data.row['options']||{}"
                                         rows="6"
                                         :disabled="!props.url"
                                         :placeholder="$t('Please enter')">
@@ -69,12 +71,14 @@
                                     <div v-else-if="props.data.row['itype']==3">
                                         <editor-md
                                             v-model="props.data.row['value']"
+                                            v-bind="props.data.row['options']||{}"
                                             :disabled="!props.url">
                                         </editor-md>
                                     </div>
                                     <div v-else-if="props.data.row['itype']==4">
                                         <json-edit
                                             v-model="props.data.row['value']"
+                                            v-bind="props.data.row['options']||{}"
                                             :disabled="!props.url"
                                             :placeholder="$t('Please enter')">
                                         </json-edit>
@@ -82,8 +86,9 @@
                                     <div class="edit-item-content" v-else-if="props.data.row['itype']==5">
                                         <el-switch v-model="props.data.row['value']"
                                                    :disabled="!props.url"
-                                                   :active-text="$t('Closed')"
-                                                   :inactive-text="$t('Open')"
+                                                   v-bind="props.data.row['options']||{}"
+                                                   :active-text="$t('Open')"
+                                                   :inactive-text="$t('Closed')"
                                                    :active-value="1"
                                                    :inactive-value="0">
                                         </el-switch>
@@ -94,6 +99,7 @@
                                             class="w-100"
                                             size="medium"
                                             :disabled="!props.url"
+                                            v-bind="props.data.row['options']||{}"
                                             :step="1">
                                         </el-input-number>
                                     </div>
