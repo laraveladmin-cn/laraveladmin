@@ -44,7 +44,8 @@ class Config extends Model
             '2'=>'textarea',
             '3'=>'markdown',
             '4'=>'json',
-            '5'=>'switch'
+            '5'=>'switch',
+            '6'=>'number'
         ]
     ];
 
@@ -78,7 +79,7 @@ class Config extends Model
      * @return bool|string
      */
     public function getOptionsAttribute($value){
-        return json_decode($value,true)?:[];
+        return json_decode($value,true)?:new \stdClass();
     }
     public function setOptionsAttribute($value){
         $this->attributes['options'] = json_encode($value);

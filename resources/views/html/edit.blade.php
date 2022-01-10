@@ -88,6 +88,7 @@
         ],
         'date' =>$datePicker,
         'datetime'=>$datePicker,
+        'time'=>$datePicker,
         'month'=>$datePicker,
         'icheck'=>$icheck,
         'icheck-radio'=>$icheck,
@@ -148,7 +149,7 @@
                                             </div>
                                         </div>
                                     </template>
-@elseif($table_field['showType']=='datetime')
+@elseif($table_field['showType']=='datetime' || $table_field['showType']=='time')
                                     <template slot="input-item">
                                         <el-date-picker v-model="props.data.row['{{$table_field['Field']}}']"
                                                         class="w-100"

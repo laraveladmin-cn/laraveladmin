@@ -509,10 +509,22 @@ trait ResourceController
         return $this->resourceModel ?: str_replace('Controller', '', class_basename(get_class()));
     }
 
+    /**
+     * 模型类名
+     * @return string
+     */
+    public function getModelClass(){
+        return $this->getModelNamespace() . $this->getResourceModel();
+    }
 
+
+    /**
+     * 模型对象
+     * @return mixed
+     */
     public function newBindModel()
     {
-        $resourceModel = $this->getModelNamespace() . $this->getResourceModel();
+        $resourceModel = $this->getModelClass();
 
         return new $resourceModel();
     }

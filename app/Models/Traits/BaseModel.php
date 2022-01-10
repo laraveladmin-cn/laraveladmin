@@ -396,5 +396,9 @@ trait BaseModel{
         return $this->fillable?:[];
     }
 
+    public function scopeCommaMapValue($q,$key){
+        return collect(self::getFieldsMap($key,true))->implode(',');
+    }
+
 
 }
