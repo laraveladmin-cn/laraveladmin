@@ -1,8 +1,8 @@
 <template>
     <span class="main-select2" :class="{'placeholder-show':placeholder_show}">
         <select class="form-control" :disabled="disabled" :multiple="multiple" style="width: 100%;">
-            <option :value="placeholderValue" :selected="placeholderValue===value?'selected':null">{{_placeholder}}</option>
-            <option v-for="option in options" :value="option['id']" :selected="selected(option['id'])">
+            <option v-if="has_placeholder" :value="placeholderValue?placeholderValue:placeholderValue+' '" :selected="placeholderValue===value?'selected':null">{{_placeholder}}</option>
+            <option v-for="option in options" :value="option['id']?option['id']:option['id']+' '" :selected="selected(option['id'])">
                 {{option['text']}}
             </option>
         </select>
@@ -164,6 +164,19 @@
                     return this.placeholderShow();
                 }
                 return this.$t(this.placeholderShow);
+            },
+            has_placeholder(){
+                if(this.placeholder){
+                    return true;
+                }
+                let flog = false;
+                collect(this.options).each((option)=>{
+                    if(this.selected(option['id'])){
+                        flog = true;
+                    }
+                });
+                return !flog;
+
             }
         },
         methods:{
@@ -171,9 +184,9 @@
                 return JSON.parse(JSON.stringify(obj));
             },
             autofocus(){
-                if(!this.placeholder){
-                    $('.select2-container--open').addClass('main-select2-no-placeholder');
-                }
+                //if(!this.placeholder){
+                //    $('.select2-container--open').addClass('main-select2-no-placeholder');
+                //}
                 setTimeout(()=>{
                     let $search = $('.select2-search__field');
                     if($search[0]){
@@ -192,7 +205,7 @@
                 let $select2 = $(this.$el).find('select');
                 if(this.isAjax){
                     $select2.select2({
-                        placeholder:this.$t('Please enter keywords'),
+                        placeholder:this._placeholder,
                         maximumSelectionLength: 10,
                         minimumResultsForSearch:9,
                         language: this.language,
@@ -267,7 +280,7 @@
                     });
                 }else {
                     $select2.select2({
-                        placeholder:$this.$t('Please enter keywords'),
+                        placeholder:this._placeholder,
                         language: this.language,
                         maximumSelectionLength: 10,
                         minimumResultsForSearch:9,
@@ -280,7 +293,7 @@
                 $select2.on("select2:open",this.autofocus);
                 //修改值提交修改
                 $select2.on('change',function(){
-                    let value = $(this).val();
+                    let value = $.trim($(this).val());
                     $this.$emit('input', value); //修改值
                     $this.$emit('change',value); //修改值
                     $this.data = value;
@@ -318,6 +331,9 @@
             value(val,old){
                 if(this.data!==val){
                     let $select2 = $(this.$el).find('select');
+                    if(!val){
+                        val = val+' ';
+                    }
                     $select2.val(val);
                     this.destroy();
                     this.initSelect2();
