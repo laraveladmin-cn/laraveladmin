@@ -151,7 +151,7 @@
                         options[i]['text'] = text;
                     }
                     if(typeof row['id']=='undefined'|| this.primaryKey!='id'){
-                        options[i]['id'] = options[i][this.primaryKey];
+                        options[i]['id'] = this.array_get(options[i],this.primaryKey);
                     }
                 }
                 return options;
@@ -249,7 +249,7 @@
                                         data.data[i]['text'] = text;
                                     }
                                     if(typeof row['id']=='undefined' || $this.primaryKey!='id'){
-                                        data.data[i]['id'] = data.data[i][$this.primaryKey];
+                                        data.data[i]['id'] = $this.array_get(data.data[i],$this.primaryKey);
                                     }
                                 }
                                 let more ;
