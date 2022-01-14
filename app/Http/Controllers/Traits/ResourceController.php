@@ -807,6 +807,7 @@ trait ResourceController
             return str_contains($k, '$index');
         })->keys()->toArray();
         $data['data'] = collect($data['data'])->map(function ($item) use ($fields_key, $maps, $multipleFields) {
+            $item = $this->handleExportItem($item);
             $row = collect($fields_key)->map(function ($key) use ($item, $maps, $multipleFields) {
                 $value = Arr::get($item, $key, '');
                 $map = Arr::get($maps, $key);
@@ -839,6 +840,10 @@ trait ResourceController
         }
 
         return $data;
+    }
+
+    protected function handleExportItem(&$item){
+        return $item;
     }
     protected function handleExportRow(&$row)
     {
@@ -903,10 +908,11 @@ trait ResourceController
 
                 return $value;
             })->merge($relation_row)->toArray();
-
             return $row;
         })->filter(function ($item) use (&$errors, $key_name, $relation_keys, $maps1, $multipleFields) { //数据验证
-            $validator = Validator::make(getRelationData($item), $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
+            $data = getRelationData($item);
+            $data = $this->handleImportValidateBefore($data);
+            $validator = Validator::make($data, $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
             $flog = !$validator->fails(); //验证状态
             if ($validator->fails()) {
                 $item['error'] = collect($validator->errors()->toArray())->map(function ($v, $k) {
@@ -930,7 +936,9 @@ trait ResourceController
                         }
                     }
                     $value = $this->handleExportValue($item, $key, $maps1, $value);
-
+                    if (is_array($value)) {
+                        $value = json_encode($value, JSON_UNESCAPED_UNICODE);
+                    }
                     return $value;
                 })->toArray();
                 $errors[] = $item;
@@ -1069,6 +1077,15 @@ trait ResourceController
      */
     protected function handleDestroyObj(&$obj){
         return $obj;
+    }
+
+    /**
+     * 批量导入验证前处理数据
+     * @param $data
+     * @return mixed
+     */
+    protected function handleImportValidateBefore(&$data){
+        return $data;
     }
 
 
