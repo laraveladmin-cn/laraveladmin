@@ -159,6 +159,9 @@ trait BaseModel{
      * @param string $condition
      */
     protected function jointWhere(&$query,$key,$exp,$val,$condition='and'){
+        if(is_string($key) && Str::contains($key,'`')){
+            $key = DB::raw($key);
+        }
         $whereMap = ['in','not_in','between'];
         $exps = [];
         if($condition=='or'){
