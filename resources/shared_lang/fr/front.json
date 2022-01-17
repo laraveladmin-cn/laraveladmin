@@ -168,7 +168,15 @@
                     "Operation menu": "Menu action",
                     "Operator": "Opérateur"
                 },
-                "maps": []
+                "maps": {
+                    "group": {
+                        "By day": "Par jour",
+                        "By week": "Par semaine",
+                        "Monthly": "Par mois",
+                        "Quarterly": "Par trimestre",
+                        "By year": "Par année"
+                    }
+                }
             },
             "menus": {
                 "fields": {
@@ -745,6 +753,8 @@
             "Last Week": "Dernière semaine",
             "Last month": "Janvier dernier",
             "Last three months": "Mars dernier",
+            "Last Year": "Année la plus récente",
+            "All": "Tous",
             "users": {
                 "username": "Surnom de l'utilisateur",
                 "Must be {min}-{max} non-Chinese characters": "Doit être un caractère non chinois du BIT {min} - {max}.",

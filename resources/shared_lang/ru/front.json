@@ -168,7 +168,15 @@
                     "Operation menu": "меню действие",
                     "Operator": "оператор"
                 },
-                "maps": []
+                "maps": {
+                    "group": {
+                        "By day": "по дням",
+                        "By week": "по неделям",
+                        "Monthly": "по месяцам",
+                        "Quarterly": "по кварталу",
+                        "By year": "по годам"
+                    }
+                }
             },
             "menus": {
                 "fields": {
@@ -745,6 +753,8 @@
             "Last Week": "Последняя неделя",
             "Last month": "последний месяц",
             "Last three months": "последний март",
+            "Last Year": "последний год",
+            "All": "все",
             "users": {
                 "username": "Имя пользователя",
                 "Must be {min}-{max} non-Chinese characters": "Должно быть не китайский символ - {min} - {max} бит",

@@ -5,17 +5,18 @@
                 <data-table :options="options" ref="table">
                     <template slot="sizer" slot-scope="props">
                         <div class="row">
-                            <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <h4><strong>{{$tp('Log in to access the statistics chart')}}</strong></h4>
                             </div>
+                            <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+                                <dropdown-menu :map="props.maps.group" v-model="props.options.group" @change="changeGroup(props)"></dropdown-menu>
+                            </div>
                             <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-                                <div class="pull-right">
-                                    <label-edit v-model="props.where['created_at'][0]"
-                                                v-if="props.where && props.where['created_at']"
-                                                @change="props.search"
-                                                :map="_map_date">
-                                    </label-edit>
-                                </div>
+                                <label-edit v-model="props.where['created_at'][0]"
+                                            v-if="props.where && props.where['created_at']"
+                                            @change="props.search"
+                                            :map="_map_date">
+                                </label-edit>
                             </div>
                         </div>
                     </template>
@@ -39,10 +40,10 @@
     import {mapState} from 'vuex';
     export default {
         components:{
-            'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
-            'echart':()=>import(/* webpackChunkName: "common_components/echart.vue" */ 'common_components/echart.vue'),
-            "labelEdit": () => import(/* webpackChunkName: "common_components/labelEdit.vue" */ 'common_components/labelEdit.vue'),
-
+            dataTable:()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
+            echart:()=>import(/* webpackChunkName: "common_components/echart.vue" */ 'common_components/echart.vue'),
+            labelEdit: () => import(/* webpackChunkName: "common_components/labelEdit.vue" */ 'common_components/labelEdit.vue'),
+            dropdownMenu: () => import(/* webpackChunkName: "common_components/dropdownMenu.vue" */ 'common_components/dropdownMenu.vue'),
         },
         props: {
         },
@@ -51,7 +52,9 @@
             let map_date = [
                 {day:7,show:'Last Week'},
                 {day:30,show:'Last month'},
-                {day:90,show:'Last three months'}
+                {day:90,show:'Last three months'},
+                {day:365,show:'Last Year'},
+                {day:0,show:'All'},
             ];
             let def_options = JSON.parse(this.$router.currentRoute.query.options || '{}');
             let data = {
@@ -74,10 +77,15 @@
                 mapDate:{
 
                 },
-                access:[]
+                access:[],
+                group:0
             };
             for (let i in map_date){
-                data.mapDate[date_format(timestamp-3600*24*map_date[i].day,'yyyy-MM-dd 00:00:00')]=map_date[i].show;
+                if(map_date[i].day){
+                    data.mapDate[date_format(timestamp-3600*24*map_date[i].day,'yyyy-MM-dd 00:00:00')]=map_date[i].show;
+                }else {
+                    data.mapDate['']=map_date[i].show;
+                }
             }
             return data;
         },
@@ -120,9 +128,16 @@
                 }
             },
             _map_date(){
-                return collect(this.mapDate).map((value)=>{
-                    return this.$tp(value);
-                }).all();
+                let map={};
+                let index = 0;
+                for (let i in this.mapDate){
+                    let value = this.mapDate[i];
+                    if(this.group<=index){
+                        map[i] = this.$tp(value);
+                    }
+                    index++;
+                }
+                return map;
             }
         },
         methods:{
@@ -130,6 +145,14 @@
                 this.access = data;
                 return this.option4;
             },
+            changeGroup(props){
+                this.group = props.options.group;
+                let created_at = props.where['created_at'][0];
+                if(typeof this._map_date[created_at]=="undefined"){
+                    props.where['created_at'][0] = collect(this._map_date).keys().first() || '';
+                }
+                props.search();
+            }
 
         }
 

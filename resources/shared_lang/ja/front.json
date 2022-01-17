@@ -168,7 +168,15 @@
                     "Operation menu": "操作メニュー",
                     "Operator": "操縦者"
                 },
-                "maps": []
+                "maps": {
+                    "group": {
+                        "By day": "日単位",
+                        "By week": "週単位",
+                        "Monthly": "月次",
+                        "Quarterly": "四半期ごと",
+                        "By year": "年ごと"
+                    }
+                }
             },
             "menus": {
                 "fields": {
@@ -745,6 +753,8 @@
             "Last Week": "最近の1週間",
             "Last month": "最近の1月",
             "Last three months": "最近の3月",
+            "Last Year": "最近の1年",
+            "All": "すべて",
             "users": {
                 "username": "ユーザーのニックネーム",
                 "Must be {min}-{max} non-Chinese characters": "{min}-{max}ビットの非中国語文字である必要があります。",

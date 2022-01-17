@@ -168,7 +168,15 @@
                     "Operation menu": "Menu de operação",
                     "Operator": "Operador"
                 },
-                "maps": []
+                "maps": {
+                    "group": {
+                        "By day": "De dia",
+                        "By week": "Por semana",
+                        "Monthly": "Mensal",
+                        "Quarterly": "Trimestralmente",
+                        "By year": "Por ano"
+                    }
+                }
             },
             "menus": {
                 "fields": {
@@ -745,6 +753,8 @@
             "Last Week": "Semana passada",
             "Last month": "Mês passado",
             "Last three months": "Último Março",
+            "Last Year": "Ano passado",
+            "All": "Inteiro",
             "users": {
                 "username": "Apelido do utilizador",
                 "Must be {min}-{max} non-Chinese characters": "Deve ser um personagem não-chinês com {min} - {Max} bits",

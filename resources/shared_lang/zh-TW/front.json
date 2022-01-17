@@ -168,7 +168,15 @@
                     "Operation menu": "操作選單",
                     "Operator": "操作者"
                 },
-                "maps": []
+                "maps": {
+                    "group": {
+                        "By day": "按天",
+                        "By week": "按周",
+                        "Monthly": "按月",
+                        "Quarterly": "按季度",
+                        "By year": "按年"
+                    }
+                }
             },
             "menus": {
                 "fields": {
@@ -745,6 +753,8 @@
             "Last Week": "最近一周",
             "Last month": "最近一月",
             "Last three months": "最近三月",
+            "Last Year": "最近一年",
+            "All": "全部",
             "users": {
                 "username": "用戶昵稱",
                 "Must be {min}-{max} non-Chinese characters": "必須是{min}-{max}比特的非中文字元",

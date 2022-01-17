@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Facades\LifeData;
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
@@ -46,9 +48,19 @@ class LogCountController extends Controller
     protected function bindModel()
     {
         if ( ! $this->bindModel ) {
+            $map = [
+                'LEFT(`created_at`,10)',//'按天',
+                'DATE_FORMAT(`created_at`,"%X-%v")',//'按周',
+                'LEFT(`created_at`,7)',//'按月',
+                'CONCAT(DATE_FORMAT(`created_at`, "%Y"),"-",FLOOR((DATE_FORMAT(`created_at`, "%m")+2)/3))',//'按季度',
+                'LEFT(`created_at`,4)',//'按年'
+            ];
+            $group = Request::input('group',0);
+            $group_str = Arr::get($map,$group,$map[0]);
             $this->bindModel = $this->newBindModel()
                 ->main('=')
-                ->groupBy(DB::raw('LEFT(created_at,10)'));
+                ->groupBy(DB::raw($group_str));
+            $this->showIndexFields[0] = $group_str.' as `date`';
         }
 
         return $this->bindModel;
@@ -72,7 +84,7 @@ class LogCountController extends Controller
      * @var array
      */
     public $showIndexFields = [
-        'LEFT(`created_at`,10) as date',
+        'LEFT(`created_at`,10) as `date`',
         'COUNT(DISTINCT `ip`) as distinct_value',
         'COUNT(*) as `value`'
     ];
@@ -91,6 +103,19 @@ class LogCountController extends Controller
      * @var int
      */
     protected $per_page = 200;
+
+    /**
+     * 结果返回添加筛选条件跟排序
+     */
+    protected function addOptions()
+    {
+        LifeData::set('options', [
+            'where' => LifeData::get('_condition.where', new \stdClass()),
+            'order' => LifeData::get('_condition.order', new \stdClass()),
+            'group'=>LifeData::get('_condition.group', 0),
+        ]);
+    }
+
 
 
 

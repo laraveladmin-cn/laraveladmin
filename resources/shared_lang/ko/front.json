@@ -168,7 +168,15 @@
                     "Operation menu": "조작 메뉴",
                     "Operator": "오퍼레이터"
                 },
-                "maps": []
+                "maps": {
+                    "group": {
+                        "By day": "날마다",
+                        "By week": "주별",
+                        "Monthly": "매달",
+                        "Quarterly": "분기별",
+                        "By year": "연별"
+                    }
+                }
             },
             "menus": {
                 "fields": {
@@ -745,6 +753,8 @@
             "Last Week": "최근 일주일",
             "Last month": "최근 1 월",
             "Last three months": "최근 3 월",
+            "Last Year": "최근 1년",
+            "All": "모조리",
             "users": {
                 "username": "사용자 닉네임",
                 "Must be {min}-{max} non-Chinese characters": "{min} 이 어야 합 니 다. - {max} 비트 비 중국어 문자.",
