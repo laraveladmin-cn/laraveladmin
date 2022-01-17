@@ -9,13 +9,14 @@
                                 <h4><strong>{{$tp('Log in to access the statistics chart')}}</strong></h4>
                             </div>
                             <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
-                                <dropdown-menu :map="props.maps.group" v-model="props.options.group" @change="changeGroup(props)"></dropdown-menu>
+                                <dropdown-menu class="row-item" :map="props.maps.group" v-model="props.options.group" @change="changeGroup(props)"></dropdown-menu>
                             </div>
                             <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
                                 <label-edit v-model="props.where['created_at'][0]"
                                             v-if="props.where && props.where['created_at']"
                                             @change="props.search"
-                                            :map="_map_date">
+                                            :map="_map_date"
+                                            class="row-item">
                                 </label-edit>
                             </div>
                         </div>
@@ -159,5 +160,7 @@
     };
 </script>
 <style lang="scss" scoped>
-
+.row-item{
+    margin-bottom: 5px;
+}
 </style>
