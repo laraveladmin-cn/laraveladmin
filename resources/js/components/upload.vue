@@ -224,7 +224,7 @@
                 if(this.value.indexOf('?')!=-1){
                     return this.value+'&'+this.parm;
                 }
-                return this.value+'?'+this.parm;
+                return this.parm?this.value+'?'+this.parm:this.value;
             },
             ...mapState([
                 '_token',
