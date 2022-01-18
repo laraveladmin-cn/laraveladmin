@@ -8,16 +8,19 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <h4><strong>{{$tp('Log in to access the statistics chart')}}</strong></h4>
                             </div>
-                            <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-md-4 col-sm-2 col-xs-12">
                                 <dropdown-menu class="row-item" :map="props.maps.group" v-model="props.options.group" @change="changeGroup(props)"></dropdown-menu>
                             </div>
                             <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-                                <label-edit v-model="props.where['created_at'][0]"
-                                            v-if="props.where && props.where['created_at']"
-                                            @change="props.search"
-                                            :map="_map_date"
-                                            class="row-item">
-                                </label-edit>
+                                <div :class="'label-date-'+_map_date_count">
+                                    <label-edit v-model="props.where['created_at'][0]"
+                                                v-if="props.where && props.where['created_at']"
+                                                @change="props.search"
+                                                :map="_map_date"
+                                                :class="'language-'+language"
+                                                class="row-item">
+                                    </label-edit>
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -93,7 +96,8 @@
         computed:{
             ...mapState([
                 'use_url',
-                'theme'
+                'theme',
+                'language'
             ]),
             option4(){
                 let access = this.access;
@@ -139,6 +143,9 @@
                     index++;
                 }
                 return map;
+            },
+            _map_date_count(){
+                return collect(this._map_date).count();
             }
         },
         methods:{
@@ -162,5 +169,23 @@
 <style lang="scss" scoped>
 .row-item{
     margin-bottom: 5px;
+}
+.label-date-5{
+    overflow-x: scroll;
+    .row-item{
+        min-width: 700px;
+    }
+}
+.label-date-4{
+    overflow-x: scroll;
+    .language-fr,.language-ru,.language-es,.language-pt{
+        min-width: 600px;
+    }
+}
+.label-date-3{
+    overflow-x: scroll;
+    .language-fr,.language-ru,.language-es,.language-pt{
+        min-width: 500px;
+    }
 }
 </style>

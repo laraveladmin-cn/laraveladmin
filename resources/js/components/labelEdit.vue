@@ -154,6 +154,8 @@
 </script>
 
 <style scoped>
-
+.btn{
+    padding: 0px;
+}
 
 </style>

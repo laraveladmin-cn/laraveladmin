@@ -112,7 +112,7 @@ class LogCountController extends Controller
         LifeData::set('options', [
             'where' => LifeData::get('_condition.where', new \stdClass()),
             'order' => LifeData::get('_condition.order', new \stdClass()),
-            'group'=>LifeData::get('_condition.group', 0),
+            'group'=>Request::input('group',0)-0,
         ]);
     }
 
