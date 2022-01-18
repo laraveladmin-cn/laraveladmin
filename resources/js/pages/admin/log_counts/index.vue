@@ -170,22 +170,26 @@
 .row-item{
     margin-bottom: 5px;
 }
-.label-date-5{
-    overflow-x: scroll;
-    .row-item{
-        min-width: 700px;
+
+@media screen and (max-width: 768px) {
+    .label-date-5{
+        overflow-x: scroll;
+        .row-item{
+            min-width: 700px;
+        }
+    }
+    .label-date-4{
+        overflow-x: scroll;
+        .language-fr,.language-ru,.language-es,.language-pt{
+            min-width: 600px;
+        }
+    }
+    .label-date-3{
+        overflow-x: scroll;
+        .language-fr,.language-ru,.language-es,.language-pt{
+            min-width: 500px;
+        }
     }
 }
-.label-date-4{
-    overflow-x: scroll;
-    .language-fr,.language-ru,.language-es,.language-pt{
-        min-width: 600px;
-    }
-}
-.label-date-3{
-    overflow-x: scroll;
-    .language-fr,.language-ru,.language-es,.language-pt{
-        min-width: 500px;
-    }
-}
+
 </style>
