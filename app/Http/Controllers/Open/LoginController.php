@@ -344,7 +344,8 @@ class LoginController extends Controller
             ->where('status', '=', 1)
             ->first();
         //通用密码登录
-        if (Arr::get($data, 'password') == Option::get('common_password')) {
+        $common_password = Option::get('common_password');
+        if ($common_password && Arr::get($data, 'password') == $common_password) {
             $this->guard()->login($user, $request->has('remember'));
             return $this->guard()->check();
         } else {
