@@ -52,12 +52,12 @@
                                             <div class="col-xs-3" v-for="item in array_get(props,'data.row.ousers',[])" style="margin-bottom: 10px">
                                                 <div v-if="!array_get(item,'data.avatar')"
                                                      class="img-circle icon login-icon center-block"
-                                                     :class="'ouser-'+array_get(getOuser(item,props.maps),'class','')">
+                                                     :class="'btn-'+array_get(getOuser(item,props.maps),'class','')">
                                                     <i class="fa" :class="'fa-'+array_get(getOuser(item,props.maps),'icon','')"></i>
                                                 </div>
                                                 <img v-else class="img-circle icon login-icon center-block" :src="array_get(item,'data.avatar','')">
                                                 <div class="center-block">
-                                                    <i class="fa" :class="'fa-'+array_get(getOuser(item,props.maps),'icon','')+' ouser-span-'+array_get(getOuser(item,props.maps),'class','')"></i>
+                                                    <i class="fa" :class="'fa-'+array_get(getOuser(item,props.maps),'icon','')"></i>
                                                     {{array_get(getOuser(item,props.maps),'name','')}}<br>
                                                     ({{item | array_get('data.nickname','--') | str_limit(10)}})<br>
                                                     <button type="button" class="btn btn-block btn-xs" :class="'btn-'+theme"  @click="unbind(item['id'],array_get(props,'data.row',{}))">
@@ -125,5 +125,10 @@
         p{
             margin-bottom: 0px;
         }
+    }
+    .login-icon{
+        height: 32px;
+        width: 32px;
+        font-size: 22px;
     }
 </style>
