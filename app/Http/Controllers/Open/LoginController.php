@@ -131,12 +131,17 @@ class LoginController extends Controller
     public function otherLoginCallback($type=''){
         $request = app('request');
         $request->offsetSet('type',$type);
-        $validator = Validator::make($request->all(), ['type'=>'required|string|in:'.collect(config('services',[]))->keys()->implode(',')], [],[
+        $validator = Validator::make($request->all(), [
+            'type'=>'required|string|in:'.collect(config('services',[]))->keys()->implode(',')], [],[
             'type'=>trans('Three-party Login service provider')
         ]);
         if ($validator->fails()) {
             throw ValidationException::withMessages($validator->errors()->toArray());
         }
+        $request->offsetUnset('type');
+        $request->offsetUnset(config('laravel_admin.api_route_prefix').'/open/other-login-callback/'.$type);
+        $request->offsetUnset(config('laravel_admin.web_route_prefix').'/open/other-login-callback/'.$type);
+        $request->offsetUnset('json');
         try{
             if($type=='official'){ //微信公众号直接登录
                 $app = EasyWeChat::officialAccount(); // 公众号
