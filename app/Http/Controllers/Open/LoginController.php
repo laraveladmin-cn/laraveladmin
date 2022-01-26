@@ -56,9 +56,9 @@ class LoginController extends Controller
     protected $loginNumUname = '';
     //三方登录配置
     protected $otherLogin=[
-        ['type'=>'qq','url'=>'/open/other-login/qq','class'=>'hover-primary'],
-        //['type'=>'wechat','url'=>'/open/other-login/weixinweb','class'=>'hover-warning'],
-        //['type'=>'weibo','url'=>'/open/other-login/weibo','class'=>'hover-danger']
+        ['type'=>'qq','url'=>'/open/other-login/qq','class'=>'hover-primary','col'=>12],
+        //['type'=>'wechat','url'=>'/open/other-login/weixinweb','class'=>'hover-warning','col'=>4],
+        //['type'=>'weibo','url'=>'/open/other-login/weibo','class'=>'hover-danger','col'=>4],
     ];
 
     protected $backUrlKey ='';
