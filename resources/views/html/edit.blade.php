@@ -240,8 +240,6 @@
                                 <template slot="input-item">
                                     <el-switch v-model="props.data.row['{{$table_field['Field']}}']"
                                                :disabled="!props.url"
-                                               active-color="#13ce66"
-                                               inactive-color="#ff4949"
                                                :active-value="1"
                                                :inactive-value="0">
                                     </el-switch>
@@ -263,13 +261,11 @@
                                 </template>
 @elseif($table_field['showType']=='num')
                                 <template slot="input-item">
-                                    <div>
-                                        <el-input-number v-model="props.data.row['{{$table_field['Field']}}']"
-                                                         class="w-100"
-                                                         size="medium"
-                                                         :disabled="!props.url" :step="1">
-                                        </el-input-number>
-                                    </div>
+                                    <el-input-number v-model="props.data.row['{{$table_field['Field']}}']"
+                                                     class="w-100"
+                                                     size="medium"
+                                                     :disabled="!props.url" :step="1">
+                                    </el-input-number>
                                 </template>
 @elseif($table_field['showType']=='upload')
                                 <template slot="input-item">

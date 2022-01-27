@@ -835,8 +835,10 @@ trait ResourceController
         });
         if (!Request::input('page')) {
             $data['data'] = $data['data']
-                ->prepend($title->toArray()) //标题
-                ->prepend($fields_key); //key
+                ->prepend($title->toArray()); //标题
+            if(!(isset($this->exportDeleteKey) && $this->exportDeleteKey)){
+                $data['data'] = $data['data']->prepend($fields_key); //key
+            }
         }
 
         return $data;

@@ -38,12 +38,15 @@
                 <div class="social-auth-links text-center other-login" v-if="otherLogin.length && !other">
                     <p>---------------- {{$tp('Other login methods')}} ----------------</p>
                     <div class="row">
-                        <div :class="'col-xs-'+other_col" v-for="item in otherLogin">
-                            <a :href="otherLoginUrl(item['url'])">
-                                <div class="img-circle icon login-icon" :class="item['class']">
-                                    <i class="fa" :class="'fa-'+item['type']"></i>
-                                </div>
-                            </a>
+                        <div class="other-login-col" :class="'col-xs-'+item.col+' other-'+item.type" v-for="item in otherLogin">
+                            <div class="other-login-button" v-if="item.button"></div>
+                            <div v-else>
+                                <a :href="otherLoginUrl(item['url'])">
+                                    <div class="img-circle icon login-icon" :class="item['class']">
+                                        <i class="fa" :class="'fa-'+item['type']"></i>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -204,14 +207,23 @@
                         }
                     }
                     this.loading = false;
+                    setTimeout(()=>{
+                        collect(this.otherLogin).each((item)=>{
+                            if(item.button){
+                                $('.other-'+item.type+' .other-login-button').html(item.button);
+                            }
+                        });
+                    },50);
+
+
                 }).catch( (error)=> {
                     this.loading = false;
                 });
             },
             //三方登录
-            otherLoginCallback(query){
+            otherLoginCallback(query,type){
                 this.loading = true;
-                axios.get(this.web_url+'/open/other-login-callback/'+query.type,{params:query}).then((res)=>{
+                axios.get(this.web_url+'/open/other-login-callback/'+(type || query.type),{params:query}).then((res)=>{
                     if(res.data.other){
                         this.other = res.data.other;
                         this.set({
@@ -251,7 +263,11 @@
             }
         },
         mounted() {
-
+            if(typeof window.onOtherLoginAuth=="undefined"){
+                window.onOtherLoginAuth = (user,type)=> {
+                    this.otherLoginCallback(user,type);
+                };
+            }
         },
         created() {
             this.getData();
@@ -320,5 +336,8 @@
         .register-box {
             width: 400px;
         }
+    }
+    .other-login-col{
+        padding: 5px;
     }
 </style>
