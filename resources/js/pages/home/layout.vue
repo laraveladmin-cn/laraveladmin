@@ -43,28 +43,28 @@
                         </div>
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav" v-if="user && user.id">
-                                <li class="dropdown messages-menu">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-envelope-o"></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
+                                <!--  <li class="dropdown messages-menu">
+                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                          <i class="fa fa-envelope-o"></i>
+                                      </a>
+                                      <ul class="dropdown-menu">
 
-                                    </ul>
-                                </li>
-                                <li class="dropdown notifications-menu">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-bell-o"></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                    </ul>
-                                </li>
-                                <li class="dropdown tasks-menu">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-flag-o"></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                    </ul>
-                                </li>
+                                      </ul>
+                                  </li>
+                                  <li class="dropdown notifications-menu">
+                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                          <i class="fa fa-bell-o"></i>
+                                      </a>
+                                      <ul class="dropdown-menu">
+                                      </ul>
+                                  </li>
+                                  <li class="dropdown tasks-menu">
+                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                          <i class="fa fa-flag-o"></i>
+                                      </a>
+                                      <ul class="dropdown-menu">
+                                      </ul>
+                                  </li>-->
                                 <user-menu></user-menu>
                                 <li v-if="locales.length>1" class="language">
                                     <a @click="openLanguage">
@@ -90,22 +90,24 @@
                 </nav>
             </header>
             <div class="content-wrapper">
-              <!--  <div class="container">-->
+                <!--  <div class="container">-->
                 <div>
-                    <section class="content-header">
+                    <section class="content-header" :class="{'my-content-header':downloading}">
                         <h1>
-                            {{$tp(current_menu['name'],menu_lang)}}
-                            <small>{{$tp(current_menu['description'],menu_lang)}}</small>
+                            {{current_menu_name}}
+                            <small>
+                                {{current_menu_description}}
+                            </small>
                         </h1>
                         <ol class="breadcrumb">
                             <li :class="{active:navbar.active}" v-for="navbar in navbars">
                                 <router-link :to="navbar['url']" v-if="!navbar.active && navbar['url']">
                                     <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                    {{$tp(navbar['name'],menu_lang)}}
+                                    {{translation(navbar,'name')}}
                                 </router-link>
                                 <span v-else>
                                  <i class="fa" :class="navbar['id']==current_menu['id'] ? navbar['icons']+' active':navbar['icons']"></i>
-                                {{$tp(navbar['name'],menu_lang)}}
+                                    {{last_menu_show_name ? last_menu_show_name:translation(navbar,'name')}}
                             </span>
                             </li>
                         </ol>
@@ -172,6 +174,31 @@
                 'no_permission',
                 'module_route'
             ]),
+            ...mapState('menu',{
+                menus:state => state.menus,
+                loadingMenu:state => state.loading,
+                last_menu_show:state => state.last_menu_show
+            }),
+            ...mapState('excel',{
+                downloading:state => state.downloading,
+                download_progress:state => state.download_progress,
+                download_pauseing:state => state.pauseing,
+            }),
+            last_menu_show_name(){
+                if(this.last_menu_show && this.last_menu_show.name){
+                    return this.translation(this.last_menu_show,'name');
+                }
+                return '';
+            },
+            current_menu_name(){
+                return this.last_menu_show_name || this.translation(this.current_menu,'name');
+            },
+            current_menu_description(){
+                if(this.last_menu_show && this.last_menu_show.description ){
+                    return this.last_menu_show.description
+                }
+                return this.translation(this.current_menu,'description');
+            }
         },
         methods: {
             ...mapActions({
@@ -186,12 +213,32 @@
             openLanguage(){
                 this.$refs['language'].open();
             },
+            translation(item,key){
+                let value = array_get(item,key,'');
+                let resource_id = item['resource_id'];
+                let res = this.$tp(value , this.shared);
+                if(resource_id && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                    let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
+                    let key = value.replace(parent_name,'{name}');
+                    let shared = copyObj(this.shared);
+                    if(key.indexOf('{name}')==0){
+                        shared.name=this.$tp(parent_name,shared);
+                    }else {
+                        key = value.replace(parent_name.toLowerCase(),'{name}');
+                        shared.l_name=this.$tp(parent_name,shared);
+                        key = key.replace('{name}','{l_name}');
+                    }
+                    res = this.$tp(key , shared);
+                }
+                return res;
+            },
         },
         watch: {
             '$route'(to, from) {
+                dd(to);
                 this.menuSet({
-                    key: 'path',
-                    path: to.path
+                    key:'path',
+                    path:to.matched[1].path.replace(':id','{id}')
                 });
             }
         },
@@ -205,8 +252,8 @@
                 document.body.appendChild(editormdJs);
             }
             this.menuSet({
-                key: 'path',
-                path: this.$router.currentRoute.path
+                key:'path',
+                path:this.$router.currentRoute.matched[1].path.replace(':id','{id}')
             });
             this.getUser();
             this.getMenus();
@@ -217,7 +264,11 @@
                 menu_lang:{
                     "{lang_path}":'_shared.menus',
                     "{lang_root}":''
-                }
+                },
+                shared:{
+                    '{lang_path}':'_shared.menus',
+                    '{lang_root}':''
+                },
             };
         }
     };
