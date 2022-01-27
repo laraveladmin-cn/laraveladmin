@@ -3,7 +3,7 @@
         <div class="login-box center-block" :style="{height:(otherLogin.length && !other)? '455px':'390px'}">
             <logo></logo>
             <div class="login-box-body">
-                <p class="login-box-msg">{{other ? $t('User binding'):$tp('User login')}}</p>
+                <p class="login-box-msg">{{other ? $tp('User binding'):$tp('User login')}}</p>
                 <validation-observer ref="login" v-slot="{invalid,validate}">
                     <form method="post">
                         <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18',icon:'glyphicon-envelope',placeholder:placeholderUsername}"></form-item>
