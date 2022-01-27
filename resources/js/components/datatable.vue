@@ -17,6 +17,8 @@
                       :search="search"
                       :reset="reset"
                       :where="data.options.where"
+                      :maps="_maps"
+                      :options="data.options"
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
