@@ -142,6 +142,7 @@ class LoginController extends Controller
         $request->offsetUnset(config('laravel_admin.api_route_prefix').'/open/other-login-callback/'.$type);
         $request->offsetUnset(config('laravel_admin.web_route_prefix').'/open/other-login-callback/'.$type);
         $request->offsetUnset('json');
+        $request->offsetUnset('uname');
         try{
             if($type=='official'){ //微信公众号直接登录
                 $app = EasyWeChat::officialAccount(); // 公众号
