@@ -78,6 +78,11 @@
                 this.clear();
             }
         },
+        updated() {
+            if(this.modal && this.modal.mounted && typeof this.modal.mounted=="function"){
+                this.modal.mounted();
+            }
+        }
     }
 </script>
 
