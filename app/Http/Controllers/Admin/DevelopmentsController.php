@@ -162,7 +162,7 @@ class DevelopmentsController extends Controller
         $dom = HtmlDomParser::str_get_html($dom->outertext);
         $all_items = collect($data['items'])->collapse()->toArray();
         //代码中所有可拖动节点
-        $items = collect($dom->find('edit-item,.move-item'))->map(function (&$item)use ($all_items){
+        $items = collect($dom->find('edit-item,.move-item'))->map(function ($item)use ($all_items){
             $key = Arr::get($item->attr,'key-name','');
             $data = [
                 'key'=>Arr::get($item->attr,'key-name',''),
