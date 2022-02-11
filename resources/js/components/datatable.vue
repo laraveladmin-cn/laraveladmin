@@ -35,12 +35,14 @@
                                     <i class="fa fa-refresh"></i> {{$t("Refresh")}}
                                 </button>
                             </slot>
-                            <button class="btn btn-danger"
-                                    type="button"
-                                    @click="remove(check_ids)"
-                                    v-show="checkbox && data.configUrl['deleteUrl']">
-                                <i class="fa fa-trash-o"></i> {{$t("Delete selected")}}
-                            </button>
+                            <slot name="delete_selected" :data="data" :remove="remove" :check-ids="check_ids">
+                                <button class="btn btn-danger"
+                                        type="button"
+                                        @click="remove(check_ids)"
+                                        v-show="checkbox && data.configUrl['deleteUrl']">
+                                    <i class="fa fa-trash-o"></i> {{$t("Delete selected")}}
+                                </button>
+                            </slot>
                             <slot name="sizer_more" :data="data" >
                                 <button class="btn btn-primary"
                                         type="button"
@@ -116,7 +118,7 @@
                 </div>
                 <slot name="sizer-min">
                     <div class="collapse sizer_more in">
-                        <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps"  :trans-field="transField">
+                        <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps" :order="data.options.order" :search="search" :trans-field="transField">
                         </slot>
                         <div class="row hidden-md hidden-lg">
                             <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">

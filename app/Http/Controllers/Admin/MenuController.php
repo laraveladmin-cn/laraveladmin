@@ -39,7 +39,7 @@ class MenuController extends Controller
         $this->bindModel OR $this->bindModel();
         $options = $this->getOptions(); //筛选项+排序项
         $where = collect($options['where'])->filter(function ($item){
-            return in_array($item['key'],['name','name|url']);
+            return in_array($item['key'],['name','name|url']) && $item['val'];
         })->toArray();
         $options['where'] = collect($options['where'])->filter(function ($item){
             return !in_array($item['key'],['name','name|url']);
@@ -50,11 +50,22 @@ class MenuController extends Controller
             })->toArray())
             ->options($options);
         $trans_name = config('laravel_admin.trans_prefix').'name';
-        $menus_trans = collect(Menu::main()->get(['id', 'name', 'parent_id','resource_id']))->map(function ($item)use($trans_name){
-            $item1 = collect($item)->toArray();
-            $item1[$trans_name] = Menu::trans($item,'name');//trans_path($item['name'],'_shared.menus');
-            return $item1;
-        });
+        if($where){
+            $menus_trans = collect(Menu::main()
+                ->with(['parent'=>function($q){
+                    $q->select([
+                        'id',
+                        'name',
+                        'item_name'
+                    ]);
+                }])->get(['id', 'name', 'parent_id','resource_id']))->map(function ($item)use($trans_name){
+                $item1 = collect($item)->toArray();
+                $item1[$trans_name] = Menu::trans($item,'name');//trans_path($item['name'],'_shared.menus');
+                return $item1;
+            });
+        }else{
+            $menus_trans = [];
+        }
         collect($where)->map(function ($item)use(&$obj,$menus_trans,$trans_name){
             $obj = $obj->where(function ($q)use($item,$menus_trans,$trans_name){
                 $value = $item['val'];
@@ -72,7 +83,7 @@ class MenuController extends Controller
                         ->orWhere('url',$item['exp'],$value)
                         ->orWhere('url',$item['exp'],'%'.$value);
                 }
-                $q->orWhereIn('id',$menus_ids);
+                $menus_ids and $q->orWhereIn('id',$menus_ids);
             });
         });
 
@@ -122,7 +133,6 @@ class MenuController extends Controller
             'id',
             'name',
             'item_name'
-
         ],
     ];
 
