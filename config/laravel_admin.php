@@ -76,6 +76,15 @@ return [
     ], //支持语言
     'trans_prefix'=>'_trans_', //翻译语言前缀
     'tinymce_key'=>env('TINYMCE_KEY',''), //tinymce编辑器key
-    'sso'=>env('SINGLE_SIGN_ON',false) //是否单点登录
+    'sso'=>env('SINGLE_SIGN_ON',false), //是否单点登录
+    'amap'=>[
+        'js_api'=>[
+            'key'=>env('AMAP_JS_API_KEY',''),
+            'secret'=>env('AMAP_JS_API_SECRET','')
+        ],
+        'web_api'=>[
+            'key'=>env('AMAP_WEB_API_KEY',''),
+        ]
+    ]
 
 ];
