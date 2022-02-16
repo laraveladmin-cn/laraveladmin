@@ -92,11 +92,11 @@ class IndexController extends Controller
             'key'=>config('laravel_admin.amap.js_api.key',''),
             'searchUrl'=>'/home/map/search-amap' //高德地图搜索接口
         ];
-        if($data['env']=='local'){
+        //if($data['env']=='local'){
             $amap_config['securityJsCode'] = config('laravel_admin.amap.js_api.secret','');
-        }else{
+       /* }else{
             $amap_config['serviceHost']=$app_url.'/_AMapService';
-        }
+        }*/
         $data['amap_config'] = $amap_config;
         $data['version'] = 'V1.0.0';
         $max_age = 3600*24;

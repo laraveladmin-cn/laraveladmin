@@ -58,8 +58,6 @@ services: #服务
       - 80:80
       - 443:443
     restart: always
-    environment:
-      AMAP_JS_API_SECRET: ${AMAP_JS_API_SECRET}
     links:
       - php:phpfpm
   node:
