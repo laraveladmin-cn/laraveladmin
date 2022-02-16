@@ -193,8 +193,21 @@
                         }}).then( (response)=> {
                             if(response.status==200 && response.data && response.data.pois && response.data.pois.length){
                                 let first = response.data.pois[0];
-                                let location = first.location;
-                                this.updateMarker(location.split(','));
+                                let location = first.location.split(',');
+                                let value;
+                                if(this.value && !(this.value instanceof Array)){
+                                    value = {
+                                        lng:location[0],
+                                        lat:location[1]
+                                    };
+                                }else {
+                                    value=location;
+                                }
+                                this.updateMarker(location);
+                                if(JSON.stringify(this.value||[])!=JSON.stringify(value)){
+                                    this.$emit('input', value); //修改值
+                                    this.$emit('change',value); //修改值
+                                }
                             }
                         this.searching = false;
                     }).catch((error) => {
