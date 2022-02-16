@@ -34,7 +34,10 @@ class User extends Authenticatable
         'province_id',
         'city_id',
         'area_id',
-        'client_id'
+        'client_id',
+        'addr',
+        'lng',
+        'lat'
     ];
 
     /**
@@ -92,7 +95,8 @@ class User extends Authenticatable
         'province_id'=>0,
         'city_id'=>0,
         'area_id'=>0,
-        'client_id'=>''
+        'client_id'=>'',
+        'addr'=>''
     ];
 
     //字段默认值
@@ -113,6 +117,9 @@ class User extends Authenticatable
         'province_id'=>'Province ID',
         'city_id'=>'City ID',
         'area_id'=>'Zone ID',
+        'addr'=>'详细地址',
+        'lng'=>'坐标经度',
+        'lat'=>'坐标纬度',
         'id' => 'ID',
     ];
 

@@ -375,6 +375,21 @@
             "_id": 141
         },
         {
+            "id": 163,
+            "name": "高德搜索定位",
+            "icons": "fa-map-pin",
+            "description": "高德关键字搜索定位",
+            "url": "/home/map/search-amap",
+            "parent_id": 3,
+            "method": [
+                "get"
+            ],
+            "group": "home",
+            "action": "MapController@searchAmap",
+            "as": "home_map_search_amap",
+            "_id": 142
+        },
+        {
             "id": 4,
             "name": "Official website",
             "icons": "fa-home",
@@ -385,7 +400,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "open",
-            "_id": 142
+            "_id": 143
         },
         {
             "id": 61,
@@ -398,7 +413,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 143
+            "_id": 144
         },
         {
             "id": 62,
@@ -414,7 +429,7 @@
             "use": [
                 "web"
             ],
-            "_id": 144
+            "_id": 145
         },
         {
             "id": 63,
@@ -429,7 +444,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 145
+            "_id": 146
         },
         {
             "id": 64,
@@ -449,7 +464,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 146
+            "_id": 147
         },
         {
             "id": 76,
@@ -465,7 +480,7 @@
             "use": [
                 "web"
             ],
-            "_id": 147
+            "_id": 148
         },
         {
             "id": 77,
@@ -482,7 +497,7 @@
                 "api",
                 "web"
             ],
-            "_id": 148
+            "_id": 149
         },
         {
             "id": 65,
@@ -499,7 +514,7 @@
                 "api",
                 "web"
             ],
-            "_id": 149
+            "_id": 150
         },
         {
             "id": 66,
@@ -513,7 +528,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 150
+            "_id": 151
         },
         {
             "id": 67,
@@ -530,7 +545,7 @@
                 "api",
                 "web"
             ],
-            "_id": 151
+            "_id": 152
         },
         {
             "id": 68,
@@ -547,7 +562,7 @@
                 "api",
                 "web"
             ],
-            "_id": 152
+            "_id": 153
         },
         {
             "id": 69,
@@ -561,7 +576,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 153
+            "_id": 154
         },
         {
             "id": 70,
@@ -574,7 +589,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 154
+            "_id": 155
         },
         {
             "id": 71,
@@ -587,7 +602,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 155
+            "_id": 156
         },
         {
             "id": 72,
@@ -599,7 +614,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 156
+            "_id": 157
         },
         {
             "id": 73,
@@ -612,7 +627,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 157
+            "_id": 158
         },
         {
             "id": 74,
@@ -625,7 +640,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 158
+            "_id": 159
         },
         {
             "id": 159,
@@ -639,7 +654,7 @@
             ],
             "group": "open",
             "action": "IndexController@menuInfo",
-            "_id": 159
+            "_id": 160
         },
         {
             "id": 75,
@@ -656,7 +671,7 @@
                 "api",
                 "web"
             ],
-            "_id": 160
+            "_id": 161
         },
         {
             "id": 79,
@@ -669,7 +684,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 161
+            "_id": 162
         },
         {
             "id": 150,
@@ -683,7 +698,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 162
+            "_id": 163
         }
     ],
     "resource": [

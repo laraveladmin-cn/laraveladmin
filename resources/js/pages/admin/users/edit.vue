@@ -52,6 +52,7 @@
                                                  :is-ajax="true"
                                                  :params="{where:{'level':2}}"
                                                  @change="changeProvinceId(props.data.row)"
+                                                 ref="province"
                                         >
                                         </select2>
                                     </div>
@@ -69,6 +70,7 @@
                                                  :is-ajax="true"
                                                  :params="{where:{'parent_id':props.data.row['province_id']}}"
                                                  @change="changeCityId(props.data.row)"
+                                                 ref="city"
                                         >
                                         </select2>
                                     </div>
@@ -85,14 +87,40 @@
                                                  :keyword-key="'name'"
                                                  :is-ajax="true"
                                                  :params="{where:{'parent_id':props.data.row['city_id']}}"
+                                                 @change="changeAreaId(props.data.row)"
+                                                 ref="area"
                                         >
                                         </select2>
                                     </div>
                                 </template>
                             </edit-item>
-
+                            <edit-item key-name="addr"
+                                       :options="{name: '详细地址', required: false, rules:'',title:''}"
+                                       :datas="props"
+                                       @change="updateKeywords(props.data.row)"
+                            >
+                            </edit-item>
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                            <edit-item key-name="lng" :options="{name: '坐标', required: false, rules:'',title:''}"  :datas="props">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                经度:{{props.data.row['lng'] || '--'}}
+                                            </div>
+                                            <div class="col-xs-6">
+                                                纬度:{{props.data.row['lat'] || '--'}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <gaode-map v-model="props.data.row['location']"
+                                               @change="props.data.row['lng']=props.data.row['location'][0];props.data.row['lat']=props.data.row['location'][1]"
+                                               :keywords="keywords"
+                                               :disabled="!props.url"
+                                    ></gaode-map>
+                                </template>
+                            </edit-item>
                             <edit-item key-name="avatar" :options="{name: props.transField('Head portrait'), required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <upload v-model="props.data.row['avatar']"
@@ -118,6 +146,7 @@
             "password-edit": ()=>import(/* webpackChunkName: "common_components/passwordEdit.vue" */ 'common_components/passwordEdit.vue'),
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             "upload":()=>import(/* webpackChunkName: "common_components/upload.vue" */ 'common_components/upload.vue'),
+            "gaode-map":()=>import(/* webpackChunkName: "common_components/gaodeMap.vue" */ 'common_components/gaodeMap.vue'),
         },
         props: {
             url:{
@@ -154,7 +183,8 @@
                         }
                         this.callback();
                     }
-                }
+                },
+                keywords:''
             };
         },
         methods:{
@@ -164,10 +194,34 @@
             changeProvinceId(row){
                 row.city_id = 0;
                 row.area_id = 0;
+                row.addr='';
+                this.updateKeywords(row);
             },
             changeCityId(row){
                 row.area_id = 0;
+                row.addr='';
+                this.updateKeywords(row);
             },
+            changeAreaId(row){
+                row.addr='';
+                this.updateKeywords(row);
+            },
+            updateKeywords(row){
+                let obj = {
+                    province:'',
+                    city:'',
+                    area:'',
+                };
+                let keywords = collect(obj).map((value,key)=>{
+                    let val = $(this.$refs[key].$el).find("select option:selected").text() || '';
+                    return val.replace(this.$t('Please select'),'');
+                }).values().implode('');
+                let addr = row.addr || '';
+                keywords = keywords+addr;
+                if(keywords!=this.keywords){
+                    this.keywords = keywords;
+                }
+            }
         },
         computed:{
             ...mapState([
@@ -177,6 +231,7 @@
             ...mapState('user',{
                 user:state => state.user
             }),
+
         },
         mounted() {
         },
