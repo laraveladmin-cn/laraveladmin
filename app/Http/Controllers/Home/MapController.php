@@ -15,7 +15,7 @@ class MapController extends Controller
      * @return mixed
      */
     public function searchAmap(){
-        $url = 'https://restapi.amap.com/v3/place/text';
+        $url = 'https://restapi.amap.com/v5/place/text';
         $prams = Request::only(['keywords','types','city','citylimit','children','offset','page','extensions','sig','output','callback']);
         $prams['key'] = config('laravel_admin.amap.web_api.key','');
         try {
