@@ -18,10 +18,10 @@ class AlertUsersAddrTable extends Migration
         $model = new $this->bindModel();
         $prefix = $model->getConnection()->getTablePrefix();
         $connection = $model->getConnectionName()?: config('database.default');
-/*        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
+        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
 ADD COLUMN `addr` varchar(255) NOT NULL DEFAULT '' COMMENT '详细地址' AFTER `description`,
 ADD COLUMN `lng` decimal(10, 6) NULL DEFAULT NULL COMMENT '坐标经度' AFTER `addr`,
-ADD COLUMN `lat` decimal(10, 6) NULL DEFAULT NULL COMMENT '坐标纬度' AFTER `lng`;");*/
+ADD COLUMN `lat` decimal(10, 6) NULL DEFAULT NULL COMMENT '坐标纬度' AFTER `lng`;");
     }
 
     /**
