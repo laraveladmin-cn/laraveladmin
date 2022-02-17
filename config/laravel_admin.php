@@ -78,6 +78,14 @@ return [
         'web_api'=>[
             'key'=>env('AMAP_WEB_API_KEY',''),
         ]
+    ],
+    'google'=>[
+        'js_api'=>[
+            'key'=>env('GOOGLE_JS_API_KEY',''),
+        ],
+        'web_api'=>[
+            'key'=>env('GOOGLE_WEB_API_KEY',''),
+        ]
     ]
 
 ];

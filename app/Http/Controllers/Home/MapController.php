@@ -34,4 +34,40 @@ class MapController extends Controller
         return Response::returns([]);
     }
 
+    /**
+     * 谷歌地图关键字搜索
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function searchGoogle(){
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json';
+        $prams = Request::only([  'address',
+            'bounds',
+            'key',
+            'region',
+            'language',
+            'result_type',
+            'location_type',
+            'latlng',
+            'place_id',
+            'components'
+            ]);
+        $prams['key'] = config('laravel_admin.google.web_api.key','');
+        try {
+            $response = (new Client([
+                'timeout'  => 5,
+            ]))->request('get', $url, ['query'=>$prams]);
+            $status = $response->getStatusCode();
+            if ($status == 200) {
+                $stringBody = $response->getBody()->getContents();
+                $data = json_decode($stringBody,true);
+                if(Arr::get($data,'status')=='OK'){
+                    return Response::returns($data);
+                }
+            }
+        } catch (\Exception $e) {
+        }
+        return Response::returns([]);
+    }
+
 }
