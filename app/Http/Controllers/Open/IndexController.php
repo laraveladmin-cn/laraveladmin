@@ -98,6 +98,10 @@ class IndexController extends Controller
             $amap_config['serviceHost']=$app_url.'/_AMapService';
         }*/
         $data['amap_config'] = $amap_config;
+        $data['google_config'] = [
+            'key'=>config('laravel_admin.google.js_api.key',''),
+            'searchUrl'=>'/home/map/search-google' //谷歌地图搜索接口
+        ];
         $data['version'] = 'V1.0.0';
         $max_age = 3600*24;
         $response = Response::returns($data)

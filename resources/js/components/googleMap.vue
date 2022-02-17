@@ -7,10 +7,10 @@
 </template>
 
 <script>
-    //高德地图
+    //谷歌地图
     import { mapState } from 'vuex';
     export default {
-        name: "gaodeMap",
+        name: "googleMap",
         props:{
             //值
             value: {
@@ -65,7 +65,7 @@
         methods:{
             init(){
                 this.intervalTime = setInterval(()=>{
-                    if(typeof window.AMap!="undefined"){
+                    if(typeof window.google!="undefined" && window.google.maps && window.google.maps.Map){
                         clearInterval(this.intervalTime);
                         //中心点位置
                         let center = this.value || this.defaultCenter;
@@ -73,34 +73,28 @@
                             center = [center.lng,center.lat];
                         }
                         //地图显示
-                        this.map = new window.AMap.Map(this.$el, {
-                            resizeEnable: true,
-                            center: center,
+                        this.map = new window.google.maps.Map(this.$el, {
+                            center: {lng:center[0],lat:center[1]},
                             zoom: 13
                         });
-                        window.AMap.plugin('AMap.Geolocation', ()=> {
-                            let geolocation = new window.AMap.Geolocation({
-                                enableHighAccuracy: true,//是否使用高精度定位，默认:true
-                                timeout: 10000,          //超过10秒后停止定位，默认：5s
-                                position:'RB',    //定位按钮的停靠位置
-                                offset: [10, 20], //定位按钮与设置的停靠位置的偏移量，默认：[10, 20]
-                                zoomToAccuracy: false,   //定位成功后是否自动调整地图视野到定位点
-                            });
-                            this.map.addControl(geolocation);
-                            geolocation.getCurrentPosition((status,result)=>{
-                                if(status=='complete'){ //定位成功
+                        if (window.navigator.geolocation) {
+                            window.navigator.geolocation.getCurrentPosition(
+                                (position) => {
                                     if(!this.value){
-                                        this.updateMarker([result.position.lng,result.position.lat]);
+                                        this.updateMarker([position.coords.longitude,position.coords.latitude]);
                                     }else {
-                                        this.map.setCenter(center); //设置地图中心点
+                                        this.map.setCenter({lng:center[0],lat:center[1]}); //设置地图中心点
                                     }
-                                    //dd('定位信息:',result)
-                                }else{ //定位失败
-                                    //dd(result)
+                                    dd('定位信息:',position)
+                                },
+                                () => {
+                                    dd('定位失败');
                                 }
-                            });
-                        });
-                        this.updateMarker(this.map.getCenter());
+                            );
+                        }else {
+                            dd('定位失败');
+                        }
+                        this.updateMarker(center);
                     }
                 },500);
             },
@@ -108,7 +102,8 @@
                 if(this.disabled){ //禁用模式
                     return;
                 }
-                let location = this.marker.getPosition();
+                let position = this.marker.getPosition();
+                let location = {lng:position.lng(),lat:position.lat()};
                 let value;
                 if(this.value && !(this.value instanceof Array)){
                     value = {
@@ -128,7 +123,7 @@
             },
             destroy(){
                 if(this.map){
-                    this.map.destroy();
+                    //this.map.destroy();
                 }
             },
             updateMarker(val){
@@ -141,16 +136,15 @@
                     lat = val[1];
                 }
                 if(this.marker){
-                    this.map.remove(this.marker);
+                    this.marker.setMap(null);
                 }
-                this.marker = new window.AMap.Marker({
-                    position: new window.AMap.LngLat(lng, lat),
+                this.marker = new window.google.maps.Marker({
+                    position: {lng:lng, lat:lat},
+                    map:this.map,
                     draggable: !this.disabled,
-                    cursor: 'move',
-                    raiseOnDrag: true
                 });
-                this.map.add(this.marker);
-                this.map.setCenter([lng, lat]); //设置地图中心点
+                dd(val);
+                this.map.setCenter({lng:lng,lat:lat}); //设置地图中心点
             }
         },
         mounted() {
@@ -158,23 +152,20 @@
         },
         created() {
             //动态加载js文件
-            if(!document.getElementById('gaode-map')){
+            if(!document.getElementById('google-map')){
                 //认证配置项
-                if(this.amap_config && (typeof window._AMapSecurityConfig=="undefined")){
-                    window._AMapSecurityConfig = this.amap_config;
-                }
                 let jsApiKey;
-                if(this.amap_config){
-                    jsApiKey = this.jsApiKey || this.amap_config.key;
+                if(this.google_config){
+                    jsApiKey = this.jsApiKey || this.google_config.key;
                 }else {
                     jsApiKey = this.jsApiKey;
                 }
 
-                let gaodeMapJs = document.createElement('script');
-                gaodeMapJs.id = 'gaode-map-js';
-                gaodeMapJs.type = 'text/javascript';
-                gaodeMapJs.src = 'https://webapi.amap.com/maps?v=2.0&key='+jsApiKey;
-                document.body.appendChild(gaodeMapJs);
+                let googleMapJs = document.createElement('script');
+                googleMapJs.id = 'google-map-js';
+                googleMapJs.type = 'text/javascript';
+                googleMapJs.src = 'https://maps.googleapis.com/maps/api/js?key='+jsApiKey;
+                document.body.appendChild(googleMapJs);
             }
         },
         watch:{
@@ -184,8 +175,8 @@
                     if(new Date().getTime() - this.timer >= 200){
                         if(val && !this.disabled){
                             let url;
-                            if(this.amap_config){
-                                url = this.searchUrl || this.amap_config.searchUrl;
+                            if(this.google_config){
+                                url = this.searchUrl || this.google_config.searchUrl;
                             }else {
                                 url = this.searchUrl;
                             }
@@ -194,16 +185,16 @@
                             }
                             this.searching = true;
                             axios.get(this.use_url+url,{params:{
-                                    keywords:val
+                                    address:val
                                 }}).then( (response)=> {
-                                if(response.status==200 && response.data && response.data.pois && response.data.pois.length){
-                                    let first = response.data.pois[0];
-                                    let location = first.location.split(',');
+                                if(response.status==200 && response.data && response.data.results && response.data.results.length){
+                                    let first = response.data.results[0];
+                                    let location = first.geometry.location;
                                     let value;
                                     if(this.value && !(this.value instanceof Array)){
                                         value = {
-                                            lng:location[0],
-                                            lat:location[1]
+                                            lng:location.lng,
+                                            lat:location.lat
                                         };
                                     }else {
                                         value=location;
@@ -221,6 +212,7 @@
                         }
                     }
                 },210);
+
             },
             value(val){
                 if(this.map && this.marker && val){
@@ -235,7 +227,7 @@
         },
         computed:{
             ...mapState([
-                'amap_config',
+                'google_config',
                 'use_url',
             ])
         },
