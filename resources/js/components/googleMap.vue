@@ -143,7 +143,6 @@
                     map:this.map,
                     draggable: !this.disabled,
                 });
-                dd(val);
                 this.map.setCenter({lng:lng,lat:lat}); //设置地图中心点
             }
         },
