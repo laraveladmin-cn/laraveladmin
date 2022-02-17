@@ -93,7 +93,7 @@
                         }
                         //地图显示
                         this.map = new window.google.maps.Map(this.$el, {
-                            center: {lng:center[0],lat:center[1]},
+                            center: {lng:center[0]-0,lat:center[1]-0},
                             zoom: 13
                         });
                         this.geolocation(center);
@@ -118,7 +118,7 @@
                             if (window.navigator.geolocation) {
                                 window.navigator.geolocation.getCurrentPosition(
                                     (position) => {
-                                        this.map.setCenter({lng:position.coords.longitude,lat:position.coords.latitude}); //设置地图中心点
+                                        this.map.setCenter({lng:position.coords.longitude-0,lat:position.coords.latitude-0}); //设置地图中心点
                                         dd('定位信息:',position)
                                     },
                                     () => {
@@ -164,11 +164,11 @@
             updateMarker(val){
                 let lng,lat;
                 if(!(val instanceof Array)){
-                    lng = val.lng;
-                    lat = val.lat;
+                    lng = val.lng-0;
+                    lat = val.lat-0;
                 }else {
-                    lng = val[0];
-                    lat = val[1];
+                    lng = val[0]-0;
+                    lat = val[1]-0;
                 }
                 if(this.marker){
                     this.marker.setMap(null);
