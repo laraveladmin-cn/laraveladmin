@@ -70,7 +70,7 @@
                             if(!this.value){
                                 this.updateMarker([position.coords.longitude,position.coords.latitude]);
                             }else {
-                                this.map.setCenter({lng:center[0],lat:center[1]}); //设置地图中心点
+                                this.map.setCenter({lng:center[0]-0,lat:center[1]-0}); //设置地图中心点
                             }
                             dd('定位信息:',position)
                         },
@@ -178,7 +178,7 @@
                     map:this.map,
                     draggable: !this.disabled,
                 });
-                this.map.setCenter({lng:lng,lat:lat}); //设置地图中心点
+                this.map.setCenter({lng:lng-0,lat:lat-0}); //设置地图中心点
             }
         },
         mounted() {
