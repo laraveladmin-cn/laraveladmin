@@ -63,6 +63,31 @@
             };
         },
         methods:{
+            //定位
+            geolocation(center){
+                window.AMap.plugin('AMap.Geolocation', ()=> {
+                    let geolocation = new window.AMap.Geolocation({
+                        enableHighAccuracy: true,//是否使用高精度定位，默认:true
+                        timeout: 10000,          //超过10秒后停止定位，默认：5s
+                        position:'RB',    //定位按钮的停靠位置
+                        offset: [10, 20], //定位按钮与设置的停靠位置的偏移量，默认：[10, 20]
+                        zoomToAccuracy: false,   //定位成功后是否自动调整地图视野到定位点
+                    });
+                    this.map.addControl(geolocation);
+                    geolocation.getCurrentPosition((status,result)=>{
+                        if(status=='complete'){ //定位成功
+                            if(!this.value){
+                                this.updateMarker([result.position.lng,result.position.lat]);
+                            }else {
+                                this.map.setCenter(center); //设置地图中心点
+                            }
+                            //dd('定位信息:',result)
+                        }else{ //定位失败
+                            //dd(result)
+                        }
+                    });
+                });
+            },
             init(){
                 this.intervalTime = setInterval(()=>{
                     if(typeof window.AMap!="undefined"){
@@ -78,28 +103,7 @@
                             center: center,
                             zoom: 13
                         });
-                        window.AMap.plugin('AMap.Geolocation', ()=> {
-                            let geolocation = new window.AMap.Geolocation({
-                                enableHighAccuracy: true,//是否使用高精度定位，默认:true
-                                timeout: 10000,          //超过10秒后停止定位，默认：5s
-                                position:'RB',    //定位按钮的停靠位置
-                                offset: [10, 20], //定位按钮与设置的停靠位置的偏移量，默认：[10, 20]
-                                zoomToAccuracy: false,   //定位成功后是否自动调整地图视野到定位点
-                            });
-                            this.map.addControl(geolocation);
-                            geolocation.getCurrentPosition((status,result)=>{
-                                if(status=='complete'){ //定位成功
-                                    if(!this.value){
-                                        this.updateMarker([result.position.lng,result.position.lat]);
-                                    }else {
-                                        this.map.setCenter(center); //设置地图中心点
-                                    }
-                                    //dd('定位信息:',result)
-                                }else{ //定位失败
-                                    //dd(result)
-                                }
-                            });
-                        });
+                        this.geolocation(center);
                         this.updateMarker(this.map.getCenter());
                     }
                 },500);

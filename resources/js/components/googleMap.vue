@@ -63,6 +63,25 @@
             };
         },
         methods:{
+            geolocation(center){
+                if (window.navigator.geolocation) {
+                    window.navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            if(!this.value){
+                                this.updateMarker([position.coords.longitude,position.coords.latitude]);
+                            }else {
+                                this.map.setCenter({lng:center[0]-0,lat:center[1]-0}); //设置地图中心点
+                            }
+                            dd('定位信息:',position)
+                        },
+                        () => {
+                            dd('定位失败');
+                        }
+                    );
+                }else {
+                    dd('定位失败');
+                }
+            },
             init(){
                 this.intervalTime = setInterval(()=>{
                     if(typeof window.google!="undefined" && window.google.maps && window.google.maps.Map){
@@ -74,26 +93,42 @@
                         }
                         //地图显示
                         this.map = new window.google.maps.Map(this.$el, {
-                            center: {lng:center[0],lat:center[1]},
+                            center: {lng:center[0]-0,lat:center[1]-0},
                             zoom: 13
                         });
-                        if (window.navigator.geolocation) {
-                            window.navigator.geolocation.getCurrentPosition(
-                                (position) => {
-                                    if(!this.value){
-                                        this.updateMarker([position.coords.longitude,position.coords.latitude]);
-                                    }else {
-                                        this.map.setCenter({lng:center[0],lat:center[1]}); //设置地图中心点
+                        this.geolocation(center);
+                        //定位按钮
+                        const locationButton = document.createElement("button");
+
+                        locationButton.textContent = "定位";
+                        locationButton.classList.add("custom-map-control-button");
+                        locationButton.style=' background-color: #fff;\n' +
+                            '  border: 0;\n' +
+                            '  border-radius: 2px;\n' +
+                            '  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);\n' +
+                            '  margin: 10px;\n' +
+                            '  padding: 0 0.5em;\n' +
+                            '  font: 400 18px Roboto, Arial, sans-serif;\n' +
+                            '  overflow: hidden;\n' +
+                            '  height: 40px;\n' +
+                            '  cursor: pointer;' +
+                            ':hover:background: #ebebeb;';
+                        this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+                        locationButton.addEventListener("click",()=>{
+                            if (window.navigator.geolocation) {
+                                window.navigator.geolocation.getCurrentPosition(
+                                    (position) => {
+                                        this.map.setCenter({lng:position.coords.longitude-0,lat:position.coords.latitude-0}); //设置地图中心点
+                                        dd('定位信息:',position)
+                                    },
+                                    () => {
+                                        dd('定位失败');
                                     }
-                                    dd('定位信息:',position)
-                                },
-                                () => {
-                                    dd('定位失败');
-                                }
-                            );
-                        }else {
-                            dd('定位失败');
-                        }
+                                );
+                            }else {
+                                dd('定位失败');
+                            }
+                        });
                         this.updateMarker(center);
                     }
                 },500);
@@ -129,11 +164,11 @@
             updateMarker(val){
                 let lng,lat;
                 if(!(val instanceof Array)){
-                    lng = val.lng;
-                    lat = val.lat;
+                    lng = val.lng-0;
+                    lat = val.lat-0;
                 }else {
-                    lng = val[0];
-                    lat = val[1];
+                    lng = val[0]-0;
+                    lat = val[1]-0;
                 }
                 if(this.marker){
                     this.marker.setMap(null);
@@ -143,8 +178,7 @@
                     map:this.map,
                     draggable: !this.disabled,
                 });
-                dd(val);
-                this.map.setCenter({lng:lng,lat:lat}); //设置地图中心点
+                this.map.setCenter({lng:lng-0,lat:lat-0}); //设置地图中心点
             }
         },
         mounted() {
@@ -216,7 +250,7 @@
             },
             value(val){
                 if(this.map && this.marker && val){
-                   this.updateMarker(val);
+                    this.updateMarker(val);
                 }
             },
             disabled(val){
