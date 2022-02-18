@@ -98,7 +98,9 @@
             "500 page": "500 pages",
             "403 page": "403 pages",
             "404 page": "404 pages",
-            "Log statistics": "Statistiques des journaux"
+            "Log statistics": "Statistiques des journaux",
+            "Gaode search location": "Recherche et localisation de Gaud",
+            "Gaode keyword search and positioning": "Positionnement de la recherche par mot - clé Gaud"
         },
         "tables": {
             "_file_logs": {
@@ -141,7 +143,10 @@
                     "Zone ID": "Zone id",
                     "Province": "Province",
                     "City": "Ville",
-                    "Zone": "Zone"
+                    "Zone": "Zone",
+                    "Detailed address": "Adresse détaillée",
+                    "Coordinate longitude": "Longitude des coordonnées",
+                    "Coordinate latitude": "Coordonnées latitude"
                 },
                 "maps": {
                     "status": {
@@ -1110,5 +1115,6 @@
     "Only picture files can be uploaded and no more than {size}": "Seuls les fichiers Image peuvent être téléchargés et ne doivent pas dépasser {taille}",
     "Total number": "Total général",
     "Confirm to add": "Confirmer l'ajout",
-    "Your account has been logged in elsewhere": "Votre compte est déjà connecté ailleurs!"
+    "Your account has been logged in elsewhere": "Votre compte est déjà connecté ailleurs!",
+    "Coordinates": "Coordonnées"
 }

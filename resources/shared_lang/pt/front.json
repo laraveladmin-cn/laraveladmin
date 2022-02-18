@@ -98,7 +98,9 @@
             "500 page": "500 páginas",
             "403 page": "403 página",
             "404 page": "404 página",
-            "Log statistics": "Estatísticas do registo"
+            "Log statistics": "Estatísticas do registo",
+            "Gaode search location": "Localização da pesquisa do Gaode",
+            "Gaode keyword search and positioning": "Pesquisa e posicionamento das palavras-chave Gaode"
         },
         "tables": {
             "_file_logs": {
@@ -141,7 +143,10 @@
                     "Zone ID": "Zona ID",
                     "Province": "Província",
                     "City": "Cidade",
-                    "Zone": "área"
+                    "Zone": "área",
+                    "Detailed address": "Endereço pormenorizado",
+                    "Coordinate longitude": "Longitude das coordenadas",
+                    "Coordinate latitude": "Latitude das coordenadas"
                 },
                 "maps": {
                     "status": {
@@ -1110,5 +1115,6 @@
     "Only picture files can be uploaded and no more than {size}": "Somente arquivos de Imagem podem ser enviados, e não Mais do que (tamanho)",
     "Total number": "Total",
     "Confirm to add": "Confirmar adição",
-    "Your account has been logged in elsewhere": "Sua conta foi registrada em outro lugar!"
+    "Your account has been logged in elsewhere": "Sua conta foi registrada em outro lugar!",
+    "Coordinates": "Coordenada"
 }

@@ -98,7 +98,9 @@
             "500 page": "500 page",
             "403 page": "403 page",
             "404 page": "404 page",
-            "Log statistics": "Log statistics"
+            "Log statistics": "Log statistics",
+            "Gaode search location": "Gaode search location",
+            "Gaode keyword search and positioning": "Gaode keyword search and positioning"
         },
         "tables": {
             "_file_logs": {
@@ -141,7 +143,10 @@
                     "Zone ID": "Zone ID",
                     "Province": "Province",
                     "City": "City",
-                    "Zone": "Zone"
+                    "Zone": "Zone",
+                    "Detailed address": "Detailed address",
+                    "Coordinate longitude": "Coordinate longitude",
+                    "Coordinate latitude": "Coordinate latitude"
                 },
                 "maps": {
                     "status": {
@@ -1110,5 +1115,6 @@
     "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}",
     "Total number": "Total number",
     "Confirm to add": "Confirm to add",
-    "Your account has been logged in elsewhere": "Your account has been logged in elsewhere"
+    "Your account has been logged in elsewhere": "Your account has been logged in elsewhere",
+    "Coordinates": "Coordinates"
 }

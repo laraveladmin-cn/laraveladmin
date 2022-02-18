@@ -376,9 +376,9 @@
         },
         {
             "id": 163,
-            "name": "高德搜索定位",
+            "name": "Gaode search location",
             "icons": "fa-map-pin",
-            "description": "高德关键字搜索定位",
+            "description": "Gaode keyword search and positioning",
             "url": "/home/map/search-amap",
             "parent_id": 3,
             "method": [

@@ -98,7 +98,9 @@
             "500 page": "500页面",
             "403 page": "403页面",
             "404 page": "404页面",
-            "Log statistics": "日志统计"
+            "Log statistics": "日志统计",
+            "Gaode search location": "高德搜索定位",
+            "Gaode keyword search and positioning": "高德关键字搜索定位"
         },
         "tables": {
             "_file_logs": {
@@ -141,7 +143,10 @@
                     "Zone ID": "区ID",
                     "Province": "省",
                     "City": "市",
-                    "Zone": "区"
+                    "Zone": "区",
+                    "Detailed address": "详细地址",
+                    "Coordinate longitude": "坐标经度",
+                    "Coordinate latitude": "坐标纬度"
                 },
                 "maps": {
                     "status": {
@@ -1110,5 +1115,6 @@
     "Only picture files can be uploaded and no more than {size}": "只能上传图片文件，且不超过{size}",
     "Total number": "总数",
     "Confirm to add": "确认添加",
-    "Your account has been logged in elsewhere": "您的帐号已在其他地方登录！"
+    "Your account has been logged in elsewhere": "您的帐号已在其他地方登录！",
+    "Coordinates": "坐标"
 }

@@ -98,7 +98,9 @@
             "500 page": "500ページ",
             "403 page": "403ページ",
             "404 page": "404ページ",
-            "Log statistics": "ログ統計"
+            "Log statistics": "ログ統計",
+            "Gaode search location": "高徳検索位置",
+            "Gaode keyword search and positioning": "高徳キーワード検索位置"
         },
         "tables": {
             "_file_logs": {
@@ -141,7 +143,10 @@
                     "Zone ID": "エリアID",
                     "Province": "省",
                     "City": "市",
-                    "Zone": "エリア"
+                    "Zone": "エリア",
+                    "Detailed address": "詳細アドレス",
+                    "Coordinate longitude": "ざひょうけいど",
+                    "Coordinate latitude": "座標緯度"
                 },
                 "maps": {
                     "status": {
@@ -1110,5 +1115,6 @@
     "Only picture files can be uploaded and no more than {size}": "画像ファイルのみアップロードできます。",
     "Total number": "合計",
     "Confirm to add": "追加の確認",
-    "Your account has been logged in elsewhere": "アカウントは他の場所に登録されています。"
+    "Your account has been logged in elsewhere": "アカウントは他の場所に登録されています。",
+    "Coordinates": "座標"
 }

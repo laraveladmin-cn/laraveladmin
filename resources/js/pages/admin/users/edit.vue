@@ -95,22 +95,22 @@
                                 </template>
                             </edit-item>
                             <edit-item key-name="addr"
-                                       :options="{name: '详细地址', required: false, rules:'',title:''}"
+                                       :options="{name: props.transField('Detailed address'), required: false, rules:'',title:''}"
                                        :datas="props"
                                        @change="updateKeywords(props.data.row)"
                             >
                             </edit-item>
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="lng" :options="{name: '坐标', required: false, rules:'',title:''}"  :datas="props">
+                            <edit-item key-name="lng" :options="{name: $t('Coordinates'), required: false, rules:'',title:''}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                经度:{{props.data.row['lng'] || '--'}}
+                                                {{props.transField('Coordinate longitude')}}:{{props.data.row['lng'] || '--'}}
                                             </div>
                                             <div class="col-xs-6">
-                                                纬度:{{props.data.row['lat'] || '--'}}
+                                                {{props.transField('Coordinate latitude')}}:{{props.data.row['lat'] || '--'}}
                                             </div>
                                         </div>
                                     </div>

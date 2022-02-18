@@ -117,9 +117,9 @@ class User extends Authenticatable
         'province_id'=>'Province ID',
         'city_id'=>'City ID',
         'area_id'=>'Zone ID',
-        'addr'=>'详细地址',
-        'lng'=>'坐标经度',
-        'lat'=>'坐标纬度',
+        'addr'=>'Detailed address',
+        'lng'=>'Coordinate longitude',
+        'lat'=>'Coordinate latitude',
         'id' => 'ID',
     ];
 

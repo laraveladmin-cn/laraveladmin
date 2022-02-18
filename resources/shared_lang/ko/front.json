@@ -98,7 +98,9 @@
             "500 page": "500 쪽",
             "403 page": "403 쪽",
             "404 page": "404 페이지",
-            "Log statistics": "로그 통계"
+            "Log statistics": "로그 통계",
+            "Gaode search location": "고덕 검색 포지셔닝",
+            "Gaode keyword search and positioning": "고덕 키워드 검색 포지셔닝"
         },
         "tables": {
             "_file_logs": {
@@ -141,7 +143,10 @@
                     "Zone ID": "지역 ID",
                     "Province": "성.",
                     "City": "시장.",
-                    "Zone": "구역."
+                    "Zone": "구역.",
+                    "Detailed address": "상세 주소",
+                    "Coordinate longitude": "좌표 경도",
+                    "Coordinate latitude": "좌표 위도"
                 },
                 "maps": {
                     "status": {
@@ -1110,5 +1115,6 @@
     "Only picture files can be uploaded and no more than {size}": "이미지 파일 만 올 릴 수 있 고 {size} 을 초과 하지 않 습 니 다.",
     "Total number": "총수",
     "Confirm to add": "추가 확인",
-    "Your account has been logged in elsewhere": "당신의 계정은 이미 다른 곳에서 로그인하였습니다!"
+    "Your account has been logged in elsewhere": "당신의 계정은 이미 다른 곳에서 로그인하였습니다!",
+    "Coordinates": "좌표"
 }

@@ -98,7 +98,9 @@
             "500 page": "500 páginas",
             "403 page": "Página 403",
             "404 page": "Página 404",
-            "Log statistics": "Estadísticas de registro"
+            "Log statistics": "Estadísticas de registro",
+            "Gaode search location": "Localización de búsqueda de Gaud",
+            "Gaode keyword search and positioning": "Búsqueda de palabras clave Goethe"
         },
         "tables": {
             "_file_logs": {
@@ -141,7 +143,10 @@
                     "Zone ID": "ID de área",
                     "Province": "Provincia",
                     "City": "Ciudad",
-                    "Zone": "Región"
+                    "Zone": "Región",
+                    "Detailed address": "Dirección detallada",
+                    "Coordinate longitude": "Longitud de coordenadas",
+                    "Coordinate latitude": "Latitud de coordenadas"
                 },
                 "maps": {
                     "status": {
@@ -1110,5 +1115,6 @@
     "Only picture files can be uploaded and no more than {size}": "Sólo se pueden cargar archivos de imagen y no más de {tamaño}",
     "Total number": "Total",
     "Confirm to add": "Confirmar añadir",
-    "Your account has been logged in elsewhere": "¡Su cuenta ha sido registrada en otro lugar!"
+    "Your account has been logged in elsewhere": "¡Su cuenta ha sido registrada en otro lugar!",
+    "Coordinates": "Coordenada"
 }

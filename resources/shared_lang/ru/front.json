@@ -98,7 +98,9 @@
             "500 page": "500 страниц",
             "403 page": "страница",
             "404 page": "Страница 404",
-            "Log statistics": "журнал"
+            "Log statistics": "журнал",
+            "Gaode search location": "позиционирование при поиске по гауде",
+            "Gaode keyword search and positioning": "поиск по ключевому слову гауда"
         },
         "tables": {
             "_file_logs": {
@@ -141,7 +143,10 @@
                     "Zone ID": "идентификатор области",
                     "Province": "провинция",
                     "City": "город",
-                    "Zone": "район"
+                    "Zone": "район",
+                    "Detailed address": "подробный адрес",
+                    "Coordinate longitude": "долгота координат",
+                    "Coordinate latitude": "координатная широта"
                 },
                 "maps": {
                     "status": {
@@ -1110,5 +1115,6 @@
     "Only picture files can be uploaded and no more than {size}": "только для загрузки фотофайлов и не более {size}",
     "Total number": "итог",
     "Confirm to add": "подтверждать Добавление",
-    "Your account has been logged in elsewhere": "Ваш счёт был зарегистрирован в другом месте!"
+    "Your account has been logged in elsewhere": "Ваш счёт был зарегистрирован в другом месте!",
+    "Coordinates": "координата"
 }
