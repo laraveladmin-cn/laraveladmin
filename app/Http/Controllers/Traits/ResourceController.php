@@ -403,10 +403,13 @@ trait ResourceController
      * 获取条件拼接对象
      * @return mixed
      */
-    protected function getWithOptionModel($fields_key = 'showIndexFields')
+    protected function getWithOptionModel($fields_key = 'showIndexFields',$unset_order=false)
     {
         $this->bindModel OR $this->bindModel();
         $options = $this->getOptions(); //筛选项+排序项
+        if($unset_order){
+            unset($options['order']);
+        }
         $obj = $this->bindModel->with($this->selectWithFields($fields_key))
             ->withCount(collect($this->getShowIndexFieldsCount())->filter(function ($item, $key) {
                 return !is_array($item);
@@ -796,35 +799,27 @@ trait ResourceController
         //优化导出
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();
+        $no_order = $primary_key && ((isset($this->disableExportOrder) && $this->disableExportOrder ) || //禁用排序 或
+            !Arr::get($this->getOptions(),'order')); //没有排序
         //获取分页数据
         if (!Request::input('page')) {
             //获取带有筛选条件的对象
             $obj = $this->getWithOptionModel('exportFields');
             $data = $obj->paginate(200)->toArray();
-            if(isset($this->disableExportOrder) && $this->disableExportOrder && $primary_key){
+            if($no_order){
                 $data['max_id'] = collect($data['data'])->max($primary_key)?:0;
             }
             //表头数据放入
-        } else { //不统计条数
-            if(isset($this->disableExportOrder) && $this->disableExportOrder && $primary_key){
-                $id = Request::get('id',0);
-                $this->bindModel OR $this->bindModel();
-                $options = $this->getOptions(); //筛选项+排序项
-                unset($options['order']);
-                $obj = $this->bindModel->with($this->selectWithFields('exportFields'))
-                    ->withCount(collect($this->getShowIndexFieldsCount())->filter(function ($item, $key) {
-                        return !is_array($item);
-                    })->toArray())
-                    ->where($primary_key,'>',$id)
-                    ->options($options);
-                $data = $obj->simplePaginate(200,['*'],'page',1)->toArray();
-                $data['max_id'] = collect($data['data'])->max($primary_key)?:0;
-                $data['current_page'] = Request::get('page',1);
-            }else{
-                //获取带有筛选条件的对象
-                $obj = $this->getWithOptionModel('exportFields');
-                $data = $obj->simplePaginate(200)->toArray();
-            }
+        } else if($no_order){
+            $id = Request::get('id',0);
+            $obj = $this->getWithOptionModel('exportFields',true)->where($primary_key,'>',$id);
+            $data = $obj->simplePaginate(200,['*'],'page',1)->toArray();
+            $data['max_id'] = collect($data['data'])->max($primary_key)?:$id;
+            $data['current_page'] = Request::get('page',1);
+        }else{ //不统计条数
+            //获取带有筛选条件的对象
+            $obj = $this->getWithOptionModel('exportFields');
+            $data = $obj->simplePaginate(200)->toArray();
         }
         $maps = $this->getFieldsMap($this->exportFields, $model,false,true);
         $multipleFields = collect($this->exportFieldsName)->filter(function ($v, $k) {
