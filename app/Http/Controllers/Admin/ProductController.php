@@ -29,7 +29,7 @@ class ProductController extends Controller
      * 导出不进行排序优化导出速度
      * @var bool
      */
-    protected $disableExportOrder=true;
+    protected $disableExportOrder=false;
 
     //默认排序
     protected $orderDefault = [
