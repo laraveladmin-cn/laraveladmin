@@ -25,6 +25,12 @@ class ProductController extends Controller
      */
     protected $resourceModel = 'Product';
 
+    /**
+     * 导出不进行排序优化导出速度
+     * @var bool
+     */
+    protected $disableExportOrder=true;
+
     //默认排序
     protected $orderDefault = [
         'updated_at' => 'desc',
@@ -76,7 +82,7 @@ class ProductController extends Controller
         ]
     ];
 
-    protected $disableExportOrder=false;
+
 
 
     /**
