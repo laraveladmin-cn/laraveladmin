@@ -32,6 +32,12 @@ class LogController extends Controller
     protected $resourceModel = 'Log';
 
     /**
+     * 导出不进行排序优化导出速度
+     * @var bool
+     */
+    protected $disableExportOrder=true;
+
+    /**
      * 绑定模型
      *
      * @return mixed
