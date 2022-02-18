@@ -34,10 +34,13 @@ class MenuController extends Controller
      * 获取条件拼接对象
      * @return mixed
      */
-    protected function getWithOptionModel($fields_key = 'showIndexFields')
+    protected function getWithOptionModel($fields_key = 'showIndexFields',$unset_order=false)
     {
         $this->bindModel OR $this->bindModel();
         $options = $this->getOptions(); //筛选项+排序项
+        if($unset_order){
+            unset($options['order']);
+        }
         $where = collect($options['where'])->filter(function ($item){
             return in_array($item['key'],['name','name|url']) && $item['val'];
         })->toArray();
