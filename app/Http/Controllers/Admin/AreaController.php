@@ -68,10 +68,13 @@ class AreaController extends Controller
      * 获取条件拼接对象
      * @return mixed
      */
-    protected function getWithOptionModel($fields_key = 'showIndexFields')
+    protected function getWithOptionModel($fields_key = 'showIndexFields',$unset_order=false)
     {
         $this->bindModel OR $this->bindModel();
         $options = $this->getOptions(); //筛选项+排序项
+        if($unset_order){
+            unset($options['order']);
+        }
         $obj = $this->bindModel->with($this->selectWithFields($fields_key))
             ->withCount(collect($this->getShowIndexFieldsCount())->filter(function ($item, $key) {
                 return !is_array($item);
