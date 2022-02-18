@@ -76,6 +76,8 @@ class ProductController extends Controller
         ]
     ];
 
+    protected $disableExportOrder=false;
+
 
     /**
      * 验证规则
