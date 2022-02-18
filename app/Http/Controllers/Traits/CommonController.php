@@ -140,6 +140,13 @@ trait CommonController{
      */
     protected $showPrefixions = [];
 
+    /**
+     * 禁用导出排序
+     * 优化加快分页查询速度
+     * @var bool
+     */
+    protected $disableExportOrder=false;
+
 
     /**
      * 查询需要输出的字段信息
