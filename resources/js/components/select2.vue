@@ -322,9 +322,10 @@
                 }
             },
             destroy(){
-                if($(this.$el).find('select').select2){
+                let $el = $(this.$el).find('select');
+                if($el.select2 && $el.data('select2')){
                     try {
-                        $(this.$el).find('select').select2('destroy');
+                        $el.select2('destroy');
                     }catch (e) {
 
                     }
