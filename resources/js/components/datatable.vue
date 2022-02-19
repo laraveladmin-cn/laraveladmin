@@ -281,11 +281,8 @@
                                             </span>
                                         </span>
                                         <span v-else-if="field.type =='code'">
-                                            <code v-if="field.limit">
-                                                {{row | array_get(k) | str_limit(field.limit)}}
-                                            </code>
-                                            <code v-else>
-                                                  {{row | array_get(k)}}
+                                            <code>
+                                                {{showCode(row,k,field)}}
                                             </code>
                                         </span>
                                         <span v-else-if="field.type =='pre'">
@@ -473,6 +470,16 @@
             ...mapMutations({
                 set:'set'
             }),
+            showCode(row,k,field){
+                let str = array_get(row,k) || '';
+                if(str && typeof str=="object"){
+                    str = JSON.stringify(str);
+                };
+                if(field.limit){
+                    str = str_limit(str,field.limit);
+                }
+                return str;
+            },
             hasItem(key,item){
                 if(key.indexOf('.')==-1){
                     if(item[key]===null){
