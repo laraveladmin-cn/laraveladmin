@@ -73,7 +73,10 @@
             },
             affirm(){
                 if(typeof this.modal.callback=="function"){
-                    this.modal.callback();
+                    let res = this.modal.callback();
+                    if(res===false){
+                        return;
+                    }
                 }
                 this.clear();
             }
