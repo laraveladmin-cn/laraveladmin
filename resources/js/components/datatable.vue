@@ -251,7 +251,7 @@
                                     </slot>
                                 </td>
                                 <td v-for="(field,k) in show_fields" :class="field['class']">
-                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass">
+                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass" :showCode="showCode">
                                         <span v-if="field.type =='label' || field.type =='radio'">
                                             <span class="label" :class="labelClass(row,k)" v-if="hasItem(k,row)">
                                                 {{ _maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
@@ -281,11 +281,8 @@
                                             </span>
                                         </span>
                                         <span v-else-if="field.type =='code'">
-                                            <code v-if="field.limit">
-                                                {{row | array_get(k) | str_limit(field.limit)}}
-                                            </code>
-                                            <code v-else>
-                                                  {{row | array_get(k)}}
+                                            <code>
+                                                {{showCode(row,k,field)}}
                                             </code>
                                         </span>
                                         <span v-else-if="field.type =='pre'">
@@ -473,6 +470,16 @@
             ...mapMutations({
                 set:'set'
             }),
+            showCode(row,k,field){
+                let str = array_get(row,k) || '';
+                if(str && typeof str=="object"){
+                    str = JSON.stringify(str);
+                };
+                if(field.limit){
+                    str = str_limit(str,field.limit);
+                }
+                return str;
+            },
             hasItem(key,item){
                 if(key.indexOf('.')==-1){
                     if(item[key]===null){

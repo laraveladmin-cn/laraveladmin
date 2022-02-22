@@ -157,6 +157,9 @@ class CreateModel extends BaseCreate
         $data['passwords'] = collect($table_fields)->filter(function ($item) {
             return in_array($item['showType'], ['password']);
         });
+        $data['jsons'] = collect($table_fields)->filter(function ($item) {
+            return in_array($item['showType'], ['json']);
+        });
         $data['fieldsDefault'] = $this->formatShow(collect($table_fields)->filter(function($item){
             return !in_array($item['Field'],['id','deleted_at','updated_at','created_at']) && !is_null($item['Default']);
         })->map(function($item){

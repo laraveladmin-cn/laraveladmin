@@ -15,6 +15,11 @@
         'path' => 'common_components/icheck.vue',
         'info' => '单选复选组件'
     ];
+    $json = [
+        'name' => 'json-edit',
+        'path' => 'common_components/jsonEdit.vue',
+        'info' => 'json编辑器组件'
+    ];
     $components = [
         'markdown'=>[
             'name' => 'editorMd',
@@ -93,6 +98,8 @@
         'icheck'=>$icheck,
         'icheck-radio'=>$icheck,
         'icheck-checkbox'=>$icheck,
+        'json'=>$json,
+        'json-edit'=>$json
     ];
     $components = collect($components)
         ->only(collect($table_fields)
@@ -308,18 +315,25 @@
                                         </div>
                                     </template>
 @elseif($table_field['showType']=='icheck-checkbox')
-                            <template slot="input-item">
-                                <div class="row">
-                                    <div v-for="(item,index) in props.maps['{{$table_field['Field']}}']"
-                                         class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <icheck v-model="props.data.row['{{$table_field['Field']}}']"
-                                                :option="index"
-                                                :disabled="!props.url">
-                                            {{$startSymbol}}item{{$endSymbol}}
-                                        </icheck>
+                                <template slot="input-item">
+                                    <div class="row">
+                                        <div v-for="(item,index) in props.maps['{{$table_field['Field']}}']"
+                                             class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                            <icheck v-model="props.data.row['{{$table_field['Field']}}']"
+                                                    :option="index"
+                                                    :disabled="!props.url">
+                                                {{$startSymbol}}item{{$endSymbol}}
+                                            </icheck>
+                                        </div>
                                     </div>
-                                </div>
-                            </template>
+                                </template>
+@elseif($table_field['showType']=='json' || $table_field['showType']=='json-edit')
+                                <template slot="input-item">
+                                    <json-edit
+                                        v-model="props.data.row['{{$table_field['Field']}}']"
+                                        :disabled="!props.url">
+                                    </json-edit>
+                                </template>
 @endif
                             </edit-item>
 @endforeach

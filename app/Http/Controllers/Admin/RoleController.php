@@ -121,6 +121,7 @@ class RoleController extends Controller
 
         if ( $id == 1 ) {
             unset($validate['parent_id']);
+            unset($validate['menu_ids']);
         }
 
         return $validate;
@@ -186,7 +187,7 @@ class RoleController extends Controller
             return $item;
         });
         if ( $id == 1 ) {
-            $data['menu_ids'] = collect($data['maps']['permissions'])->pluck('id')->toArray();
+            $data['row']['menu_ids'] = collect($data['maps']['permissions'])->pluck('id')->toArray();
         }
 
         return $data;
@@ -215,7 +216,9 @@ class RoleController extends Controller
                 ]]);
             }
         }
-        unset($data['menu_ids']);
+        if($id==1){
+            unset($data['menu_ids']);
+        }
         return $data;
     }
 
@@ -229,7 +232,7 @@ class RoleController extends Controller
         //当前用户拥有的权限
         $have = Menu::mainAdmin()->pluck('id')->toArray();
         //新角色权限
-        $new_permissions = collect(Request::input('menu_ids',[]))->intersect($have)->all();
+        $new_permissions = collect(Arr::get($data,'menu_ids',[]))->intersect($have)->all();
         $id = Arr::get($data,'id',0);
         if($id){
             //修改菜单-角色关系
