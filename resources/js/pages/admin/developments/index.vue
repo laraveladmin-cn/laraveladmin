@@ -92,7 +92,20 @@
                                                 <template slot="input-item">
                                                     <div class="row">
                                                         <div v-for="(item1,index) in (item.map || array_get(props,'data.maps.'+item.map_key,[]))" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                            <icheck v-model="item.value" :option="index" :label="$tp(item1)"> {{$tp(item1)}}</icheck>
+                                                            <icheck :name="item.key" v-model="item.value" :option="index" :label="$tp(item1)"> {{$tp(item1)}}</icheck>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </edit-item>
+                                            <edit-item :key-name="'parameters.'+index+'.value'"
+                                                       v-else-if="item.type=='radio'"
+                                                       :options="transItem(item)"
+                                                       :datas="props"
+                                                       :key="index">
+                                                <template slot="input-item">
+                                                    <div class="row">
+                                                        <div v-for="(item1,index) in (item.map || array_get(props,'data.maps.'+item.map_key,[]))" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                            <icheck :type="'radio'" :name="item.key" v-model="item.value" :option="index" :label="$tp(item1)"> {{$tp(item1)}}</icheck>
                                                         </div>
                                                     </div>
                                                 </template>

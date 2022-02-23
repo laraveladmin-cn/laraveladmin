@@ -1021,7 +1021,117 @@
     },
     {
         "command": "route:list",
-        "name": "List all registered routes"
+        "name": "List all registered routes",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "",
+                "title": "筛选路由名称",
+                "name": "路由名称",
+                "is_option": true
+            },
+            {
+                "key": "path",
+                "value": "",
+                "rules": "",
+                "title": "筛选路由路径",
+                "name": "路由路径",
+                "is_option": true
+            },
+            {
+                "key": "except-path",
+                "value": "",
+                "rules": "",
+                "title": "筛选排除路由路径",
+                "name": "排除路由路径",
+                "is_option": true
+            },
+            {
+                "key": "columns",
+                "value": [],
+                "rules": "",
+                "title": "不选全部输出",
+                "name": "结果显示列",
+                "type": "checkbox",
+                "is_option": true,
+                "map": {
+                    "Domain": "域名",
+                    "Method": "请求方式",
+                    "URI": "路由路径",
+                    "Name": "名称",
+                    "Action": "绑定控制器方法",
+                    "Middleware": "中间件"
+                }
+            },
+            {
+                "key": "sort",
+                "value": "",
+                "rules": "",
+                "title": "",
+                "name": "结果排序列",
+                "type": "radio",
+                "is_option": true,
+                "map": {
+                    "domain1": "域名",
+                    "method1": "请求方式",
+                    "uri1": "路由路径",
+                    "name1": "名称",
+                    "action1": "绑定控制器方法",
+                    "middleware1": "中间件"
+                }
+            },
+
+
+            {
+                "key": "compact",
+                "value": 0,
+                "rules": "",
+                "title": "只显示方法、URI和操作列",
+                "name": "简洁输出",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "c"
+            },
+            {
+                "key": "method",
+                "value": "",
+                "rules": "",
+                "title": "筛选请求方式",
+                "name": "请求方式",
+                "type": "radio",
+                "is_option": true,
+                "map": {
+                    "get": "GET",
+                    "post": "POST",
+                    "put": "PUT",
+                    "delete": "DELETE"
+                }
+            },
+            {
+                "key": "json",
+                "value": 0,
+                "rules": "",
+                "title": "将路由列表输出为JSON",
+                "name": "JSON格式输出",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "reverse",
+                "value": 0,
+                "rules": "",
+                "title": "将路由列表顺序颠倒输出",
+                "name": "顺序倒序",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "r"
+            }
+
+        ]
     },
     {
         "command": "schedule:run",
