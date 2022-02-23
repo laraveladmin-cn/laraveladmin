@@ -1081,8 +1081,6 @@
                     "middleware1": "中间件"
                 }
             },
-
-
             {
                 "key": "compact",
                 "value": 0,
@@ -1167,6 +1165,35 @@
                 "title": "",
                 "name": "Service provider",
                 "placeholderValue": "Laravel\\Tinker\\TinkerServiceProvider",
+                "is_option": true
+            },
+            {
+                "key": "all",
+                "value": 0,
+                "rules": "",
+                "title": "为所有服务提供商发布资源，无需提示",
+                "name": "所有",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "覆盖现有文件",
+                "name": "强制覆盖",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "tag",
+                "value": "",
+                "rules": "",
+                "title": "",
+                "name": "标记",
+                "placeholderValue": "*",
                 "is_option": true
             }
         ],
