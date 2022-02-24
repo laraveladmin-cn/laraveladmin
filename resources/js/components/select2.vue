@@ -258,13 +258,12 @@
                                 }else {
                                     more = data.data.length!=0;
                                 }
-                                if(typeof data['current_page']=='undefined' || !data['current_page'] || data.current_page<=1){
+                                if((typeof data['current_page']=='undefined' || !data['current_page'] || data.current_page<=1) && $this.has_placeholder){
                                     data.data.unshift({
-                                        'id':$this.placeholderValue,
+                                        'id':$this.placeholderValue===''?$this.placeholderValue+' ':$this.placeholderValue,
                                         'text':$this._placeholder
                                     });
                                 }
-
                                 return {
                                     results: data.data,
                                     pagination: {
