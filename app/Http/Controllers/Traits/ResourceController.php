@@ -305,7 +305,7 @@ trait ResourceController
      */
     public function create(\Illuminate\Http\Request $request)
     {
-        $validate = $this->getValidateRule();
+        $validate = $this->getValidateRule(0);
         $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             return Response::returns([
@@ -347,6 +347,7 @@ trait ResourceController
     public function update($id = 0)
     {
         $request = Request::instance();
+        $id = $id ?: $request->get('id', 0);
         $validate = $this->getValidateRule($id);
         $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
@@ -355,7 +356,6 @@ trait ResourceController
                 'message' => trans('The given data was invalid.')
             ], 422);
         }
-        $id = $id ?: $request->get('id', 0);
         $this->bindModel OR $this->bindModel(); //绑定模型
         $data = $id ? $request->all() : $request->except('id');
         $data['operate_id'] = User::getOperateId();
