@@ -387,7 +387,8 @@
             "double": "The {_field_} field must be a valid decimal",
             "mobile": "The {_field_} is not properly formed",
             "digits_between": "The {_field_} must be between {min} and {max} digits",
-            "user_name": "user_name"
+            "user_name": "The {_field_} must be an impure number consisting of letters, digits, and bottom lines.",
+            "domain": "The {_field_} must be a valid domain name."
         },
         "attributes": {
             "mobile": "mobile",
@@ -623,7 +624,32 @@
                 "Pretend": "Pretend",
                 "Reset data": "Reset data",
                 "Data filling": "Data filling",
-                "Force the operation in the production environment (no confirmation message)": "Force the operation in the production environment (no confirmation message)"
+                "Force the operation in the production environment (no confirmation message)": "Force the operation in the production environment (no confirmation message)",
+                "Filter route name": "Filter route name",
+                "Route name": "Route name",
+                "Filter routing path": "Filter routing path",
+                "Routing path": "Routing path",
+                "Filter and exclude routing paths": "Filter and exclude routing paths",
+                "Exclude routing paths": "Exclude routing paths",
+                "Do not select all outputs": "Do not select all outputs",
+                "Result display column": "Result display column",
+                "Domain name": "Domain name",
+                "Request mode": "Request mode",
+                "Binding controller method": "Binding controller method",
+                "Middleware": "Middleware",
+                "Result ranking": "Result ranking",
+                "Only the method, URI, and action columns are displayed": "Only the method, URI, and action columns are displayed",
+                "Concise output": "Concise output",
+                "Filter request method": "Filter request method",
+                "Output route list as JSON": "Output route list as JSON",
+                "JSON format output": "JSON format output",
+                "Reverse the order of the routing list and output it": "Reverse the order of the routing list and output it",
+                "Reverse order": "Reverse order",
+                "Publish resources for all service providers without prompting": "Publish resources for all service providers without prompting",
+                "All": "All",
+                "Overwrite existing file": "Overwrite existing file",
+                "Force override": "Force override",
+                "Sign": "Sign"
             },
             "menus": {
                 "Drag shift": "Drag shift",

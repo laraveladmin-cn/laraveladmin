@@ -1027,41 +1027,41 @@
                 "key": "name",
                 "value": "",
                 "rules": "",
-                "title": "筛选路由名称",
-                "name": "路由名称",
+                "title": "Filter route name",
+                "name": "Route name",
                 "is_option": true
             },
             {
                 "key": "path",
                 "value": "",
                 "rules": "",
-                "title": "筛选路由路径",
-                "name": "路由路径",
+                "title": "Filter routing path",
+                "name": "Routing path",
                 "is_option": true
             },
             {
                 "key": "except-path",
                 "value": "",
                 "rules": "",
-                "title": "筛选排除路由路径",
-                "name": "排除路由路径",
+                "title": "Filter and exclude routing paths",
+                "name": "Exclude routing paths",
                 "is_option": true
             },
             {
                 "key": "columns",
                 "value": [],
                 "rules": "",
-                "title": "不选全部输出",
-                "name": "结果显示列",
+                "title": "Do not select all outputs",
+                "name": "Result display column",
                 "type": "checkbox",
                 "is_option": true,
                 "map": {
-                    "Domain": "域名",
-                    "Method": "请求方式",
-                    "URI": "路由路径",
-                    "Name": "名称",
-                    "Action": "绑定控制器方法",
-                    "Middleware": "中间件"
+                    "Domain": "Domain name",
+                    "Method": "Request mode",
+                    "URI": "Routing path",
+                    "Name": "Name",
+                    "Action": "Binding controller method",
+                    "Middleware": "Middleware"
                 }
             },
             {
@@ -1069,24 +1069,24 @@
                 "value": "",
                 "rules": "",
                 "title": "",
-                "name": "结果排序列",
+                "name": "Result ranking",
                 "type": "radio",
                 "is_option": true,
                 "map": {
-                    "domain1": "域名",
-                    "method1": "请求方式",
-                    "uri1": "路由路径",
-                    "name1": "名称",
-                    "action1": "绑定控制器方法",
-                    "middleware1": "中间件"
+                    "domain1": "Domain name",
+                    "method1": "Request mode",
+                    "uri1": "Routing path",
+                    "name1": "Name",
+                    "action1": "Binding controller method",
+                    "middleware1": "Middleware"
                 }
             },
             {
                 "key": "compact",
                 "value": 0,
                 "rules": "",
-                "title": "只显示方法、URI和操作列",
-                "name": "简洁输出",
+                "title": "Only the method, URI, and action columns are displayed",
+                "name": "Concise output",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true,
@@ -1096,8 +1096,8 @@
                 "key": "method",
                 "value": "",
                 "rules": "",
-                "title": "筛选请求方式",
-                "name": "请求方式",
+                "title": "Filter request method",
+                "name": "Request mode",
                 "type": "radio",
                 "is_option": true,
                 "map": {
@@ -1111,8 +1111,8 @@
                 "key": "json",
                 "value": 0,
                 "rules": "",
-                "title": "将路由列表输出为JSON",
-                "name": "JSON格式输出",
+                "title": "Output route list as JSON",
+                "name": "JSON format output",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -1121,14 +1121,13 @@
                 "key": "reverse",
                 "value": 0,
                 "rules": "",
-                "title": "将路由列表顺序颠倒输出",
-                "name": "顺序倒序",
+                "title": "Reverse the order of the routing list and output it",
+                "name": "Reverse order",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true,
                 "key_as": "r"
             }
-
         ]
     },
     {
@@ -1171,8 +1170,8 @@
                 "key": "all",
                 "value": 0,
                 "rules": "",
-                "title": "为所有服务提供商发布资源，无需提示",
-                "name": "所有",
+                "title": "Publish resources for all service providers without prompting",
+                "name": "All",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -1181,8 +1180,8 @@
                 "key": "force",
                 "value": 0,
                 "rules": "",
-                "title": "覆盖现有文件",
-                "name": "强制覆盖",
+                "title": "Overwrite existing file",
+                "name": "Force override",
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
@@ -1192,7 +1191,7 @@
                 "value": "",
                 "rules": "",
                 "title": "",
-                "name": "标记",
+                "name": "Sign",
                 "placeholderValue": "*",
                 "is_option": true
             }
