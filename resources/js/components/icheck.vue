@@ -1,6 +1,6 @@
 <template>
     <label class="label-text" :title="label">
-        <input ref="icheck" v-model="val" :type="type" :value="option" :disabled="disabled">
+        <input ref="icheck" :name="name" v-model="val" :type="type" :value="option" :disabled="disabled">
         <slot v-if="!disabledLabel">
             {{label}}
         </slot>
@@ -46,7 +46,12 @@
                     return false;
                 }
             },
-
+            name:{
+                type:[String,Number],
+                default:function () {
+                    return null;
+                }
+            }
         },
         data(){
           return {

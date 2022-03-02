@@ -154,7 +154,8 @@ $str = <<<'str'
     "sting_or_array": "Выбранные атрибуты :attribute.",
     "url_path": ": неверный формат :attribute.",
     "captcha": ": Ошибка проверки attribute.",
-    "user_name": ": attribute должно быть не чисто число, состоящее из букв, цифр, подчёркнутых."
+    "user_name": ": attribute должно быть не чисто число, состоящее из букв, цифр, подчёркнутых.",
+    "domain": ": attribute должно быть действительным доменом."
 }
 str;
 return json_decode($str,true);

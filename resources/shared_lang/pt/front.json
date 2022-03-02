@@ -637,7 +637,8 @@
             "double": "Tchau.Campo de concentraçãoO Campo deve ser UMA Casa decimal válida",
             "mobile": "Tchau.Campo de concentraçãoFormato incorreto",
             "digits_between": "Tchau.Campo de concentraçãoO comprimento deve ESTAR entreMINHA GARANTIAE AINDAMáximo de EmbaixadaEntre OS bits",
-            "user_name": "Feliz campo, Josué. Deve ser um número não puro composto de letras, números e subnúcleos."
+            "user_name": "Feliz campo, Josué. Deve ser um número não puro composto de letras, números e subnúcleos.",
+            "domain": "{_field_} Deve ser um nome de domínio válido."
         },
         "attributes": {
             "mobile": "Número de telefone",
@@ -927,7 +928,32 @@
                 "Pretend": "Fingir",
                 "Reset data": "Reiniciar os dados",
                 "Data filling": "Preenchimento de dados",
-                "Force the operation in the production environment (no confirmation message)": "Forçar a operação no ambiente de produção (sem mensagem de confirmação)"
+                "Force the operation in the production environment (no confirmation message)": "Forçar a operação no ambiente de produção (sem mensagem de confirmação)",
+                "Filter route name": "Nome da rota do filtro",
+                "Route name": "Nome da rota",
+                "Filter routing path": "Caminho de encaminhamento do filtro",
+                "Routing path": "Caminho de encaminhamento",
+                "Filter and exclude routing paths": "Filtrar e excluir caminhos de roteamento",
+                "Exclude routing paths": "Excluir os caminhos de encaminhamento",
+                "Do not select all outputs": "Não seleccionar todas as saídas",
+                "Result display column": "Coluna de visualização do resultado",
+                "Domain name": "nome de domínio",
+                "Request mode": "Modo de pedido",
+                "Binding controller method": "Método do controlador de ligação",
+                "Middleware": "Middleware",
+                "Result ranking": "Classificação dos resultados",
+                "Only the method, URI, and action columns are displayed": "Somente as colunas de método, URI e ação são exibidas",
+                "Concise output": "Resultado conciso",
+                "Filter request method": "Método do pedido do filtro",
+                "Output route list as JSON": "Lista de rotas de saída como JSON",
+                "JSON format output": "Saída do formato JSON",
+                "Reverse the order of the routing list and output it": "Reverter a ordem da lista de roteamento e emiti-la",
+                "Reverse order": "Ordem inversa",
+                "Publish resources for all service providers without prompting": "Publicar recursos para todos os provedores de serviços sem solicitar",
+                "All": "Todos",
+                "Overwrite existing file": "Substituir o ficheiro existente",
+                "Force override": "Forçar a anulação",
+                "Sign": "Signo"
             },
             "menus": {
                 "Drag shift": "Arrastar mudança",

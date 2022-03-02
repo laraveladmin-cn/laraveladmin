@@ -154,7 +154,8 @@ $str = <<<'str'
     "sting_or_array": "선 택 된 속성:attribute 불법.",
     "url_path": ":attribute 형식 이 잘못 되 었 습 니 다.",
     "captcha": ": attribute 유효성 검사 오류입니다.",
-    "user_name": ": attribute는 문자, 숫자, 밑줄로 구성된 비순수 숫자여야 합니다."
+    "user_name": ": attribute는 문자, 숫자, 밑줄로 구성된 비순수 숫자여야 합니다.",
+    "domain": ": attribute는 유효한 도메인 이름이어야 합니다."
 }
 str;
 return json_decode($str,true);

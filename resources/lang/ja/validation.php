@@ -154,7 +154,8 @@ $str = <<<'str'
     "sting_or_array": "選択した属性:attributeが不正です。",
     "url_path": ":attributeフォーマットが不正です。",
     "captcha": ":attribute検証エラー。",
-    "user_name": ":attributeは、アルファベット、数値、下線からなる非純数値でなければなりません。"
+    "user_name": ":attributeは、アルファベット、数値、下線からなる非純数値でなければなりません。",
+    "domain": ":attributeは有効なドメイン名でなければなりません。"
 }
 str;
 return json_decode($str,true);

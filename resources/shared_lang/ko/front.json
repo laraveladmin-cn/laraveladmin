@@ -637,7 +637,8 @@
             "double": "{_field_} 필드는 유효한 십진수 여야합니다",
             "mobile": "{field}부정 확 하 다",
             "digits_between": "{field}길 이 는 {min}와 {max}비트 사이",
-            "user_name": "{_field_} 문자, 숫자, 밑줄로 이루어진 비순수 숫자여야 합니다."
+            "user_name": "{_field_} 문자, 숫자, 밑줄로 이루어진 비순수 숫자여야 합니다.",
+            "domain": "{_field_} 유효한 도메인 이름이어야 합니다."
         },
         "attributes": {
             "mobile": "핸드폰 번호",
@@ -927,7 +928,32 @@
                 "Pretend": "... 인 체하다",
                 "Reset data": "데이터 재설정 여부",
                 "Data filling": "데이터 충전",
-                "Force the operation in the production environment (no confirmation message)": "프로덕션 환경에서 작업을 강제로 실행합니다(확인 메시지 없음)."
+                "Force the operation in the production environment (no confirmation message)": "프로덕션 환경에서 작업을 강제로 실행합니다(확인 메시지 없음).",
+                "Filter route name": "필터 라우팅 이름",
+                "Route name": "라우팅 이름",
+                "Filter routing path": "라우팅 경로 필터링",
+                "Routing path": "경로",
+                "Filter and exclude routing paths": "필터 제외 라우팅 경로",
+                "Exclude routing paths": "라우팅 경로 제외",
+                "Do not select all outputs": "모든 출력 선택 안 함",
+                "Result display column": "결과 표시 열",
+                "Domain name": "도메인 이름",
+                "Request mode": "요청 방식",
+                "Binding controller method": "바인딩 컨트롤러 방법",
+                "Middleware": "중간부품",
+                "Result ranking": "결과 정렬",
+                "Only the method, URI, and action columns are displayed": "메서드, URI 및 작업 열만 표시",
+                "Concise output": "단순 출력",
+                "Filter request method": "요청 방식 필터링",
+                "Output route list as JSON": "라우팅 목록을 JSON으로 내보내기",
+                "JSON format output": "JSON 형식 출력",
+                "Reverse the order of the routing list and output it": "라우팅 목록 순서를 출력으로 반전",
+                "Reverse order": "순서",
+                "Publish resources for all service providers without prompting": "모든 서비스 공급업체에 대한 리소스 게시 알림 필요 없음",
+                "All": "소유하다",
+                "Overwrite existing file": "기존 파일 덮어쓰기",
+                "Force override": "강제 덮어쓰기",
+                "Sign": "표식"
             },
             "menus": {
                 "Drag shift": "드래그 자리 이동",

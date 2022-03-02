@@ -637,7 +637,8 @@
             "double": "Поле {_field_} должно быть допустимым десятичным числом",
             "mobile": "{брызги}каскадНеверный формат",
             "digits_between": "{брызги}каскаддлина должна быть в пределах {u}брызгии {тяMax Shau}бит",
-            "user_name": "(Звенит колокольчик) Должно быть, это не простые цифры, состоящие из букв, цифр и подчёркивания."
+            "user_name": "(Звенит колокольчик) Должно быть, это не простые цифры, состоящие из букв, цифр и подчёркивания.",
+            "domain": "(Звенит колокольчик) имя должно быть действительным."
         },
         "attributes": {
             "mobile": "номер телефона",
@@ -927,7 +928,32 @@
                 "Pretend": "притворяться",
                 "Reset data": "сбросить данные",
                 "Data filling": "заполнение данных",
-                "Force the operation in the production environment (no confirmation message)": "принудительное выполнение этой операции в производственной среде (без подтверждения патрона)"
+                "Force the operation in the production environment (no confirmation message)": "принудительное выполнение этой операции в производственной среде (без подтверждения патрона)",
+                "Filter route name": "имя маршрутизации",
+                "Route name": "имя маршрута",
+                "Filter routing path": "путь сортировки",
+                "Routing path": "маршрут",
+                "Filter and exclude routing paths": "путь сортировки",
+                "Exclude routing paths": "удаление маршрута",
+                "Do not select all outputs": "не выделять весь вывод",
+                "Result display column": "Таблица результатов",
+                "Domain name": "доменное имя",
+                "Request mode": "форма запроса",
+                "Binding controller method": "метод привязного контроллера",
+                "Middleware": "промежуточный элемент",
+                "Result ranking": "последовательность результирующих рядов",
+                "Only the method, URI, and action columns are displayed": "Показывать только таблицы методов, URI и операций",
+                "Concise output": "простой вывод",
+                "Filter request method": "режим просеивания",
+                "Output route list as JSON": "Экспортировать список маршрутов в JSON",
+                "JSON format output": "Экспорт в формате JSON",
+                "Reverse the order of the routing list and output it": "обратный Вывод списка маршрутов",
+                "Reverse order": "последовательная инверсия",
+                "Publish resources for all service providers without prompting": "размещение ресурсов для всех поставщиков услуг без запроса",
+                "All": "все",
+                "Overwrite existing file": "Заменить существующий файл",
+                "Force override": "обязательное покрытие",
+                "Sign": "клеймо"
             },
             "menus": {
                 "Drag shift": "буксирный сдвиг",

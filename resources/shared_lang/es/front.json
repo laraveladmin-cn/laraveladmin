@@ -637,7 +637,8 @@
             "double": "El campo {_field_} debe ser un decimal válido",
             "mobile": "{Field}Formato incorrecto",
             "digits_between": "{Field}La longitud debe estar entre {yMin}Y {nMax}Entre bits",
-            "user_name": "{Field} Debe ser un número impuro de letras, números y subrayado."
+            "user_name": "{Field} Debe ser un número impuro de letras, números y subrayado.",
+            "domain": "{Field} Debe ser un nombre de dominio válido."
         },
         "attributes": {
             "mobile": "Número de teléfono móvil",
@@ -927,7 +928,32 @@
                 "Pretend": "Fingir",
                 "Reset data": "Reiniciar datos",
                 "Data filling": "Relleno de datos",
-                "Force the operation in the production environment (no confirmation message)": "Forzar la operación en el entorno de producción"
+                "Force the operation in the production environment (no confirmation message)": "Forzar la operación en el entorno de producción",
+                "Filter route name": "Nombre de ruta del filtro",
+                "Route name": "Nombre de la ruta",
+                "Filter routing path": "Ruta de enrutamiento filtrada",
+                "Routing path": "Ruta de enrutamiento",
+                "Filter and exclude routing paths": "Filtrar rutas de enrutamiento excluidas",
+                "Exclude routing paths": "Excluir rutas de enrutamiento",
+                "Do not select all outputs": "No seleccionar todas las salidas",
+                "Result display column": "Columnas de visualización de resultados",
+                "Domain name": "Nombre de dominio",
+                "Request mode": "Modo de solicitud",
+                "Binding controller method": "Método de control vinculante",
+                "Middleware": "Middleware",
+                "Result ranking": "Secuencia de fila de resultados",
+                "Only the method, URI, and action columns are displayed": "Mostrar sólo métodos, Uri y columnas de acción",
+                "Concise output": "Salida concisa",
+                "Filter request method": "Modo de solicitud de filtrado",
+                "Output route list as JSON": "Salida de la lista de enrutamiento a json",
+                "JSON format output": "Salida en formato json",
+                "Reverse the order of the routing list and output it": "Invertir la salida de la lista de enrutamiento",
+                "Reverse order": "Orden inverso",
+                "Publish resources for all service providers without prompting": "Publicar recursos para todos los proveedores de servicios sin previo aviso",
+                "All": "Todos",
+                "Overwrite existing file": "Sobrescribir archivos existentes",
+                "Force override": "Cobertura obligatoria",
+                "Sign": "Marcado"
             },
             "menus": {
                 "Drag shift": "Desplazamiento de arrastre",

@@ -637,7 +637,8 @@
             "double": "{_field_}字段必須為有效的小數",
             "mobile": "{_field_}不格式正確",
             "digits_between": "{_field_}長度必須是介於{_min_}和{_max_}比特之間",
-            "user_name": "{_field_} 必須是由字母、數位、底線組成的非純數位。"
+            "user_name": "{_field_} 必須是由字母、數位、底線組成的非純數位。",
+            "domain": "{_field_} 必須是有效功能變數名稱。"
         },
         "attributes": {
             "mobile": "手機號碼",
@@ -927,7 +928,32 @@
                 "Pretend": "假裝",
                 "Reset data": "是否重置數據",
                 "Data filling": "數據填充",
-                "Force the operation in the production environment (no confirmation message)": "在生產環境中強制運行該操作（不彈確認資訊）"
+                "Force the operation in the production environment (no confirmation message)": "在生產環境中強制運行該操作（不彈確認資訊）",
+                "Filter route name": "篩選路由名稱",
+                "Route name": "路由名稱",
+                "Filter routing path": "篩選路由路徑",
+                "Routing path": "路由路徑",
+                "Filter and exclude routing paths": "篩選排除路由路徑",
+                "Exclude routing paths": "排除路由路徑",
+                "Do not select all outputs": "不選全部輸出",
+                "Result display column": "結果顯示列",
+                "Domain name": "功能變數名稱",
+                "Request mode": "請求管道",
+                "Binding controller method": "綁定控制器方法",
+                "Middleware": "中介軟體",
+                "Result ranking": "結果排序列",
+                "Only the method, URI, and action columns are displayed": "只顯示方法、URI和操作列",
+                "Concise output": "簡潔輸出",
+                "Filter request method": "篩選請求管道",
+                "Output route list as JSON": "將路由清單輸出為JSON",
+                "JSON format output": "JSON格式輸出",
+                "Reverse the order of the routing list and output it": "將路由清單順序顛倒輸出",
+                "Reverse order": "順序倒序",
+                "Publish resources for all service providers without prompting": "為所有服務提供者發佈資源，無需提示",
+                "All": "所有",
+                "Overwrite existing file": "覆蓋現有檔案",
+                "Force override": "強制覆蓋",
+                "Sign": "標記"
             },
             "menus": {
                 "Drag shift": "拖拽移位",

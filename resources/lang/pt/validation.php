@@ -154,7 +154,8 @@ $str = <<<'str'
     "sting_or_array": "Atributo selecionado :attribute ilegal.",
     "url_path": "formato de :attribute incorrecto.",
     "captcha": ": Erro de validação do atributo.",
-    "user_name": ": o atributo deve ser um número não puro composto de letras, números e subnúcleos."
+    "user_name": ": o atributo deve ser um número não puro composto de letras, números e subnúcleos.",
+    "domain": ": atributo deve ser um nome de domínio válido."
 }
 str;
 return json_decode($str,true);

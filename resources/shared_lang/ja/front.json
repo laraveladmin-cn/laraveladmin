@@ -637,7 +637,8 @@
             "double": "{_field_}フィールドは有効な10進数である必要があります",
             "mobile": "{u}field(u)非フォーマットが正しい",
             "digits_between": "{u}field(u)長さはその中間ぐらいが必要です。min_と{u}max_ビット間",
-            "user_name": "{_field_} アルファベット、数値、下線からなる非純数値でなければなりません。"
+            "user_name": "{_field_} アルファベット、数値、下線からなる非純数値でなければなりません。",
+            "domain": "{_field_} 有効なドメイン名でなければなりません。"
         },
         "attributes": {
             "mobile": "携帯の番号",
@@ -927,7 +928,32 @@
                 "Pretend": "ふりを",
                 "Reset data": "データをリセットするかどうか",
                 "Data filling": "データの移入",
-                "Force the operation in the production environment (no confirmation message)": "この操作を本番環境で強制的に実行します(確認情報を弾かない)"
+                "Force the operation in the production environment (no confirmation message)": "この操作を本番環境で強制的に実行します(確認情報を弾かない)",
+                "Filter route name": "フィルタルーティング名",
+                "Route name": "ルーティング名",
+                "Filter routing path": "ルーティングパスのフィルタ",
+                "Routing path": "ルーティングパス",
+                "Filter and exclude routing paths": "フィルタ除外ルーティングパス",
+                "Exclude routing paths": "ルーティングパスの除外",
+                "Do not select all outputs": "すべての出力を選択しない",
+                "Result display column": "結果表示列",
+                "Domain name": "ドメイン名",
+                "Request mode": "リクエストモード",
+                "Binding controller method": "コントローラのバインド方法",
+                "Middleware": "ミドルウェア",
+                "Result ranking": "結果列",
+                "Only the method, URI, and action columns are displayed": "メソッド、URI、アクション列のみ表示",
+                "Concise output": "簡潔な出力",
+                "Filter request method": "フィルタ要求方式",
+                "Output route list as JSON": "ルーティングリストをJSONに出力",
+                "JSON format output": "JSON形式出力",
+                "Reverse the order of the routing list and output it": "ルーティングリストの順序を逆さまにして出力",
+                "Reverse order": "シーヶンシャルバックシーケンス",
+                "Publish resources for all service providers without prompting": "すべてのサービスプロバイダにリソースを公開します。ヒントは必要ありません。",
+                "All": "すべて",
+                "Overwrite existing file": "既存のファイルを上書き",
+                "Force override": "強制オーバーライド",
+                "Sign": "マーク"
             },
             "menus": {
                 "Drag shift": "ドラッグ操作",
