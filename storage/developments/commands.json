@@ -1073,12 +1073,12 @@
                 "type": "radio",
                 "is_option": true,
                 "map": {
-                    "domain1": "Domain name",
-                    "method1": "Request mode",
-                    "uri1": "Routing path",
-                    "name1": "Name",
-                    "action1": "Binding controller method",
-                    "middleware1": "Middleware"
+                    "domain": "Domain name",
+                    "method": "Request mode",
+                    "uri": "Routing path",
+                    "name": "Name",
+                    "action": "Binding controller method",
+                    "middleware": "Middleware"
                 }
             },
             {
