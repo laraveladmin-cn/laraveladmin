@@ -124,6 +124,13 @@
                         en_name: "Portugal",
                         country_or_region: "pt",
                         language:'Português',
+                    },
+                    {
+                        value:"per",
+                        name: "فارسی",
+                        en_name: "Persian",
+                        country_or_region: "per",
+                        language:'فارسی',
                     }
 
                 ],
