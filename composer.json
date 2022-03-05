@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.7",
         "laravel/tinker": "^2.0",
         "laraveladmin/aliyun-sms": "^2.1",
+        "laraveladmin/geetest": ">=1.2.1",
         "overtrue/laravel-lang": "^4.1",
         "overtrue/laravel-wechat": "^6.0",
         "socialiteproviders/telegram": "*",
