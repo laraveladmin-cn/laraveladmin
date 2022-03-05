@@ -444,7 +444,58 @@
     },
     {
         "command": "down",
-        "name": "Put the application into maintenance mode"
+        "name": "Put the application into maintenance mode",
+        "parameters": [
+            {
+                "key": "redirect",
+                "value": "",
+                "rules": "",
+                "title": "用户应该重定向到的路径",
+                "name": "重定向跳转",
+                "is_option": true
+            },
+            {
+                "key": "render",
+                "value": "",
+                "rules": "",
+                "title": "应在维护模式期间预呈现以显示的视图",
+                "name": "视图渲染",
+                "is_option": true
+            },
+            {
+                "key": "retry",
+                "value": "",
+                "rules": "",
+                "title": "多少秒后再重试",
+                "name": "重试时间",
+                "is_option": true
+            },
+            {
+                "key": "refresh",
+                "value": "",
+                "rules": "",
+                "title": "浏览器指定多少秒后自动刷新",
+                "name": "自动刷新",
+                "is_option": true
+            },
+            {
+                "key": "secret",
+                "value": "",
+                "rules": "",
+                "title": "可用于绕过维护模式的秘密短语",
+                "name": "秘密短语",
+                "is_option": true
+            },
+            {
+                "key": "status",
+                "value": "",
+                "rules": "",
+                "title": "返回维护模式响应时应该使用的状态码",
+                "name": "状态码",
+                "placeholder": "503",
+                "is_option": true
+            }
+        ]
     },
     {
         "command": "dump-server",
@@ -558,7 +609,46 @@
     },
     {
         "command": "serve",
-        "name": "Serve the application on the PHP development server"
+        "name": "Serve the application on the PHP development server",
+        "parameters": [
+            {
+                "key": "host",
+                "value": "",
+                "rules": "",
+                "title": "为应用程序提供服务的主机地址",
+                "name": "域名",
+                "placeholder": "127.0.0.1",
+                "is_option": true
+            },
+            {
+                "key": "port",
+                "value": "",
+                "rules": "",
+                "title": "为应用程序提供服务的端口",
+                "name": "端口号",
+                "placeholder": "80",
+                "is_option": true
+            },
+            {
+                "key": "tries",
+                "value": "",
+                "rules": "",
+                "title": "试图提供服务的最大端口数",
+                "name": "最大并发数",
+                "placeholder": "10",
+                "is_option": true
+            },
+            {
+                "key": "no-reload",
+                "value": 0,
+                "rules": "",
+                "title": ".env变动的时候不重载服务",
+                "name": "不重载服务",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
     },
     {
         "command": "tinker",
@@ -602,7 +692,26 @@
     },
     {
         "command": "key:generate",
-        "name": "Set the application key"
+        "name": "Set the application key",
+        "parameters": [{
+            "key": "force",
+            "value": 0,
+            "rules": "",
+            "title": "It is also generated when it exists",
+            "name": "Force generation",
+            "type": "switch",
+            "is_option": true,
+            "is_boolean": true
+        },{
+            "key": "show",
+            "value": 0,
+            "rules": "",
+            "title": "显示key值",
+            "name": "是否显示",
+            "type": "switch",
+            "is_option": true,
+            "is_boolean": true
+        }]
     },
     {
         "command": "lang:publish",
@@ -636,6 +745,14 @@
                 "title": "Command class name",
                 "name": "Command class name",
                 "placeholder": "SendEmails"
+            },
+            {
+                "key": "command",
+                "value": "",
+                "rules": "",
+                "title": "应该被分配的终端命令",
+                "name": "命令",
+                "is_option": true
             }
         ],
         "name": "Create a new Artisan command"
@@ -688,6 +805,26 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "render",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "渲染",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "report",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "报告",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ],
         "name": "Create a new custom exception class"
@@ -716,6 +853,16 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "sync",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "是否同步",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ],
         "name": "Create a new job class"
@@ -739,6 +886,16 @@
                 "name": "Event class name",
                 "placeholderValue": "PodcastProcessed",
                 "is_option": true
+            },
+            {
+                "key": "queued",
+                "value": 0,
+                "rules": "",
+                "title": "是否排队",
+                "name": "排队",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ],
         "name": "Create a new event listener class"
@@ -753,6 +910,26 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "markdown",
+                "value": "",
+                "rules": "",
+                "title": "基于Markdown的通知模板",
+                "name": "Markdown语法",
+                "is_option": true,
+                "key_as": "m"
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "It is also generated when it exists",
+                "name": "Force generation",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "f"
             }
         ],
         "name": "Create a new email class"
@@ -795,6 +972,124 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": "Models/Activity"
+            },
+            {
+                "key": "all",
+                "value": 0,
+                "rules": "",
+                "title": "为模型生成对应的迁移、数据填充、工厂、策略和资源控制器",
+                "name": "全部",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "a"
+            },
+            {
+                "key": "controller",
+                "value": 0,
+                "rules": "",
+                "title": "为模型创建一个资源控制器",
+                "name": "控制器",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "c"
+            },
+            {
+                "key": "factory",
+                "value": 0,
+                "rules": "",
+                "title": "为模型创建一个工厂类",
+                "name": "工厂类",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "f"
+            },
+            {
+                "key": "migration",
+                "value": 0,
+                "rules": "",
+                "title": "是否创建对应的数据迁移文件",
+                "name": "迁移",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "m"
+            },
+            {
+                "key": "policy",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "策略",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "seed",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "数据填充",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "s"
+            },
+            {
+                "key": "pivot",
+                "value": 0,
+                "rules": "",
+                "title": "是否是自定义中间表模型",
+                "name": "中间表",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "p"
+            },
+            {
+                "key": "resource",
+                "value": 0,
+                "rules": "",
+                "title": "是否是资源控制器",
+                "name": "资源控制器",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "r"
+            },
+            {
+                "key": "api",
+                "value": 0,
+                "rules": "",
+                "title": "是否是API控制器",
+                "name": "API",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "requests",
+                "value": 0,
+                "rules": "",
+                "title": "创建新的表单请求类，并在资源控制器中使用它们",
+                "name": "请求",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "R"
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "It is also generated when it exists",
+                "name": "Force generation",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ],
         "name": "Create a new Eloquent model class"
@@ -809,6 +1104,26 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "markdown",
+                "value": "",
+                "rules": "",
+                "title": "基于Markdown的通知模板",
+                "name": "Markdown语法",
+                "is_option": true,
+                "key_as": "m"
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "It is also generated when it exists",
+                "name": "Force generation",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "f"
             }
         ],
         "name": "Create a new notification class"
@@ -823,6 +1138,16 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "model",
+                "value": "",
+                "rules": "",
+                "title": "被监听的模型",
+                "name": "模型",
+                "placeholder": "",
+                "is_option": true,
+                "key_as": "m"
             }
         ],
         "name": "Create a new observer class"
@@ -837,6 +1162,26 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "model",
+                "value": "",
+                "rules": "",
+                "title": "策略应用的模型",
+                "name": "模型",
+                "placeholder": "",
+                "is_option": true,
+                "key_as": "m"
+            },
+            {
+                "key": "guard",
+                "value": "",
+                "rules": "",
+                "title": "策略应用的守卫",
+                "name": "守卫",
+                "placeholder": "",
+                "is_option": true,
+                "key_as": "g"
             }
         ],
         "name": "Create a new policy class"
@@ -879,6 +1224,17 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "collection",
+                "value": 0,
+                "rules": "",
+                "title": "创建一个资源集合",
+                "name": "资源集合",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "c"
             }
         ],
         "name": "Create a new resource"
@@ -893,6 +1249,17 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "implicit",
+                "value": 0,
+                "rules": "",
+                "title": "创建一个隐式规则",
+                "name": "隐式",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "i"
             }
         ],
         "name": "Create a new validation rule"
@@ -935,6 +1302,28 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "unit",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "创建单元测试",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "u"
+            },
+            {
+                "key": "pest",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "创建问题测试",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "p"
             }
         ],
         "name": "Create a new test class"
@@ -1151,6 +1540,16 @@
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "Overwrite existing file",
+                "name": "Force override",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ]
     },
@@ -1205,5 +1604,61 @@
     {
         "command": "view:clear",
         "name": "Clear all compiled view files"
+    },
+    {
+        "command": "stub:publish",
+        "name": "发布所有可定制的代码生成模板",
+        "parameters": [
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "Overwrite existing file",
+                "name": "Force override",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
+    },
+    {
+        "command": "event:list",
+        "name": "列出应用程序的事件和监听器",
+        "parameters": [
+            {
+                "key": "event",
+                "value": "",
+                "rules": "",
+                "title": "通过事件名称过滤",
+                "name": "事件名称",
+                "is_option": true
+            }
+        ]
+    },
+    {
+        "command": "make:component",
+        "name": "创建一个新的视图组件类",
+        "parameters": [
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "Overwrite existing file",
+                "name": "Force override",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "inline",
+                "value": 0,
+                "rules": "",
+                "title": "创建一个呈现内联视图的组件",
+                "name": "内联",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
     }
 ]
