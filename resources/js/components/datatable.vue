@@ -251,7 +251,7 @@
                                     </slot>
                                 </td>
                                 <td v-for="(field,k) in show_fields" :class="field['class']">
-                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :hasItem="hasItem" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass" :showCode="showCode">
+                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass" :showCode="showCode" :trans-field="transField" :hasItem="hasItem">
                                         <span v-if="field.type =='label' || field.type =='radio'">
                                             <span class="label" :class="labelClass(row,k)" v-if="hasItem(k,row)">
                                                 {{ _maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
