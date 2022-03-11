@@ -34,7 +34,7 @@ class {{$name}}Controller extends Controller
      * 验证规则
      * @return array
      */
-    protected function getValidateRule(){
+    protected function getValidateRule($id=0){
 @if ($has_unique)
         $id = Request::input('id',0);
 @endif
