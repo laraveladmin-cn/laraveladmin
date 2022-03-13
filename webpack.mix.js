@@ -48,9 +48,6 @@ if(process.argv.includes('--css')){
     global.Mix.manifest.name = 'mix-manifest.json';
     mix.js('resources/js/bootstrap.js', jsPath)
         .js('resources/js/app.js', jsPath);
-    if(typeof mix.vue=="function"){
-        mix.vue();
-    }
         //mix.tailwind()
     ;
 }
