@@ -38,11 +38,11 @@ class {{$name}}Controller extends Controller
     protected function getValidateRule($id=0)
     {
 @foreach ($tableInfo['table_fields'] as $table_field)
-    @if ($table_field['showType']=='password')
+@if ($table_field['showType']=='password')
         if(!Request::input('{{$table_field['Field']}}')){
             Request::offsetUnset('{{$table_field['Field']}}');
         }
-    @endif
+@endif
 @endforeach
         return $this->getImportValidateRule($id,Request::all());
     }
