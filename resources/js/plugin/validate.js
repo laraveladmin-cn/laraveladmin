@@ -116,10 +116,8 @@ extend('boolean', {
 let user_name =  {
     validate:(value) => {
         if(!value) return true;
-        let patt = '/^[a-zA-Z][A-Za-z0-9_]{1,}$/';
-        patt = new RegExp(patt);
-        let patt1 = '/^[0-9]{1,}$/';
-        patt1 = new RegExp(patt1);
+        let patt = /^[a-zA-Z][A-Za-z0-9_]{1,}$/;
+        let patt1 = /^[0-9]{1,}$/;
         return patt.test(value) &&
             !patt1.test(value);
     },
