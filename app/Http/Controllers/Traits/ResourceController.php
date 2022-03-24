@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use \Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 trait ResourceController
 {
@@ -101,7 +102,7 @@ trait ResourceController
         } catch (\Exception $exception) {
             return Response::returns(['alert' => alert(['message' =>
                 trans('Data does not exist!')//'数据不存在!'
-            ], 404)], 404);
+            ], HttpResponse::HTTP_NOT_FOUND)], HttpResponse::HTTP_NOT_FOUND);
         }
         //关系数据处理
         collect($this->editFields)->map(function ($item, $key) use ($id, &$data) {
@@ -293,7 +294,7 @@ trait ResourceController
         if ($res === false) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Delete failed!')//'删除失败!'
-            ], 500)], 500);
+            ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
         return Response::returns(['alert' => alert([
             'message' => trans('Delete the success!')//'删除成功!'
@@ -311,7 +312,7 @@ trait ResourceController
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
                 'message' => trans('The given data was invalid.') //提交数据无效
-            ], 422);
+            ], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
         $id = $request->get('id');
         $this->bindModel OR $this->bindModel(); //绑定模型
@@ -327,7 +328,7 @@ trait ResourceController
         if ($item === false) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Create a failure!') //创建失败
-            ], 500)], 500);
+            ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data,[]);
@@ -338,7 +339,7 @@ trait ResourceController
             'alert' => alert([
                 'message' => trans('Creating a successful!') //创建成功
             ])
-        ], 201);
+        ], HttpResponse::HTTP_CREATED);
     }
 
     /**
@@ -354,7 +355,7 @@ trait ResourceController
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
                 'message' => trans('The given data was invalid.')
-            ], 422);
+            ], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
         $this->bindModel OR $this->bindModel(); //绑定模型
         $data = $id ? $request->all() : $request->except('id');
@@ -367,14 +368,14 @@ trait ResourceController
         if (!$item) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Data does not exist!')//'数据不存在!'
-            ], 404)], 404);
+            ], HttpResponse::HTTP_NOT_FOUND)], HttpResponse::HTTP_NOT_FOUND);
         }
         $data = $this->handlePostEditFindReturn($data,$item);
         $res = $item->update($data);
         if ($res === false) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Modify the failure!') //修改失败
-            ], 500)], 500);
+            ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data,$old);
