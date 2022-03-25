@@ -390,6 +390,14 @@ if (! function_exists('excelDate')) {
                 $date = null;
             }
         }
+        if($date){
+            $date = collect(explode('-',$date))->map(function ($value){
+                if(strlen($value)==1){
+                    return '0'.$value;
+                }
+                return $value;
+            })->implode('-');
+        }
         return $date;
     }
 }
