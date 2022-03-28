@@ -8,7 +8,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                 <select2 v-model="props.where['status']"
                                          :default-options="props.maps['status']"
-                                         :placeholder-show="props.transField('Status')"
+                                         :placeholder-show="props.transField('State')"
                                          :placeholder-value="''"
                                          :is-ajax="false" >
                                 </select2>
@@ -34,7 +34,6 @@
         data() {
             return {
                 options:{
-                    lang_table:'bills',
                     lang_table: 'bills', //字段翻译
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
@@ -51,10 +50,10 @@
                     fields: {
                         id: {name: "ID", order: true},
                         "member.user.name": {name: "会员", order: false},
-                        donation_id: {name: "捐赠记录", order: true},
+                        "donation.amount": {name: "捐赠金额", order: false},
                         amount: {name: "Amount of money", order: true},
                         status: {name: "State", order: true, type: "radio"},
-                        created_at: {name: "Created At", order: true, type: "time"},
+                        //created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}
                     },
                 }

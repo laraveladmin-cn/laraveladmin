@@ -18,6 +18,23 @@ class BillController extends Controller
         'status'=>'='
     ];
 
+    public $showIndexFields=[
+        'member'=>['user'=>[]],
+        'donation'=>[]
+    ];
+    public $editFields=[
+        'donation'=>[
+            'member'=>[
+                'user'=>[]
+            ]
+        ],
+        'member'=>['user'=>[]],
+    ];
+
+    public $mapsWhereFields=[
+        'donation_id'=>['id','amount']
+    ];
+
 
     /**
      * 资源模型
@@ -45,6 +62,7 @@ class BillController extends Controller
         $data['maps']['donation_id'] = mapOption($data['row'],'donation_id');
         return $data;
     }
+
 
 
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
+use App\Models\Member;
+use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use App\Models\Donation;
 use Illuminate\Support\Facades\Response;
@@ -98,6 +101,31 @@ class DonationController extends Controller
     protected function handleEditReturn($id, &$data)
     {
         return $data;
+    }
+
+    /**
+     * 执行修改前查询到数据结果后对数据进行处理
+     * @param $data
+     * @param $item
+     * @return mixed
+     */
+    protected function handlePostEditFindReturn(&$data,$item){
+        $member = Member::query()->find($data['member_id']);
+        $amount = $data['amount'];
+        $data['name'] = Arr::get($member,'user.name','')."捐赠: {$amount} 元";
+        return $data;
+    }
+
+    /**
+     * 保存数据后对返回数据处理
+     * @param $item
+     * @param $data
+     */
+    protected function handlePostEdit($item, $data,$old_data=[])
+    {
+        if(!$old_data){ //新增数据
+            $item->createBills();
+        }
     }
 
 

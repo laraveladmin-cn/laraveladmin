@@ -30,7 +30,7 @@
                                              :default-options="props.maps['donation_id']"
                                              :url="use_url+'/admin/donations/list'"
                                              :keyword-key="'id'"
-                                             :show="['id','amount']"
+                                             :show="['id','amount','member.user.name']"
                                              :disabled="!props.url"
                                              :placeholder-show="$t('Please select')"
                                              :placeholder-value="0"

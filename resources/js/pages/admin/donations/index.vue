@@ -8,7 +8,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                 <select2 v-model="props.where['from']"
                                          :default-options="props.maps['from']"
-                                         :placeholder-show="props.transField('from')"
+                                         :placeholder-show="props.transField('Source')"
                                          :placeholder-value="''"
                                          :is-ajax="false" >
                                 </select2>
@@ -49,7 +49,6 @@
         data() {
             return {
                 options:{
-                    lang_table:'donations',
                     lang_table: 'donations', //字段翻译
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
@@ -57,7 +56,7 @@
                     checkbox: true, //选择列
                     btnSizerMore: true, //更多筛选条件按钮
                     keywordKey: 'member.user.name', //关键字查询key
-                    keywordGroup: false, //是否为选项组
+                    keywordGroup: true, //是否为选项组
                     keywordPlaceholder: () => {
                         return this.$t('Please enter keywords');
                     },
@@ -67,10 +66,10 @@
                         id: {name: "ID", order: true},
                         "member.user.name": {name: "捐赠会员", order: false, type: "select2"},
                         "sponsor.name": {name: "赞助商", order: false, type: "select2"},
-                        from: {name: "Source", order: true, type: "radio"},
+                        from: {name: "Source", order: true, type: "label"},
                         amount: {name: "Donation amount", order: true, type: "num"},
-                        "bills_count": {name: "受益记录", order: false, type: "num"},
-                        created_at: {name: "Created At", order: true, type: "time"},
+                        "bills_count": {name: "收益记录", order: false, type: "num"},
+                        //created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}
                     },
                 }
@@ -79,7 +78,8 @@
         computed: {
             ...mapState([
                 'use_url',
-                'theme'
+                'theme',
+                'statusClass'
             ])
         },
         methods: {},

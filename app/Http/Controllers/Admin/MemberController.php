@@ -42,6 +42,13 @@ class MemberController extends Controller
         ]
     ];
 
+    public $editFields=[
+        'user'=>[],
+        'parent'=>[
+            'user'=>[]
+        ]
+    ];
+
     /**
      * 导出字段名称
      *
@@ -86,20 +93,9 @@ class MemberController extends Controller
     * @return  mixed
     */
     protected function handleEditReturn($id,&$data){
-        //树状结构可选数据
-        $data['maps']['optional_parents'] = collect(Member::optionalParent($id ? $data['row'] : null)
-            ->with(['user'=>function($q){
-                $q->select(['id','name']);
-            }])
-        ->orderBy('left_margin', 'asc')
-        ->get(['id','parent_id','level','left_margin','right_margin','user_id']))
-            ->map(function ($item){
-                $item = collect($item)->toArray();
-                $item['name'] = Arr::get($item,'user.name','');
-            return $item;
-        });
         $data['no_root'] = !Member::where('id',1)->value('id') || $id==1;
         $data['maps']['user_id'] = mapOption($data['row'],'user_id');
+        $data['maps']['parent_id'] = mapOption($data['row'],'parent_id');
         return $data;
     }
 
