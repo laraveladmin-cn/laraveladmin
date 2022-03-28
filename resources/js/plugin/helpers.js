@@ -138,5 +138,20 @@ export default {
         });
         return format;
     },
+    //字符串截取
+    str_limit(value, limit, end, order){
+        limit = limit || 100;
+        end = typeof end == 'undefined' ? '...' : end;
+        order = typeof order == 'undefined' ? 0 : 1;
+        var _str = value ? String(value) : '';
+        if (_str.length > limit) {
+            if(order){
+                return end+_str.substring(_str.length-limit, _str.length);
+            }else {
+                return _str.substring(0, limit) + end;
+            }
+        }
+        return _str;
+    },
 
 }

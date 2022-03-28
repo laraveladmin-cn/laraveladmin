@@ -84,6 +84,28 @@ class {{$name}} extends Model
     }
 @endforeach
 
+@foreach($jsons as $key=>$field)
+    /**
+    * 获取json值
+    * @param $value
+    * @return array
+    */
+    public function {{Str::camel('get_'.$field['Field'])}}Attribute($value)
+    {
+        return json_decode($value,true)?:new \stdClass();
+    }
+
+    /**
+    * 设置json值
+    * @param $value
+    * @return array
+    */
+    public function {{Str::camel('set_'.$field['Field'])}}Attribute($value)
+    {
+        $this->attributes['{{$field['Field']}}'] = json_encode($value);
+    }
+@endforeach
+
 @foreach($passwords as $key=>$field)
     /**
      * 设置密码

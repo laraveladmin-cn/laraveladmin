@@ -66,7 +66,7 @@
                                     </el-switch>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="menu_ids" :options="{name: props.transField('Allocation of permissions'),rules:'required'}"  :datas="props">
+                            <edit-item key-name="menu_ids" :options="{name: props.transField('Allocation of permissions'),rules:props.data.row['id']==1?'':'required'}"  :datas="props">
                                 <template slot="input-item">
                                     <div>
                                         <ztree v-model="props.data.row['menu_ids']"

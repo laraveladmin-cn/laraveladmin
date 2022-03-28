@@ -21,6 +21,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Symfony\Component\HttpFoundation\Response;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -59,7 +60,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         //响应返回
-        $factory->macro('returns', function ($value=[],$status=200,array $headers = []) use ($factory) {
+        $factory->macro('returns', function ($value=[],$status=Response::HTTP_OK,array $headers = []) use ($factory) {
             $value = collect(LifeData::all())->only(['options','list'])->merge($value)->toArray();
             collect($value)->each(function ($value,$key){
                 LifeData::set($key,$value);

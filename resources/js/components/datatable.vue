@@ -17,6 +17,8 @@
                       :search="search"
                       :reset="reset"
                       :where="data.options.where"
+                      :maps="_maps"
+                      :options="data.options"
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
@@ -33,12 +35,14 @@
                                     <i class="fa fa-refresh"></i> {{$t("Refresh")}}
                                 </button>
                             </slot>
-                            <button class="btn btn-danger"
-                                    type="button"
-                                    @click="remove(check_ids)"
-                                    v-show="checkbox && data.configUrl['deleteUrl']">
-                                <i class="fa fa-trash-o"></i> {{$t("Delete selected")}}
-                            </button>
+                            <slot name="delete_selected" :data="data" :remove="remove" :check-ids="check_ids">
+                                <button class="btn btn-danger"
+                                        type="button"
+                                        @click="remove(check_ids)"
+                                        v-show="checkbox && data.configUrl['deleteUrl']">
+                                    <i class="fa fa-trash-o"></i> {{$t("Delete selected")}}
+                                </button>
+                            </slot>
                             <slot name="sizer_more" :data="data" >
                                 <button class="btn btn-primary"
                                         type="button"
@@ -114,7 +118,7 @@
                 </div>
                 <slot name="sizer-min">
                     <div class="collapse sizer_more in">
-                        <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps"  :trans-field="transField">
+                        <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps" :order="data.options.order" :search="search" :trans-field="transField">
                         </slot>
                         <div class="row hidden-md hidden-lg">
                             <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
@@ -211,7 +215,7 @@
                 </slot>
             </div>
             <div class="box-body">
-                <slot name="table" :data="data" :loading="loading" :check_ids="check_ids" :remove="remove" :getItems="getItems" :checkboxClass="checkboxClass" >
+                <slot name="table" :maps="_maps" :data="data" :loading="loading" :check_ids="check_ids" :remove="remove" :getItems="getItems" :checkboxClass="checkboxClass" >
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-striped text-center dataTable">
                             <thead>
@@ -247,14 +251,14 @@
                                     </slot>
                                 </td>
                                 <td v-for="(field,k) in show_fields" :class="field['class']">
-                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass">
+                                    <slot name="col" :field="field" :data="data" :maps="_maps" :row="row" :k="k" :getItems="getItems" :checkboxClass="checkboxClass" :labelClass="labelClass" :showCode="showCode" :trans-field="transField" :hasItem="hasItem">
                                         <span v-if="field.type =='label' || field.type =='radio'">
-                                            <span class="label" :class="labelClass(row,k)">
+                                            <span class="label" :class="labelClass(row,k)" v-if="hasItem(k,row)">
                                                 {{ _maps | array_get(k,[]) | array_get(array_get(row,k,0)) }}
                                             </span>
                                         </span>
                                         <span v-else-if="field.type =='labels' || field.type =='checkbox'">
-                                            <span v-for="value in getItems(row,k)" class="label labels-m" :class="checkboxClass(value,2,statusClass,k)">
+                                            <span v-for="value in getItems(row,k)" class="label labels-m" :class="checkboxClass(value,2,statusClass,k)" v-if="hasItem(k,row)">
                                                 {{ _maps | array_get(k.replace('.$index','')) | array_get(value) }}
                                             </span>
                                         </span>
@@ -277,11 +281,8 @@
                                             </span>
                                         </span>
                                         <span v-else-if="field.type =='code'">
-                                            <code v-if="field.limit">
-                                                {{row | array_get(k) | str_limit(field.limit)}}
-                                            </code>
-                                            <code v-else>
-                                                  {{row | array_get(k)}}
+                                            <code>
+                                                {{showCode(row,k,field)}}
                                             </code>
                                         </span>
                                         <span v-else-if="field.type =='pre'">
@@ -469,6 +470,38 @@
             ...mapMutations({
                 set:'set'
             }),
+            showCode(row,k,field){
+                let str = array_get(row,k) || '';
+                if(str && typeof str=="object"){
+                    str = JSON.stringify(str);
+                };
+                if(field.limit){
+                    str = str_limit(str,field.limit);
+                }
+                return str;
+            },
+            hasItem(key,item){
+                if(key.indexOf('.')==-1){
+                    if(item[key]===null){
+                        return false;
+                    }
+                    return true;
+                }else {
+                    let items = key.split('.');
+                    items.pop();
+                    let key1 = items.join('.');
+                    let sub_item = this.array_get(item,key1);
+                    if(typeof sub_item=="object" && sub_item){
+                        let value = this.array_get(item,key);
+                        if(value===null){
+                            return false;
+                        }
+                        return true;
+                    }else {
+                        return false;
+                    }
+                }
+            },
             transField(name,key,table){
                 let sheet = array_get(this.data,'excel.sheet','');
                 if(!this.options.lang_table && !this.options.langTable && !sheet){

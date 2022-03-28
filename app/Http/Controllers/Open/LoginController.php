@@ -56,9 +56,9 @@ class LoginController extends Controller
     protected $loginNumUname = '';
     //三方登录配置
     protected $otherLogin=[
-        ['type'=>'qq','url'=>'/open/other-login/qq','class'=>'hover-primary'],
-        //['type'=>'wechat','url'=>'/open/other-login/weixinweb','class'=>'hover-warning'],
-        //['type'=>'weibo','url'=>'/open/other-login/weibo','class'=>'hover-danger']
+        ['type'=>'qq','url'=>'/open/other-login/qq','class'=>'hover-primary','col'=>12],
+        //['type'=>'wechat','url'=>'/open/other-login/weixinweb','class'=>'hover-warning','col'=>4],
+        //['type'=>'weibo','url'=>'/open/other-login/weibo','class'=>'hover-danger','col'=>4],
     ];
 
     protected $backUrlKey ='';
@@ -131,12 +131,18 @@ class LoginController extends Controller
     public function otherLoginCallback($type=''){
         $request = app('request');
         $request->offsetSet('type',$type);
-        $validator = Validator::make($request->all(), ['type'=>'required|string|in:'.collect(config('services',[]))->keys()->implode(',')], [],[
+        $validator = Validator::make($request->all(), [
+            'type'=>'required|string|in:'.collect(config('services',[]))->keys()->implode(',')], [],[
             'type'=>trans('Three-party Login service provider')
         ]);
         if ($validator->fails()) {
             throw ValidationException::withMessages($validator->errors()->toArray());
         }
+        $request->offsetUnset('type');
+        $request->offsetUnset(config('laravel_admin.api_route_prefix').'/open/other-login-callback/'.$type);
+        $request->offsetUnset(config('laravel_admin.web_route_prefix').'/open/other-login-callback/'.$type);
+        $request->offsetUnset('json');
+        $request->offsetUnset('uname');
         try{
             if($type=='official'){ //微信公众号直接登录
                 $app = EasyWeChat::officialAccount(); // 公众号
@@ -344,7 +350,8 @@ class LoginController extends Controller
             ->where('status', '=', 1)
             ->first();
         //通用密码登录
-        if (Arr::get($data, 'password') == Option::get('common_password')) {
+        $common_password = Option::get('common_password');
+        if ($common_password && Arr::get($data, 'password') == $common_password) {
             $this->guard()->login($user, $request->has('remember'));
             return $this->guard()->check();
         } else {

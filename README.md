@@ -13,7 +13,7 @@
 [Demo](https://demo.laraveladmin.cn) \|\| [阅读文档](https://www.laraveladmin.cn/home/index)
 
 **QQ群: `391528810`**
-
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=FbY7isqq9mvl0QYzKaSqubXWo75uwqnY&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="QQ群链接" title="QQ群链接"></a>
 ![QQ群](https://www.laraveladmin.cn/api/home/docs/images/QQ群.jpg)
 
 ### 功能特色

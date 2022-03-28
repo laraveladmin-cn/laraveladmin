@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use \Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 trait ResourceController
 {
@@ -101,7 +102,7 @@ trait ResourceController
         } catch (\Exception $exception) {
             return Response::returns(['alert' => alert(['message' =>
                 trans('Data does not exist!')//'数据不存在!'
-            ], 404)], 404);
+            ], HttpResponse::HTTP_NOT_FOUND)], HttpResponse::HTTP_NOT_FOUND);
         }
         //关系数据处理
         collect($this->editFields)->map(function ($item, $key) use ($id, &$data) {
@@ -293,7 +294,7 @@ trait ResourceController
         if ($res === false) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Delete failed!')//'删除失败!'
-            ], 500)], 500);
+            ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
         return Response::returns(['alert' => alert([
             'message' => trans('Delete the success!')//'删除成功!'
@@ -305,13 +306,13 @@ trait ResourceController
      */
     public function create(\Illuminate\Http\Request $request)
     {
-        $validate = $this->getValidateRule();
+        $validate = $this->getValidateRule(0);
         $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
                 'message' => trans('The given data was invalid.') //提交数据无效
-            ], 422);
+            ], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
         $id = $request->get('id');
         $this->bindModel OR $this->bindModel(); //绑定模型
@@ -327,7 +328,7 @@ trait ResourceController
         if ($item === false) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Create a failure!') //创建失败
-            ], 500)], 500);
+            ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data,[]);
@@ -338,7 +339,7 @@ trait ResourceController
             'alert' => alert([
                 'message' => trans('Creating a successful!') //创建成功
             ])
-        ], 201);
+        ], HttpResponse::HTTP_CREATED);
     }
 
     /**
@@ -347,15 +348,15 @@ trait ResourceController
     public function update($id = 0)
     {
         $request = Request::instance();
+        $id = $id ?: $request->get('id', 0);
         $validate = $this->getValidateRule($id);
         $validator = Validator::make($request->all(), $validate);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
                 'message' => trans('The given data was invalid.')
-            ], 422);
+            ], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
-        $id = $id ?: $request->get('id', 0);
         $this->bindModel OR $this->bindModel(); //绑定模型
         $data = $id ? $request->all() : $request->except('id');
         $data['operate_id'] = User::getOperateId();
@@ -367,14 +368,14 @@ trait ResourceController
         if (!$item) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Data does not exist!')//'数据不存在!'
-            ], 404)], 404);
+            ], HttpResponse::HTTP_NOT_FOUND)], HttpResponse::HTTP_NOT_FOUND);
         }
         $data = $this->handlePostEditFindReturn($data,$item);
         $res = $item->update($data);
         if ($res === false) {
             return Response::returns(['alert' => alert([
                 'message' => trans('Modify the failure!') //修改失败
-            ], 500)], 500);
+            ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data,$old);
@@ -403,10 +404,13 @@ trait ResourceController
      * 获取条件拼接对象
      * @return mixed
      */
-    protected function getWithOptionModel($fields_key = 'showIndexFields')
+    protected function getWithOptionModel($fields_key = 'showIndexFields',$unset_order=false)
     {
         $this->bindModel OR $this->bindModel();
         $options = $this->getOptions(); //筛选项+排序项
+        if($unset_order){
+            unset($options['order']);
+        }
         $obj = $this->bindModel->with($this->selectWithFields($fields_key))
             ->withCount(collect($this->getShowIndexFieldsCount())->filter(function ($item, $key) {
                 return !is_array($item);
@@ -509,10 +513,22 @@ trait ResourceController
         return $this->resourceModel ?: str_replace('Controller', '', class_basename(get_class()));
     }
 
+    /**
+     * 模型类名
+     * @return string
+     */
+    public function getModelClass(){
+        return $this->getModelNamespace() . $this->getResourceModel();
+    }
 
+
+    /**
+     * 模型对象
+     * @return mixed
+     */
     public function newBindModel()
     {
-        $resourceModel = $this->getModelNamespace() . $this->getResourceModel();
+        $resourceModel = $this->getModelClass();
 
         return new $resourceModel();
     }
@@ -781,13 +797,29 @@ trait ResourceController
         $fields = $this->selectFields($this->exportFields);
         $fields and $this->bindModel = $this->bindModel()->select(in_array($model->getKeyName(), $fields)
             ? $fields : array_merge([$model->getKeyName()], $fields));
-        //获取带有筛选条件的对象
-        $obj = $this->getWithOptionModel('exportFields');
+        //优化导出
+        $model = $this->newBindModel();
+        $primary_key = $model->getKeyName();
+        $no_order = $primary_key && ((isset($this->disableExportOrder) && $this->disableExportOrder ) || //禁用排序 或
+            !Arr::get($this->getOptions(),'order')); //没有排序
         //获取分页数据
         if (!Request::input('page')) {
+            //获取带有筛选条件的对象
+            $obj = $this->getWithOptionModel('exportFields');
             $data = $obj->paginate(200)->toArray();
+            if($no_order){
+                $data['max_id'] = collect($data['data'])->max($primary_key)?:0;
+            }
             //表头数据放入
-        } else { //不统计条数
+        } else if($no_order){
+            $id = Request::get('id',0);
+            $obj = $this->getWithOptionModel('exportFields',true)->where($primary_key,'>',$id);
+            $data = $obj->simplePaginate(200,['*'],'page',1)->toArray();
+            $data['max_id'] = collect($data['data'])->max($primary_key)?:$id;
+            $data['current_page'] = Request::get('page',1);
+        }else{ //不统计条数
+            //获取带有筛选条件的对象
+            $obj = $this->getWithOptionModel('exportFields');
             $data = $obj->simplePaginate(200)->toArray();
         }
         $maps = $this->getFieldsMap($this->exportFields, $model,false,true);
@@ -795,6 +827,7 @@ trait ResourceController
             return str_contains($k, '$index');
         })->keys()->toArray();
         $data['data'] = collect($data['data'])->map(function ($item) use ($fields_key, $maps, $multipleFields) {
+            $item = $this->handleExportItem($item);
             $row = collect($fields_key)->map(function ($key) use ($item, $maps, $multipleFields) {
                 $value = Arr::get($item, $key, '');
                 $map = Arr::get($maps, $key);
@@ -822,11 +855,17 @@ trait ResourceController
         });
         if (!Request::input('page')) {
             $data['data'] = $data['data']
-                ->prepend($title->toArray()) //标题
-                ->prepend($fields_key); //key
+                ->prepend($title->toArray()); //标题
+            if(!(isset($this->exportDeleteKey) && $this->exportDeleteKey)){
+                $data['data'] = $data['data']->prepend($fields_key); //key
+            }
         }
 
         return $data;
+    }
+
+    protected function handleExportItem(&$item){
+        return $item;
     }
     protected function handleExportRow(&$row)
     {
@@ -891,10 +930,11 @@ trait ResourceController
 
                 return $value;
             })->merge($relation_row)->toArray();
-
             return $row;
         })->filter(function ($item) use (&$errors, $key_name, $relation_keys, $maps1, $multipleFields) { //数据验证
-            $validator = Validator::make(getRelationData($item), $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
+            $data = getRelationData($item);
+            $data = $this->handleImportValidateBefore($data);
+            $validator = Validator::make($data, $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
             $flog = !$validator->fails(); //验证状态
             if ($validator->fails()) {
                 $item['error'] = collect($validator->errors()->toArray())->map(function ($v, $k) {
@@ -918,7 +958,9 @@ trait ResourceController
                         }
                     }
                     $value = $this->handleExportValue($item, $key, $maps1, $value);
-
+                    if (is_array($value)) {
+                        $value = json_encode($value, JSON_UNESCAPED_UNICODE);
+                    }
                     return $value;
                 })->toArray();
                 $errors[] = $item;
@@ -1057,6 +1099,15 @@ trait ResourceController
      */
     protected function handleDestroyObj(&$obj){
         return $obj;
+    }
+
+    /**
+     * 批量导入验证前处理数据
+     * @param $data
+     * @return mixed
+     */
+    protected function handleImportValidateBefore(&$data){
+        return $data;
     }
 
 

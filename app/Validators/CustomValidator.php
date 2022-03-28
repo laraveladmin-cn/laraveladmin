@@ -206,6 +206,20 @@ class CustomValidator extends Validator{
         return preg_match('/^[\pL\pM\pN _-]+$/u', $value) > 0;
     }
 
+    /**
+     * 验证有效域名
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @return bool
+     */
+    public function validateDomain($attribute, $value,$parameters){
+        if (! is_string($value) && ! is_numeric($value)) {
+            return false;
+        }
+        return preg_match('/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/', $value) > 0;
+    }
+
 
 
 

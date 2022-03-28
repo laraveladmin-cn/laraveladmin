@@ -138,6 +138,10 @@
             init(){
                 this.intervalTime = setInterval(()=>{
                   if(typeof editormd=="function"){
+                      editormd.katexURL = {
+                          js  : "/bower_components/katex/katex.min",  // default: //cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min
+                          css : "/bower_components/katex/katex.min"   // default: //cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min
+                      };
                       clearInterval(this.intervalTime);
                       let options = copyObj(this.options);
                       options.placeholder = this.$t(options.placeholder);

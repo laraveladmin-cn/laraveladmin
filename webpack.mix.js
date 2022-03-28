@@ -47,8 +47,8 @@ if(process.argv.includes('--css')){
 }else {
     global.Mix.manifest.name = 'mix-manifest.json';
     mix.js('resources/js/bootstrap.js', jsPath)
-        .js('resources/js/app.js', jsPath)
-        //.tailwind()
+        .js('resources/js/app.js', jsPath);
+        //mix.tailwind()
     ;
 }
 mix.version();

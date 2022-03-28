@@ -82,6 +82,8 @@ cp .env.example .env
 vi .env
 ```
 
+![数据库配置参考](https://www.laraveladmin.cn/storage/uploads/images/2022/03/21/Kiz1p8tPvnOQmdLIGdYruc5OADpGbFIu0PUKiAC6.jpg)
+
 3. 安装composer相关扩展包及项目代码初始化(以下两种方式选一种进行安装即可)
 
 

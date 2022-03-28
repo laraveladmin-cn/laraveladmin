@@ -144,7 +144,7 @@ class CreateModel extends BaseCreate
         $data['delete'] = $data['delete'] ? "'".$data['delete']."'":'';
 
         $data['fieldsShowMaps'] = $this->formatShow(collect($table_fields)->filter(function ($item) {
-            return in_array($item['showType'], ['radio', 'checkbox','select','label']);
+            return in_array($item['showType'], ['radio', 'checkbox','select','label','icheck-radio','icheck','icheck-checkbox']);
         })->keyBy('Field')->map(function ($item, $key) {
             $res = "        '" . $key . "'"  . '=>[' . $this->formatShow(collect($item['values'])->map(function ($value, $key) {
                     return '            "' . $key . '"' . "=>'" . $value . "'";
@@ -156,6 +156,9 @@ class CreateModel extends BaseCreate
         });
         $data['passwords'] = collect($table_fields)->filter(function ($item) {
             return in_array($item['showType'], ['password']);
+        });
+        $data['jsons'] = collect($table_fields)->filter(function ($item) {
+            return in_array($item['showType'], ['json']);
         });
         $data['fieldsDefault'] = $this->formatShow(collect($table_fields)->filter(function($item){
             return !in_array($item['Field'],['id','deleted_at','updated_at','created_at']) && !is_null($item['Default']);

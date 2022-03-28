@@ -181,6 +181,7 @@ export default {
                 callback = (response)=>{
                     if(response.status==200){
                         options['page'] = response.data.current_page || 1; //当前页码
+                        options['id'] = response.data.max_id || 0; //最大id
                         if(typeof response.data.last_page!="undefined"){
                             last_page = response.data.last_page || 1; //最后一页
                         }

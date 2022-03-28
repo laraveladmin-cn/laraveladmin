@@ -73,11 +73,19 @@
             },
             affirm(){
                 if(typeof this.modal.callback=="function"){
-                    this.modal.callback();
+                    let res = this.modal.callback();
+                    if(res===false){
+                        return;
+                    }
                 }
                 this.clear();
             }
         },
+        updated() {
+            if(this.modal && this.modal.mounted && typeof this.modal.mounted=="function"){
+                this.modal.mounted();
+            }
+        }
     }
 </script>
 

@@ -179,7 +179,7 @@ class RouteService
                         return Arr::get($item,'group','')==$key &&
                             Arr::get($item,'url','') &&
                             Arr::get($item,'method','') &&
-                            Arr::get($item,'disabled','')==0 &&
+                            Arr::get($item,'disabled',0)==0 &&
                             Arr::get($item,'env',self::$env)==self::$env &&
                             in_array(1,$use);
                     })
@@ -230,7 +230,7 @@ class RouteService
                         return Arr::get($item,'group','')==$key &&
                             Arr::get($item,'url','') &&
                             Arr::get($item,'env',self::$env)==self::$env &&
-                            Arr::get($item,'disabled','')==0;
+                            Arr::get($item,'disabled',0)==0;
                     })
                     ->map(function ($item){
                         $value = Arr::get(explode('/',Arr::get($item,'url','')),2,'');
@@ -296,7 +296,7 @@ class RouteService
                             Arr::get($item,'group','')==$key &&
                             Arr::get($item,'is_page','')!=1 &&
                             Arr::get($item,'url','') &&
-                            Arr::get($item,'disabled','')==0 &&
+                            Arr::get($item,'disabled',0)==0 &&
                             Arr::get($item,'env',self::$env)==self::$env &&
                             Arr::get($item,'method','') &&
                             in_array(2,$use);
@@ -356,7 +356,7 @@ class RouteService
                     $url &&
                     ((is_numeric($method) && $method&1) || (is_array($method) && in_array(1,$method)) || (!$method && Str::startsWith($url,'/'))) &&
                     Arr::get($item,'env',self::$env)==self::$env &&
-                    Arr::get($item,'disabled','')==0;
+                    Arr::get($item,'disabled',0)==0;
             })
             ->map(function ($item){
                 $route = Arr::get($item,'url','');
@@ -377,7 +377,7 @@ class RouteService
             ->filter(function ($item){
                 return Arr::get($item,'url','') &&
                     Arr::get($item,'env',self::$env)==self::$env &&
-                    Arr::get($item,'disabled','')==0;
+                    Arr::get($item,'disabled',0)==0;
             })
             ->map(function ($item){
                 $name = Arr::get($item,'url','');

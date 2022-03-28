@@ -26,6 +26,7 @@ class Translation extends Seeder
         'zh-CN'=>'zh',//简体中文
         'zh'=>'zh',//简体中文
         'ja'=>'jp',//日文
+        'per'=>'per',//波斯文
     ];
     protected $lang = 'en'; //当前语言
     protected $outMenus = [];
@@ -174,14 +175,14 @@ class Translation extends Seeder
                 $edit_path = resource_path('/js/pages/admin/'.$table.'/edit.vue');
                 if(file_exists($index_path)){
                     $index_content = file_get_contents($index_path);
-                    if(!Str::contains($index_content,"lang_table:'{$table}'")){
+                    if(!Str::contains($index_content,"lang_table:'{$table}'") && !Str::contains($index_content,"lang_table: '{$table}'")){
                         $index_content = str_replace('options:{',"options:{\n                    lang_table:'{$table}',",$index_content);
                         $index_content = str_replace('options: {',"options:{\n                    lang_table:'{$table}',",$index_content);
                     }
                 }
                 if(file_exists($edit_path)){
                     $edit_content = file_get_contents($edit_path);
-                    if(!Str::contains($edit_content,"lang_table:'{$table}'")){
+                    if(!Str::contains($edit_content,"lang_table:'{$table}'") && !Str::contains($edit_content,"lang_table: '{$table}'")){
                         $edit_content = str_replace('options:{',"options:{\n                    lang_table:'{$table}',",$edit_content);
                         $edit_content = str_replace('options: {',"options:{\n                    lang_table:'{$table}',",$edit_content);
                     }

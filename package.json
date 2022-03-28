@@ -29,6 +29,7 @@
     "sass-loader": "^7.1.0",
     "tailwindcss": "^2.2.19",
     "vue": "^2.5.17",
+    "vue-loader": "^15.9.8",
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
@@ -36,7 +37,7 @@
     "animate.css": "^3.7.2",
     "bootstrap": "^3.4.1",
     "bootstrap-colorpicker": "^3.0.0-beta.3",
-    "bootstrap-sass": "^3.4.1",
+    "bootstrap-sass": "3.4.1",
     "collect.js": "^4.25.0",
     "echarts": "^5.2.2",
     "editor.md": "^1.5.0",

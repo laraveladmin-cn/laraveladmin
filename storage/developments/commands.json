@@ -444,7 +444,58 @@
     },
     {
         "command": "down",
-        "name": "Put the application into maintenance mode"
+        "name": "Put the application into maintenance mode",
+        "parameters": [
+            {
+                "key": "redirect",
+                "value": "",
+                "rules": "",
+                "title": "The path to which the user should be redirected",
+                "name": "Redirect jump",
+                "is_option": true
+            },
+            {
+                "key": "render",
+                "value": "",
+                "rules": "",
+                "title": "The view should be pre rendered for display during maintenance mode",
+                "name": "View rendering",
+                "is_option": true
+            },
+            {
+                "key": "retry",
+                "value": "",
+                "rules": "",
+                "title": "How many seconds before you try again",
+                "name": "Retry time",
+                "is_option": true
+            },
+            {
+                "key": "refresh",
+                "value": "",
+                "rules": "",
+                "title": "The browser specifies how many seconds to refresh automatically",
+                "name": "Auto refresh",
+                "is_option": true
+            },
+            {
+                "key": "secret",
+                "value": "",
+                "rules": "",
+                "title": "A secret phrase that can be used to bypass maintenance mode",
+                "name": "Secret phrase",
+                "is_option": true
+            },
+            {
+                "key": "status",
+                "value": "",
+                "rules": "",
+                "title": "Returns the status code that should be used when responding to maintenance mode",
+                "name": "Status code",
+                "placeholder": "503",
+                "is_option": true
+            }
+        ]
     },
     {
         "command": "dump-server",
@@ -558,7 +609,46 @@
     },
     {
         "command": "serve",
-        "name": "Serve the application on the PHP development server"
+        "name": "Serve the application on the PHP development server",
+        "parameters": [
+            {
+                "key": "host",
+                "value": "",
+                "rules": "",
+                "title": "The host address that serves the application",
+                "name": "Domain name",
+                "placeholder": "127.0.0.1",
+                "is_option": true
+            },
+            {
+                "key": "port",
+                "value": "",
+                "rules": "",
+                "title": "The port that serves the application",
+                "name": "Port number",
+                "placeholder": "80",
+                "is_option": true
+            },
+            {
+                "key": "tries",
+                "value": "",
+                "rules": "",
+                "title": "Maximum number of ports attempting to provide service",
+                "name": "Maximum concurrent number",
+                "placeholder": "10",
+                "is_option": true
+            },
+            {
+                "key": "no-reload",
+                "value": 0,
+                "rules": "",
+                "title": ". env changes without reloading the service",
+                "name": "Do not reload services",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
     },
     {
         "command": "tinker",
@@ -602,7 +692,29 @@
     },
     {
         "command": "key:generate",
-        "name": "Set the application key"
+        "name": "Set the application key",
+        "parameters": [
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "It is also generated when it exists",
+                "name": "Force generation",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "show",
+                "value": 0,
+                "rules": "",
+                "title": "Display key value",
+                "name": "Show",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
     },
     {
         "command": "lang:publish",
@@ -636,6 +748,14 @@
                 "title": "Command class name",
                 "name": "Command class name",
                 "placeholder": "SendEmails"
+            },
+            {
+                "key": "command",
+                "value": "",
+                "rules": "",
+                "title": "The terminal to which the command should be assigned",
+                "name": "Command",
+                "is_option": true
             }
         ],
         "name": "Create a new Artisan command"
@@ -688,6 +808,26 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "render",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "Render",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "report",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "Report",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ],
         "name": "Create a new custom exception class"
@@ -716,6 +856,16 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "sync",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "Synchronize",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ],
         "name": "Create a new job class"
@@ -739,6 +889,16 @@
                 "name": "Event class name",
                 "placeholderValue": "PodcastProcessed",
                 "is_option": true
+            },
+            {
+                "key": "queued",
+                "value": 0,
+                "rules": "",
+                "title": "Queue or not",
+                "name": "Line up",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ],
         "name": "Create a new event listener class"
@@ -753,6 +913,26 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "markdown",
+                "value": "",
+                "rules": "",
+                "title": "Markdown based notification template",
+                "name": "Markdown syntax",
+                "is_option": true,
+                "key_as": "m"
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "It is also generated when it exists",
+                "name": "Force generation",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "f"
             }
         ],
         "name": "Create a new email class"
@@ -795,6 +975,124 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": "Models/Activity"
+            },
+            {
+                "key": "all",
+                "value": 0,
+                "rules": "",
+                "title": "Generate corresponding migration, data population, factory, policy and resource controllers for the model",
+                "name": "Whole",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "a"
+            },
+            {
+                "key": "controller",
+                "value": 0,
+                "rules": "",
+                "title": "Create a resource controller for the model",
+                "name": "Controller",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "c"
+            },
+            {
+                "key": "factory",
+                "value": 0,
+                "rules": "",
+                "title": "Create a factory class for the model",
+                "name": "Factory class",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "f"
+            },
+            {
+                "key": "migration",
+                "value": 0,
+                "rules": "",
+                "title": "Create corresponding data migration file",
+                "name": "Transfer",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "m"
+            },
+            {
+                "key": "policy",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "Strategy",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "seed",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "Data filling",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "s"
+            },
+            {
+                "key": "pivot",
+                "value": 0,
+                "rules": "",
+                "title": "Is it a custom intermediate table model",
+                "name": "Intermediate table",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "p"
+            },
+            {
+                "key": "resource",
+                "value": 0,
+                "rules": "",
+                "title": "Is it a resource controller",
+                "name": "Resource controller",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "r"
+            },
+            {
+                "key": "api",
+                "value": 0,
+                "rules": "",
+                "title": "Is it an API controller",
+                "name": "API",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "requests",
+                "value": 0,
+                "rules": "",
+                "title": "Create new form request classes and use them in the resource controller",
+                "name": "Request",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "R"
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "It is also generated when it exists",
+                "name": "Force generation",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ],
         "name": "Create a new Eloquent model class"
@@ -809,6 +1107,26 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "markdown",
+                "value": "",
+                "rules": "",
+                "title": "Markdown based notification template",
+                "name": "Markdown syntax",
+                "is_option": true,
+                "key_as": "m"
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "It is also generated when it exists",
+                "name": "Force generation",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "f"
             }
         ],
         "name": "Create a new notification class"
@@ -823,6 +1141,16 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "model",
+                "value": "",
+                "rules": "",
+                "title": "Monitored model",
+                "name": "Model",
+                "placeholder": "",
+                "is_option": true,
+                "key_as": "m"
             }
         ],
         "name": "Create a new observer class"
@@ -837,6 +1165,26 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "model",
+                "value": "",
+                "rules": "",
+                "title": "Model of policy application",
+                "name": "Model",
+                "placeholder": "",
+                "is_option": true,
+                "key_as": "m"
+            },
+            {
+                "key": "guard",
+                "value": "",
+                "rules": "",
+                "title": "Guard of policy application",
+                "name": "Guard",
+                "placeholder": "",
+                "is_option": true,
+                "key_as": "g"
             }
         ],
         "name": "Create a new policy class"
@@ -879,6 +1227,17 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "collection",
+                "value": 0,
+                "rules": "",
+                "title": "Create a resource collection",
+                "name": "Collection of resources",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "c"
             }
         ],
         "name": "Create a new resource"
@@ -893,6 +1252,17 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "implicit",
+                "value": 0,
+                "rules": "",
+                "title": "Create an implicit rule",
+                "name": "Implicit",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "i"
             }
         ],
         "name": "Create a new validation rule"
@@ -935,6 +1305,28 @@
                 "title": "Name",
                 "name": "Name",
                 "placeholder": ""
+            },
+            {
+                "key": "unit",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "Create unit test",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "u"
+            },
+            {
+                "key": "pest",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "Create problem test",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "p"
             }
         ],
         "name": "Create a new test class"
@@ -1021,7 +1413,114 @@
     },
     {
         "command": "route:list",
-        "name": "List all registered routes"
+        "name": "List all registered routes",
+        "parameters": [
+            {
+                "key": "name",
+                "value": "",
+                "rules": "",
+                "title": "Filter route name",
+                "name": "Route name",
+                "is_option": true
+            },
+            {
+                "key": "path",
+                "value": "",
+                "rules": "",
+                "title": "Filter routing path",
+                "name": "Routing path",
+                "is_option": true
+            },
+            {
+                "key": "except-path",
+                "value": "",
+                "rules": "",
+                "title": "Filter and exclude routing paths",
+                "name": "Exclude routing paths",
+                "is_option": true
+            },
+            {
+                "key": "columns",
+                "value": [],
+                "rules": "",
+                "title": "Do not select all outputs",
+                "name": "Result display column",
+                "type": "checkbox",
+                "is_option": true,
+                "map": {
+                    "Domain": "Domain name",
+                    "Method": "Request mode",
+                    "URI": "Routing path",
+                    "Name": "Name",
+                    "Action": "Binding controller method",
+                    "Middleware": "Middleware"
+                }
+            },
+            {
+                "key": "sort",
+                "value": "",
+                "rules": "",
+                "title": "",
+                "name": "Result ranking",
+                "type": "radio",
+                "is_option": true,
+                "map": {
+                    "domain": "Domain name",
+                    "method": "Request mode",
+                    "uri": "Routing path",
+                    "name": "Name",
+                    "action": "Binding controller method",
+                    "middleware": "Middleware"
+                }
+            },
+            {
+                "key": "compact",
+                "value": 0,
+                "rules": "",
+                "title": "Only the method, URI, and action columns are displayed",
+                "name": "Concise output",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "c"
+            },
+            {
+                "key": "method",
+                "value": "",
+                "rules": "",
+                "title": "Filter request method",
+                "name": "Request mode",
+                "type": "radio",
+                "is_option": true,
+                "map": {
+                    "get": "GET",
+                    "post": "POST",
+                    "put": "PUT",
+                    "delete": "DELETE"
+                }
+            },
+            {
+                "key": "json",
+                "value": 0,
+                "rules": "",
+                "title": "Output route list as JSON",
+                "name": "JSON format output",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "reverse",
+                "value": 0,
+                "rules": "",
+                "title": "Reverse the order of the routing list and output it",
+                "name": "Reverse order",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "r"
+            }
+        ]
     },
     {
         "command": "schedule:run",
@@ -1044,6 +1543,16 @@
                 "type": "switch",
                 "is_option": true,
                 "is_boolean": true
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "Overwrite existing file",
+                "name": "Force override",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
             }
         ]
     },
@@ -1058,6 +1567,35 @@
                 "name": "Service provider",
                 "placeholderValue": "Laravel\\Tinker\\TinkerServiceProvider",
                 "is_option": true
+            },
+            {
+                "key": "all",
+                "value": 0,
+                "rules": "",
+                "title": "Publish resources for all service providers without prompting",
+                "name": "All",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "Overwrite existing file",
+                "name": "Force override",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "tag",
+                "value": "",
+                "rules": "",
+                "title": "",
+                "name": "Sign",
+                "placeholderValue": "*",
+                "is_option": true
             }
         ],
         "name": "Publish any publishable assets from vendor packages"
@@ -1069,5 +1607,61 @@
     {
         "command": "view:clear",
         "name": "Clear all compiled view files"
+    },
+    {
+        "command": "stub:publish",
+        "name": "Publish all customizable code generation templates",
+        "parameters": [
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "Overwrite existing file",
+                "name": "Force override",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
+    },
+    {
+        "command": "event:list",
+        "name": "Lists the events and listeners for the application",
+        "parameters": [
+            {
+                "key": "event",
+                "value": "",
+                "rules": "",
+                "title": "Filter by event name",
+                "name": "Event name",
+                "is_option": true
+            }
+        ]
+    },
+    {
+        "command": "make:component",
+        "name": "Create a new view component class",
+        "parameters": [
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "Overwrite existing file",
+                "name": "Force override",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "inline",
+                "value": 0,
+                "rules": "",
+                "title": "Create a component that renders an inline view",
+                "name": "Inline",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
     }
 ]

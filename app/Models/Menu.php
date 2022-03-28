@@ -12,6 +12,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\BaseModel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Menu extends Model
@@ -368,6 +369,12 @@ class Menu extends Model
         return $query;
     }
 
+    /**
+     * 在模块以内
+     * @param $q
+     * @param $ids
+     * @return mixed
+     */
     public function scopeModule($q,$ids){
         collect(Menu::whereIn('id',$ids)->get())
             ->map(function ($menu,$index)use(&$q){
@@ -382,6 +389,20 @@ class Menu extends Model
                             ->where('right_margin','<=',$menu['right_margin']);
                     });
                 }
+            });
+        return $q;
+    }
+
+    /**
+     * 在模块以外
+     * @param $q
+     * @param $ids
+     * @return mixed
+     */
+    public function scopeNotModule($q,$ids){
+        collect(Menu::whereIn('id',$ids)->get())
+            ->map(function ($menu,$index)use(&$q){
+                $q->whereRaw(DB::Raw("!(`left_margin`>= {$menu['left_margin']} AND `right_margin`<= {$menu['right_margin']})"));
             });
         return $q;
     }

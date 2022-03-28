@@ -147,14 +147,15 @@ $str = <<<'str'
         "where": "where",
         "verify": "verify"
     },
-    "ckeck_password": ":attribute error。",
-    "mobile_phone": ":attribute error。",
+    "ckeck_password": ":attribute error.",
+    "mobile_phone": ":attribute error.",
     "array_keys_in_array": "The :attribute field does not exist in :other.",
     "array_in_array": "The :attribute field does not exist in :other.",
     "sting_or_array": "The :attribute field does not exist in :other.",
-    "url_path": "url_path",
-    "captcha": "captcha",
-    "user_name": "user_name"
+    "url_path": "The :attribute format is incorrect.",
+    "captcha": "The :attribute verification error.",
+    "user_name": "The :attribute must be an impure number consisting of letters, digits, and bottom lines.",
+    "domain": "The :attribute must be a valid domain name."
 }
 str;
 return json_decode($str,true);
