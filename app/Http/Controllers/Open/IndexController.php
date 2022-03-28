@@ -205,10 +205,21 @@ class IndexController extends Controller
         $user = Auth::user();
         $lifetime = config('session.lifetime');
         if($user){
-            $user->load('admin','admin.roles');
+            $user->load('admin','admin.roles','member');
             if(!$user->tokenCan('remember')){
                 $lifetime = config('laravel_admin.no_remember_lifetime');
             };
+            if($member = Arr::get($user,'member')){
+                $bill_sum = collect($member->bills()->selectRaw(
+                    'SUM(amount) AS `sum_amount`,
+                    SUM(CASE `status` WHEN 0 THEN `amount` ELSE 0 END) AS `sum_amount_0`,
+                    SUM(CASE `status` WHEN 1 THEN `amount` ELSE 0 END) AS `sum_amount_1`'
+                )->first())->toArray();
+                $user = collect($user)->toArray();
+                $user['member']['bill_sum'] = $bill_sum;
+            }
+
+
         }
         return Response::returns([
             'user'=>$user,

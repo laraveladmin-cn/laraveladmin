@@ -42,7 +42,6 @@
         data() {
             return {
                 options:{
-                    lang_table:'sponsors',
                     lang_table: 'sponsors', //字段翻译
                     id: 'data-table', //多个data-table同时使用时唯一标识
                     url: '', //数据表请求数据地址
@@ -61,7 +60,7 @@
                         name: {name: "Sponsor", order: true},
                         url: {name: "Link", order: true, type: "url"},
                         logo: {name: "Logo Icon", order: true, type: "upload"},
-                        created_at: {name: "Created At", order: true, type: "time"},
+                        //created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}
                     },
                 }
