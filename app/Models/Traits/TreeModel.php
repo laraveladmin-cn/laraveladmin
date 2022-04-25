@@ -289,14 +289,6 @@ trait TreeModel{
     }
 
     /**
-     * 子节点
-     * @return mixed
-     */
-    public function children(){
-        return $this->hasMany(get_class($this),$this->treeField['parent_key'],$this->getKeyName());
-    }
-
-    /**
      * 可选的父节点
      */
     public function scopeOptionalParent($q,$node=null){

@@ -173,7 +173,7 @@
             },
             changeTmp(row,permissions){
                 if(row['tmp_id']>0){
-                    axios.get(this.use_url+'/admin/role/edit',{params:{'id':row['tmp_id']}}).then( (response)=> {
+                    axios.get(this.use_url+'/admin/roles/'+row['tmp_id'],{params:{'id':row['tmp_id']}}).then( (response)=> {
                         let permission_ids = collect(permissions).pluck('id');
                         let menus = collect(array_get(response,'data.row.menus',[])).filter(function (item) {
                             return permission_ids.contains(item['id']);

@@ -144,7 +144,7 @@ class CreateModel extends BaseCreate
         $data['delete'] = $data['delete'] ? "'".$data['delete']."'":'';
 
         $data['fieldsShowMaps'] = $this->formatShow(collect($table_fields)->filter(function ($item) {
-            return in_array($item['showType'], ['radio', 'checkbox','select','label']);
+            return in_array($item['showType'], ['radio', 'checkbox','select','label','icheck-radio','icheck','icheck-checkbox']);
         })->keyBy('Field')->map(function ($item, $key) {
             $res = "        '" . $key . "'"  . '=>[' . $this->formatShow(collect($item['values'])->map(function ($value, $key) {
                     return '            "' . $key . '"' . "=>'" . $value . "'";

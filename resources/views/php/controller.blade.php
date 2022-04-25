@@ -11,6 +11,7 @@ use {{$model}};
 use App\{{$model}};
 @endif
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Arr;
 
 class {{$name}}Controller extends Controller
 {
@@ -32,12 +33,10 @@ class {{$name}}Controller extends Controller
 
     /**
      * 验证规则
-     * @return array
+     * @return  array
      */
-    protected function getValidateRule($id=0){
-@if ($has_unique)
-        $id = Request::input('id',0);
-@endif
+    protected function getValidateRule($id=0)
+    {
 @foreach ($tableInfo['table_fields'] as $table_field)
 @if ($table_field['showType']=='password')
         if(!Request::input('{{$table_field['Field']}}')){
@@ -45,9 +44,17 @@ class {{$name}}Controller extends Controller
         }
 @endif
 @endforeach
+        return $this->getImportValidateRule($id,Request::all());
+    }
+
+    /**
+     * 验证规则
+     * @return array
+     */
+    protected function getImportValidateRule($id = 0, $item){
         $validate = [{!! $validates !!}];
 @if ($is_tree_model)
-        if(!{{$modelName}}::where('id',1)->value('id')  || Request::input('id')==1){
+        if(!{{$modelName}}::where('id',1)->value('id')  || Arr::get($item,'id')==1){
             unset($validate['parent_id']);
         }
 @endif
