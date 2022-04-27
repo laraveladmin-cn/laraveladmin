@@ -15,6 +15,7 @@ use App\Models\Menu;
 use App\Models\User;
 use App\Services\RouteService;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -78,7 +79,13 @@ trait ResourceController
             $item = [];
             $relation_id = Request::input('where.' . $value, 0);
             if ($relation_id && class_exists($model)) {
-                $fields = isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'];
+                $fields = collect(isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'])
+                    ->map(function ($field){
+                    if(is_string($field) && Str::contains($field,'`')){
+                        return DB::raw($field);
+                    }
+                    return $field;
+                })->toArray();
                 $item = collect($model::select($fields)
                     ->find($relation_id))->toArray();
             }
