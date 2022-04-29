@@ -155,6 +155,7 @@ class RouteService
         $routesConfig = json_decode(file_get_contents(base_path(self::$routes)),true);
         collect(Arr::get($routesConfig,'group',[]))->map(function ($group,$key)use($routesConfig,$route_prefix){
             $prefix = $group['prefix'];
+            $group['old_prefix'] = $prefix;
             $group['prefix'] = $route_prefix.$prefix;
             $group['middleware'] = collect(Arr::get($group,'middleware',[]))->map(function ($value){
                 if($value=='auth'){
@@ -164,7 +165,8 @@ class RouteService
                 }
             })->toArray();
             Route::group($group,function()use($routesConfig,$key,$prefix,$group){
-                if($key!='none'){
+                $defClass = $group['namespace'].'\\IndexController';
+                if($key!='none' && class_exists($defClass) && method_exists(new $defClass,'index')){
                     Route::get('/','IndexController@index');
                 }
                 //普通路由
@@ -232,8 +234,8 @@ class RouteService
                             Arr::get($item,'env',self::$env)==self::$env &&
                             Arr::get($item,'disabled',0)==0;
                     })
-                    ->map(function ($item){
-                        $value = Arr::get(explode('/',Arr::get($item,'url','')),2,'');
+                    ->map(function ($item)use ($group){
+                        $value = Str::replaceFirst($group['old_prefix'].'/','',$item['url']);
                         if($value){
                             $class = self::getClass($value);
                             $options = Arr::get($item,'options',[]);
@@ -257,12 +259,20 @@ class RouteService
         });
     }
 
+    /**
+     * 获取类名
+     * @param $value
+     * @return string
+     */
     public static function getClass($value){
         $str = Str::singular(Str::camel(str_replace('-','_',$value)));
         if(Str::endsWith($str,'ss')){
             $str = Str::replaceLast('ss','s',$str);
         }
-        return ucfirst($str).'Controller';
+        $str = collect(explode('/',$str))->filter()->map(function ($value){
+            return ucfirst($value);
+        })->implode('\\');
+        return $str.'Controller';
     }
 
     /**
