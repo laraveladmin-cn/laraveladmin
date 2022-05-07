@@ -138,7 +138,9 @@
                 if(username.count()>0){
                     errors.username = username.all();
                 }
-                this.validation.setErrors(errors);
+                if(this.$refs['login'] && this.$refs['login'].setErrors){
+                    this.$refs['login'].setErrors(errors);
+                }
                 if(errors['verify']){
                     this.mustVerify = true;
                 }
