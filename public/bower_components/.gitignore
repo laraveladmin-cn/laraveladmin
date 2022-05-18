@@ -11,4 +11,9 @@ axios
 collect-js
 qs
 vue
+docsify
+docsify-copy-code
+docsify-pagination
+gitalk
+prismjs
 !.gitignore

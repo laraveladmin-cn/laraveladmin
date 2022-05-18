@@ -127,5 +127,11 @@ return [
         resource_path('theme/_variables.scss') => resource_path('sass/_variables.scss'), //主题
         resource_path('theme/echarts.theme.json') => resource_path('js/components/echarts.theme.json'),
         resource_path('theme/variables.less') => resource_path('less/variables.less'),
+
+        public_path('bower_components/gitalk') => base_path('node_modules/gitalk/dist'),
+        public_path('bower_components/docsify') => base_path('node_modules/docsify/lib'),
+        public_path('bower_components/prismjs') => base_path('node_modules/prismjs'),
+        public_path('bower_components/docsify-copy-code') => base_path('node_modules/docsify-copy-code/dist'),
+        public_path('bower_components/docsify-pagination') => base_path('node_modules/docsify-pagination/dist'),
     ]
 ];
