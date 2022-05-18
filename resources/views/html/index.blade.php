@@ -34,7 +34,7 @@
                     },
                     primaryKey:'id', //数据唯一性主键
                     defOptions:null, //默认筛选条件
-                    fields: {!! str_replace(',"',',',str_replace('":',':',str_replace('{"','{',json_encode($show_fields,JSON_UNESCAPED_UNICODE)))) !!},
+                    fields: {!! str_replace(',"',',',str_replace('":',':',str_replace('{"','{',json_encode($show_fields,JSON_UNESCAPED_UNICODE)))) !!}
                 }
             };
         },
@@ -46,7 +46,7 @@
         },
         methods:{
 
-        },
+        }
     };
 </script>
 <style lang="scss" scoped>
