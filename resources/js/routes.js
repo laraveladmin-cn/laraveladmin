@@ -13,9 +13,14 @@ let routes = [
 
 collect(routesConfig.group).map((group,key)=>{
     group.prefix = group.prefix || '';
+    if(group.prefix && group.prefix.split('/').length>2){
+        group.prefix = '/'+group.prefix.split('/')[1];
+    }
     group.name = key;
     return group;
-}).values().groupBy('prefix').map((groups,name)=>{
+}).values()
+    .groupBy('prefix')
+    .map((groups,name)=>{
     let group_names = collect(groups).pluck('name');
     let filter = (item)=>{
         if ((item.env && window.AppConfig && window.AppConfig.env && item.env!=window.AppConfig.env) || item._is_deleted){

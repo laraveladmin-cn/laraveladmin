@@ -28,6 +28,8 @@
                             <span class="label" :class="'label-'+theme">
                                 {{showName(option)}}
                             </span>
+                            <slot name="item-more" :item="option">
+                            </slot>
                             <span class="pull-right text-red"
                                   :class="{disabled:disabled}"
                                   :title="$t('Delete')"
@@ -113,7 +115,7 @@
                 default: function () {
                     return {where:{},order:{}};
                 }
-            },
+            }
         },
         data(){
             return {
@@ -182,11 +184,13 @@
                 this.loading = true;
                 //查询险种信息
                 axios.get(this.use_url+this.itemUrl + id, {params: {}}).then((response) => {
-                    this.options.push(response.data.row);
-                    let id = array_get(response.data.row,this.primaryKey);
+                    let item = response.data.row;
+                    this.options.push(item);
+                    let id = array_get(item,this.primaryKey);
                     this.active_id=id;
                     this.val = collect(this.val).push(id).all();
                     this.loading = false;
+                    this.$emit('addItemSuccess',item);
                 }).catch( (error) =>{
                     this.loading = false;
                 });

@@ -352,8 +352,7 @@
     export default {
         components: {
             edit: ()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
-            editItem: ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
-{!! $components !!}
+            editItem: ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'){!! $components?",\n".$components:'' !!}
         },
         props: {
             url:{
@@ -373,7 +372,7 @@
                 default: function () {
                     return function () {};
                 }
-            },
+            }
         },
         data() {
             return {

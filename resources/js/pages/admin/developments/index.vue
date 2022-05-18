@@ -48,7 +48,7 @@
                                                        v-if="item.type=='select2tables'"
                                                        :options="transItem(item)"
                                                        :datas="props"
-                                                       :key="index">
+                                                       :key="props.data.index+'_'+index">
                                                 <template slot="input-item">
                                                     <div class="edit-item-content">
                                                         <select2 v-model="item.value"
@@ -71,7 +71,7 @@
                                                        v-else-if="item.type=='select2'"
                                                        :options="transItem(item)"
                                                        :datas="props"
-                                                       :key="index">
+                                                       :key="props.data.index+'_'+index">
                                                 <template slot="input-item">
                                                     <div class="edit-item-content">
                                                         <select2 v-model="item.value"
@@ -88,7 +88,7 @@
                                                        v-else-if="item.type=='checkbox'"
                                                        :options="transItem(item)"
                                                        :datas="props"
-                                                       :key="index">
+                                                       :key="props.data.index+'_'+index">
                                                 <template slot="input-item">
                                                     <div class="row">
                                                         <div v-for="(item1,index) in (item.map || array_get(props,'data.maps.'+item.map_key,[]))" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -101,7 +101,7 @@
                                                        v-else-if="item.type=='radio'"
                                                        :options="transItem(item)"
                                                        :datas="props"
-                                                       :key="index">
+                                                       :key="props.data.index+'_'+index">
                                                 <template slot="input-item">
                                                     <div class="row">
                                                         <div v-for="(item1,index) in (item.map || array_get(props,'data.maps.'+item.map_key,[]))" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -114,7 +114,7 @@
                                                        v-else-if="item.type=='switch'"
                                                        :options="transItem(item)"
                                                        :datas="props"
-                                                       :key="index">
+                                                       :key="props.data.index+'_'+index">
                                                 <template slot="input-item">
                                                     <div class="edit-item-content">
                                                         <el-switch v-model="item.value"
@@ -130,7 +130,7 @@
                                                        v-else-if="item.type=='number'"
                                                        :options="transItem(item)"
                                                        :datas="props"
-                                                       :key="index">
+                                                       :key="props.data.index+'_'+index">
                                                 <template slot="input-item">
                                                     <div class="edit-item-content">
                                                         <el-input-number v-model="item.value"
@@ -146,7 +146,7 @@
                                                        :options="transItem(item)"
                                                        :disabled="false"
                                                        :datas="props"
-                                                       :key="index">
+                                                       :key="props.data.index+'_'+index">
                                             </edit-item>
                                         </div>
                                     </div>

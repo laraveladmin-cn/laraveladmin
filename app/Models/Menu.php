@@ -506,7 +506,8 @@ class Menu extends Model
         $method = self::methodValue($method);
         $isIn = false;
         $menus = collect($menus)->filter(function($item) use (&$isIn,$url,$method,&$menu){
-            return strpos($item['url'],$url)===0 && in_array($method,$item['method']);
+            return $item['url']===$url && in_array($method,$item['method']);
+            //return strpos($item['url'],$url)===0 && in_array($method,$item['method']);
         });
         $menu = collect($menus)->first(function ($item)use($url){
             return $item['url']==$url;

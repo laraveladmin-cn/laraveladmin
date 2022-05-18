@@ -100,6 +100,7 @@
                     }else{
                         $this.val = $this.option;
                     }
+                    $this.$emit('checked',$this.option);
                     //$this.clickFun();
                 }
             }).on('ifUnchecked', function(event){ //取消选中
@@ -113,6 +114,7 @@
                     }else{
                         $this.val = '';
                     }
+                    $this.$emit('unchecked',$this.option);
                     //$this.clickFun();
                 }
             });
