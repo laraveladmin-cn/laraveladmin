@@ -489,9 +489,8 @@ const App = {
     }
 
 };
-const app = Vue.createApp(App);
 let template = '#menus';
-app.component('menus',{
+const menus = {
     props:{
         menus:{
             type:[Array],
@@ -522,5 +521,15 @@ app.component('menus',{
             }
         }
     }
-});
-app.mount('#app');
+};
+if(typeof Vue.createApp=="function"){
+    const app = Vue.createApp(App);
+    app.component('menus',menus);
+    app.mount('#app');
+}else {
+    Vue.component('menus', menus);
+    const app = new Vue(App).$mount('#app');
+}
+
+
+
