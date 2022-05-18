@@ -119,6 +119,10 @@ return [
         public_path('bower_components/select2/dist') => base_path('node_modules/select2/dist'),
         public_path('bower_components/xlsx/dist') => base_path('node_modules/xlsx/dist'),
         public_path('bower_components/ionicons') => base_path('node_modules/ionicons/dist'),
+        public_path('bower_components/collect-js') => base_path('node_modules/collect.js/build'),
+        public_path('bower_components/axios') => base_path('node_modules/axios/dist'),
+        public_path('bower_components/vue') => base_path('node_modules/vue/dist'),
+        public_path('bower_components/qs') => base_path('node_modules/qs/dist'),
 
         resource_path('theme/_variables.scss') => resource_path('sass/_variables.scss'), //主题
         resource_path('theme/echarts.theme.json') => resource_path('js/components/echarts.theme.json'),

@@ -14,7 +14,6 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
-    "axios": "^0.19.2",
     "cross-env": "^7.0",
     "jquery": "^3.2",
     "laravel-mix": "^5.0.4",
@@ -28,13 +27,14 @@
     "sass": "~1.26.5",
     "sass-loader": "^7.1.0",
     "tailwindcss": "^2.2.19",
-    "vue": "^2.5.17",
     "vue-loader": "^15.9.8",
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
+    "vue": "^2.5.17",
     "admin-lte": "^2.4.8",
     "animate.css": "^3.7.2",
+    "axios": "^0.19.2",
     "bootstrap": "^3.4.1",
     "bootstrap-colorpicker": "^3.0.0-beta.3",
     "bootstrap-sass": "3.4.1",
@@ -48,6 +48,7 @@
     "ionicons": "^3.0.0",
     "md5": "^2.2.1",
     "qiniu-js": "^2.5.5",
+    "qs": "^6.10.3",
     "select2": "4.0.10",
     "sortablejs": "^1.10.2",
     "ueditor": "^1.2.3",
