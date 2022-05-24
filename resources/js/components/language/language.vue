@@ -131,6 +131,20 @@
                         en_name: "Persian",
                         country_or_region: "per",
                         language:'فارسی',
+                    },
+                    {
+                        value:"de",
+                        name: "Deutschland",
+                        en_name: "German",
+                        country_or_region: "de",
+                        language:'Deutsch',
+                    },
+                    {
+                        value:"it",
+                        name: "Italia",
+                        en_name: "Italy",
+                        country_or_region: "it",
+                        language:'Italiano',
                     }
 
                 ],
@@ -1232,12 +1246,12 @@
     .flag.cz{
         height:14px;
         background-position:-1247px 0px
-    }
+    }*/
     .flag.de{
         height:12px;
         background-position:-1269px 0px
     }
-    .flag.dg{
+    /*.flag.dg{
         height:10px;
         background-position:-1291px 0px
     }
@@ -1460,11 +1474,11 @@
     .flag.is{
         height:15px;
         background-position:-2501px 0px
-    }
+    }*/
     .flag.it{
         height:14px;
         background-position:-2523px 0px
-    }
+    }/*
     .flag.je{
         height:12px;
         background-position:-2545px 0px
