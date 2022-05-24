@@ -155,7 +155,8 @@ $str = <<<'str'
     "url_path": ": неверный формат :attribute.",
     "captcha": ": Ошибка проверки attribute.",
     "user_name": ": attribute должно быть не чисто число, состоящее из букв, цифр, подчёркнутых.",
-    "domain": ": attribute должно быть действительным доменом."
+    "domain": ": attribute должно быть действительным доменом.",
+    "is_idcard": ": номер паспорта должен быть действительным."
 }
 str;
 return json_decode($str,true);

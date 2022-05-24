@@ -155,7 +155,8 @@ $str = <<<'str'
     "url_path": ":attributeフォーマットが不正です。",
     "captcha": ":attribute検証エラー。",
     "user_name": ":attributeは、アルファベット、数値、下線からなる非純数値でなければなりません。",
-    "domain": ":attributeは有効なドメイン名でなければなりません。"
+    "domain": ":attributeは有効なドメイン名でなければなりません。",
+    "is_idcard": "：attributeは有効な身分証明書番号でなければなりません。"
 }
 str;
 return json_decode($str,true);

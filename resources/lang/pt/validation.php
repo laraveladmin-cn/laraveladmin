@@ -155,7 +155,8 @@ $str = <<<'str'
     "url_path": "formato de :attribute incorrecto.",
     "captcha": ": Erro de validação do atributo.",
     "user_name": ": o atributo deve ser um número não puro composto de letras, números e subnúcleos.",
-    "domain": ": atributo deve ser um nome de domínio válido."
+    "domain": ": atributo deve ser um nome de domínio válido.",
+    "is_idcard": ": atributo deve ser um número de identificação válido."
 }
 str;
 return json_decode($str,true);
