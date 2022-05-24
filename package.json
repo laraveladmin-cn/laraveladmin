@@ -31,7 +31,6 @@
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
-    "vue": "^2.5.17",
     "admin-lte": "^2.4.8",
     "animate.css": "^3.7.2",
     "axios": "^0.19.2",
@@ -54,6 +53,7 @@
     "ueditor": "^1.2.3",
     "vee-validate": "^3.4.0",
     "velocity-animate": "^1.5.2",
+    "vue": "^2.5.17",
     "vue-clipboard2": "^0.3.1",
     "vue-i18n": "^8.24.3",
     "vue-json-views": "^1.1.0",
