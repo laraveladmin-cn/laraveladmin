@@ -4,6 +4,9 @@
     use \Illuminate\Support\Arr;
     $table_fields_show = collect($table_fields)->filter(function ($item) {
         return !(in_array($item['showType'], ['hidden']) || in_array($item['Field'], ['id', 'created_at', 'updated_at']));
+    })->map(function ($item){
+        $item['showType'] = Str::camel($item['showType']);
+        return $item;
     });
     $datePicker = [
         'name' => 'el-date-picker',
@@ -96,13 +99,13 @@
         'time'=>$datePicker,
         'month'=>$datePicker,
         'icheck'=>$icheck,
-        'icheck-radio'=>$icheck,
-        'icheck-checkbox'=>$icheck,
+        'icheckRadio'=>$icheck,
+        'icheckCheckbox'=>$icheck,
         'json'=>$json,
-        'json-edit'=>$json
+        'jsonEdit'=>$json
     ];
     $components = collect($components)
-        ->only(collect($table_fields)
+        ->only(collect($table_fields_show)
             ->pluck('showType')
             ->unique()
             ->toArray())
@@ -111,8 +114,8 @@
             $item['name'] = Str::studly($item['name']);
             return '            ' . lcfirst($item['name']) . ':()=>import(/* webpackChunkName: "'.$item['path'].'" */ \'' . $item['path'] . '\'), //' . $item['info'];
         })->implode("\n");
-        $chunk_count = $table_fields_show->count();
-        $chunk_num = $chunk_count<=4?1:($chunk_count<=6?2:3);
+    $chunk_count = $table_fields_show->count();
+    $chunk_num = $chunk_count<=4?1:($chunk_count<=6?2:3);
     ?>
     <div class="{{$class}}_edit">
         <div class="box" :class="'box-'+theme">
@@ -299,7 +302,7 @@
                                                    :disabled="!props.url">
                                         </editor-md>
                                     </template>
-@elseif($table_field['showType']=='icheck' || $table_field['showType']=='icheck-radio')
+@elseif($table_field['showType']=='icheck' || $table_field['showType']=='icheckRadio')
                                     <template slot="input-item">
                                         <div class="row">
                                             <div v-for="(item,index) in props.maps['{{$table_field['Field']}}']"
@@ -314,7 +317,7 @@
                                             </div>
                                         </div>
                                     </template>
-@elseif($table_field['showType']=='icheck-checkbox')
+@elseif($table_field['showType']=='icheckCheckbox')
                                 <template slot="input-item">
                                     <div class="row">
                                         <div v-for="(item,index) in props.maps['{{$table_field['Field']}}']"
@@ -327,7 +330,7 @@
                                         </div>
                                     </div>
                                 </template>
-@elseif($table_field['showType']=='json' || $table_field['showType']=='json-edit')
+@elseif($table_field['showType']=='json' || $table_field['showType']=='jsonEdit')
                                 <template slot="input-item">
                                     <json-edit
                                         v-model="props.data.row['{{$table_field['Field']}}']"
