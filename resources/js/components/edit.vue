@@ -234,6 +234,7 @@
                     this.loading = false;
                     let id = array_get(this.data,'row.'+this.primary_key,0);
                     this.setLastMenuShow(id);
+                    this.$emit('loaded');
                 }).catch((error) => {
                     this.loading = false;
                 });
