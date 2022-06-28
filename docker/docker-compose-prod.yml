@@ -6,6 +6,8 @@ services:
       - ../docker/mysql/data:/var/lib/mysql #mysql数据库数据文件存放目录;宿主机目录:容器目录
       - ../docker/mysql/shared:/var/lib/mysql_shared #与php共享目录
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql #数据库初始化sql
+#      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf #自定义配置
+      - ./storage/logs/mysql:/var/log/mysql #日志
 #    ports: #与宿主进的端口映射
 #      - 3306:3306 #宿主机端口:容器端口
     restart: always #异常退出后重启
