@@ -813,6 +813,7 @@ trait ResourceController
         if (!Request::input('page')) {
             //获取带有筛选条件的对象
             $obj = $this->getWithOptionModel('exportFields');
+            $obj = $this->handleExport($obj);
             $data = $obj->paginate(200)->toArray();
             if($no_order){
                 $data['max_id'] = collect($data['data'])->max($primary_key)?:0;
@@ -1037,6 +1038,16 @@ trait ResourceController
     protected function handleList(&$obj)
     {
         return $obj;
+    }
+
+    /**
+     * 列表页面数据获取前对数据处理
+     * @param $obj
+     * @return mixed
+     */
+    protected function handleExport(&$obj)
+    {
+        return $this->handleList($obj);
     }
 
     /**
