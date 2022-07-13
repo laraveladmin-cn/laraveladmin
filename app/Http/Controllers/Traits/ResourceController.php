@@ -81,11 +81,11 @@ trait ResourceController
             if ($relation_id && class_exists($model)) {
                 $fields = collect(isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'])
                     ->map(function ($field){
-                    if(is_string($field) && Str::contains($field,'`')){
-                        return DB::raw($field);
-                    }
-                    return $field;
-                })->toArray();
+                        if(is_string($field) && Str::contains($field,'`')){
+                            return DB::raw($field);
+                        }
+                        return $field;
+                    })->toArray();
                 $item = collect($model::select($fields)
                     ->find($relation_id))->toArray();
             }
@@ -303,6 +303,7 @@ trait ResourceController
                 'message' => trans('Delete failed!')//'删除失败!'
             ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
+        $this->handleDeleteSuccess($ids);
         return Response::returns(['alert' => alert([
             'message' => trans('Delete the success!')//'删除成功!'
         ])]);
@@ -808,7 +809,7 @@ trait ResourceController
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();
         $no_order = $primary_key && ((isset($this->disableExportOrder) && $this->disableExportOrder ) || //禁用排序 或
-            !Arr::get($this->getOptions(),'order')); //没有排序
+                !Arr::get($this->getOptions(),'order')); //没有排序
         //获取分页数据
         if (!Request::input('page')) {
             //获取带有筛选条件的对象
@@ -1126,6 +1127,14 @@ trait ResourceController
      */
     protected function handleImportValidateBefore(&$data){
         return $data;
+    }
+
+    /**
+     * 成功删除后处理
+     * @param array $ids
+     */
+    protected function handleDeleteSuccess($ids=[]){
+
     }
 
 
