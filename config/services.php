@@ -49,6 +49,12 @@ return (function(){
             'client_id' => env('WEIXINWEB_KEY'),
             'client_secret' => env('WEIXINWEB_SECRET'),
             'redirect' => $redirect.'weixinweb',
+        ],
+        'telegram'=>[
+            'bot' => env('TELEGRAM_BOT_USERNAME'),  // The bot's username
+            'client_id' => null,
+            'client_secret' => env('TELEGRAM_BOT_API_KEY'),
+            'redirect' => $redirect.'telegram',
         ]
 
     ];

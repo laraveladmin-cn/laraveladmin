@@ -155,7 +155,8 @@ $str = <<<'str'
     "url_path": "The :attribute format is incorrect.",
     "captcha": "The :attribute verification error.",
     "user_name": "The :attribute must be an impure number consisting of letters, digits, and bottom lines.",
-    "domain": "The :attribute must be a valid domain name."
+    "domain": "The :attribute must be a valid domain name.",
+    "is_idcard": "is_idcard"
 }
 str;
 return json_decode($str,true);

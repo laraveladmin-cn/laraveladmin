@@ -8,7 +8,7 @@
     "watch-css": "npm run development -- --watch --css",
     "watch-tailwindcss": "npm run development -- --watch --tailwindcss",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "npm run production && npm run prod-css && npm run prod-tailwindcss",
+    "prod": "npm run production && npm run prod-css",
     "prod-css": "npm run production -- --css",
     "prod-tailwindcss": "npm run production -- --tailwindcss",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"

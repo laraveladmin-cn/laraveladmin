@@ -20,25 +20,43 @@
             "Root node, the parent node of all menus": "Root node, the parent node of all menus",
             "Operate": "Operate",
             "Operation module": "Operation module",
-            "Homepage": "Homepage",
-            "Home module": "Home module",
-            "Official website": "Official website",
-            "Official website module": "Official website module",
             "Backstage home page": "Backstage home page",
-            "User management ": "User management ",
+            "Error log Download": "Error log Download",
+            "User management": "User management",
             "User management group": "User management group",
             "Other settings": "Other settings",
             "Other settings group": "Other settings group",
+            "Menu drag": "Menu drag",
+            "Menu drag page data": "Menu drag page data",
+            "Submit menu location modification": "Submit menu location modification",
+            "Development assistance": "Development assistance",
+            "Development assistant function page": "Development assistant function page",
+            "Edit page layout save": "Edit page layout save",
+            "Submit edit page layout save": "Submit edit page layout save",
+            "Data table query": "Data table query",
+            "Data table name association query": "Data table name association query",
+            "Command execution": "Command execution",
+            "Submit the command for execution": "Submit the command for execution",
             "Personal Center": "Personal Center",
             "Personal Center Group": "Personal Center Group",
-            "personal data": "personal data",
+            "Personal data": "Personal data",
             "Submit and edit personal data": "Submit and edit personal data",
             "Change Password": "Change Password",
             "Submit to edit to change password": "Submit to edit to change password",
+            "Insurance management": "Insurance management",
+            "Cooperation channel": "Cooperation channel",
+            "Conditions delete partner company": "Conditions delete partner company",
+            "Homepage": "Homepage",
+            "Home module": "Home module",
+            "File upload": "File upload",
+            "Official website": "Official website",
+            "Official website module": "Official website module",
             "Get configuration information": "Get configuration information",
             "Update token": "Update token",
             "Login page": "Login page",
             "Submit login": "Submit login",
+            "Three party login": "Three party login",
+            "Callback after three party login": "Callback after three party login",
             "Log out": "Log out",
             "Registration page": "Registration page",
             "Send sign up SMS": "Send sign up SMS",
@@ -50,46 +68,39 @@
             "Get user information": "Get user information",
             "Get menu information": "Get menu information",
             "Polar verification": "Polar verification",
-            "Three party login": "Three party login",
-            "Callback after three party login": "Callback after three party login",
             "Get the unique identity of the connection": "Get the unique identity of the connection",
-            "Error log Download": "Error log Download",
-            "File upload": "File upload",
-            "Development assistance": "Development assistance",
-            "Development assistant function page": "Development assistant function page",
-            "Edit page layout save": "Edit page layout save",
-            "Submit edit page layout save": "Submit edit page layout save",
-            "Data table query": "Data table query",
-            "Data table name association query": "Data table name association query",
-            "Command execution": "Command execution",
-            "Submit the command for execution": "Submit the command for execution",
-            "Menu drag": "Menu drag",
-            "Menu drag page data": "Menu drag page data",
-            "Submit menu location modification": "Submit menu location modification",
             "Ordinary users": "Ordinary users",
             "Authority management": "Authority management",
             "Role list": "Role list",
+            "Role": "Role",
             "Operation log": "Operation log",
             "Log list": "Log list",
-            "journal": "journal",
+            "Journal": "Journal",
             "Background users": "Background users",
             "Menu settings": "Menu settings",
-            "menu": "menu",
-            "System settings": "System settings",
-            "User management": "User management",
-            "Personal data": "Personal data",
-            "Role": "Role",
-            "Journal": "Journal",
             "Menu": "Menu",
+            "System settings": "System settings",
+            "Insurance company": "Insurance company",
+            "Insurance products": "Insurance products",
+            "Bank management": "Bank management",
+            "Bank": "Bank",
+            "Insurance classification": "Insurance classification",
+            "Insurance grouping": "Insurance grouping",
+            "Payment period": "Payment period",
+            "Cooperative company": "Cooperative company",
             "Log file": "Log file",
             "System log file": "System log file",
             "Seven cattle cloud token": "Seven cattle cloud token",
             "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get",
+            "Regional management": "Regional management",
+            "Get single menu details": "Get single menu details",
+            "Menu details": "Menu details",
             "500 page": "500 page",
             "403 page": "403 page",
             "404 page": "404 page",
-            "Get single menu details": "Get single menu details",
-            "Menu details": "Menu details"
+            "Log statistics": "Log statistics",
+            "Gaode search location": "Gaode search location",
+            "Gaode keyword search and positioning": "Gaode keyword search and positioning"
         },
         "tables": {
             "_file_logs": {
@@ -126,7 +137,16 @@
                     "Old password": "Old password",
                     "New password": "New password",
                     "Confirm the new password": "Confirm the new password",
-                    "Tripartite login": "Tripartite login"
+                    "Tripartite login": "Tripartite login",
+                    "Province ID": "Province ID",
+                    "City ID": "City ID",
+                    "Zone ID": "Zone ID",
+                    "Province": "Province",
+                    "City": "City",
+                    "Zone": "Zone",
+                    "Detailed address": "Detailed address",
+                    "Coordinate longitude": "Coordinate longitude",
+                    "Coordinate latitude": "Coordinate latitude"
                 },
                 "maps": {
                     "status": {
@@ -153,7 +173,15 @@
                     "Operation menu": "Operation menu",
                     "Operator": "Operator"
                 },
-                "maps": []
+                "maps": {
+                    "group": {
+                        "By day": "By day",
+                        "By week": "By week",
+                        "Monthly": "Monthly",
+                        "Quarterly": "Quarterly",
+                        "By year": "By year"
+                    }
+                }
             },
             "menus": {
                 "fields": {
@@ -323,6 +351,225 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "agent_systems": {
+                "fields": {
+                    "Name": "Name",
+                    "Full name": "Full name",
+                    "Website address": "Website address",
+                    "User name": "User name",
+                    "Password": "Password",
+                    "Binding IP": "Binding IP",
+                    "Server unique ID": "Server unique ID",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "banks": {
+                "fields": {
+                    "Name": "Name",
+                    "Full name": "Full name",
+                    "Sort": "Sort",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "Withholding Bank": "Withholding Bank",
+                    "Number of contracted insurance companies": "Number of contracted insurance companies"
+                },
+                "maps": []
+            },
+            "classifys": {
+                "fields": {
+                    "Name": "Name",
+                    "Remarks": "Remarks",
+                    "Parent ID": "Parent ID",
+                    "Hierarchy": "Hierarchy",
+                    "Left border": "Left border",
+                    "Right border": "Right border",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "First-level classification": "First-level classification",
+                    "Second classification": "Second classification",
+                    "Classification": "Classification",
+                    "Group of insurance types": "Group of insurance types",
+                    "Parent name": "Parent name",
+                    "Parent selection": "Parent selection"
+                },
+                "maps": []
+            },
+            "firms": {
+                "fields": {
+                    "Name": "Name",
+                    "Full name": "Full name",
+                    "Type": "Type",
+                    "Company website": "Company website",
+                    "Brand logo": "Brand logo",
+                    "Agent account rules": "Agent account rules",
+                    "Proxy account password rules": "Proxy account password rules",
+                    "Fixed password value": "Fixed password value",
+                    "Business month calculated by signing date": "Business month calculated by signing date",
+                    "Business month calculated by return receipt date": "Business month calculated by return receipt date",
+                    "Link rules": "Link rules",
+                    "Link Rule Template": "Link Rule Template",
+                    "Describe": "Describe",
+                    "Sort": "Sort",
+                    "Consolidated expected settlement month": "Consolidated expected settlement month",
+                    "Docking services": "Docking services",
+                    "Insurance notice": "Insurance notice",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "Link rules template": "Link rules template",
+                    "Number of insurance types": "Number of insurance types",
+                    "Withholding Bank": "Withholding Bank",
+                    "Number of long-term insurance types": "Number of long-term insurance types",
+                    "Company official website": "Company official website",
+                    "Online Insurance Service Provider": "Online Insurance Service Provider",
+                    "Link address rules": "Link address rules",
+                    "Link address rule template": "Link address rule template",
+                    "Return receipt input date Calculation business month": "Return receipt input date Calculation business month",
+                    "Support bank selection": "Support bank selection",
+                    "Fixed default password": "Fixed default password",
+                    "Insurance Company": "Insurance Company",
+                    "Receipt template type": "Receipt template type",
+                    "Pdf template": "Pdf template",
+                    "Content template": "Content template"
+                },
+                "maps": {
+                    "type": {
+                        "Life insurance": "Life insurance",
+                        "Property insurance": "Property insurance"
+                    },
+                    "uname_rule": {
+                        "No rules": "No rules",
+                        "Agent number": "Agent number",
+                        "ID number": "ID number",
+                        "Phone number": "Phone number"
+                    },
+                    "password_rule": {
+                        "No rules": "No rules",
+                        "Last 6 digits of ID card": "Last 6 digits of ID card",
+                        "Fixed value": "Fixed value"
+                    },
+                    "url_rule": {
+                        "No rules": "No rules",
+                        "Account template rules": "Account template rules"
+                    },
+                    "service_api": {
+                        "National treasure": "National treasure"
+                    },
+                    "receipt_type": {
+                        "Pdf template": "Pdf template",
+                        "Content template": "Content template"
+                    }
+                }
+            },
+            "pclassifys": {
+                "fields": {
+                    "Name": "Name",
+                    "Remarks": "Remarks",
+                    "Parent ID": "Parent ID",
+                    "Hierarchy": "Hierarchy",
+                    "Left border": "Left border",
+                    "Right border": "Right border",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "Parent name": "Parent name",
+                    "Parent selection": "Parent selection"
+                },
+                "maps": []
+            },
+            "products": {
+                "fields": {
+                    "Unique identification": "Unique identification",
+                    "Insurance company ID": "Insurance company ID",
+                    "First level classification ID": "First level classification ID",
+                    "Secondary classification ID": "Secondary classification ID",
+                    "Insurance group ID": "Insurance group ID",
+                    "Name": "Name",
+                    "Long term insurance": "Long term insurance",
+                    "Category": "Category",
+                    "Purchase method": "Purchase method",
+                    "Payment method": "Payment method",
+                    "Product attributes": "Product attributes",
+                    "Document address": "Document address",
+                    "Insurance company document number": "Insurance company document number",
+                    "Document number": "Document number",
+                    "State": "State",
+                    "Release time": "Release time",
+                    "Closing date": "Closing date",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "Preview Poster": "Preview Poster",
+                    "Stop selling insurance plant number": "Stop selling insurance plant number",
+                    "Number of types of insurance on sale": "Number of types of insurance on sale",
+                    "Number of discontinued insurance types": "Number of discontinued insurance types"
+                },
+                "maps": {
+                    "is_long_time": {
+                        "Short-term": "Short-term",
+                        "Long-term": "Long-term"
+                    },
+                    "class": {
+                        "Traditional products": "Traditional products",
+                        "New products": "New products"
+                    },
+                    "buy_type": {
+                        "Personal": "Personal",
+                        "Group": "Group"
+                    },
+                    "pay_type": {
+                        "One time payment": "One time payment",
+                        "Payment by installments": "Payment by installments",
+                        "Flexible payment": "Flexible payment"
+                    },
+                    "attr": {
+                        "Nothing": "Nothing",
+                        "Student FPA": "Student FPA",
+                        "Exclusive products for women": "Exclusive products for women",
+                        "Exclusive products for children": "Exclusive products for children",
+                        "Exclusive products for the elderly": "Exclusive products for the elderly",
+                        "Aviation accident insurance": "Aviation accident insurance"
+                    },
+                    "status": {
+                        "Halt the sales": "Halt the sales",
+                        "On sale": "On sale",
+                        "Out of service": "Out of service"
+                    }
+                }
+            },
+            "years": {
+                "fields": {
+                    "Name": "Name",
+                    "Value": "Value",
+                    "Describe": "Describe",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "Optional years": "Optional years"
+                },
+                "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "Zone ID",
+                    "Name": "Name",
+                    "Parent ID": "Parent ID",
+                    "Hierarchy": "Hierarchy",
+                    "Left border": "Left border",
+                    "Right border": "Right border",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At",
+                    "Parent": "Parent",
+                    "Parent name": "Parent name"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -334,6 +581,9 @@
                 "admins": {
                     "User name": "User name",
                     "Role Name": "Role Name"
+                },
+                "years": {
+                    "Please enter the value , split": "Please enter the value , split"
                 }
             }
         },
@@ -403,7 +653,14 @@
             "index": {
                 "Home page of official website": "Home page of official website",
                 "Backstage home page": "Backstage home page",
-                "Front desk home page": "Front desk home page"
+                "Front desk home page": "Front desk home page",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use.",
+                "Official environment official website": "Official environment official website:",
+                "Document": "Document",
+                "Website": "Website",
+                "Template download": "Template download",
+                "Gitee": "Gitee",
+                "Laravel documentation": "Laravel documentation"
             },
             "Registered user": "Registered user",
             "Forget your password": "Forget your password",
@@ -420,15 +677,15 @@
             "{_field_} must be verified": "{_field_} field must be verified",
             "Reset password": "Reset password",
             "Resetting": "Resetting…",
-            "Get the verification code": "Get the verification code",
+            "Get the verification code": "Get message code",
             "Getting": "Getting...",
-            "Enter the received message verification code": "Enter the received message verification code",
+            "Enter the received message verification code": "Enter the received message code",
             "seconds": "seconds",
             "new password": "new password",
             "confirm the new password": "confirm the new password",
             "Please enter a new password": "Please enter a new password",
             "Please enter to confirm your new password": "Please enter to confirm your new password",
-            "Message authentication code": "Message authentication code",
+            "Message authentication code": "Message code",
             "Please fill in the verification code": "Please fill in the verification code",
             "The verification code is being sent": "The verification code is being sent…",
             "Captcha validation failed": "Captcha validation failed",
@@ -447,7 +704,9 @@
             "index": {
                 "Home page of official website": "Home page of official website",
                 "Backstage home page": "Backstage home page",
-                "Front desk home page": "Front desk home page"
+                "Front desk home page": "Front desk home page",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use.",
+                "Official environment official website": "Official environment official website:"
             },
             "layout": {
                 "Footer": "Footer",
@@ -457,6 +716,51 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "Log in to access the statistics chart",
+            "Number of successful login": "Number of successful login",
+            "IP row of heavy": "IP row of heavy",
+            "Bar charts": "Bar charts",
+            "Sales": "Sales",
+            "Shirt": "Shirt",
+            "Cardigan": "Cardigan",
+            "Chiffon": "Chiffon",
+            "Trousers": "Trousers",
+            "High heels": "High heels",
+            "Socks": "Socks",
+            "Direct": "Direct",
+            "Marketing Advertising": "Marketing Advertising",
+            "Search engines": "Search engines",
+            "Email Marketing": "Email Marketing",
+            "Alliance advertising": "Alliance advertising",
+            "Video Ads": "Video Ads",
+            "Baidu": "Baidu",
+            "Google": "Google",
+            "Bing": "Bing",
+            "Other": "Other",
+            "Visit source": "Visit source",
+            "Custom radar chart": "Custom radar chart",
+            "Figure 1": "Figure 1",
+            "Figure 2": "Figure 2",
+            "Zhang San": "Zhang San",
+            "Li Si": "Li Si",
+            "Measure 1": "Measure 1",
+            "Measure 2": "Measure 2",
+            "Measure 3": "Measure 3",
+            "Measure 4": "Measure 4",
+            "Measure 5": "Measure 5",
+            "Language": "Language",
+            "Mathematics": "Mathematics",
+            "English": "English",
+            "Physical": "Physical",
+            "Chemistry": "Chemistry",
+            "Biology": "Biology",
+            "Radar map": "Radar map",
+            "Transcript": "Transcript",
+            "Last Week": "Last Week",
+            "Last month": "Last month",
+            "Last three months": "Last three months",
+            "Last Year": "Last Year",
+            "All": "All",
             "users": {
                 "username": "username",
                 "Must be {min}-{max} non-Chinese characters": "Must be {min}-{max} non-Chinese characters",
@@ -762,6 +1066,14 @@
                 "{number} minutes ago": "{number} minutes ago",
                 "Night": "Night",
                 "Day": "Day"
+            },
+            "firms": {
+                "http or https begins": "'http://' or 'https://' begins",
+                "The LOGO has not been set": "The LOGO has not been set",
+                "Attachment Image": "Attachment Image"
+            },
+            "agent_systems": {
+                "http or https begins": "'http://' or 'https://' begins"
             }
         },
         "errors": {
@@ -885,8 +1197,11 @@
     "Select month": "Select month",
     "Unbundling": "Unbundling",
     "Download": "Download",
+    "Delete within condition": "Delete within condition",
     "Click Upload": "Click Upload",
     "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}",
+    "Total number": "Total number",
     "Confirm to add": "Confirm to add",
-    "Your account has been logged in elsewhere": "Your account has been logged in elsewhere"
+    "Your account has been logged in elsewhere": "Your account has been logged in elsewhere",
+    "Coordinates": "Coordinates"
 }

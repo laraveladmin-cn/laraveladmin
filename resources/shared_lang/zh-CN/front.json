@@ -20,25 +20,43 @@
             "Root node, the parent node of all menus": "根节点,所有菜单的父节点",
             "Operate": "运营",
             "Operation module": "运营模块",
-            "Homepage": "主页",
-            "Home module": "主页模块",
-            "Official website": "官网",
-            "Official website module": "官网模块",
             "Backstage home page": "后台主页",
-            "User management ": "用户管理",
+            "Error log Download": "错误日志下载",
+            "User management": "用户管理",
             "User management group": "用户管理组",
             "Other settings": "其它设置",
             "Other settings group": "其它设置组",
+            "Menu drag": "菜单拖拽",
+            "Menu drag page data": "菜单拖拽页面数据",
+            "Submit menu location modification": "提交菜单位置修改",
+            "Development assistance": "开发辅助",
+            "Development assistant function page": "开发辅助功能页面",
+            "Edit page layout save": "编辑页面布局保存",
+            "Submit edit page layout save": "提交编辑页面布局保存",
+            "Data table query": "数据表查询",
+            "Data table name association query": "数据表名称联想查询",
+            "Command execution": "命令执行",
+            "Submit the command for execution": "提交命令进行执行",
             "Personal Center": "个人中心",
             "Personal Center Group": "个人中心组",
-            "personal data": "个人资料",
-            "Submit and edit personal data": "提交编辑修改个人资料",
+            "Personal data": "个人资料",
+            "Submit and edit personal data": "提交编辑个人资料",
             "Change Password": "修改密码",
             "Submit to edit to change password": "提交编辑修改密码",
+            "Insurance management": "保险管理",
+            "Cooperation channel": "合作渠道",
+            "Conditions delete partner company": "条件删除合作公司",
+            "Homepage": "主页",
+            "Home module": "主页模块",
+            "File upload": "文件上传",
+            "Official website": "官网",
+            "Official website module": "官网模块",
             "Get configuration information": "获取配置信息",
             "Update token": "更新token",
             "Login page": "登录页面",
             "Submit login": "提交登录",
+            "Three party login": "三方登录",
+            "Callback after three party login": "三方登录后回调",
             "Log out": "退出登录",
             "Registration page": "注册页面",
             "Send sign up SMS": "发送注册短信",
@@ -50,46 +68,39 @@
             "Get user information": "获取用户信息",
             "Get menu information": "获取菜单信息",
             "Polar verification": "极验验证",
-            "Three party login": "三方登录",
-            "Callback after three party login": "三方登录后回调",
             "Get the unique identity of the connection": "获取连接唯一标识",
-            "Error log Download": "错误日志下载",
-            "File upload": "文件上传",
-            "Development assistance": "开发辅助",
-            "Development assistant function page": "开发辅助功能页面",
-            "Edit page layout save": "编辑页面布局保存",
-            "Submit edit page layout save": "提交编辑页面布局保存",
-            "Data table query": "数据表查询",
-            "Data table name association query": "数据表名称联想查询",
-            "Command execution": "命令执行",
-            "Submit the command for execution": "提交命令进行执行",
-            "Menu drag": "菜单拖拽",
-            "Menu drag page data": "菜单拖拽页面数据",
-            "Submit menu location modification": "提交菜单位置修改",
             "Ordinary users": "普通用户",
             "Authority management": "权限管理",
             "Role list": "角色列表",
+            "Role": "角色",
             "Operation log": "操作日志",
             "Log list": "日志列表",
-            "journal": "日志",
+            "Journal": "日志",
             "Background users": "后台用户",
             "Menu settings": "菜单设置",
-            "menu": "菜单",
-            "System settings": "系统设置",
-            "User management": "用户管理",
-            "Personal data": "个人资料",
-            "Role": "角色",
-            "Journal": "日志",
             "Menu": "菜单",
+            "System settings": "系统设置",
+            "Insurance company": "保险公司",
+            "Insurance products": "保险产品",
+            "Bank management": "银行管理",
+            "Bank": "银行",
+            "Insurance classification": "险种分类",
+            "Insurance grouping": "险种分组",
+            "Payment period": "交费年期",
+            "Cooperative company": "合作公司",
             "Log file": "日志文件",
             "System log file": "系统日志文件",
             "Seven cattle cloud token": "七牛云TOKEN",
             "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取",
+            "Regional management": "地区管理",
+            "Get single menu details": "获取单条菜单详细信息",
+            "Menu details": "菜单详情",
             "500 page": "500页面",
             "403 page": "403页面",
             "404 page": "404页面",
-            "Get single menu details": "获取单条菜单详细信息",
-            "Menu details": "菜单详情"
+            "Log statistics": "日志统计",
+            "Gaode search location": "高德搜索定位",
+            "Gaode keyword search and positioning": "高德关键字搜索定位"
         },
         "tables": {
             "_file_logs": {
@@ -126,7 +137,16 @@
                     "Old password": "旧密码",
                     "New password": "新密码",
                     "Confirm the new password": "确认新密码",
-                    "Tripartite login": "三方登录"
+                    "Tripartite login": "三方登录",
+                    "Province ID": "省ID",
+                    "City ID": "市ID",
+                    "Zone ID": "区ID",
+                    "Province": "省",
+                    "City": "市",
+                    "Zone": "区",
+                    "Detailed address": "详细地址",
+                    "Coordinate longitude": "坐标经度",
+                    "Coordinate latitude": "坐标纬度"
                 },
                 "maps": {
                     "status": {
@@ -153,7 +173,15 @@
                     "Operation menu": "操作菜单",
                     "Operator": "操作者"
                 },
-                "maps": []
+                "maps": {
+                    "group": {
+                        "By day": "按天",
+                        "By week": "按周",
+                        "Monthly": "按月",
+                        "Quarterly": "按季度",
+                        "By year": "按年"
+                    }
+                }
             },
             "menus": {
                 "fields": {
@@ -323,6 +351,225 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "agent_systems": {
+                "fields": {
+                    "Name": "名称",
+                    "Full name": "全称",
+                    "Website address": "网站地址",
+                    "User name": "用户名",
+                    "Password": "密码",
+                    "Binding IP": "绑定IP",
+                    "Server unique ID": "服务器唯一标识",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "banks": {
+                "fields": {
+                    "Name": "名称",
+                    "Full name": "全称",
+                    "Sort": "排序",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Withholding Bank": "代扣银行",
+                    "Number of contracted insurance companies": "签约保险公司数"
+                },
+                "maps": []
+            },
+            "classifys": {
+                "fields": {
+                    "Name": "名称",
+                    "Remarks": "备注",
+                    "Parent ID": "父级ID",
+                    "Hierarchy": "层级",
+                    "Left border": "左边界",
+                    "Right border": "右边界",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "First-level classification": "一级分类",
+                    "Second classification": "二级分类",
+                    "Classification": "分类",
+                    "Group of insurance types": "险种分组",
+                    "Parent name": "父级名称",
+                    "Parent selection": "所属父级选择"
+                },
+                "maps": []
+            },
+            "firms": {
+                "fields": {
+                    "Name": "名称",
+                    "Full name": "全称",
+                    "Type": "类型",
+                    "Company website": "公司网站",
+                    "Brand logo": "品牌LOGO",
+                    "Agent account rules": "代理账号规则",
+                    "Proxy account password rules": "代理账号密码规则",
+                    "Fixed password value": "固定密码值",
+                    "Business month calculated by signing date": "签单日期计算业务月份",
+                    "Business month calculated by return receipt date": "交回执日期计算业务月份",
+                    "Link rules": "链接规则",
+                    "Link Rule Template": "链接规则模板",
+                    "Describe": "描述",
+                    "Sort": "排序",
+                    "Consolidated expected settlement month": "合并预计结算月份开关",
+                    "Docking services": "对接服务",
+                    "Insurance notice": "投保须知",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Link rules template": "链接规则模板",
+                    "Number of insurance types": "险种数量",
+                    "Withholding Bank": "代扣银行",
+                    "Number of long-term insurance types": "长期险种数量",
+                    "Company official website": "公司官网网址",
+                    "Online Insurance Service Provider": "线上投保服务商",
+                    "Link address rules": "链接地址规则",
+                    "Link address rule template": "链接地址规则模板",
+                    "Return receipt input date Calculation business month": "回执录入日期计算业务月份",
+                    "Support bank selection": "支持银行选择",
+                    "Fixed default password": "固定默认密码",
+                    "Insurance Company": "保险公司",
+                    "Receipt template type": "回执模板类型",
+                    "Pdf template": "PDF模板",
+                    "Content template": "内容模板"
+                },
+                "maps": {
+                    "type": {
+                        "Life insurance": "寿险",
+                        "Property insurance": "财险"
+                    },
+                    "uname_rule": {
+                        "No rules": "无规则",
+                        "Agent number": "代理人工号",
+                        "ID number": "身份证号",
+                        "Phone number": "手机号码"
+                    },
+                    "password_rule": {
+                        "No rules": "无规则",
+                        "Last 6 digits of ID card": "身份证后6位",
+                        "Fixed value": "固定值"
+                    },
+                    "url_rule": {
+                        "No rules": "无规则",
+                        "Account template rules": "账号模板规则"
+                    },
+                    "service_api": {
+                        "National treasure": "国宝"
+                    },
+                    "receipt_type": {
+                        "Pdf template": "pdf模板",
+                        "Content template": "内容模板"
+                    }
+                }
+            },
+            "pclassifys": {
+                "fields": {
+                    "Name": "名称",
+                    "Remarks": "备注",
+                    "Parent ID": "父级ID",
+                    "Hierarchy": "层级",
+                    "Left border": "左边界",
+                    "Right border": "右边界",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Parent name": "父级名称",
+                    "Parent selection": "所属父级选择"
+                },
+                "maps": []
+            },
+            "products": {
+                "fields": {
+                    "Unique identification": "唯一标识",
+                    "Insurance company ID": "保险公司ID",
+                    "First level classification ID": "一级分类ID",
+                    "Secondary classification ID": "二级分类ID",
+                    "Insurance group ID": "险种分组ID",
+                    "Name": "名称",
+                    "Long term insurance": "长期险种",
+                    "Category": "类别",
+                    "Purchase method": "购买方式",
+                    "Payment method": "交费方式",
+                    "Product attributes": "产品属性",
+                    "Document address": "文档地址",
+                    "Insurance company document number": "保险公司文件编号",
+                    "Document number": "文件编号",
+                    "State": "状态",
+                    "Release time": "发布时间",
+                    "Closing date": "停售日期",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Preview Poster": "预览海报",
+                    "Stop selling insurance plant number": "停售险种数量",
+                    "Number of types of insurance on sale": "在售险种数量",
+                    "Number of discontinued insurance types": "停用险种数量"
+                },
+                "maps": {
+                    "is_long_time": {
+                        "Short-term": "短期",
+                        "Long-term": "长期"
+                    },
+                    "class": {
+                        "Traditional products": "传统型产品",
+                        "New products": "新型产品"
+                    },
+                    "buy_type": {
+                        "Personal": "个人",
+                        "Group": "团体"
+                    },
+                    "pay_type": {
+                        "One time payment": "一次性交费",
+                        "Payment by installments": "分期交费",
+                        "Flexible payment": "灵活交费"
+                    },
+                    "attr": {
+                        "Nothing": "无",
+                        "Student FPA": "学生平安险",
+                        "Exclusive products for women": "女性专属产品",
+                        "Exclusive products for children": "少儿专属产品",
+                        "Exclusive products for the elderly": "老年专属产品",
+                        "Aviation accident insurance": "航空意外险"
+                    },
+                    "status": {
+                        "Halt the sales": "停售",
+                        "On sale": "在售",
+                        "Out of service": "停用"
+                    }
+                }
+            },
+            "years": {
+                "fields": {
+                    "Name": "名称",
+                    "Value": "值",
+                    "Describe": "描述",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Optional years": "可选年期"
+                },
+                "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "区域ID",
+                    "Name": "名称",
+                    "Parent ID": "父ID",
+                    "Hierarchy": "层级",
+                    "Left border": "左边界",
+                    "Right border": "右边界",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间",
+                    "Parent": "父级",
+                    "Parent name": "父级名称"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -334,6 +581,9 @@
                 "admins": {
                     "User name": "用户名称",
                     "Role Name": "角色名称"
+                },
+                "years": {
+                    "Please enter the value , split": "请输入值','分割"
                 }
             }
         },
@@ -403,7 +653,14 @@
             "index": {
                 "Home page of official website": "官网首页",
                 "Backstage home page": "后台首页",
-                "Front desk home page": "前台首页"
+                "Front desk home page": "前台首页",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "请勿在本演示环境注册用户,本演示环境的注册,登录仅用于演示使用",
+                "Official environment official website": "正式环境官网:",
+                "Document": "文档",
+                "Website": "官网",
+                "Template download": "模板下载",
+                "Gitee": "码云",
+                "Laravel documentation": "Laravel文档"
             },
             "Registered user": "注册用户",
             "Forget your password": "忘记密码",
@@ -447,7 +704,9 @@
             "index": {
                 "Home page of official website": "官网首页",
                 "Backstage home page": "后台首页",
-                "Front desk home page": "前台首页"
+                "Front desk home page": "前台首页",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "请勿在本演示环境注册用户,本演示环境的注册跟登录仅用于演示使用",
+                "Official environment official website": "正式环境官网:"
             },
             "layout": {
                 "Footer": "脚部",
@@ -457,6 +716,51 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "登录访问统计图",
+            "Number of successful login": "成功登录次数",
+            "IP row of heavy": "IP排重",
+            "Bar charts": "柱状图",
+            "Sales": "销量",
+            "Shirt": "衬衫",
+            "Cardigan": "羊毛衫",
+            "Chiffon": "雪纺衫",
+            "Trousers": "裤子",
+            "High heels": "高跟鞋",
+            "Socks": "袜子",
+            "Direct": "直达",
+            "Marketing Advertising": "营销广告",
+            "Search engines": "搜索引擎",
+            "Email Marketing": "邮件营销",
+            "Alliance advertising": "联盟广告",
+            "Video Ads": "视频广告",
+            "Baidu": "百度",
+            "Google": "谷歌",
+            "Bing": "必应",
+            "Other": "其他",
+            "Visit source": "访问来源",
+            "Custom radar chart": "自定义雷达图",
+            "Figure 1": "图一",
+            "Figure 2": "图二",
+            "Zhang San": "张三",
+            "Li Si": "李四",
+            "Measure 1": "指标一",
+            "Measure 2": "指标二 ",
+            "Measure 3": "指标三 ",
+            "Measure 4": "指标四 ",
+            "Measure 5": "指标五",
+            "Language": "语文",
+            "Mathematics": "数学 ",
+            "English": "英语 ",
+            "Physical": "物理 ",
+            "Chemistry": "化学 ",
+            "Biology": "生物 ",
+            "Radar map": "雷达图",
+            "Transcript": "成绩单",
+            "Last Week": "最近一周",
+            "Last month": "最近一月",
+            "Last three months": "最近三月",
+            "Last Year": "最近一年",
+            "All": "全部",
             "users": {
                 "username": "用户昵称",
                 "Must be {min}-{max} non-Chinese characters": "必须是{min}-{max}位的非中文字符",
@@ -762,6 +1066,14 @@
                 "{number} minutes ago": "{number}分钟前",
                 "Night": "黑夜",
                 "Day": "白天"
+            },
+            "firms": {
+                "http or https begins": "'http://'或'https://‘开头",
+                "The LOGO has not been set": "还没有设置LOGO",
+                "Attachment Image": "附件图片"
+            },
+            "agent_systems": {
+                "http or https begins": "'http://'或'https://‘开头"
             }
         },
         "errors": {
@@ -885,8 +1197,11 @@
     "Select month": "选择月份",
     "Unbundling": "解绑",
     "Download": "下载",
+    "Delete within condition": "条件内删除",
     "Click Upload": "点击上传",
     "Only picture files can be uploaded and no more than {size}": "只能上传图片文件，且不超过{size}",
+    "Total number": "总数",
     "Confirm to add": "确认添加",
-    "Your account has been logged in elsewhere": "您的帐号已在其他地方登录！"
+    "Your account has been logged in elsewhere": "您的帐号已在其他地方登录！",
+    "Coordinates": "坐标"
 }

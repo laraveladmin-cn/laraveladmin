@@ -29,7 +29,8 @@ class Ouser extends Model
             "2"=>'weixin', //微信移动应用登录
             "3"=>'weibo', //微博三方登录
             "4"=>'weixinweb', //微信网页登录
-            "5"=>'official' //微信公众号登录
+            "5"=>'official', //微信公众号登录
+            "6"=>'telegram' //电报
         ],
         'type_show'=>[
             [
@@ -61,7 +62,13 @@ class Ouser extends Model
                 'class'=>'info',
                 'icon'=>'weixin',
                 'type'=>5
-            ] //微信公众号登录
+            ], //微信公众号登录
+            [
+                'name'=>'电报',
+                'class'=>'twitter',
+                'icon'=>'paper-plane-o',
+                'type'=>6
+            ], //电报登录
         ]
     ];
     //字段默认值

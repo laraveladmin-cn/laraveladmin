@@ -55,6 +55,20 @@ class Log extends Model
     ];
 
     /**
+     * 字段值map
+     * @var array
+     */
+    protected $fieldsShowMaps = [
+        'group'=>[
+            'By day',
+            'By week',
+            'Monthly',
+            'Quarterly',
+            'By year'
+        ]
+    ];
+
+    /**
      * 日志用户
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

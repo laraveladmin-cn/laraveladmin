@@ -56,9 +56,9 @@ class LoginController extends Controller
     protected $loginNumUname = '';
     //三方登录配置
     protected $otherLogin=[
-        ['type'=>'qq','url'=>'/open/other-login/qq','class'=>'hover-primary','col'=>12],
-        //['type'=>'wechat','url'=>'/open/other-login/weixinweb','class'=>'hover-warning','col'=>4],
-        //['type'=>'weibo','url'=>'/open/other-login/weibo','class'=>'hover-danger','col'=>4],
+        ['type'=>'qq','url'=>'/open/other-login/qq','class'=>'hover-primary','col'=>4],
+        ['type'=>'wechat','url'=>'/open/other-login/weixinweb','class'=>'hover-warning','col'=>4],
+        ['type'=>'weibo','url'=>'/open/other-login/weibo','class'=>'hover-danger','col'=>4],
     ];
 
     protected $backUrlKey ='';
@@ -75,6 +75,21 @@ class LoginController extends Controller
         $this->loginNumIp = config('laravel_admin.store_keys.verify.login_num_key').':'.RequestFacade::header('x-real-ip',RequestFacade::ip());
         $this->loginNumUname = config('laravel_admin.store_keys.verify.login_num_key').':'.app('request')->get($this->loginUsername());
         $this->backUrlKey = config('laravel_admin.store_keys.other_login.back_url');
+        $this->otherLogin[] = [
+            'type'=>'telegram',
+            'url'=>'/open/other-login/telegram',
+            'class'=>'hover-danger',
+            'col'=>12,
+            'button'=>sprintf(<<<str
+<script async
+src="https://telegram.org/js/telegram-widget.js"
+data-telegram-login="%s"
+data-size="large"
+data-onauth="onOtherLoginAuth(user,'telegram')"
+data-request-access="write">
+</script>
+str,config('services.telegram.bot'))
+        ];
     }
 
     /**

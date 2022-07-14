@@ -31,7 +31,13 @@ class User extends Authenticatable
         'status',
         'description',
         'avatar',
-        'client_id'
+        'province_id',
+        'city_id',
+        'area_id',
+        'client_id',
+        'addr',
+        'lng',
+        'lat'
     ];
 
     /**
@@ -86,7 +92,11 @@ class User extends Authenticatable
         'status'=>1,
         'description'=>null,
         'avatar'=>'',
-        'client_id'=>''
+        'province_id'=>0,
+        'city_id'=>0,
+        'area_id'=>0,
+        'client_id'=>'',
+        'addr'=>''
     ];
 
     //字段默认值
@@ -104,6 +114,12 @@ class User extends Authenticatable
         //'created_at' => 'Created At',
         //'updated_at' => 'Updated At',
         //'deleted_at' => 'Deleted At',
+        'province_id'=>'Province ID',
+        'city_id'=>'City ID',
+        'area_id'=>'Zone ID',
+        'addr'=>'Detailed address',
+        'lng'=>'Coordinate longitude',
+        'lat'=>'Coordinate latitude',
         'id' => 'ID',
     ];
 
@@ -140,6 +156,19 @@ class User extends Authenticatable
      */
     public function ousers(){
         return $this->hasMany('App\Models\Ouser');
+    }
+
+    /* 所属省份 */
+    public function province(){
+        return $this->belongsTo('App\Models\Area','province_id');
+    }
+    /* 所属市 */
+    public function city(){
+        return $this->belongsTo('App\Models\Area','city_id');
+    }
+    /* 所属区 */
+    public function area(){
+        return $this->belongsTo('App\Models\Area');
     }
 
     public function scopeIsAdmin($query){

@@ -84,10 +84,10 @@
         data() {
             return {
                 "{lang_path}":'open',
-                username:'',
+                username:'demo_admin',
                 remember:false,
                 mustVerify:false,
-                password:'',
+                password:'admin123456',
                 verifyCode:'',
                 //三方登录配置
                 otherLogin: [],

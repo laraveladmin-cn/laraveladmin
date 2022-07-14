@@ -20,25 +20,43 @@
             "Root node, the parent node of all menus": "根節點，所有選單的父節點",
             "Operate": "運營",
             "Operation module": "運營模塊",
-            "Homepage": "主頁",
-            "Home module": "主頁模塊",
-            "Official website": "官網",
-            "Official website module": "官網模塊",
             "Backstage home page": "後臺主頁",
-            "User management ": "用戶管理",
+            "Error log Download": "錯誤日誌下載",
+            "User management": "用戶管理",
             "User management group": "用戶管理組",
             "Other settings": "其它設定",
             "Other settings group": "其它設定組",
+            "Menu drag": "選單拖拽",
+            "Menu drag page data": "選單拖拽頁面數據",
+            "Submit menu location modification": "提交選單位置修改",
+            "Development assistance": "開發輔助",
+            "Development assistant function page": "開發協助工具頁面",
+            "Edit page layout save": "編輯頁面佈局保存",
+            "Submit edit page layout save": "提交編輯頁面佈局保存",
+            "Data table query": "資料表査詢",
+            "Data table name association query": "資料表名稱聯想査詢",
+            "Command execution": "命令執行",
+            "Submit the command for execution": "提交命令進行執行",
             "Personal Center": "個人中心",
             "Personal Center Group": "個人中心組",
-            "personal data": "個人資料",
-            "Submit and edit personal data": "提交編輯修改個人資料",
+            "Personal data": "個人資料",
+            "Submit and edit personal data": "提交編輯個人資料",
             "Change Password": "修改密碼",
             "Submit to edit to change password": "提交編輯修改密碼",
+            "Insurance management": "保險管理",
+            "Cooperation channel": "合作通路",
+            "Conditions delete partner company": "條件删除合作公司",
+            "Homepage": "主頁",
+            "Home module": "主頁模塊",
+            "File upload": "文件上傳",
+            "Official website": "官網",
+            "Official website module": "官網模塊",
             "Get configuration information": "獲取配寘資訊",
             "Update token": "更新token",
             "Login page": "登入頁面",
             "Submit login": "提交登入",
+            "Three party login": "三方登入",
+            "Callback after three party login": "三方登入後回檔",
             "Log out": "登出",
             "Registration page": "注册頁面",
             "Send sign up SMS": "發送注册簡訊",
@@ -50,46 +68,39 @@
             "Get user information": "獲取用戶資訊",
             "Get menu information": "獲取選單資訊",
             "Polar verification": "極驗驗證",
-            "Three party login": "三方登入",
-            "Callback after three party login": "三方登入後回檔",
             "Get the unique identity of the connection": "獲取連接唯一標識",
-            "Error log Download": "錯誤日誌下載",
-            "File upload": "文件上傳",
-            "Development assistance": "開發輔助",
-            "Development assistant function page": "開發協助工具頁面",
-            "Edit page layout save": "編輯頁面佈局保存",
-            "Submit edit page layout save": "提交編輯頁面佈局保存",
-            "Data table query": "資料表査詢",
-            "Data table name association query": "資料表名稱聯想査詢",
-            "Command execution": "命令執行",
-            "Submit the command for execution": "提交命令進行執行",
-            "Menu drag": "選單拖拽",
-            "Menu drag page data": "選單拖拽頁面數據",
-            "Submit menu location modification": "提交選單位置修改",
             "Ordinary users": "普通用戶",
             "Authority management": "許可權管理",
             "Role list": "角色清單",
+            "Role": "角色",
             "Operation log": "操作日誌",
             "Log list": "日誌清單",
-            "journal": "日誌",
+            "Journal": "日誌",
             "Background users": "後臺用戶",
             "Menu settings": "選單設定",
-            "menu": "選單",
-            "System settings": "系統設置",
-            "User management": "用戶管理",
-            "Personal data": "個人資料",
-            "Role": "角色",
-            "Journal": "日誌",
             "Menu": "選單",
+            "System settings": "系統設置",
+            "Insurance company": "保險公司",
+            "Insurance products": "保險產品",
+            "Bank management": "銀行管理",
+            "Bank": "銀行",
+            "Insurance classification": "險種分類",
+            "Insurance grouping": "險種分組",
+            "Payment period": "交費年期",
+            "Cooperative company": "合作公司",
             "Log file": "日誌檔",
             "System log file": "系統日誌檔",
             "Seven cattle cloud token": "七牛雲TOKEN",
             "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取",
+            "Regional management": "地區管理",
+            "Get single menu details": "獲取單條選單詳細資訊",
+            "Menu details": "選單詳情",
             "500 page": "500頁面",
             "403 page": "403頁面",
             "404 page": "404頁面",
-            "Get single menu details": "獲取單條選單詳細資訊",
-            "Menu details": "選單詳情"
+            "Log statistics": "日誌統計",
+            "Gaode search location": "高德蒐索定位",
+            "Gaode keyword search and positioning": "高德關鍵字搜索定位"
         },
         "tables": {
             "_file_logs": {
@@ -126,7 +137,16 @@
                     "Old password": "舊密碼",
                     "New password": "新密碼",
                     "Confirm the new password": "確認新密碼",
-                    "Tripartite login": "三方登入"
+                    "Tripartite login": "三方登入",
+                    "Province ID": "省ID",
+                    "City ID": "市ID",
+                    "Zone ID": "區ID",
+                    "Province": "省",
+                    "City": "市",
+                    "Zone": "區",
+                    "Detailed address": "詳細地址",
+                    "Coordinate longitude": "座標經度",
+                    "Coordinate latitude": "座標緯度"
                 },
                 "maps": {
                     "status": {
@@ -153,7 +173,15 @@
                     "Operation menu": "操作選單",
                     "Operator": "操作者"
                 },
-                "maps": []
+                "maps": {
+                    "group": {
+                        "By day": "按天",
+                        "By week": "按周",
+                        "Monthly": "按月",
+                        "Quarterly": "按季度",
+                        "By year": "按年"
+                    }
+                }
             },
             "menus": {
                 "fields": {
@@ -323,6 +351,225 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "agent_systems": {
+                "fields": {
+                    "Name": "名稱",
+                    "Full name": "全稱",
+                    "Website address": "網站地址",
+                    "User name": "用戶名",
+                    "Password": "密碼",
+                    "Binding IP": "綁定IP",
+                    "Server unique ID": "服務器唯一標識",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "banks": {
+                "fields": {
+                    "Name": "名稱",
+                    "Full name": "全稱",
+                    "Sort": "排序",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Withholding Bank": "代扣銀行",
+                    "Number of contracted insurance companies": "簽約保險公司數"
+                },
+                "maps": []
+            },
+            "classifys": {
+                "fields": {
+                    "Name": "名稱",
+                    "Remarks": "備註",
+                    "Parent ID": "父級ID",
+                    "Hierarchy": "層級",
+                    "Left border": "左邊界",
+                    "Right border": "右邊界",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "First-level classification": "一級分類",
+                    "Second classification": "二級分類",
+                    "Classification": "分類",
+                    "Group of insurance types": "險種分組",
+                    "Parent name": "父級名稱",
+                    "Parent selection": "所屬父級選擇"
+                },
+                "maps": []
+            },
+            "firms": {
+                "fields": {
+                    "Name": "名稱",
+                    "Full name": "全稱",
+                    "Type": "類型",
+                    "Company website": "公司網站",
+                    "Brand logo": "品牌LOGO",
+                    "Agent account rules": "代理帳號規則",
+                    "Proxy account password rules": "代理帳號密碼規則",
+                    "Fixed password value": "固定密碼值",
+                    "Business month calculated by signing date": "簽單日期計算業務月份",
+                    "Business month calculated by return receipt date": "交回執日期計算業務月份",
+                    "Link rules": "連結規則",
+                    "Link Rule Template": "連結規則範本",
+                    "Describe": "描述",
+                    "Sort": "排序",
+                    "Consolidated expected settlement month": "合併預計結算月份開關",
+                    "Docking services": "對接服務",
+                    "Insurance notice": "投保須知",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Link rules template": "Link rules範本",
+                    "Number of insurance types": "險種數量",
+                    "Withholding Bank": "代扣銀行",
+                    "Number of long-term insurance types": "長期險種數量",
+                    "Company official website": "公司官網網址",
+                    "Online Insurance Service Provider": "線上投保服務商",
+                    "Link address rules": "連結位址規則",
+                    "Link address rule template": "連結位址規則範本",
+                    "Return receipt input date Calculation business month": "回執錄入日期計算業務月份",
+                    "Support bank selection": "支持銀行選擇",
+                    "Fixed default password": "固定默認密碼",
+                    "Insurance Company": "保險公司",
+                    "Receipt template type": "回執範本類型",
+                    "Pdf template": "PDF範本",
+                    "Content template": "內容範本"
+                },
+                "maps": {
+                    "type": {
+                        "Life insurance": "壽險",
+                        "Property insurance": "財險"
+                    },
+                    "uname_rule": {
+                        "No rules": "無規則",
+                        "Agent number": "代理人工號",
+                        "ID number": "身份證號",
+                        "Phone number": "手機號碼"
+                    },
+                    "password_rule": {
+                        "No rules": "無規則",
+                        "Last 6 digits of ID card": "身份證後6比特",
+                        "Fixed value": "固定值"
+                    },
+                    "url_rule": {
+                        "No rules": "無規則",
+                        "Account template rules": "帳號範本規則"
+                    },
+                    "service_api": {
+                        "National treasure": "國寶"
+                    },
+                    "receipt_type": {
+                        "Pdf template": "pdf範本",
+                        "Content template": "內容範本"
+                    }
+                }
+            },
+            "pclassifys": {
+                "fields": {
+                    "Name": "名稱",
+                    "Remarks": "備註",
+                    "Parent ID": "父級ID",
+                    "Hierarchy": "層級",
+                    "Left border": "左邊界",
+                    "Right border": "右邊界",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Parent name": "父級名稱",
+                    "Parent selection": "所屬父級選擇"
+                },
+                "maps": []
+            },
+            "products": {
+                "fields": {
+                    "Unique identification": "唯一標識",
+                    "Insurance company ID": "保險公司ID",
+                    "First level classification ID": "一級分類ID",
+                    "Secondary classification ID": "二級分類ID",
+                    "Insurance group ID": "險種分組ID",
+                    "Name": "名稱",
+                    "Long term insurance": "長期險種",
+                    "Category": "類別",
+                    "Purchase method": "購買管道",
+                    "Payment method": "交費方式",
+                    "Product attributes": "產品内容",
+                    "Document address": "檔案地址",
+                    "Insurance company document number": "保險公司檔案編號",
+                    "Document number": "檔案編號",
+                    "State": "狀態",
+                    "Release time": "發佈時間",
+                    "Closing date": "停售日期",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Preview Poster": "預覽海報",
+                    "Stop selling insurance plant number": "停售險種數量",
+                    "Number of types of insurance on sale": "在售險種數量",
+                    "Number of discontinued insurance types": "停用險種數量"
+                },
+                "maps": {
+                    "is_long_time": {
+                        "Short-term": "短期",
+                        "Long-term": "長期"
+                    },
+                    "class": {
+                        "Traditional products": "傳統型產品",
+                        "New products": "新型產品"
+                    },
+                    "buy_type": {
+                        "Personal": "個人",
+                        "Group": "團體"
+                    },
+                    "pay_type": {
+                        "One time payment": "一次性交費",
+                        "Payment by installments": "分期交費",
+                        "Flexible payment": "靈活交費"
+                    },
+                    "attr": {
+                        "Nothing": "無",
+                        "Student FPA": "學生平安險",
+                        "Exclusive products for women": "女性專屬產品",
+                        "Exclusive products for children": "少兒專屬產品",
+                        "Exclusive products for the elderly": "老年專屬產品",
+                        "Aviation accident insurance": "航空意外險"
+                    },
+                    "status": {
+                        "Halt the sales": "停售",
+                        "On sale": "在售",
+                        "Out of service": "停用"
+                    }
+                }
+            },
+            "years": {
+                "fields": {
+                    "Name": "名稱",
+                    "Value": "值",
+                    "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Optional years": "可選年期"
+                },
+                "maps": []
+            },
+            "areas": {
+                "fields": {
+                    "Zone ID": "區域ID",
+                    "Name": "名稱",
+                    "Parent ID": "父ID",
+                    "Hierarchy": "層級",
+                    "Left border": "左邊界",
+                    "Right border": "右邊界",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間",
+                    "Parent": "父級",
+                    "Parent name": "父級名稱"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -334,6 +581,9 @@
                 "admins": {
                     "User name": "用戶名稱",
                     "Role Name": "角色名稱"
+                },
+                "years": {
+                    "Please enter the value , split": "請輸入值'，'分割"
                 }
             }
         },
@@ -403,7 +653,14 @@
             "index": {
                 "Home page of official website": "官網首頁",
                 "Backstage home page": "後臺首頁",
-                "Front desk home page": "前臺首頁"
+                "Front desk home page": "前臺首頁",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "請勿在本演示環境註冊用戶，本演示環境的注册，登入僅用於演示使用",
+                "Official environment official website": "正式環境官網：",
+                "Document": "檔案",
+                "Website": "官網",
+                "Template download": "範本下載",
+                "Gitee": "碼雲",
+                "Laravel documentation": "Laravel檔案"
             },
             "Registered user": "註冊用戶",
             "Forget your password": "忘記密碼",
@@ -447,7 +704,9 @@
             "index": {
                 "Home page of official website": "官網首頁",
                 "Backstage home page": "後臺首頁",
-                "Front desk home page": "前臺首頁"
+                "Front desk home page": "前臺首頁",
+                "Please do not register users in this demo environment, The registration and login of this demo environment are only used for demo use": "請勿在本演示環境註冊用戶，本演示環境的注册跟登入僅用於演示使用",
+                "Official environment official website": "正式環境官網："
             },
             "layout": {
                 "Footer": "脚部",
@@ -457,6 +716,51 @@
             }
         },
         "admin": {
+            "Log in to access the statistics chart": "登入訪問統計圖",
+            "Number of successful login": "成功登錄次數",
+            "IP row of heavy": "IP排重",
+            "Bar charts": "柱狀圖",
+            "Sales": "銷量",
+            "Shirt": "襯衫",
+            "Cardigan": "羊毛衫",
+            "Chiffon": "雪紡衫",
+            "Trousers": "褲子",
+            "High heels": "高跟鞋",
+            "Socks": "襪子",
+            "Direct": "直達",
+            "Marketing Advertising": "行銷廣告",
+            "Search engines": "搜尋引擎",
+            "Email Marketing": "郵件行銷",
+            "Alliance advertising": "聯盟廣告",
+            "Video Ads": "視頻廣告",
+            "Baidu": "百度",
+            "Google": "穀歌",
+            "Bing": "必應",
+            "Other": "其他",
+            "Visit source": "訪問來源",
+            "Custom radar chart": "自定義雷達圖",
+            "Figure 1": "圖一",
+            "Figure 2": "圖二",
+            "Zhang San": "張三",
+            "Li Si": "李四",
+            "Measure 1": "名額一",
+            "Measure 2": "名額二",
+            "Measure 3": "名額三",
+            "Measure 4": "名額四",
+            "Measure 5": "名額五",
+            "Language": "語文",
+            "Mathematics": "數學",
+            "English": "英語",
+            "Physical": "物理",
+            "Chemistry": "化學",
+            "Biology": "生物",
+            "Radar map": "雷達圖",
+            "Transcript": "成績單",
+            "Last Week": "最近一周",
+            "Last month": "最近一月",
+            "Last three months": "最近三月",
+            "Last Year": "最近一年",
+            "All": "全部",
             "users": {
                 "username": "用戶昵稱",
                 "Must be {min}-{max} non-Chinese characters": "必須是{min}-{max}比特的非中文字元",
@@ -762,6 +1066,14 @@
                 "{number} minutes ago": "{number}分鐘前",
                 "Night": "黑夜",
                 "Day": "白天"
+            },
+            "firms": {
+                "http or https begins": "'http://'或'https://‘開頭",
+                "The LOGO has not been set": "還沒有設定LOGO",
+                "Attachment Image": "附件圖片"
+            },
+            "agent_systems": {
+                "http or https begins": "'http://'或'https://‘開頭"
             }
         },
         "errors": {
@@ -885,8 +1197,11 @@
     "Select month": "選擇月份",
     "Unbundling": "解綁",
     "Download": "下載",
+    "Delete within condition": "條件內删除",
     "Click Upload": "點擊上傳",
     "Only picture files can be uploaded and no more than {size}": "只能上傳圖片檔案，且不超過{size}",
+    "Total number": "總數",
     "Confirm to add": "確認添加",
-    "Your account has been logged in elsewhere": "您的帳號已在其他地方登入！"
+    "Your account has been logged in elsewhere": "您的帳號已在其他地方登入！",
+    "Coordinates": "座標"
 }

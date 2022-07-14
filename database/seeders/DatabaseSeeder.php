@@ -21,5 +21,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ParamTableSeeder::class); //接口文档参数说明
         $this->call(ResponseTableSeeder::class); //接口文档响应说明
 
+        $this->call(BankTableSeeder::class); //银行数据
+        $this->call(ClassifyTableSeeder::class); //险种分类
+        $this->call(PclassifyTableSeeder::class); //险种分组
+        $this->call(YearTableSeeder::class); //年期
+        $this->call(ProductSeeder::class); //产品相关数据
+
+        $this->call(AreaTableSeeder::class); //地区数据
     }
 }
