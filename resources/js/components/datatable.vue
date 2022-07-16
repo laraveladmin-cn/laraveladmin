@@ -22,7 +22,7 @@
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
-                            <slot name="add" :url="data.configUrl['createUrl']?data.configUrl['createUrl']+'/0':''">
+                            <slot name="add" :data="data" :url="data.configUrl['createUrl']?data.configUrl['createUrl']+'/0':''">
                                 <router-link :to="data.configUrl['createUrl']+'/0'" class="btn btn-info" v-if="data.configUrl['createUrl']">
                                     <i class="fa fa-plus"></i> {{$t("New")}}
                                 </router-link>
@@ -70,7 +70,7 @@
                                 {{$t("Bulk import")}}
                                 <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false" />
                             </button>
-                            <slot name="add_btn"></slot>
+                            <slot name="add_btn" :data="data"></slot>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item pull-right hidden-xs hidden-sm" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
                             <div class="box-tools">
@@ -610,17 +610,28 @@
                 }
                 options = copyObj(options);
                 this.loading = true;
-                let options_str = JSON.stringify(options);
+                let options1 = copyObj(options);
+                if(this.options.dataPush){
+                    delete options1['page'];
+                }
+                let options_str = JSON.stringify(options1);
                 this.options_str = options_str;
                 let url = this.data.configUrl['listUrl'] || this.options.url || this.$router.currentRoute.path;
                 axios.get(this.use_url+url,{params:options}).then( (response)=> {
                     this.data.options.order = copyObj(options.order || {});
                     if(url==this.data.configUrl['listUrl']){
                         for (let i in response.data ) {
-                            Vue.set(this.data.list,i,response.data[i]);
+                            if(i == 'data' && this.options.dataPush && response.data.current_page>1){ //数据追加
+                                let data = response.data[i];
+                                for (let j in data){
+                                    this.data.list.data.push(data[j]);
+                                }
+                            }else {
+                                Vue.set(this.data.list,i,response.data[i]);
+                            }
                         }
                         //添加历史记录
-                        if(!options['get_count'] && !flog){
+                        if(!options['get_count'] && !flog && !this.options.routerPushDisabled){
                             let query = copyObj(this.$route.query);
                             query[this.options_key] = options_str;
                             this.$router.push({ path: this.$router.currentRoute.path, query: query}).catch(()=>{});
