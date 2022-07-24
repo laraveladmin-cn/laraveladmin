@@ -636,6 +636,9 @@
                             query[this.options_key] = options_str;
                             this.$router.push({ path: this.$router.currentRoute.path, query: query}).catch(()=>{});
                         }
+                        if(typeof response.data['total']!="undefined"){
+                            this.$emit('updateCount');
+                        }
                     }else {
                         for (let i in response.data ) {
                             Vue.set(this.data,i,response.data[i]);
@@ -649,6 +652,8 @@
                         }else if(!this.export_fileds){
                             this.export_fileds = [];
                         }
+                        this.$emit('loaded');
+                        this.$emit('updateCount');
                     }
                     this.input_page = this.data.list['current_page'];
                     this.input_per_page = this.data.list['per_page'];
