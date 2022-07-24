@@ -603,11 +603,11 @@
                     return false;
                 }
                 //过滤为空的数据
-                if(options.where){
+                /*if(options.where){
                     options.where = collect(options.where).filter((value)=>{
                         return value!=='';
                     }).all();
-                }
+                }*/
                 options = copyObj(options);
                 this.loading = true;
                 let options1 = copyObj(options);
