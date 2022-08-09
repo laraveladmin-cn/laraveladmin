@@ -1,7 +1,20 @@
 <template>
     <div class="select-many">
         <div class="w-100 select-item">
-            <div class="input-group">
+            <select2 v-model="val_id"
+                     :disabled="disabled"
+                     class="form-control no-border"
+                     :default-options="[]"
+                     :url="use_url+url"
+                     :keyword-key="keywordKey"
+                     :primary-key="primaryKey"
+                     :params="params"
+                     :show="show"
+                     @change="changeSelect"
+                     v-if="autoSelect"
+                     :is-ajax="true">
+            </select2>
+            <div class="input-group" v-if="!autoSelect">
                 <select2 v-model="val_id"
                          :disabled="disabled"
                          class="form-control no-border"
@@ -11,6 +24,7 @@
                          :primary-key="primaryKey"
                          :params="params"
                          :show="show"
+                         @change="changeSelect"
                          :is-ajax="true">
                 </select2>
                 <span class="input-group-addon btn btn-block btn-default"
@@ -117,6 +131,12 @@
                 default: function () {
                     return {where:{},order:{}};
                 }
+            },
+            autoSelect:{
+                type: [Boolean],
+                default: function () {
+                    return false;
+                }
             }
         },
         data(){
@@ -139,6 +159,11 @@
             }
         },
         methods:{
+            changeSelect(){
+              if(this.autoSelect){
+                  this.add();
+              }
+            },
             remove(item){
                 if(this.disabled){
                     return ;
