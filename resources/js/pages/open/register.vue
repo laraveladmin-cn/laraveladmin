@@ -138,7 +138,7 @@
                             this.loading = false;
                             let redirect_url = res.data.redirect_url;
                             if(redirect_url && redirect_url!='/open/login'){
-                                this.getUser();
+                                this.getUser(1);
                                 this.$router.replace(res.data.redirect_url);
                             }
                         })
