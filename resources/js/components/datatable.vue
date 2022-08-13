@@ -118,7 +118,7 @@
                 </div>
                 <slot name="sizer-min">
                     <div class="collapse sizer_more in">
-                        <slot name="sizer-more" :data="data" :where="data.options.where" :maps="_maps" :order="data.options.order" :search="search" :trans-field="transField">
+                        <slot name="sizer-more" :data="data" :options="data.options" :where="data.options.where" :maps="_maps" :order="data.options.order" :search="search" :trans-field="transField">
                         </slot>
                         <div class="row hidden-md hidden-lg">
                             <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
