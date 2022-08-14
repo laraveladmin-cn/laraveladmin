@@ -45,6 +45,7 @@ let AppConfig = {
     theme: localStorage.getItem('theme') || 'primary',//主题
     amap_config:null,
     google_config:null,
+    def_avatar:'/dist/img/user_default_180.gif',
     ...(window.AppConfig || {})
 };
 AppConfig.language = (localStorage.getItem('language') || AppConfig.default_language).replace(/\_/g,'-');

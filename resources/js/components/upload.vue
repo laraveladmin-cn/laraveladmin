@@ -259,8 +259,17 @@
             },
             val(val){
                 if(this.value!=val){
-                    this.$emit('input', val); //修改值
-                    this.$emit('change',val); //修改值
+                    if(Object.prototype.toString.call(this.value)=='[object Array]'){
+                        this.value.splice(0,this.value.length);
+                        collect(val).each((item)=>{
+                            this.value.push(copyObj(item));
+                        });
+                        this.$emit('input', val); //修改值
+                        this.$emit('change',val); //修改值
+                    }else {
+                        this.$emit('input', val); //修改值
+                        this.$emit('change',val); //修改值
+                    }
                 }
             }
         },

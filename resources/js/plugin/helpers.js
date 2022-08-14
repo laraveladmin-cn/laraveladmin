@@ -104,16 +104,18 @@ export default {
      * @return String
      * @author yanis.wang
      */
-    date_format(date, format){
+    date_format(date, format,is_obj){
         if(!format){
             format = 'yyyy-MM-dd hh:mm:ss';
         }
         if(!date){
             return '--';
         }
+        if(!is_obj){
+            date = new Date(date*1000);
+        }
 
-        date = new Date(date*1000);
-        var map = {
+        let map = {
             "M": date.getMonth() + 1, //月份
             "d": date.getDate(), //日
             "h": date.getHours(), //小时

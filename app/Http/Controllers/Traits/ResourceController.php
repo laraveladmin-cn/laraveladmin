@@ -81,11 +81,11 @@ trait ResourceController
             if ($relation_id && class_exists($model)) {
                 $fields = collect(isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'])
                     ->map(function ($field){
-                    if(is_string($field) && Str::contains($field,'`')){
-                        return DB::raw($field);
-                    }
-                    return $field;
-                })->toArray();
+                        if(is_string($field) && Str::contains($field,'`')){
+                            return DB::raw($field);
+                        }
+                        return $field;
+                    })->toArray();
                 $item = collect($model::select($fields)
                     ->find($relation_id))->toArray();
             }
@@ -303,6 +303,7 @@ trait ResourceController
                 'message' => trans('Delete failed!')//'删除失败!'
             ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
+        $this->handleDeleteSuccess($ids);
         return Response::returns(['alert' => alert([
             'message' => trans('Delete the success!')//'删除成功!'
         ])]);
@@ -808,11 +809,12 @@ trait ResourceController
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();
         $no_order = $primary_key && ((isset($this->disableExportOrder) && $this->disableExportOrder ) || //禁用排序 或
-            !Arr::get($this->getOptions(),'order')); //没有排序
+                !Arr::get($this->getOptions(),'order')); //没有排序
         //获取分页数据
         if (!Request::input('page')) {
             //获取带有筛选条件的对象
             $obj = $this->getWithOptionModel('exportFields');
+            $obj = $this->handleExport($obj);
             $data = $obj->paginate(200)->toArray();
             if($no_order){
                 $data['max_id'] = collect($data['data'])->max($primary_key)?:0;
@@ -941,7 +943,7 @@ trait ResourceController
         })->filter(function ($item) use (&$errors, $key_name, $relation_keys, $maps1, $multipleFields) { //数据验证
             $data = getRelationData($item);
             $data = $this->handleImportValidateBefore($data);
-            $validator = Validator::make($data, $this->getImportValidateRule(Arr::get($item, $key_name, 0), $item), [], $this->exportFieldsName);
+            $validator = Validator::make($data, $this->getImportValidateRule(Arr::get($data, $key_name, 0), $data), [], $this->exportFieldsName);
             $flog = !$validator->fails(); //验证状态
             if ($validator->fails()) {
                 $item['error'] = collect($validator->errors()->toArray())->map(function ($v, $k) {
@@ -1040,6 +1042,16 @@ trait ResourceController
     }
 
     /**
+     * 列表页面数据获取前对数据处理
+     * @param $obj
+     * @return mixed
+     */
+    protected function handleExport(&$obj)
+    {
+        return $this->handleList($obj);
+    }
+
+    /**
      * 列表页面返回数据前对数据处理
      * @param $data
      * @return mixed
@@ -1115,6 +1127,14 @@ trait ResourceController
      */
     protected function handleImportValidateBefore(&$data){
         return $data;
+    }
+
+    /**
+     * 成功删除后处理
+     * @param array $ids
+     */
+    protected function handleDeleteSuccess($ids=[]){
+
     }
 
 

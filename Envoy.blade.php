@@ -60,13 +60,13 @@ $self = isset($self)?$self:0;
 @endif
 cd {{$path_dir}} && \
 @endif
-php {{$path_dir}}/artisan down --redirect="/503" --retry=60 && \
+php artisan down --redirect="/503" --retry=60 && \
 git pull origin {{$branch}} && \
 @if($composer_install)
 composer install --optimize-autoloader @if($is_online) --no-dev @endif && \
 @endif
 @if($is_online)
-    php artisan optimize
+    php artisan optimize && \
 @endif
 php artisan migrate:all && \
 php artisan db:seed --class=VersionSeeder --force && \

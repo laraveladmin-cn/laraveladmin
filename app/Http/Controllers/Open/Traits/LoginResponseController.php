@@ -67,7 +67,11 @@ trait LoginResponseController
             if(Arr::get($user,'admin') ){
                 $hasPermission = Menu::hasPermission($this->redirectTo,'get',false);
                 if(!$hasPermission){
-                    $url = Menu::mainAdmin()->where('is_page',1)->orderBy('left_margin','asc')->value('url');
+                    $url = Menu::mainAdmin()
+                        ->where('is_page',1)
+                        ->where('resource_id','<=',0)
+                        ->orderBy('left_margin','asc')
+                        ->value('url');
                     if($url){
                         $this->redirectTo = $url;
                     }

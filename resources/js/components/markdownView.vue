@@ -153,7 +153,7 @@
             this.init();
         },
         beforeDestroy(){
-            if(this.editorMd){
+            if(this.editorMd && this.editorMd.editor){
                 this.editorMd.editor.remove();
                 this.editorMd = null;
             }

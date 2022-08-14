@@ -43,7 +43,7 @@
     "docsify-pagination": "^2.6.2",
     "echarts": "^5.2.2",
     "editor.md": "^1.5.0",
-    "element-ui": "^2.13.0",
+    "element-ui": "^2.15.7",
     "es6-promise": "^4.2.8",
     "font-awesome": "^4.7.0",
     "gitalk": "^1.5.0",

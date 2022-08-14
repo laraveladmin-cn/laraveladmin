@@ -1,6 +1,6 @@
 <template>
     <div class="select-many">
-        <div class="input-group">
+        <div class="w-100 select-item">
             <select2 v-model="val_id"
                      :disabled="disabled"
                      class="form-control no-border"
@@ -10,15 +10,31 @@
                      :primary-key="primaryKey"
                      :params="params"
                      :show="show"
+                     @change="changeSelect"
+                     v-if="autoSelect"
                      :is-ajax="true">
             </select2>
-            <span class="input-group-addon btn btn-block btn-default"
-                  :disabled="disabled"
-                  :class="{disabled:disabled}"
-                  :title="$t('Confirm to add')"
-                  @click="add">
+            <div class="input-group" v-if="!autoSelect">
+                <select2 v-model="val_id"
+                         :disabled="disabled"
+                         class="form-control no-border"
+                         :default-options="[]"
+                         :url="use_url+url"
+                         :keyword-key="keywordKey"
+                         :primary-key="primaryKey"
+                         :params="params"
+                         :show="show"
+                         @change="changeSelect"
+                         :is-ajax="true">
+                </select2>
+                <span class="input-group-addon btn btn-block btn-default"
+                      :disabled="disabled"
+                      :class="{disabled:disabled}"
+                      :title="$t('Confirm to add')"
+                      @click="add">
                 <i class="fa fa-plus"></i>
             </span>
+            </div>
         </div>
         <div class="box box-default">
             <div class="box-footer no-padding">
@@ -115,6 +131,12 @@
                 default: function () {
                     return {where:{},order:{}};
                 }
+            },
+            autoSelect:{
+                type: [Boolean],
+                default: function () {
+                    return false;
+                }
             }
         },
         data(){
@@ -137,6 +159,11 @@
             }
         },
         methods:{
+            changeSelect(){
+              if(this.autoSelect){
+                  this.add();
+              }
+            },
             remove(item){
                 if(this.disabled){
                     return ;
@@ -206,6 +233,9 @@
 </script>
 
 <style scoped>
+    .select-item{
+        overflow-x: auto;
+    }
     .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
         border: 0px solid #d2d6de;
     }

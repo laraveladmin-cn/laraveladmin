@@ -24,7 +24,21 @@ class ConfigTableSeeder extends Seeder
             'value' => config('laravel_admin.admin_password')
         ]);
 
+        //系统版本号
+        Config::create([
+            'key' => 'system_version_no',
+            'name' => '系统版本号',
+            'description' => '系统版本号',
+            'value' => 'v1.0.0'
+        ]);
 
+        //百度统计代码
+        Config::create([
+            'key' => 'baidu_statistics_url',
+            'name' => '百度统计地址',
+            'description' => '百度统计地址',
+            'value' => ''
+        ]);
 
 
     }

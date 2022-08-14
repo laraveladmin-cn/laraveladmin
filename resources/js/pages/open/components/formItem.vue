@@ -14,6 +14,7 @@
                     {{value}}
                 </span>
             </label>
+            <slot name="error"></slot>
             <div class="clearfix"></div>
             <div class="form-input">
                 <slot>
