@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 use App\Facades\Option;
+use App\Models\Config;
 use Illuminate\Database\Seeder;
 
 class VersionSeeder extends Seeder
@@ -16,7 +17,25 @@ class VersionSeeder extends Seeder
 
         $this->call(ParamTableSeeder::class); //接口文档参数说明
         $this->call(ResponseTableSeeder::class); //接口文档响应说明
+        //系统版本号
+        Config::query()->firstOrCreate([
+            'key' => 'system_version_no'
+        ],[
+            'key' => 'system_version_no',
+            'name' => '系统版本号',
+            'description' => '系统版本号',
+            'value' => 'v1.0.0'
+        ]);
 
+        //百度统计代码
+        Config::create([
+            'key' => 'baidu_statistics_url'
+        ],[
+            'key' => 'baidu_statistics_url',
+            'name' => '百度统计地址',
+            'description' => '百度统计地址',
+            'value' => ''
+        ]);
 
         $this->addVersion();
     }
