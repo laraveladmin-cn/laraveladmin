@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 use App\Facades\Option;
+use App\Models\Config;
 use Illuminate\Database\Seeder;
 
 class VersionSeeder extends Seeder
@@ -15,7 +16,25 @@ class VersionSeeder extends Seeder
         $this->call(MenuTableSeeder::class); //菜单数据安装
         $this->call(ParamTableSeeder::class); //接口文档参数说明
         $this->call(ResponseTableSeeder::class); //接口文档响应说明
+        //系统版本号
+        Config::query()->firstOrCreate([
+            'key' => 'system_version_no',
+        ],[
+            'key' => 'system_version_no',
+            'name' => '系统版本号',
+            'description' => '系统版本号',
+            'value' => 'v1.0.0'
+        ]);
 
+        //百度统计代码
+        Config::firstOrCreate([
+            'key' => 'baidu_statistics_url',
+        ],[
+            'key' => 'baidu_statistics_url',
+            'name' => '百度统计地址',
+            'description' => '百度统计地址',
+            'value' => 'https://hm.baidu.com/hm.js?b5090a95aba5b1706b70f159f6deedfb'
+        ]);
 
         $this->addVersion();
     }
