@@ -28,7 +28,7 @@ class VersionSeeder extends Seeder
         ]);
 
         //百度统计代码
-        Config::create([
+        Config::firstOrCreate([
             'key' => 'baidu_statistics_url'
         ],[
             'key' => 'baidu_statistics_url',
