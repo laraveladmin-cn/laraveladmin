@@ -234,6 +234,7 @@
                     this.loading = false;
                     let id = array_get(this.data,'row.'+this.primary_key,0);
                     this.setLastMenuShow(id);
+                    this.$emit('loaded');
                 }).catch((error) => {
                     this.loading = false;
                 });
@@ -268,6 +269,11 @@
                 axios.post(this.use_url+'/admin/developments/layout', data).then( (response)=>{
                 }).catch((error) =>{
                 });
+            },
+            refresh(){
+                let value = this.$router.query;
+                let options = copyObj(value);
+                this.getData(options);
             }
         },
         created() {

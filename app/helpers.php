@@ -147,9 +147,9 @@ function multipleToNum($options)
  * @param $key
  * @return array
  */
-function mapOption($row, $key, $primary_key = 'id')
+function mapOption($row, $key, $primary_key = 'id',$relation_key='')
 {
-    $relation_key = str_replace('_id', '', $key);
+    $relation_key = $relation_key?:str_replace('_id', '', $key);
     return ($row[$primary_key] && Arr::get($row, $relation_key)) ? [Arr::get($row, $relation_key)] : [];
 }
 

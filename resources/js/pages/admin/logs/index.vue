@@ -23,7 +23,7 @@
                                 <select2 v-model="props.where['user_id']"
                                          :default-options="array_get(props,'maps.user_id',[])"
                                          :url="use_url+'/admin/admins/list'"
-                                         :keyword-key="'name|uname'"
+                                         :keyword-key="'user.name|user.uname'"
                                          :placeholder-show="props.transField('Operator','user.name')"
                                          :placeholder-value="''"
                                          :primary-key="'user_id'"

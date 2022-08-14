@@ -1,5 +1,6 @@
 <?php
 namespace Database\Seeders;
+use App\Facades\Option;
 use Illuminate\Database\Seeder;
 
 class VersionSeeder extends Seeder
@@ -17,6 +18,20 @@ class VersionSeeder extends Seeder
         $this->call(ResponseTableSeeder::class); //接口文档响应说明
 
 
+        $this->addVersion();
+    }
+
+    /**
+     * 增加系统版本号
+     */
+    protected function addVersion(){
+        $system_version_no = Option::get('system_version_no');
+        if($system_version_no){
+            $arr = explode('.',$system_version_no);
+            $arr[count($arr)-1] +=1;
+            $system_version_no = implode('.',$arr);
+            Option::set('system_version_no',$system_version_no);
+        }
     }
 
 

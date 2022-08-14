@@ -35,3 +35,12 @@ const app = new Vue({
     router,
     store
 }).$mount('#app');
+if(window.AppConfig.env=='production' && window.AppConfig.baidu_statistics_url){
+    window._hmt = window._hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = window.AppConfig.baidu_statistics_url;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+}
