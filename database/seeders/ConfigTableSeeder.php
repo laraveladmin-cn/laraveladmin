@@ -32,6 +32,13 @@ class ConfigTableSeeder extends Seeder
             'value' => 'v1.0.0'
         ]);
 
+        //百度统计代码
+        Config::create([
+            'key' => 'baidu_statistics_url',
+            'name' => '百度统计地址',
+            'description' => '百度统计地址',
+            'value' => ''
+        ]);
 
 
     }

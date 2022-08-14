@@ -104,6 +104,7 @@ class IndexController extends Controller
             'searchUrl'=>'/home/map/search-google' //谷歌地图搜索接口
         ];
         $data['version'] = Option::get('system_version_no','v1.0.0');
+        $data['baidu_statistics_url'] = Option::get('baidu_statistics_url','');
         $max_age = 3600*24;
         $response = Response::returns($data)
             ->header('Cache-Control','max-age='.$max_age)
