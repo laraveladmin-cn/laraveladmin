@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Open;
 
 use App\Facades\ClientAuth;
+use App\Facades\Option;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Support\Arr;
@@ -102,7 +103,7 @@ class IndexController extends Controller
             'key'=>config('laravel_admin.google.js_api.key',''),
             'searchUrl'=>'/home/map/search-google' //谷歌地图搜索接口
         ];
-        $data['version'] = 'V1.0.0';
+        $data['version'] = Option::get('system_version_no','v1.0.0');
         $max_age = 3600*24;
         $response = Response::returns($data)
             ->header('Cache-Control','max-age='.$max_age)

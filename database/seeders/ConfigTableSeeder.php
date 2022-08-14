@@ -24,6 +24,13 @@ class ConfigTableSeeder extends Seeder
             'value' => config('laravel_admin.admin_password')
         ]);
 
+        //系统版本号
+        Config::create([
+            'key' => 'system_version_no',
+            'name' => '系统版本号',
+            'description' => '系统版本号',
+            'value' => 'v1.0.0'
+        ]);
 
 
 
