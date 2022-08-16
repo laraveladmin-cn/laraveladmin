@@ -804,8 +804,13 @@ trait ResourceController
             return $value;
         });
         $fields = $this->selectFields($this->exportFields);
-        $fields and $this->bindModel = $this->bindModel()->select(in_array($model->getKeyName(), $fields)
-            ? $fields : array_merge([$model->getKeyName()], $fields));
+        $primary_key = $model->getKeyName();
+        if($primary_key && $fields && (!isset($this->noPrimaryKey) || !$this->noPrimaryKey)){
+            $primary_key1 = $model->getTable().'.'.$primary_key;
+            $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
+            $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
+        }
+        $fields and $this->bindModel = $this->bindModel()->select($fields);
         //优化导出
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();
