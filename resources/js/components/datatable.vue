@@ -620,6 +620,10 @@
                 axios.get(this.use_url+url,{params:options}).then( (response)=> {
                     this.data.options.order = copyObj(options.order || {});
                     if(url==this.data.configUrl['listUrl']){
+                        //判断是否是每页条数变更
+                        if(response.data.per_page!=this.data.list.per_page){
+                            response.data.last_page = Math.ceil(this.data.list.total/response.data.per_page);
+                        }
                         for (let i in response.data ) {
                             if(i == 'data' && this.options.dataPush && response.data.current_page>1){ //数据追加
                                 let data = response.data[i];
