@@ -263,7 +263,7 @@ trait ResourceController
             $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
             $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
         }
-        $fields and $this->bindModel->select($fields);
+        $fields and $this->bindModel = $this->bindModel->select($fields);
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel();
         $obj = $this->handleList($obj);
