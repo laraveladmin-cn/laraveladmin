@@ -621,7 +621,7 @@
                     this.data.options.order = copyObj(options.order || {});
                     if(url==this.data.configUrl['listUrl']){
                         //判断是否是每页条数变更
-                        if(response.data.per_page!=this.data.list.per_page){
+                        if(response.data.per_page!=this.data.list.per_page && typeof response.data.last_page =="undefined"){
                             response.data.last_page = Math.ceil(this.data.list.total/response.data.per_page);
                         }
                         for (let i in response.data ) {
