@@ -115,7 +115,21 @@ export default Plugin = {
                 }
             }
         });
-
+        //错误默认图片显示
+        Vue.directive('imgdef', {
+            // 当元素被插入到DOM中时...
+            inserted: function() {},
+            // 绑定，只调用1次
+            bind: function(el, binding) {
+                el.onerror = function() {
+                    el.src = binding.value
+                }
+            },
+            update: function() {},
+            componentUpdated: function() {},
+            // 解绑时调用
+            unbind: function() {}
+        });
     }
 };
 Vue.use(Plugin);
