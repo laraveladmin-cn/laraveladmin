@@ -1,7 +1,6 @@
 <?php
 /**
  * 通过 PhpStorm 创建.
- * 创建人: zhangshiping
  * 日期: 16-5-20
  * 时间: 下午6:21
  */
@@ -398,6 +397,7 @@ trait BaseModel{
 
     public function scopeIgnoreUpdateAt($q){
         $this->timestamps = false;
+        return $q;
     }
 
     public function scopeGetFillables($q){
