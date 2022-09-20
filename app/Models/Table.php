@@ -15,6 +15,7 @@ class Table extends Model
     protected $table = 'tables'; //数据表名称
     //没有主键ID
     protected $primaryKey = '';
+    public $incrementing = false;
     //批量赋值白名单
     protected $fillable = [];
     //字段默认值
