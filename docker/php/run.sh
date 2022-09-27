@@ -25,10 +25,10 @@ do
     if [ "${APP_ENV}" = "" ] || [ "${APP_ENV}" = "local" ];
         then
             is_local=1
-            queue_type="work"
+            queue_type="listen"
         else
             is_local=0
-            queue_type="listen"
+            queue_type="work"
     fi
     http_host=${SWOOLE_HTTP_HOST}
     unset $(grep -Ev '^$|[#;]' ${code_dir}/${project}/.env | sed -E 's/([^=]*)=.*/\1/')
