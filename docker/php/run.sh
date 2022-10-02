@@ -17,7 +17,7 @@ chmod 600 /var/spool/cron/crontabs/root
 
 projects=`ls ${code_dir}`
 #本地环境不自动启动队列
-if ! [ "${APP_ENV}" = "local" ]
+if ! [ "${DOCKER_APP_ENV}" = "local" ]
 then
 ##项目消息队列
 for project in ${projects}
