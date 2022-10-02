@@ -16,6 +16,9 @@ chmod 600 /var/spool/cron/crontabs/root
 /etc/init.d/cron start
 
 projects=`ls ${code_dir}`
+#本地环境不自动启动队列
+if ! [ "${APP_ENV}" = "local" ]
+then
 ##项目消息队列
 for project in ${projects}
 do
@@ -70,6 +73,7 @@ stdout_logfile=${code_dir}/${project}/storage/logs/supervisor_swoole.log" > /etc
   fi
 done
 supervisord -c /etc/supervisor/supervisord.conf
+fi
 #supervisorctl stop all
 php-fpm
 #php /var/www/laravel/artisan swoole:http start
