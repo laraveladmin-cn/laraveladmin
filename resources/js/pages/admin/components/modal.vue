@@ -11,7 +11,7 @@
                             <span>×</span></button>
                         <h4 class="modal-title">{{modal['title']}}</h4>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-center">
                         <p v-html="modal['content']"></p>
                     </div>
                     <div class="modal-footer">
