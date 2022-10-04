@@ -100,6 +100,7 @@
         top: 0;
         right: 0;
         margin: auto;
+        padding:10px;
     }
 
 </style>

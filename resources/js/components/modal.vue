@@ -72,7 +72,12 @@
 
 <style scoped lang="scss">
     .modal-dialog {
-        width: unset;
+        width: 100%;
+    }
+    @media (max-width: 767px) {
+        .modal-dialog {
+            width: unset;
+        }
     }
     .close {
         position: absolute;
