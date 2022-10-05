@@ -103,8 +103,8 @@ class CreateView extends BaseCreate
                     return $data;
                 });
         } else {
-            $class = get_class($this->bindModel);
-            $data['tableInfo'] = $class::getTableInfo(); //数据表信息
+            $class1 = get_class($this->bindModel);
+            $data['tableInfo'] = $class1::getTableInfo(); //数据表信息
             $data['validates'] = collect($data['tableInfo']['table_fields'])->map(function ($item) {
 
                 if ($item['validator']) {
