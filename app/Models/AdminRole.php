@@ -14,6 +14,7 @@ class AdminRole extends Model
     protected $table = 'admin_role'; //数据表名称
     protected $itemName='后台用户权限关联';
     public $timestamps = false;
+    public $incrementing = false;
     //批量赋值白名单
     protected $fillable = ['admin_id','role_id'];
     //输出隐藏字段

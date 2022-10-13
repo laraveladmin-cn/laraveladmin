@@ -470,7 +470,7 @@ class Menu extends Model
     public function scopeHasPermissionPath($query,$path,$method='get',$is_bool=true){
         $route = app('routes')->match(\Illuminate\Support\Facades\Request::create($path));
         if($route){
-            $url = $route->uri;
+            $url =Str::startsWith($route->uri,'/')?$route->uri:'/'.$route->uri;
             return self::isUrlInMenus($url,self::getMain(),$method,$is_bool);
         }else{
             return $is_bool?false:collect([]);

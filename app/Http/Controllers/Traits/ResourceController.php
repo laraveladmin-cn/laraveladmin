@@ -74,22 +74,44 @@ trait ResourceController
         collect($this->sizer)->keys()->filter(function ($value) {
             return Str::endsWith($value, '_id');
         })->map(function ($value) use (&$data) {
-            $val = str_replace('_id', '', $value);
+            $val = collect(explode('.',$value))->last();
+            $val = Str::replaceLast('_id', '', $val);
             $model = '\App\Models\\' . Str::studly($val);
             $item = [];
-            $relation_id = Request::input('where.' . $value, 0);
+            $where = Request::input('where');
+            $relation_id = isset($where[$value])?$where[$value]:0;
             if ($relation_id && class_exists($model)) {
-                $fields = collect(isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'])
+                $fields_and_relation = collect(isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'])
                     ->map(function ($field){
                         if(is_string($field) && Str::contains($field,'`')){
                             return DB::raw($field);
                         }
                         return $field;
-                    })->toArray();
-                $item = collect($model::select($fields)
-                    ->find($relation_id))->toArray();
+                    });
+                $fields = $fields_and_relation->filter(function ($item){
+                    return !is_array($item);
+                })->toArray();
+                $relation = $fields_and_relation->filter(function ($item){
+                    return is_array($item);
+                })->map(function ($item){
+                    return function ($q)use($item){
+                        if($item){
+                            $q->select($item);
+                        }
+                        return $q;
+                    };
+                })->toArray();
+                $modelObj = $model::query();
+                if($fields){
+                    $modelObj = $modelObj->select($fields);
+                }
+                if($relation){
+                    $modelObj = $modelObj->with($relation);
+                }
+                $item = collect($modelObj->find($relation_id))->toArray();
             }
-            $data['maps'][$value] = $item ? [$item] : [];
+            $map = $item ? [$item] : [];
+            $data['maps'][$value] = $map;
         });
         //条件筛选及排序返回
         $this->addOptions();
@@ -252,6 +274,7 @@ trait ResourceController
     public function list()
     {
         $this->selectValidate();
+        $this->bindModel = $this->bindModel();
         //指定查询字段
         $fields = $this->selectFields($this->showIndexFields);
         //判断是否包含主键字段,没有包含自动添加
@@ -262,7 +285,7 @@ trait ResourceController
             $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
             $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
         }
-        $fields and $this->bindModel = $this->bindModel()->select($fields);
+        $fields and $this->bindModel = $this->bindModel->select($fields);
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel();
         $obj = $this->handleList($obj);
@@ -803,8 +826,13 @@ trait ResourceController
             return $value;
         });
         $fields = $this->selectFields($this->exportFields);
-        $fields and $this->bindModel = $this->bindModel()->select(in_array($model->getKeyName(), $fields)
-            ? $fields : array_merge([$model->getKeyName()], $fields));
+        $primary_key = $model->getKeyName();
+        if($primary_key && $fields && (!isset($this->noPrimaryKey) || !$this->noPrimaryKey)){
+            $primary_key1 = $model->getTable().'.'.$primary_key;
+            $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
+            $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
+        }
+        $fields and $this->bindModel = $this->bindModel()->select($fields);
         //优化导出
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();

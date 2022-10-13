@@ -109,7 +109,7 @@ class Config extends Model
         $type = Arr::get($this->attributes,'type',1);
         if(!isset($this->attributes['type'])){
         }elseif($type==2){
-            $value = json_encode($value);
+            $value = json_encode($value,JSON_UNESCAPED_UNICODE);
         }elseif ($type==3){
             $value = ($value?:0)-0;
         }

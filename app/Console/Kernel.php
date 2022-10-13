@@ -29,13 +29,15 @@ class Kernel extends ConsoleKernel
         $schedule->command("db:seed --class='Database\Seeders\Commands\ForceDeleteSeeder' --force")
             ->name('force_delete')
             ->withoutOverlapping()
-            ->dailyAt('01:10');
+            ->dailyAt('01:10')
+            ->runInBackground();
         if(config('app.env')!='local'){
             //数据库备份
             $schedule->command("backup:run --only-db")
                 ->name('backup_db')
                 ->withoutOverlapping()
-                ->dailyAt('02:00');
+                ->dailyAt('02:00')
+                ->runInBackground();
         }
 
     }

@@ -49,7 +49,7 @@ class BuildIndexHtml extends BaseCommand
         $path = base_path('.env');
         $env_str = file_get_contents($path);
         collect($_ENV)->each(function ($value,$key)use (&$env_str){
-            if(Str::contains($value,'=')){
+            if(is_string($value) && Str::contains($value,'=')){
                 $value = env($key,'');
                 $env_str = Str::replaceFirst($key.'='.$value,$key.'="'.$value.'"',$env_str);
             }

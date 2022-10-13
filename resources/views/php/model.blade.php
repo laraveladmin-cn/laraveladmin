@@ -42,6 +42,7 @@ class {{$name}} extends Model
 @if(in_array('noId',$table_types))
     //没有主键ID
     protected $primaryKey = '';
+    public $incrementing = false;
 @endif
 @if($table_comment)
     //没有主键ID

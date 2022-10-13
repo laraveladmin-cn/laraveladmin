@@ -321,7 +321,7 @@
                             </tr>
                             </tbody>
                             <tfoot >
-                            <tr class="loading" v-if="loading">
+                            <tr class="loading" v-if="loading && !hideLoading">
                                 <td colspan="6" class="overlay">
                                     <div class="fa">
                                         <i class="fa fa-refresh fa-spin"></i>
@@ -415,6 +415,7 @@
                 loading:false, //数据加载中状态
                 initLoading:true, //初始化加载状态
                 show_export_fields:false, //导出字段按钮显示状态
+                hideLoading:false,
                 data:{
                     options:{
                         where:{},
@@ -620,6 +621,10 @@
                 axios.get(this.use_url+url,{params:options}).then( (response)=> {
                     this.data.options.order = copyObj(options.order || {});
                     if(url==this.data.configUrl['listUrl']){
+                        //判断是否是每页条数变更
+                        if(response.data.per_page!=this.data.list.per_page && typeof response.data.last_page =="undefined"){
+                            response.data.last_page = Math.ceil(this.data.list.total/response.data.per_page);
+                        }
                         for (let i in response.data ) {
                             if(i == 'data' && this.options.dataPush && response.data.current_page>1){ //数据追加
                                 let data = response.data[i];
@@ -707,7 +712,8 @@
                 });
             },
             //刷新
-            refresh(){
+            refresh(hideLoading){
+                this.hideLoading = !!hideLoading;
                 let options = copyObj(this.affirm_options);
                 options['page'] = this.data.list['current_page'];
                 options['get_count'] = 1;

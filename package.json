@@ -35,7 +35,7 @@
     "animate.css": "^3.7.2",
     "axios": "^0.19.2",
     "bootstrap": "^3.4.1",
-    "bootstrap-colorpicker": "^3.0.0-beta.3",
+    "bootstrap-colorpicker": "^2.5.3",
     "bootstrap-sass": "3.4.1",
     "collect.js": "^4.25.0",
     "docsify": "^4.12.2",
