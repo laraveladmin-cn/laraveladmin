@@ -7,6 +7,14 @@
                         <span v-if="props.k =='name'">
                             {{$tp(array_get(props.row ,props.k),shared_name)}}
                         </span>
+                        <span v-else-if="props.field.type =='code'">
+                            <code v-if="props.field.limit">
+                                {{props.row | array_get(props.k) | str_limit(props.field.limit)}}
+                            </code>
+                            <code v-else>
+                                  {{props.row | array_get(props.k)}}
+                            </code>
+                        </span>
                         <span v-else-if="props.k =='description'">
                             {{$tp(array_get(props.row ,props.k),shared_description) | str_limit(80,'...')}}
                         </span>
@@ -56,9 +64,9 @@
                     fields: {
                         "id": {"name": "ID", "order": true},
                         "name": {"name": "Configuration name", "order": true},
-                        "description": {"name": "Describe", "order": true},
+                        //"description": {"name": "Describe", "order": true},
                         "key": {"name": "Key name", "order": true},
-                        "value": {"name": "Value", "order": true},
+                        "value": {"name": "Value", "order": true,type:"code",limit:30},
                         //"created_at": {"name": "Created At", "order": true},
                         "updated_at": {"name": "Updated At", "order": true},
                     },

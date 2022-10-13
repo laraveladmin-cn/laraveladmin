@@ -217,7 +217,7 @@
                 return new Promise(resolve => setTimeout(resolve, ms))
             },
             mouseoutEvent(){
-                if(this.editorMd && this.editorMd.getValue){
+                if(this.editorMd && (typeof this.editorMd.getValue!="undefined")){
                     let val = this.editorMd.getValue();
                     if((typeof this.value!="undefined") && val!=this.value){
                         this.$emit('input', val); //修改值

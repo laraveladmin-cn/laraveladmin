@@ -38,9 +38,9 @@ const app = new Vue({
 if(window.AppConfig.env=='production' && window.AppConfig.baidu_statistics_url){
     window._hmt = window._hmt || [];
     (function() {
-        var hm = document.createElement("script");
+        let hm = document.createElement("script");
         hm.src = window.AppConfig.baidu_statistics_url;
-        var s = document.getElementsByTagName("script")[0];
+        let s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
 }
