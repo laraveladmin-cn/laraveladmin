@@ -71,8 +71,8 @@ numprocs=1
 redirect_stderr=true
 stdout_logfile=${code_dir}/${project}/storage/logs/supervisor_swoole.log" > /etc/supervisor/conf.d/"${project}"_swoole.conf
           fi
-        done
-        supervisord -c /etc/supervisor/supervisord.conf
+    done
+    supervisord -c /etc/supervisor/supervisord.conf
 fi
 #supervisorctl stop all
 php-fpm
