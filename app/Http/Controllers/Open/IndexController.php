@@ -24,7 +24,7 @@ class IndexController extends Controller
      * @return array
      */
     public function indexData(){
-        $config_url = config('app.url').getRoutePrefix(config('laravel_admin.web_api_model'));
+        $config_url = (config('laravel_admin.domain_auto')?'':config('app.url')).getRoutePrefix(config('laravel_admin.web_api_model'));
         $config_url = $this->checkUrl($config_url);
         return [
             'time_str'=>'&time='.time(),
@@ -61,7 +61,7 @@ class IndexController extends Controller
      * @return mixed
      */
     public function config(){
-        $app_url = config('app.url');
+        $app_url = config('laravel_admin.domain_auto')?'':config('app.url');
         $app_url = $this->checkUrl($app_url);
         $data['logo'] = config('laravel_admin.logo');
         $data['name'] = config('app.name');
