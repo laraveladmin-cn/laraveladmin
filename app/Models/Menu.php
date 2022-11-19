@@ -101,8 +101,8 @@ class Menu extends Model
             'production'=>'production'
         ],
         'is_out_link'=>[
-            '否',
-            '是'
+            'No',
+            'Yes'
         ]
     ];
 
@@ -152,7 +152,7 @@ class Menu extends Model
         'use'=>'Route usage',
         'as'=>'Routing alias',
         'middleware'=>'Using middleware alone',
-        'is_out_link'=>'是否为外部页面',
+        'is_out_link'=>'Whether it is an external page',
         //'left_margin' => 'Left boundary',
         //'right_margin' => 'Right boundary',
         //'created_at' => 'Created At',

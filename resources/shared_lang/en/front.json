@@ -190,7 +190,8 @@
                     "Specify where the route is used": "Specify where the route is used",
                     "Resources included": "Resources included",
                     "Left boundary": "Left boundary",
-                    "Right boundary": "Right boundary"
+                    "Right boundary": "Right boundary",
+                    "Whether it is an external page": "Whether it is an external page"
                 },
                 "maps": {
                     "method": [],
@@ -219,7 +220,11 @@
                         "production": "Formal environment"
                     },
                     "group": [],
-                    "middleware": []
+                    "middleware": [],
+                    "is_out_link": {
+                        "No": "No",
+                        "Yes": "Yes"
+                    }
                 }
             },
             "configs": {
