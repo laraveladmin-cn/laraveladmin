@@ -4,6 +4,9 @@
             <div class="top-left links">
                 <router-link to="/admin">{{$tp('Backstage home page')}}</router-link>
                 <router-link to="/home">{{$tp('Front desk home page')}}</router-link>
+                <a @click="toUrl('/api-doc',$event,true)" href="/api-doc">
+                    接口文档
+                </a>
             </div>
             <div class="content">
                 <div class="title m-b-md">

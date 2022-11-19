@@ -1,5 +1,6 @@
 <?php
 return [
+    'domain_auto'=>env('APP_DOMAIN_AUTO',false),
     'web_api_model'=>env('WEB_API_MODEL','api'), //页面请求模式:api或web
     'api_route_prefix'=>'api', //API路由前缀
     'web_route_prefix'=>'web-api', //web Api路由前缀

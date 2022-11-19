@@ -54,7 +54,7 @@ export default Plugin = {
                 this.loading = false;
             });
         };
-        Vue.prototype.toUrl = function(url,event){
+        Vue.prototype.toUrl = function(url,event,is_out_page){
             event.preventDefault();
             if(!url){
                 return
@@ -71,7 +71,7 @@ export default Plugin = {
                 window.open(url,'_blank');
                 return false;
             }
-            if(is_external){
+            if(is_external || is_out_page){
                 window.location.href=url;
             }else {
                 this.$router.push({ path: url }).catch(error => {
