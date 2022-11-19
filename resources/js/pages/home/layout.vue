@@ -21,19 +21,19 @@
                         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                             <ul class="nav navbar-nav">
                                 <li :class="{active:menu.active}" v-for="(menu,index) in tree_menus">
-                                    <router-link :to="menu.url" v-if="menu.url.indexOf('http')!=0" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a @click="toUrl(menu.url,$event,menu['is_out_link'])"
+                                       :href="menu.url?menu.url:null"
+                                       class="dropdown-toggle"
+                                       data-toggle="dropdown"
+                                    >
                                         {{$tp(menu.name,menu_lang)}}
                                         <span class="caret" v-if="menu.childrens && menu.childrens.length"></span>
-                                    </router-link>
-                                    <a :href="menu.url" target="_blank" v-else>
-                                        {{$tp(menu.name,menu_lang)}}
                                     </a>
                                     <ul class="dropdown-menu" role="menu" v-if="menu.childrens">
                                         <li v-for="(child,index) in menu.childrens">
-                                            <router-link :to="child.url" v-if="child.url.indexOf('http')!=0">
-                                                {{$tp(child.name,menu_lang)}}
-                                            </router-link>
-                                            <a :href="child.url" target="_blank" v-else>
+                                            <a :href="child.url"
+                                               @click="toUrl(child.url,$event,child['is_out_link'])"
+                                            >
                                                 {{$tp(child.name,menu_lang)}}
                                             </a>
                                         </li>

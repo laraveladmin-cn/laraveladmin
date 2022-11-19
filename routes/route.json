@@ -774,6 +774,19 @@
             "_id": 157
         },
         {
+            "id": 160,
+            "name": "Interface document",
+            "icons": "fa-file-word-o",
+            "description": "Interface Document Page",
+            "url": "/api-doc",
+            "parent_id": 4,
+            "method": [],
+            "is_page": "Yes",
+            "status": "Display",
+            "is_out_link": "Yes",
+            "_id": 158
+        },
+        {
             "id": 84,
             "name": "Reward",
             "icons": "fa-phone",
@@ -787,7 +800,7 @@
             "status": "Display",
             "group": "open",
             "action": "IndexController@contact",
-            "_id": 158
+            "_id": 159
         },
         {
             "id": 122,
@@ -801,7 +814,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 159
+            "_id": 160
         }
     ],
     "resource": [

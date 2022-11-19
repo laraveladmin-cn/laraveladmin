@@ -115,7 +115,9 @@
             "403 page": "403页面",
             "404 page": "404页面",
             "Get single menu details": "获取单条菜单详细信息",
-            "Menu details": "菜单详情"
+            "Menu details": "菜单详情",
+            "Interface document": "接口文档",
+            "Interface Document Page": "接口文档页面"
         },
         "tables": {
             "_file_logs": {

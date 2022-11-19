@@ -19,10 +19,7 @@
                 <div class="navbar-collapse collapse" role="navigation">
                     <ul class="nav navbar-nav">
                         <li :class="{active:menu.active}" v-for="(menu,index) in tree_menus" v-if="loginMenus(menu)">
-                            <router-link :to="menu.url" v-if="menu.url.indexOf('http')!=0">
-                                {{$tp(menu.name)}}
-                            </router-link>
-                            <a :href="menu.url" target="_blank" v-else>
+                            <a @click="toUrl(menu.url,$event,menu['is_out_link'])" :href="menu.url || null" target="_blank">
                                 {{$tp(menu.name)}}
                             </a>
                         </li>

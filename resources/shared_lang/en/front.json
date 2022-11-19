@@ -115,7 +115,9 @@
             "403 page": "403 page",
             "404 page": "404 page",
             "Get single menu details": "Get single menu details",
-            "Menu details": "Menu details"
+            "Menu details": "Menu details",
+            "Interface document": "Interface document",
+            "Interface Document Page": "Interface Document Page"
         },
         "tables": {
             "_file_logs": {
@@ -1040,5 +1042,7 @@
     "Download": "Download",
     "Click Upload": "Click Upload",
     "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}",
-    "Please enter the link address": "Please enter the link address"
+    "Please enter the link address": "Please enter the link address",
+    "Confirm to add": "Confirm to add",
+    "Your account has been logged in elsewhere": "Your account has been logged in elsewhere"
 }
