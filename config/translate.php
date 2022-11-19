@@ -26,13 +26,13 @@ return [
         'youdao' => [
             'base_url' => 'https://openapi.youdao.com/api',
             //App id of the translation api
-            'app_id' =>env('YOUDAO_TRANSLATE_KEY',''),
+            'app_id' =>env('YOUDAO_TRANSLATE_ID',''),
             //secret of the translation api
             'app_key' => env('YOUDAO_TRANSLATE_KEY',''),
         ],
 
         'google' => [
-            'base_url' => 'http://translate.google.cn/translate_a/single',
+            'base_url' => 'https://translate.googleapis.com/translate_a/single',
             'app_id' => env('GOOGLE_TRANSLATE_KEY',''),
             'app_key' => env('GOOGLE_TRANSLATE_KEY',''),
         ],

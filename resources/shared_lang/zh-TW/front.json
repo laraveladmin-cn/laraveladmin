@@ -216,7 +216,8 @@
                     "Specify where the route is used": "指定路由使用地方",
                     "Resources included": "包含資源",
                     "Left boundary": "左邊界",
-                    "Right boundary": "右邊界"
+                    "Right boundary": "右邊界",
+                    "Whether it is an external page": "是否為外部頁面"
                 },
                 "maps": {
                     "method": [],
@@ -245,7 +246,11 @@
                         "production": "正式環境"
                     },
                     "group": [],
-                    "middleware": []
+                    "middleware": [],
+                    "is_out_link": {
+                        "No": "否",
+                        "Yes": "是"
+                    }
                 }
             },
             "configs": {

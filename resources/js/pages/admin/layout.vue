@@ -17,7 +17,7 @@
                     <div class="navbar-custom-menu pull-left">
                         <ul class="nav navbar-nav">
                             <li :class="{active:module['active']}" v-for="module in modules">
-                                <a @click="toUrl(module['url'],$event)" :href="module['url']?module['url']:null">
+                                <a @click="toUrl(module['url'],$event,module['is_out_link'])" :href="module['url']?module['url']:null">
                                     <i class="fa" :class="module['icons']"></i>
                                     {{$tp(module['name'],shared)}}
                                 </a>

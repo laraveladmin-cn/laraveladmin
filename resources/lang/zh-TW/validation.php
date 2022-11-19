@@ -155,7 +155,8 @@ $str = <<<'str'
     "url_path": ":attribute 格式不正確。",
     "captcha": ":attribute 驗證錯誤。",
     "user_name": ":attribute 必須是由字母、數位、底線組成的非純數位。",
-    "domain": ":attribute 必須是有效功能變數名稱。"
+    "domain": ":attribute 必須是有效功能變數名稱。",
+    "is_idcard": "：attribute必須是有效的身份證號碼。"
 }
 str;
 return json_decode($str,true);

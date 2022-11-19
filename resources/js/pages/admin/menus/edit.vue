@@ -149,6 +149,21 @@
                                     </div>
                                 </template>
                             </edit-item>
+                            <edit-item key-name="is_out_link" :options="{name: '是否为外部链接', required: false}" :datas="props">
+                                <template slot="input-item">
+                                    <div class="row">
+                                        <div v-for="(item,index) in props.maps['is_out_link']"
+                                             class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                            <icheck v-model="props.data.row['is_out_link']"
+                                                    type="radio"
+                                                    :option="index"
+                                                    :title="item"
+                                                    :disabled="!props.url || props.data.row['resource_id']>0"> {{item}}
+                                            </icheck>
+                                        </div>
+                                    </div>
+                                </template>
+                            </edit-item>
                             <edit-item key-name="status" :options="{name: props.transField('State'), required: false}" :datas="props">
                                 <template slot="input-item">
                                     <div class="row">

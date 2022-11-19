@@ -50,7 +50,7 @@ class IndexController extends Controller
     public function indexData(){
         $file = public_path(getRoutePrefix(config('laravel_admin.web_api_model')).'/home/docs/README.md');
         $markdown = file_exists($file)?file_get_contents($file):Doc::query()->where('name','README.md')->value('description');
-        $config_url = config('app.url').getRoutePrefix(config('laravel_admin.web_api_model'));
+        $config_url = (config('laravel_admin.domain_auto')?'':config('app.url')).getRoutePrefix(config('laravel_admin.web_api_model'));
         $config_url = $this->checkUrl($config_url);
         return [
             'time_str'=>'&time='.time(),
@@ -88,7 +88,7 @@ class IndexController extends Controller
      * @return mixed
      */
     public function config(){
-        $app_url = config('app.url');
+        $app_url = config('laravel_admin.domain_auto')?'':config('app.url');
         $app_url = $this->checkUrl($app_url);
         $data['logo'] = config('laravel_admin.logo');
         $data['name'] = config('app.name');
@@ -236,7 +236,7 @@ class IndexController extends Controller
         $obj = Menu::main()
             ->select(['id','name','icons','description',
                 'url','parent_id','resource_id','status','level',
-                'left_margin','right_margin','method'
+                'left_margin','right_margin','method','is_out_link'
             ])
             ->orderBy('left_margin','asc')
             ->with(['parent'=>function($q){
