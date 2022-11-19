@@ -56,7 +56,8 @@ class Menu extends Model
         'use',
         'as',
         'middleware',
-        'item_name'
+        'item_name',
+        'is_out_link'
     ];
     //输出隐藏字段
     protected $hidden = ['deleted_at'];
@@ -98,6 +99,10 @@ class Menu extends Model
             'testing'=>'testing',
             'staging'=>'staging',
             'production'=>'production'
+        ],
+        'is_out_link'=>[
+            '否',
+            '是'
         ]
     ];
 
@@ -123,7 +128,8 @@ class Menu extends Model
         'as'=>'',
         'middleware'=>[],
         'use'=>[],
-        'item_name'=>''
+        'item_name'=>'',
+        'is_out_link'=>0
     ];
 
     //字段默认值
@@ -146,6 +152,7 @@ class Menu extends Model
         'use'=>'Route usage',
         'as'=>'Routing alias',
         'middleware'=>'Using middleware alone',
+        'is_out_link'=>'是否为外部页面',
         //'left_margin' => 'Left boundary',
         //'right_margin' => 'Right boundary',
         //'created_at' => 'Created At',

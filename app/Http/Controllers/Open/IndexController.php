@@ -198,7 +198,7 @@ class IndexController extends Controller
         $obj = Menu::main()
             ->select(['id','name','icons','description',
                 'url','parent_id','resource_id','status','level',
-                'left_margin','right_margin','method'
+                'left_margin','right_margin','method','is_out_link'
             ])
             ->orderBy('left_margin','asc')
             ->with(['parent'=>function($q){
