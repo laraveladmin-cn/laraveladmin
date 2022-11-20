@@ -525,7 +525,7 @@ class Menu extends Model
      */
     public function scopeDecodeValue($query,&$item){
         //解码
-        collect(['method','disabled','status','is_page','use'])->map(function ($key)use(&$item){
+        collect(['method','disabled','status','is_page','use','is_out_link'])->map(function ($key)use(&$item){
             if(!isset($item[$key])){
                 return;
             }
