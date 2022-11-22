@@ -172,7 +172,7 @@ trait CommonController{
                     $result[] = $k ? $k . '.' . $key : $key;
                 }
                 $this->getWithFields($item, $result, $k ? $k . '.' . $key : $key);
-            }elseif (is_callable($item)){
+            }elseif (!is_string($item) && !is_numeric($item) && is_callable($item)){
                 $result[$k ? $k . '.' . $key : $key] = $item;
             }
         }
@@ -240,7 +240,7 @@ trait CommonController{
     {
         $result = [];
         foreach ($fields as $field) {
-            if(!is_array($field) && !is_callable($field)){
+            if(!is_array($field) && !(!is_string($field) && !is_numeric($field) && is_callable($field))){
                 if(is_string($field) && Str::contains($field,'`')){
                     $field = DB::raw($field);
                 }
