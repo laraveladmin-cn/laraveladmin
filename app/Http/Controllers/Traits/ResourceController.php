@@ -75,8 +75,11 @@ trait ResourceController
             return Str::endsWith($value, '_id');
         })->map(function ($value) use (&$data) {
             $val = collect(explode('.',$value))->last();
-            $val = Str::replaceLast('_id', '', $val);
-            $model = '\App\Models\\' . Str::studly($val);
+            $model=Arr::get($this->mapsWhereFieldsClass,$val);
+            if(!$model){
+                $val = Str::replaceLast('_id', '', $val);
+                $model = '\App\Models\\' . Str::studly($val);
+            }
             $item = [];
             $where = Request::input('where');
             $relation_id = isset($where[$value])?$where[$value]:0;

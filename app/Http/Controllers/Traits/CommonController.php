@@ -45,6 +45,12 @@ trait CommonController{
     protected $mapsWhereFields=[];
 
     /**
+     * 条件筛选查询字段映射类
+     * @var array
+     */
+    protected $mapsWhereFieldsClass=[];
+
+    /**
      * 其它筛选条件输出
      * @var array
      */
@@ -166,6 +172,8 @@ trait CommonController{
                     $result[] = $k ? $k . '.' . $key : $key;
                 }
                 $this->getWithFields($item, $result, $k ? $k . '.' . $key : $key);
+            }elseif (is_callable($item)){
+                $result[$k ? $k . '.' . $key : $key] = $item;
             }
         }
         return $result;
@@ -232,7 +240,7 @@ trait CommonController{
     {
         $result = [];
         foreach ($fields as $field) {
-            if(!is_array($field)){
+            if(!is_array($field) && !is_callable($field)){
                 if(is_string($field) && Str::contains($field,'`')){
                     $field = DB::raw($field);
                 }
