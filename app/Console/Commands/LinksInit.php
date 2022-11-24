@@ -76,7 +76,12 @@ class LinksInit extends BaseCommand
                     }
                     $res = $this->laravel->make('files')->link($relativeTarget, $link);
                 }else{
-                    $res = $this->laravel->make('files')->relativeLink($target, $link);
+                    $storage = $this->laravel->make('files');
+                    if(method_exists($storage,'relativeLink')){
+                        $res = $this->laravel->make('files')->relativeLink($target, $link);
+                    }else{
+                        $res = $this->laravel->make('files')->link($target, $link);
+                    }
                 }
             } else {
                 $res = $this->laravel->make('files')->link($target, $link);
