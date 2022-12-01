@@ -35,6 +35,7 @@ const app = new Vue({
     router,
     store
 }).$mount('#app');
+//百度访问统计
 if(window.AppConfig.env=='production' && window.AppConfig.baidu_statistics_url){
     window._hmt = window._hmt || [];
     (function() {
@@ -43,4 +44,11 @@ if(window.AppConfig.env=='production' && window.AppConfig.baidu_statistics_url){
         let s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
+}
+//页面灰色设置
+if(window.AppConfig.page_gray==1){
+    let htmls = document.getElementsByTagName('html');
+    if(htmls && htmls[0]){
+        htmls[0].style.filter='grayscale(100%)';
+    }
 }

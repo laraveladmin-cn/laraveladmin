@@ -46,6 +46,7 @@ let AppConfig = {
     amap_config:null,
     google_config:null,
     def_avatar:'/dist/img/user_default_180.gif',
+    page_gray:0,//页面灰色
     ...(window.AppConfig || {})
 };
 AppConfig.language = (localStorage.getItem('language') || AppConfig.default_language).replace(/\_/g,'-');

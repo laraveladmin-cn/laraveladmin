@@ -40,6 +40,16 @@ class ConfigTableSeeder extends Seeder
             'value' => ''
         ]);
 
+        //页面灰色
+        Config::create([
+            'key' => 'page_gray',
+            'name' => '页面灰色',
+            'description' => '页面灰色显示',
+            'value' => 0,
+            'type'=>3,
+            'itype'=>5
+        ]);
+
 
     }
 
