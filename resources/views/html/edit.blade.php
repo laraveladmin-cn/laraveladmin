@@ -94,6 +94,11 @@
             'path' => 'common_components/labelEdit.vue',
             'info' => '标签选项组件'
         ],
+        'jsonView'=>[
+            'name' => 'json-view',
+            'path' => 'vue-json-views/build/index.js',
+            'info' => 'json数据显示组件'
+        ],
         'date' =>$datePicker,
         'datetime'=>$datePicker,
         'time'=>$datePicker,
@@ -337,6 +342,13 @@
                                         :disabled="!props.url">
                                     </json-edit>
                                 </template>
+@elseif($table_field['showType']=='jsonView')
+                                    <template slot="input-item">
+                                        <json-view :deep="3" style="height: 500px;overflow: scroll"
+                                                   :closed="false" :theme="'one-dark'"
+                                                   :data="array_get(props,'data.row.{{$table_field['Field']}}',{}) || {}">
+                                        </json-view>
+                                    </template>
 @endif
                             </edit-item>
 @endforeach
