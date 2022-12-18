@@ -45,7 +45,7 @@
     "Whoops!": "哎呦！",
     "Whoops, something went wrong on our servers.": "哎呀，我们的服务器出了问题。",
     "This password reset link will expire in :count minutes.": "此密码重置链接将会在:count分钟内失效。",
-    "Unauthenticated": "身份验证失败。",
+    "Unauthenticated.": "身份验证失败。",
     "Data does not exist!": "数据不存在！",
     "Delete the success!": "删除成功！",
     "Delete failed!": "删除失败!",

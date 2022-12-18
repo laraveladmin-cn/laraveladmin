@@ -7,7 +7,7 @@
                 <validation-observer ref="register" v-slot="{invalid,validate}">
                     <form method="post">
                         <form-item v-model="username" :options="{key:'username',name:$tp('Account'),rules:'required|min:5|max:18|user_name',icon:'fa-user',placeholder:placeholderUsername}"></form-item>
-                        <form-item v-model="email" :options="{key:'email',name:$t('Email'),type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:$tp('Please enter email address')}"></form-item>
+                        <form-item v-model="email" :options="{key:'email',name:$t('Email'),type:'email',rules:mobile_phone?'':'required|email',icon:'glyphicon-envelope',placeholder:$tp('Please enter email address'),title:$tp('Email notification will be preferred if you fill in the mailbox')}"></form-item>
                         <form-item v-model="mobile_phone" :options="{key:'mobile_phone',name:$t('Mobile phone number'),rules:email?'':'required|mobile',icon:'glyphicon-phone',placeholder:$tp('Please enter your mobile phone number')}"></form-item>
                         <form-item v-if="count_down<=0" v-model="verifyCode" :options="{key:'verify',name:$t('captcha'),rules:'required'+(verify['type']=='captcha'?'|length:'+verify['length']:''),label:verify['type']=='captcha'}">
                             <geetest style="width: 150px"  v-if="verify['type']=='geetest'" :url="web_url+verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></geetest>
@@ -55,7 +55,7 @@
                     <router-link class="pull-right" to="/open/login">{{$tp('To log in')}}</router-link>
                 </div>
             </div>
-            <icp></icp>
+         <!--   <icp></icp>-->
         </div>
 
     </div>
@@ -243,7 +243,7 @@
         }
     };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .open_register{
         position: relative;
         background: url('/dist/img/login-bg.jpg') no-repeat;

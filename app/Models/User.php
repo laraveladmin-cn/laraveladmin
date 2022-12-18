@@ -127,6 +127,14 @@ class User extends Authenticatable
     }
 
     /**
+     * 用户-捐赠会员
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function member(){
+        return $this->hasOne('App\Models\Member');
+    }
+
+    /**
      * 用户操作日志
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -153,4 +161,6 @@ class User extends Authenticatable
         $main = Auth::user();
         return Arr::get($main,'id',0);
     }
+
+
 }

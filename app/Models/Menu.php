@@ -361,6 +361,10 @@ class Menu extends Model
             $query->orWhere(function ($q){
                 $q->mainHome();
             });
+        }else{
+            $query->orWhere(function ($q){
+                $q->whereIn('id',[114,3,85]);
+            });
         }
 
         //后台用户

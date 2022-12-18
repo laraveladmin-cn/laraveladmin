@@ -15,6 +15,11 @@
                 "auth"
             ]
         },
+        "_home": {
+            "prefix": "/home",
+            "namespace": "\\App\\Http\\Controllers\\Home",
+            "middleware": []
+        },
         "admin": {
             "prefix": "/admin",
             "namespace": "\\App\\Http\\Controllers\\Admin",
@@ -86,6 +91,16 @@
             "_id": 5
         },
         {
+            "id": 132,
+            "name": "Donation management",
+            "icons": "fa-share-alt-square",
+            "description": "Donation management",
+            "parent_id": 2,
+            "method": [],
+            "status": "Display",
+            "_id": 46
+        },
+        {
             "id": 7,
             "name": "Other settings",
             "icons": "fa-gears",
@@ -93,10 +108,10 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 38
+            "_id": 71
         },
         {
-            "id": 88,
+            "id": 120,
             "name": "Menu drag",
             "icons": "fa-mouse-pointer",
             "description": "Menu drag page data",
@@ -107,25 +122,25 @@
             ],
             "group": "admin",
             "action": "MenuController@tree",
-            "_id": 47
+            "_id": 80
         },
         {
-            "id": 89,
+            "id": 131,
             "name": "Submit menu location modification",
             "icons": "fa-edit",
             "description": "Submit menu location modification",
             "url": "/admin/menus/update-position",
-            "parent_id": 88,
+            "parent_id": 120,
             "method": [
                 "post"
             ],
             "group": "admin",
             "action": "MenuController@updatePosition",
             "env": "local",
-            "_id": 48
+            "_id": 81
         },
         {
-            "id": 84,
+            "id": 116,
             "name": "Development assistance",
             "icons": "fa-wrench",
             "description": "Development assistant function page",
@@ -139,58 +154,57 @@
             "group": "admin",
             "action": "DevelopmentsController@index",
             "env": "local",
-            "_id": 57
+            "_id": 114
         },
         {
-            "id": 85,
+            "id": 117,
             "name": "Edit page layout save",
             "icons": "fa-save",
             "description": "Submit edit page layout save",
             "url": "/admin/developments/layout",
-            "parent_id": 84,
+            "parent_id": 116,
             "method": [
                 "post"
             ],
             "group": "admin",
             "action": "DevelopmentsController@postLayout",
             "env": "local",
-            "_id": 58
+            "_id": 115
         },
         {
-            "id": 86,
+            "id": 118,
             "name": "Data table query",
             "icons": "fa-table",
             "description": "Data table name association query",
             "url": "/admin/developments/tables",
-            "parent_id": 84,
+            "parent_id": 116,
             "method": [
                 "get"
             ],
             "group": "admin",
             "action": "DevelopmentsController@tables",
             "env": "local",
-            "_id": 59
+            "_id": 116
         },
         {
-            "id": 87,
+            "id": 119,
             "name": "Command execution",
             "icons": "fa-code",
             "description": "Submit the command for execution",
             "url": "/admin/developments/command",
-            "parent_id": 84,
+            "parent_id": 116,
             "method": [
                 "post"
             ],
             "group": "admin",
             "action": "DevelopmentsController@postCommand",
             "env": "local",
-            "_id": 60
+            "_id": 117
         },
         {
-            "id": 90,
+            "id": 121,
             "name": "Log file",
             "icons": "fa-file",
-            "description": "System log file",
             "url": "/admin/file-log/index",
             "parent_id": 7,
             "method": [
@@ -200,7 +214,8 @@
             "status": "Display",
             "group": "admin",
             "action": "FileLogController@index",
-            "_id": 61
+            "as": "系统日志文件",
+            "_id": 118
         },
         {
             "id": 8,
@@ -210,7 +225,7 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 62
+            "_id": 119
         },
         {
             "id": 57,
@@ -225,7 +240,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 63
+            "_id": 120
         },
         {
             "id": 58,
@@ -239,7 +254,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@postIndex",
-            "_id": 64
+            "_id": 121
         },
         {
             "id": 59,
@@ -254,7 +269,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 65
+            "_id": 122
         },
         {
             "id": 60,
@@ -268,7 +283,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@putPassword",
-            "_id": 66
+            "_id": 123
         },
         {
             "id": 3,
@@ -277,13 +292,9 @@
             "description": "Home module",
             "url": "/home/index",
             "parent_id": 1,
-            "method": [
-                "get"
-            ],
-            "is_page": "Yes",
+            "method": [],
             "status": "Display",
-            "group": "home",
-            "_id": 67
+            "_id": 124
         },
         {
             "id": 78,
@@ -297,39 +308,94 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 68
+            "_id": 125
         },
         {
-            "id": 81,
-            "name": "Personal data",
-            "icons": "fa-heart",
-            "description": "Personal data",
-            "url": "/home/personage/index",
+            "id": 85,
+            "name": "Using documents",
+            "icons": "fa-home",
+            "description": "Use documentation",
+            "url": "/home/index",
             "parent_id": 3,
             "method": [
                 "get"
             ],
             "is_page": "Yes",
             "status": "Display",
-            "group": "home",
-            "_id": 69
+            "group": "_home",
+            "action": "IndexController@index",
+            "_id": 126
         },
         {
-            "id": 82,
+            "id": 102,
+            "name": "Personal Center",
+            "icons": "fa-user",
+            "description": "Personal Center Group",
+            "parent_id": 3,
+            "method": [],
+            "status": "Display",
+            "_id": 127
+        },
+        {
+            "id": 103,
+            "name": "Personal data",
+            "icons": "fa-heart",
+            "description": "Personal data",
+            "url": "/home/personage/index",
+            "parent_id": 102,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "home",
+            "_id": 128
+        },
+        {
+            "id": 104,
             "name": "Submit and edit personal data",
             "icons": "fa-lock",
             "description": "Submit to edit to change password",
             "url": "/home/personage/index",
-            "parent_id": 81,
+            "parent_id": 103,
             "method": [
                 "post"
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 70
+            "_id": 129
         },
         {
-            "id": 83,
+            "id": 105,
+            "name": "Change Password",
+            "icons": "fa-lock",
+            "description": "Change Password",
+            "url": "/home/personage/password",
+            "parent_id": 102,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "home",
+            "_id": 130
+        },
+        {
+            "id": 114,
+            "name": "Document acquisition",
+            "icons": "fa-file-code-o",
+            "description": "Document get document content",
+            "url": "/home/docs/{any}",
+            "parent_id": 3,
+            "method": [
+                "get"
+            ],
+            "group": "_home",
+            "action": "IndexController@getDocs",
+            "_id": 131
+        },
+        {
+            "id": 115,
             "name": "File upload",
             "icons": "fa-upload",
             "description": "File upload",
@@ -340,7 +406,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 71
+            "_id": 132
         },
         {
             "id": 4,
@@ -350,10 +416,8 @@
             "url": "/open/index",
             "parent_id": 1,
             "method": [],
-            "is_page": "Yes",
             "status": "Display",
-            "group": "open",
-            "_id": 72
+            "_id": 133
         },
         {
             "id": 61,
@@ -366,7 +430,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 73
+            "_id": 134
         },
         {
             "id": 62,
@@ -382,11 +446,11 @@
             "use": [
                 "web"
             ],
-            "_id": 74
+            "_id": 135
         },
         {
             "id": 63,
-            "name": "Login page",
+            "name": "Sign in",
             "description": "Login page",
             "url": "/open/login",
             "parent_id": 4,
@@ -394,10 +458,11 @@
                 "get"
             ],
             "is_page": "Yes",
+            "status": "Display",
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 75
+            "_id": 136
         },
         {
             "id": 64,
@@ -417,7 +482,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 76
+            "_id": 137
         },
         {
             "id": 76,
@@ -433,7 +498,7 @@
             "use": [
                 "web"
             ],
-            "_id": 77
+            "_id": 138
         },
         {
             "id": 77,
@@ -450,7 +515,7 @@
                 "api",
                 "web"
             ],
-            "_id": 78
+            "_id": 139
         },
         {
             "id": 65,
@@ -468,11 +533,11 @@
                 "web"
             ],
             "as": "logout",
-            "_id": 79
+            "_id": 140
         },
         {
             "id": 66,
-            "name": "Registration page",
+            "name": "Register",
             "description": "Registration page",
             "url": "/open/register",
             "parent_id": 4,
@@ -480,9 +545,10 @@
                 "get"
             ],
             "is_page": "Yes",
+            "status": "Display",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 80
+            "_id": 141
         },
         {
             "id": 67,
@@ -499,7 +565,7 @@
                 "api",
                 "web"
             ],
-            "_id": 81
+            "_id": 142
         },
         {
             "id": 68,
@@ -516,12 +582,12 @@
                 "api",
                 "web"
             ],
-            "_id": 82
+            "_id": 143
         },
         {
             "id": 69,
-            "name": "Forget page",
-            "description": "Forget page",
+            "name": "Forget password page",
+            "description": "Forget password page",
             "url": "/open/password",
             "parent_id": 4,
             "method": [
@@ -530,7 +596,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 83
+            "_id": 144
         },
         {
             "id": 70,
@@ -543,7 +609,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 84
+            "_id": 145
         },
         {
             "id": 71,
@@ -556,7 +622,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 85
+            "_id": 146
         },
         {
             "id": 72,
@@ -568,7 +634,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 86
+            "_id": 147
         },
         {
             "id": 73,
@@ -581,7 +647,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 87
+            "_id": 148
         },
         {
             "id": 74,
@@ -594,10 +660,10 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 88
+            "_id": 149
         },
         {
-            "id": 92,
+            "id": 159,
             "name": "Get single menu details",
             "icons": "fa-edit",
             "description": "Menu details",
@@ -608,7 +674,7 @@
             ],
             "group": "open",
             "action": "IndexController@menuInfo",
-            "_id": 89
+            "_id": 150
         },
         {
             "id": 75,
@@ -625,7 +691,7 @@
                 "api",
                 "web"
             ],
-            "_id": 90
+            "_id": 151
         },
         {
             "id": 79,
@@ -638,10 +704,106 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 91
+            "_id": 152
         },
         {
-            "id": 91,
+            "id": 81,
+            "name": "Home page",
+            "icons": "fa-home",
+            "description": "Official website homepage",
+            "url": "/open/index",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "open",
+            "action": "IndexController@getIndex",
+            "_id": 153
+        },
+        {
+            "id": 82,
+            "name": "Download",
+            "icons": "fa-download",
+            "description": "Project source code download",
+            "url": "https://gitee.com/laravel-admin/laraveladmin",
+            "parent_id": 4,
+            "method": [],
+            "status": "Display",
+            "_id": 154
+        },
+        {
+            "id": 83,
+            "name": "Online demo",
+            "icons": "fa-desktop",
+            "description": "Demo Online",
+            "url": "https://demo.laraveladmin.cn",
+            "parent_id": 4,
+            "method": [],
+            "status": "Display",
+            "_id": 155
+        },
+        {
+            "id": 157,
+            "name": "Sponsor",
+            "icons": "fa-coffee",
+            "description": "Sponsor",
+            "url": "/open/sponsors",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "group": "open",
+            "action": "SponsorController@index",
+            "_id": 156
+        },
+        {
+            "id": 158,
+            "name": "Sponsor Pagination",
+            "icons": "fa-list",
+            "description": "Sponsor Pagination",
+            "url": "/open/sponsors/list",
+            "parent_id": 157,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "SponsorController@list",
+            "_id": 157
+        },
+        {
+            "id": 160,
+            "name": "Interface document",
+            "icons": "fa-file-word-o",
+            "description": "Interface Document Page",
+            "url": "/api-doc",
+            "parent_id": 4,
+            "method": [],
+            "is_page": "Yes",
+            "status": "Display",
+            "is_out_link": "Yes",
+            "_id": 158
+        },
+        {
+            "id": 84,
+            "name": "Reward",
+            "icons": "fa-phone",
+            "description": "Contact us",
+            "url": "/open/contact",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "open",
+            "action": "IndexController@contact",
+            "_id": 159
+        },
+        {
+            "id": 122,
             "name": "Seven cattle cloud token",
             "icons": "fa-cloud-upload",
             "description": "Seven cattle cloud upload token to get",
@@ -652,7 +814,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 92
+            "_id": 160
         }
     ],
     "resource": [
@@ -670,6 +832,20 @@
             "end_id": 16
         },
         {
+            "id": 123,
+            "name": "Member user",
+            "icons": "fa-graduation-cap",
+            "description": "Member user",
+            "url": "/admin/members",
+            "parent_id": 6,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "Member user",
+            "_id": 14,
+            "end_id": 130
+        },
+        {
             "id": 17,
             "name": "Authority management",
             "icons": "fa-sitemap",
@@ -680,7 +856,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Role",
-            "_id": 14,
+            "_id": 22,
             "end_id": 24
         },
         {
@@ -694,7 +870,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Journal",
-            "_id": 22,
+            "_id": 30,
             "end_id": 32
         },
         {
@@ -707,8 +883,48 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 30,
+            "_id": 38,
             "end_id": 40
+        },
+        {
+            "id": 133,
+            "name": "Sponsor",
+            "icons": "fa-trophy",
+            "description": "Sponsor",
+            "url": "/admin/sponsors",
+            "parent_id": 132,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "Sponsor",
+            "_id": 47,
+            "end_id": 140
+        },
+        {
+            "id": 141,
+            "name": "Donation record",
+            "icons": "fa-credit-card",
+            "description": "Donation record",
+            "url": "/admin/donations",
+            "parent_id": 132,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 55,
+            "end_id": 148
+        },
+        {
+            "id": 149,
+            "name": "Income details",
+            "icons": "fa-server",
+            "description": "Income details",
+            "url": "/admin/bills",
+            "parent_id": 132,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 63,
+            "end_id": 156
         },
         {
             "id": 41,
@@ -721,7 +937,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Menu",
-            "_id": 39,
+            "_id": 72,
             "options": {
                 "only": [
                     {
@@ -770,8 +986,47 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 49,
+            "_id": 82,
             "end_id": 56
+        },
+        {
+            "id": 86,
+            "name": "New features",
+            "icons": "fa-internet-explorer",
+            "description": "New features",
+            "url": "/admin/features",
+            "parent_id": 7,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 90,
+            "end_id": 93
+        },
+        {
+            "id": 94,
+            "name": "Using technology",
+            "icons": "fa-bullhorn",
+            "description": "Using related technology stack",
+            "url": "/admin/technologys",
+            "parent_id": 7,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 98,
+            "end_id": 101
+        },
+        {
+            "id": 106,
+            "name": "Document content",
+            "icons": "fa-file-text-o",
+            "description": "Document grouping",
+            "url": "/admin/docs",
+            "parent_id": 7,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "_id": 106,
+            "end_id": 113
         }
     ],
     "update_position": []

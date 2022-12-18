@@ -1,6 +1,6 @@
 <template>
     <div class="login-logo">
-        <router-link to="/"><b>{{name_short}}</b>{{$tp('Backend systems')}}</router-link>
+        <router-link to="/"><b>{{name}}</b></router-link>
     </div>
 </template>
 
@@ -14,7 +14,8 @@
             };
         },
         computed:mapState([
-           'name_short'
+           'name_short',
+            'name'
         ])
     }
 </script>

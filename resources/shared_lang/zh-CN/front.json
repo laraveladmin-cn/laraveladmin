@@ -81,15 +81,43 @@
             "Role": "角色",
             "Journal": "日志",
             "Menu": "菜单",
+            "Using documents": "使用文档",
+            "Use documentation": "使用文档说明",
+            "Document acquisition": "文档获取",
+            "Document get document content": "文档获取文档内容",
+            "Sign in": "登录",
+            "Register": "注册",
+            "Forget password page": "忘记密码页面",
+            "Home page": "首页",
+            "Official website homepage": "官网主页",
+            "Download": "下载",
+            "Project source code download": "项目源码下载",
+            "Online demo": "在线演示",
+            "Demo Online": "在线演示demo",
+            "Reward": "打赏",
+            "Contact us": "联系我们",
+            "New features": "新增功能",
+            "Using technology": "使用技术",
+            "Using related technology stack": "使用相关技术栈",
+            "Document content": "文档内容",
+            "Document grouping": "文档分组",
             "Log file": "日志文件",
             "System log file": "系统日志文件",
             "Seven cattle cloud token": "七牛云TOKEN",
             "Seven cattle cloud upload token to get": "七牛云上传TOKEN获取",
+            "Donation management": "捐赠管理",
+            "Sponsor": "赞助商",
+            "Sponsor Pagination": "赞助商分页",
+            "Member user": "会员用户",
+            "Donation record": "捐赠记录",
+            "Income details": "收益明细",
             "500 page": "500页面",
             "403 page": "403页面",
             "404 page": "404页面",
             "Get single menu details": "获取单条菜单详细信息",
-            "Menu details": "菜单详情"
+            "Menu details": "菜单详情",
+            "Interface document": "接口文档",
+            "Interface Document Page": "接口文档页面"
         },
         "tables": {
             "_file_logs": {
@@ -328,6 +356,99 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "docs": {
+                "fields": {
+                    "Route": "路径",
+                    "Content": "内容",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "features": {
+                "fields": {
+                    "Name": "名称",
+                    "Icon": "图标",
+                    "Colour": "颜色",
+                    "Describe": "描述",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "technologys": {
+                "fields": {
+                    "Name": "名称",
+                    "Link address": "链接地址",
+                    "Logo image": "LOGO图片",
+                    "Describe": "描述",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "bills": {
+                "fields": {
+                    "Member ID": "会员ID",
+                    "Donation ID": "捐赠ID",
+                    "Amount of money": "金额",
+                    "State": "状态",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": {
+                    "status": {
+                        "No cash withdrawal": "未提现",
+                        "Withdrawn cash": "已提现"
+                    }
+                }
+            },
+            "donations": {
+                "fields": {
+                    "Member ID": "会员ID",
+                    "Sponsor ID": "赞助商ID",
+                    "Source": "来源",
+                    "Donation amount": "捐赠金额",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": {
+                    "from": {
+                        "WeChat": "微信",
+                        "Alipay": "支付宝",
+                        "Transfer accounts": "转账"
+                    }
+                }
+            },
+            "members": {
+                "fields": {
+                    "User ID": "用户ID",
+                    "Recommender ID": "推荐人ID",
+                    "Hierarchy": "层级",
+                    "Left boundary": "左边界",
+                    "Right boundary": "右边界",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
+            },
+            "sponsors": {
+                "fields": {
+                    "Sponsor": "赞助商",
+                    "Link": "链接",
+                    "Logo Icon": "LOGO图标",
+                    "Created At": "创建时间",
+                    "Updated At": "修改时间",
+                    "Deleted At": "删除时间"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -353,7 +474,8 @@
             },
             "roles": {
                 "name": {
-                    "Superadministrator": "超级管理员"
+                    "Superadministrator": "超级管理员",
+                    "Ordinary Member": "普通会员"
                 },
                 "description": {
                     "Have all operation permissions": "拥有所有操作权限。"
@@ -408,10 +530,34 @@
             "index": {
                 "Home page of official website": "官网首页",
                 "Backstage home page": "后台首页",
-                "Front desk home page": "前台首页"
+                "Front desk home page": "前台首页",
+                "Simple, intuitive, powerful front-end and back-end development framework, so that the full stack development more quickly, simple": "简洁、直观、强悍的前端后端开发框架，让全栈开发更迅速、简单。",
+                "LaravelAdmin documents": "LaravelAdmin文档",
+                "Please register at the WWW main site before viewing the documentation, Do not register users in the demo environment": "请在www主站注册后再查看文档,不要在演示环境注册用户",
+                "Background template download": "后台模板下载",
+                "LaravelAdmin covers the basic features": "LaravelAdmin涵盖基本功能",
+                "These basic functions make it easy and fast to realize our business": "这些基础功能可以方便快速让实现我们的业务",
+                "Related technology stack": "涉及相关技术栈"
+            },
+            "contact": {
+                "Demo environment": "演示环境",
+                "User name": "用户名",
+                "Password": "密码",
+                "Scan code for donation": "扫码捐赠",
+                "Official QQ Group": "官方QQ群",
+                "Zip code": "邮编",
+                "Telephone": "电话",
+                "Email address": "电子邮箱",
+                "Address": "地址",
+                "Jiaozi No1, Jinjiang District, Chengdu City, Sichuan Province": "四川省成都市锦江区娇子一号",
+                "Contact us": "联系我们",
+                "Open source is not easy thanks for your support": "开源不易谢谢支持",
+                "Mr Zhang": "张先生",
+                "WeChat Same number": "微信同号"
             },
             "Registered user": "注册用户",
             "Forget your password": "忘记密码",
+            "Email notification will be preferred if you fill in the mailbox": "填了邮箱将优先使用邮件通知",
             "To log in": "直接登录",
             "Other login methods": "其它登录方式",
             "Remember to log in": "记住登录",
@@ -888,10 +1034,15 @@
     "Select time": "选择时间",
     "Select Date": "选择日期",
     "Select month": "选择月份",
+    "Menu switch": "菜单切换",
+    "Back to top": "返回顶部",
+    "Special thanks": "特别鸣谢:",
+    "Links": "友情链接:",
     "Unbundling": "解绑",
     "Download": "下载",
     "Click Upload": "点击上传",
     "Only picture files can be uploaded and no more than {size}": "只能上传图片文件，且不超过{size}",
+    "Please enter the link address": "请输入链接地址",
     "Confirm to add": "确认添加",
     "Your account has been logged in elsewhere": "您的帐号已在其他地方登录！"
 }

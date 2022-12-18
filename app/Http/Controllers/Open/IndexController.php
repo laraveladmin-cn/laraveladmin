@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Open;
 use App\Facades\ClientAuth;
 use App\Facades\Option;
 use App\Http\Controllers\Controller;
+use App\Models\Doc;
+use App\Models\Feature;
 use App\Models\Menu;
+use App\Models\Technology;
+use Illuminate\Mail\Markdown;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -20,15 +24,38 @@ class IndexController extends Controller
 
 
     /**
+     * 首页数据
+     */
+    public function getIndex(){
+        $data = [
+            'features'=>Feature::take(50)->get(),
+            'technologys'=>Technology::take(100)->get()
+        ];
+        return Response::returns($data);
+    }
+
+    /**
+     * 联系我们
+     * @return mixed
+     */
+    public function contact(){
+        $data = [];
+        return Response::returns($data);
+    }
+
+    /**
      * 生成index.html文件生成的数据
      * @return array
      */
     public function indexData(){
+        $file = public_path(getRoutePrefix(config('laravel_admin.web_api_model')).'/home/docs/README.md');
+        $markdown = file_exists($file)?file_get_contents($file):Doc::query()->where('name','README.md')->value('description');
         $config_url = (config('laravel_admin.domain_auto')?'':config('app.url')).getRoutePrefix(config('laravel_admin.web_api_model'));
         $config_url = $this->checkUrl($config_url);
         return [
             'time_str'=>'&time='.time(),
             'app_name'=>config('app.name'),
+            'markdown'=>Markdown::parse($markdown?:''),
             'config_url'=>$config_url
         ];
     }
@@ -180,10 +207,21 @@ class IndexController extends Controller
         $user = Auth::user();
         $lifetime = config('session.lifetime');
         if($user){
-            $user->load('admin','admin.roles');
+            $user->load('admin','admin.roles','member');
             if(!$user->tokenCan('remember')){
                 $lifetime = config('laravel_admin.no_remember_lifetime');
             };
+            if($member = Arr::get($user,'member')){
+                $bill_sum = collect($member->bills()->selectRaw(
+                    'SUM(amount) AS `sum_amount`,
+                    SUM(CASE `status` WHEN 0 THEN `amount` ELSE 0 END) AS `sum_amount_0`,
+                    SUM(CASE `status` WHEN 1 THEN `amount` ELSE 0 END) AS `sum_amount_1`'
+                )->first())->toArray();
+                $user = collect($user)->toArray();
+                $user['member']['bill_sum'] = $bill_sum;
+            }
+
+
         }
         return Response::returns([
             'user'=>$user,

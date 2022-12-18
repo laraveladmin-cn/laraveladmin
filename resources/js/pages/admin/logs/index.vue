@@ -135,6 +135,16 @@
 
     };
 </script>
-<style lang="scss">
-
+<style lang="scss" scoped>
+    .attachment-img{
+        max-width: 100px;
+        max-height: 100px;
+    }
+    .no-img{
+        width: 100px;
+        height: 73px;
+        background: gainsboro;
+        display: inline-block;
+        vertical-align: middle;
+    }
 </style>

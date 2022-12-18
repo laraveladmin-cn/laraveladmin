@@ -81,15 +81,43 @@
             "Role": "角色",
             "Journal": "日誌",
             "Menu": "選單",
+            "Using documents": "使用檔案",
+            "Use documentation": "使用檔案說明",
+            "Document acquisition": "檔案獲取",
+            "Document get document content": "檔案獲取檔案內容",
+            "Sign in": "登入",
+            "Register": "注册",
+            "Forget password page": "忘記密碼頁面",
+            "Home page": "首頁",
+            "Official website homepage": "官網主頁",
+            "Download": "下載",
+            "Project source code download": "項目源碼下載",
+            "Online demo": "線上演示",
+            "Demo Online": "線上演示demo",
+            "Reward": "打賞",
+            "Contact us": "聯繫我們",
+            "New features": "新增功能",
+            "Using technology": "使用科技",
+            "Using related technology stack": "使用相關科技棧",
+            "Document content": "檔案內容",
+            "Document grouping": "檔案分組",
             "Log file": "日誌檔",
             "System log file": "系統日誌檔",
             "Seven cattle cloud token": "七牛雲TOKEN",
             "Seven cattle cloud upload token to get": "七牛雲上傳TOKEN獲取",
+            "Donation management": "捐贈管理",
+            "Sponsor": "贊助商",
+            "Sponsor Pagination": "贊助商分頁",
+            "Member user": "會員用戶",
+            "Donation record": "捐贈記錄",
+            "Income details": "收益明細",
             "500 page": "500頁面",
             "403 page": "403頁面",
             "404 page": "404頁面",
             "Get single menu details": "獲取單條選單詳細資訊",
-            "Menu details": "選單詳情"
+            "Menu details": "選單詳情",
+            "Interface document": "介面檔案",
+            "Interface Document Page": "介面檔案頁面"
         },
         "tables": {
             "_file_logs": {
@@ -328,6 +356,99 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "docs": {
+                "fields": {
+                    "Route": "路徑",
+                    "Content": "內容",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "features": {
+                "fields": {
+                    "Name": "名稱",
+                    "Icon": "圖標",
+                    "Colour": "顏色",
+                    "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "technologys": {
+                "fields": {
+                    "Name": "名稱",
+                    "Link address": "連結位址",
+                    "Logo image": "LOGO圖片",
+                    "Describe": "描述",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "bills": {
+                "fields": {
+                    "Member ID": "會員ID",
+                    "Donation ID": "捐贈ID",
+                    "Amount of money": "金額",
+                    "State": "狀態",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": {
+                    "status": {
+                        "No cash withdrawal": "未提現",
+                        "Withdrawn cash": "已提現"
+                    }
+                }
+            },
+            "donations": {
+                "fields": {
+                    "Member ID": "會員ID",
+                    "Sponsor ID": "贊助商ID",
+                    "Source": "來源",
+                    "Donation amount": "捐贈金額",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": {
+                    "from": {
+                        "WeChat": "微信",
+                        "Alipay": "支付寶",
+                        "Transfer accounts": "轉帳"
+                    }
+                }
+            },
+            "members": {
+                "fields": {
+                    "User ID": "用戶ID",
+                    "Recommender ID": "推薦人ID",
+                    "Hierarchy": "層級",
+                    "Left boundary": "左邊界",
+                    "Right boundary": "右邊界",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
+            },
+            "sponsors": {
+                "fields": {
+                    "Sponsor": "贊助商",
+                    "Link": "連結",
+                    "Logo Icon": "LOGO圖標",
+                    "Created At": "創建時間",
+                    "Updated At": "修改時間",
+                    "Deleted At": "删除時間"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -353,7 +474,8 @@
             },
             "roles": {
                 "name": {
-                    "Superadministrator": "超級管理員"
+                    "Superadministrator": "超級管理員",
+                    "Ordinary Member": "普通會員"
                 },
                 "description": {
                     "Have all operation permissions": "擁有所有操作許可權。"
@@ -408,10 +530,34 @@
             "index": {
                 "Home page of official website": "官網首頁",
                 "Backstage home page": "後臺首頁",
-                "Front desk home page": "前臺首頁"
+                "Front desk home page": "前臺首頁",
+                "Simple, intuitive, powerful front-end and back-end development framework, so that the full stack development more quickly, simple": "簡潔、直觀、強悍的前端後端開發框架，讓全棧開發更迅速、簡單。",
+                "LaravelAdmin documents": "LaravelAdmin檔案",
+                "Please register at the WWW main site before viewing the documentation, Do not register users in the demo environment": "請在www主站注册後再查看檔案，不要在演示環境註冊用戶",
+                "Background template download": "後臺範本下載",
+                "LaravelAdmin covers the basic features": "LaravelAdmin涵蓋基本功能",
+                "These basic functions make it easy and fast to realize our business": "這些基礎功能可以方便快速讓實現我們的業務",
+                "Related technology stack": "涉及相關科技棧"
+            },
+            "contact": {
+                "Demo environment": "演示環境",
+                "User name": "用戶名",
+                "Password": "密碼",
+                "Scan code for donation": "掃碼捐贈",
+                "Official QQ Group": "官方QQ群",
+                "Zip code": "郵編",
+                "Telephone": "電話",
+                "Email address": "電子郵箱",
+                "Address": "地址",
+                "Jiaozi No1, Jinjiang District, Chengdu City, Sichuan Province": "四川省成都市錦江區嬌子一號",
+                "Contact us": "聯繫我們",
+                "Open source is not easy thanks for your support": "開源不易謝謝支持",
+                "Mr Zhang": "張先生",
+                "WeChat Same number": "微信同號"
             },
             "Registered user": "註冊用戶",
             "Forget your password": "忘記密碼",
+            "Email notification will be preferred if you fill in the mailbox": "填了郵箱將優先使用郵件通知",
             "To log in": "直接登入",
             "Other login methods": "其它登入管道",
             "Remember to log in": "記住登入",
@@ -888,10 +1034,15 @@
     "Select time": "選擇時間",
     "Select Date": "選擇日期",
     "Select month": "選擇月份",
+    "Menu switch": "選單切換",
+    "Back to top": "返回頂部",
+    "Special thanks": "特別鳴謝：",
+    "Links": "友情連結：",
     "Unbundling": "解綁",
     "Download": "下載",
     "Click Upload": "點擊上傳",
     "Only picture files can be uploaded and no more than {size}": "只能上傳圖片檔案，且不超過{size}",
+    "Please enter the link address": "請輸入連結位址",
     "Confirm to add": "確認添加",
     "Your account has been logged in elsewhere": "您的帳號已在其他地方登入！"
 }

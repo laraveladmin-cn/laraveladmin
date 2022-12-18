@@ -45,7 +45,7 @@
                             </edit-item>
                         </div>
                         <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item v-if="array_get(props,'data.row.ousers',[]).length" key-name="unbind_ids" :options="{name:  props.transField('Tripartite login')}"  :datas="props">
+                            <edit-item v-if="array_get(props,'data.row.ousers',[]).length" key-name="unbind_ids" :options="{name: props.transField('Tripartite login')}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="social-auth-links text-center other-login">
                                         <div class="row">

@@ -81,15 +81,43 @@
             "Role": "Role",
             "Journal": "Journal",
             "Menu": "Menu",
+            "Using documents": "Using documents",
+            "Use documentation": "Use documentation",
+            "Document acquisition": "Document acquisition",
+            "Document get document content": "Document get document content",
+            "Sign in": "Sign in",
+            "Register": "Register",
+            "Forget password page": "Forget password page",
+            "Home page": "Home page",
+            "Official website homepage": "Official website homepage",
+            "Download": "Download",
+            "Project source code download": "Project source code download",
+            "Online demo": "Online demo",
+            "Demo Online": "Demo Online",
+            "Reward": "Reward",
+            "Contact us": "Contact us",
+            "New features": "New features",
+            "Using technology": "Using technology",
+            "Using related technology stack": "Using related technology stack",
+            "Document content": "Document content",
+            "Document grouping": "Document grouping",
             "Log file": "Log file",
             "System log file": "System log file",
             "Seven cattle cloud token": "Seven cattle cloud token",
             "Seven cattle cloud upload token to get": "Seven cattle cloud upload token to get",
+            "Donation management": "Donation management",
+            "Sponsor": "Sponsor",
+            "Sponsor Pagination": "Sponsor Pagination",
+            "Member user": "Member user",
+            "Donation record": "Donation record",
+            "Income details": "Income details",
             "500 page": "500 page",
             "403 page": "403 page",
             "404 page": "404 page",
             "Get single menu details": "Get single menu details",
-            "Menu details": "Menu details"
+            "Menu details": "Menu details",
+            "Interface document": "Interface document",
+            "Interface Document Page": "Interface Document Page"
         },
         "tables": {
             "_file_logs": {
@@ -328,6 +356,99 @@
             "tables": {
                 "fields": [],
                 "maps": []
+            },
+            "docs": {
+                "fields": {
+                    "Route": "Route",
+                    "Content": "Content",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "features": {
+                "fields": {
+                    "Name": "Name",
+                    "Icon": "Icon",
+                    "Colour": "Colour",
+                    "Describe": "Describe",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "technologys": {
+                "fields": {
+                    "Name": "Name",
+                    "Link address": "Link address",
+                    "Logo image": "Logo image",
+                    "Describe": "Describe",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "bills": {
+                "fields": {
+                    "Member ID": "Member ID",
+                    "Donation ID": "Donation ID",
+                    "Amount of money": "Amount of money",
+                    "State": "State",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": {
+                    "status": {
+                        "No cash withdrawal": "No cash withdrawal",
+                        "Withdrawn cash": "Withdrawn cash"
+                    }
+                }
+            },
+            "donations": {
+                "fields": {
+                    "Member ID": "Member ID",
+                    "Sponsor ID": "Sponsor ID",
+                    "Source": "Source",
+                    "Donation amount": "Donation amount",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": {
+                    "from": {
+                        "WeChat": "WeChat",
+                        "Alipay": "Alipay",
+                        "Transfer accounts": "Transfer accounts"
+                    }
+                }
+            },
+            "members": {
+                "fields": {
+                    "User ID": "User ID",
+                    "Recommender ID": "Recommender ID",
+                    "Hierarchy": "Hierarchy",
+                    "Left boundary": "Left boundary",
+                    "Right boundary": "Right boundary",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
+            },
+            "sponsors": {
+                "fields": {
+                    "Sponsor": "Sponsor",
+                    "Link": "Link",
+                    "Logo Icon": "Logo Icon",
+                    "Created At": "Created At",
+                    "Updated At": "Updated At",
+                    "Deleted At": "Deleted At"
+                },
+                "maps": []
             }
         },
         "pages": {
@@ -353,7 +474,8 @@
             },
             "roles": {
                 "name": {
-                    "Superadministrator": "Superadministrator"
+                    "Superadministrator": "Superadministrator",
+                    "Ordinary Member": "Ordinary Member"
                 },
                 "description": {
                     "Have all operation permissions": "Have all operation permissions"
@@ -408,10 +530,34 @@
             "index": {
                 "Home page of official website": "Home page of official website",
                 "Backstage home page": "Backstage home page",
-                "Front desk home page": "Front desk home page"
+                "Front desk home page": "Front desk home page",
+                "Simple, intuitive, powerful front-end and back-end development framework, so that the full stack development more quickly, simple": "Simple, intuitive, powerful front-end and back-end development framework, so that the full stack development more quickly, simple",
+                "LaravelAdmin documents": "LaravelAdmin documents",
+                "Please register at the WWW main site before viewing the documentation, Do not register users in the demo environment": "Please register at the WWW main site before viewing the documentation, Do not register users in the demo environment",
+                "Background template download": "Background template download",
+                "LaravelAdmin covers the basic features": "LaravelAdmin covers the basic features",
+                "These basic functions make it easy and fast to realize our business": "These basic functions make it easy and fast to realize our business",
+                "Related technology stack": "Related technology stack"
+            },
+            "contact": {
+                "Demo environment": "Demo environment",
+                "User name": "User name",
+                "Password": "Password",
+                "Scan code for donation": "Scan code for donation",
+                "Official QQ Group": "Official QQ Group",
+                "Zip code": "Zip code",
+                "Telephone": "Telephone",
+                "Email address": "Email address",
+                "Address": "Address",
+                "Jiaozi No1, Jinjiang District, Chengdu City, Sichuan Province": "Jiaozi No1, Jinjiang District, Chengdu City, Sichuan Province",
+                "Contact us": "Contact us",
+                "Open source is not easy thanks for your support": "Open source is not easy thanks for your support",
+                "Mr Zhang": "Mr Zhang",
+                "WeChat Same number": "WeChat Same number"
             },
             "Registered user": "Registered user",
             "Forget your password": "Forget your password",
+            "Email notification will be preferred if you fill in the mailbox": "Email notification will be preferred if you fill in the mailbox",
             "To log in": "To log in",
             "Other login methods": "Other login methods",
             "Remember to log in": "Remember to log in",
@@ -888,10 +1034,15 @@
     "Select time": "Select time",
     "Select Date": "Select Date",
     "Select month": "Select month",
+    "Menu switch": "Menu switch",
+    "Back to top": "Back to top",
+    "Special thanks": "Special thanks",
+    "Links": "Links",
     "Unbundling": "Unbundling",
     "Download": "Download",
     "Click Upload": "Click Upload",
     "Only picture files can be uploaded and no more than {size}": "Only picture files can be uploaded and no more than {size}",
+    "Please enter the link address": "Please enter the link address",
     "Confirm to add": "Confirm to add",
     "Your account has been logged in elsewhere": "Your account has been logged in elsewhere"
 }

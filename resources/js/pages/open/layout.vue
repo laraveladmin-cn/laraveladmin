@@ -1,15 +1,73 @@
 <template>
-    <div class="open_layout h100">
-        <div v-if="locales.length>1" class="language">
-            <a @click="openLanguage">
-                <language ref="language" :value="language" @change="setLanguage"></language>
-            </a>
-        </div>
+    <div class="open_layout h100" v-cloak>
         <message></message>
         <modal></modal>
-        <transition name="fade" enter-active-class="animated fadeIn faster" mode="out-in" leave-active-class="animated fadeOut faster">
-            <router-view></router-view>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">{{$t('Menu switch')}}</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand hidden-sm" href="#" >
+                        <img :src="app_url+logo" alt="LOGO" class="img-circle logo">
+                        {{name}}
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li :class="{active:menu.active}" v-for="(menu,index) in tree_menus" v-if="loginMenus(menu)">
+                            <a @click="toUrl(menu.url,$event,menu['is_out_link'])" :href="menu.url || null" target="_blank">
+                                {{$tp(menu.name)}}
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right hidden-sm" v-if="user && user.id">
+                        <user-menu></user-menu>
+                        <li v-if="locales.length>1" class="language">
+                            <a @click="openLanguage">
+                                <language ref="language" :value="language" @change="setLanguage"></language>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right hidden-sm" v-else>
+                        <li :class="{active:menu.active}" v-for="(menu,index) in tree_menus" v-if="!loginMenus(menu)">
+                            <router-link :to="menu.url" v-if="menu.url.indexOf('http')!=0">{{$tp(menu.name)}}</router-link>
+                        </li>
+                        <li v-if="locales.length>1" class="language">
+                            <a @click="openLanguage">
+                                <language ref="language" :value="language" @change="setLanguage"></language>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <transition name="fade" enter-active-class="animated fadeIn faster" mode="out-in"  leave-active-class="animated fadeOut faster">
+            <router-view class="open-content"></router-view>
         </transition>
+        <footer>
+            <div class="container">
+                <ul class="bs-docs-footer-links">
+                    <li>{{$t('Links')}}</li>
+                    <li><a href="https://secure.quantumca.com.cn/" target="_blank">量子认证平台</a></li>
+                    <li><a href="https://laravelacademy.org/" target="_blank">Laravel学院</a></li>
+                    <li><a href="https://gitee.com/light4/light4admin" target="_blank">light4admin</a></li>
+                    <li><a href="https://django-vue-admin.com/" target="_blank">Django-Vue-Admin</a></li>
+                </ul>
+                <p class="pull-right"><a href="#">{{$t('Back to top')}}</a></p>
+                <p style="margin: 0px 0px">
+                    {{$t('Copyright')}}<a>{{name}}</a>
+                    <span class="wangjing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    {{$t('The record number:')}}<a href="http://beian.miit.gov.cn" target="_blank">{{icp}}</a>
+                </p>
+            </div>
+        </footer>
+        <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647;">
+            <i class="fa fa-angle-up"></i>
+        </a>
     </div>
 </template>
 
@@ -17,19 +75,15 @@
     import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
     import Message from 'admin_components/message.vue';
     import Modal from 'admin_components/modal.vue';
+    import userMenu from 'pages_components/userMenu.vue';
     export default {
         components:{
             "message":Message,
             "modal":Modal,
+            "user-menu":userMenu,
             "language":()=>import(/* webpackChunkName: "common_components/language/language.vue" */ 'common_components/language/language.vue'),
         },
         props: {
-        },
-        computed:{
-            ...mapState([
-                'language',
-                'locales'
-            ]),
         },
         methods:{
             ...mapActions({
@@ -41,6 +95,9 @@
                 menuSet:'menu/set',  //设置当前路由,用于菜单选中
                 setLanguage:'setLanguage',
             }),
+            loginMenus(menu){
+                return [66,63].indexOf(menu.id)==-1;
+            },
             openLanguage(){
                 this.$refs['language'].open();
             },
@@ -53,20 +110,109 @@
                 });
             }
         },
+        data(){
+          return {
+              "{lang_path}":'_shared.menus',
+              "{lang_root}":''
+          };
+        },
+        computed:{
+            ...mapState([
+                'icp',
+                'logo',
+                'app_url',
+                'name',
+                'language',
+                'locales'
+            ]),
+            ...mapState('user',{
+                user:state => state.user
+            }),
+            route(){
+                return this.$route.path;
+            },
+            ...mapGetters('menu',[
+                'modules',
+                'navbars',
+                'current_menu',
+                'tree_menus',
+                'no_permission',
+                'module_route'
+            ]),
+
+        },
         created() {
+            //动态加载js文件
+            if(!document.getElementById('bootstrap-js')){
+                let editormdJs = document.createElement('script');
+                editormdJs.id = 'bootstrap-js';
+                editormdJs.type = 'text/javascript';
+                editormdJs.src = 'https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js';
+                document.body.appendChild(editormdJs);
+            }
             this.menuSet({
                 key:'path',
                 path:this.$router.currentRoute.path
             });
             this.getUser();
-        }
+            this.getMenus();
+        },
+        mounted() {
+            setTimeout(()=>{
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+            },500);
+        },
     };
 </script>
 <style scoped>
-    .language{
-        padding: 5px;
-        position: fixed;
-        right: 5px;
-        z-index: 10;
+    @import url('/dist/css/site.min.css');
+    .navbar-fixed-top{
+        position:relative;
+    }
+    .navbar{
+        margin-bottom: 0px;
+    }
+    @media screen and (min-width: 768px) {
+        .open-content{
+            min-height: 100%;
+        }
+    }
+    .logo{
+        height: 30px;
+        display: inline-block;
+        font-size: 20px;
+        border-radius:unset;
+    }
+    footer{
+      /*  position: fixed;*/
+        left: 0;
+        bottom: 0px;
+        right: 0;
+        margin: auto;
+        background: #101010;
+        padding-top: 10px;
+        color: white;
+    }
+    body{
+        padding-top: 0px;
+    }
+    @media (min-width: 768px) {
+        .navbar-brand{
+            margin-top: 5px;
+        }
+    }
+    .navbar-toggle{
+        margin-top: 5px;
+        position: relative;
+    }
+    .bs-docs-footer-links{
+        padding-left: 0px;
+        margin-top: 10px;
+    }
+    .bs-docs-footer-links li {
+        display: inline-block;
+    }
+    .bs-docs-footer-links li+li{
+        margin-left: 15px;
     }
 </style>
