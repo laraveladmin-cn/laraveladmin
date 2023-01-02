@@ -55,7 +55,7 @@ export default {
             s = '',
             toFixedFix = function (n, prec) {
                 var k = Math.pow(10, prec);
-                return '' + Math.ceil(n * k) / k;
+                return '' + Math.round(n * k) / k;
             };
 
         s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
