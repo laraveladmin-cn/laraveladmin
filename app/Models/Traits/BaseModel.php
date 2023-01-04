@@ -76,7 +76,7 @@ trait BaseModel{
                 return ;
             }
             //值处理
-            if($item['exp']=='like'){
+            if($item['exp']=='like' || $item['exp']=='like_index'){
                 $val = /*'%'.*/preg_replace('/([_%\'"])/','\\\$1', $item['val']).'%';
             }else if($item['exp']=='between'){
                 $val = is_string($item['val']) ? explode(' - ',$item['val']):$item['val'];
@@ -187,6 +187,10 @@ trait BaseModel{
             $query->$where(function ($q)use($key,$exp,$val){
                 $q->where($key,$exp,$val)->orWhere($key,$exp,'%'.$val); //模糊搜索命中索引
             });
+        }elseif($exp=='like_index'){
+            $exps[] = 'where';
+            $where = Str::camel(implode('_',$exps));
+            $query->$where($key,'like',$val);
         }elseif($exp=='&' && is_array($val)){
             if(!$val){
                 $val = [0];
