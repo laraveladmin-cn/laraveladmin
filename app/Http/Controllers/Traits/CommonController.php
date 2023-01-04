@@ -33,6 +33,12 @@ trait CommonController{
     ];
 
     /**
+     * 筛选条件别名
+     * @var array
+     */
+    public $sizerAs=[];
+
+    /**
      * 允许更多可排序字段
      * @var array
      */
@@ -366,7 +372,21 @@ trait CommonController{
         }else{
             $options['order'] = $this->orderDefault;
         }
-        LifeData::set(['_condition'=>['where'=>$where,'order'=>$options['order']]]);
+        LifeData::set([
+            '_condition'=>[
+                'where'=>$where,
+                'order'=>$options['order']
+            ]
+        ]);
+        if($this->sizerAs){
+            $options['where'] = collect($options['where'])->map(function ($item){
+                $key = $item['key'];
+                if($really_key = Arr::get($this->sizerAs,$key)){
+                    $item['key'] = $really_key;
+                }
+                return $item;
+            })->toArray();
+        }
         return $options;
     }
 
