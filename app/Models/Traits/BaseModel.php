@@ -333,6 +333,12 @@ trait BaseModel{
             }
             if($decode){
                 $maps = collect($maps)->map(function ($map){
+                    $map = collect($map)->map(function ($val){
+                        if(is_numeric($val)){
+                            $val = (string)$val;
+                        }
+                        return $val;
+                    })->toArray();
                     return array_flip($map);
                 })->toArray();
             }
