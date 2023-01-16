@@ -84,7 +84,7 @@ trait BaseModel{
     /**
      * 条件筛选
      */
-    public function scopeOptionsWhere($query,array $where=[]){
+    public function scopeOptionsWhere($query,$where=[]){
         $where = collect($where)->map(function ($item,$index){
             $key = $copy_key = $item['key'];
             if(!Str::contains($key,'|') && Str::contains($key,'.')){
