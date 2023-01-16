@@ -23,6 +23,25 @@ trait BaseModel{
         return $date->format('Y-m-d H:i:s');
     }
 
+    /**
+     * 筛选条件转成一级
+     * @param array $items
+     * @param array $result
+     * @param string $prefix
+     * @return array
+     */
+    protected function whereLevelOne(array $items,&$result=[],$prefix=''){
+        foreach ($items as $key=>$item){
+            if(!is_numeric($key)){
+                $this->whereLevelOne($item,$result,$key.'.');
+            }else{
+                $item['key'] = $prefix.$item['key'];
+                $result[] = $item;
+            }
+        }
+        return $result;
+    }
+
 
     /**
      * 批量替换插入
@@ -63,15 +82,75 @@ trait BaseModel{
     }
 
     /**
-     * 多条件筛选
-     * @param $query
-     * @param array $options
-     * @return mixed
+     * 条件筛选
      */
-    public function scopeOptions($query,array $options=[])
-    {
-        //条件筛选
-        collect($options['where'])->map(function($item) use(&$query){
+    public function scopeOptionsWhere($query,array $where=[]){
+        $where = collect($where)->map(function ($item,$index){
+            $key = $copy_key = $item['key'];
+            if(!Str::contains($key,'|') && Str::contains($key,'.')){
+                $arr = collect(explode('.',$key));
+                $copy_key = $arr->pop();
+                $item['_relationship'] = $arr->implode('.');
+            }elseif (Str::contains($key,'|') && Str::contains($key,'.')){
+                //拆解|
+                $keys = explode('|',$key);
+                $arr_keys= [];
+                collect($keys)->map(function ($key)use(&$arr_keys){
+                    $arr = collect(explode('.',$key));
+                    $arr->pop();
+                    $key1 = $arr->implode('.');
+                    if(!isset($arr_keys[$key1])){
+                        $arr_keys[$key1] = 1;
+                    }
+                });
+                $_relationship = '';
+                collect($arr_keys)
+                    ->keys()
+                    ->sort()
+                    ->values()
+                    ->each(function ($key,$i)use(&$_relationship){
+                        if($i==0){
+                            $_relationship = $key;
+                        }elseif(!Str::startsWith($key,$_relationship)){
+                            $_relationship = '';
+                            return false;
+                        }
+                    });
+                $item['_relationship'] = $_relationship;
+                if($_relationship){
+                    $copy_key = collect($keys)->map(function ($key)use($_relationship){
+                        return Str::replaceFirst($_relationship.'.','',$key);
+                    })->implode('|');
+                }
+            }else{
+                $item['_relationship'] = '';
+            }
+            $item['_order'] = $item['_relationship'].'_'.$index;
+            $item['key'] = $copy_key;
+            return $item;
+        });
+        //本表筛选项
+        $use_where = collect($where)->filter(function ($item){
+            return !$item['_relationship'];
+        })->values()
+            ->map(function ($item){
+                return collect($item)->only(['key','exp','val'])->toArray();
+            });
+        //关系表筛选项
+        $use_relationship_where = [];
+        $relationship_where = collect($where)->filter(function ($item){
+            return $item['_relationship'];
+        })->values()
+            ->sortBy('_order')
+            ->values()
+            ->groupBy('_relationship')
+            ->sortKeys();
+        $relationship_where->each(function ($items,$key)use(&$use_relationship_where){
+            Arr::set($use_relationship_where,$key,$items->map(function ($item){
+                return collect($item)->only(['key','exp','val'])->toArray();
+            })->toArray());
+        });
+        $use_where->map(function($item) use(&$query){
             if(is_null($item) || $item['val']===''){
                 return ;
             }
@@ -111,6 +190,28 @@ trait BaseModel{
                 $this->relationWhere($query,$item['key'],$exp,$val);
             }
         });
+        collect($use_relationship_where)->each(function ($wheres,$key)use(&$query){
+            $query->whereHas($key,function ($q)use($wheres){
+                //再将关系层级数据转成一级
+                $items = $this->whereLevelOne($wheres);
+                $q->optionsWhere($items);
+            });
+        });
+        return $query;
+    }
+
+    /**
+     * 多条件筛选
+     * @param $query
+     * @param array $options
+     * @return mixed
+     */
+    public function scopeOptions($query,array $options=[])
+    {
+        //条件筛选
+        if(isset($options['where'])){
+            $query->optionsWhere($options['where']);
+        }
         //排序
         isset($options['order']) AND collect($options['order'])->each(function($item,$key) use (&$query){
             $item and $query->orderBy($key,$item);
@@ -185,7 +286,7 @@ trait BaseModel{
             $exps[] = 'where';
             $where = Str::camel(implode('_',$exps));
             $query->$where(function ($q)use($key,$exp,$val){
-                $q->where($key,$exp,$val)->orWhere($key,$exp,'%'.$val); //模糊搜索命中索引
+                $q->where($key,$exp,'%'.$val); //模糊搜索命中索引
             });
         }elseif($exp=='like_index'){
             $exps[] = 'where';
