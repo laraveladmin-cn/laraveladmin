@@ -33,7 +33,7 @@ trait BaseModel{
     protected function whereLevelOne(array $items,&$result=[],$prefix=''){
         foreach ($items as $key=>$item){
             if(!is_numeric($key)){
-                $this->whereLevelOne($item,$result,$key.'.');
+                $this->whereLevelOne($item,$result,$prefix.$key.'.');
             }else{
                 $item['key'] = $prefix.$item['key'];
                 $result[] = $item;
