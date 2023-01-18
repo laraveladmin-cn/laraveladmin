@@ -35,7 +35,14 @@ trait BaseModel{
             if(!is_numeric($key)){
                 $this->whereLevelOne($item,$result,$prefix.$key.'.');
             }else{
-                $item['key'] = $prefix.$item['key'];
+                if(Str::contains($item['key'],'|')){
+                    $item['key'] = collect(explode('|',$item['key']))->map(function ($value)use($prefix){
+                        return $prefix.$value;
+                    })->implode('|');
+                }else{
+                    $item['key'] = $prefix.$item['key'];
+                }
+
                 $result[] = $item;
             }
         }
@@ -285,9 +292,7 @@ trait BaseModel{
         }elseif($exp=='like'){
             $exps[] = 'where';
             $where = Str::camel(implode('_',$exps));
-            $query->$where(function ($q)use($key,$exp,$val){
-                $q->where($key,$exp,'%'.$val); //模糊搜索命中索引
-            });
+            $query->$where($key,$exp,'%'.$val);
         }elseif($exp=='like_index'){
             $exps[] = 'where';
             $where = Str::camel(implode('_',$exps));
