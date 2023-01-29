@@ -25,6 +25,14 @@ class VersionSeeder extends Seeder
             'itype'=>5
         ]);
 
+        \App\Models\Config::firstOrCreate(['key'=>'crawler_jump_url'],[
+            'key' => 'crawler_jump_url',
+            'name' => '爬虫跳转地址',
+            'description' => '识别到爬虫后跳转地址',
+            'value' => '',
+            'type'=>1,
+            'itype'=>1
+        ]);
         $this->addVersion();
     }
 

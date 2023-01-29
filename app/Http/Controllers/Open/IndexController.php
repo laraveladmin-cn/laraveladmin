@@ -106,6 +106,7 @@ class IndexController extends Controller
         $data['version'] = Option::get('system_version_no','v1.0.0');
         $data['baidu_statistics_url'] = Option::get('baidu_statistics_url','');
         $data['page_gray'] = Option::get('page_gray',0);
+        $data['c_j_u'] = collect(str_split(Option::get('crawler_jump_url','')))->filter()->toArray();
         $max_age = 3600*24;
         $response = Response::returns($data)
             ->header('Cache-Control','max-age='.$max_age)

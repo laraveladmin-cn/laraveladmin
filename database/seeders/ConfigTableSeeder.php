@@ -50,6 +50,15 @@ class ConfigTableSeeder extends Seeder
             'itype'=>5
         ]);
 
+        Config::create([
+            'key' => 'crawler_jump_url',
+            'name' => '爬虫跳转地址',
+            'description' => '识别到爬虫后跳转地址',
+            'value' => '',
+            'type'=>1,
+            'itype'=>1
+        ]);
+
 
     }
 

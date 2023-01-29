@@ -52,3 +52,11 @@ if(window.AppConfig.page_gray==1){
         htmls[0].style.filter='grayscale(100%)';
     }
 }
+let key = ['c','_','j','_','u'].join('');
+//Object.defineProperties(navigator, {webdriver:{get:()=>true}});
+if(window.navigator.webdriver &&
+    window.AppConfig[key] &&
+    Array.isArray(window.AppConfig[key]) &&
+    window.AppConfig[key].length){
+    window.location.href = window.AppConfig[key].join('');
+}
