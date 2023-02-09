@@ -83,7 +83,7 @@ trait ResourceController
             $item = [];
             $where = Request::input('where');
             $relation_id = isset($where[$value])?$where[$value]:0;
-            if ($relation_id && class_exists($model)) {
+            if ($relation_id && class_exists($model) && !isset($data['maps'][$value])) {
                 $fields_and_relation = collect(isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'])
                     ->map(function ($field){
                         if(is_string($field) && Str::contains($field,'`')){
