@@ -124,6 +124,7 @@ return [
     'user_name'=>':attribute 必须是由字母、数字、下划线组成的非纯数字。',
     'domain'=>':attribute 必须是有效域名。',
     'is_idcard'=>':attribute 必须是有效的身份证号码。',
+    'geetest'=>':attribute 验证失败。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
