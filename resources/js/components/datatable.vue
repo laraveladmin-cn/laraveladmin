@@ -31,7 +31,7 @@
                                 <button class="btn btn-success"
                                         v-show="btnRefresh"
                                         type="button"
-                                        @click="refresh">
+                                        @click="refresh(false)">
                                     <i class="fa fa-refresh"></i> {{$t("Refresh")}}
                                 </button>
                             </slot>
@@ -72,7 +72,7 @@
                             </button>
                             <slot name="add_btn" :data="data"></slot>
                         </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12 sizer-item pull-right hidden-xs hidden-sm" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
+                        <div class="col-md-6 col-sm-12 col-xs-12 sizer-item pull-right hidden-xs hidden-sm" v-if="!options.delSizerKeyword" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
                             <div class="box-tools">
                                 <div class="input-group">
                                     <div class="input-group-btn" v-if="options.keywordGroup">
@@ -120,7 +120,7 @@
                     <div class="collapse sizer_more in">
                         <slot name="sizer-more" :data="data" :options="data.options" :where="data.options.where" :maps="_maps" :order="data.options.order" :search="search" :trans-field="transField">
                         </slot>
-                        <div class="row hidden-md hidden-lg">
+                        <div class="row hidden-md hidden-lg" v-if="!options.delSizerKeyword">
                             <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-5':options.keywordGroup,'col-lg-4':!options.keywordGroup}">
                                 <div class="box-tools">
                                     <div class="input-group">
