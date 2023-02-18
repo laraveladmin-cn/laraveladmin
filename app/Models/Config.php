@@ -45,7 +45,8 @@ class Config extends Model
             '3'=>'markdown',
             '4'=>'json',
             '5'=>'switch',
-            '6'=>'number'
+            '6'=>'number',
+            '7'=>'upload'
         ]
     ];
 

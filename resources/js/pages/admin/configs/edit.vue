@@ -103,6 +103,18 @@
                                             :step="1">
                                         </el-input-number>
                                     </div>
+                                    <div class="edit-item-content" v-else-if="props.data.row['itype']==7">
+                                        <upload v-model="props.data.row['value']"
+                                                v-if="props.data.row['id']"
+                                                v-bind="props.data.row['options']||{}"
+                                                :disabled="!props.url">
+                                        </upload>
+                                        <upload v-model="images"
+                                                v-if="!props.data.row['id']"
+                                                v-bind="props.data.row['options']||{}"
+                                                :disabled="!props.url">
+                                        </upload>
+                                    </div>
                                 </template>
                             </edit-item>
                         </div>
@@ -134,6 +146,7 @@
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}
                 },
+                images:[]
             };
         },
         computed:{
