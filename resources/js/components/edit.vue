@@ -215,6 +215,7 @@
                 this.error = {};
                 this.data = copyObj(this.back_data);
                 this.validation.reset();
+                this.disabledSubmit = false;
                 if(typeof this.options.resetCallback=="function"){
                     this.options.resetCallback();
                 }
