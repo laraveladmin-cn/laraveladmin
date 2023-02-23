@@ -134,7 +134,8 @@
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             "editor-md": ()=>import(/* webpackChunkName: "common_components/editorMd.vue" */ 'common_components/editorMd.vue'),
             "el-switch": ()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
-            "json-edit":()=>import(/* webpackChunkName: "common_components/jsonEdit.vue" */ 'common_components/jsonEdit.vue')
+            "json-edit":()=>import(/* webpackChunkName: "common_components/jsonEdit.vue" */ 'common_components/jsonEdit.vue'),
+            "upload":()=>import(/* webpackChunkName: "common_components/upload.vue" */ 'common_components/upload.vue'),
         },
         props: {
         },
