@@ -103,7 +103,7 @@
                 getUser:'user/getUser', //获取用户数据
             }),
             placeholderUsername(){
-                return this.$tp('Please enter your account/email/mobile phone number');
+                return this.$tp('Please enter the user name');
             },
             placeholderPassword(){
                 return this.$t('enter',{name:this.$t('password')});

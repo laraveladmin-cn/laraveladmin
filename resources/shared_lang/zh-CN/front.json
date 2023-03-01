@@ -420,6 +420,7 @@
             "User binding": "用户绑定",
             "Loading in": "登录中...",
             "Please enter your account/email/mobile phone number": "请输入账号/邮箱/手机号码",
+            "Please enter the user name": "请输入用户名",
             "Account": "账号",
             "Password": "密码",
             "{_field_} must be verified": "{_field_} 必须验证",
