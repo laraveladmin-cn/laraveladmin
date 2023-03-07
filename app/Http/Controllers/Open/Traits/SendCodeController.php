@@ -60,10 +60,18 @@ trait SendCodeController
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function caseType(){
-        if(app('request')->input('email')){
+        $priority_use = config('laravel_admin.communication_mode.priority_use','email');
+        if($priority_use=='mobile_phone'){
+            if(app('request')->input('mobile_phone')){
+                return 'mobile_phone';
+            };
             return 'email';
-        };
-        return 'mobile_phone';
+        }else{
+            if(app('request')->input('email')){
+                return 'email';
+            };
+            return 'mobile_phone';
+        }
     }
 
     /**
@@ -74,7 +82,14 @@ trait SendCodeController
      */
     public function send(Request $request){
         $type = $this->caseType();
-        return $type=='mobile_phone'?  $this->sendSMS($request):$this->sendEmail($request,$type=='uname');
+        if($type=='mobile_phone'){
+            return $this->sendSMS($request);
+        }elseif ($type=='email'){
+            $this->sendEmail($request);
+        }else{
+            $priority_use = config('laravel_admin.communication_mode.priority_use','email');
+            return $priority_use=='mobile_phone'?  $this->sendSMS($request,$type=='uname'):$this->sendEmail($request,$type=='uname');
+        }
     }
 
     /**
@@ -83,6 +98,8 @@ trait SendCodeController
     protected function getCode(Request $request,$username){
         //生成短信验证码并存放
         $code = $this->generate();
+        $codes = SessionService::get(config($this->send_code_key),[]);
+        //$codes = [];
         $codes['time'] = time();
         $codes['values'][] = $code . '|' . $username;
         $codes['verify_num'] = 0; //验证次数
@@ -94,7 +111,7 @@ trait SendCodeController
      * 获取存储的验证码信息
      */
     protected function getStorageCode(){
-       return SessionService::get(config($this->send_code_key), []);
+        return SessionService::get(config($this->send_code_key), []);
     }
 
 
@@ -108,8 +125,7 @@ trait SendCodeController
         return $validate;
     }
 
-    protected function getSendMessage($request){
-        $email = $request->input($this->email_key);
+    protected function getSendMessage($request,$email){
         $user = User::where('email',$email)->first();
         $code = $this->getCode($request,$email);
         return new SendMessage(trans('Retrieve password'),'emails.forgot_password',['user'=>$user, 'code'=>$code]);
@@ -118,8 +134,8 @@ trait SendCodeController
     /**
      * 发送忘记密码验证邮件
      */
-    public function sendEmail(Request $request,$uname=false){
-        if($response = $this->sendValidate($request,'email',$uname)){
+    public function sendEmail(Request $request,$uname=false,$force=false){
+        if($response = $this->sendValidate($request,'email',$uname,$force)){
             return $response;
         };
         $email = $request->input($this->email_key);
@@ -131,7 +147,7 @@ trait SendCodeController
                 ]]);
             }
         }
-        Mail::to($email)->queue($this->getSendMessage($request)->onQueue('send_message'));
+        Mail::to($email)->queue($this->getSendMessage($request,$email)->onQueue('send_message'));
         return Response::returns([
             'title' => trans('Email is being sent...'),//'邮件正在发送...',
             'countdown' => config($this->forbidden)
@@ -141,22 +157,31 @@ trait SendCodeController
     /**
      * 发送忘记密码验证短信
      */
-    public function sendSMS(Request $request,$uname=false){
-        if($response = $this->sendValidate($request,'mobile_phone',$uname)){
+    public function sendSMS(Request $request,$uname=false,$force=false){
+        if($response = $this->sendValidate($request,'mobile_phone',$uname,$force)){
             return $response;
         };
         //短信内容
         $mobile_phone = $request->input($this->sms_key);
+        if($uname){
+            $mobile_phone = User::where('uname',$mobile_phone)->value('mobile_phone');
+            if(!$mobile_phone){
+                throw ValidationException::withMessages(['username'=>[
+                    trans('The mobile phone is not set!')//'电子邮箱未设置'
+                ]]);
+            }
+        }
+        $code = $this->getCode($request,$mobile_phone);
         $sms = SMS::setRecNum($mobile_phone)
-            ->setSmsParam(['code' => $this->getCode($request,$mobile_phone)])
+            ->setSmsParam(['code' => $code])
             ->setSmsTemplateCode(config($this->sms_template));
-
         //异步队列发送短信
         $job = (new SendSms($sms))->onQueue('send_message');
         $this->dispatch($job);
         return Response::returns([
             'title' => trans('Text is being sent...'),//'短信正在发送...',
-            'countdown' => config($this->forbidden)
+            'countdown' => config($this->forbidden),
+            //'code'=> SessionService::get(config($this->send_code_key))
         ]);
     }
 
@@ -167,7 +192,7 @@ trait SendCodeController
      * @param string $type
      * @return mixed
      */
-    protected function sendValidate(Request $request,$type='email',$uname=false){
+    protected function sendValidate(Request $request,$type='email',$uname=false,$force=false){
         $validate = $this->initValidate($type,$uname);
         //验证码及上传验证码发送时间
         $codes = $this->getStorageCode();
@@ -178,13 +203,13 @@ trait SendCodeController
                 'message' => $type=='email'?trans('Refuse to send email!'):trans('Refusing to send text messages!'),//'拒绝发送'.Arr::get($this->map,$type),
                 'errors' => [
                     $type.'_code' => [
-                            trans('You are operating too often. Please try again later!')//'你操作太频繁,请稍后再试'
+                        trans('You are operating too often. Please try again later!')//'你操作太频繁,请稍后再试'
                     ]
                 ]
             ], 422);
         }
         //正在发送短信验证码
-        if ($codes && $codes['time'] + config($this->forbidden) > $now) {
+        if ($codes && $codes['time'] + config($this->forbidden) > $now && !$force) {
             return Response::returns([
                 'title' => $type=='email'?trans('Email is being sent...'):trans('Text is being sent...'),
                 'countdown' => $codes['time'] + config($this->forbidden) - $now

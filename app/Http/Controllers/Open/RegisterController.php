@@ -67,10 +67,18 @@ class RegisterController extends Controller
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function caseType(){
-        if(app('request')->input('email')){
+        $priority_use = config('laravel_admin.communication_mode.priority_use','email');
+        if($priority_use=='mobile_phone'){
+            if(app('request')->input('mobile_phone')){
+                return 'mobile_phone';
+            };
             return 'email';
-        };
-        return 'mobile_phone';
+        }else{
+            if(app('request')->input('email')){
+                return 'email';
+            };
+            return 'mobile_phone';
+        }
     }
 
     protected function initValidate($type,$uname=false){
@@ -80,8 +88,8 @@ class RegisterController extends Controller
         ];
     }
 
-    protected function getSendMessage($request){
-        $code = $this->getCode($request,$request->input($this->email_key));
+    protected function getSendMessage($request,$email){
+        $code = $this->getCode($request,$email);
         return new SendMessage(trans('User registration'),'emails.register',['code'=>$code]);
     }
 

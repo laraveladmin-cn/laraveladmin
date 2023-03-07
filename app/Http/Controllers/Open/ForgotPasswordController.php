@@ -54,12 +54,23 @@ class ForgotPasswordController extends Controller
         //判断发送类型
         $validator = app('validator');
         $username = $request->input('username');
-        if($validator->make(['username' => $username],['username' => 'email'])->passes()){
-            $type = 'email';
-        }elseif ($validator->make(['username' => $username],['username' => 'mobile_phone'])->passes()){
-            $type = 'mobile_phone';
+        $priority_use = config('laravel_admin.communication_mode.priority_use','email');
+        if($priority_use=='mobile_phone'){
+            if ($validator->make(['username' => $username],['username' => 'mobile_phone'])->passes()){
+                $type = 'mobile_phone';
+            }elseif($validator->make(['username' => $username],['username' => 'email'])->passes()){
+                $type = 'email';
+            }else{
+                $type = 'uname';
+            }
         }else{
-            $type = 'uname';
+            if($validator->make(['username' => $username],['username' => 'email'])->passes()){
+                $type = 'email';
+            }elseif ($validator->make(['username' => $username],['username' => 'mobile_phone'])->passes()){
+                $type = 'mobile_phone';
+            }else{
+                $type = 'uname';
+            }
         }
         return $type;
     }
@@ -93,8 +104,12 @@ class ForgotPasswordController extends Controller
         $validate = $this->getValidateRule($request,$model); //验证规则
         $user = User::where($model,$request->input('username'))->first();
         if($model=='uname' && $user){
-            $model = $user['email'] ? 'email':'mobile_phone';
-            //$model = $user['mobile_phone'] ? 'mobile_phone':'email';
+            $priority_use = config('laravel_admin.communication_mode.priority_use','email');
+            if($priority_use=='mobile_phone'){
+                $model = $user['mobile_phone'] ? 'mobile_phone':'email';
+            }else{
+                $model = $user['email'] ? 'email':'mobile_phone';
+            }
             $request->offsetSet($model,$user[$model]);
         }
         $model_name = Arr::get($this->map,$model); //模式名称

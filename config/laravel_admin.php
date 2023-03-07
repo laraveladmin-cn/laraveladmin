@@ -16,7 +16,8 @@ return [
         'register'=>[ //注册用户通讯方式
             'email'=>'Email', //电子邮箱
             'mobile_phone'=>'Mobile Phone'//手机号
-        ]
+        ],
+        'priority_use'=>'mobile_phone' //优先使用什么方式发送验证消息
     ],
     'verify'=>[
         'type'=>env('APP_VERIFY_TYPE','geetest'), //登录注册验证类型
