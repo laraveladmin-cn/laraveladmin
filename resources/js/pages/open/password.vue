@@ -12,9 +12,11 @@
                             <captcha v-if="verify['type']=='captcha'" :url="verify['dataUrl']" v-model="verifyCode" :data="verify['data']"></captcha>
                         </form-item>
                         <form-item v-model="message_code" :options="{key:'message_code',name:$tp('Message authentication code'),rules:'required|length:6|integer',icon:'glyphicon-envelope',placeholder:$tp('Enter the received message verification code')}">
-                            <label class="control-label pull-right" v-show="count_down>0">
-                                <span><span class="count-down">{{count_down}}</span>{{$tp('seconds')}}</span>
-                            </label>
+                            <template slot="error" slot-scope="props">
+                                <label class="control-label pull-right" v-show="count_down>0">
+                                    <span><span class="count-down">{{count_down}}</span>{{$tp('seconds')}}</span>
+                                </label>
+                            </template>
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-primary btn-block btn-flat" :disabled="sendActive" @click="send">

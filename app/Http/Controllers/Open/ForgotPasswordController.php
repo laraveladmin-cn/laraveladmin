@@ -94,6 +94,8 @@ class ForgotPasswordController extends Controller
         $user = User::where($model,$request->input('username'))->first();
         if($model=='uname' && $user){
             $model = $user['email'] ? 'email':'mobile_phone';
+            //$model = $user['mobile_phone'] ? 'mobile_phone':'email';
+            $request->offsetSet($model,$user[$model]);
         }
         $model_name = Arr::get($this->map,$model); //模式名称
         //验证
@@ -106,7 +108,7 @@ class ForgotPasswordController extends Controller
         }
         //最后验证短信码
         $validator = Validator::make($request->all(),[
-            'message_code' => 'required|send_code:username,'.config($this->send_code_key)
+            'message_code' => 'required|send_code:'.$model.','.config($this->send_code_key)
         ], [
             'message_code.send_code' => $model_name=='邮箱'?trans('Email verification code verification failed!'):trans('SMS verification code verification failed!')
         ]);
