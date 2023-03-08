@@ -47,6 +47,7 @@ let AppConfig = {
     google_config:null,
     def_avatar:'/dist/img/user_default_180.gif',
     page_gray:0,//页面灰色
+    wechat_appid:'',
     ...(window.AppConfig || {})
 };
 AppConfig.language = (localStorage.getItem('language') || AppConfig.default_language).replace(/\_/g,'-');

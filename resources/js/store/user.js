@@ -53,18 +53,24 @@ export default {
         logout({ dispatch,state, commit, rootState },data){
             let callback = ()=>{
                 //清空用户数据
-                commit({
-                    type: 'set',
-                    key:'user',
-                    user: {}
-                });
                 setCookie('Authorization','',0);
+                setCookie('Open-Id','',0);
                 dispatch('refreshToken',null,{root:true}); //刷新token
                 if(data && data.force_logout===true){
                     commit('set',data.data,{root:true});
                 }
+                setTimeout(()=>{
+                    commit({
+                        type: 'set',
+                        key:'user',
+                        user: {}
+                    });
+                },100);
             };
-            axios.post(rootState['web_url']+'/open/logout',{_token:rootState._token}).then(function (response) {
+            axios.post(rootState['web_url']+'/open/logout',{
+                _token:rootState._token,
+                is_wechat:navigator.userAgent.toLowerCase().match(/MicroMessenger/i)=="micromessenger"
+            }).then(function (response) {
                 callback();
             }).catch(function (error) {
                 if(error.response.status==302){

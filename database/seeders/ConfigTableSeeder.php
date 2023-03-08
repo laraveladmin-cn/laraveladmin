@@ -59,6 +59,19 @@ class ConfigTableSeeder extends Seeder
             'itype'=>1
         ]);
 
+        Config::create([
+            'key' => 'wxconfig_official',
+            'name' => '微信公众号分享配置',
+            'description' => '微信公众号分享显示配置',
+            'type'=>2,
+            'itype'=>4,
+            'value' => [
+                'title'=>config('app.name'),
+                'desc'=>config('app.name'),
+                'imgUrl'=>config('app.url').'/dist/img/logo1.png'
+            ]
+        ]);
+
 
     }
 

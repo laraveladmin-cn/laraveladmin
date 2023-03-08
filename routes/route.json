@@ -653,6 +653,20 @@
             "group": "open",
             "action": "QiNiuController@getToken",
             "_id": 92
+        },
+        {
+            "id": 93,
+            "name": "获取微信公众号配置",
+            "icons": "fa-wechat",
+            "description": "获取微信公众号配置",
+            "url": "/open/wx-config",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "group": "open",
+            "action": "IndexController@wxConfig",
+            "_id": 93
         }
     ],
     "resource": [

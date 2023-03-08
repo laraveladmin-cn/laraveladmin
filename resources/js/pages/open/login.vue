@@ -98,6 +98,15 @@
             }
         },
         methods:{
+            //微信公众号登录
+            weChatLogin(){
+                let href = window.location.href;
+                if(href.indexOf('?')==-1){
+                    href = href+'?';
+                }
+                href = href+'&type=official';
+                window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+this.wechat_appid+'&redirect_uri='+encodeURIComponent(href)+'&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
+            },
             otherLoginUrl(url){
                 let str_url = this.web_url+url;
                 if(typeof this.$route.query['back_url']!="undefined"){ //跳转url
@@ -115,8 +124,12 @@
             loginSucces(res){
                 this.refreshToken();
                 this.verifyCode = '';
+                if(res.status==200 && res.data.open_id){
+                    setCookie('Open-Id',res.data.open_id,365*10);
+                }
                 if(res.status==200 && res.data.token){
                     setCookie('Authorization','Bearer '+res.data.token,res.data.lifetime/60/24);
+                    this.getUser();
                 }else if(res.data.errors){
                     let errors = catchError({response:res});
                     this.errorFun(errors);
@@ -189,7 +202,8 @@
 
             },
             ...mapActions({
-                refreshToken: 'refreshToken'
+                refreshToken: 'refreshToken',
+                getUser: 'user/getUser',
             }),
             //全局数据设置,设置弹窗提示
             ...mapMutations({
@@ -204,8 +218,14 @@
                     if(response.data){
                         this.setData(response.data);
                         let query = this.$router.currentRoute.query;
-                        if(query.type && collect(this.otherLogin).pluck('type').contains(query.type)){
+                        let ua = navigator.userAgent.toLowerCase();
+                        if(query.type && collect(this.otherLogin).pluck('type').push('official').contains(query.type)){ //回调回来提交自动登录
                             this.otherLoginCallback(query);
+                        }else if(this.wechat_appid &&
+                            ua.match(/MicroMessenger/i)=="micromessenger" &&
+                            !query.type
+                        ){ //微信公众号自动跳转登录
+                            this.weChatLogin();
                         }
                     }
                     this.loading = false;
@@ -248,7 +268,8 @@
                 }).catch( (error) =>{
                     this.loading = false;
                 });
-            }
+            },
+
         },
         computed:{
             validation(){
@@ -259,7 +280,7 @@
                 let other_col = Math.ceil(12/count);
                 return other_col<2?2:other_col;
             },
-            ...mapState(['_token','verify','use_url','web_url','theme']),
+            ...mapState(['_token','verify','use_url','web_url','theme','wechat_appid']),
             loaded(){
                 return !this.loading;
             }

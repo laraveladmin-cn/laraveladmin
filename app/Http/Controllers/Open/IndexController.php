@@ -9,11 +9,13 @@ use App\Models\Menu;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Overtrue\LaravelWeChat\Facade as EasyWeChat;
 
 class IndexController extends Controller
 {
@@ -107,11 +109,56 @@ class IndexController extends Controller
         $data['baidu_statistics_url'] = Option::get('baidu_statistics_url','');
         $data['page_gray'] = Option::get('page_gray',0);
         $data['c_j_u'] = collect(str_split(Option::get('crawler_jump_url','')))->filter()->toArray();
+        $data['wechat_appid'] = config('wechat.official_account.default.app_id','');
         $max_age = 3600*24;
         $response = Response::returns($data)
             ->header('Cache-Control','max-age='.$max_age)
             ->header('Expires',gmdate('D, d M Y H:i:s ',time()+$max_age).'GMT');
         return $this->addClientId($response,$data['client_id']);
+    }
+
+    /**
+     * 微信配置
+     */
+    public function wxConfig()
+    {
+        $request = Request::instance();
+        if(!isset($_SERVER['HTTP_HOST'])){
+            $_SERVER['HTTP_HOST']=$request->getHttpHost();
+        }
+        if(!isset($_SERVER['REQUEST_URI'])){
+            $_SERVER['REQUEST_URI']=$request->getRequestUri();
+        }
+        $officialAccount = EasyWeChat::officialAccount(); // 公众号
+        $sdk = $officialAccount->jssdk;
+        if ($url = $request->header('Referer')?:config('app.url')) {
+            $url = explode('#', $url)[0];
+            $sdk->setUrl($url);
+        }
+        $wxconfig_official = Option::get('wxconfig_official');
+        $wxconfig_official = $wxconfig_official ? $wxconfig_official : [
+            'title' => config('app.name'),
+            'desc' => config('app.name'),
+            'imgUrl' => config('app.url').'/dist/img/logo1.png'
+        ];
+        try {
+            $data['wxconfig'] = $sdk->buildConfig([
+                'updateAppMessageShareData',
+                'updateTimelineShareData',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone',
+                'chooseWXPay'],  !!config('app.debug'), false, false);
+        } catch (\Exception $e) {
+            $data['wxconfig'] = [];
+            $data['wxconfig_error'] = $e->getMessage();
+            Log::channel('daily')->error($e->getMessage());
+        }
+        $wxconfig_official['link'] = $url;
+        $data['show'] = $wxconfig_official;
+        return $data;
     }
 
     /**

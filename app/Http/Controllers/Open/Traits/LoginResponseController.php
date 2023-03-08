@@ -34,7 +34,7 @@ trait LoginResponseController
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    protected function sendLoginResponse(Request $request)
+    protected function sendLoginResponse(Request $request,$open_id='')
     {
         LifeData::offsetUnset('_menus_main');
         //用户数据记录
@@ -83,11 +83,19 @@ trait LoginResponseController
         }
         $token = $user->createToken('apiToken',$remember?['remember']:['*'])->plainTextToken;
         $domain = config('session.domain');
-        return Response::returns([
+        $data = [
             'token'=>$token,
             'redirect_url' => $redirect,
-            'lifetime'=>$lifetime
-        ],200)->cookie('Authorization','Bearer '.$token,$lifetime,'/',$domain,null,false);
+            'lifetime'=>$lifetime,
+        ];
+        if($open_id){
+            $data['open_id'] = $open_id;
+        }
+        $res =  Response::returns($data,200)->cookie('Authorization','Bearer '.$token,$lifetime,'/',$domain,null,false);
+        if($open_id){
+            $res->cookie('Open-Id',$open_id,60*24*365*10,'/',$domain,null,false);
+        }
+        return $res;
     }
 
     /**

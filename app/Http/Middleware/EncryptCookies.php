@@ -14,7 +14,8 @@ class EncryptCookies extends Middleware
         $this->except = [
             'Authorization',
             config('laravel_admin.client_id_key'),
-            'Language'
+            'Language',
+            'Open-Id'
         ];
     }
 

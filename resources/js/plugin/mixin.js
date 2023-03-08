@@ -1,6 +1,6 @@
 import {mapState, mapActions, mapMutations} from 'vuex';
 import config from '../config.js';
-
+let jweixin = require('weixin-js-sdk');
 export default {
     computed: {
         ...mapState([
@@ -8,7 +8,8 @@ export default {
             'use_url',
             'url',
             'lifetime',
-            'theme'
+            'theme',
+            'wechat_appid'
         ])
     },
     methods: {
@@ -25,6 +26,35 @@ export default {
             let authorization = getCookie('Authorization');
             if (authorization) {
                 setCookie('Authorization', authorization, this.lifetime / 1440);
+            }
+        },
+        //初始化微信公众号
+        initOfficialAccount(){
+            let ua = navigator.userAgent.toLowerCase();
+            if(
+                ua.match(/MicroMessenger/i)=="micromessenger" //是微信打开
+            ) {
+                axios.get(this.use_url+'/open/wx-config').then( (response)=> {
+                    let official_account = response.data;
+                    if(official_account //配置
+                        && official_account.wxconfig
+                        && official_account.wxconfig.appId){
+                        jweixin.config(official_account.wxconfig);
+                        jweixin.ready(()=>{
+                            let obj = official_account.show;
+                            jweixin.updateAppMessageShareData(obj);
+                            jweixin.updateTimelineShareData(obj);
+                            jweixin.onMenuShareTimeline(obj);
+                            jweixin.onMenuShareAppMessage(obj);
+                            jweixin.onMenuShareQQ(obj);
+                            jweixin.onMenuShareWeibo(obj);
+                            jweixin.onMenuShareQZone(obj);
+                        });
+                    }
+                }).catch((error) => {
+                    dd(error);
+                });
+
             }
         }
     },
@@ -149,6 +179,10 @@ export default {
             if (token) {
                 config.headers.Authorization = decodeURIComponent(token);
             }
+            let open_id = getCookie('Open-Id');
+            if (open_id) {
+                config.headers['Open-Id'] = decodeURIComponent(open_id);
+            }
             let language = localStorage.getItem('language');
             if (language) {
                 config.headers.Language = decodeURIComponent(language);
@@ -174,8 +208,14 @@ export default {
         setInterval(() => {
             this.refreshToken();
         }, 7200000);
-
     },
+    watch:{
+        $route(to,from){
+            if(this.wechat_appid){
+                this.initOfficialAccount();
+            }
+        }
+    }
 
 
 };

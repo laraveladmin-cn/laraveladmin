@@ -129,10 +129,13 @@ class LoginController extends Controller
      * @return mixed
      */
     public function otherLoginCallback($type=''){
-        $request = app('request');
+        $request = \Illuminate\Support\Facades\Request::instance();
         $request->offsetSet('type',$type);
         $validator = Validator::make($request->all(), [
-            'type'=>'required|string|in:'.collect(config('services',[]))->keys()->implode(',')], [],[
+            'type'=>'required|string|in:'.collect(config('services',[]))
+                    ->keys()
+                    ->push('official')
+                    ->implode(',')], [],[
             'type'=>trans('Three-party Login service provider')
         ]);
         if ($validator->fails()) {
@@ -146,13 +149,21 @@ class LoginController extends Controller
         try{
             if($type=='official'){ //微信公众号直接登录
                 $app = EasyWeChat::officialAccount(); // 公众号
-                $ouser = json_decode(json_encode($app->oauth->user()),true); //微信用户
+                $oauth = $app->oauth;
+                if(method_exists($oauth,'user')){
+                    $ouserObj = $app->oauth->user(); //微信用户
+                }else{
+                    $code = $request->input('code');
+                    $ouserObj = $app->oauth->userFromCode($code);
+                }
+                $ouser = json_decode(json_encode($ouserObj),true); //微信用户
             }else{
                 $ouser = collect(Socialite::driver($type)->user());
             }
         }catch (\Exception $exception){
             throw ValidationException::withMessages(['username'=>[
-                trans('Tripartite login authorization failed!')//'三方登录授权失败'
+                trans('Tripartite login authorization failed!'),//'三方登录授权失败'
+                //$exception->getMessage()
             ]]);
         };
         //三方登录类型
@@ -161,23 +172,29 @@ class LoginController extends Controller
         $user = User::whereHas('ousers',function($q)use($ouser_type,$ouser){
             $q->where('type',$ouser_type)->where('open_id',Arr::get($ouser,'id'));
         })->first();
+        $open_id = Arr::get($ouser,'id');
         if($user){ //直接登录
             $this->guard()->login($user);
-            return $this->sendLoginResponse($request);
+            return $this->sendLoginResponse($request,$open_id);
         }else{ //没有账号,保存三方信息
             Ouser::firstOrCreate([
                 'type'=>$ouser_type,
-                'open_id'=>Arr::get($ouser,'id')
+                'open_id'=>$open_id
             ],[
                 'user_id'=>0,
                 'type'=>$ouser_type,
-                'open_id'=>Arr::get($ouser,'id'),
-                'data'=>Arr::get($ouser,'user')
+                'open_id'=>$open_id,
+                'data'=>Arr::get($ouser,'user')?:Arr::get($ouser,'raw')
             ]);
             $value = $ouser_type.'|'.Arr::get($ouser,'id');
             $key = config($this->other_login_key);
             SessionService::put($key,$value);
-            return Response::returns(['other'=>md5($value)]);
+            $domain = config('session.domain');
+            return Response::returns([
+                'other'=>md5($value),
+                'open_id'=>$open_id
+            ])->cookie('Open-Id',$open_id,60*24*365*10,'/',$domain,null,false);
+
         }
     }
 
@@ -455,10 +472,14 @@ class LoginController extends Controller
 
     protected function loggedOut(Request $request)
     {
+        $redirect = (
+            $request->input('is_wechat') && //是微信打开
+            config('wechat.official_account.default.app_id','') //有微信公众号配置
+        )?RouteServiceProvider::OPEN:$this->redirectAfterLogout;
         return Response::returns([
             'title'=>Lang::get('status.status302'),
-            'content'=>Lang::get('status.redirectTo').$this->redirectAfterLogout,
-            'redirect' => $this->redirectAfterLogout
+            'content'=>Lang::get('status.redirectTo').$redirect,
+            'redirect' => $redirect
         ],302);
     }
 

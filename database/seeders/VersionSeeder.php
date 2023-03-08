@@ -33,6 +33,26 @@ class VersionSeeder extends Seeder
             'type'=>1,
             'itype'=>1
         ]);
+        \App\Models\Config::firstOrCreate(['key'=>'privacy_policy_url'],[
+            'key' => 'privacy_policy_url',
+            'name' => '隐私条款',
+            'description' => '隐私条款',
+            'value' => '',
+            'type'=>1,
+            'itype'=>8
+        ]);
+        \App\Models\Config::firstOrCreate(['key'=>'wxconfig_official'],[
+            'key' => 'wxconfig_official',
+            'name' => '微信公众号分享配置',
+            'description' => '微信公众号分享显示配置',
+            'type'=>2,
+            'itype'=>4,
+            'value' => [
+                'title'=>config('app.name'),
+                'desc'=>config('app.name'),
+                'imgUrl'=>config('app.url').'/dist/img/logo1.png'
+            ]
+        ]);
         $this->addVersion();
     }
 
