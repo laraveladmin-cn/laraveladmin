@@ -14,7 +14,8 @@ chown -R root:crontab /var/spool/cron/crontabs/root
 chmod 600 /var/spool/cron/crontabs/root
 /etc/init.d/cron force-reload
 /etc/init.d/cron start
-
+sed -i 's,^\(MinProtocol[ ]*=\).*,\1'TLSv1.0',g' /etc/ssl/openssl.cnf
+sed -i 's,^\(CipherString[ ]*=\).*,\1'DEFAULT@SECLEVEL=1',g' /etc/ssl/openssl.cnf
 projects=`ls ${code_dir}`
 #本地环境不自动启动队列
 if ! [ "${DOCKER_APP_ENV}" = "local" ]
