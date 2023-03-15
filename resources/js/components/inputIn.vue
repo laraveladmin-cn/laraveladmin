@@ -26,12 +26,18 @@
                 default: function () {
                     return false;
                 }
+            },
+            split:{
+                type:[String],
+                default: function () {
+                    return ',';
+                }
             }
         },
         data(){
             let val = this.value;
             if(typeof val=="object"){
-                val = collect(val).implode(',');
+                val = collect(val).implode(this.split);
             }
             return {
                 val:val,
@@ -40,7 +46,7 @@
         watch:{
             value(val){
                 if(typeof val=="object"){
-                    val = collect(val).implode(',');
+                    val = collect(val).implode(this.split);
                 }
                 if(this.val!=val){
                     this.val = val;
@@ -48,7 +54,7 @@
             },
             val(val){
                 if(val){
-                    val = val.split(',');
+                    val = val.split(this.split);
                     if(!val.length){
                         val = '';
                     }

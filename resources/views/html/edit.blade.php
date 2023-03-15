@@ -279,7 +279,8 @@
                                     <el-input-number v-model="props.data.row['{{$table_field['Field']}}']"
                                                      class="w-100"
                                                      size="medium"
-                                                     :disabled="!props.url" :step="1">
+                                                     :disabled="!props.url"
+                                                     :step="1">
                                     </el-input-number>
                                 </template>
 @elseif($table_field['showType']=='upload')
