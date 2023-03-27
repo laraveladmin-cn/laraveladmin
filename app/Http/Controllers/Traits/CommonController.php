@@ -159,6 +159,12 @@ trait CommonController{
      */
     protected $disableExportOrder=false;
 
+    /**
+     * 全文检索key
+     * @var string
+     */
+    protected $hasFullTextSearch=null;
+
 
     /**
      * 查询需要输出的字段信息

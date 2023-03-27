@@ -171,15 +171,15 @@ trait ResourceController
     {
         $this->bindModel OR $this->bindModel();
         //搜集模型表内所有字段
-        $model = $this->bindModel->getModel();
-        $allow_order = collect($this->bindModel->getFieldsName())->keys();
+        $model = $this->newBindModel();
+        $allow_order = collect($model->getFieldsName())->keys();
         if (!$allow_order->count()) {
-            $allow_order = $allow_order->merge($this->bindModel->getFillables());
+            $allow_order = $allow_order->merge($model->getFillables());
         }
         $allow_order = $allow_order->push($model->getKeyName()); //主键
         $class = get_class($model);
         if (isset($class::$isTreeModel)) {
-            $allow_order = $allow_order->merge(collect($this->bindModel->getTreeField())->values());
+            $allow_order = $allow_order->merge(collect($model->getTreeField())->values());
         }
         //自动完成的日期字段
         if (isset($model->timestamps) && $model->timestamps) {
@@ -271,6 +271,15 @@ trait ResourceController
         }
     }
 
+    protected function existFullTextSearch(){
+        if(!isset($this->hasFullTextSearch) || is_null($this->hasFullTextSearch)){
+            $this->hasFullTextSearch = collect(Arr::get($this->getOptions(),'where',[]))
+                    ->where('exp','=','search')
+                ->first()?:false;
+        }
+        return $this->hasFullTextSearch;
+    }
+
     /**
      * 获取翻页数据
      */
@@ -288,17 +297,29 @@ trait ResourceController
             $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
             $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
         }
-        $fields and $this->bindModel = $this->bindModel->select($fields);
+        $hasFullTextSearch = $this->existFullTextSearch();
+        if($fields && !$hasFullTextSearch){
+            $this->bindModel = $this->bindModel->select($fields);
+        }
+
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel();
         $obj = $this->handleList($obj);
         $perPage = Request::input('per_page', $this->per_page);
-        $perPage = $perPage > 200 ? 200 : $perPage; //限制单页最大获取数据量
+        $maxPerPage = (isset($this->maxPerPage)?$this->maxPerPage:200)?:200;
+        $perPage = $perPage > $maxPerPage ? $maxPerPage : $perPage; //限制单页最大获取数据量
         //获取分页数据
         if (!Request::input('page') || Request::input('get_count')) {
             $data = (clone $obj)->paginate($perPage);
         } else { //不统计条数
             $data = (clone $obj)->simplePaginate($perPage);
+        }
+        //全文检索过滤字段
+        if($fields && $hasFullTextSearch){
+            $data = collect($data)->toArray();
+            $data['data'] = collect($data['data'])->map(function ($item)use($fields){
+                return collect($item)->only($fields)->toArray();
+            })->toArray();
         }
         $data = $this->handleListReturn($data, $obj);
         //返回响应数据存放,方便操作日志记录
@@ -445,13 +466,34 @@ trait ResourceController
         if($unset_order){
             unset($options['order']);
         }
-        $obj = $this->bindModel->with($this->selectWithFields($fields_key))
-            ->withCount(collect($this->getShowIndexFieldsCount())->filter(function ($item, $key) {
-                return !is_array($item);
-            })->toArray())
-            ->options($options);
-
-        return $obj;
+        $fullTextSearch = $this->existFullTextSearch();
+        $with = $this->selectWithFields($fields_key);
+        $obj = $this->bindModel;
+        if($with){
+            $obj = $obj->with($with);
+        }
+        $with_count = collect($this->getShowIndexFieldsCount())->filter(function ($item, $key) {
+            return !is_array($item);
+        })->toArray();
+        if($with_count){
+            $obj =$obj->withCount();
+        }
+        if($fullTextSearch){
+            collect(Arr::get($options,'where',[]))
+                ->each(function ($item)use(&$obj){
+                    if($item['exp']=='search'){
+                        return;
+                    }
+                    $obj = $obj->where($item['key'],$item['exp'],$item['value']);
+            });
+            collect(Arr::get($options,'order',[]))
+                ->each(function ($item,$key)use(&$obj){
+                    $obj = $obj->orderBy($key,$item);
+                });
+            return $obj;
+        }else{
+            return $obj->options($options);
+        }
     }
 
     protected function getFieldsMap($showFields, $model, $decode = false,$trans=false)
@@ -574,7 +616,13 @@ trait ResourceController
     protected function bindModel()
     {
         if (!$this->bindModel) {
-            $this->bindModel = $this->newBindModel();
+            $fullTextSearch = $this->existFullTextSearch();
+            if($fullTextSearch){ //全文搜索时优先进行搜索获取搜索结果对象
+                $this->bindModel = $this->newBindModel()
+                    ->search(Arr::get($fullTextSearch,'val',''));
+            }else{
+                $this->bindModel = $this->newBindModel();
+            }
         }
 
         return $this->bindModel;
