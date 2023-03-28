@@ -476,7 +476,7 @@ trait ResourceController
             return !is_array($item);
         })->toArray();
         if($with_count){
-            $obj =$obj->withCount();
+            $obj =$obj->withCount($with_count);
         }
         if($fullTextSearch){
             collect(Arr::get($options,'where',[]))
