@@ -17,6 +17,8 @@
         "laravel/tinker": "^2.0",
         "laraveladmin/aliyun-sms": "^2.1",
         "laraveladmin/geetest": ">=1.2.1",
+        "laraveladmin/laravel-open-ai": "^1.0",
+        "mews/captcha": "^3.2",
         "overtrue/laravel-lang": "^4.1",
         "overtrue/laravel-wechat": "^6.0",
         "socialiteproviders/qq": ">=3.0",
@@ -26,8 +28,7 @@
         "swooletw/laravel-swoole": "^2.6",
         "symfony/filesystem": "^5.4",
         "zgldh/qiniu-laravel-storage": "^0.10.3",
-        "zhuzhichao/ip-location-zh": "^2.4",
-        "mews/captcha": "^3.2"
+        "zhuzhichao/ip-location-zh": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
