@@ -738,7 +738,7 @@
             "name": "对话管理",
             "icons": "fa-wechat",
             "description": "对话",
-            "url": "/admin/chats",
+            "url": "/admin/ai-chats",
             "parent_id": 94,
             "is_page": "Yes",
             "status": "Display",
@@ -752,7 +752,7 @@
             "name": "对话消息",
             "icons": "fa-send",
             "description": "对话消息",
-            "url": "/admin/messages",
+            "url": "/admin/ai-messages",
             "parent_id": 94,
             "is_page": "Yes",
             "status": "Display",
@@ -823,6 +823,86 @@
             "group": "admin",
             "_id": 66,
             "end_id": 56
+        },
+        {
+            "id": 111,
+            "name": "聊天",
+            "icons": "fa-wechat",
+            "description": "聊天",
+            "url": "/open/ai-chats",
+            "parent_id": 4,
+            "is_page": "Yes",
+            "group": "open",
+            "item_name": "聊天",
+            "_id": 111,
+            "options": {
+                "only": [
+                    {
+                        "id": 112,
+                        "name": "list"
+                    },
+                    {
+                        "id": 113,
+                        "name": "export",
+                        "_is_deleted": 1
+                    },
+                    {
+                        "id": 114,
+                        "name": "import",
+                        "_is_deleted": 1
+                    },
+                    {
+                        "id": 115,
+                        "name": "show"
+                    },
+                    {
+                        "id": 116,
+                        "name": "create"
+                    },
+                    {
+                        "id": 117,
+                        "name": "update"
+                    },
+                    {
+                        "id": 118,
+                        "name": "delete"
+                    }
+                ]
+            },
+            "end_id": 116
+        },
+        {
+            "id": 119,
+            "name": "聊天消息",
+            "icons": "fa-send-o",
+            "description": "聊天消息",
+            "url": "/open/ai-messages",
+            "parent_id": 4,
+            "is_page": "Yes",
+            "group": "open",
+            "item_name": "聊天消息",
+            "_id": 119,
+            "options": {
+                "only": [
+                    {
+                        "id": 120,
+                        "name": "list"
+                    },
+                    {
+                        "id": 121,
+                        "name": "show"
+                    },
+                    {
+                        "id": 122,
+                        "name": "create"
+                    },
+                    {
+                        "id": 123,
+                        "name": "update"
+                    }
+                ]
+            },
+            "end_id": 123
         }
     ],
     "update_position": []

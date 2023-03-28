@@ -71,7 +71,14 @@ class ConfigTableSeeder extends Seeder
                 'imgUrl'=>config('app.url').'/dist/img/logo1.png'
             ]
         ]);
-
+        Config::create([
+            'key' => 'get_recommended_content_copy',
+            'name' => '获取推荐内容选项文案',
+            'description' => '获取推荐内容选项文案',
+            'type'=>1,
+            'itype'=>2,
+            'value' => ''
+        ]);
 
     }
 
