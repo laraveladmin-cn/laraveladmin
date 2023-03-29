@@ -13,6 +13,13 @@ class AiMessageController extends Controller
 {
     use ResourceController;
 
+    public $showIndexFields=[
+        'ai_chat'=>[
+            'user'=>['id','name','uname'],
+            'ouser'=>['id','type','data'],
+        ]
+    ];
+
 
     /**
      * 资源模型

@@ -19,21 +19,28 @@
         },
         data(){
             return {
-                options:{
-                    lang_table:'chats', //字段翻译
-                    id:'data-table', //多个data-table同时使用时唯一标识
-                    url:'', //数据表请求数据地址
-                    operation:true, //操作列
-                    checkbox:true, //选择列
-                    btnSizerMore:false, //更多筛选条件按钮
-                    keywordKey:'name', //关键字查询key
-                    keywordGroup:false, //是否为选项组
-                    keywordPlaceholder:()=>{
+                options: {
+                    lang_table: 'chats', //字段翻译
+                    id: 'data-table', //多个data-table同时使用时唯一标识
+                    url: '', //数据表请求数据地址
+                    operation: true, //操作列
+                    checkbox: true, //选择列
+                    btnSizerMore: false, //更多筛选条件按钮
+                    keywordKey: 'name', //关键字查询key
+                    keywordGroup: false, //是否为选项组
+                    keywordPlaceholder: () => {
                         return this.$t('Please enter keywords');
                     },
-                    primaryKey:'id', //数据唯一性主键
-                    defOptions:null, //默认筛选条件
-                    fields: {id:{name:"ID",order:true},ouser_id:{name:"三方登录用户ID",order:true,type:"select2"},user_id:{name:"用户ID",order:true,type:"select2"},name:{name:"聊天室名称",order:true,type:"required"},created_at:{name:"Created At",order:true,type:"time"},updated_at:{name:"Updated At",order:true,type:"time"}}
+                    primaryKey: 'id', //数据唯一性主键
+                    defOptions: null, //默认筛选条件
+                    fields: {
+                        id: {name: "ID", order: true},
+                        'ouser.data.nickname': {name: "三方登录用户", order: true, type: "select2"},
+                        'user.name': {name: "用户", order: true, type: "select2"},
+                        name: {name: "聊天室名称", order: true, type: "required"},
+                        created_at: {name: "Created At", order: true, type: "time"},
+                        updated_at: {name: "Updated At", order: true, type: "time"}
+                    }
                 }
             };
         },

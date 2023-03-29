@@ -13,6 +13,11 @@ class AiChatController extends Controller
 {
     use ResourceController;
 
+    public $showIndexFields=[
+        'user'=>['id','name','uname'],
+        'ouser'=>['id','type','data'],
+    ];
+
 
     /**
      * 资源模型
