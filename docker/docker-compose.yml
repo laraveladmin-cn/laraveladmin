@@ -6,8 +6,8 @@ services: #服务
       - ../docker/mysql/data:/var/lib/mysql #mysql数据库数据文件存放目录;宿主机目录:容器目录
       - ../docker/mysql/shared:/var/lib/mysql_shared #与php共享目录
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql #数据库初始化sql
-#    ports: #与宿主进的端口映射
-#      - 3306:3306 #宿主机端口:容器端口
+    ports: #与宿主进的端口映射
+      - 3307:3306 #宿主机端口:容器端口
     restart: always #异常退出后重启
     command: --default-authentication-plugin=mysql_native_password #启动执行指令
     environment: #容器中环境变量
@@ -15,6 +15,8 @@ services: #服务
       MYSQL_DATABASE: ${DB_DATABASE} #新创建数据库名称
 #      MYSQL_USER: ${DB_USERNAME} #数据库用户名
 #      MYSQL_PASSWORD: ${DB_PASSWORD} #数据库密码
+    networks:
+      - php_network
   redis: #redis服务
     build: ./docker/redis #Dockerfile源码编译
     restart: always #异常退出后自动重启服务
@@ -27,6 +29,8 @@ services: #服务
     volumes:
       - ../docker/redis/data:/data #redis数据文件存放目录
       - ./docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - php_network
   php: #用于开发环境
     #build: ./docker/php
     image: laraveladmin/laraveladmin #镜像源
@@ -54,6 +58,9 @@ services: #服务
       - DOCKER_APP_ENV=${APP_ENV}
     extra_hosts:
       - "local.laraveladmin.cn:host-gateway"
+      - "db1:192.168.10.129"
+    networks:
+      - php_network
   nginx: #服务器服务
     image: nginx:1.15
     depends_on:
@@ -68,6 +75,8 @@ services: #服务
     restart: always
     links:
       - php:phpfpm
+    networks:
+      - php_network
   node:
 #    build: ./docker/node
     image: laraveladmin/node #镜像源
@@ -75,3 +84,6 @@ services: #服务
       - .:/var/www/laravel/laraveladmin #代码目录
 #    command:
 #      npm run watch
+networks:
+  php_network:
+    driver: bridge
