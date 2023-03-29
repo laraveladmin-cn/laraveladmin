@@ -61,6 +61,14 @@ class VersionSeeder extends Seeder
             'itype'=>2,
             'value' => ''
         ]);
+        \App\Models\Config::firstOrCreate(['key'=>'use_write_tpl_id'],[
+            'key' => 'use_write_tpl_id',
+            'name' => '默认使用撰写提示语模板ID',
+            'description' => '默认使用撰写提示语模板ID',
+            'type'=>3,
+            'itype'=>1,
+            'value' => 0
+        ]);
         $this->addVersion();
     }
 
