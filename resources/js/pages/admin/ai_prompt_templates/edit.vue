@@ -10,7 +10,9 @@
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="name" :options="{name: '模板名称',type:'text', rules:'required',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="content" :options="{name: '模板内容',type:'textarea', rules:'required',title:'可使用变量:{{用户输入}}'}" :datas="props">
+                            <edit-item key-name="cue_word" :options="{name: '提示词内容',type:'textarea', rules:'required',title:''}" :datas="props">
+                            </edit-item>
+                            <edit-item key-name="content" :options="{name: '模板内容',type:'textarea', rules:'',title:''}" :datas="props">
                             </edit-item>
 
                         </div>

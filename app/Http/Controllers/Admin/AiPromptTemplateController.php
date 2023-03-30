@@ -34,7 +34,7 @@ class AiPromptTemplateController extends Controller
      * @return  array
      */
     protected function getImportValidateRule($id = 0, $item){
-        $validate = ['name'=>'required','content'=>'required','options'=>'nullable|array'];
+        $validate = ['name'=>'required','cue_word'=>'required','options'=>'nullable|array'];
         return $validate;
     }
 

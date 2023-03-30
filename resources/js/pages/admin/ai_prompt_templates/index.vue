@@ -10,6 +10,14 @@
                                 {{option.name}}:{{collect(option.items).pluck('name').implode(',')}}
                             </div>
                         </span>
+                        <span v-else-if="props.field.type =='code'">
+                            <code v-if="props.field.limit">
+                                {{props.row | array_get(props.k) | str_limit(props.field.limit)}}
+                            </code>
+                            <code v-else>
+                                  {{props.row | array_get(props.k)}}
+                            </code>
+                        </span>
                         <span v-else-if="props.field.type =='pre'">
                             <pre v-if="props.field.limit">{{props.row | array_get(props.k) | str_limit(props.field.limit)}}</pre>
                             <pre v-else>{{props.row | array_get(props.k)}}</pre>
@@ -52,6 +60,7 @@
                     fields: {
                         id: {name: "ID", order: true},
                         name: {name: "模板名称", order: true},
+                        cue_word: {name: "提示词内容", order: true,type: "code",str_limit:30},
                         content: {name: "模板内容", order: true, type: "pre"},
                         options: {name: "可选项", order: true},
                         created_at: {name: "Created At", order: true, type: "time"},

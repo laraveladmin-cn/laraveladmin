@@ -28,3 +28,10 @@ __MACOSX
 composer.lock
 *.DS_Store
 front_end
+database/seeders/Commands/chats_json/origin/part_0.json
+database/seeders/Commands/chats_json/origin/part_1.json
+database/seeders/Commands/chats_json/origin/part_2.json
+database/seeders/Commands/chats_json/origin/part_3.json
+database/seeders/Commands/chats_json/origin/part_4.json
+database/seeders/Commands/chats_json/origin/part_5.json
+database/seeders/Commands/chats_json/origin/part_6.json

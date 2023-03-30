@@ -21,7 +21,8 @@ class AiPromptTemplate extends Model
     protected $fillable = [
        'name',
        'content',
-       'options'
+       'options',
+        'cue_word'
     ];
     //输出隐藏字段
     protected $hidden = ['deleted_at'];
@@ -33,14 +34,16 @@ class AiPromptTemplate extends Model
     protected $fieldsDefault = [
         'name' => '',
         'content' => '',
-        'options'=>[]
+        'options'=>[],
+        'cue_word'=>''
     ];
     //字段说明
     protected $fieldsName = [
         'id' => 'ID',
         'name' => '模板名称',
-        'content' => '模板内容',
+        'content' => '可选项模板内容',
         'options' => '可选项',
+        'cue_word'=>'提示词内容',
         'created_at' => '创建时间',
         'updated_at' => '修改时间',
         'deleted_at' => '删除时间'
@@ -69,12 +72,11 @@ class AiPromptTemplate extends Model
     /**
      * 组装获得提示词
      */
-    public function scopeGetPrompt($q,$input_str,$data){
+    public function scopeGetPrompt($q,$data){
         $prompt = $data['content'];
         $options = $data['options'];
         //获取参数
         $params = [
-            '用户输入'=>$input_str
         ];
         collect($options)->each(function($item) use (&$params){
             $params[$item['name']] = Arr::get($item['items'],$item['value'].'.value');
