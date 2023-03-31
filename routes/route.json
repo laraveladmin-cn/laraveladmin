@@ -102,7 +102,7 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 63
+            "_id": 103
         },
         {
             "id": 88,
@@ -116,7 +116,7 @@
             ],
             "group": "admin",
             "action": "MenuController@tree",
-            "_id": 72
+            "_id": 112
         },
         {
             "id": 89,
@@ -131,7 +131,7 @@
             "group": "admin",
             "action": "MenuController@updatePosition",
             "env": "local",
-            "_id": 73
+            "_id": 113
         },
         {
             "id": 84,
@@ -148,7 +148,7 @@
             "group": "admin",
             "action": "DevelopmentsController@index",
             "env": "local",
-            "_id": 82
+            "_id": 122
         },
         {
             "id": 85,
@@ -163,7 +163,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postLayout",
             "env": "local",
-            "_id": 83
+            "_id": 123
         },
         {
             "id": 86,
@@ -178,7 +178,7 @@
             "group": "admin",
             "action": "DevelopmentsController@tables",
             "env": "local",
-            "_id": 84
+            "_id": 124
         },
         {
             "id": 87,
@@ -193,7 +193,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postCommand",
             "env": "local",
-            "_id": 85
+            "_id": 125
         },
         {
             "id": 90,
@@ -209,7 +209,7 @@
             "status": "Display",
             "group": "admin",
             "action": "FileLogController@index",
-            "_id": 86
+            "_id": 126
         },
         {
             "id": 8,
@@ -219,7 +219,7 @@
             "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 87
+            "_id": 127
         },
         {
             "id": 57,
@@ -234,7 +234,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 88
+            "_id": 128
         },
         {
             "id": 58,
@@ -248,7 +248,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@postIndex",
-            "_id": 89
+            "_id": 129
         },
         {
             "id": 59,
@@ -263,7 +263,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 90
+            "_id": 130
         },
         {
             "id": 60,
@@ -277,7 +277,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@putPassword",
-            "_id": 91
+            "_id": 131
         },
         {
             "id": 3,
@@ -292,7 +292,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 92
+            "_id": 132
         },
         {
             "id": 78,
@@ -306,7 +306,7 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 93
+            "_id": 133
         },
         {
             "id": 81,
@@ -321,7 +321,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 94
+            "_id": 134
         },
         {
             "id": 82,
@@ -335,7 +335,7 @@
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 95
+            "_id": 135
         },
         {
             "id": 83,
@@ -349,7 +349,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 96
+            "_id": 136
         },
         {
             "id": 4,
@@ -362,7 +362,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "open",
-            "_id": 97
+            "_id": 137
         },
         {
             "id": 61,
@@ -375,7 +375,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 98
+            "_id": 138
         },
         {
             "id": 62,
@@ -391,7 +391,7 @@
             "use": [
                 "web"
             ],
-            "_id": 99
+            "_id": 139
         },
         {
             "id": 63,
@@ -406,7 +406,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 100
+            "_id": 140
         },
         {
             "id": 64,
@@ -426,7 +426,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 101
+            "_id": 141
         },
         {
             "id": 76,
@@ -442,7 +442,7 @@
             "use": [
                 "web"
             ],
-            "_id": 102
+            "_id": 142
         },
         {
             "id": 77,
@@ -459,7 +459,7 @@
                 "api",
                 "web"
             ],
-            "_id": 103
+            "_id": 143
         },
         {
             "id": 65,
@@ -477,7 +477,7 @@
                 "web"
             ],
             "as": "logout",
-            "_id": 104
+            "_id": 144
         },
         {
             "id": 66,
@@ -491,7 +491,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 105
+            "_id": 145
         },
         {
             "id": 67,
@@ -508,7 +508,7 @@
                 "api",
                 "web"
             ],
-            "_id": 106
+            "_id": 146
         },
         {
             "id": 68,
@@ -525,7 +525,7 @@
                 "api",
                 "web"
             ],
-            "_id": 107
+            "_id": 147
         },
         {
             "id": 69,
@@ -539,7 +539,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 108
+            "_id": 148
         },
         {
             "id": 70,
@@ -552,7 +552,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 109
+            "_id": 149
         },
         {
             "id": 71,
@@ -565,7 +565,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 110
+            "_id": 150
         },
         {
             "id": 72,
@@ -577,7 +577,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 111
+            "_id": 151
         },
         {
             "id": 73,
@@ -590,7 +590,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 112
+            "_id": 152
         },
         {
             "id": 74,
@@ -603,7 +603,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 113
+            "_id": 153
         },
         {
             "id": 92,
@@ -617,7 +617,7 @@
             ],
             "group": "open",
             "action": "IndexController@menuInfo",
-            "_id": 114
+            "_id": 154
         },
         {
             "id": 75,
@@ -634,7 +634,7 @@
                 "api",
                 "web"
             ],
-            "_id": 115
+            "_id": 155
         },
         {
             "id": 79,
@@ -647,7 +647,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 116
+            "_id": 156
         },
         {
             "id": 91,
@@ -661,7 +661,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 117
+            "_id": 157
         },
         {
             "id": 93,
@@ -675,7 +675,7 @@
             ],
             "group": "open",
             "action": "IndexController@wxConfig",
-            "_id": 118
+            "_id": 158
         }
     ],
     "resource": [
@@ -741,7 +741,6 @@
             "url": "/admin/ai-chats",
             "parent_id": 94,
             "is_page": "Yes",
-            "status": "Display",
             "group": "admin",
             "item_name": "对话",
             "_id": 39,
@@ -755,7 +754,6 @@
             "url": "/admin/ai-messages",
             "parent_id": 94,
             "is_page": "Yes",
-            "status": "Display",
             "group": "admin",
             "item_name": "对话消息",
             "_id": 47,
@@ -776,6 +774,76 @@
             "end_id": 131
         },
         {
+            "id": 132,
+            "name": "对话角色",
+            "icons": "fa-users",
+            "description": "对话角色",
+            "url": "/admin/main-customerroles",
+            "parent_id": 94,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "对话角色",
+            "_id": 63,
+            "end_id": 139
+        },
+        {
+            "id": 140,
+            "name": "三方授权",
+            "icons": "fa-user-plus",
+            "description": "三方授权",
+            "url": "/admin/main-customeroauths",
+            "parent_id": 94,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "三方用户",
+            "_id": 71,
+            "end_id": 147
+        },
+        {
+            "id": 148,
+            "name": "用户信息",
+            "icons": "fa-user",
+            "description": "用户信息",
+            "url": "/admin/main_customers",
+            "parent_id": 94,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "用户",
+            "_id": 79,
+            "end_id": 155
+        },
+        {
+            "id": 156,
+            "name": "对话管理",
+            "icons": "fa-comments-o",
+            "description": "对话列表",
+            "url": "/admin/main-customersessions",
+            "parent_id": 94,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "对话",
+            "_id": 87,
+            "end_id": 163
+        },
+        {
+            "id": 164,
+            "name": "对话消息",
+            "icons": "fa-send-o",
+            "description": "对话消息",
+            "url": "/admin/main-customersessionconversations",
+            "parent_id": 94,
+            "is_page": "Yes",
+            "status": "Display",
+            "group": "admin",
+            "item_name": "对话消息",
+            "_id": 95,
+            "end_id": 171
+        },
+        {
             "id": 41,
             "name": "Menu settings",
             "icons": "fa-bars",
@@ -786,7 +854,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Menu",
-            "_id": 64,
+            "_id": 104,
             "options": {
                 "only": [
                     {
@@ -835,7 +903,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 74,
+            "_id": 114,
             "end_id": 56
         },
         {
@@ -848,42 +916,8 @@
             "is_page": "Yes",
             "group": "open",
             "item_name": "聊天",
-            "_id": 119,
-            "options": {
-                "only": [
-                    {
-                        "id": 112,
-                        "name": "list"
-                    },
-                    {
-                        "id": 113,
-                        "name": "export",
-                        "_is_deleted": 1
-                    },
-                    {
-                        "id": 114,
-                        "name": "import",
-                        "_is_deleted": 1
-                    },
-                    {
-                        "id": 115,
-                        "name": "show"
-                    },
-                    {
-                        "id": 116,
-                        "name": "create"
-                    },
-                    {
-                        "id": 117,
-                        "name": "update"
-                    },
-                    {
-                        "id": 118,
-                        "name": "delete"
-                    }
-                ]
-            },
-            "end_id": 116
+            "_id": 159,
+            "end_id": 118
         },
         {
             "id": 119,
@@ -895,7 +929,7 @@
             "is_page": "Yes",
             "group": "open",
             "item_name": "聊天消息",
-            "_id": 127,
+            "_id": 167,
             "options": {
                 "only": [
                     {
@@ -917,31 +951,6 @@
                 ]
             },
             "end_id": 123
-        },
-        {
-            "id": 132,
-            "name": "提示词模板",
-            "icons": "fa-edit",
-            "description": "提示词",
-            "url": "/open/ai-prompt-templates",
-            "parent_id": 4,
-            "is_page": "Yes",
-            "group": "open",
-            "item_name": "提示词",
-            "_id": 132,
-            "options": {
-                "only": [
-                    {
-                        "id": 133,
-                        "name": "list"
-                    },
-                    {
-                        "id": 134,
-                        "name": "show"
-                    }
-                ]
-            },
-            "end_id": 134
         }
     ],
     "update_position": []

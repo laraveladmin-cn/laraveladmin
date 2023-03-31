@@ -28,7 +28,8 @@
         "swooletw/laravel-swoole": "^2.6",
         "symfony/filesystem": "^5.4",
         "zgldh/qiniu-laravel-storage": "^0.10.3",
-        "zhuzhichao/ip-location-zh": "^2.4"
+        "zhuzhichao/ip-location-zh": "^2.4",
+        "zw/laravel-soft-delete-custom": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
