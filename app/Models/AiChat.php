@@ -15,7 +15,7 @@ class AiChat extends Model
     //数据表名称
     protected $table = 'ai_chats';
     //没有主键ID
-    protected $itemName = '聊天室';
+    protected $itemName = '对话';
     //批量赋值白名单
     protected $fillable = [
        'ouser_id',

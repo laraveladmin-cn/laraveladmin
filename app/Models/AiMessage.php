@@ -15,7 +15,7 @@ class AiMessage extends Model
     //数据表名称
     protected $table = 'ai_messages';
     //没有主键ID
-    protected $itemName = '聊天室';
+    protected $itemName = '对话消息';
     //批量赋值白名单
     protected $fillable = [
        'ai_chat_id',
