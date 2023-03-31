@@ -624,9 +624,16 @@
                         for (let i in response.data ) {
                             if(i == 'data' && this.options.dataPush && response.data.current_page>1){ //数据追加
                                 let data = response.data[i];
-                                for (let j in data){
-                                    this.data.list.data.push(data[j]);
+                                if(this.options.dataPrepend){
+                                    collect(data).sortByDesc(this.options.primaryKey||'id').values().each((item)=>{
+                                        this.data.list.data.unshift(item);
+                                    });
+                                }else {
+                                    for (let j in data){
+                                        this.data.list.data.push(data[j]);
+                                    }
                                 }
+
                             }else {
                                 Vue.set(this.data.list,i,response.data[i]);
                             }
