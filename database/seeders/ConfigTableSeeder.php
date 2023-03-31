@@ -89,6 +89,24 @@ class ConfigTableSeeder extends Seeder
             'value' => 0
         ]);
 
+        Config::create([
+            'key' => 'cue_word_id',
+            'name' => '默认聊天模板ID',
+            'description' => '默认聊天模板ID',
+            'type'=>3,
+            'itype'=>1,
+            'value' => 0
+        ]);
+
+        Config::create([
+            'key' => 'robot_head_url',
+            'name' => '机器人聊天头像',
+            'description' => '机器人聊天头像',
+            'value' => '',
+            'type'=>1,
+            'itype'=>7
+        ]);
+
     }
 
 

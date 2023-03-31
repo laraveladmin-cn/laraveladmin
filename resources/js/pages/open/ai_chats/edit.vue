@@ -73,7 +73,7 @@
             callback:{
                 type: [Function],
                 default: function () {
-                    return function () {};
+                    return function (response, row) {};
                 }
             }
         },
@@ -86,7 +86,7 @@
                     url:this.url || '', //数据表请求数据地址
                     no_back:this.noBack,
                     callback: (response, row) => { //修改成功
-                        this.callback();
+                        this.callback(response, row);
                     }
                 }
             };

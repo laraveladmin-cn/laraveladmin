@@ -1,10 +1,10 @@
 <template>
     <div class="open_layout h100">
-        <div v-if="locales.length>1" class="language">
+<!--        <div v-if="locales.length>1" class="language">
             <a @click="openLanguage">
                 <language ref="language" :value="language" @change="setLanguage"></language>
             </a>
-        </div>
+        </div>-->
         <message></message>
         <modal></modal>
         <transition name="fade" enter-active-class="animated fadeIn faster" mode="out-in" leave-active-class="animated fadeOut faster">

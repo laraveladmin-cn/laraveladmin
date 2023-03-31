@@ -849,7 +849,41 @@
             "group": "open",
             "item_name": "聊天",
             "_id": 119,
-            "end_id": 118
+            "options": {
+                "only": [
+                    {
+                        "id": 112,
+                        "name": "list"
+                    },
+                    {
+                        "id": 113,
+                        "name": "export",
+                        "_is_deleted": 1
+                    },
+                    {
+                        "id": 114,
+                        "name": "import",
+                        "_is_deleted": 1
+                    },
+                    {
+                        "id": 115,
+                        "name": "show"
+                    },
+                    {
+                        "id": 116,
+                        "name": "create"
+                    },
+                    {
+                        "id": 117,
+                        "name": "update"
+                    },
+                    {
+                        "id": 118,
+                        "name": "delete"
+                    }
+                ]
+            },
+            "end_id": 116
         },
         {
             "id": 119,
@@ -883,6 +917,31 @@
                 ]
             },
             "end_id": 123
+        },
+        {
+            "id": 132,
+            "name": "提示词模板",
+            "icons": "fa-edit",
+            "description": "提示词",
+            "url": "/open/ai-prompt-templates",
+            "parent_id": 4,
+            "is_page": "Yes",
+            "group": "open",
+            "item_name": "提示词",
+            "_id": 132,
+            "options": {
+                "only": [
+                    {
+                        "id": 133,
+                        "name": "list"
+                    },
+                    {
+                        "id": 134,
+                        "name": "show"
+                    }
+                ]
+            },
+            "end_id": 134
         }
     ],
     "update_position": []

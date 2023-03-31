@@ -33,7 +33,7 @@ class AiChat extends Model
     protected $fieldsDefault = [
         'ouser_id' => 0,
         'user_id' => 0,
-        'name' => '',
+        'name' => '新对话',
         'client_id'=>''
     ];
     //字段说明

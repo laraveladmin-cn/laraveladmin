@@ -20,6 +20,34 @@ class AiChatController extends Controller
      */
     protected $resourceModel = 'AiChat';
 
+    public $sizer=[
+        'name'=>'like'
+    ];
+
+    public $order=[
+        'id'=>'desc'
+    ];
+
+
+    /**
+     * 绑定模型
+     * @return mixed
+     */
+    protected function bindModel()
+    {
+        if (!$this->bindModel) {
+            $fullTextSearch = $this->existFullTextSearch();
+            if($fullTextSearch){ //全文搜索时优先进行搜索获取搜索结果对象
+                $this->bindModel = $this->newBindModel()
+                    ->search(Arr::get($fullTextSearch,'val',''));
+            }else{
+                $this->bindModel = $this->newBindModel();
+            }
+        }
+
+        return $this->bindModel;
+    }
+
     /**
      * 验证规则
      * @return    array

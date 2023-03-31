@@ -1,22 +1,43 @@
 <template>
     <div class="open_index">
-        {{$tp('Home page of official website')}}
-        <router-link to="/admin">{{$tp('Backstage home page')}}</router-link>
-        <router-link to="/home">{{$tp('Front desk home page')}}</router-link>
-        <a @click="toUrl('/api-doc',$event,true)" href="/api-doc">
-            接口文档
-        </a>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                <ai-chats @chatActive="chatActive"></ai-chats>
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                <ai-messages ref="ai_message"></ai-messages>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script>
     export default {
+        components:{
+            "ai-chats": ()=>import(/* webpackChunkName: "pages/open/ai_chats/index.vue" */ 'pages/open/ai_chats/index.vue'),
+            "ai-messages": ()=>import(/* webpackChunkName: "pages/open/ai_messages/index.vue" */ 'pages/open/ai_messages/index.vue')
+
+        },
         props: {
         },
         data(){
             return {
                 "{lang_path}":'open.index',
             };
-        }
+        },
+        methods: {
+            chatActive(val){
+                dd(val);
+                let $table = this.$refs.ai_message.$refs.table;
+                $table.data.options.where.ai_chat_id = val;
+                $table.search();
+            }
+        },
     };
 </script>
+<style scoped>
+.open_index{
+    padding: 10px;
+}
+</style>
