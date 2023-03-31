@@ -35,9 +35,9 @@
                     defOptions: null, //默认筛选条件
                     fields: {
                         id: {name: "ID", order: true},
-                        'ouser.data.nickname': {name: "三方登录用户", order: true, type: "select2"},
-                        'user.name': {name: "用户", order: true, type: "select2"},
                         name: {name: "聊天室名称", order: true, type: "required"},
+                        'ouser.data.nickname': {name: "三方登录用户", order: true, type: "select2",orderField:'ouser_id'},
+                        'user.name': {name: "用户", order: true, type: "select2",orderField:'user_id'},
                         created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}
                     }

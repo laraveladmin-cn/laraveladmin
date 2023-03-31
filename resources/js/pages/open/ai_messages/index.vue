@@ -36,9 +36,7 @@
                                             </small>
                                            {{row.role==0?props.data.system_name:(row.role==2?props.data.robot_name:'游客')}}
                                         </a>
-                                        <span style="white-space: pre-line;">
-                                            {{row.conternt}}
-                                        </span>
+                                        <span style="white-space: pre-line;">{{row.conternt}}</span>
                                     </p>
                                 </div>
 
@@ -108,6 +106,7 @@
                     hideTopPagerTool:true,
                     hideBottomPagerTool:false,
                     dataPush:true, //数据追加
+                    dataPrepend:true, //数据向前
                     routerPushDisabled:true,
                     fields: {
                         id: {name: "ID", order: true},
