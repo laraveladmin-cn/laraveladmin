@@ -13,12 +13,19 @@ class MainCustomersessionController extends Controller
 {
     use ResourceController;
 
-
     /**
      * 资源模型
      * @var  string
      */
     protected $resourceModel = 'MainCustomersession';
+
+    public $showIndexFields=[
+        'main_customer'=>['id','name','nickname','mobile']
+    ];
+
+    public $sizer=[
+        'title'=>'like'
+    ];
 
     /**
      * 验证规则

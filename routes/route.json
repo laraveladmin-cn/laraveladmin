@@ -806,7 +806,7 @@
             "name": "用户信息",
             "icons": "fa-user",
             "description": "用户信息",
-            "url": "/admin/main_customers",
+            "url": "/admin/main-customers",
             "parent_id": 94,
             "is_page": "Yes",
             "status": "Display",

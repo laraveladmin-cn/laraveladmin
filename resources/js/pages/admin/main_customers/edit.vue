@@ -1,8 +1,9 @@
 <template>
-        <div class="admin_main_customer_edit">
+    <div class="admin_main_customer_edit">
         <div class="box" :class="'box-'+theme">
             <div class="box-header with-border">
-                <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
+                <h3 class="box-title">{{$t('Quickly fill in')}}
+                </h3>
             </div>
             <div class="box-body">
                 <edit :options="options" ref="edit">
@@ -12,47 +13,47 @@
                             </edit-item>
                             <edit-item key-name="nickname" :options="{name: '昵称',type:'text', rules:'',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="avatar" :options="{name: '头像',type:'upload', rules:'',title:''}" :datas="props">
-                                <template slot="input-item">
-                                    <upload v-model="props.data.row['avatar']"
-                                            :disabled="!props.url">
-                                    </upload>
-                                </template>
-                            </edit-item>
-                        </div>
-                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="name" :options="{name: '真实姓名',type:'text', rules:'',title:''}" :datas="props">
                             </edit-item>
                             <edit-item key-name="email" :options="{name: '电子邮箱',type:'text', rules:'email',title:''}" :datas="props">
+                            </edit-item>
+                        </div>
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                            <edit-item key-name="role_id" :options="{name: '用户角色',type:'select2', rules:'required',title:''}" :datas="props">
+                                <template slot="input-item">
+                                    <select2 v-model="props.data.row['role_id']"
+                                        :default-options="props.maps['main_customerrole_id']"
+                                        :url="use_url+'/admin/main-customerroles/list'"
+                                        :keyword-key="'name|code'"
+                                        :show="['name','code']"
+                                        :disabled="!props.url"
+                                        :placeholder-show="$t('Please select')"
+                                        :placeholder-value="0"
+                                        :is-ajax="true">
+                                    </select2>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="last_login" :options="{name: '最后登录日期',type:'datetime', rules:'',title:''}" :datas="props">
+                                <template slot="input-item">
+                                    <el-date-picker v-model="props.data.row['last_login']"
+                                        class="w-100"
+                                        value-format="yyyy-MM-dd HH:mm:ss"
+                                        :placeholder="$t('Select time')"
+                                        type="datetime"
+                                        :editable="false"
+                                        :disabled="!props.url">
+                                    </el-date-picker>
+                                </template>
                             </edit-item>
                             <edit-item key-name="is_active" :options="{name: '状态',type:'radio', rules:'in:0,1',title:''}" :datas="props">
                             </edit-item>
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="last_login" :options="{name: '最后登录日期',type:'datetime', rules:'',title:''}" :datas="props">
-                                    <template slot="input-item">
-                                        <el-date-picker v-model="props.data.row['last_login']"
-                                                        class="w-100"
-                                                        value-format="yyyy-MM-dd HH:mm:ss"
-                                                        :placeholder="$t('Select time')"
-                                                        type="datetime"
-                                                        :editable="false"
-                                                        :disabled="!props.url">
-                                        </el-date-picker>
-                                    </template>
-                            </edit-item>
-                            <edit-item key-name="role_id" :options="{name: '用户角色',type:'select2', rules:'required',title:''}" :datas="props">
+                            <edit-item key-name="avatar" :options="{name: '头像',type:'upload', rules:'',title:''}" :datas="props">
                                 <template slot="input-item">
-                                        <select2 v-model="props.data.row['role_id']"
-                                                 :default-options="props.maps['role_id']"
-                                                 :url="use_url+'/admin/roles/list'"
-                                                 :keyword-key="'name'"
-                                                 :show="['name']"
-                                                 :disabled="!props.url"
-                                                 :placeholder-show="$t('Please select')"
-                                                 :placeholder-value="0"
-                                                 :is-ajax="true">
-                                        </select2>
+                                    <upload v-model="props.data.row['avatar']"
+                                        :disabled="!props.url">
+                                    </upload>
                                 </template>
                             </edit-item>
                         </div>
@@ -62,7 +63,6 @@
         </div>
     </div>
 </template>
-
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
 

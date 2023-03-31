@@ -20,6 +20,14 @@ class MainCustomeroauthController extends Controller
      */
     protected $resourceModel = 'MainCustomeroauth';
 
+    public $showIndexFields=[
+        'main_customer'=>['id','name','nickname','mobile']
+    ];
+    public $sizer=[
+        'type'=>'=',
+        'data'=>'like'
+    ];
+
     /**
      * 验证规则
      * @return    array

@@ -13,12 +13,23 @@ class MainCustomersessionconversationController extends Controller
 {
     use ResourceController;
 
-
     /**
      * 资源模型
      * @var  string
      */
     protected $resourceModel = 'MainCustomersessionconversation';
+
+    public $sizer=[
+        'user_id'=>'=',
+        'customer_session_id'=>'=',
+        'human'=>'like',
+    ];
+
+    public $showIndexFields=[
+        'main_customer'=>['id','name','nickname','mobile'],
+        'main_customersession'=>['id','title']
+    ];
+
 
     /**
      * 验证规则
@@ -34,7 +45,11 @@ class MainCustomersessionconversationController extends Controller
      * @return  array
      */
     protected function getImportValidateRule($id = 0, $item){
-        $validate = ['human'=>'required','customer_session_id'=>'required|exists:main_customersession,id','user_id'=>'required|exists:main_customer,id'];
+        $validate = [
+            'human'=>'required',
+            'customer_session_id'=>'required|exists:main_customersession,id',
+            'user_id'=>'required|exists:main_customer,id'
+        ];
         return $validate;
     }
 
@@ -46,6 +61,7 @@ class MainCustomersessionconversationController extends Controller
     */
     protected function handleEditReturn($id,&$data){
         $data['maps']['main_customersession_id'] = mapOption($data['row'],'main_customersession_id');
+        $data['maps']['main_customer_id'] = mapOption($data['row'],'main_customer_id');
         return $data;
     }
 

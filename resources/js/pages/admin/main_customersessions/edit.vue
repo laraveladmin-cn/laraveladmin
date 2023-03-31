@@ -10,23 +10,21 @@
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="title" :options="{name: '标题',type:'text', rules:'required',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="summary" :options="{name: '会话摘要',type:'text', rules:'',title:''}" :datas="props">
+                            <edit-item key-name="summary" :options="{name: '会话摘要',type:'textarea', rules:'',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="user_id" :options="{name: '用户',type:'select2', rules:'required',title:''}" :datas="props">
+                            <edit-item key-name="user_id" :options="{name: '所属用户',type:'select2', rules:'required',title:''}" :datas="props">
                                 <template slot="input-item">
-                                        <select2 v-model="props.data.row['user_id']"
-                                                 :default-options="props.maps['user_id']"
-                                                 :url="use_url+'/admin/users/list'"
-                                                 :keyword-key="'name'"
-                                                 :show="['name']"
-                                                 :disabled="!props.url"
-                                                 :placeholder-show="$t('Please select')"
-                                                 :placeholder-value="0"
-                                                 :is-ajax="true">
-                                        </select2>
+                                    <select2 v-model="props.data.row['user_id']"
+                                             :default-options="props.maps['main_customer_id']"
+                                             :url="use_url+'/admin/main-customers/list'"
+                                             :keyword-key="'name|mobile'"
+                                             :show="['name','mobile']"
+                                             :disabled="!props.url"
+                                             :placeholder-show="$t('Please select')"
+                                             :placeholder-value="0"
+                                             :is-ajax="true">
+                                    </select2>
                                 </template>
-                            </edit-item>
-                            <edit-item key-name="is_deleted" :options="{name: '是否已删除',type:'radio', rules:'',title:''}" :datas="props">
                             </edit-item>
                         </div>
                     </template>

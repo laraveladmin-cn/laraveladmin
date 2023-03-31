@@ -14,24 +14,32 @@
                             </edit-item>
                             <edit-item key-name="union_id" :options="{name: 'extra第三方登陆ID',type:'text', rules:'',title:''}" :datas="props">
                             </edit-item>
-                        </div>
-                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="data" :options="{name: '用户信息',type:'text', rules:'',title:''}" :datas="props">
-                            </edit-item>
                             <edit-item key-name="user_id" :options="{name: '用户',type:'select2', rules:'',title:''}" :datas="props">
                                 <template slot="input-item">
-                                        <select2 v-model="props.data.row['user_id']"
-                                                 :default-options="props.maps['user_id']"
-                                                 :url="use_url+'/admin/users/list'"
-                                                 :keyword-key="'name'"
-                                                 :show="['name']"
-                                                 :disabled="!props.url"
-                                                 :placeholder-show="$t('Please select')"
-                                                 :placeholder-value="0"
-                                                 :is-ajax="true">
-                                        </select2>
+                                    <select2 v-model="props.data.row['user_id']"
+                                             :default-options="props.maps['main_customer_id']"
+                                             :url="use_url+'/admin/main-customers/list'"
+                                             :keyword-key="'name|mobile'"
+                                             :show="['name','mobile']"
+                                             :disabled="!props.url"
+                                             :placeholder-show="$t('Please select')"
+                                             :placeholder-value="0"
+                                             :is-ajax="true">
+                                    </select2>
                                 </template>
                             </edit-item>
+                        </div>
+                        <div class="move-items col-lg-8 col-md-6 col-sm-12 col-xs-12">
+                            <edit-item key-name="data" :options="{name: '用户信息',type:'text', rules:'',title:''}" :datas="props">
+                                <template slot="input-item">
+                                    <json-edit
+                                        v-model="props.data.row['data']"
+                                        :disabled="!props.url"
+                                        :placeholder="'请输入'">
+                                    </json-edit>
+                                </template>
+                            </edit-item>
+
                         </div>
                     </template>
                 </edit>
@@ -48,6 +56,8 @@
             edit: ()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
             editItem: ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
             select2:()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'), //选择框异步组件
+            "json-edit":()=>import(/* webpackChunkName: "common_components/jsonEdit.vue" */ 'common_components/jsonEdit.vue'),
+
         },
         props: {
             url:{

@@ -20,6 +20,10 @@ class MainCustomerroleController extends Controller
      */
     protected $resourceModel = 'MainCustomerrole';
 
+    public $sizer=[
+        'name|code'=>'like'
+    ];
+
     /**
      * 验证规则
      * @return    array

@@ -5,6 +5,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BaseModel;
+use Illuminate\Support\Str;
 
 class MainCustomeroauth extends Model
 {
@@ -64,5 +65,27 @@ class MainCustomeroauth extends Model
     public function main_customer(){
         return $this->belongsTo('App\Models\MainCustomer','user_id');
     }
+
+    /**
+     * 获取多选值
+     * @param  $value
+     * @return  array
+     */
+    public function getDataAttribute($value)
+    {
+        return json_decode($value,true);
+    }
+
+    /**
+     * 设置多选值
+     * @param  $value
+     * @return  array
+     */
+    public function setDataAttribute($value)
+    {
+        $this->attributes['data'] = $value?json_encode($value):null;
+    }
+
+
 
 }

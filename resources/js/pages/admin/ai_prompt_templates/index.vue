@@ -60,8 +60,8 @@
                     fields: {
                         id: {name: "ID", order: true},
                         name: {name: "模板名称", order: true},
-                        cue_word: {name: "提示词内容", order: true,type: "code",str_limit:30},
-                        content: {name: "模板内容", order: true, type: "pre"},
+                        cue_word: {name: "提示词内容", order: true,type: "code",limit:30},
+                        content: {name: "模板内容", order: true, type: "pre",limit:50},
                         options: {name: "可选项", order: true},
                         created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}

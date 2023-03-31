@@ -1,48 +1,49 @@
 <template>
-        <div class="admin_main_customersessionconversation_edit">
+    <div class="admin_main_customersessionconversation_edit">
         <div class="box" :class="'box-'+theme">
             <div class="box-header with-border">
-                <h3 class="box-title">{{$t('Quickly fill in')}}</h3>
+                <h3 class="box-title">{{$t('Quickly fill in')}}
+                </h3>
             </div>
             <div class="box-body">
                 <edit :options="options" ref="edit">
                     <template slot="content" slot-scope="props">
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="human" :options="{name: '用户输入',type:'text', rules:'required',title:''}" :datas="props">
-                            </edit-item>
-                            <edit-item key-name="ai" :options="{name: 'AI回答',type:'text', rules:'',title:''}" :datas="props">
-                            </edit-item>
                             <edit-item key-name="customer_session_id" :options="{name: '会话',type:'select2', rules:'required',title:''}" :datas="props">
                                 <template slot="input-item">
-                                        <select2 v-model="props.data.row['customer_session_id']"
-                                                 :default-options="props.maps['customer_session_id']"
-                                                 :url="use_url+'/admin/customer-sessions/list'"
-                                                 :keyword-key="'name'"
-                                                 :show="['name']"
-                                                 :disabled="!props.url"
-                                                 :placeholder-show="$t('Please select')"
-                                                 :placeholder-value="0"
-                                                 :is-ajax="true">
-                                        </select2>
+                                    <select2 v-model="props.data.row['customer_session_id']"
+                                        :default-options="props.maps['main_customersession_id']"
+                                        :url="use_url+'/admin/main-customersessions/list'"
+                                        :keyword-key="'title'"
+                                        :show="['title']"
+                                        :disabled="!props.url"
+                                        :placeholder-show="$t('Please select')"
+                                        :placeholder-value="0"
+                                        :is-ajax="true">
+                                    </select2>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="user_id" :options="{name: '用户',type:'select2', rules:'required',title:''}" :datas="props">
+                                <template slot="input-item">
+                                    <select2 v-model="props.data.row['user_id']"
+                                        :default-options="props.maps['main_customer_id']"
+                                        :url="use_url+'/admin/main-customers/list'"
+                                        :keyword-key="'name|mobile'"
+                                        :show="['name','mobile']"
+                                        :disabled="!props.url"
+                                        :placeholder-show="$t('Please select')"
+                                        :placeholder-value="0"
+                                        :is-ajax="true">
+                                    </select2>
                                 </template>
                             </edit-item>
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="user_id" :options="{name: '用户',type:'select2', rules:'required',title:''}" :datas="props">
-                                <template slot="input-item">
-                                        <select2 v-model="props.data.row['user_id']"
-                                                 :default-options="props.maps['user_id']"
-                                                 :url="use_url+'/admin/users/list'"
-                                                 :keyword-key="'name'"
-                                                 :show="['name']"
-                                                 :disabled="!props.url"
-                                                 :placeholder-show="$t('Please select')"
-                                                 :placeholder-value="0"
-                                                 :is-ajax="true">
-                                        </select2>
-                                </template>
+                            <edit-item key-name="human" :options="{name: '用户输入',type:'textarea', rules:'required',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="is_deleted" :options="{name: '是否已删除',type:'radio', rules:'',title:''}" :datas="props">
+                        </div>
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                            <edit-item key-name="ai" :options="{name: 'AI回答',type:'textarea', rules:'',title:''}" :datas="props">
                             </edit-item>
                         </div>
                     </template>
@@ -51,7 +52,6 @@
         </div>
     </div>
 </template>
-
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
 

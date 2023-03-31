@@ -20,6 +20,16 @@ class MainCustomerController extends Controller
      */
     protected $resourceModel = 'MainCustomer';
 
+    public $showIndexFields=[
+        'main_customerrole'=>[
+            'id','name'
+        ]
+
+    ];
+    public $sizer=[
+        'name|mobile'=>'like'
+    ];
+
     /**
      * 验证规则
      * @return    array

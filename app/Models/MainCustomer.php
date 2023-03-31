@@ -5,6 +5,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BaseModel;
+use Illuminate\Support\Str;
 
 class MainCustomer extends Model
 {
@@ -76,6 +77,16 @@ class MainCustomer extends Model
      */
     public function main_customeroauths(){
         return $this->hasMany('App\Models\MainCustomeroauth','user_id');
+    }
+
+    /**
+     * 获取多选值
+     * @param  $value
+     * @return  array
+     */
+    public function getLastLoginAttribute($value)
+    {
+        return $value?Str::limit($value,19,''):null;
     }
 
 }
