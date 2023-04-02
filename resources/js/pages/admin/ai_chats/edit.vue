@@ -36,7 +36,7 @@
                                         </select2>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="name" :options="{name: '聊天室名称',type:'required', rules:'',title:''}" :datas="props">
+                            <edit-item key-name="name" :options="{name: '聊天室名称',type:'text', rules:'required',title:''}" :datas="props">
                             </edit-item>
                         </div>
                     </template>

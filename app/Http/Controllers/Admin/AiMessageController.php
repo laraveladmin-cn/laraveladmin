@@ -20,6 +20,14 @@ class AiMessageController extends Controller
         ]
     ];
 
+    public $editFields=[
+        'ai_chat'=>[
+            'user'=>['id','name','uname'],
+            'ouser'=>['id','type','data'],
+        ]
+    ];
+
+
 
     /**
      * 资源模型
@@ -52,7 +60,7 @@ class AiMessageController extends Controller
     * @return  mixed
     */
     protected function handleEditReturn($id,&$data){
-        $data['maps']['ai_chat_id'] = mapOption($data['row'],'chat_id');
+        $data['maps']['ai_chat_id'] = mapOption($data['row'],'ai_chat_id');
         return $data;
     }
 
