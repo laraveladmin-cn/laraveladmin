@@ -484,7 +484,11 @@ trait ResourceController
                     if($item['exp']=='search'){
                         return;
                     }
-                    $obj = $obj->where($item['key'],$item['exp'],$item['value']);
+                    if($item['exp']=='='){
+                        $obj = $obj->where($item['key'],$item['val']);
+                    }else{
+                        $obj = $obj->where($item['key'],$item['exp'],$item['val']);
+                    }
             });
             collect(Arr::get($options,'order',[]))
                 ->each(function ($item,$key)use(&$obj){
