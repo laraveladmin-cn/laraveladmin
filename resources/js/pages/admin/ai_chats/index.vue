@@ -3,6 +3,34 @@
         <div class="row">
             <div class="col-xs-12">
                 <data-table class="box" :class="'box-'+theme" :options="options" ref="table">
+                    <template slot="sizer-more" slot-scope="props">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
+                                <select2 v-model="props.where['ouser_id']"
+                                         :default-options="array_get(props,'maps.ouser_id',[])"
+                                         :url="use_url+'/admin/ousers/list'"
+                                         :keyword-key="'data|user.uname|user.name|user.mobile_phone'"
+                                         :placeholder-show="'三方登录用户'"
+                                         :placeholder-value="''"
+                                         :primary-key="'id'"
+                                         :show="['user.name','id']"
+                                         :is-ajax="true" >
+                                </select2>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 sizer-item">
+                                <select2 v-model="props.where['user_id']"
+                                         :default-options="array_get(props,'maps.user_id',[])"
+                                         :url="use_url+'/admin/users/list'"
+                                         :keyword-key="'name|uname|mobile_phone|email'"
+                                         :placeholder-show="'用户'"
+                                         :placeholder-value="''"
+                                         :primary-key="'id'"
+                                         :show="['name']"
+                                         :is-ajax="true" >
+                                </select2>
+                            </div>
+                        </div>
+                    </template>
                 </data-table>
             </div>
         </div>
@@ -13,7 +41,9 @@
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     export default {
         components:{
-            'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue')
+            'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
+            select2:()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
+
         },
         props: {
         },
