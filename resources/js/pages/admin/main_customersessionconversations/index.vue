@@ -7,7 +7,7 @@
                         <div class="row" >
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                 <select2 v-model="props.where['user_id']"
-                                         :default-options="props.maps['main_customer_id']"
+                                         :default-options="props.maps['user_id']"
                                          :url="use_url+'/admin/main-customers/list'"
                                          :keyword-key="'name|mobile'"
                                          :show="['name','mobile']"
@@ -18,7 +18,7 @@
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 sizer-item">
                                 <select2 v-model="props.where['customer_session_id']"
-                                         :default-options="array_get(props,'maps.main_customersession_id',[])"
+                                         :default-options="array_get(props,'maps.customer_session_id',[])"
                                          :url="use_url+'/admin/main-customersessions/list'"
                                          :keyword-key="'title'"
                                          :show="['title']"
@@ -83,7 +83,7 @@ export default {
                 operation: true, //操作列
                 checkbox: true, //选择列
                 btnSizerMore: false, //更多筛选条件按钮
-                keywordKey: 'name', //关键字查询key
+                keywordKey: 'human', //关键字查询key
                 keywordGroup: false, //是否为选项组
                 keywordPlaceholder: () => {
                     return this.$t('Please enter keywords');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
+use App\Models\MainCustomer;
 use Illuminate\Support\Facades\Request;
 use App\Models\MainCustomersession;
 use Illuminate\Support\Facades\Response;
@@ -28,6 +29,7 @@ class MainCustomersessionController extends Controller
     ];
 
     public $sizer=[
+        'user_id'=>'=',
         'title'=>'like'
     ];
 
@@ -68,10 +70,10 @@ class MainCustomersessionController extends Controller
      */
     protected function handleIndexReturn(&$data)
     {
-        if($customer_session_id = Request::input('where.customer_session_id')){
-            $data['maps']['main_customer_id'] = collect(MainCustomersession::query()
-                ->where('id','=',$customer_session_id)
-                ->get(['id','title']))->toArray();
+        if($user_id = Request::input('where.user_id')){
+            $data['maps']['user_id'] = collect(MainCustomer::query()
+                ->where('id','=',$user_id)
+                ->get(['id','name','mobile']))->toArray();
         }
 
         return $data;

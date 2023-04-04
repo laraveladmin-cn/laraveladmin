@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
+use App\Models\MainCustomer;
+use App\Models\MainCustomersession;
 use Illuminate\Support\Facades\Request;
 use App\Models\MainCustomersessionconversation;
 use Illuminate\Support\Facades\Response;
@@ -62,6 +64,27 @@ class MainCustomersessionconversationController extends Controller
     protected function handleEditReturn($id,&$data){
         $data['maps']['main_customersession_id'] = mapOption($data['row'],'main_customersession_id');
         $data['maps']['main_customer_id'] = mapOption($data['row'],'main_customer_id');
+        return $data;
+    }
+
+    /**
+     * 列表页面返回数据前对数据处理
+     * @param $data
+     * @return mixed
+     */
+    protected function handleIndexReturn(&$data)
+    {
+        if($customer_session_id = Request::input('where.customer_session_id')){
+            $data['maps']['customer_session_id'] = collect(MainCustomersession::query()
+                ->where('id','=',$customer_session_id)
+                ->get(['id','title']))->toArray();
+        }
+        if($user_id = Request::input('where.user_id')){
+            $data['maps']['user_id'] = collect(MainCustomer::query()
+                ->where('id','=',$user_id)
+                ->get(['id','name','mobile']))->toArray();
+        }
+
         return $data;
     }
 

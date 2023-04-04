@@ -27,6 +27,8 @@ class MainCustomerController extends Controller
 
     ];
     public $sizer=[
+        'is_active'=>'=',
+        'role_id'=>'=',
         'name|mobile'=>'like'
     ];
 
