@@ -10,9 +10,9 @@
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
                             <edit-item key-name="chat_id" :options="{name: '聊天室ID',type:'select2', rules:'',title:''}" :datas="props">
                                 <template slot="input-item">
-                                        <select2 v-model="props.data.row['chat_id']"
-                                                 :default-options="props.maps['chat_id']"
-                                                 :url="use_url+'/admin/chats/list'"
+                                        <select2 v-model="props.data.row['ai_chat_id']"
+                                                 :default-options="props.maps['ai_chat_id']"
+                                                 :url="use_url+'/admin/ai-chats/list'"
                                                  :keyword-key="'name'"
                                                  :show="['name']"
                                                  :disabled="!props.url"

@@ -24,7 +24,7 @@
                             </edit-item>
                             <edit-item key-name="role" :options="{name: '角色',type:'radio', rules:'',title:''}" :datas="props">
                             </edit-item>
-                            <edit-item key-name="conternt" :options="{name: '内容',type:'textarea', rules:'',title:''}" :datas="props">
+                            <edit-item key-name="content" :options="{name: '内容',type:'textarea', rules:'',title:''}" :datas="props">
                             </edit-item>
                         </div>
                     </template>

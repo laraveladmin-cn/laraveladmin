@@ -15,6 +15,12 @@ class AiMessageController extends Controller
 {
     use ResourceController;
 
+    /**
+     * 资源模型
+     * @var  string
+     */
+    protected $resourceModel = 'AiMessage';
+
     public $sizer=[
         'ai_chat_id'=>'='
     ];
@@ -24,15 +30,30 @@ class AiMessageController extends Controller
     ];
 
 
-    /**
-     * 资源模型
-     * @var  string
-     */
-    protected $resourceModel = 'AiMessage';
-
     public $orderDefault=[
         'id'=>'desc'
     ];
+
+//    public $per_page=2;
+
+    /**
+     * 绑定模型
+     * @return mixed
+     */
+    protected function bindModel()
+    {
+        if (!$this->bindModel) {
+            $fullTextSearch = $this->existFullTextSearch();
+            if($fullTextSearch){ //全文搜索时优先进行搜索获取搜索结果对象
+                $this->bindModel = $this->newBindModel()
+                    ->search(Arr::get($fullTextSearch,'val',''));
+            }else{
+                $this->bindModel = $this->newBindModel()->main();
+            }
+        }
+
+        return $this->bindModel;
+    }
 
     /**
      * 验证规则

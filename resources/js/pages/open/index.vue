@@ -28,7 +28,6 @@
         },
         methods: {
             chatActive(val){
-                dd(val);
                 let $table = this.$refs.ai_message.$refs.table;
                 $table.data.options.where.ai_chat_id = val;
                 $table.search();

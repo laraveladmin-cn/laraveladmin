@@ -36,9 +36,7 @@
                                             </small>
                                            {{row.role==0?props.data.system_name:(row.role==2?props.data.robot_name:'游客')}}
                                         </a>
-                                        <span style="white-space: pre-line;">
-                                            {{row.conternt}}
-                                        </span>
+                                        <span style="white-space: pre-line;">{{row.content}}</span>
                                     </p>
                                 </div>
 
@@ -108,12 +106,13 @@
                     hideTopPagerTool:true,
                     hideBottomPagerTool:false,
                     dataPush:true, //数据追加
+                    dataPrepend:true, //数据向前
                     routerPushDisabled:true,
                     fields: {
                         id: {name: "ID", order: true},
                         ai_chat_id: {name: "聊天室ID", order: true, type: "select2"},
                         role: {name: "角色", order: true, type: "radio"},
-                        conternt: {name: "内容", order: true, type: "textarea"},
+                        content: {name: "内容", order: true, type: "textarea"},
                         created_at: {name: "Created At", order: true, type: "time"},
                         updated_at: {name: "Updated At", order: true, type: "time"}
                     }

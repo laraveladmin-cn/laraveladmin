@@ -3,9 +3,13 @@
  * 聊天室模型
  */
 namespace App\Models;
+use App\Services\SessionService;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class AiMessage extends Model
 {
@@ -59,6 +63,12 @@ class AiMessage extends Model
      */
     public function ai_chat(){
         return $this->belongsTo('App\Models\AiChat');
+    }
+
+    public function scopeMain($q){
+        $ai_chat_ids = AiChat::query()->main()->pluck('id')->toArray()?:[];
+        $q->whereIn('ai_chat_id',$ai_chat_ids);
+        return $q;
     }
 
 }

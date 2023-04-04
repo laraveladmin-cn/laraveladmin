@@ -3,9 +3,13 @@
  * 聊天室模型
  */
 namespace App\Models;
+use App\Services\SessionService;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class AiChat extends Model
 {
@@ -67,6 +71,24 @@ class AiChat extends Model
 
     public function ai_messages(){
         return $this->hasMany('App\Models\AiMessage');
+    }
+
+    public function scopeMain($q){
+        $q->where(function ($q){
+            $request = Request::instance();
+            $open_id = $request->header('Open-Id')?:$request->cookie('Open-Id');
+            $open_id = $open_id?:0;
+            $client_id = SessionService::getId();
+            $user_id = Arr::get(Auth::user(),'id',0);
+            $q->where('client_id',$client_id);
+            if($user_id){
+                $q->orWhere('user_id',$user_id);
+            };
+            if($open_id){
+                $q->orWhere('ouser_id',$open_id);
+            };
+        });
+        return $q;
     }
 
 }
