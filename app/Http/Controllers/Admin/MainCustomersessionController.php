@@ -23,6 +23,10 @@ class MainCustomersessionController extends Controller
         'main_customer'=>['id','name','nickname','mobile']
     ];
 
+    public $showIndexFieldsCount=[
+        'main_customersessionconversations'
+    ];
+
     public $sizer=[
         'title'=>'like'
     ];
@@ -56,5 +60,21 @@ class MainCustomersessionController extends Controller
         return $data;
     }
 
+
+    /**
+     * 列表页面返回数据前对数据处理
+     * @param $data
+     * @return mixed
+     */
+    protected function handleIndexReturn(&$data)
+    {
+        if($customer_session_id = Request::input('where.customer_session_id')){
+            $data['maps']['main_customer_id'] = collect(MainCustomersession::query()
+                ->where('id','=',$customer_session_id)
+                ->get(['id','title']))->toArray();
+        }
+
+        return $data;
+    }
 
 }

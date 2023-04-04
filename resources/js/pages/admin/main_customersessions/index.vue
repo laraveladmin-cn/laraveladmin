@@ -40,6 +40,11 @@
                             <pre v-if="props.field.limit">{{props.row | array_get(props.k) | str_limit(props.field.limit)}}</pre>
                             <pre v-else>{{props.row | array_get(props.k)}}</pre>
                         </span>
+                        <span v-else-if="props.k =='main_customersessionconversations_count'">
+                              <router-link :to="'/admin/main-customersessionconversations?options='+getOptions({where:{'customer_session_id':props.row['id']}})">
+                                {{props.row | array_get(props.k)}}
+                              </router-link>
+                        </span>
                         <span v-else>
                             {{props.row | array_get(props.k)}}
                         </span>
@@ -81,6 +86,7 @@ export default {
                     title: {name: "标题", order: true},
                     summary: {name: "会话摘要", order: true,type:'code',limit:30},
                     "main_customer.name": {name: "用户", order: true, type: "select2",orderField:'user_id'},
+                    'main_customersessionconversations_count':{name: "消息数", order: true},
                     //is_deleted: {name: "是否已删除", order: true, type: "label"},
                     created_at: {name: "Created At", order: true, type: "time"},
                     updated_at: {name: "Updated At", order: true, type: "time"},
