@@ -14,7 +14,7 @@ let s2ab = function(s) {
 };
 // 将一个sheet转成最终的excel文件的blob对象，然后利用URL.createObjectURL下载
 let sheet2blob = function(sheet, sheetName) {
-    sheetName = sheetName || 'sheet1';
+    sheetName = (sheetName || 'sheet1').slice(0,29);
     let workbook = {
         SheetNames: [sheetName],
         Sheets: {}
