@@ -20,6 +20,10 @@ class AiPromptTemplateController extends Controller
      */
     protected $resourceModel = 'AiPromptTemplate';
 
+    public $sizer=[
+        'name'=>'like'
+    ];
+
     /**
      * 验证规则
      * @return    array
@@ -34,7 +38,11 @@ class AiPromptTemplateController extends Controller
      * @return  array
      */
     protected function getImportValidateRule($id = 0, $item){
-        $validate = ['name'=>'required','cue_word'=>'required','options'=>'nullable|array'];
+        $validate = [
+            'name'=>'required',
+            'cue_word'=>'required',
+            'options'=>'nullable|array'
+        ];
         return $validate;
     }
 
