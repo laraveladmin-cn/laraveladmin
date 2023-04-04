@@ -58,7 +58,7 @@ services: #服务
       - DOCKER_APP_ENV=${APP_ENV}
     extra_hosts:
       - "local.laraveladmin.cn:host-gateway"
-      - "db1:192.168.10.129"
+      - "db1:192.168.10.138"
     networks:
       - php_network
   nginx: #服务器服务
