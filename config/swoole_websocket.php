@@ -30,9 +30,9 @@ return [
     |--------------------------------------------------------------------------
     */
     'middleware' => [
-        // SwooleTW\Http\Websocket\Middleware\DecryptCookies::class,
-        // SwooleTW\Http\Websocket\Middleware\StartSession::class,
-        // SwooleTW\Http\Websocket\Middleware\Authenticate::class,
+         SwooleTW\Http\Websocket\Middleware\DecryptCookies::class,
+         SwooleTW\Http\Websocket\Middleware\StartSession::class,
+         SwooleTW\Http\Websocket\Middleware\Authenticate::class,
     ],
 
     /*
