@@ -120,7 +120,9 @@
                 row:{
                     ai_prompt_template_id:0,
                     message_text:''
-                }
+                },
+                path:  (window.location.protocol=='https:'?'wss':'ws')+'://'+window.location.host, // 和上面开启的链接是一样的，只是换了ws协议
+                socket:  null,
 
             };
         },
@@ -132,7 +134,38 @@
             ])
         },
         methods:{
-
+            open: function() {
+                console.log("socket连接成功");
+                this.send('["example",[1]]');  // 发个消息 格式默认规定是这样的
+            },
+            error: function() {
+                console.log("连接错误");
+            },
+            getMessage: function(msg) {
+                console.log("收到服务器信息" + msg.data);
+            },
+            send: function(params) {
+                this.socket.send(params);
+            }
+        },
+        created(){
+            if (typeof WebSocket === "undefined") {
+                alert("您的浏览器不支持socket");
+            } else {
+                // 实例化socket
+                this.socket = new WebSocket(this.path);
+                // 监听socket连接
+                this.socket.onopen = this.open;
+                // 监听socket错误信息
+                this.socket.onerror = this.error;
+                // 监听socket消息
+                this.socket.onmessage = this.getMessage;
+            }
+        },
+        destroyed(){
+            if(this.socket){
+                this.socket.close();
+            }
         }
     };
 </script>
