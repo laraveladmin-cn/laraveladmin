@@ -13,6 +13,10 @@ class MainCustomerarticleController extends Controller
 {
     use ResourceController;
 
+    public $sizer=[
+        'title|input'=>'like'
+    ];
+
 
     /**
      * 资源模型
@@ -34,7 +38,13 @@ class MainCustomerarticleController extends Controller
      * @return  array
      */
     protected function getImportValidateRule($id = 0, $item){
-        $validate = ['title'=>'required','input'=>'required','options'=>'required','prompt'=>'required','content'=>'required'];
+        $validate = [
+            'title'=>'required',
+            'input'=>'required',
+            'options'=>'required',
+            'prompt'=>'required',
+            'content'=>'required'
+        ];
         return $validate;
     }
 

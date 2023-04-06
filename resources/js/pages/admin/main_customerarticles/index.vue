@@ -26,7 +26,7 @@ export default {
                 operation: true, //操作列
                 checkbox: true, //选择列
                 btnSizerMore: false, //更多筛选条件按钮
-                keywordKey: 'name', //关键字查询key
+                keywordKey: 'title|input', //关键字查询key
                 keywordGroup: false, //是否为选项组
                 keywordPlaceholder: () => {
                     return this.$t('Please enter keywords');
