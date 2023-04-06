@@ -15,7 +15,7 @@ use SwooleTW\Http\Websocket\Facades\Websocket;
 //连接成功消息回调
 Websocket::on('connect', function ($websocket, Request $request) {
     // called while socket on connect
-    $websocket->emit('message', 'welcome:'.collect($request->user())->toJson());
+    $websocket->emit('message', 'welcome:'.collect([$request->user(),\Illuminate\Support\Facades\Auth::user()])->toJson());
 });
 //断开连接消息回调
 Websocket::on('disconnect', function ($websocket) {
