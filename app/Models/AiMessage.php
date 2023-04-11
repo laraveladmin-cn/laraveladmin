@@ -36,7 +36,12 @@ class AiMessage extends Model
             "0"=>'系统',
             "1"=>'用户',
             "2"=>'回答'
-         ]
+         ],
+        'role_en'=>[
+            "0"=>'system',
+            "1"=>'user',
+            "2"=>'assistant'
+        ]
     ];
     //字段默认值
     protected $fieldsDefault = [

@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 use App\Facades\Option;
+use App\Models\Config;
 use Illuminate\Database\Seeder;
 
 class VersionSeeder extends Seeder
@@ -84,6 +85,15 @@ class VersionSeeder extends Seeder
             'value' => '',
             'type'=>1,
             'itype'=>7
+        ]);
+
+        \App\Models\Config::firstOrCreate(['key'=>'memory_session_length'],[
+            'key' => 'memory_session_length',
+            'name' => '记忆会话条数',
+            'description' => '记忆会话条数',
+            'value' => 1,
+            'type'=>3,
+            'itype'=>6
         ]);
 
         $this->addVersion();

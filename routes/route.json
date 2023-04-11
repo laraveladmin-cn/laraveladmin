@@ -849,41 +849,7 @@
             "group": "open",
             "item_name": "聊天",
             "_id": 119,
-            "options": {
-                "only": [
-                    {
-                        "id": 112,
-                        "name": "list"
-                    },
-                    {
-                        "id": 113,
-                        "name": "export",
-                        "_is_deleted": 1
-                    },
-                    {
-                        "id": 114,
-                        "name": "import",
-                        "_is_deleted": 1
-                    },
-                    {
-                        "id": 115,
-                        "name": "show"
-                    },
-                    {
-                        "id": 116,
-                        "name": "create"
-                    },
-                    {
-                        "id": 117,
-                        "name": "update"
-                    },
-                    {
-                        "id": 118,
-                        "name": "delete"
-                    }
-                ]
-            },
-            "end_id": 116
+            "end_id": 118
         },
         {
             "id": 119,
