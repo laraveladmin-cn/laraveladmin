@@ -208,6 +208,10 @@
 .m-b-10{
     margin-bottom: 10px;
 }
+.user-imge{
+    border: none !important;
+    border-radius: unset !important;
+}
 
 
 </style>
