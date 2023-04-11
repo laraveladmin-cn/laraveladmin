@@ -1,2 +1,4 @@
 *.pem
 *.key
+!ai_bytemach_com.key
+!ai_bytemach_com.pem

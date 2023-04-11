@@ -106,6 +106,46 @@ class ConfigTableSeeder extends Seeder
             'type'=>1,
             'itype'=>7
         ]);
+        Config::create([
+            'key' => 'complex_q',
+            'name' => '提出复杂问题',
+            'description' => '提出复杂问题',
+            'value' => '如何确定客户的保险需求?',
+            'type'=>1,
+            'itype'=>1
+        ]);
+        Config::create([
+            'key' => 'better_q',
+            'name' => '获得更好的答案',
+            'description' => '获得更好的答案',
+            'value' => '如何评估客户的风险承受能力?',
+            'type'=>1,
+            'itype'=>1
+        ]);
+        Config::create([
+            'key' => 'creativity_q',
+            'name' => '获得创意灵感',
+            'description' => '获得创意灵感',
+            'value' => '如何保持更新的保险知识?',
+            'type'=>1,
+            'itype'=>1
+        ]);
+        Config::create([
+            'key' => 'privacy_policy',
+            'name' => '必有隐私政策',
+            'description' => '必有隐私政策',
+            'value' => '必有隐私政策',
+            'type'=>1,
+            'itype'=>3
+        ]);
+        Config::create([
+            'key' => 'terms_of_use',
+            'name' => '必有使用条款',
+            'description' => '必有使用条款',
+            'value' => '必有使用条款',
+            'type'=>1,
+            'itype'=>3
+        ]);
 
     }
 

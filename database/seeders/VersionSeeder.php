@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 use App\Facades\Option;
+use App\Models\Config;
 use Illuminate\Database\Seeder;
 
 class VersionSeeder extends Seeder
@@ -85,7 +86,46 @@ class VersionSeeder extends Seeder
             'type'=>1,
             'itype'=>7
         ]);
-
+        \App\Models\Config::firstOrCreate(['key'=>'complex_q'],[
+            'key' => 'complex_q',
+            'name' => '提出复杂问题',
+            'description' => '提出复杂问题',
+            'value' => '如何确定客户的保险需求?',
+            'type'=>1,
+            'itype'=>1
+        ]);
+        \App\Models\Config::firstOrCreate(['key'=>'better_q'],[
+            'key' => 'better_q',
+            'name' => '获得更好的答案',
+            'description' => '获得更好的答案',
+            'value' => '如何评估客户的风险承受能力?',
+            'type'=>1,
+            'itype'=>1
+        ]);
+        \App\Models\Config::firstOrCreate(['key'=>'creativity_q'],[
+            'key' => 'creativity_q',
+            'name' => '获得创意灵感',
+            'description' => '获得创意灵感',
+            'value' => '如何保持更新的保险知识?',
+            'type'=>1,
+            'itype'=>1
+        ]);
+        \App\Models\Config::firstOrCreate(['key'=>'privacy_policy'],[
+            'key' => 'privacy_policy',
+            'name' => '必有隐私政策',
+            'description' => '必有隐私政策',
+            'value' => '必有隐私政策',
+            'type'=>1,
+            'itype'=>3
+        ]);
+        \App\Models\Config::firstOrCreate(['key'=>'terms_of_use'],[
+            'key' => 'terms_of_use',
+            'name' => '必有使用条款',
+            'description' => '必有使用条款',
+            'value' => '必有使用条款',
+            'type'=>1,
+            'itype'=>3
+        ]);
         $this->addVersion();
     }
 
