@@ -70,8 +70,8 @@ services: #服务
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./docker/nginx/vhost_dev:/etc/nginx/conf.d/vhost
     ports:
-      - 80:80
-      - 443:443
+      - 81:80
+      - 444:443
     restart: always
     links:
       - php:phpfpm
