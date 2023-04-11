@@ -23,7 +23,7 @@
                                     </a>
                                 </div>
                                 <div class="item" :class="row.role==1?'text-right':''"  v-for="(row,i) in (props.data.list?props.data.list.data:[])">
-                                    <img :src="row.role==0?props.data.system_head_url:(row.role==2?props.data.robot_head_url:'/dist/img/user_default_180.gif')"
+                                    <img :src="getImg(row,props)"
                                          alt="user image"
                                          class="user-imge"
                                          :class="row.role==1?'offline':'online'"
@@ -57,11 +57,10 @@
                                     :is-ajax="true" >
                                 </select2>
                             </div>
-
                             <div class="input-group">
-                                <input class="form-control" v-model="row.message_text" placeholder="发送一条消息">
+                                <input class="form-control" v-model="row.content" placeholder="发送一条消息" @keyup.enter="postSend">
                                 <div class="input-group-btn">
-                                    <button type="button" class="btn btn-success">
+                                    <button type="button" class="btn btn-success" @click="postSend">
                                         <i class="fa fa-send-o"></i>
                                     </button>
                                 </div>
@@ -119,8 +118,13 @@
                 },
                 row:{
                     ai_prompt_template_id:0,
-                    message_text:''
-                }
+                    content:'',
+                    ai_chat_id:0,
+                },
+                path:  (window.location.protocol=='https:'?'wss':'ws')+'://'+window.location.host, // 和上面开启的链接是一样的，只是换了ws协议
+                socket:  null,
+                sending:false, //消息发送中
+                in_response:false //消息响应中
 
             };
         },
@@ -132,7 +136,67 @@
             ])
         },
         methods:{
+            getImg(row,props){
+                let url = '/dist/img/user_default_180.gif';
+                if(row.role==0 && props.data.system_head_url){
+                    url = props.data.system_head_url;
 
+                }else if(row.role==2 && props.data.robot_head_url){
+                    url = props.data.robot_head_url;
+                }
+                return url;
+
+            },
+            open: () =>{
+                console.log("socket连接成功");
+                this.send('["example",[1]]');  // 发个消息 格式默认规定是这样的
+            },
+            error: () =>{
+                console.log("连接错误");
+            },
+            getMessage: (msg)=> {
+                console.log("收到服务器信息" + msg.data);
+            },
+            send: (params) =>{
+                this.socket.send(params);
+            },
+            postSend(){
+                if(this.sending || !this.row.content){
+                    return;
+                }
+                this.sending=true;
+                axios.post(this.use_url+'/open/ai-messages', this.row).then( (response)=>{
+                    this.sending=false;
+                    this.row.content='';
+                    if(response.data && response.data.question){
+                        this.$refs.table.data.list.data.push(response.data.question);
+                    }
+                    if(response.data && response.data.answer){
+                        this.$refs.table.data.list.data.push(response.data.answer);
+                    }
+                }).catch((error) =>{
+                    this.sending=false;
+                });
+            }
+        },
+        created(){
+            if (typeof WebSocket === "undefined") {
+                alert("您的浏览器不支持socket");
+            } else {
+                // 实例化socket
+                this.socket = new WebSocket(this.path);
+                // 监听socket连接
+                this.socket.onopen = this.open;
+                // 监听socket错误信息
+                this.socket.onerror = this.error;
+                // 监听socket消息
+                this.socket.onmessage = this.getMessage;
+            }
+        },
+        destroyed(){
+            if(this.socket){
+                this.socket.close();
+            }
         }
     };
 </script>
@@ -143,6 +207,10 @@
 }
 .m-b-10{
     margin-bottom: 10px;
+}
+.user-imge{
+    border: none !important;
+    border-radius: unset !important;
 }
 
 

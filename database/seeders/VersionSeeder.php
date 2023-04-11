@@ -126,6 +126,15 @@ class VersionSeeder extends Seeder
             'type'=>1,
             'itype'=>3
         ]);
+
+        \App\Models\Config::firstOrCreate(['key'=>'memory_session_length'],[
+            'key' => 'memory_session_length',
+            'name' => '记忆会话条数',
+            'description' => '记忆会话条数',
+            'value' => 1,
+            'type'=>3,
+            'itype'=>6
+        ]);
         $this->addVersion();
     }
 

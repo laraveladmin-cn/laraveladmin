@@ -147,6 +147,15 @@ class ConfigTableSeeder extends Seeder
             'itype'=>3
         ]);
 
+        Config::create([
+            'key' => 'memory_session_length',
+            'name' => '记忆会话条数',
+            'description' => '记忆会话条数',
+            'value' => 1,
+            'type'=>3,
+            'itype'=>6
+        ]);
+
     }
 
 
