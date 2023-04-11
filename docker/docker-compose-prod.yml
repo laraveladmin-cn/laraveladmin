@@ -50,8 +50,8 @@ services:
 #    links:
 #      - mysql:db
 #      - redis:redis
-    #ports:
-    #  - 1215:1215
+    ports:
+      - 1215:1215
     restart: always
     environment:
       - DOCKER_APP_ENV=${APP_ENV}
