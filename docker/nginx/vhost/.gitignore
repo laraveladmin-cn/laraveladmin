@@ -2,3 +2,5 @@
 *.key
 !ai_bytemach_com.key
 !ai_bytemach_com.pem
+!aichat_bytemach_com.key
+!aichat_bytemach_com.pem
