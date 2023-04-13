@@ -85,7 +85,7 @@ class Ouser extends Model
      */
     public function setDataAttribute($value)
     {
-        $this->attributes['data'] = json_encode($value);
+        $this->attributes['data'] = json_encode($value,JSON_UNESCAPED_UNICODE);
     }
 
 
