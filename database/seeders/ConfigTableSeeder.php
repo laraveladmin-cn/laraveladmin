@@ -93,9 +93,9 @@ class ConfigTableSeeder extends Seeder
             'key' => 'cue_word_id',
             'name' => '默认聊天模板ID',
             'description' => '默认聊天模板ID',
-            'type'=>3,
+            'type'=>1,
             'itype'=>1,
-            'value' => 0
+            'value' => ''
         ]);
 
         Config::create([
