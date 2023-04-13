@@ -2,7 +2,7 @@
     <div class="open_ai_chat_index">
         <div class="row">
             <div class="col-xs-12">
-                <data-table class="box no-border" :class="'box-'+theme" :options="options" ref="table">
+                <data-table class="box no-border" :class="'box-'+theme" :options="options" ref="table" @loaded="loaded">
                     <template slot="sizer" slot-scope="props">
                         <div class="m-t-10">
                             <button type="button" class="btn btn-default btn-block" @click="addChat">
@@ -175,6 +175,12 @@
                         });
                     }
                 });
+            },
+            loaded(){
+                let rows = this.$refs.table.data.list.data;
+                if(rows.length){
+                    this.chat_active = rows[0].id;
+                }
             }
         },
         watch:{

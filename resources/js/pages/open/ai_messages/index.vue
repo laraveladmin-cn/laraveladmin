@@ -34,7 +34,7 @@
                                                 <i class="fa fa-clock-o"></i>
                                                 {{row.created}}
                                             </small>
-                                           {{row.role==0?props.data.system_name:(row.role==2?props.data.robot_name:'游客')}}
+                                           {{getName(row,props)}}
                                         </a>
                                         <span style="white-space: pre-line;">{{row.content}}</span>
                                     </p>
@@ -58,9 +58,18 @@
                                 </select2>
                             </div>
                             <div class="input-group">
-                                <input class="form-control" v-model="row.content" placeholder="发送一条消息" @keyup.enter="postSend">
+                                <input class="form-control"
+                                       v-model="row.content"
+                                       placeholder="发送一条消息"
+                                       @keyup.enter="postSend"
+                                       :disabled="!row.ai_chat_id"
+                                >
                                 <div class="input-group-btn">
-                                    <button type="button" class="btn btn-success" @click="postSend">
+                                    <button type="button"
+                                            class="btn btn-success"
+                                            @click="postSend"
+                                            :disabled="!row.ai_chat_id"
+                                    >
                                         <i class="fa fa-send-o"></i>
                                     </button>
                                 </div>
@@ -133,16 +142,34 @@
                 'use_url',
                 'theme',
                 'labelClass'
-            ])
+            ]),
+            ...mapState('user',{
+                user:state => state.user,
+                loadingUser:state => state.loading
+            }),
         },
         methods:{
+            getName(row,props){
+                let name = '游客';
+                if(row.role==0 && props.data.system_name){
+                    name = props.data.system_name;
+                }else if(row.role==2 && props.data.robot_name){
+                    name = props.data.robot_name;
+                }else if(row.role==1 && this.user['name']){
+                    name = this.user['name'];
+                }
+                return name;
+            },
             getImg(row,props){
                 let url = '/dist/img/user_default_180.gif';
+                //系统
                 if(row.role==0 && props.data.system_head_url){
                     url = props.data.system_head_url;
-
+                //AI回答
                 }else if(row.role==2 && props.data.robot_head_url){
                     url = props.data.robot_head_url;
+                }else if(row.role==1 && this.user['avatar']){
+                    url = this.user['avatar'];
                 }
                 return url;
 
