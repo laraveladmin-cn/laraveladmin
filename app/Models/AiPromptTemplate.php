@@ -73,15 +73,16 @@ class AiPromptTemplate extends Model
      * 组装获得提示词
      */
     public function scopeGetPrompt($q,$data){
-        $prompt = $data['content'];
-        $options = $data['options'];
+        $cue_word = $data['cue_word']??'';
+        $prompt = $data['content']??'';
+        $options = $data['options']??[];
         //获取参数
         $params = [
         ];
         collect($options)->each(function($item) use (&$params){
             $params[$item['name']] = Arr::get($item['items'],$item['value'].'.value');
         });
-        return $this->render($prompt,$params);
+        return ($cue_word?$cue_word."\n":'').$this->render($prompt,$params);
     }
 
     public function render($tmp,$data){

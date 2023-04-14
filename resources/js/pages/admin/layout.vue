@@ -551,9 +551,6 @@
                     }]
             };
         },
-        mounted(){
-
-        },
         methods:{
             checkDark(){
                 let $control_sidebar = $(this.$refs['control_sidebar']);
@@ -775,7 +772,8 @@
             this.getUser();
         },
         mounted(){
-        }
+
+        },
     };
 </script>
 <style lang="scss" scoped>

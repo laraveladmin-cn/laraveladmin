@@ -25,7 +25,10 @@ class AiChat extends Model
        'ouser_id',
        'user_id',
        'name',
-        'client_id'
+        'client_id',
+        'abstract',
+        'message_id',
+        'abstract_res'
     ];
     //输出隐藏字段
     protected $hidden = ['deleted_at'];
@@ -38,7 +41,9 @@ class AiChat extends Model
         'ouser_id' => 0,
         'user_id' => 0,
         'name' => '新对话',
-        'client_id'=>''
+        'client_id'=>'',
+        'abstract'=>'',
+        'message_id'=>0
     ];
     //字段说明
     protected $fieldsName = [
@@ -47,6 +52,9 @@ class AiChat extends Model
         'user_id' => '用户ID',
         'name' => '聊天室名称',
         'client_id'=>'连接ID',
+        'abstract'=>'摘要',
+        'message_id'=>'已摘要到消息ID',
+        'abstract_res'=>'摘要响应结果',
         'created_at' => '创建时间',
         'updated_at' => '修改时间',
         'deleted_at' => '删除时间'
