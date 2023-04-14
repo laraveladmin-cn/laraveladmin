@@ -38,6 +38,10 @@
                             </edit-item>
                             <edit-item key-name="name" :options="{name: '聊天室名称',type:'text', rules:'required',title:''}" :datas="props">
                             </edit-item>
+                            <edit-item key-name="message_id" :options="{name: '已摘要到消息ID',type:'text', rules:'',title:''}" :datas="props">
+                            </edit-item>
+                            <edit-item key-name="abstract" :options="{name: '摘要',type:'textarea', rules:'',title:''}" :datas="props">
+                            </edit-item>
                         </div>
                     </template>
                 </edit>

@@ -115,7 +115,22 @@ class ConfigTableSeeder extends Seeder
             'type'=>3,
             'itype'=>6
         ]);
-
+        Config::create([
+            'key' => 'abstract_session_length',
+            'name' => '摘要会话条数',
+            'description' => '摘要会话条数',
+            'value' => 1,
+            'type'=>3,
+            'itype'=>6
+        ]);
+        Config::create([
+            'key' => 'abstract_content',
+            'name' => '摘要总结文案',
+            'description' => '摘要总结文案',
+            'value' => 1,
+            'type'=>1,
+            'itype'=>2
+        ]);
     }
 
 

@@ -96,6 +96,24 @@ class VersionSeeder extends Seeder
             'itype'=>6
         ]);
 
+        \App\Models\Config::firstOrCreate(['key'=>'abstract_session_length'],[
+            'key' => 'abstract_session_length',
+            'name' => '摘要会话条数',
+            'description' => '摘要会话条数',
+            'value' => 1,
+            'type'=>3,
+            'itype'=>6
+        ]);
+
+        \App\Models\Config::firstOrCreate(['key'=>'abstract_content'],[
+            'key' => 'abstract_content',
+            'name' => '摘要总结文案',
+            'description' => '摘要总结文案',
+            'value' => 1,
+            'type'=>1,
+            'itype'=>2
+        ]);
+
         $this->addVersion();
     }
 

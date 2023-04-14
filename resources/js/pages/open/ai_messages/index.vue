@@ -129,6 +129,7 @@
                     ai_prompt_template_id:0,
                     content:'',
                     ai_chat_id:0,
+                    ai_prompt_template:null
                 },
                 path:  (window.location.protocol=='https:'?'wss':'ws')+'://'+window.location.host, // 和上面开启的链接是一样的，只是换了ws协议
                 socket:  null,
@@ -136,6 +137,17 @@
                 in_response:false //消息响应中
 
             };
+        },
+        watch:{
+            'row.ai_prompt_template_id'(val){ //选择提示词模板
+                if(val){
+                    axios.get(this.use_url+'/open/ai-prompt-templates/'+val).then(res=>{
+                        this.row.ai_prompt_template = res.data.row;
+                    });
+                }else {
+                    this.row.ai_prompt_template = null;
+                }
+            },
         },
         computed:{
             ...mapState([
@@ -195,6 +207,9 @@
                 axios.post(this.use_url+'/open/ai-messages', this.row).then( (response)=>{
                     this.sending=false;
                     this.row.content='';
+                    if(response.data && response.data.init_message){
+                        this.$refs.table.data.list.data.push(response.data.init_message);
+                    }
                     if(response.data && response.data.question){
                         this.$refs.table.data.list.data.push(response.data.question);
                     }
