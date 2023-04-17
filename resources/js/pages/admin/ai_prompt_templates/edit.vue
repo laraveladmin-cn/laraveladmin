@@ -48,7 +48,8 @@
         components: {
             edit: ()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
             editItem: ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
-            options: ()=>import(/* webpackChunkName: "pages/admin/ai_prompt_templates/options.vue" */ 'pages/admin/ai_prompt_templates/options.vue')
+            options: ()=>import(/* webpackChunkName: "pages/admin/ai_prompt_templates/options.vue" */ 'pages/admin/ai_prompt_templates/options.vue'),
+            "iconEdit": () => import(/* webpackChunkName: "common_components/iconEdit.vue" */ 'common_components/iconEdit.vue'),
         },
         props: {
             url:{
