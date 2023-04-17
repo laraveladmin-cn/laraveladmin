@@ -12,6 +12,15 @@
                             </edit-item>
                             <edit-item key-name="cue_word" :options="{name: '提示词内容',type:'textarea', rules:'required',title:''}" :datas="props">
                             </edit-item>
+                            <edit-item key-name="icon" :options="{name: '图标',title:'双击图标即可选中'}" :datas="props">
+                                <template slot="input-item">
+                                    <icon-edit
+                                        v-model="props.data.row['icon']"
+                                        :disabled="!props.url"
+                                        :placeholder="'请输入图标样式'">
+                                    </icon-edit>
+                                </template>
+                            </edit-item>
                             <edit-item key-name="content" :options="{name: '模板内容',type:'textarea', rules:'',title:''}" :datas="props">
                             </edit-item>
 

@@ -22,7 +22,8 @@ class AiPromptTemplate extends Model
        'name',
        'content',
        'options',
-        'cue_word'
+        'cue_word',
+        'icon'
     ];
     //输出隐藏字段
     protected $hidden = ['deleted_at'];
@@ -35,7 +36,8 @@ class AiPromptTemplate extends Model
         'name' => '',
         'content' => '',
         'options'=>[],
-        'cue_word'=>''
+        'cue_word'=>'',
+        'icon'=>''
     ];
     //字段说明
     protected $fieldsName = [
@@ -44,6 +46,7 @@ class AiPromptTemplate extends Model
         'content' => '可选项模板内容',
         'options' => '可选项',
         'cue_word'=>'提示词内容',
+        'icon'=>'图标',
         'created_at' => '创建时间',
         'updated_at' => '修改时间',
         'deleted_at' => '删除时间'
