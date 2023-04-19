@@ -9,6 +9,55 @@ use App\Models\Traits\BaseModel;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * App\Models\Log
+ *
+ * @property int $id ID
+ * @property int $menu_id 菜单ID
+ * @property int $user_id 用户ID
+ * @property string $location 位置
+ * @property string $ip IP地址
+ * @property string|null $parameters 请求参数
+ * @property string|null $return 返回数据
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Menu|null $menu
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Log commaMapValue($key)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log getClassName()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log getFieldsDefault($key = '')
+ * @method static \Illuminate\Database\Eloquent\Builder|Log getFieldsMap($key = '', $decode = false, $trans = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log getFieldsName($key = '')
+ * @method static \Illuminate\Database\Eloquent\Builder|Log getFillables()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log getItemName()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log getTableComment()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log getTableInfo()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log getTableName()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log ignoreUpdateAt()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log insertReplaceAll($datas)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log main($self = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder|Log mainDB()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Log onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log options(array $options = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Log optionsWhere($where = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Log query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereLocation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereMenuId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereParameters($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereReturn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|Log withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Log withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Log extends Model
 {
     //日志记录存放1年

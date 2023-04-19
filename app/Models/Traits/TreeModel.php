@@ -15,7 +15,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
-
+/**
+ * @method static array getTreeField() 获取自定义树状结构相关字段
+ * @method static optionalParent($node=null) 获取父节点
+ * @method static parents($node,$self = null) 获取所有父节点
+ * @method static children($node,$self = null) 获取子节点
+ */
 trait TreeModel{
     //是树状结构
     public static $isTreeModel = true;
@@ -189,7 +194,8 @@ trait TreeModel{
 
     /**
      * 删除子节点
-     * 返回: bool
+     * @return bool|int|mixed|null
+     * @throws \Exception
      */
     public function deleteChilds(){
         //边界获取
@@ -215,7 +221,7 @@ trait TreeModel{
 
             $this->{$this->getDeletedAtColumn()} = $time = $this->freshTimestamp();
 
-            $query->update([$this->getDeletedAtColumn() => $this->fromDateTime($time)]);
+            return $query->update([$this->getDeletedAtColumn() => $this->fromDateTime($time)]);
         }
     }
 
