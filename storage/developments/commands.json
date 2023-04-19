@@ -1663,5 +1663,72 @@
                 "is_boolean": true
             }
         ]
+    },
+    {
+        "command": "ide-helper:models",
+        "parameters": [
+            {
+                "key": "write",
+                "value": 0,
+                "rules": "",
+                "title": "强制将注释写入您的模型文件中",
+                "name": "强制写入替换",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "W"
+            },
+            {
+                "key": "nowrite",
+                "value": 0,
+                "rules": "",
+                "title": "对话询问将注释写入您的模型文件中",
+                "name": "不强制写入",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "N"
+            },
+            {
+                "key": "write-mixin",
+                "value": 0,
+                "rules": "",
+                "title": "混合写入到配置文件中'_ide_helper_models.php'",
+                "name": "混合写入",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "M"
+            },
+            {
+                "key": "reset",
+                "value": 0,
+                "rules": "",
+                "title": "",
+                "name": "重置所有模型的注释",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true,
+                "key_as": "R"
+            },
+            {
+                "key": "dir",
+                "value": "",
+                "rules": "",
+                "title": "",
+                "name": "指定目录",
+                "placeholder": "path/to/models"
+            },
+            {
+                "key": "ignore",
+                "value": "",
+                "rules": "",
+                "title": "",
+                "name": "忽略模型",
+                "placeholder": "App\\Models\\Post,App\\Models\\User",
+                "key_as": "I"
+            }
+        ],
+        "name": "为模型生成自动完成"
     }
 ]
