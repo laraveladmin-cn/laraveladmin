@@ -8,6 +8,7 @@
 namespace App\Models\Traits;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 
 /**
@@ -36,7 +37,13 @@ trait BaseModel{
      */
     protected function serializeDate(\DateTimeInterface $date)
     {
-        return $date->format('Y-m-d H:i:s');
+        $request = Request::instance();
+        $timezone = $request->header('TimeZone')?:$request->cookie('TimeZone');
+        if($timezone){
+            return $date->timezone($timezone)->format('Y-m-d H:i:s');
+        }
+        return $date->toDateTimeLocalString();
+
     }
 
     /**

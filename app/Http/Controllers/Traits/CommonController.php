@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Traits;
 
 
 use App\Facades\LifeData;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -384,15 +385,26 @@ trait CommonController{
                 'order'=>$options['order']
             ]
         ]);
-        if($this->sizerAs){
-            $options['where'] = collect($options['where'])->map(function ($item){
-                $key = $item['key'];
-                if($really_key = Arr::get($this->sizerAs,$key)){
-                    $item['key'] = $really_key;
-                }
-                return $item;
-            })->toArray();
-        }
+        $options['where'] = collect($options['where'])->map(function ($item){
+            //字段别名处理
+            $key = $item['key'];
+            if($really_key = Arr::get($this->sizerAs,$key)){
+                $item['key'] = $really_key;
+            }
+            //日期本地化处理
+            $val = $item['val'];
+            $pattern = '/^\d\d\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])(\s([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9])?$/';
+           if(Str::endsWith($item['key'],'_at') && is_string($val) && preg_match($pattern, $val)){
+               if(Str::contains($val,'T')){ //标准日期格式
+                   $item['val'] = Carbon::parse($val)->toDateTimeString();
+               }else{
+                   $request = Request::instance();
+                   $timezone = $request->header('TimeZone')?:$request->cookie('TimeZone')?:config('app.timezone');
+                   $item['val'] = Carbon::parse($val,$timezone)->timezone(config('app.timezone'))->toDateTimeString();
+               }
+           }
+            return $item;
+        })->toArray();
         return $options;
     }
 

@@ -61,7 +61,7 @@ RUN apt-get install -y default-mysql-client \
 
 ENV PATH /root/.composer/vendor/bin:$PATH
 RUN chown -R www-data:www-data /var/www && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+#    cp /usr/share/zoneinfo/UTC /etc/localtime && \
     apt-get clean && \
     rm -rf /tmp/pear &&\
     rm -rf /var/lib/apt/lists/* &&\
