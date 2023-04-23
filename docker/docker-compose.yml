@@ -32,7 +32,9 @@ services: #服务
     networks:
       - php_network
   php: #用于开发环境
-    build: ./docker/php
+    build:
+      context: ./ #编译运行上下文目录
+      dockerfile: ./docker/php/Dockerfile #dockerfile对应文件
     #image: laraveladmin/laraveladmin #镜像源
     depends_on: #启动依赖
       - redis
