@@ -293,6 +293,9 @@
                                              <span v-if="field.limit" :title="array_get(row,k,'')">
                                                    {{row | array_get(k) | str_limit(field.limit)}}
                                              </span>
+                                             <span v-else-if="k.endsWith('_at')">
+                                                     {{row | array_get(k) | to_local_time}}
+                                            </span>
                                             <span v-else>
                                                      {{row | array_get(k)}}
                                             </span>

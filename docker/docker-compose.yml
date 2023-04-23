@@ -32,8 +32,8 @@ services: #服务
     networks:
       - php_network
   php: #用于开发环境
-    #build: ./docker/php
-    image: laraveladmin/laraveladmin #镜像源
+    build: ./docker/php
+    #image: laraveladmin/laraveladmin #镜像源
     depends_on: #启动依赖
       - redis
       - mysql

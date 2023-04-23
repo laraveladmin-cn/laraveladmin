@@ -16,9 +16,15 @@ class LogController extends Controller
      */
     public function __construct()
     {
+        $request = Request::instance();
+        $timezone = $request->header('TimeZone')?:$request->cookie('TimeZone')?:config('app.timezone');
+        $created_at = Carbon::now()
+            ->timezone($timezone)
+            ->startOfDay()
+            ->toDateTimeString();
         $this->sizerDefault = [
             'created_at' => [
-                Carbon::now()->startOfDay()->toDateTimeString(),
+                $created_at,
                 '',
             ],
         ];

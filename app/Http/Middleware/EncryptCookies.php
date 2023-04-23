@@ -15,7 +15,8 @@ class EncryptCookies extends Middleware
             'Authorization',
             config('laravel_admin.client_id_key'),
             'Language',
-            'Open-Id'
+            'Open-Id',
+            'TimeZone'
         ];
     }
 

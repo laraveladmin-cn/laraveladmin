@@ -56,11 +56,18 @@ export default {
                 });
 
             }
+        },
+        //客户端时区
+        setTimeZone(){
+            let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            setCookie('TimeZone', timeZone);
         }
     },
     created() {
         //默认语言包
         this.setLanguage(config.language);
+        //设置时区
+        this.setTimeZone();
         $('body').addClass(this.theme);
         //添加弹窗拦截器
         window.axios.interceptors.response.use((response) => {
@@ -188,6 +195,9 @@ export default {
                 config.headers.Language = decodeURIComponent(language);
             }
             config.headers.RefererPage = window.location.href;
+            //客户端时区
+            let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            config.headers.TimeZone = timeZone;
             config.paramsSerializer = function (params) {
                 params = JSON.parse(JSON.stringify(params));
                 params['json'] = 1;
