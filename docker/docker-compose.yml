@@ -28,7 +28,9 @@ services: #服务
       - ../docker/redis/data:/data #redis数据文件存放目录
       - ./docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
   php: #用于开发环境
-    build: ./docker/php
+    build:
+      context: ./ #编译运行上下文目录
+      dockerfile: ./docker/php/Dockerfile #dockerfile对应文件
     #image: laraveladmin/laraveladmin #镜像源
     depends_on: #启动依赖
       - redis
