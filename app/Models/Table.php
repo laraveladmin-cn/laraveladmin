@@ -7,6 +7,29 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BaseModel;
 
+/**
+ * App\Models\Table
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Table commaMapValue($key)
+ * @method static \Illuminate\Database\Eloquent\Builder|Table getClassName()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table getFieldsDefault($key = '')
+ * @method static \Illuminate\Database\Eloquent\Builder|Table getFieldsMap($key = '', $decode = false, $trans = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Table getFieldsName($key = '')
+ * @method static \Illuminate\Database\Eloquent\Builder|Table getFillables()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table getItemName()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table getTableComment()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table getTableInfo()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table getTableName()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table ignoreUpdateAt()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table insertReplaceAll($datas)
+ * @method static \Illuminate\Database\Eloquent\Builder|Table mainDB()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table options(array $options = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Table optionsWhere($where = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Table query()
+ * @mixin \Eloquent
+ */
 class Table extends Model
 {
 

@@ -10,7 +10,23 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-
+/**
+ * @method static insertReplaceAll(array $datas) 批量替换插入
+ * @method static optionsWhere(array $where=[]) 条件筛选过滤
+ * @method static options(array $options=['order'=>[],'where'=>[]]) 条件筛选过滤加排序
+ * @method static mainDB() 获取本模型数据库连接对象
+ * @method static getTableInfo() 获取本模型表信息
+ * @method static getFieldsMap($key='',$decode=false,$trans=false) 获取本模型字段值map
+ * @method static getFieldsDefault($key='') 获取本模型字段默认值
+ * @method static getFieldsName($key='') 获取本模型字段名称
+ * @method static getTableName() 获取本模型表名称
+ * @method static getTableComment() 获取本模型表注释
+ * @method static getItemName() 获取本模型名称
+ * @method static getClassName() 获取本模型类名
+ * @method static ignoreUpdateAt() 忽略更新时间
+ * @method static getFillables() 获取本模型可批量赋值白名单
+ * @method static commaMapValue($key) 逗号分隔的字段值map
+ */
 trait BaseModel{
 
     /**

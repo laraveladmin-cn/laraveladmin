@@ -33,6 +33,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
+        "barryvdh/laravel-ide-helper": "^2.12",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",
         "kitloong/laravel-migrations-generator": "^4.4",

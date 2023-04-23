@@ -15,6 +15,122 @@ use App\Models\Traits\BaseModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+/**
+ * App\Models\Menu
+ *
+ * @property int $id ID
+ * @property string $name 名称@required
+ * @property string $icons 图标@nullable|alpha_dash
+ * @property string $description 描述$textarea
+ * @property string $url URL路径
+ * @property int $parent_id 父级ID@sometimes|required|exists:menus,id
+ * @property array $method 请求方式:1-get,2-post,4-put,8-delete,16-head,32-options,64-trace,128-connect$checkbox@required|array
+ * @property int $is_page 是否为页面:0-否,1-是$radio@in:0,1
+ * @property int $disabled 功能状态:0-启用,1-禁用$radio@in:0,1
+ * @property int $status 状态:1-显示,2-不显示$radio@in:1,2
+ * @property int $resource_id 所属资源
+ * @property string $group 后台路由所属组
+ * @property string $action 绑定控制器方法
+ * @property string $env 使用环境
+ * @property string $plug_in_key 插件菜单唯一标识
+ * @property int $level 层级
+ * @property int $left_margin 左边界
+ * @property int $right_margin 右边界
+ * @property array $use 路由使用地方:1-api,2-web
+ * @property string $as 路由别名
+ * @property array $middleware 单独使用中间件
+ * @property string $item_name 资源名称
+ * @property int $is_out_link 是否为外部链接:0-否,1-是
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Param[] $body_params
+ * @property-read int|null $body_params_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|Menu[] $childrens
+ * @property-read int|null $childrens_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Log[] $logs
+ * @property-read int|null $logs_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\MenuRole[] $menu_roles
+ * @property-read int|null $menu_roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Param[] $params
+ * @property-read int|null $params_count
+ * @property-read Menu|null $parent
+ * @property-read Menu|null $resource
+ * @property-read \Illuminate\Database\Eloquent\Collection|Menu[] $resources
+ * @property-read int|null $resources_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Response[] $responses
+ * @property-read int|null $responses_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
+ * @property-read int|null $roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Param[] $route_params
+ * @property-read int|null $route_params_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu children($node, $self = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu commaMapValue($key)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu decodeValue($item)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getClassName()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getFieldsDefault($key = '')
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getFieldsMap($key = '', $decode = false, $trans = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getFieldsName($key = '')
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getFillables()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getItemName()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getMain()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getTableComment()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getTableInfo()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getTableName()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu getTreeField()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu hasPermission($url, $method = 'get', $is_bool = true)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu hasPermissionPath(string $path, string $method = 'get', string $is_bool = true)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu ignoreUpdateAt()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu insertReplaceAll($datas)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu isUrlInMenus($url, $menus, $method = 'get', $is_bool = true)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu main()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu mainAdmin()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu mainDB()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu mainHome()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu methodValue($method)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu module($ids)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu notModule($ids)
+ * @method static \Illuminate\Database\Query\Builder|Menu onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu optionalParent($node = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu options(array $options = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu optionsWhere($where = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu parents(bool $node, bool $self = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu realRoute($url)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu trans($item, $key)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu usable()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereAction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereAs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereDisabled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereEnv($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereGroup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereIcons($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereIsOutLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereIsPage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereItemName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereLeftMargin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereMethod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereMiddleware($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu wherePlugInKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereResourceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereRightMargin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUse($value)
+ * @method static \Illuminate\Database\Query\Builder|Menu withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Menu withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Menu extends Model
 {
     public function __construct(array $attributes = [])
