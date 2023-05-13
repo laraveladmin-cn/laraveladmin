@@ -22,24 +22,12 @@
                                         查看更多
                                     </a>
                                 </div>
-                                <div class="item" :class="row.role==1?'text-right':''"  v-for="(row,i) in (props.data.list?props.data.list.data:[])">
-                                    <img :src="getImg(row,props)"
-                                         alt="user image"
-                                         class="user-imge"
-                                         :class="row.role==1?'offline':'online'"
-                                    >
-                                    <p class="message"  :class="row.role==1?'right-message':''" >
-                                        <a  class="name">
-                                            <small class="text-muted" :class="row.role==1?'pull-left':'pull-right'">
-                                                <i class="fa fa-clock-o"></i>
-                                                {{row.created}}
-                                            </small>
-                                           {{getName(row,props)}}
-                                        </a>
-                                        <span style="white-space: pre-line;">{{row.content}}</span>
-                                    </p>
+                                <div v-for="(row,i) in (props.data.list?props.data.list.data:[])">
+                                    <item :value="row" :datas="props"></item>
                                 </div>
-
+                                <div v-for="(row,i) in send_data" v-if="sending">
+                                    <item :value="row" :datas="props" :use-time="use_time"></item>
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -90,7 +78,7 @@
             'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
             elEmpty:()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/empty'), //数字框异步组件
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
-
+            item: () => import(/* webpackChunkName: "pages/open/ai_messages/item.vue" */ 'pages/open/ai_messages/item.vue'),
 
         },
         props: {
@@ -129,13 +117,28 @@
                     ai_prompt_template_id:0,
                     content:'',
                     ai_chat_id:0,
-                    ai_prompt_template:null
+                    ai_prompt_template:null,
+                    role:1,
                 },
                 path:  (window.location.protocol=='https:'?'wss':'ws')+'://'+window.location.host, // 和上面开启的链接是一样的，只是换了ws协议
                 socket:  null,
                 sending:false, //消息发送中
-                in_response:false //消息响应中
-
+                in_response:false, //消息响应中
+                use_time:0,//使用时间
+                interval:null,//计算器
+                send_data:[
+                    {
+                        id:0,
+                        role:1,
+                        content:''
+                    },
+                    {
+                        id:-1,
+                        role:2,
+                        content:'思考中...',
+                        is_think:true
+                    }
+                ]
             };
         },
         watch:{
@@ -161,31 +164,7 @@
             }),
         },
         methods:{
-            getName(row,props){
-                let name = '游客';
-                if(row.role==0 && props.data.system_name){
-                    name = props.data.system_name;
-                }else if(row.role==2 && props.data.robot_name){
-                    name = props.data.robot_name;
-                }else if(row.role==1 && this.user['name']){
-                    name = this.user['name'];
-                }
-                return name;
-            },
-            getImg(row,props){
-                let url = '/dist/img/user_default_180.gif';
-                //系统
-                if(row.role==0 && props.data.system_head_url){
-                    url = props.data.system_head_url;
-                //AI回答
-                }else if(row.role==2 && props.data.robot_head_url){
-                    url = props.data.robot_head_url;
-                }else if(row.role==1 && this.user['avatar']){
-                    url = this.user['avatar'];
-                }
-                return url;
 
-            },
             open: () =>{
                 console.log("socket连接成功");
                 this.send('["example",[1]]');  // 发个消息 格式默认规定是这样的
@@ -204,9 +183,13 @@
                     return;
                 }
                 this.sending=true;
-                axios.post(this.use_url+'/open/ai-messages', this.row).then( (response)=>{
+                let send_data = copyObj(this.send_data);
+                let row = copyObj(this.row);
+                send_data[0]= row;
+                this.send_data=send_data;
+                this.row.content='';
+                axios.post(this.use_url+'/open/ai-messages', row).then( (response)=>{
                     this.sending=false;
-                    this.row.content='';
                     if(response.data && response.data.init_message){
                         this.$refs.table.data.list.data.push(response.data.init_message);
                     }
@@ -216,8 +199,10 @@
                     if(response.data && response.data.answer){
                         this.$refs.table.data.list.data.push(response.data.answer);
                     }
+                    this.use_time=0;
                 }).catch((error) =>{
                     this.sending=false;
+                    this.use_time=0;
                 });
             }
         },
@@ -234,26 +219,28 @@
                 // 监听socket消息
                 this.socket.onmessage = this.getMessage;
             }
+
+            this.interval = window.setInterval(()=>{
+                if(this.sending){
+                    this.use_time++;
+                }
+            },1000);
+
+
         },
         destroyed(){
             if(this.socket){
                 this.socket.close();
             }
+            if(this.interval){
+                window.clearInterval(this.interval);
+            }
         }
     };
 </script>
 <style lang="scss" scoped>
-.chat .item>.right-message{
-    margin-right: 55px;
-    margin-left: 0px;
-}
 .m-b-10{
     margin-bottom: 10px;
 }
-.user-imge{
-    border: none !important;
-    border-radius: unset !important;
-}
-
 
 </style>

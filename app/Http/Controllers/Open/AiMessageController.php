@@ -235,7 +235,7 @@ class AiMessageController extends Controller
         $this->summary($item,$answer);
         return Response::returns([
             $primaryKey => $item[$primaryKey],
-            'alert' => alert([
+            '_alert' => alert([
                 'message' => trans('Creating a successful!') //创建成功
             ]),
             'question'=>$this->handleItem($item),
@@ -320,6 +320,9 @@ class AiMessageController extends Controller
         }
         return $ai_message;
     }
+
+
+
 
 
 }

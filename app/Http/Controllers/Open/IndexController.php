@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Open;
 
+use AlibabaCloud\Client\AlibabaCloud;
 use App\Facades\ClientAuth;
 use App\Facades\Option;
 use App\Http\Controllers\Controller;
@@ -312,6 +313,32 @@ class IndexController extends Controller
             'errors' => ['roue'=>trans('Routing address error')],
             'message' => trans('The resource you visited does not exist')
         ],404);
+    }
+
+    /**
+     * 更新阿里巴巴云应用token
+     * @return void
+     */
+    public function alibabaToken(){
+        $obj = \App\Facades\AlibabaCloud::regionId("cn-shanghai")
+            ->asDefaultClient();
+        try {
+            $response = $obj->nlsCloudMeta()
+                ->v20180518()
+                ->createToken()
+                ->request();
+            $token = $response["Token"];
+            if ($token != NULL) {
+                return Response::returns($token);
+            }
+            $message = '获取token失败';
+        }catch (\Exception $exception) {
+            $message = $exception->getErrorMessage();
+        }
+        return Response::returns([
+            'errors' => [$message],
+            'message' => $message
+        ],500);
     }
 
 
