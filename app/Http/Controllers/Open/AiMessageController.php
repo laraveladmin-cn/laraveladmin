@@ -42,6 +42,14 @@ class AiMessageController extends Controller
         'id'=>'desc'
     ];
 
+
+    protected $timezone=null;
+    public function __construct()
+    {
+        $request = Request::instance();
+        $this->timezone = $request->header('TimeZone')?:$request->cookie('TimeZone');
+    }
+
 //    public $per_page=2;
 
     /**
@@ -132,7 +140,7 @@ class AiMessageController extends Controller
             return $item;
         }
         $item = collect($item)->toArray();
-        $item['created'] = Carbon::createFromFormat('Y-m-d H:i:s',$item['created_at'])
+        $item['created'] = Carbon::createFromFormat('Y-m-d H:i:s',$item['created_at'],$this->timezone)
             ->diffForHumans();
         return $item;
     }
@@ -161,18 +169,32 @@ class AiMessageController extends Controller
         $message_id = Arr::get($ai_chat,'message_id',0);
         $abstract = Arr::get($ai_chat,'abstract','');//摘要内容
         $memory_session_length= Option::get('memory_session_length',1);
+        $has_system = false;
         $messages = collect($ai_chat->ai_messages()
             ->where('id','>',$message_id)
+            ->where('role','<>',2)
             ->take($memory_session_length)
             ->orderBy('id','desc')
             ->get(['id','role','content']))
             ->sortBy('id')
             ->values()
-            ->map(function ($item, $key)use($map_role) {
+            ->map(function ($item, $key)use($map_role,&$has_system) {
                 $item_data = collect($item)->except('id')->toArray();
+                if($item_data['role']==0){
+                    $has_system = true;
+                }
                 $item_data['role'] = Arr::get($map_role,$item_data['role'],'user');
                 return $item_data;
             });
+        if(!$has_system){
+            $content = $ai_chat->ai_messages()->where('role',0)->value('content');
+            if($content){
+                $messages = $messages->prepend([
+                    'role'=>'system',
+                    'content'=>$content
+                ]);
+            }
+        }
         if($abstract){
             $messages = $messages->prepend([
                 'role'=>'system',
@@ -261,6 +283,7 @@ class AiMessageController extends Controller
         $abstract_content = Option::get('abstract_content','');
         if($count >= $abstract_session_length && $abstract_session_length && $abstract_content){
             $messages = collect($ai_chat->ai_messages()
+                ->where('role','>',0)
                 ->where('id','>',$last_answer_id)
                 ->orderBy('id','desc')
                 ->get(['id','role','content']))
