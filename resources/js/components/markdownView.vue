@@ -1,6 +1,6 @@
 <template>
     <div @mouseout="mouseoutEvent">
-        <div :id="options.id" ref="editormd" style="height: 100%">
+        <div :id="options.id" ref="editormd" class="content-container" style="height: 100%">
             <textarea style="display:none;"></textarea>
         </div>
     </div>
@@ -165,5 +165,9 @@
     @import url('/bower_components/editor.md/css/editormd.css');
     .editormd-fullscreen{
         z-index: 9999;
+    }
+    .no-padding .content-container{
+        padding: 0;
+        text-align: unset;
     }
 </style>

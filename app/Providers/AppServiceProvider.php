@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use AlibabaCloud\Client\AlibabaCloud;
 use App\Console\DevelopCommands\BuildApiDoc;
 use App\Console\DevelopCommands\CreateAll;
 use App\Console\DevelopCommands\CreateController;
@@ -18,6 +19,7 @@ use App\Services\OptionRepository;
 use App\Services\SMSNewService;
 use App\Validators\CustomValidator;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -48,6 +50,15 @@ class AppServiceProvider extends ServiceProvider
         //短信发送
         $this->app->singleton('sms' , function($app){
             return new SMSNewService();
+        });
+
+        //注册阿里云应用
+        collect(config('alibaba_cloud.apps'))->each(function ($config,$key){
+            $this->app->singleton('alibaba_cloud_apps.'.$key, function ()use ($config) {
+                $id = Arr::get($config,'AccessKeyID');
+                $secret = Arr::get($config,'AccessKeySecret');
+                return  AlibabaCloud::accessKeyClient($id,$secret);
+            });
         });
     }
 
@@ -98,5 +109,6 @@ class AppServiceProvider extends ServiceProvider
         {
             return new NestedSetsService($app['DbMysqlModel']);
         });
+
     }
 }

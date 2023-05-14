@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers\Open;
 
+use AlibabaCloud\Client\AlibabaCloud;
 use App\Facades\ClientAuth;
 use App\Facades\Option;
 use App\Http\Controllers\Controller;
+use App\Models\AiMessage;
 use App\Models\Menu;
+use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -313,6 +318,124 @@ class IndexController extends Controller
             'message' => trans('The resource you visited does not exist')
         ],404);
     }
+
+    /**
+     * 语言读取文字
+     * @return void
+     * @throws ValidationException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function readText(){
+        $request = app('request');
+        $validator = Validator::make($request->all(), [
+            'text'=>'required|min:1|max:30000'
+        ]);
+        if ($validator->fails()) {
+            throw ValidationException::withMessages($validator->errors()->toArray());
+        }
+        $data = [];
+        $data['format'] = 'wav';
+        $data['token'] = $this->alibabaToken();
+        $data['appkey'] = config('alibaba_cloud.apps.default.AppKey');
+        $data['text'] = $request->input('text');
+        $client = new Client();
+        try {
+            $response = $client->post('https://nls-gateway.aliyuncs.com/stream/v1/tts', [
+                'body' => json_encode($data)
+            ]);
+            $content = $response->getBody();
+            $path = 'tmp/'.date('Y-m/d/').md5($data['text']).'.wav';
+            Storage::disk('public')->put($path,$content);
+            $url = Storage::disk('public')->url($path);
+            if($id = $request->input('id')){
+                AiMessage::query()->where('id',$id)->update([
+                    'read_url'=>$url
+                ]);
+            }
+            return Response::returns([
+                'url'=>$url
+            ]);
+
+        } catch (\Exception $e) {
+            return Response::returns([
+                'errors' => [$e->getMessage()],
+                'message' => '转换音频失败!'
+            ],500);
+        }
+    }
+
+    /**
+     * 语音转文字
+     * @return void
+     */
+    public function audioToText(){
+        $request = app('request');
+        $validator = Validator::make($request->all(), [
+            'audio'=>'required|file'
+        ]);
+        if ($validator->fails()) {
+            throw ValidationException::withMessages($validator->errors()->toArray());
+        }
+        $client = new Client();
+        try {
+            $appkey = config('alibaba_cloud.apps.default.AppKey');
+            $file = $request->file('audio');
+            $response = $client->post('https://nls-gateway.aliyuncs.com/stream/v1/asr?appkey='.$appkey, [
+                'headers' => [
+                    'Content-Type' => 'application/octet-stream',
+                    'X-NLS-Token'=>$this->alibabaToken(),
+                    'Accept' => '*/*',
+                    'Host'=>'nls-gateway.aliyuncs.com'
+                ],
+                'body' => fopen($file->getRealPath(), 'r'),
+            ]);
+            if ($response->getStatusCode() === 200) {
+                $result = json_decode($response->getBody(), true);
+                return Response::returns($result);
+            } else {
+                return Response::returns([
+                    'errors' => ['调用接口出错'],
+                    'message' => '转换音频失败!'
+                ],500);
+            }
+        } catch (\Exception $e) {
+            return Response::returns([
+                'errors' => [$e->getMessage()],
+                'message' => '转换音频失败!'
+            ],500);
+        }
+    }
+
+    /**
+     * 更新阿里巴巴云应用token
+     * @return void
+     */
+    protected function alibabaToken(){
+        $alibaba_token = Cache::get('alibaba_token');
+        if($alibaba_token){
+            return $alibaba_token;
+        }
+        \App\Facades\AlibabaCloud::regionId("cn-shanghai")
+            ->asDefaultClient();
+        try {
+            $response = AlibabaCloud::nlsCloudMeta()
+                ->v20180518()
+                ->createToken()
+                ->request();
+            $token = $response["Token"];
+            if ($token != NULL) {
+                $effective = ($token['ExpireTime']-time())-10;
+                Cache::put('alibaba_token',$token['Id'],$effective);
+                return $token['Id'];
+            }
+            $message = '获取token失败';
+        }catch (\Exception $exception) {
+            $message = $exception->getErrorMessage();
+        };
+        return '';
+    }
+
+
 
 
 
