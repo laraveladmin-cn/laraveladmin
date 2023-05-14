@@ -5,7 +5,8 @@ return [
     'apps' => [
         'default' => [
             'AccessKeyID' => env('ALIBABACLOUD_ACCESSKEY_ID',''),
-            'AccessKeySecret'=>env('ALIBABACLOUD_ACCESSKEY_SECRET','')
+            'AccessKeySecret'=>env('ALIBABACLOUD_ACCESSKEY_SECRET',''),
+            'AppKey'=>env('ALIBABACLOUD_APPKEY',''),
         ],
     ],
 

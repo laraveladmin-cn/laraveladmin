@@ -676,6 +676,34 @@
             "group": "open",
             "action": "IndexController@wxConfig",
             "_id": 118
+        },
+        {
+            "id": 135,
+            "name": "文本内容转语音",
+            "icons": "fa-hourglass-end",
+            "url": "/open/read-text",
+            "parent_id": 4,
+            "method": [
+                "get",
+                "post"
+            ],
+            "group": "open",
+            "action": "IndexController@readText",
+            "_id": 135
+        },
+        {
+            "id": 136,
+            "name": "音频转文字",
+            "icons": "fa-tty",
+            "url": "/open/audio-to-text",
+            "parent_id": 4,
+            "method": [
+                "get",
+                "post"
+            ],
+            "group": "open",
+            "action": "IndexController@audioToText",
+            "_id": 136
         }
     ],
     "resource": [

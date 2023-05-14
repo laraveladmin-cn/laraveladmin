@@ -13,8 +13,11 @@
                 </small>
                 {{getName(row,datas)}}
             </a>
-            <markdown-view class="no-padding" v-model="row.content" :id="'editormd_'+row.id"></markdown-view>
-<!--            <span style="white-space: pre-line;">{{row.content}}</span>-->
+<!--            <markdown-view class="no-padding" v-model="row.content" :id="'editormd_'+row.id"></markdown-view>-->
+            <span style="white-space: pre-line;">{{row.content}}</span>
+            <span @click="pay" v-if="row.role==2 && !row.is_think">
+                <i class="fa fa-play-circle"></i>
+            </span>
         </p>
     </div>
 </template>
@@ -65,6 +68,28 @@ export default {
         }
     },
     methods:{
+        //播放语音
+        pay(){
+            if(this.row.read_url){
+                this.read();
+                return;
+            }
+            axios.post(this.use_url+'/open/read-text', {
+                "text":this.row.content,
+                "id":this.row.id,
+            }).then( (response)=>{
+                if(response.status==200){
+                    this.row.read_url = response.data.url;
+                    this.read();
+                }
+            }).catch((error) =>{
+
+            });
+        },
+        read(){
+            let audio = new Audio(this.row.read_url);
+            audio.play();
+        },
         getName(row,props){
             let name = '游客';
             if(row.role==0 && props.data.system_name){

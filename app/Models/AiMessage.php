@@ -24,7 +24,8 @@ class AiMessage extends Model
     protected $fillable = [
        'ai_chat_id',
        'role',
-       'content'
+       'content',
+        'read_url'
     ];
     //输出隐藏字段
     protected $hidden = ['deleted_at'];
@@ -47,7 +48,8 @@ class AiMessage extends Model
     protected $fieldsDefault = [
         'ai_chat_id' => 0,
         'role' => 0,
-        'content' => ''
+        'content' => '',
+        'read_url'=>''
     ];
     //字段说明
     protected $fieldsName = [
@@ -55,6 +57,7 @@ class AiMessage extends Model
         'ai_chat_id' => '聊天室ID',
         'role' => '角色',
         'content' => '内容',
+        'read_url'=>'内容阅读音频地址',
         'created_at' => '创建时间',
         'updated_at' => '修改时间',
         'deleted_at' => '删除时间'

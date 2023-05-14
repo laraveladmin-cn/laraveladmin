@@ -46,12 +46,23 @@
                                 </select2>
                             </div>
                             <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button type="button"
+                                            class="btn btn-info"
+                                            @mousedown="recording"
+                                            @mouseup="stopRecording"
+                                            :disabled="!row.ai_chat_id || audio.submiting"
+                                    >
+                                        <i class="fa" :class="audio.submiting?'fa-microphone-slash':'fa-microphone'"></i>
+                                    </button>
+                                </div>
                                 <input class="form-control"
                                        v-model="row.content"
-                                       placeholder="发送一条消息"
+                                       :placeholder="audio.recording?'正在录音...':(audio.submiting?'语音识别中...':'发送一条消息')"
                                        @keyup.enter="postSend"
-                                       :disabled="!row.ai_chat_id"
+                                       :disabled="!row.ai_chat_id || audio.submiting"
                                 >
+
                                 <div class="input-group-btn">
                                     <button type="button"
                                             class="btn btn-success"
@@ -73,6 +84,7 @@
 
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
+    import Recorder from 'js-audio-recorder';
     export default {
         components:{
             'data-table':()=>import(/* webpackChunkName: "common_components/datatable.vue" */ 'common_components/datatable.vue'),
@@ -138,7 +150,14 @@
                         content:'思考中...',
                         is_think:true
                     }
-                ]
+                ],
+                audio:{ //音频
+                    recording:false,
+                    mediaRecorder:null,
+                    chunks:[],
+                    recorder:null,
+                    submiting:false
+                }
             };
         },
         watch:{
@@ -164,7 +183,74 @@
             }),
         },
         methods:{
+            initRecording(){
+                this.audio.recorder = new Recorder({
+                        sampleBits: 16,         // 采样位数，范围8或16
+                        sampleRate: 16000,      // 采样率，范围11025、16000、22050、24000、44100、48000
+                        numChannels: 1,         // 声道，范围1或2                    }
+                    });
+            /*    const constraints = { audio: true };
+                // 获取音频流
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then((stream) =>{
+                        // 创建一个 MediaRecorder 对象来录制音频
+                        this.audio.mediaRecorder = new MediaRecorder(stream);
 
+                        // 监听录音的数据块并保存它们
+                        this.audio.mediaRecorder.addEventListener('dataavailable', (e)=> {
+                            this.audio.chunks.push(e.data);
+                        });
+
+                        // 录音结束时，将数据块合并成单个Blob对象并发送给服务器
+                        this.audio.mediaRecorder.addEventListener('stop', () =>{
+                            const blob = new Blob(this.audio.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+                            //提交上传音频文件
+                            this.postRecording(blob);
+                        });
+                    })
+                    .catch(error => console.error(error));*/
+            },
+            //开始录音
+            recording(){
+                this.audio.recording = true;
+                //this.audio.chunks = [];
+                //this.audio.mediaRecorder.start();
+                this.audio.recorder.start();
+            },
+            //停止录音
+            stopRecording(){
+                this.audio.recording = false;
+                this.audio.recorder.stop();
+                if(this.audio.recorder.duration>0.5){
+                    this.postRecording();
+                }
+                //this.audio.mediaRecorder.stop();
+            },
+            postRecording(){
+                if(this.audio.submiting){
+                    return ;
+                }
+                this.audio.submiting = true;
+                let blob = this.audio.recorder.getPCMBlob();
+                // 创建 FormData 对象
+                const formData = new FormData();
+                // 将录音数据作为二进制文件添加到 FormData 中
+                formData.append('audio', blob);
+                // 发送 POST 请求
+                axios.post(this.use_url+'/open/audio-to-text', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
+                   if(response.data.result){
+                       this.row.content = response.data.result;
+                   }
+                    this.audio.submiting = false;
+                }).catch(error => {
+                    console.error(error);
+                    this.audio.submiting = false;
+                });
+            },
             open: () =>{
                 console.log("socket连接成功");
                 this.send('["example",[1]]');  // 发个消息 格式默认规定是这样的
@@ -225,6 +311,7 @@
                     this.use_time++;
                 }
             },1000);
+            this.initRecording();
 
 
         },
@@ -234,6 +321,9 @@
             }
             if(this.interval){
                 window.clearInterval(this.interval);
+            }
+            if(this.audio.recorder){
+                this.audio.recorder.destroy();
             }
         }
     };

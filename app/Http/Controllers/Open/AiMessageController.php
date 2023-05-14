@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Open;
 
+use AlibabaCloud\Client\AlibabaCloud;
 use App\Facades\Option;
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
 use App\Models\AiPromptTemplate;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
 use App\Models\AiMessage;
 use Illuminate\Support\Facades\Response;
@@ -101,8 +103,11 @@ class AiMessageController extends Controller
         $data['system_head_url'] = config('laravel_admin.logo');
         $data['system_name'] = config('app.name');
         $data['robot_name'] = 'chatgpt';
+
         return $data;
     }
+
+
 
     /**
      * 列表页面返回数据前对数据处理
