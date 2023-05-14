@@ -15,6 +15,7 @@ use App\Models\AiMessage;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use LaravelAdmin\LaravelOpenAi\Facades\OpenAI;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -182,6 +183,9 @@ class AiMessageController extends Controller
                 $item_data = collect($item)->except('id')->toArray();
                 if($item_data['role']==0){
                     $has_system = true;
+                }
+                if($item_data['role']==2){
+                    $item_data['content'] = Str::limit($item_data['content'],30,'...');
                 }
                 $item_data['role'] = Arr::get($map_role,$item_data['role'],'user');
                 return $item_data;

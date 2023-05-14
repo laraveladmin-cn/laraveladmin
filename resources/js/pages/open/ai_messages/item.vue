@@ -16,7 +16,7 @@
 <!--            <markdown-view class="no-padding" v-model="row.content" :id="'editormd_'+row.id"></markdown-view>-->
             <span style="white-space: pre-line;">{{row.content}}</span>
             <span @click="pay" v-if="row.role==2 && !row.is_think">
-                <i class="fa fa-play-circle"></i>
+                <i class="fa" :class="submiting?'fa-spinner':'fa-play-circle'"></i>
             </span>
         </p>
     </div>
@@ -53,7 +53,9 @@ export default {
     },
     data(){
         return {
-            row:this.value || {}
+            row:this.value || {},
+            submiting:false,
+            audio:null
         };
     },
     watch:{
@@ -74,6 +76,10 @@ export default {
                 this.read();
                 return;
             }
+            if(this.submiting){
+                return;
+            }
+            this.submiting = true;
             axios.post(this.use_url+'/open/read-text', {
                 "text":this.row.content,
                 "id":this.row.id,
@@ -82,13 +88,16 @@ export default {
                     this.row.read_url = response.data.url;
                     this.read();
                 }
+                this.submiting = false;
             }).catch((error) =>{
-
+                this.submiting = false;
             });
         },
         read(){
-            let audio = new Audio(this.row.read_url);
-            audio.play();
+            if(!this.audio){
+                this.audio = new Audio(this.row.read_url);
+            }
+            this.audio.play();
         },
         getName(row,props){
             let name = '游客';

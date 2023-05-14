@@ -33,7 +33,7 @@
                     </template>
                     <template slot="pager" slot-scope="props">
                         <div>
-                            <div v-show="!(props.data.list?props.data.list.data:[]).length" class="m-b-10">
+                            <div v-if="!(props.data.list?props.data.list.data:[]).length" class="m-b-10">
                                 <select2
                                     v-model="row['ai_prompt_template_id']"
                                     :default-options="[]"
