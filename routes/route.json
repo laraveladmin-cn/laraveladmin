@@ -993,6 +993,30 @@
                 ]
             },
             "end_id": 123
+        },
+        {
+            "id": 182,
+            "name": "提示词",
+            "icons": "fa-gg",
+            "url": "/open/ai-prompt-templates",
+            "parent_id": 4,
+            "is_page": "Yes",
+            "group": "open",
+            "item_name": "提示词",
+            "_id": 182,
+            "options": {
+                "only": [
+                    {
+                        "id": 183,
+                        "name": "list"
+                    },
+                    {
+                        "id": 184,
+                        "name": "show"
+                    }
+                ]
+            },
+            "end_id": 184
         }
     ],
     "update_position": []

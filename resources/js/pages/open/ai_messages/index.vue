@@ -12,7 +12,7 @@
                     <template slot="table" slot-scope="props">
                         <div class="slimScrollDiv">
                             <div class="chat">
-                                <el-empty description="暂无数据" v-show="!(props.data.list?props.data.list.data:[]).length"></el-empty>
+                                <el-empty description="暂无数据" v-show="!(props.data.list?props.data.list.data:[]).length && !sending"></el-empty>
                                 <div class="text-center" v-show="props.data.list['current_page']!=props.data.list['last_page']">
                                     <a v-if="$refs['table'] && $refs['table'].loading">
                                         加载中...
