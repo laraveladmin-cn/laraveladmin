@@ -338,6 +338,7 @@ class IndexController extends Controller
         $data['token'] = $this->alibabaToken();
         $data['appkey'] = config('alibaba_cloud.apps.default.AppKey');
         $data['text'] = $request->input('text');
+        $data['voice'] = 'abby';
         $client = new Client();
         try {
             $response = $client->post('https://nls-gateway.aliyuncs.com/stream/v1/tts', [
