@@ -16,7 +16,7 @@
 <!--            <markdown-view class="no-padding" v-model="row.content" :id="'editormd_'+row.id"></markdown-view>-->
             <span style="white-space: pre-line;">{{row.content}}</span>
             <span @click="pay" v-if="row.role==2 && !row.is_think">
-                <i class="fa" :class="submiting?'fa-spinner':'fa-play-circle'"></i>
+                <i class="fa" :class="submiting?'fa-spinner rotation':'fa-play-circle'"></i>
             </span>
         </p>
     </div>
@@ -149,5 +149,24 @@ export default {
     border: none !important;
     border-radius: unset !important;
 }
+.rotation {
+    /* 设置元素初始状态 */
+    transform: rotate(0deg);
 
+    /* 定义动画的名称、时间和速度曲线 */
+    animation: rotate 2s linear infinite;
+}
+
+/* 定义名为 rotate 的动画 */
+@keyframes rotate {
+    /* 定义动画从 0% 到 100% 的关键帧变化 */
+    from {
+        /* 设置旋转角度为0度 */
+        transform: rotate(0deg);
+    }
+    to {
+        /* 设置旋转角度为360度 */
+        transform: rotate(360deg);
+    }
+}
 </style>

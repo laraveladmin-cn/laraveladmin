@@ -28,9 +28,11 @@
         },
         methods: {
             chatActive(val){
+                dd(val);
                 let $table = this.$refs.ai_message.$refs.table;
                 $table.data.options.where.ai_chat_id = val;
                 this.$refs.ai_message.row.ai_chat_id = val;
+                $table.loading = false;
                 $table.search();
             }
         },
