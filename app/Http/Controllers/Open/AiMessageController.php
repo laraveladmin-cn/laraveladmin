@@ -173,7 +173,7 @@ class AiMessageController extends Controller
         $has_system = false;
         $messages = collect($ai_chat->ai_messages()
             ->where('id','>',$message_id)
-            ->where('role','<>',2)
+            //->where('role','<>',2)
             ->take($memory_session_length)
             ->orderBy('id','desc')
             ->get(['id','role','content']))
@@ -209,7 +209,7 @@ class AiMessageController extends Controller
             'model' => 'gpt-3.5-turbo',
             'messages' => $messages->toArray(),
             'temperature' => 1.0,
-            'max_tokens' => 4096,
+            //'max_tokens' => 4096,
             'frequency_penalty' => 0,
             'presence_penalty' => 0,
         ]);
@@ -225,6 +225,8 @@ class AiMessageController extends Controller
                 'role'=>2,
                 'content'=>$content
             ]);
+            $answer = collect($answer)->toArray();
+            $answer['messages'] = $messages->toArray();
         }
         return $answer;
     }
@@ -307,7 +309,7 @@ class AiMessageController extends Controller
             $abstract_str = OpenAI::chat([
                 'model' => 'gpt-3.5-turbo',
                 'documents' => $messages->toArray(),
-                'max_tokens' => 4096,
+                //'max_tokens' => 4096,
                 'temperature' => 1.0,
                 'frequency_penalty' => 0,
                 'presence_penalty' => 0,
