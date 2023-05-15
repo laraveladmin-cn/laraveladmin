@@ -18,6 +18,9 @@
             <span @click="pay" v-if="row.role==2 && !row.is_think">
                 <i class="fa" :class="submiting?'fa-spinner rotation':'fa-play-circle'"></i>
             </span>
+            <span v-if="row.is_think">
+                <i class="fa fa-spinner rotation"></i>
+            </span>
         </p>
     </div>
 </template>
