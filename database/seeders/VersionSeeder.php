@@ -153,7 +153,14 @@ class VersionSeeder extends Seeder
             'type'=>1,
             'itype'=>2
         ]);
-
+        \App\Models\Config::firstOrCreate(['key'=>'voice'],[
+            'key' => 'voice',
+            'name' => '语音角色',
+            'description' => '语音角色',
+            'value' => 'zhimiao_emo',
+            'type'=>1,
+            'itype'=>1
+        ]);
         $this->addVersion();
     }
 
