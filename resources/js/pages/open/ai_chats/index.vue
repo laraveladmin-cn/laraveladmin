@@ -30,7 +30,7 @@
                                     <el-empty description="暂无数据" v-show="!(props.data.list?props.data.list.data:[]).length"></el-empty>
                                     <div class="item" v-for="(row,i) in (props.data.list?props.data.list.data:[])"
                                          @click="activeChat(row)"
-                                         :class="chat_active==row.id?'active':''">
+                                         :class="chat_active==row.id?'active text-green':''">
                                         <div class="input-group" v-if="edit_chat_id==row.id">
                                               <span class="input-group-addon">
                                                 <i class="fa fa-comment-o"></i>
