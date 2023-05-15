@@ -51,6 +51,8 @@
                                             class="btn btn-info"
                                             @mousedown="recording"
                                             @mouseup="stopRecording"
+                                            @touchstart="recording"
+                                            @touchend="stopRecording"
                                             :disabled="!row.ai_chat_id || audio.submiting"
                                     >
                                         <i class="fa" :class="audio.submiting?'fa-microphone-slash':'fa-microphone'"></i>
