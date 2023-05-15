@@ -131,6 +131,14 @@ class ConfigTableSeeder extends Seeder
             'type'=>1,
             'itype'=>2
         ]);
+        Config::create([
+            'key' => 'voice',
+            'name' => '语音角色',
+            'description' => '语音角色',
+            'value' => 'zhimiao_emo',
+            'type'=>1,
+            'itype'=>1
+        ]);
     }
 
 
