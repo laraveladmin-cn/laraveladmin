@@ -209,7 +209,7 @@ class AiMessageController extends Controller
             'model' => 'gpt-3.5-turbo',
             'messages' => $messages->toArray(),
             'temperature' => 1.0,
-            'max_tokens' => 4000,
+            'max_tokens' => 4096,
             'frequency_penalty' => 0,
             'presence_penalty' => 0,
         ]);
@@ -307,7 +307,7 @@ class AiMessageController extends Controller
             $abstract_str = OpenAI::chat([
                 'model' => 'gpt-3.5-turbo',
                 'documents' => $messages->toArray(),
-                'max_tokens' => 4000,
+                'max_tokens' => 4096,
                 'temperature' => 1.0,
                 'frequency_penalty' => 0,
                 'presence_penalty' => 0,
