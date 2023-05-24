@@ -388,6 +388,7 @@ trait CommonController{
             $options['where'] = collect($options['where'])->map(function ($item){
                 $key = $item['key'];
                 if($really_key = Arr::get($this->sizerAs,$key)){
+                    $item['_key'] = $item['key'];
                     $item['key'] = $really_key;
                 }
                 return $item;
