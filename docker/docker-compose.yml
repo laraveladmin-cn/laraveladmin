@@ -48,6 +48,8 @@ services: #服务
     restart: always
     environment:
       - DOCKER_APP_ENV=${APP_ENV}
+    extra_hosts:
+      - "local.laraveladmin.cn:host-gateway"
   nginx: #服务器服务
     image: nginx:1.15
     depends_on:
