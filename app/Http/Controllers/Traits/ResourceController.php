@@ -520,9 +520,8 @@ trait ResourceController
                 $relation = $model->$k();
                 if($relation){
                     $res[$key] = $relation->getModel()->getTable();
-                    $this->mapsRelations($showField, $relation->getRelated());
+                    $this->mapsRelations($showField, $relation->getRelated(),$key,$res);
                 }
-
             }
         }
         return $res;

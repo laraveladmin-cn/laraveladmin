@@ -114,7 +114,7 @@
                         return this.transMap(value,field,table);
                     }else if(value && typeof value=="object"){
                         let key1 = prefix ? prefix+'.'+key:key;
-                        let table1 = array_get(this.data,'mapsRelations.'+key1,'');
+                        let table1 = array_get(this.data,'mapsRelations.'+key1,'') || this.data.mapsRelations[key1] || '';
                         return this.mapEach(value,key,table1 || table,key1);
                     }else {
                         return value;
