@@ -3,10 +3,12 @@
         <validation-provider :vid="keyName" :custom-messages="options.messages || null" :name="options.name" :rules="options.rules || ''" v-slot="{ errors }">
             <div class="form-group edit-item" :class="{'has-error':errors.length>0}">
                 <label><span class="required" v-show="_required">*</span>{{options.name}}</label>
+                <slot name="title">
                 <span class="help-block title pull-right" v-show="options.title && !errors.length">
                     <i class="fa fa-info-circle"></i>
                     <span>{{_title}}</span>
                 </span>
+                </slot>
                 <label class="control-label pull-right" v-show="errors.length>0">
                     <i class="fa fa-warning"></i>
                     <span v-for="error in errors">{{error}}</span>
