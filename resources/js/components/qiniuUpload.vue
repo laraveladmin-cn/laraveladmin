@@ -1,7 +1,7 @@
 <template>
     <div>
         <input v-show="false" type="file" ref="file" @change="changeFile" :accept="accept" />
-        <button class="btn inline-block" :class="'btn-'+theme"
+        <button class="btn inline-block " :class="'btn-'+theme+' '+btnClass"
                 onclick="return false;"
                 :disabled="disabled_value"
                 @click="selectFile">
@@ -45,7 +45,7 @@
             tokenUrl:{ //获取上传token
                 type:[String],
                 default: function () {
-                    return '/open/qiniu/token';
+                    return '/open/qi-niu/token';
                 }
             },
             token:{ //上传token直接传入
@@ -83,6 +83,12 @@
                     return false;
                 }
             },
+            btnClass:{
+                type:[String],
+                default: function () {
+                    return '';
+                }
+            }
 
         },
         data(){
@@ -167,6 +173,7 @@
                     let index2=this.file.name.length;
                     let type=this.file.name.substring(index1,index2);
                     let key = this.rootPath+Y+M+D+md5(key_new)+type;
+                    this.$emit('changeFile',file_new);
                     this.getToken(()=>{
                         this.observable = qiniu.upload(this.file, key, this.uptoken, this.putExtra, this.config);
                         if(this.autoStart){

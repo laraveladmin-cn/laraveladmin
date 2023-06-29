@@ -84,7 +84,8 @@
                     row:{},
                     maps:{},
                     configUrl:{},
-                    mapsRelations:{}
+                    mapsRelations:{},
+                    newItems:{}
                 },
                 back_data: {
                     row:{},
