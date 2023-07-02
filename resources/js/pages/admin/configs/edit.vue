@@ -121,6 +121,29 @@
                                                       v-model="props.data.row['value']">
                                         </qiniu-upload>
                                     </div>
+                                    <div class="edit-item-content" v-else-if="props.data.row['itype']==9">
+                                        <many v-model="props.data.row['value']"
+                                              :new-item="{name:'',img_url:'',href:''}"
+                                              :fields="carousel_images_fields"
+                                              :key-value="'value'"
+                                              :sort-key="'no'"
+                                              :disabled="!props.url">
+                                            <template slot="col" slot-scope="props1">
+                                                <validation-provider :vid="props1.vid" :name="props1.fieldName" v-slot="{ errors }">
+                                                    <div :class="{'has-error':(errors && errors.length>0)}">
+                                                        <div v-if="props1.fieldKey=='img_url'">
+                                                            <upload v-model="props1.item[props1.fieldKey]"
+                                                                    :disabled="!props.url">
+                                                            </upload>
+                                                        </div>
+                                                        <div v-else>
+                                                            <input type="text" v-model="props1.item[props1.fieldKey]" :disabled="!props.url" placeholder="请输入" class="form-control input-sm"/>
+                                                        </div>
+                                                    </div>
+                                                </validation-provider>
+                                            </template>
+                                        </many>
+                                    </div>
                                 </template>
                             </edit-item>
                         </div>
@@ -132,8 +155,10 @@
 </template>
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
+    import {ValidationProvider} from 'vee-validate';
     export default {
         components:{
+            ValidationProvider,
             'edit':()=>import(/* webpackChunkName: "common_components/edit.vue" */ 'common_components/edit.vue'),
             "el-input-number": ()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
             "edit-item": ()=>import(/* webpackChunkName: "common_components/editItem.vue" */ 'common_components/editItem.vue'),
@@ -143,6 +168,8 @@
             "json-edit":()=>import(/* webpackChunkName: "common_components/jsonEdit.vue" */ 'common_components/jsonEdit.vue'),
             "upload":()=>import(/* webpackChunkName: "common_components/upload.vue" */ 'common_components/upload.vue'),
             "qiniuUpload":()=>import(/* webpackChunkName: "common_components/qiniuUpload.vue" */ 'common_components/qiniuUpload.vue'),
+            "many":()=>import(/* webpackChunkName: "common_components/many.vue" */ 'common_components/many.vue'),
+
         },
         props: {
         },
@@ -154,7 +181,12 @@
                     url:'', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {}
                 },
-                images:[]
+                images:[],
+                carousel_images_fields:{
+                    img_url:'图片',
+                    href:'跳转链接',
+                    name:'名称',
+                }
             };
         },
         computed:{
