@@ -85,7 +85,7 @@
             'info' => '上传组件'
         ],
         'qiniuUpload' => [
-            'name' => 'upload',
+            'name' => 'qiniu-upload',
             'path' => 'common_components/qiniuUpload.vue',
             'info' => '七牛云上传组件'
         ],

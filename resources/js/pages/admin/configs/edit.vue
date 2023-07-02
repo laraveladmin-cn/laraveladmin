@@ -115,6 +115,12 @@
                                                 :disabled="!props.url">
                                         </upload>
                                     </div>
+                                    <div class="edit-item-content" v-else-if="props.data.row['itype']==8">
+                                        <qiniu-upload :disabled="!props.url"
+                                                      :token-url="'/open/qi-niu/token?disk=qiniu_public'"
+                                                      v-model="props.data.row['value']">
+                                        </qiniu-upload>
+                                    </div>
                                 </template>
                             </edit-item>
                         </div>
@@ -136,6 +142,7 @@
             "el-switch": ()=>import(/* webpackChunkName: "element-ui/lib/switch" */ 'element-ui/lib/switch'),
             "json-edit":()=>import(/* webpackChunkName: "common_components/jsonEdit.vue" */ 'common_components/jsonEdit.vue'),
             "upload":()=>import(/* webpackChunkName: "common_components/upload.vue" */ 'common_components/upload.vue'),
+            "qiniuUpload":()=>import(/* webpackChunkName: "common_components/qiniuUpload.vue" */ 'common_components/qiniuUpload.vue'),
         },
         props: {
         },
