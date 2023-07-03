@@ -197,12 +197,8 @@
                     "description": "创建时间"
                 },
                 {
-                    "name": "options.where.created_at.0",
-                    "description": ""
-                },
-                {
                     "name": "options.where.admin",
-                    "description": ""
+                    "description": "是否是后台用户:0-否,1-是"
                 },
                 {
                     "name": "options.where.name|uname",
@@ -242,7 +238,7 @@
                 },
                 {
                     "name": "keywordsMap.name|uname|mobile_phone|email",
-                    "description": ""
+                    "description": "姓名或用户名或手机号或邮箱地址"
                 },
                 {
                     "name": "excel.exportFields.uname",
@@ -448,7 +444,7 @@
                 {
                     "name": "where[admin]",
                     "type": 1,
-                    "title": "未命名",
+                    "title": "是否是后台用户:0-否,1-是",
                     "description": "",
                     "example": "",
                     "validate": ""
@@ -567,7 +563,7 @@
             "responses": [
                 {
                     "name": "row",
-                    "description": ""
+                    "description": "用户对象"
                 },
                 {
                     "name": "row.id",
@@ -759,7 +755,7 @@
                 },
                 {
                     "name": "list.data.$index.level",
-                    "description": ""
+                    "description": "层级"
                 },
                 {
                     "name": "list.data.$index.updated_at",
@@ -767,11 +763,11 @@
                 },
                 {
                     "name": "list.data.$index.admins_count",
-                    "description": ""
+                    "description": "后台用户数"
                 },
                 {
                     "name": "list.data.$index.parent",
-                    "description": ""
+                    "description": "父级"
                 },
                 {
                     "name": "options.where.roles.id",
@@ -787,7 +783,7 @@
                 },
                 {
                     "name": "options.order.left_margin",
-                    "description": ""
+                    "description": "左边界"
                 },
                 {
                     "name": "options.order.id",
@@ -807,7 +803,7 @@
                 },
                 {
                     "name": "maps.parent",
-                    "description": ""
+                    "description": "父级"
                 },
                 {
                     "name": "maps.parent.is_tmp",
@@ -823,7 +819,7 @@
                 },
                 {
                     "name": "mapsRelations.parent",
-                    "description": ""
+                    "description": "父级映射表名"
                 },
                 {
                     "name": "excel.exportFields.tmp_id",
@@ -937,7 +933,7 @@
                 },
                 {
                     "name": "data.$index.level",
-                    "description": ""
+                    "description": "层级"
                 },
                 {
                     "name": "data.$index.updated_at",
@@ -945,11 +941,11 @@
                 },
                 {
                     "name": "data.$index.admins_count",
-                    "description": ""
+                    "description": "后台用户数"
                 },
                 {
                     "name": "data.$index.parent",
-                    "description": ""
+                    "description": "父级"
                 }
             ],
             "route_params": []
@@ -1060,7 +1056,7 @@
             "responses": [
                 {
                     "name": "row",
-                    "description": ""
+                    "description": "角色对象"
                 },
                 {
                     "name": "row.id",
@@ -1104,7 +1100,7 @@
                 },
                 {
                     "name": "row.menu_ids",
-                    "description": ""
+                    "description": "拥有的菜单ID"
                 },
                 {
                     "name": "maps.is_tmp",
@@ -1120,7 +1116,7 @@
                 },
                 {
                     "name": "maps.menus",
-                    "description": ""
+                    "description": "菜单"
                 },
                 {
                     "name": "maps.menus.method",
@@ -1316,7 +1312,7 @@
                 },
                 {
                     "name": "maps.tmp",
-                    "description": ""
+                    "description": "所属菜单模板"
                 },
                 {
                     "name": "maps.tmp.is_tmp",
@@ -1340,15 +1336,15 @@
                 },
                 {
                     "name": "maps.permissions",
-                    "description": ""
+                    "description": "权限"
                 },
                 {
                     "name": "mapsRelations.menus",
-                    "description": ""
+                    "description": "菜单对应数据表"
                 },
                 {
                     "name": "mapsRelations.tmp",
-                    "description": ""
+                    "description": "模板菜单对应数据表"
                 }
             ],
             "route_params": [
@@ -1584,7 +1580,11 @@
                 },
                 {
                     "name": "options.where.created_at.0",
-                    "description": ""
+                    "description": "创建时间开始"
+                },
+                {
+                    "name": "options.where.created_at.0",
+                    "description": "创建时间结束"
                 },
                 {
                     "name": "options.order.updated_at",
@@ -2345,7 +2345,7 @@
             "responses": [
                 {
                     "name": "row",
-                    "description": ""
+                    "description": "日志对象"
                 },
                 {
                     "name": "row.id",
@@ -2405,7 +2405,7 @@
                 },
                 {
                     "name": "maps.menu",
-                    "description": ""
+                    "description": "菜单"
                 },
                 {
                     "name": "maps.menu.method",
@@ -2601,7 +2601,7 @@
                 },
                 {
                     "name": "maps.user",
-                    "description": ""
+                    "description": "用户"
                 },
                 {
                     "name": "maps.user.status",
@@ -2629,11 +2629,11 @@
                 },
                 {
                     "name": "mapsRelations.menu",
-                    "description": ""
+                    "description": "菜单表名"
                 },
                 {
                     "name": "mapsRelations.user",
-                    "description": ""
+                    "description": "用户表名"
                 }
             ],
             "route_params": [
@@ -6833,11 +6833,11 @@
             "responses": [
                 {
                     "name": "token",
-                    "description": ""
+                    "description": "Token值"
                 },
                 {
                     "name": "domain",
-                    "description": ""
+                    "description": "域名"
                 }
             ],
             "route_params": []
