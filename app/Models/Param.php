@@ -73,8 +73,17 @@ class Param extends Model
     protected $dates = ['created_at','updated_at','deleted_at'];
     //字段值map
     protected $fieldsShowMaps = [
-        'type'=>["1"=>'Character string',"2"=>'Number',"3"=>'Boolean value'],
-        'use'=>['URL parameter','Body parameter','Route parameter']
+        'type'=>[
+            "1"=>'Character string',
+            "2"=>'Number',
+            "3"=>'Boolean value',
+            "4"=>'二进制文件内容'
+        ],
+        'use'=>[
+            'URL parameter',
+            'Body parameter',
+            'Route parameter'
+        ]
     ];
     //字段默认值
     protected $fieldsDefault = [
