@@ -111,7 +111,8 @@ class User extends Authenticatable
         'status',
         'description',
         'avatar',
-        'client_id'
+        'client_id',
+        'message_id'
     ];
 
     /**
@@ -166,7 +167,8 @@ class User extends Authenticatable
         'status'=>1,
         'description'=>null,
         'avatar'=>'',
-        'client_id'=>''
+        'client_id'=>'',
+        'message_id'=>0
     ];
 
     //字段默认值
@@ -184,6 +186,7 @@ class User extends Authenticatable
         //'created_at' => 'Created At',
         //'updated_at' => 'Updated At',
         //'deleted_at' => 'Deleted At',
+        'message_id'=>'已读最新消息ID',
         'id' => 'ID',
     ];
 
@@ -232,5 +235,13 @@ class User extends Authenticatable
     public function scopeGetOperateId($q){
         $main = Auth::user();
         return Arr::get($main,'id',0);
+    }
+
+    /**
+     * 已读最新消息
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function message(){
+        return $this->belongsTo(Message::class);
     }
 }

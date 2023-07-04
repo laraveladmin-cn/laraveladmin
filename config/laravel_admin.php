@@ -8,6 +8,7 @@ return [
     'name_short' => env('APP_NAME_SHORT', 'Laravel'), //简称
     'logo' => env('APP_LOGO','/dist/img/logo.png'), //LOGO
     'icp'=>env('ICP',''), //备案号
+    'message_login'=>true, //是否开启消息登录
     'communication_mode'=>[
         'forgot_password'=>[ //忘记密码通讯方式
             'email'=>'Email', //电子邮箱
@@ -17,7 +18,11 @@ return [
             'email'=>'Email', //电子邮箱
             'mobile_phone'=>'Mobile Phone'//手机号
         ],
-        'priority_use'=>'email' //优先使用什么方式发送验证消息
+        'login'=>[ //消息登录通讯方式
+            'email'=>'Email', //电子邮箱
+            'mobile_phone'=>'Mobile Phone'//手机号
+        ],
+        'priority_use'=>'email', //优先使用什么方式发送验证消息
     ],
     'verify'=>[
         'type'=>env('APP_VERIFY_TYPE','geetest'), //登录注册验证类型
@@ -30,6 +35,7 @@ return [
         'sms'=>[
             'code_key'=>'sms_codes', //注册用户验证码存放键
             'forgot_password_key'=>'forgot_password_code', //忘记密码验证码存放键
+            'login_code_key'=>'login_code',
             'forbidden'=>60, //禁止发送时长
             'refuse_num'=>5, //发送多少次短信后拒绝发送
             'refuse_time'=>1800, //拒绝发送失效时间
@@ -88,6 +94,6 @@ return [
         'web_api'=>[
             'key'=>env('GOOGLE_WEB_API_KEY',''),
         ]
-    ]
+    ],
 
 ];
