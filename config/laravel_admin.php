@@ -8,7 +8,7 @@ return [
     'name_short' => env('APP_NAME_SHORT', 'Laravel'), //简称
     'logo' => env('APP_LOGO','/dist/img/logo.png'), //LOGO
     'icp'=>env('ICP',''), //备案号
-    'message_login'=>true, //是否开启消息登录
+    'message_login'=>false, //是否开启消息登录
     'communication_mode'=>[
         'forgot_password'=>[ //忘记密码通讯方式
             'email'=>'Email', //电子邮箱
