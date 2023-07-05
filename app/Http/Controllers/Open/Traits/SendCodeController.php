@@ -161,7 +161,7 @@ trait SendCodeController
             'title' => trans('Email is being sent...'),//'邮件正在发送...',
             'countdown' => config($this->forbidden)
         ];
-        if(config('app.env')=='local'){
+        if(config('app.env')=='local' && config('app.debug')){
             $response_data['code'] = SessionService::get(config($this->send_code_key));
         }
         return Response::returns($response_data);
@@ -195,7 +195,7 @@ trait SendCodeController
             'title' => trans('Text is being sent...'),//'短信正在发送...',
             'countdown' => config($this->forbidden),
         ];
-        if(config('app.env')=='local'){
+        if(config('app.env')=='local' && config('app.debug')){
             $response_data['code'] = SessionService::get(config($this->send_code_key));
         }
         return Response::returns($response_data);
