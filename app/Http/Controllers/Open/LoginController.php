@@ -267,7 +267,12 @@ class LoginController extends Controller
         $login_num = $this->getLoginFailedNum();
         $verify_type = config('laravel_admin.verify.type');
         if($login_num>=config('laravel_admin.verify.login_pass_num')){
-            $validate['verify'] = 'required|'.$verify_type;
+            if($verify_type=='captcha' && ClientAuth::isApi()){
+                $validate['verify'] = 'required|captcha_api:'.\Illuminate\Support\Facades\Request::input('captcha_key','');
+                $validate['captcha_key'] = 'required';
+            }else{
+                $validate['verify'] = 'required|'.$verify_type;
+            }
         }
         $validate[$uname] = 'required|min:5';
         if(!(config('laravel_admin.message_login.enable') &&

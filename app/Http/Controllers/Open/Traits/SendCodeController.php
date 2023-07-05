@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Open\Traits;
 
 
+use App\Facades\ClientAuth;
 use App\Facades\SMS;
 use App\Jobs\SendSms;
 use App\Mail\SendMessage;
@@ -117,7 +118,14 @@ trait SendCodeController
 
 
     protected function initValidate($type,$uname=false){
-        $validate = ['verify' => 'required|'.config($this->verify_type)]; //验证码
+        $validate = []; //验证码
+        $verify_type = config($this->verify_type);
+        if($verify_type=='captcha' && ClientAuth::isApi()){
+            $validate['verify'] = 'required|captcha_api:'.\Illuminate\Support\Facades\Request::input('captcha_key','');
+            $validate['captcha_key'] = 'required';
+        }else{
+            $validate['verify'] = 'required|'.$verify_type;
+        }
         if($uname){
             $validate['username'] = 'required|alpha_dash|between:5,18|exists:users,uname,deleted_at,NULL';
         }else{
