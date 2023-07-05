@@ -86,7 +86,7 @@ trait SendCodeController
         if($type=='mobile_phone'){
             return $this->sendSMS($request);
         }elseif ($type=='email'){
-            $this->sendEmail($request);
+            return $this->sendEmail($request);
         }else{
             $priority_use = config('laravel_admin.communication_mode.priority_use','email');
             return $priority_use=='mobile_phone'?  $this->sendSMS($request,$type=='uname'):$this->sendEmail($request,$type=='uname');
@@ -157,10 +157,14 @@ trait SendCodeController
             }
         }
         Mail::to($email)->queue($this->getSendMessage($request,$email)->onQueue('send_message'));
-        return Response::returns([
+        $response_data = [
             'title' => trans('Email is being sent...'),//'邮件正在发送...',
             'countdown' => config($this->forbidden)
-        ]);
+        ];
+        if(config('app.env')=='local'){
+            $response_data['code'] = SessionService::get(config($this->send_code_key));
+        }
+        return Response::returns($response_data);
     }
 
     /**
@@ -187,11 +191,14 @@ trait SendCodeController
         //异步队列发送短信
         $job = (new SendSms($sms))->onQueue('send_message');
         $this->dispatch($job);
-        return Response::returns([
+        $response_data = [
             'title' => trans('Text is being sent...'),//'短信正在发送...',
             'countdown' => config($this->forbidden),
-            //'code'=> SessionService::get(config($this->send_code_key))
-        ]);
+        ];
+        if(config('app.env')=='local'){
+            $response_data['code'] = SessionService::get(config($this->send_code_key));
+        }
+        return Response::returns($response_data);
     }
 
     /**
