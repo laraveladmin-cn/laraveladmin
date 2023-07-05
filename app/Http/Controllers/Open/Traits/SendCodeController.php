@@ -27,6 +27,7 @@ trait SendCodeController
     protected $verify_type = 'laravel_admin.verify.type';
     protected $sms_key='username';
     protected $email_key='username';
+    protected $is_login=false;
 
     //验证码随机字符串范围
     protected $characters = '0123456789';
@@ -120,7 +121,15 @@ trait SendCodeController
         if($uname){
             $validate['username'] = 'required|alpha_dash|between:5,18|exists:users,uname,deleted_at,NULL';
         }else{
-            $validate['username'] = 'required|'.$type.'|exists:users,'.$type.',deleted_at,NULL';
+            if($this->is_login &&
+                config('laravel_admin.message_login.enable')  &&
+                config('laravel_admin.message_login.auto_register') &&
+                in_array($type,['email','mobile_phone'])
+            ){
+                $validate['username'] = 'required|'.$type;
+            }else{
+                $validate['username'] = 'required|'.$type.'|exists:users,'.$type.',deleted_at,NULL';
+            }
         }
         return $validate;
     }
