@@ -25,6 +25,12 @@ trait CommonController{
     protected $per_page = 15;
 
     /**
+     * 分页简洁输出
+     * @var bool
+     */
+    protected $paged_concise_output=false;
+
+    /**
      * 筛选条件
      * @var array
      */

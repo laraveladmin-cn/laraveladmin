@@ -322,6 +322,20 @@ trait ResourceController
             })->toArray();
         }
         $data = $this->handleListReturn($data, $obj);
+        if(isset($this->paged_concise_output) &&
+            $this->paged_concise_output
+        ){
+            $data = collect($data)->except([
+                'first_page_url',
+                'from',
+                'last_page_url',
+                'next_page_url',
+                'links',
+                'path',
+                'prev_page_url',
+                'to'
+            ])->toArray();
+        }
         //返回响应数据存放,方便操作日志记录
         LifeData::set('list', $data);
 
