@@ -230,7 +230,7 @@
                                   :show-fields="show_fields">
                                 <tr>
                                     <th class="id" v-if="checkbox">
-                                        <!-- <input type="checkbox" v-model="select_all" @click="selectAll" :value="1">-->
+                                        <!-- <input type="checkbox" v-model="select_all" @change="selectAll(select_all)" :value="1"> -->
                                         <icheck v-model="select_all" @change="selectAll" :option="1" :disabled-label="true"></icheck>
                                     </th>
                                     <th v-for="(field,index) in show_fields" :class="field['class']" @click="orderBy(index)">

@@ -73,7 +73,9 @@
               }
           },
             value(value){
-              this.val = value;
+              if(value!=this.val){
+                  this.val = value;
+              }
             },
             disabled(value){
               if(value){
