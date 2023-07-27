@@ -145,6 +145,7 @@
                     return 'pivot.sort';
                 }
             },
+
         },
         data(){
             return {
@@ -177,11 +178,9 @@
                 }
                 let id = array_get(item,this.primaryKey);
                 let index=-1;
-                collect(this.options).eachSpread((i) => {
-                    let item = this.options[i];
-                    if(array_get(item,this.primaryKey) == id){
+                collect(this.options).each((item,i) => {
+                    if(index==-1 && array_get(item,this.primaryKey) == id){
                         index = i;
-                        return false;
                     }
                 });
                 if(index!=-1){

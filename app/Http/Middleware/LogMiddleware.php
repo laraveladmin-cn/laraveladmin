@@ -51,7 +51,7 @@ class LogMiddleware{
                 'user_id'=>User::getOperateId(),
                 'location'=>collect(Ip::find($ip))->take(4)->filter()->unique()->implode(','),
                 'ip'=>$ip,
-                'parameters'=>json_encode($parameters,JSON_UNESCAPED_UNICODE),
+                'parameters'=>Str::limit(json_encode($parameters,JSON_UNESCAPED_UNICODE),65530),
                 'return'=>''
             ]);
             LifeData::set($this->log_id_key,$log['id']);
