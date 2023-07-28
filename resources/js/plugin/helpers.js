@@ -173,5 +173,22 @@ export default {
         }
         return _str;
     },
+    format_time(seconds) {
+        if (typeof seconds == "undefined" || seconds === '') {
+            return '';
+        }
+        let hours = Math.floor(seconds / 3600);
+        let minutes = Math.floor((seconds % 3600) / 60);
+        let remainingSeconds = seconds % 60;
+
+        return (
+            (hours < 10 ? "0" + hours : hours) +
+            ":" +
+            (minutes < 10 ? "0" + minutes : minutes) +
+            ":" +
+            (remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds)
+        );
+    }
+
 
 }
