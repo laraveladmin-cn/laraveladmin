@@ -234,7 +234,7 @@ trait CommonController{
      * 查询所需字段
      * @return array
      */
-    protected function selectWithEidtFields($fields_key='showIndexFields'){
+    protected function selectWithEditFields($fields_key='showIndexFields'){
         $result = [];
         foreach($this->getWithFields($this->$fields_key) as $key=>$withField){
             if(is_array($withField)){
