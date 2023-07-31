@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Schema;
 class AlertAiMessagesContentTable extends Migration
 {
 
-    protected $bindModel='App\Models\AiMessage';
-
     /**
      * Run the migrations.
      *
@@ -16,11 +14,9 @@ class AlertAiMessagesContentTable extends Migration
      */
     public function up()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-MODIFY COLUMN `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '内容\$textarea' AFTER `role`;");
+        Schema::table('ai_messages', function (Blueprint $table) {
+            $table->text('content', 65535)->nullable()->comment('内容$textarea')->change();
+        });
     }
 
     /**
@@ -30,6 +26,8 @@ MODIFY COLUMN `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NO
      */
     public function down()
     {
-
+        Schema::table('ai_messages', function (Blueprint $table) {
+            $table->string('content', 255)->default('')->comment('内容$textarea')->change();
+        });
     }
 }
