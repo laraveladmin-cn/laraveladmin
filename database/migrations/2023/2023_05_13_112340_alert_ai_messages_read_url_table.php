@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Schema;
 class AlertAiMessagesReadUrlTable extends Migration
 {
 
-    protected $bindModel='App\Models\AiMessage';
-
     /**
      * Run the migrations.
      *
@@ -16,11 +14,9 @@ class AlertAiMessagesReadUrlTable extends Migration
      */
     public function up()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-ADD COLUMN `read_url` varchar(255) NOT NULL DEFAULT '' COMMENT '内容阅读音频地址' AFTER `content`;");
+        Schema::table('ai_messages', function (Blueprint $table) {
+            $table->string('read_url', 255)->default('')->comment('内容阅读音频地址');
+        });
     }
 
     /**
@@ -30,10 +26,11 @@ ADD COLUMN `read_url` varchar(255) NOT NULL DEFAULT '' COMMENT '内容阅读音�
      */
     public function down()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-DROP COLUMN `read_url`;");
+        Schema::table('ai_messages', function (Blueprint $table) {
+            $table->dropColumn([
+                'read_url'
+            ]);
+        });
     }
+
 }

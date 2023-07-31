@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Schema;
 class AlertAiPromptTemplatesIconTable extends Migration
 {
 
-    protected $bindModel='App\Models\AiPromptTemplate';
-
     /**
      * Run the migrations.
      *
@@ -16,11 +14,9 @@ class AlertAiPromptTemplatesIconTable extends Migration
      */
     public function up()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-ADD COLUMN `icon` varchar(255) NOT NULL DEFAULT '' COMMENT '图标\$icon' AFTER `name`;");
+        Schema::table('ai_prompt_templates', function (Blueprint $table) {
+            $table->string('icon', 255)->default('')->comment('图标$icon');
+        });
     }
 
     /**
@@ -30,10 +26,10 @@ ADD COLUMN `icon` varchar(255) NOT NULL DEFAULT '' COMMENT '图标\$icon' AFTER 
      */
     public function down()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-DROP COLUMN `icon`;");
+        Schema::table('ai_prompt_templates', function (Blueprint $table) {
+            $table->dropColumn([
+                'icon'
+            ]);
+        });
     }
 }
