@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\DB;
 class AlertParamsUseTable extends Migration
 {
 
-    protected $bindModel='App\Models\Param';
-
     /**
      * Run the migrations.
      *
@@ -17,11 +15,9 @@ class AlertParamsUseTable extends Migration
      */
     public function up()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-ADD COLUMN `use` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属类型:0-url参数,1-body参数' AFTER `validate`;");
+        Schema::table('params', function (Blueprint $table) {
+            $table->tinyInteger('use')->unsigned()->default(0)->comment('所属类型:0-url参数,1-body参数');
+        });
     }
 
     /**
@@ -31,10 +27,10 @@ ADD COLUMN `use` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属类型:0-
      */
     public function down()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-DROP COLUMN `use`;");
+        Schema::table('params', function (Blueprint $table) {
+            $table->dropColumn([
+                'use'
+            ]);
+        });
     }
 }

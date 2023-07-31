@@ -2,11 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 class AlertMenusReloadTable extends Migration
 {
-
-    protected $bindModel='App\Models\Menu';
 
     /**
      * Run the migrations.
@@ -15,11 +14,9 @@ class AlertMenusReloadTable extends Migration
      */
     public function up()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-ADD COLUMN `is_out_link` tinyint UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否为外部链接:0-否,1-是' AFTER `item_name`;");
+        Schema::table('menus', function (Blueprint $table) {
+            $table->tinyInteger('is_out_link')->unsigned()->default(0)->comment('是否为外部链接:0-否,1-是');
+        });
     }
 
     /**
@@ -29,10 +26,13 @@ ADD COLUMN `is_out_link` tinyint UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否为�
      */
     public function down()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-DROP COLUMN `is_out_link`;");
+        Schema::table('menus', function (Blueprint $table) {
+            $table->dropColumn([
+                'is_out_link'
+            ]);
+        });
     }
+
+
+
 }

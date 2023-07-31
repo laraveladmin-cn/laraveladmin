@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 class AlertMenusUseTable extends Migration
 {
 
-    protected $bindModel='App\Models\Menu';
 
     /**
      * Run the migrations.
@@ -17,14 +16,12 @@ class AlertMenusUseTable extends Migration
      */
     public function up()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-ADD COLUMN `use` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '路由使用地方:1-api,2-web' AFTER `right_margin`,
-ADD COLUMN `as` varchar(255) NOT NULL DEFAULT '' COMMENT '路由别名' AFTER `use`,
-ADD COLUMN `middleware` varchar(255) NOT NULL DEFAULT '' COMMENT '单独使用中间件' AFTER `as`,
-ADD COLUMN `item_name` varchar(255) NOT NULL DEFAULT '' COMMENT '资源名称' AFTER `middleware`;");
+        Schema::table('menus', function (Blueprint $table) {
+            $table->tinyInteger('use')->unsigned()->default(0)->comment('路由使用地方:1-api,2-web');
+            $table->string('as', 255)->default('')->comment('路由别名');
+            $table->string('middleware', 255)->default('')->comment('单独使用中间件');
+            $table->string('item_name', 255)->default('')->comment('资源名称');
+        });
     }
 
     /**
@@ -34,13 +31,15 @@ ADD COLUMN `item_name` varchar(255) NOT NULL DEFAULT '' COMMENT '资源名称' A
      */
     public function down()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-DROP COLUMN `use`,
-DROP COLUMN `as`,
-DROP COLUMN `middleware`,
-DROP COLUMN `item_name`;");
+        Schema::table('menus', function (Blueprint $table) {
+            $table->dropColumn([
+                'use',
+                'as',
+                'middleware',
+                'item_name'
+            ]);
+        });
     }
+
+
 }

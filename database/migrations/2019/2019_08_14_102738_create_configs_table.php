@@ -19,8 +19,8 @@ class CreateConfigsTable extends Migration {
 			$table->string('description')->default('')->comment('描述$textarea');
 			$table->string('key', 100)->default('')->index()->comment('键');
 			$table->text('value', 65535)->comment('值');
-			$table->boolean('type')->default(1)->comment('类型:1-字符串,2-json,3-数字');
-			$table->boolean('itype')->default(1)->comment('输入类型:1-input,2-textarea,3-markdown');
+			$table->tinyInteger('type')->default(1)->comment('类型:1-字符串,2-json,3-数字');
+			$table->tinyInteger('itype')->default(1)->comment('输入类型:1-input,2-textarea,3-markdown');
             $table->text('options', 65535)->nullable()->comment('组件属性');
 			$table->timestamps();
 			$table->softDeletes()->comment('删除时间');
