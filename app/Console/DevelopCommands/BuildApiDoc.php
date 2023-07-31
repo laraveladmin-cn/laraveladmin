@@ -466,6 +466,9 @@ class BuildApiDoc extends BaseCommand
                 'deleted_at' => 'Deleted At',
                 'id' => 'ID'
                 ];
+                if(!$field){
+                    return '';
+                }
                 $value1 = Arr::get($fields,$field,'');
                 $value1 = $value1?trans_path($value1):$model->getFieldsName($field);
             }

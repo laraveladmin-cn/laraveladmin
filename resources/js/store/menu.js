@@ -54,7 +54,7 @@ let translation = function (item,key,shared){
     let value = array_get(item,key,'');
     let resource_id = item['resource_id'];
     let res = $tp(value , shared);
-    if(resource_id && res==value && (i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+    if(resource_id>0 && res==value && (i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
         let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
         let key = value.replace(parent_name,'{name}');
         if(key.indexOf('{name}')==0){

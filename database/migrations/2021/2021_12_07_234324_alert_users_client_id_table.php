@@ -2,11 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 class AlertUsersClientIdTable extends Migration
 {
-
-    protected $bindModel='App\Models\User';
 
     /**
      * Run the migrations.
@@ -15,11 +14,9 @@ class AlertUsersClientIdTable extends Migration
      */
     public function up()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-ADD COLUMN `client_id` varchar(255) NOT NULL DEFAULT '' COMMENT '客户端ID' AFTER `remember_token`;");
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('client_id', 255)->default('')->comment('客户端ID');
+        });
     }
 
     /**
@@ -29,10 +26,11 @@ ADD COLUMN `client_id` varchar(255) NOT NULL DEFAULT '' COMMENT '客户端ID' AF
      */
     public function down()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-DROP COLUMN `client_id`;");
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn([
+                'client_id'
+            ]);
+        });
     }
+
 }

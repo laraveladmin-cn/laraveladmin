@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Open\Traits;
 
 
+use App\Facades\ClientAuth;
 use App\Facades\SMS;
 use App\Jobs\SendSms;
 use App\Mail\SendMessage;
@@ -27,6 +28,7 @@ trait SendCodeController
     protected $verify_type = 'laravel_admin.verify.type';
     protected $sms_key='username';
     protected $email_key='username';
+    protected $is_login=false;
 
     //验证码随机字符串范围
     protected $characters = '0123456789';
@@ -85,7 +87,7 @@ trait SendCodeController
         if($type=='mobile_phone'){
             return $this->sendSMS($request);
         }elseif ($type=='email'){
-            $this->sendEmail($request);
+            return $this->sendEmail($request);
         }else{
             $priority_use = config('laravel_admin.communication_mode.priority_use','email');
             return $priority_use=='mobile_phone'?  $this->sendSMS($request,$type=='uname'):$this->sendEmail($request,$type=='uname');
@@ -116,11 +118,26 @@ trait SendCodeController
 
 
     protected function initValidate($type,$uname=false){
-        $validate = ['verify' => 'required|'.config($this->verify_type)]; //验证码
+        $validate = []; //验证码
+        $verify_type = config($this->verify_type);
+        if($verify_type=='captcha' && ClientAuth::isApi()){
+            $validate['verify'] = 'required|captcha_api:'.\Illuminate\Support\Facades\Request::input('captcha_key','');
+            $validate['captcha_key'] = 'required';
+        }else{
+            $validate['verify'] = 'required|'.$verify_type;
+        }
         if($uname){
             $validate['username'] = 'required|alpha_dash|between:5,18|exists:users,uname,deleted_at,NULL';
         }else{
-            $validate['username'] = 'required|'.$type.'|exists:users,'.$type.',deleted_at,NULL';
+            if($this->is_login &&
+                config('laravel_admin.message_login.enable')  &&
+                config('laravel_admin.message_login.auto_register') &&
+                in_array($type,['email','mobile_phone'])
+            ){
+                $validate['username'] = 'required|'.$type;
+            }else{
+                $validate['username'] = 'required|'.$type.'|exists:users,'.$type.',deleted_at,NULL';
+            }
         }
         return $validate;
     }
@@ -148,10 +165,14 @@ trait SendCodeController
             }
         }
         Mail::to($email)->queue($this->getSendMessage($request,$email)->onQueue('send_message'));
-        return Response::returns([
+        $response_data = [
             'title' => trans('Email is being sent...'),//'邮件正在发送...',
             'countdown' => config($this->forbidden)
-        ]);
+        ];
+        if(config('app.env')=='local' && config('app.debug')){
+            $response_data['code'] = SessionService::get(config($this->send_code_key));
+        }
+        return Response::returns($response_data);
     }
 
     /**
@@ -178,11 +199,14 @@ trait SendCodeController
         //异步队列发送短信
         $job = (new SendSms($sms))->onQueue('send_message');
         $this->dispatch($job);
-        return Response::returns([
+        $response_data = [
             'title' => trans('Text is being sent...'),//'短信正在发送...',
             'countdown' => config($this->forbidden),
-            //'code'=> SessionService::get(config($this->send_code_key))
-        ]);
+        ];
+        if(config('app.env')=='local' && config('app.debug')){
+            $response_data['code'] = SessionService::get(config($this->send_code_key));
+        }
+        return Response::returns($response_data);
     }
 
     /**

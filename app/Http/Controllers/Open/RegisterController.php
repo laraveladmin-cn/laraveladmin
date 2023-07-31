@@ -115,7 +115,7 @@ class RegisterController extends Controller
             $validator['email'] = 'required|string|email|max:255|unique:users,email'; //电子邮箱
         };
         if($this->moreVerifyNum()){
-            $validate['verify'] = 'required|'.config($this->verify_type); //验证码
+            $validator['verify'] = 'required|'.config($this->verify_type); //验证码
         }
         return Validator::make($request->all(), $validator, [
             'username.unique' => trans('The user name already exists!'),//'用户名已存在',

@@ -27,6 +27,24 @@ export default {
         }
         return reslut === '' ? def : reslut;
     },
+    //获取多级数据
+    array_set(obj, key, val){
+        key = String(key);
+        let keys = key.split('.');
+        let length = keys.length-1;
+        let obj_copy = obj;
+        for (let i in keys) {
+            let key = keys[i];
+            if(i==length){
+                obj_copy[key]=val;
+            }else {
+                if(typeof obj_copy[key] !="object"){
+                    obj_copy[key] = {};
+                }
+                obj_copy = obj_copy[key];
+            }
+        }
+    },
     catchError(error){
         let data = error.response ? error.response.data : {};
         let errors = {};
@@ -164,6 +182,22 @@ export default {
         }
         let date = new Date(date_str);
         return date_format(date,format,true);
+    },
+    format_time(seconds) {
+        if (typeof seconds == "undefined" || seconds === '') {
+            return '';
+        }
+        let hours = Math.floor(seconds / 3600);
+        let minutes = Math.floor((seconds % 3600) / 60);
+        let remainingSeconds = seconds % 60;
+
+        return (
+            (hours < 10 ? "0" + hours : hours) +
+            ":" +
+            (minutes < 10 ? "0" + minutes : minutes) +
+            ":" +
+            (remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds)
+        );
     }
 
 }

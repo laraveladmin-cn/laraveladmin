@@ -1,0 +1,104 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Traits\ResourceController;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Request;
+use App\Models\Message;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Arr;
+
+class MessageController extends Controller
+{
+    use ResourceController;
+
+
+    /**
+     * 资源模型
+     * @var  string
+     */
+    protected $resourceModel = 'Message';
+
+    public $sizer=[
+        'user_id'=>'=',
+        'type'=>'=',
+        'title'=>'like',
+        'title|content'=>'like'
+    ];
+
+    public $orderDefault=[
+        'id'=>'asc'
+    ];
+
+    public $showIndexFields=[
+        'user'=>[
+            'id',
+            'name',
+            'uname'
+        ],
+        'operate'=>[
+            'id',
+            'name'
+        ]
+    ];
+
+    public $editFields=[
+        'operate'=>[
+            'id',
+            'name'
+        ],
+        'user'=>[
+            'id',
+            'name',
+            'uname'
+        ],
+    ];
+
+    /**
+     * 验证规则
+     * @return    array
+     */
+    protected function getValidateRule($id=0)
+    {
+        return $this->getImportValidateRule($id,Request::all());
+    }
+
+    /**
+     * 验证规则
+     * @return  array
+     */
+    protected function getImportValidateRule($id = 0, $item){
+        $validate = [
+            'user_id'=>'nullable|exists:users,id',
+            'type'=>'required|in:0,1,2',
+            'title'=>'required'
+        ];
+        return $validate;
+    }
+
+    /**
+    * 编辑页面数据返回处理
+    * @param  $id
+    * @param  $data
+    * @return  mixed
+    */
+    protected function handleEditReturn($id,&$data){
+        return $data;
+    }
+
+    /**
+     * 列表页面返回数据前对数据处理
+     * @param $data
+     * @return mixed
+     */
+    protected function handleIndexReturn(&$data)
+    {
+        $data['maps']['user_id'] = collect(Arr::get($data,'maps.user_id',[]))
+            ->prepend(['id'=>'0','name'=>'所有用户'])
+            ->toArray();
+        return $data;
+    }
+
+
+}

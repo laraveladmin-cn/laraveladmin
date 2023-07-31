@@ -86,6 +86,10 @@ class Admin extends Model
         return $this->belongsToMany('App\Models\Role','admin_role','admin_id','role_id');
     }
 
+    public function admin_roles(){
+        return $this->hasMany('App\Models\AdminRole');
+    }
+
 
     /**
      * 我管理的用户

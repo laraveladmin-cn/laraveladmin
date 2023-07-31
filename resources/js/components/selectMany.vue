@@ -38,8 +38,8 @@
         </div>
         <div class="box box-default">
             <div class="box-footer no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                    <li v-for="(option,index) in options" v-if="options.length>0">
+                <ul class="nav nav-pills nav-stacked li-items">
+                    <li v-for="(option,index) in options" v-if="options.length>0" :data-id="array_get(option,primaryKey)" class="li-item">
                         <a href="javascript:void(0)">
                             <span class="label" :class="'label-'+theme">
                                 {{showName(option)}}
@@ -70,6 +70,7 @@
 
 <script>
     import {mapState} from 'vuex';
+    import Sortable from 'sortablejs';
     export default {
         name: "selectMany",
         components: {
@@ -137,7 +138,14 @@
                 default: function () {
                     return false;
                 }
-            }
+            },
+            sortKey:{
+                type: [String],
+                default: function () {
+                    return 'pivot.sort';
+                }
+            },
+
         },
         data(){
             return {
@@ -170,11 +178,9 @@
                 }
                 let id = array_get(item,this.primaryKey);
                 let index=-1;
-                collect(this.options).eachSpread((i) => {
-                    let item = this.options[i];
-                    if(array_get(item,this.primaryKey) == id){
+                collect(this.options).each((item,i) => {
+                    if(index==-1 && array_get(item,this.primaryKey) == id){
                         index = i;
-                        return false;
                     }
                 });
                 if(index!=-1){
@@ -212,6 +218,9 @@
                 //查询险种信息
                 axios.get(this.use_url+this.itemUrl + id, {params: {}}).then((response) => {
                     let item = response.data.row;
+                    //处理顺序值
+                    let sort_value = (collect(this.options).pluck(this.sortKey).max() || 0)+1;
+                    array_set(item,this.sortKey,sort_value);
                     this.options.push(item);
                     let id = array_get(item,this.primaryKey);
                     this.active_id=id;
@@ -221,6 +230,23 @@
                 }).catch( (error) =>{
                     this.loading = false;
                 });
+            },
+            //更新排序值
+            updateOptionsSortValue(){
+                let ids = {};
+                let index = 0;
+                $(this.$el)
+                    .find('.li-item')
+                    .each(function (){
+                    let id = $(this).attr('data-id')-0;
+                        ids[id]=index;
+                        index++;
+                });
+                collect(this.options).each((option)=>{
+                    let id = array_get(option,this.primaryKey);
+                    array_set(option,this.sortKey,array_get(ids,id,0));
+                });
+
             }
         },
         computed:{
@@ -228,7 +254,23 @@
                 'use_url',
                 'theme'
             ])
-        }
+        },
+        mounted() {
+            let $this = this;
+            $(this.$el).find('.li-items').each(function () {
+                new Sortable(this,  {
+                    animation: 1000,
+                    draggable: ".li-item",
+                    filter: ".ignore-move-item-content",  // 过滤器，不需要进行拖动的元素
+                    preventOnFilter: false, //  在触发过滤器`filter`的时候调用`event.preventDefault()`
+                    group: { name: "selectMany_"+$this._uid, pull: false, put: false },
+                    // 结束拖拽
+                    onEnd: function (evt) {
+                        $this.updateOptionsSortValue();
+                    },
+                });
+            });
+        },
     }
 </script>
 

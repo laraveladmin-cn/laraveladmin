@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\DB;
 class AlertMenusGroupTable extends Migration
 {
 
-    protected $bindModel='App\Models\Menu';
-
     /**
      * Run the migrations.
      *
@@ -17,15 +15,13 @@ class AlertMenusGroupTable extends Migration
      */
     public function up()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-ADD COLUMN `resource_id` int(0) NOT NULL DEFAULT 0 COMMENT '所属资源' AFTER `status`,
-ADD COLUMN `group` varchar(100) NOT NULL DEFAULT '' COMMENT '后台路由所属组' AFTER `resource_id`,
-ADD COLUMN `action` varchar(255) NOT NULL DEFAULT '' COMMENT '绑定控制器方法' AFTER `group`,
-ADD COLUMN `env` varchar(100) NOT NULL DEFAULT '' COMMENT '使用环境' AFTER `action`,
-ADD COLUMN `plug_in_key` varchar(255) NOT NULL DEFAULT '' COMMENT '插件菜单唯一标识' AFTER `env`;");
+        Schema::table('menus', function (Blueprint $table) {
+            $table->integer('resource_id')->default(0)->comment('所属资源');
+            $table->string('group', 100)->default('')->comment('后台路由所属组');
+            $table->string('action', 255)->default('')->comment('绑定控制器方法');
+            $table->string('env', 100)->default('')->comment('使用环境');
+            $table->string('plug_in_key', 100)->default('')->comment('插件菜单唯一标识');
+        });
     }
 
     /**
@@ -35,14 +31,14 @@ ADD COLUMN `plug_in_key` varchar(255) NOT NULL DEFAULT '' COMMENT '插件菜单�
      */
     public function down()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `".$prefix.$model->getTable()."`
-DROP COLUMN `resource_id`,
-DROP COLUMN `group`,
-DROP COLUMN `action`,
-DROP COLUMN `env`,
-DROP COLUMN `plug_in_key`;");
+        Schema::table('menus', function (Blueprint $table) {
+            $table->dropColumn([
+                'resource_id',
+                'group',
+                'action',
+                'env',
+                'plug_in_key'
+            ]);
+        });
     }
 }

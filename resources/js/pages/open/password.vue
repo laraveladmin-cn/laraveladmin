@@ -131,6 +131,13 @@
                     post_data['password']=this.password;
                     post_data['password_confirmation']=this.confirm_password; //确认密码
                     post_data['message_code']=this.message_code;
+                    if(this.verify['type']=='captcha'){
+                        post_data['verify'] = this.verifyCode;
+                    }else {
+                        post_data['verify'] = $(this.$el).find("input[name='geetest_challenge']").val();
+                        post_data['geetest_validate'] = $(this.$el).find("input[name='geetest_validate']").val();
+                        post_data['geetest_seccode'] = $(this.$el).find("input[name='geetest_seccode']").val();
+                    }
                     axios.post(this.use_url+this.submitUrl,post_data)
                         .then((res)=>{
                             this.submiting= false;

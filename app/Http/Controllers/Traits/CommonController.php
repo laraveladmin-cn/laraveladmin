@@ -26,6 +26,12 @@ trait CommonController{
     protected $per_page = 15;
 
     /**
+     * 分页简洁输出
+     * @var bool
+     */
+    protected $paged_concise_output=false;
+
+    /**
      * 筛选条件
      * @var array
      */
@@ -229,7 +235,7 @@ trait CommonController{
      * 查询所需字段
      * @return array
      */
-    protected function selectWithEidtFields($fields_key='showIndexFields'){
+    protected function selectWithEditFields($fields_key='showIndexFields'){
         $result = [];
         foreach($this->getWithFields($this->$fields_key) as $key=>$withField){
             if(is_array($withField)){
@@ -405,6 +411,16 @@ trait CommonController{
            }
             return $item;
         })->toArray();
+        if($this->sizerAs){
+            $options['where'] = collect($options['where'])->map(function ($item){
+                $key = $item['key'];
+                if($really_key = Arr::get($this->sizerAs,$key)){
+                    $item['_key'] = $item['key'];
+                    $item['key'] = $really_key;
+                }
+                return $item;
+            })->toArray();
+        }
         return $options;
     }
 

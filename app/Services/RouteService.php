@@ -41,7 +41,7 @@ class RouteService
             'list' => [ //翻页json数据
                 'route' => 'list',
                 'method' => [
-                    'name' => 'list',
+                    'name' => 'getList',
                     'type' => 'get'
                 ]
             ],

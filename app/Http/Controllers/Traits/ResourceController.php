@@ -56,7 +56,7 @@ trait ResourceController
     {
         $model = $this->newBindModel();
         //查询数据结果
-        $data['list'] = $this->list();
+        $data['list'] = $this->getList();
         //数据字段映射信息
         $data['maps'] = $this->getFieldsMap($this->showIndexFields, $model);
         $data['mapsRelations'] = $this->mapsRelations($this->showIndexFields, $model);
@@ -283,7 +283,7 @@ trait ResourceController
     /**
      * 获取翻页数据
      */
-    public function list()
+    public function getList()
     {
         $this->selectValidate();
         $this->bindModel = $this->bindModel();
@@ -322,6 +322,20 @@ trait ResourceController
             })->toArray();
         }
         $data = $this->handleListReturn($data, $obj);
+        if(isset($this->paged_concise_output) &&
+            $this->paged_concise_output
+        ){
+            $data = collect($data)->except([
+                'first_page_url',
+                'from',
+                'last_page_url',
+                'next_page_url',
+                'links',
+                'path',
+                'prev_page_url',
+                'to'
+            ])->toArray();
+        }
         //返回响应数据存放,方便操作日志记录
         LifeData::set('list', $data);
 
@@ -449,10 +463,26 @@ trait ResourceController
     protected function one($id = null)
     {
         $this->bindModel OR $this->bindModel(); //绑定模型
+        //指定查询字段
+        $fields = $this->selectFields($this->editFields);
+        //判断是否包含主键字段,没有包含自动添加
+        $model = $this->newBindModel();
+        $primary_key = $model->getKeyName();
+        if($primary_key && $fields && (!isset($this->noPrimaryKey) || !$this->noPrimaryKey)){
+            $primary_key1 = $model->getTable().'.'.$primary_key;
+            $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
+            $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
+        }
+        if($id){
+            $obj = $this->bindModel
+                ->with($this->selectWithEditFields('editFields'));
+            if($fields){
+                $obj = $obj->select($fields);
+            }
+            return $obj->findOrFail($id);
+        }
 
-        return $id ? $this->bindModel
-            ->with($this->selectWithEidtFields('editFields'))->findOrFail($id) :
-            $this->editDefaultFields($this->editFields, $this->newBindModel());
+        return $this->editDefaultFields($this->editFields, $this->newBindModel());
     }
 
     /**
@@ -520,9 +550,8 @@ trait ResourceController
                 $relation = $model->$k();
                 if($relation){
                     $res[$key] = $relation->getModel()->getTable();
-                    $this->mapsRelations($showField, $relation->getRelated());
+                    $this->mapsRelations($showField, $relation->getRelated(),$key,$res);
                 }
-
             }
         }
         return $res;

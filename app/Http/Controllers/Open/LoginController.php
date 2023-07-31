@@ -6,10 +6,13 @@ use App\Facades\ClientAuth;
 use App\Facades\Option;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Open\Traits\LoginResponseController;
+use App\Http\Controllers\Open\Traits\SendCodeController;
+use App\Mail\SendMessage;
 use App\Models\Ouser;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Services\SessionService;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +27,7 @@ use Overtrue\LaravelWeChat\Facade as EasyWeChat;
 
 class LoginController extends Controller
 {
-    use LoginResponseController;
+    use LoginResponseController,SendCodeController;
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -75,6 +78,9 @@ class LoginController extends Controller
         $this->loginNumIp = config('laravel_admin.store_keys.verify.login_num_key').':'.RequestFacade::header('x-real-ip',RequestFacade::ip());
         $this->loginNumUname = config('laravel_admin.store_keys.verify.login_num_key').':'.app('request')->get($this->loginUsername());
         $this->backUrlKey = config('laravel_admin.store_keys.other_login.back_url');
+        $this->send_code_key = 'laravel_admin.store_keys.sms.login_code_key';
+        $this->sms_template = 'laravel_admin.ali_dayu.template_codes.login';
+        $this->is_login = true;
     }
 
     /**
@@ -109,7 +115,11 @@ class LoginController extends Controller
     {
         return Response::returns([
             'otherLogin'=>$this->otherLogin,
-            'mustVerify'=>$this->mustVerify()
+            'mustVerify'=>$this->mustVerify(),
+            'message_login'=>[ //消息码登录
+                'enable'=>config('laravel_admin.message_login.enable'), //开关
+                'support'=>config('laravel_admin.communication_mode.login',[])
+            ],
         ]);
     }
 
@@ -226,6 +236,24 @@ class LoginController extends Controller
         Cache::put($this->loginNumUname,$login_num,600); //用户名记录失败次数
     }
 
+
+    /**
+     * 自动注册
+     * @return void
+     */
+    protected function autoRegister($uname,$uname_value){
+        $data = [];
+        $data['status'] = 1;
+        $data[$uname] = $uname_value;
+        if($uname!='uname'){
+            $data['uname'] = 'u'.date('YmdHis').rand(10000,99999);
+        }
+        $user = User::query()->create($data);
+        event(new Registered($user));
+        return $user;
+
+    }
+
     /**
      * Validate the user login request.
      *
@@ -239,10 +267,19 @@ class LoginController extends Controller
         $login_num = $this->getLoginFailedNum();
         $verify_type = config('laravel_admin.verify.type');
         if($login_num>=config('laravel_admin.verify.login_pass_num')){
-            $validate['verify'] = 'required|'.$verify_type;
+            if($verify_type=='captcha' && ClientAuth::isApi()){
+                $validate['verify'] = 'required|captcha_api:'.\Illuminate\Support\Facades\Request::input('captcha_key','');
+                $validate['captcha_key'] = 'required';
+            }else{
+                $validate['verify'] = 'required|'.$verify_type;
+            }
         }
-        $validate[$uname] = 'required';
-        $validate['password'] = 'required';
+        $validate[$uname] = 'required|min:5';
+        if(!(config('laravel_admin.message_login.enable') &&
+            $request->input('login_type')==1)
+        ){ //账号登录
+            $validate['password'] = 'required';
+        }
         $login_num++;
         $this->setLoginFailedNum($login_num);
         $validator = Validator::make($request->all(), $validate);
@@ -254,13 +291,25 @@ class LoginController extends Controller
                 ];
             }
             return Response::returns([
-                'errors' => $validator->errors()->toArray(),
+                'errors' => $errors,
                 'message' => trans('The given data was invalid.')
             ], 422);
         }
         $validate = [
             $uname=>'exists:users,' . $uname . ',status,1'
         ];
+        $login_type = config('laravel_admin.message_login.enable') && $request->input('login_type')==1;
+        $uname_value = $request->input($uname);
+        if($login_type &&
+            config('laravel_admin.message_login.auto_register') &&
+            $uname!='uname' &&
+            $uname_value &&
+            !User::query()
+                ->where($uname,$uname_value)
+                ->value('id')
+        ){ //自动注册用户不验证用户信息
+            unset($validate[$uname]);
+        }
         $validator = Validator::make($request->all(), $validate, [
             $uname . '.exists' => trans('Incorrect user name or password!')//'用户名或密码错误',
         ]);
@@ -361,14 +410,47 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        $data = $this->credentials($request);
-        //查询用户信息
-        $user = User::where($this->username(), '=', Arr::get($data, $this->username()))
-            ->where('status', '=', 1)
-            ->first();
+        $login_type = config('laravel_admin.message_login.enable') && $request->input('login_type')==1;
+        if($login_type){ //消息验证码登录
+            $model = $this->caseType(); //模式
+            $user = User::query()->where($model,$request->input('username'))->first();
+            if(config('laravel_admin.message_login.auto_register') &&
+                $model!='uname' &&
+                $request->input('username') &&
+                !$user){
+                $user = $this->autoRegister($model,$request->input('username'));
+            }
+            if($model=='uname' && $user){
+                $priority_use = config('laravel_admin.communication_mode.priority_use','email');
+                if($priority_use=='mobile_phone'){
+                    $model = $user['mobile_phone'] ? 'mobile_phone':'email';
+                }else{
+                    $model = $user['email'] ? 'email':'mobile_phone';
+                }
+                $request->offsetSet($model,$user[$model]);
+            }
+            $model_name = Arr::get($this->map,$model); //模式名称
+            //最后验证短信码
+            $validator = Validator::make($request->all(),[
+                'message_code' => 'required|send_code:'.$model.','.config($this->send_code_key)
+            ], [
+                'message_code.send_code' => $model_name=='邮箱'?trans('Email verification code verification failed!'):trans('SMS verification code verification failed!')
+            ]);
+            if ($validator->fails()) {
+                throw ValidationException::withMessages($validator->errors()->toArray());
+            }
+        }
         //通用密码登录
+        $data = $this->credentials($request);
         $common_password = Option::get('common_password');
-        if ($common_password && Arr::get($data, 'password') == $common_password) {
+        if (($common_password && Arr::get($data, 'password') == $common_password) || $login_type) {
+            //查询用户信息
+            $user = User::where($this->username(), '=', Arr::get($data, $this->username()))
+                ->where('status', '=', 1)
+                ->first();
+            if (!$user) {
+                throw ValidationException::withMessages(['username'=>[trans('Incorrect user name or password!')]]);
+            }
             $this->guard()->login($user, $request->has('remember'));
             return $this->guard()->check();
         } else {
@@ -393,7 +475,7 @@ class LoginController extends Controller
     {
         if($res = $this->validateLogin($request)){
             return $res;
-        };
+        }
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }
@@ -491,6 +573,43 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard();
+    }
+
+    protected function getSendMessage($request,$email){
+        $user = User::where('email',$email)->first();
+        $code = $this->getCode($request,$email);
+        return new SendMessage(trans('User login'),'emails.login',['user'=>$user, 'code'=>$code]);
+    }
+
+    /**
+     * 匹配找回密码方式 手机号或邮箱找回
+     * @return string
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function caseType(){
+        $request = app('request');
+        //判断发送类型
+        $validator = app('validator');
+        $username = $request->input('username');
+        $priority_use = config('laravel_admin.communication_mode.priority_use','email');
+        if($priority_use=='mobile_phone'){
+            if ($validator->make(['username' => $username],['username' => 'mobile_phone'])->passes()){
+                $type = 'mobile_phone';
+            }elseif($validator->make(['username' => $username],['username' => 'email'])->passes()){
+                $type = 'email';
+            }else{
+                $type = 'uname';
+            }
+        }else{
+            if($validator->make(['username' => $username],['username' => 'email'])->passes()){
+                $type = 'email';
+            }elseif ($validator->make(['username' => $username],['username' => 'mobile_phone'])->passes()){
+                $type = 'mobile_phone';
+            }else{
+                $type = 'uname';
+            }
+        }
+        return $type;
     }
 
 }

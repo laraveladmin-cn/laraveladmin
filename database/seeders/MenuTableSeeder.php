@@ -202,7 +202,7 @@ class MenuTableSeeder extends Seeder
         });
         //禁用的菜单功能
         $menu_ids = explode(',',$disabled_menus)?:[];
-        $menu_ids = collect(Menu::where('disabled',1)->pluck('id'))->merge($menu_ids)->unique()->toArray();
+        $menu_ids = collect(Menu::where('disabled',1)->pluck('id'))->merge($menu_ids)->unique()->filter()->toArray();
         if($menu_ids){
             Menu::where(function ($q)use($menu_ids){
                 $q->where('id','=',0);

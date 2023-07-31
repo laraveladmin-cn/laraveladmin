@@ -84,6 +84,11 @@
             'path' => 'common_components/upload.vue',
             'info' => '上传组件'
         ],
+        'qiniuUpload' => [
+            'name' => 'qiniu-upload',
+            'path' => 'common_components/qiniuUpload.vue',
+            'info' => '七牛云上传组件'
+        ],
         'password' => [
             'name' => 'password-edit',
             'path' => 'common_components/passwordEdit.vue',
@@ -288,6 +293,12 @@
                                     <upload v-model="props.data.row['{{$table_field['Field']}}']"
                                             :disabled="!props.url">
                                     </upload>
+                                </template>
+@elseif($table_field['showType']=='qiniuUpload')
+                                <template slot="input-item">
+                                    <qiniu-upload v-model="props.data.row['{{$table_field['Field']}}']"
+                                            :disabled="!props.url">
+                                    </qiniu-upload>
                                 </template>
 @elseif($table_field['showType']=='password')
                                 <template slot="input-item">

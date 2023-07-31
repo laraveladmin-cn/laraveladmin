@@ -94,7 +94,9 @@ class Config extends Model
             '4'=>'json',
             '5'=>'switch',
             '6'=>'number',
-            '7'=>'upload'
+            '7'=>'upload',
+            '8'=>'qiniu-upload',
+            '9'=>'carousel-images' //轮播图
         ]
     ];
 

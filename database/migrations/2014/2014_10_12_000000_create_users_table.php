@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration {
             $table->string('email', 100)->default('')->index()->comment('电子邮箱@sometimes|required|email|unique:users,email');
             $table->string('mobile_phone', 11)->default('')->index()->comment('手机号码@sometimes|required|mobile_phone|unique:users,mobile_phone');
             $table->string('remember_token', 100)->default('')->comment('记住登录');
-            $table->boolean('status')->default(2)->comment('状态:0-注销,1-有效,2-停用$radio@nullable|in:0,1,2');
+            $table->tinyInteger('status')->default(2)->comment('状态:0-注销,1-有效,2-停用$radio@nullable|in:0,1,2');
             $table->timestamp('email_verified_at')->nullable()->comment('激活时间');
             $table->text('description', 65535)->nullable()->comment('备注$textarea');
             $table->timestamps();

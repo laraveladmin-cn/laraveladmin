@@ -25,7 +25,7 @@
 <script>
     import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
     import {ValidationObserver} from 'vee-validate';
-    import sortable from 'sortablejs';
+    import Sortable from 'sortablejs';
     export default {
         name: "edit",
         components: {
@@ -84,7 +84,8 @@
                     row:{},
                     maps:{},
                     configUrl:{},
-                    mapsRelations:{}
+                    mapsRelations:{},
+                    newItems:{}
                 },
                 back_data: {
                     row:{},
@@ -114,7 +115,7 @@
                         return this.transMap(value,field,table);
                     }else if(value && typeof value=="object"){
                         let key1 = prefix ? prefix+'.'+key:key;
-                        let table1 = array_get(this.data,'mapsRelations.'+key1,'');
+                        let table1 = array_get(this.data,'mapsRelations.'+key1,'') || this.data.mapsRelations[key1] || '';
                         return this.mapEach(value,key,table1 || table,key1);
                     }else {
                         return value;
@@ -305,14 +306,15 @@
             }
         },
         mounted() {
+            let $this = this;
             if(this.is_local){
                 $(this.$el).find('.move-items').each(function () {
-                    sortable.create(this,  {
+                    new Sortable(this,  {
                         animation: 1000,
                         draggable: ".move-item",
                         filter: ".ignore-move-item-content",  // 过滤器，不需要进行拖动的元素
                         preventOnFilter: false, //  在触发过滤器`filter`的时候调用`event.preventDefault()`
-                        group: { name: "edit", pull: true, put: true },
+                        group: { name: "edit_"+$this._uid, pull: false, put: false },
                     });
                 });
             }

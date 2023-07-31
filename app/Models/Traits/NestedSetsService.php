@@ -232,7 +232,8 @@ class NestedSetsService {
 
 		// Update tree keys to create gap
 		$res = $this->Db->update(
-			'UPDATE ?T SET ?F = ?F + 2, ?F = IF(?F >= ?N, ?F + 2, ?F) WHERE ?F >= ?N',
+			//'UPDATE ?T SET ?F = ?F + 2, ?F = IF(?F >= ?N, ?F + 2, ?F) WHERE ?F >= ?N',
+            'UPDATE ?T SET ?F = ?F + 2, ?F = (CASE WHEN ?F >= ?N THEN ?F + 2 ELSE ?F END) WHERE ?F >= ?N',
 			$this->tableName,
 			$this->rightKey,
 			$this->rightKey,
@@ -282,7 +283,8 @@ class NestedSetsService {
 
 		// Update keys for a displacement
 		$this->Db->update(
-			'UPDATE ?T SET ?F = IF(?F > ?N, ?F - ?N, ?F), ?F = ?F - ?N WHERE ?F > ?N',
+			 //'UPDATE ?T SET ?F = IF(?F > ?N, ?F - ?N, ?F), ?F = ?F - ?N WHERE ?F > ?N',
+            'UPDATE ?T SET ?F = (CASE WHEN ?F > ?N THEN ?F - ?N ELSE ?F END), ?F = ?F - ?N WHERE ?F > ?N',
 			$this->tableName,
 
 			$this->leftKey,
