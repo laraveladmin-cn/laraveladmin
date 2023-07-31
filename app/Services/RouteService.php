@@ -462,7 +462,7 @@ class RouteService
         $_id = 1; //存储创建顺序
         //查询所有菜单
         $menus = collect(Menu::withTrashed()
-            ->whereRaw(DB::raw('1 or id=1'))
+            ->whereRaw(DB::raw('1=1 or id=1'))
             ->orderBy('left_margin','asc')
             ->get($fillable)
             ->all())
