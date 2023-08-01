@@ -19,7 +19,7 @@ class CreateMessagesTable extends Migration
             $table->unsignedTinyInteger('type')->default(1)->comment('类型:0-提醒,1-消息,2-重要$icheckRadio@required|in:0,1,2');
             $table->string('title', 255)->default('')->comment('标题@required');
             $table->string('content', 255)->default('')->comment('内容$markdown');
-            $table->unsignedInteger('operate_id')->default(0)->index('operate_id_index')->comment('操作者');
+            $table->unsignedInteger('operate_id')->default(0)->index('messages_operate_id_index')->comment('操作者');
             $table->timestamps();
             $table->softDeletes();
         });
