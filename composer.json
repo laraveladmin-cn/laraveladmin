@@ -10,6 +10,7 @@
     "require": {
         "php": ">=7.3",
         "alibabacloud/sdk": "^1.8",
+        "doctrine/dbal": "^3.6",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
