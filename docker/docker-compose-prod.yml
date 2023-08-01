@@ -31,9 +31,9 @@ services:
 #      - ../docker/redis/data:/data #redis数据文件存放目录
 #      - ./docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
   php: #swoole项目 用于生产环境
-#    build:
-#      context: ./ #编译运行上下文目录
-#      dockerfile: ./docker/php/Dockerfile #dockerfile对应文件
+    build:
+      context: ./ #编译运行上下文目录
+      dockerfile: ./docker/php/Dockerfile #dockerfile对应文件
     image: laraveladmin/laraveladmin #镜像源
 #    depends_on:
 #      - mysql
