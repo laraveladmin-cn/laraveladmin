@@ -160,7 +160,7 @@ class MenuTableSeeder extends Seeder
             $this->command->line(
                 trans('Menu unchanged!')//'菜单未改变!'
             );
-            //return true;
+            return true;
         }
         //初始化数据表
         DB::table('menus')->truncate(); //菜单权限表
