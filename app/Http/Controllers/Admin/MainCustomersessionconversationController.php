@@ -28,8 +28,8 @@ class MainCustomersessionconversationController extends Controller
     ];
 
     public $showIndexFields=[
-        //'main_customer'=>['id','name','nickname','mobile'],
-       // 'main_customersession'=>['id','title']
+        'main_customer'=>['id','name','nickname','mobile'],
+        'main_customersession'=>['id','title']
     ];
     /**
      * 默认排序

@@ -16,7 +16,13 @@ class MainCustomerarticleController extends Controller
     public $sizer=[
         'title|input'=>'like'
     ];
-
+    /**
+     * 默认排序
+     * @var array
+     */
+    protected $orderDefault = [
+        'created_at'=>'desc'
+    ];
 
     /**
      * 资源模型

@@ -53,8 +53,11 @@ class MainCustomersession extends Model
     ];
     const DELETED_VALUE = true;//软删除值 不设置默认为1
     const UN_DELETED_VALUE = false;//未删除值 不设置默认为o
-
-
+    protected $casts = [
+        'id' => 'string'
+    ];
+    public $incrementing = false;
+    protected $keyType = 'string';
 
 
     /**

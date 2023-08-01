@@ -27,7 +27,13 @@ class MainCustomeroauthController extends Controller
         'type'=>'=',
         'data'=>'like'
     ];
-
+    /**
+     * 默认排序
+     * @var array
+     */
+    protected $orderDefault = [
+        'created_at'=>'desc'
+    ];
     /**
      * 验证规则
      * @return    array

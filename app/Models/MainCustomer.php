@@ -65,7 +65,11 @@ class MainCustomer extends Model
 
     const DELETED_VALUE = true;//软删除值 不设置默认为1
     const UN_DELETED_VALUE = false;//未删除值 不设置默认为o
-
+ /*   protected $casts = [
+        'id' => 'string'
+    ];*/
+    //public $incrementing = false;
+    //protected $keyType = 'string';
 
 
     /**
@@ -90,6 +94,13 @@ class MainCustomer extends Model
     public function getLastLoginAttribute($value)
     {
         return $value?Str::limit($value,19,''):null;
+    }
+
+    public function getIsActiveAttribute($value){
+        return $value?1:0;
+    }
+    public function setIsActiveAttribute($value){
+        $this->attributes['is_active'] = !!$value;
     }
 
 }

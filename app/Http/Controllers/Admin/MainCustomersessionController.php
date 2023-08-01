@@ -32,6 +32,13 @@ class MainCustomersessionController extends Controller
         'user_id'=>'=',
         'title'=>'like'
     ];
+    /**
+     * 默认排序
+     * @var array
+     */
+    protected $orderDefault = [
+        'created_at'=>'desc'
+    ];
 
     /**
      * 验证规则
