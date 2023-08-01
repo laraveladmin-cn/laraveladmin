@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Schema;
 class AlertUsersMessageIdTable extends Migration
 {
 
-    protected $bindModel = 'App\Models\User';
     /**
      * Run the migrations.
      *
@@ -15,12 +14,9 @@ class AlertUsersMessageIdTable extends Migration
      */
     public function up()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName()?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE  `".$prefix.$model->getTable()."`
-ADD COLUMN `message_id` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '已读最新消息ID\$select2' AFTER `description`,
-ADD INDEX `message_id_index`(`message_id`);");
+        Schema::table('ai_messages', function (Blueprint $table) {
+            $table->integer('message_id')->unsigned()->default(0)->index()->comment('已读最新消息ID$select2');
+        });
 
     }
 
@@ -31,10 +27,10 @@ ADD INDEX `message_id_index`(`message_id`);");
      */
     public function down()
     {
-        $model = new $this->bindModel();
-        $prefix = $model->getConnection()->getTablePrefix();
-        $connection = $model->getConnectionName() ?: config('database.default');
-        DB::connection($connection)->statement("ALTER TABLE `" . $prefix . $model->getTable() . "`
-DROP COLUMN `message_id`;");
+        Schema::table('ai_messages', function (Blueprint $table) {
+            $table->dropColumn([
+                'message_id'
+            ]);
+        });
     }
 }
