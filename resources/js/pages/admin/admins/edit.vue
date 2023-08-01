@@ -39,7 +39,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="user.uname" :options="{name: props.transField('Username','user.uname'), required: true, rules:'required|alpha_dash|min:5|max:18',title:$tp('Must be {min}-{max} non-Chinese characters',{min:5,max:18})}" :datas="props" v-else>
+                            <edit-item key-name="user.uname" :options="{name: props.transField('Username','user.uname'), required: true, rules:'required|alpha_dash|min:5|max:18|user_name',title:$tp('Must be {min}-{max} non-Chinese characters',{min:5,max:18})}" :datas="props" v-else>
                             </edit-item>
                             <edit-item key-name="user.password" :options="{name: props.transField('Password','user.password'), required: (!props.data.row['id'] && !props.data.row['user_id']),rules:(!props.data.row['id'] && !props.data.row['user_id'])?'required|min:6|max:18':'min:6|max:18',title:$tp('Must be {min}-{max} characters long',{min:6,max:18})}" :datas="props">
                                 <template slot="input-item">
