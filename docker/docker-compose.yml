@@ -17,6 +17,13 @@ services: #服务
 #      MYSQL_PASSWORD: ${DB_PASSWORD} #数据库密码
     networks:
       - php_network
+#  postgres:
+#    image: postgres
+#    restart: always
+#    environment:
+#      POSTGRES_PASSWORD: ${DB_PASSWORD}
+#    volumes:
+#      - ../docker/postgres/data:/var/lib/postgresql/data
   redis: #redis服务
     build: ./docker/redis #Dockerfile源码编译
     restart: always #异常退出后自动重启服务
