@@ -98,7 +98,7 @@ class UserController extends Controller
         }
 
         return [
-            'uname' => 'sometimes|required|alpha_dash|between:5,18|unique:users,uname,' . $id . ',id,deleted_at,NULL',
+            'uname' => 'sometimes|required|alpha_dash|between:5,18|user_name|unique:users,uname,' . $id . ',id,deleted_at,NULL',
             'password' => ($id ? 'sometimes|' : '').'required|between:6,18',
             'name' => 'required',
             'email' => 'sometimes|required|email|unique:users,email,' . $id . ',id,deleted_at,NULL',

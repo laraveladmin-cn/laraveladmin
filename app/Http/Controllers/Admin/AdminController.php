@@ -156,7 +156,7 @@ class AdminController extends Controller
         }
         $validate = [
             'user_id' => 'sometimes|exists:users,id|unique:admins,user_id,' . $id . ',id,deleted_at,NULL',
-            'user.uname' => 'sometimes|required|alpha_dash|between:6,18|unique:users,uname,' . $user_id . ',id,deleted_at,NULL',
+            'user.uname' => 'sometimes|required|alpha_dash|between:6,18|user_name|unique:users,uname,' . $user_id . ',id,deleted_at,NULL',
             'user.password' => ($user_id ? 'sometimes|' : '').'required|between:6,18',
             'user.name' => 'required',
             'user.email' => 'nullable|email|unique:users,email,' . $user_id . ',id,deleted_at,NULL',

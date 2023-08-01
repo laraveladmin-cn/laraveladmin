@@ -8,7 +8,7 @@
                 <edit :options="options">
                     <template slot="content" slot-scope="props">
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="uname" :options="{name: props.transField('User name'), required: true, rules:'required|alpha_dash|min:5|max:18',title:$tp('Must be {min}-{max} non-Chinese characters',{min:5,max:18})}"  :datas="props">
+                            <edit-item key-name="uname" :options="{name: props.transField('User name'), required: true, rules:'required|alpha_dash|min:5|max:18|user_name',title:$tp('Must be {min}-{max} non-Chinese characters',{min:5,max:18})}"  :datas="props">
                             </edit-item>
                             <edit-item key-name="password" :options="{name: props.transField('Password'), required: !props.data.row['id'],rules:!props.data.row['id']?'required|min:6|max:18':'min:6|max:18',title:$tp('Must be {min}-{max} characters long',{min:6,max:18})}"  :datas="props">
                                 <template slot="input-item">
