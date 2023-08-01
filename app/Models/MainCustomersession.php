@@ -14,6 +14,7 @@ class MainCustomersession extends Model
     use SoftDeletes; //软删除
     //数据表名称
     protected $table = 'main_customersession';
+    protected $connection='pgsql_business';
     //没有主键ID
     protected $itemName = '对话';
     //批量赋值白名单
@@ -50,6 +51,8 @@ class MainCustomersession extends Model
         'updated_at' => '修改时间',
         'is_deleted' => '是否已删除'
     ];
+    const DELETED_VALUE = true;//软删除值 不设置默认为1
+    const UN_DELETED_VALUE = false;//未删除值 不设置默认为o
 
 
 

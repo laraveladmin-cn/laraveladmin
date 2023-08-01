@@ -12,6 +12,7 @@ class MainCustomerrole extends Model
     use BaseModel; //基础模型
     //数据表名称
     protected $table = 'main_customerrole';
+    protected $connection='pgsql_business';
     //没有主键ID
     protected $itemName = '角色';
     //批量赋值白名单
@@ -37,6 +38,8 @@ class MainCustomerrole extends Model
         'created_at' => '创建时间',
         'updated_at' => '修改时间'
     ];
+    const DELETED_VALUE = true;//软删除值 不设置默认为1
+    const UN_DELETED_VALUE = false;//未删除值 不设置默认为o
 
 
 

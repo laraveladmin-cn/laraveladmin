@@ -11,6 +11,7 @@ class MainCustomer extends Model
 {
 
     use BaseModel; //基础模型
+    protected $connection='pgsql_business';
     //数据表名称
     protected $table = 'main_customer';
     //没有主键ID
@@ -62,6 +63,8 @@ class MainCustomer extends Model
         'updated_at' => '修改时间'
     ];
 
+    const DELETED_VALUE = true;//软删除值 不设置默认为1
+    const UN_DELETED_VALUE = false;//未删除值 不设置默认为o
 
 
 
