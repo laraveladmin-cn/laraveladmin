@@ -55,15 +55,16 @@ class CreateModel extends BaseCreate
             $prefix = '';
         }
         $trueTable = $prefix.$table;
+        $driver =  config('database.connections.'.$connection.'.driver');
         //数据表备注信息
-        if($connection=='mysql'){
+        if($driver=='mysql'){
             $data['comment'] =  DB::connection($connection)->select('SELECT TABLE_COMMENT FROM information_schema.`TABLES` WHERE TABLE_SCHEMA= :db_name AND TABLE_NAME = :tname',
                 [
                     'db_name'=>config('database.connections.'.$connection.'.database'),
                     'tname'=>$trueTable
                 ])[0]->TABLE_COMMENT;
             $field_sql = 'show full COLUMNS from `'.$trueTable.'`';
-        }else{
+        }elseif($driver=='pgsql'){
             $data['comment'] =  DB::connection($connection)->select("select cast(obj_description(relfilenode,'pg_class') as varchar) as comment from pg_class c where relname ='$trueTable'")[0]->comment;
 //            $field_sql = "SELECT column_name, data_type, character_maximum_length, is_nullable,cast(obj_description(relfilenode,'pg_class') as varchar) as comment FROM information_schema.columns WHERE table_name = '$trueTable'";
             $field_sql = "SELECT
@@ -81,6 +82,8 @@ where
 	and B.table_name=c.relname
     and
     c.relname = '$trueTable'";
+        }else{
+            dd('暂不支持该数据库:'.$driver);
         }
         //数据表类型
         preg_match('/\$([A-Za-z0-9_,]{1,})/',$data['comment'],$table_types);
