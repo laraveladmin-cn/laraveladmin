@@ -367,13 +367,37 @@ trait BaseModel{
         $connection = $this->getConnectionName() ?: config('database.default');
         $prefix = config('database.connections.'.$connection.'.prefix');
         $trueTable = $prefix.$table;
-
+        $driver =  config('database.connections.'.$connection.'.driver');
         //数据表备注信息
-        $data['comment'] =  $this->getConnection()->select('SELECT TABLE_COMMENT FROM information_schema.`TABLES` WHERE TABLE_SCHEMA= :db_name AND TABLE_NAME = :tname',
-            [
-                'db_name'=>config('database.connections.'.$connection.'.database'),
-                'tname'=>$trueTable
-            ])[0]->TABLE_COMMENT;
+        if($driver=='mysql'){
+            $data['comment'] =  $this->getConnection()->select('SELECT TABLE_COMMENT FROM information_schema.`TABLES` WHERE TABLE_SCHEMA= :db_name AND TABLE_NAME = :tname',
+                [
+                    'db_name'=>config('database.connections.'.$connection.'.database'),
+                    'tname'=>$trueTable
+                ])[0]->TABLE_COMMENT;
+            $field_sql = 'show full COLUMNS from `'.$trueTable.'`';
+        }elseif($driver=='pgsql'){
+            $data['comment'] =  DB::connection($connection)->select("select cast(obj_description(relfilenode,'pg_class') as varchar) as comment from pg_class c where relname ='$trueTable'")[0]->comment;
+//            $field_sql = "SELECT column_name, data_type, character_maximum_length, is_nullable,cast(obj_description(relfilenode,'pg_class') as varchar) as comment FROM information_schema.columns WHERE table_name = '$trueTable'";
+            $field_sql = "SELECT
+    a.attname as Field,
+    format_type(a.atttypid,a.atttypmod) as Type,
+    a.attnotnull as Null, col_description(a.attrelid,a.attnum) as Comment,
+    B.column_default AS default_value
+FROM
+    pg_class as c,pg_attribute as a,information_schema.COLUMNS AS B
+where
+    a.attrelid = c.oid
+    and
+    a.attnum>0
+    and B.column_name=a.attname
+	and B.table_name=c.relname
+    and
+    c.relname = '$trueTable'";
+        }else{
+            dd('暂不支持该数据库:'.$driver);
+        }
+
         //数据表类型
         preg_match('/\$([A-Za-z0-9_,]{1,})/',$data['comment'],$table_types);
         $data['table_types'] = collect(explode(',',Arr::get($table_types,1)))->filter()->map(function($item){
@@ -395,8 +419,13 @@ trait BaseModel{
         $data['table_comment'] = $table_comment;
 
         //字段信息
-        $data['table_fields'] = collect($this->getConnection()->select('show full COLUMNS from `'.$trueTable.'`'))
-            ->map(function($item){
+        $data['table_fields'] = collect($this->getConnection()->select($field_sql))
+            ->map(function($item)use($driver){
+                if($driver=='pgsql'){
+                    $item->Comment = $item->comment;
+                    $item->Field = $item->field;
+                    $item->Default = strpos($item->default_value,'::')?'':$item->default_value;
+                }
                 $comment = explode('@',$item->Comment);
                 $item->validator = Arr::get($comment,'1',''); //字段验证
                 $comment = explode('$',$comment[0]);

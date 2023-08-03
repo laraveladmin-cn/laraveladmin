@@ -106,8 +106,8 @@ where
         $data['table_comment'] = $table_comment;
         //字段信息
         $data['table_fields'] = collect(DB::connection($connection)->select($field_sql))
-            ->map(function($item)use($connection){
-                if($connection=='pgsql'){
+            ->map(function($item)use($driver){
+                if($driver=='pgsql'){
                     $item->Comment = $item->comment;
                     $item->Field = $item->field;
                     $item->Default = strpos($item->default_value,'::')?'':$item->default_value;
