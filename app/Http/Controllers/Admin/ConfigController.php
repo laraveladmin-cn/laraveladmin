@@ -38,7 +38,7 @@ class ConfigController extends Controller
         $model_class = $this->getModelClass();
         return [
             'name' => 'required',
-            'key' => 'required|alpha_dash|unique:configs,key,'.$id.',id,deleted_at,NULL',
+            'key' => 'required|alpha_dash|unique:configs,key,"'.$id.'",id,deleted_at,NULL',
             'type'=>'required|in:'.$model_class::commaMapValue('type'),
             'itype'=>'required|in:'.$model_class::commaMapValue('itype')
         ];
@@ -46,7 +46,7 @@ class ConfigController extends Controller
 
     protected function getImportValidateRule($id,$item){
         $validate = [
-            'key' => 'required|alpha_dash|unique:configs,key,'.$id.',id,deleted_at,NULL',
+            'key' => 'required|alpha_dash|unique:configs,key,"'.$id.'",id,deleted_at,NULL',
         ];
         return $validate;
     }

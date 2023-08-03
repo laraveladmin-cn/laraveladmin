@@ -122,7 +122,7 @@ class CreateController extends BaseCreate
         $data['validates'] = collect($data['tableInfo']['table_fields'])->map(function($item){
             if($item['validator']){
                 if(str_contains($item['validator'],'unique:')){
-                    $item['validator'] = preg_replace ('/unique\:(\w{1,})\,(\w{1,})/', 'unique:$1,$2,\'.\$id.\',id,deleted_at,NULL', $item['validator']);
+                    $item['validator'] = preg_replace ('/unique\:(\w{1,})\,(\w{1,})/', 'unique:$1,$2,"\'.\$id.\'",id,deleted_at,NULL', $item['validator']);
                 }
                 return "'".$item['Field']."'=>'".$item['validator']."'";
             }

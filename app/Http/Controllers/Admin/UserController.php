@@ -98,11 +98,11 @@ class UserController extends Controller
         }
 
         return [
-            'uname' => 'sometimes|required|alpha_dash|between:5,18|user_name|unique:users,uname,' . $id . ',id,deleted_at,NULL',
+            'uname' => 'sometimes|required|alpha_dash|between:5,18|user_name|unique:users,uname,"' . $id . '",id,deleted_at,NULL',
             'password' => ($id ? 'sometimes|' : '').'required|between:6,18',
             'name' => 'required',
-            'email' => 'sometimes|required|email|unique:users,email,' . $id . ',id,deleted_at,NULL',
-            'mobile_phone' => 'sometimes|required|mobile_phone|unique:users,mobile_phone,' . $id . ',id,deleted_at,NULL',
+            'email' => 'sometimes|required|email|unique:users,email,"' . $id . '",id,deleted_at,NULL',
+            'mobile_phone' => 'sometimes|required|mobile_phone|unique:users,mobile_phone,"' . $id . '",id,deleted_at,NULL',
             'status'=>'nullable|in:0,1,2',
         ];
     }

@@ -109,7 +109,7 @@ class CreateView extends BaseCreate
 
                 if ($item['validator']) {
                     if (str_contains($item['validator'], 'unique:')) {
-                        $item['validator'] = preg_replace('/unique\:(\w{1,})\,(\w{1,})/', 'unique:$1,$2,\'.\$id.\',id,deleted_at,NULL', $item['validator']);
+                        $item['validator'] = preg_replace('/unique\:(\w{1,})\,(\w{1,})/', 'unique:$1,$2,"\'.\$id.\'",id,deleted_at,NULL', $item['validator']);
                     }
                     $validator = collect(explode('|', $item['validator']))->filter(function ($value) {
                         return !in_array(Arr::get(explode(':', $value), '0', ''), $this->exclude_validator);
