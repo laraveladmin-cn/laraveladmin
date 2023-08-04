@@ -60,14 +60,15 @@ class CreateModel extends BaseCreate
         $driver =  config('database.connections.'.$connection.'.driver');
         //数据表备注信息
         if($driver=='mysql'){
-            $data['comment'] =  DB::connection($connection)->select('SELECT TABLE_COMMENT FROM information_schema.`TABLES` WHERE TABLE_SCHEMA= :db_name AND TABLE_NAME = :tname',
-                [
-                    'db_name'=>config('database.connections.'.$connection.'.database'),
-                    'tname'=>$trueTable
-                ])[0]->TABLE_COMMENT;
+            $data['comment'] =  DB::connection($connection)
+                ->select('SELECT TABLE_COMMENT FROM information_schema.`TABLES` WHERE TABLE_SCHEMA= :db_name AND TABLE_NAME = :tname',
+                    [
+                        'db_name'=>config('database.connections.'.$connection.'.database'),
+                        'tname'=>$trueTable
+                    ])[0]->TABLE_COMMENT;
             $field_sql = 'show full COLUMNS from `'.$trueTable.'`';
         }elseif($driver=='pgsql'){
-            $data['comment'] =  DB::connection($connection)->select("select cast(obj_description(relfilenode,'pg_class') as varchar) as comment from pg_class c where relname ='$trueTable'")[0]->comment;
+            $data['comment'] =  DB::connection($connection)->select("SELECT obj_description('$trueTable'::regclass, 'pg_class') AS table_remark")[0]->table_remark;
 //            $field_sql = "SELECT column_name, data_type, character_maximum_length, is_nullable,cast(obj_description(relfilenode,'pg_class') as varchar) as comment FROM information_schema.columns WHERE table_name = '$trueTable'";
             $field_sql = "SELECT
     a.attname as Field,
@@ -106,13 +107,19 @@ where
         $table_comment = str_replace(Arr::get($table_types,0,''),'',$data['comment']);
         $table_comment = str_replace(Arr::get($table_relations,0,''),'',$table_comment);
         $data['table_comment'] = $table_comment;
+
+        $primary_key_is_uuid = false;
         //字段信息
         $data['table_fields'] = collect(DB::connection($connection)->select($field_sql))
-            ->map(function($item)use($driver){
+            ->map(function($item)use($driver,&$primary_key_is_uuid){
                 if($driver=='pgsql'){
                     $item->Comment = $item->comment;
                     $item->Field = $item->field;
                     $item->Default = strpos($item->default_value,'::')?'':$item->default_value;
+                    $item->Type = $item->type;
+                }
+                if($item->Field=='id' && $item->Type=='uuid'){
+                    $primary_key_is_uuid = true;
                 }
                 $comment = explode('@',$item->Comment);
                 $item->validator = Arr::get($comment,'1',''); //字段验证
@@ -133,6 +140,7 @@ where
                 $item->showType = !$item->showType ? 'text' : $item->showType;
                 return collect($item)->toArray();
             })->toArray();
+        $data['primary_key_is_uuid'] = $primary_key_is_uuid;
         return $data;
     }
 
@@ -154,7 +162,9 @@ where
         $data['table_types'] = $data['tableInfo']['table_types'];
         $data['comment'] = $data['tableInfo']['comment'];
         $data['dates'] = $table_fields->filter(function($item){
-            return $item['showType']=='time' || in_array($item['Field'],['deleted_at', 'created_at','updated_at']);
+            return $item['showType']=='time' ||
+                in_array($item['Field'],['deleted_at', 'created_at','updated_at']) ||
+                in_array($item['Type'],['timestamp', 'timestamp with time zone']) ;
         })->pluck('Field')->implode("','");
         $data['dates'] = $data['dates'] ? "'".$data['dates']."'":'';
         //隐藏输出字段

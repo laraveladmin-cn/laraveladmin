@@ -38,9 +38,13 @@ class {{$name}} extends Model
     //数据库连接
     protected $connection = '{{$connection}}';
 @endif
-@if(!in_array('timestamps',$table_types))
+@if(!in_array('timestamps',$table_types) && !in_array('ignoreUpdatedAt',$table_types))
     //无需更新时间字段
     public $timestamps = false;
+@endif
+@if(in_array('ignoreUpdatedAt',$table_types))
+    //无需更新时间字段
+    const UPDATED_AT = null;
 @endif
 @if(in_array('noId',$table_types))
     //没有主键ID
@@ -48,8 +52,16 @@ class {{$name}} extends Model
     public $incrementing = false;
 @endif
 @if($table_comment)
-    //没有主键ID
+    //数据项名称
     protected $itemName = '{{$table_comment}}';
+@endif
+@if($tableInfo['primary_key_is_uuid'])
+    //主键是uuid
+    protected $casts = [
+        'id' => 'string'
+    ];
+    public $incrementing = false;
+    protected $keyType = 'string';
 @endif
     //批量赋值白名单
     protected $fillable = [{!! $fillable !!}];
