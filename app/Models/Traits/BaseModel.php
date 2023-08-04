@@ -377,8 +377,7 @@ trait BaseModel{
                 ])[0]->TABLE_COMMENT;
             $field_sql = 'show full COLUMNS from `'.$trueTable.'`';
         }elseif($driver=='pgsql'){
-            $data['comment'] =  DB::connection($connection)->select("select cast(obj_description(relfilenode,'pg_class') as varchar) as comment from pg_class c where relname ='$trueTable'")[0]->comment;
-//            $field_sql = "SELECT column_name, data_type, character_maximum_length, is_nullable,cast(obj_description(relfilenode,'pg_class') as varchar) as comment FROM information_schema.columns WHERE table_name = '$trueTable'";
+            $data['comment'] =  DB::connection($connection)->select("SELECT obj_description('$trueTable'::regclass, 'pg_class') AS table_remark")[0]->table_remark;
             $field_sql = "SELECT
     a.attname as Field,
     format_type(a.atttypid,a.atttypmod) as Type,

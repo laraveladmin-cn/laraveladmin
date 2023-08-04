@@ -52,7 +52,7 @@ class CreateModel extends BaseCreate
      */
     public function getTableInfo($table,$connection){
         $prefix = config('database.connections.'.$connection.'.prefix');
-        $connection = config('database.default');
+        //$connection = config('database.default');
         if($this->hasOption('has_prefix') && $this->option('has_prefix')){
             $prefix = '';
         }
