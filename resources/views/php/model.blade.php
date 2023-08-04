@@ -12,6 +12,9 @@ use App\Models\Traits\TreeModel;
 @if (in_array('softDeletes',$table_types))
 use Illuminate\Database\Eloquent\SoftDeletes;
 @endif
+@if (in_array('customSoftDeletes',$table_types))
+use ZW\Laravel\Eloquent\Custom\SoftDeletes;
+@endif
 @if (in_array('excludeTop',$table_types))
 use App\Models\Traits\ExcludeTop;
 @endif
@@ -23,7 +26,7 @@ class {{$name}} extends Model
 @if (in_array('treeModel',$table_types))
     use TreeModel; //树状结构
 @endif
-@if (in_array('softDeletes',$table_types))
+@if (in_array('softDeletes',$table_types) || in_array('customSoftDeletes',$table_types))
     use SoftDeletes; //软删除
 @endif
 @if (in_array('excludeTop',$table_types))
