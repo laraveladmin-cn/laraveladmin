@@ -143,8 +143,8 @@ class AdminController extends Controller
      */
     protected function getValidateRule()
     {
-        $id = Request::input('id',0);
-        $user_id = Request::input('user_id',0);
+        $id = Request::input('id',0)?:0;
+        $user_id = Request::input('user_id',0)?:0;
         //没有密码值不对密码进行修改
         if ( ! Request::input('user.password') ) {
             $user = Request::input('user');

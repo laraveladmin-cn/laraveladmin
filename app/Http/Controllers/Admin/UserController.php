@@ -91,12 +91,11 @@ class UserController extends Controller
      */
     protected function getValidateRule()
     {
-        $id = Request::input('id',0);
+        $id = Request::input('id',0)?:0;
         //没有密码值不对密码进行修改
         if ( ! Request::input('password') ) {
             Request::offsetUnset('password');
         }
-
         return [
             'uname' => 'sometimes|required|alpha_dash|between:5,18|user_name|unique:users,uname,' . $id . ',id,deleted_at,NULL',
             'password' => ($id ? 'sometimes|' : '').'required|between:6,18',

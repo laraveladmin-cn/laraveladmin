@@ -34,7 +34,7 @@ class ConfigController extends Controller
      * @return  array
      */
     protected function getValidateRule(){
-        $id = Request::input('id',0);
+        $id = Request::input('id',0)?:0;
         $model_class = $this->getModelClass();
         return [
             'name' => 'required',
@@ -45,6 +45,7 @@ class ConfigController extends Controller
     }
 
     protected function getImportValidateRule($id,$item){
+        $id = $id?:0;
         $validate = [
             'key' => 'required|alpha_dash|unique:configs,key,'.$id.',id,deleted_at,NULL',
         ];
