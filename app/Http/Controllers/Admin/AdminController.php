@@ -143,8 +143,8 @@ class AdminController extends Controller
      */
     protected function getValidateRule()
     {
-        $id = Request::input('id',0);
-        $user_id = Request::input('user_id',0);
+        $id = Request::input('id',0)?:0;
+        $user_id = Request::input('user_id',0)?:0;
         //没有密码值不对密码进行修改
         if ( ! Request::input('user.password') ) {
             $user = Request::input('user');
@@ -155,11 +155,11 @@ class AdminController extends Controller
             Request::offsetUnset('user_id');
         }
         $validate = [
-            'user_id' => 'sometimes|exists:users,id|unique:admins,user_id,"' . $id . '",id,deleted_at,NULL',
-            'user.uname' => 'sometimes|required|alpha_dash|between:6,18|user_name|unique:users,uname,"' . $user_id . '",id,deleted_at,NULL',
+            'user_id' => 'sometimes|exists:users,id|unique:admins,user_id,' . $id . ',id,deleted_at,NULL',
+            'user.uname' => 'sometimes|required|alpha_dash|between:6,18|user_name|unique:users,uname,' . $user_id . ',id,deleted_at,NULL',
             'user.password' => ($user_id ? 'sometimes|' : '').'required|between:6,18',
             'user.name' => 'required',
-            'user.email' => 'nullable|email|unique:users,email,"' . $user_id . '",id,deleted_at,NULL',
+            'user.email' => 'nullable|email|unique:users,email,' . $user_id . ',id,deleted_at,NULL',
             'user.mobile_phone' => 'nullable|mobile_phone',
             'user.status' => 'nullable|in:0,1,2',
             'role_ids'=>'required|array'

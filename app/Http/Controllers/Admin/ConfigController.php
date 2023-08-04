@@ -34,19 +34,20 @@ class ConfigController extends Controller
      * @return  array
      */
     protected function getValidateRule(){
-        $id = Request::input('id',0);
+        $id = Request::input('id',0)?:0;
         $model_class = $this->getModelClass();
         return [
             'name' => 'required',
-            'key' => 'required|alpha_dash|unique:configs,key,"'.$id.'",id,deleted_at,NULL',
+            'key' => 'required|alpha_dash|unique:configs,key,'.$id.',id,deleted_at,NULL',
             'type'=>'required|in:'.$model_class::commaMapValue('type'),
             'itype'=>'required|in:'.$model_class::commaMapValue('itype')
         ];
     }
 
     protected function getImportValidateRule($id,$item){
+        $id = $id?:0;
         $validate = [
-            'key' => 'required|alpha_dash|unique:configs,key,"'.$id.'",id,deleted_at,NULL',
+            'key' => 'required|alpha_dash|unique:configs,key,'.$id.',id,deleted_at,NULL',
         ];
         return $validate;
     }

@@ -126,8 +126,8 @@ class PersonageController extends Controller
         $user = Auth::user();
         return [
             'name' => 'required',
-            'email' => 'sometimes|required|email|unique:users,email,"'.$user['id'].'",id,deleted_at,NULL',
-            //'mobile_phone' => 'sometimes|required|mobile_phone|unique:users,mobile_phone,"'.$user['id'].'",id,deleted_at,NULL',
+            'email' => 'sometimes|required|email|unique:users,email,'.$user['id'].',id,deleted_at,NULL',
+            //'mobile_phone' => 'sometimes|required|mobile_phone|unique:users,mobile_phone,'.$user['id'].',id,deleted_at,NULL',
         ];
     }
 
