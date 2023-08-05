@@ -222,6 +222,14 @@ class MenuTableSeeder extends Seeder
         if(config('app.env')=='local'){
             RouteService::upRouteJson();
         }
+        $connection = Menu::query()->getConnection();
+        $driver = $connection->getConfig('driver');
+        //更新自增ID值
+        if($driver=='pgsql'){
+            $max_id = Menu::query()->withTrashed()->max('id');
+            $sql = "select setval('sys_menus_id_seq',:max_id)";
+            $connection->select($sql,['max_id'=>$max_id]);
+        }
     }
 
 
