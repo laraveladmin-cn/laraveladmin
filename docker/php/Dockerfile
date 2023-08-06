@@ -36,7 +36,7 @@ RUN pecl install redis-4.0.1 \
     && docker-php-ext-enable redis
 RUN pecl install channel://pecl.php.net/mcrypt-1.0.3 \
     && docker-php-ext-enable mcrypt
-RUN pecl install swoole && docker-php-ext-enable swoole
+RUN pecl install https://pecl.php.net/get/swoole-4.8.3.tgz && docker-php-ext-enable swoole
 
 # 安装定时任务
 RUN apt-get install -y cron && \
