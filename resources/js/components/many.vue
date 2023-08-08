@@ -18,8 +18,27 @@
                     </validation-provider>
                 </slot>
             </td>
-            <td class="operation">
-                <button class="btn btn-danger btn-xs"
+            <td class="operation" >
+                <el-popover
+                    placement="top"
+                    :ref="'popover_'+index"
+                    width="160"
+                    trigger="click">
+                    <p>确定删除吗？</p>
+                    <div style="text-align: right; margin: 0">
+                        <el-button size="mini" type="text" @click="closePopover(index)">取消</el-button>
+                        <el-button type="primary" size="mini" @click="delItem(index)">确定</el-button>
+                    </div>
+                    <button class="btn btn-danger btn-xs"
+                            v-show="confirmDeletion"
+                            slot="reference"
+                            :disabled="disabled"
+                    >
+                        删除
+                    </button>
+                </el-popover>
+               <button class="btn btn-danger btn-xs"
+                        v-show="!confirmDeletion"
                         :disabled="disabled"
                         @click="delItem(index)"
                 >
@@ -53,6 +72,8 @@ import Sortable from 'sortablejs';
 export default {
     name: "many.vue",
     components: {
+        "el-popover": ()=>import(/* webpackChunkName: "element-ui/lib/popover" */ 'element-ui/lib/popover'),
+        "el-button": ()=>import(/* webpackChunkName: "element-ui/lib/button" */ 'element-ui/lib/button'),
         ValidationProvider,
     },
     props:{
@@ -91,6 +112,11 @@ export default {
                 return '';
             }
         },
+        confirmDeletion:{
+            default: function () {
+                return false;
+            }
+        },
 
     },
     data(){
@@ -113,6 +139,10 @@ export default {
         }
     },
     methods:{
+        closePopover(index){
+            let key = 'popover_'+index;
+            this.$refs[key][0].doClose();
+        },
         addItem(){
             let item = copyObj(this.newItem);
             if(typeof this.items=="undefined"){
@@ -123,6 +153,7 @@ export default {
             this.items.push(item);
         },
         delItem(index){
+            this.closePopover(index);
             this.items.splice(index, 1);
         },
         //更新排序值
