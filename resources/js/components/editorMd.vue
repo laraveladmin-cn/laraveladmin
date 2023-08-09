@@ -155,7 +155,7 @@
                           //查找图片上传按钮并绑定事件
                           while(true) {
                               let $picture = $(this.$el).find('.editormd-toolbar-container .fa-picture-o');
-                              if($picture.length){
+                              if($picture.length>0){
                                   if(!this.onClick){
                                       this.onClick=true;
                                       $picture.on('touchend click',async()=>{
