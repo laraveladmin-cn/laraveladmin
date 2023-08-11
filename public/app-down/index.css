@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+[v-cloak]{
+    display: none;
+}
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: #EDECED;
+    overflow-x: hidden;
+}
+
+.head {
+    height: 200px;
+    text-align: center;
+}
+
+.head .bg {
+    height: 100%;
+}
+
+.main {
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qr-box {
+    /* margin: -71px auto 0; */
+    z-index: 99;
+    position: relative;
+}
+
+/* .btn {
+    display: block;
+    width: 219px;
+    height: 48px;
+    border-radius: 10px;
+    border: solid 1px #ffffff;
+    font-family: SourceHanSansSC-Bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    font-weight: bold;
+    line-height: 48px;
+    text-indent: 40px;
+}
+
+.btn:active {
+    opacity: .7;
+}
+
+.btn.android {
+    background-color: #ffffff;
+    color: #0d041c;
+    margin-top: 44px;
+}
+
+.btn.iphone {
+    background-color: #0d041c;
+    color: #ffffff;
+    margin-top: 16px;
+}
+
+.btn .icon {
+    height: 20px;
+    vertical-align: middle;
+}*/
+
+.icon {
+    height: 42px;
+    margin-top: 25px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.logo {
+    width: 104px;
+    height: 104px;
+    z-index: 2;
+    margin-top: 155px;
+    border-radius: 4px;
+}
+
+#qrBox {
+    display: inline-block;
+    border: 4px solid #fff;
+    font-size: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -57px;
+    margin-left: -57px;
+}
+
+#qrBox img {
+    display: block;
+}
+
+.head {
+    width: 100%;
+    background-color: white;
+    height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.size2 {
+    color: #302D2D;
+    font-size: 17px;
+}
+
+.img-back {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 99;
+}
+#and:hover{
+    cursor:pointer;
+}
+

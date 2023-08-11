@@ -72,6 +72,15 @@ class ConfigTableSeeder extends Seeder
             ]
         ]);
 
+        Config::create([
+            'key' => 'app_logo_url',
+            'name' => 'APP应用图标',
+            'description' => 'APP应用图标',
+            'type'=>1,
+            'itype'=>7
+        ]);
+
+
 
     }
 

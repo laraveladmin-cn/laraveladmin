@@ -53,6 +53,13 @@ class VersionSeeder extends Seeder
                 'imgUrl'=>config('app.url').'/dist/img/logo1.png'
             ]
         ]);
+        \App\Models\Config::firstOrCreate(['key'=>'app_logo_url'],[
+            'key' => 'app_logo_url',
+            'name' => 'APP应用图标',
+            'description' => 'APP应用图标',
+            'type'=>1,
+            'itype'=>7
+        ]);
         $this->addVersion();
     }
 
