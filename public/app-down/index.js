@@ -1,5 +1,8 @@
 const { createApp } = Vue;
-
+let $el = document.getElementById('icon-logo');
+if($el && AppConfig && AppConfig.logo){
+    $el.href=AppConfig.logo;
+}
 createApp({
     data() {
         let ua = navigator.userAgent.toLowerCase();
