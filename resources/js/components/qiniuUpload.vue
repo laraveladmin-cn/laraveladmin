@@ -119,6 +119,9 @@
             ...mapActions({
                 pushMessage: 'pushMessage',
             }),
+            destroy(){
+                this.cancelUp();
+            },
             //获取token
             getToken(callback,key){
                 if(this.token){
@@ -293,6 +296,9 @@
             value(val,old){
 
             }
+        },
+        beforeDestroy() {
+            this.destroy();
         }
 
     }
