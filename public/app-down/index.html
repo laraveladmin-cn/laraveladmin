@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/dist/img/logo.png" type="image/x-icon">
+    <title>应用下载</title>
+    <link href="./index.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="/web-api/open/config?script=AppConfig&amp;time=1691720245" type="application/javascript"></script>
+    <script src="/web-api/open/apps/version-info?script=AppVersion&amp;time=1691720245" type="application/javascript"></script>
+</head>
+<body>
+    <main class="main" id="app" v-cloak>
+        <div class="qr-box">
+            <img class="logo" :src="app_config.app_icon_url || './img/logo.png'" alt="">
+        </div>
+        <div class="size2">{{app_config.name}}</div>
+        <img src="./img/and.png" @click="down" class="icon" id="and" alt="">
+        <a :href="app_config.android_apk_url" ref="down" v-show="false"></a>
+        <img src="./img/back.png" class="img-back" v-show="pop_up" id="back" alt="">
+    </main>
+    <script src="./index.js" type="application/javascript"></script>
+</body>
+</html>
