@@ -58,7 +58,8 @@ class VersionSeeder extends Seeder
             'name' => 'APP应用图标',
             'description' => 'APP应用图标',
             'type'=>1,
-            'itype'=>7
+            'itype'=>7,
+            'value' => '',
         ]);
         $this->addVersion();
     }
