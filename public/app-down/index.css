@@ -79,13 +79,17 @@ body {
     height: 40px;
     width: 150px;
     margin-top: 25px;
-    background-repeat: no-repeat;
-    background-image: url("./img/and.png");
     display: inline-block;
+    border-radius: 6px;
+    background-image: url("./img/and.png");
     background-size: cover;
+    background-repeat: no-repeat;
+
 }
-.icon:hover{
+.icon:hover,.icon-click{
     background-image: url("./img/and_back.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 a {

@@ -15,6 +15,7 @@ createApp({
             forbidden:false,
             app_icon_url:latest_ver.logo_url || '',
             android_apk_url:latest_ver.apk_url || '',
+            down_click:false
         }
     },
     methods:{
@@ -23,6 +24,7 @@ createApp({
                 return
             }
             this.forbidden = true;
+            this.down_click = true;
             if(this.is_wx){
                 this.pop_up = true;
             }else {
