@@ -76,8 +76,16 @@ body {
 }*/
 
 .icon {
-    height: 42px;
+    height: 40px;
+    width: 150px;
     margin-top: 25px;
+    background-repeat: no-repeat;
+    background-image: url("./img/and.png");
+    display: inline-block;
+    background-size: cover;
+}
+.icon:hover{
+    background-image: url("./img/and_back.jpg");
 }
 
 a {

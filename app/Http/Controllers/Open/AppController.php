@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Open;
 
+use App\Facades\Option;
 use App\Http\Controllers\Traits\ResourceController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;

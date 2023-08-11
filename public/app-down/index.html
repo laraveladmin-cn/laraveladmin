@@ -16,7 +16,7 @@
             <img class="logo" :src="app_config.app_icon_url || './img/logo.png'" alt="">
         </div>
         <div class="size2">{{app_config.name}}</div>
-        <img src="./img/and.png" @click="down" class="icon" id="and" alt="">
+        <div @click="down" class="icon" id="and"></div>
         <a :href="app_config.android_apk_url" ref="down" v-show="false"></a>
         <img src="./img/back.png" class="img-back" v-show="pop_up" id="back" alt="">
     </main>
