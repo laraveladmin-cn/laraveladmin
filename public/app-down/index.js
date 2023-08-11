@@ -11,7 +11,7 @@ createApp({
         return {
             app_config:AppConfig,
             is_wx:is_wx,
-            pop_up:false,
+            pop_up:is_wx,
             forbidden:false,
             app_icon_url:latest_ver.logo_url || '',
             android_apk_url:latest_ver.apk_url || '',
