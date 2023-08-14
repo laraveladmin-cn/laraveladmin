@@ -226,8 +226,9 @@ class MenuTableSeeder extends Seeder
         $driver = $connection->getConfig('driver');
         //更新自增ID值
         if($driver=='pgsql'){
+            $tablePrefix = $connection->getTablePrefix();
             $max_id = Menu::query()->withTrashed()->max('id');
-            $sql = "select setval('sys_menus_id_seq',:max_id)";
+            $sql = "select setval('".$tablePrefix."menus_id_seq',:max_id)";
             $connection->select($sql,['max_id'=>$max_id]);
         }
     }
