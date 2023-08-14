@@ -410,10 +410,8 @@ class NestedSetsService {
 		if ($item[$this->rightKey] < $near_key) {
 			// Determine the displacement of the keys for the tree
 			$skew_edit = $near_key - $item[$this->leftKey] + 1 - $skew_tree;
-
 			// move node and update tree
-			$this->Db->update('
-				UPDATE ?T
+         /*   $sql = 'UPDATE ?T
 				SET
 					?F = IF(
 						?F <= ?N,
@@ -444,7 +442,18 @@ class NestedSetsService {
 					)
 				WHERE
 					?F > ?N
-					AND ?F <= ?N',
+					AND ?F <= ?N';*/
+            $sql  = <<<str
+UPDATE ?T
+SET
+    ?F = (CASE WHEN ?F <= ?N THEN ?F + ?N ELSE (CASE WHEN ?F > ?N THEN ?F - ?N ELSE ?F END) END),
+    ?F = (CASE WHEN ?F <= ?N THEN ?F + ?N ELSE ?F END),
+    ?F = (CASE WHEN ?F <= ?N THEN ?F + ?N ELSE (CASE WHEN ?F <= ?N THEN ?F - ?N ELSE ?F END) END),
+    ?F = (CASE WHEN ?F = ?N THEN ?N ELSE ?F END)
+WHERE ?F > ?N AND ?F <= ?N
+str;
+
+			$this->Db->update($sql,
 
 				$this->tableName,
 
@@ -494,9 +503,7 @@ class NestedSetsService {
 		} else { // move down on the tree
 			// Determine the displacement of the keys for the tree
 			$skew_edit = $near_key - $item[$this->leftKey] + 1;
-
-			// move node and update tree
-			$this->Db->update('
+            $sql = '
 				UPDATE ?T
 				SET
 					?F = IF(
@@ -529,7 +536,20 @@ class NestedSetsService {
 					)
 					WHERE
 						?F > ?N
-						AND ?F < ?N',
+						AND ?F < ?N';
+			// move node and update tree
+            $sql = <<<str
+UPDATE ?T
+SET
+    ?F = (CASE WHEN ?F >= ?N THEN ?F + ?N ELSE (CASE WHEN ?F < ?N THEN ?F + ?N ELSE ?F END) END),
+    ?F = (CASE WHEN ?F >= ?N THEN ?F + ?N ELSE ?F END),
+    ?F = (CASE WHEN ?F >= ?N THEN ?F + ?N ELSE (CASE WHEN ?F > ?N THEN ?F + ?N ELSE ?F END) END),
+    ?F = (CASE WHEN ?F = ?N THEN ?N ELSE ?F END)
+WHERE
+    ?F > ?N AND ?F < ?N
+str;
+
+			$this->Db->update($sql,
 
 				$this->tableName,
 

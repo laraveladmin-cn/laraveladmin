@@ -259,7 +259,7 @@ trait CommonController{
         $result = [];
         foreach ($fields as $field) {
             if(!is_array($field) && !(!is_string($field) && !is_numeric($field) && is_callable($field))){
-                if(is_string($field) && Str::contains($field,'`')){
+                if(is_string($field) && (Str::contains($field,'`') || Str::contains($field,'"'))){
                     $field = DB::raw($field);
                 }
                 $result[] = $field;

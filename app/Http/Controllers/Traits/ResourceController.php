@@ -84,9 +84,11 @@ trait ResourceController
             $where = Request::input('where');
             $relation_id = isset($where[$value])?$where[$value]:0;
             if ($relation_id && class_exists($model) && !isset($data['maps'][$value])) {
+                $driver = $model::query()->getConnection()->getDriverName();
+                $str = $driver=='pgsql'?'"':'`';
                 $fields_and_relation = collect(isset($this->mapsWhereFields[$value]) ? $this->mapsWhereFields[$value] : ['id', 'name'])
-                    ->map(function ($field){
-                        if(is_string($field) && Str::contains($field,'`')){
+                    ->map(function ($field)use($str){
+                        if(is_string($field) && Str::contains($field,$str)){
                             return DB::raw($field);
                         }
                         return $field;
