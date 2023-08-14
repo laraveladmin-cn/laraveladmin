@@ -519,9 +519,10 @@ class Menu extends Model
      * @return mixed
      */
     public function scopeNotModule($q,$ids){
+        $str = $this->getConnection()->getDriverName()=='pgsql'?'"':'`';
         collect(Menu::whereIn('id',$ids)->get())
-            ->map(function ($menu,$index)use(&$q){
-                $q->whereRaw(DB::Raw("!(`left_margin`>= {$menu['left_margin']} AND `right_margin`<= {$menu['right_margin']})"));
+            ->map(function ($menu,$index)use(&$q,$str){
+                $q->whereRaw(DB::Raw("({$str}left_margin{$str}>= {$menu['left_margin']} AND {$str}right_margin{$str}<= {$menu['right_margin']})=False"));
             });
         return $q;
     }

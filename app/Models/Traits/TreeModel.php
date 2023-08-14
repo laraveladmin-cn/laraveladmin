@@ -303,7 +303,8 @@ trait TreeModel{
         }
         $l_key = $this->treeField['left_key'];
         $r_key = $this->treeField['right_key'];
-        $q->whereRaw(DB::Raw("!(`{$l_key}`>=".$node[$l_key]." AND `{$r_key}`<=".$node[$r_key].')'));
+        $str = $this->getConnection()->getDriverName()=='pgsql'?'"':'`';
+        $q->whereRaw(DB::Raw("({$str}{$l_key}{$str}>=".$node[$l_key]." AND {$str}{$r_key}{$str}<=".$node[$r_key].')=False'));
         return $q;
     }
 
