@@ -59,7 +59,7 @@ RUN apt-get install -y default-mysql-client \
 # 安装mongodb扩展
 #RUN pecl install mongodb && docker-php-ext-enable mongodb
 # 安装pgsql
-RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
+#RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
 ENV PATH /root/.composer/vendor/bin:$PATH
 RUN chown -R www-data:www-data /var/www && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
