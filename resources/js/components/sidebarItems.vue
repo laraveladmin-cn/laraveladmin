@@ -11,6 +11,7 @@
             <li is="sidebar-items"
                 v-for="children in menu['childrens']"
                 :class="{active:children['active'],'menu-open':children['active']}"
+                :open="children['active']"
                 :key="children.id"
                 :menu="children">
             </li>
