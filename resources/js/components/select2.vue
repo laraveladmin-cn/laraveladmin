@@ -258,7 +258,7 @@
                                 }else {
                                     more = data.data.length!=0;
                                 }
-                                if((typeof data['current_page']=='undefined' || !data['current_page'] || data.current_page<=1) && $this.has_placeholder){
+                                if((typeof data['current_page']=='undefined' || !data['current_page'] || data.current_page<=1) && $this.placeholder){
                                     data.data.unshift({
                                         'id':$this.placeholderValue===''?$this.placeholderValue+' ':$this.placeholderValue,
                                         'text':$this._placeholder
@@ -292,7 +292,14 @@
                 $select2.on("select2:open",this.autofocus);
                 //修改值提交修改
                 $select2.on('change',function(){
-                    let value = $.trim($(this).val());
+                    let value;
+                    if(this.multiple){
+                        value = collect($(this).val()).map((val)=>{
+                            return $.trim(val);
+                        }).values().all();
+                    }else {
+                        value = $.trim($(this).val());
+                    }
                     $this.$emit('input', value); //修改值
                     $this.$emit('change',value); //修改值
                     $this.data = value;
@@ -458,5 +465,12 @@
     }
     .main-select2-no-placeholder .select2-results .select2-results__options .select2-results__option:first-child{
         display: none !important;
+    }
+    .select2-container--default.select2-container--open{
+        z-index: 10000;
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice{
+        background-color: #3c8dbc;
+        border-color: #367fa9;
     }
 </style>

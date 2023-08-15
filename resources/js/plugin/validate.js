@@ -113,7 +113,7 @@ extend('boolean', {
     params: [],
     computesRequired: false
 });
-//同意
+//用户名
 let user_name =  {
     validate:(value) => {
         if(!value) return true;
@@ -126,3 +126,13 @@ let user_name =  {
     computesRequired: false
 };
 extend('user_name', user_name);
+let array_length =  {
+    validate:(value,{ min ,max}) => {
+        let length = collect(value).values().count();
+        return length>=min && length<=max;
+    },
+    params: ['min','max'],
+    computesRequired: true
+};
+extend('array_length', array_length);
+

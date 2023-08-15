@@ -22,10 +22,18 @@
                 >
                     <div class="row sizer-row">
                         <div class="col-md-6 col-sm-12 col-xs-12 sizer-item" :class="{'col-lg-7':options.keywordGroup,'col-lg-8':!options.keywordGroup}">
-                            <slot name="add" :data="data" :url="data.configUrl['createUrl']?data.configUrl['createUrl']+'/0':''">
-                                <router-link :to="data.configUrl['createUrl']+'/0'" class="btn btn-info" v-if="data.configUrl['createUrl']">
+                            <slot name="add" :data="data" :url="data.configUrl['createUrl']?data.configUrl['createUrl']+'/0':''" :to-edit="toEdit" >
+                                <router-link :to="data.configUrl['createUrl']+'/0'"
+                                             class="btn btn-info"
+                                             v-if="data.configUrl['createUrl'] && !options.editDialog">
                                     <i class="fa fa-plus"></i> {{$t("New")}}
                                 </router-link>
+                                <button class="btn btn-info"
+                                        type="button"
+                                        @click="toEdit(data.configUrl['createUrl']+'/0',0)"
+                                        v-if="data.configUrl['createUrl'] && options.editDialog">
+                                    <i class="fa fa-plus"></i> {{$t("New")}}
+                                </button>
                             </slot>
                             <slot name="refresh" :data="data" >
                                 <button class="btn btn-success"
@@ -303,13 +311,27 @@
                                     </slot>
                                 </td>
                                 <td class="operate" v-if="operation">
-                                    <slot name="col-operation" :data="data" :row="row" :remove="remove">
-                                        <button v-show="data.configUrl['deleteUrl']" :title="$t('Delete selected')" type="button" class="btn btn-danger btn-xs" @click="remove([row[options.primaryKey]])">
+                                    <slot name="col-operation" :data="data" :url="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])" :row="row" :to-edit="toEdit" :remove="remove">
+                                        <button v-show="data.configUrl['deleteUrl']"
+                                                :title="$t('Delete selected')"
+                                                type="button"
+                                                class="btn btn-danger btn-xs"
+                                                @click="remove([row[options.primaryKey]])">
                                             <i class="fa fa-trash-o"></i>
                                         </button>
-                                        <router-link class="btn btn-info btn-xs" :title="$t('Edit')"  :to="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])" v-if="data.configUrl['showUrl']">
+                                        <router-link class="btn btn-info btn-xs"
+                                                     :title="$t('Edit')"
+                                                     :to="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])"
+                                                     v-if="data.configUrl['showUrl'] && !options.editDialog">
                                             <i class="fa fa-edit"></i>
                                         </router-link>
+                                        <button class="btn btn-info btn-xs"
+                                                :title="$t('Edit')"
+                                                type="button"
+                                                @click="toEdit(data.configUrl['showUrl'].replace('{id}',row[options.primaryKey]),row[options.primaryKey])"
+                                                v-if="data.configUrl['showUrl'] && options.editDialog">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
                                     </slot>
                                 </td>
                             </tr>
@@ -383,6 +405,11 @@
             </div>
             <slot name="end" :data="data"></slot>
         </div>
+        <el-dialog :title="dialog_title" :visible.sync="show_dialog" v-if="options.editDialog">
+            <div v-if="show_dialog">
+                <slot name="edit" :url="edit_url" :callback="editCallback" :data="data" :maps="_maps"></slot>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -395,6 +422,7 @@
             "el-select": ()=>import(/* webpackChunkName: "element-ui/lib/select" */ 'element-ui/lib/select'),
             "el-option": ()=>import(/* webpackChunkName: "element-ui/lib/option" */ 'element-ui/lib/option'),
             "el-input-number": ()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
+            "el-dialog": ()=>import(/* webpackChunkName: "element-ui/lib/dialog" */ 'element-ui/lib/dialog'),
         },
         props: {
             //配置选项
@@ -415,6 +443,9 @@
                 initLoading:true, //初始化加载状态
                 show_export_fields:false, //导出字段按钮显示状态
                 hideLoading:false,
+                show_dialog:false,
+                edit_url:'',
+                dialog_title:'',
                 data:{
                     options:{
                         where:{},
@@ -470,6 +501,15 @@
             ...mapMutations({
                 set:'set'
             }),
+            toEdit(url,id){
+                this.edit_url = url;
+                this.dialog_title = id?'编辑':'新增';
+                this.show_dialog=true;
+            },
+            editCallback(){
+                this.show_dialog=false;
+                this.refresh();
+            },
             showCode(row,k,field){
                 let str = array_get(row,k) || '';
                 if(str && typeof str=="object"){

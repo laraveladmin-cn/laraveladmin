@@ -126,8 +126,7 @@
         })->implode("\n");
     $chunk_count = $table_fields_show->count();
     $chunk_num = $chunk_count<=4?1:($chunk_count<=6?2:3);
-    ?>
-    <div class="{{$class}}_edit">
+    ?>    <div class="{{$class}}_edit">
         <div class="box" :class="'box-'+theme">
             <div class="box-header with-border">
                 <h3 class="box-title">{{$startSymbol}}$t('Quickly fill in'){{$endSymbol}}</h3>

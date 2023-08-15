@@ -162,6 +162,13 @@ trait ResourceController
         //增删改查URL地址
         $data['configUrl'] = $this->getConfigUrl('edit');
         //$data['configUrl']['indexUrl'] = '';
+        //修改值
+        $request = Request::instance();
+        $_set = $request->input('_set',[]);
+        if($_set && is_array($_set)){
+            $data = collect($data)->toArray();
+            $data['row'] = collect(Arr::get($data,'row',[]))->merge($_set)->toArray();
+        }
         $data = $this->handleEditReturn($id, $data);
         return Response::returns($data); //获取一条记录
     }
