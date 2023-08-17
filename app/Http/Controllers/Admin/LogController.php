@@ -22,12 +22,6 @@ class LogController extends Controller
                 '',
             ],
         ];
-        $driver = $this->newBindModel()->getConnection()->getDriverName();
-        if($driver=='pgsql'){
-            $this->showIndexFields[] =  'LEFT("parameters",100) AS "parameters"';
-        }else{
-            $this->showIndexFields[] =  'LEFT(`parameters`,100) AS `parameters`';
-        }
     }
 
     /**
@@ -86,7 +80,7 @@ class LogController extends Controller
         'location',
         'ip',
         'created_at',
-
+        'LEFT(`parameters`,100) AS `parameters`',
         'user' => [
             'id',
             'name',

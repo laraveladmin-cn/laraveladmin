@@ -179,17 +179,22 @@ trait CommonController{
      * @param string $k
      * @return array
      */
-    public function getWithFields($data, &$result = [], $k = '')
+    public function getWithFields($data,$model=null, &$result = [], $k = '')
     {
         foreach ($data as $key => $item) {
             if (is_array($item)) {
-                $fileds = $this->selectFields($item);
+                $model1 = null;
+                if($model){
+                    $relation = $model->getModel()->$key();
+                    $model1 = $relation->getModel();
+                }
+                $fileds = $this->selectFields($item,$model1);
                 if ($fileds) {
                     $result[$k ? $k . '.' . $key : $key] = $fileds;
                 } else {
                     $result[] = $k ? $k . '.' . $key : $key;
                 }
-                $this->getWithFields($item, $result, $k ? $k . '.' . $key : $key);
+                $this->getWithFields($item, $model1,$result, $k ? $k . '.' . $key : $key);
             }elseif (!is_string($item) && !is_numeric($item) && is_callable($item)){
                 $result[$k ? $k . '.' . $key : $key] = $item;
             }
@@ -201,9 +206,9 @@ trait CommonController{
      * 查询所需字段
      * @return array
      */
-    protected function selectWithFields($fields_key='showIndexFields'){
+    protected function selectWithFields($fields_key='showIndexFields',$model=null){
         $result = [];
-        foreach($this->getWithFields($this->$fields_key) as $key=>$withField){
+        foreach($this->getWithFields($this->$fields_key,$model) as $key=>$withField){
             if(is_array($withField) &&  Arr::get($this->getShowIndexFieldsCount(),$key)){
                 $result[$key] = function($q)use($withField,$key){
                     $q->select($withField);
@@ -234,9 +239,9 @@ trait CommonController{
      * 查询所需字段
      * @return array
      */
-    protected function selectWithEditFields($fields_key='showIndexFields'){
+    protected function selectWithEditFields($fields_key='showIndexFields',$model=null){
         $result = [];
-        foreach($this->getWithFields($this->$fields_key) as $key=>$withField){
+        foreach($this->getWithFields($this->$fields_key,$model) as $key=>$withField){
             if(is_array($withField)){
                 $result[$key] = function($q)use($withField){
                     $q->select($withField);
@@ -254,18 +259,31 @@ trait CommonController{
      * @param $fields
      * @return array
      */
-    public function selectFields($fields)
+    public function selectFields($fields,$model=null)
     {
         $result = [];
         foreach ($fields as $field) {
             if(!is_array($field) && !(!is_string($field) && !is_numeric($field) && is_callable($field))){
                 if(is_string($field) && (Str::contains($field,'`') || Str::contains($field,'"'))){
+                    if($model && $model->getConnection()->getDriverName()=='pgsql'){
+                        $field = Str::replace('`','"',$field);
+                    }
                     $field = DB::raw($field);
                 }
                 $result[] = $field;
             }
         }
         return $result;
+    }
+
+    public function checkSql($sql,$model=null){
+        if(!$model){
+            return $sql;
+        }
+        if($model && $model->getConnection()->getDriverName()=='pgsql'){
+            return Str::replace('`','"',$sql);
+        }
+        return $sql;
     }
 
 
@@ -378,7 +396,7 @@ trait CommonController{
             $options['order'] = collect($order)->merge(collect($this->orderDefault)
                 ->map(function ($item,$key)use($order){
                     return Arr::get($order,$key,$item);
-            })->toArray())->map(function ($value){
+                })->toArray())->map(function ($value){
                 return $value!='desc'?'asc':'desc';
             })->toArray();
         }else{

@@ -176,6 +176,7 @@
                     </div>
                 </slot>
             </div>
+            <slot name="table-top" :data="data" :maps="_maps"></slot>
             <div class="box-footer box-footer-top clearfix pager-tool" v-if="!options.hideTopPagerTool">
                 <slot name="pager" :data="data">
                     <div class="row">

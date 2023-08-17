@@ -297,7 +297,7 @@ trait ResourceController
         $this->selectValidate();
         $this->bindModel = $this->bindModel();
         //指定查询字段
-        $fields = $this->selectFields($this->showIndexFields);
+        $fields = $this->selectFields($this->showIndexFields,$this->bindModel);
         //判断是否包含主键字段,没有包含自动添加
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();
@@ -473,7 +473,7 @@ trait ResourceController
     {
         $this->bindModel OR $this->bindModel(); //绑定模型
         //指定查询字段
-        $fields = $this->selectFields($this->editFields);
+        $fields = $this->selectFields($this->editFields,$this->bindModel);
         //判断是否包含主键字段,没有包含自动添加
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();
@@ -484,7 +484,7 @@ trait ResourceController
         }
         if($id){
             $obj = $this->bindModel
-                ->with($this->selectWithEditFields('editFields'));
+                ->with($this->selectWithEditFields('editFields',$model));
             if($fields){
                 $obj = $obj->select($fields);
             }
@@ -506,7 +506,7 @@ trait ResourceController
             unset($options['order']);
         }
         $fullTextSearch = $this->existFullTextSearch();
-        $with = $this->selectWithFields($fields_key);
+        $with = $this->selectWithFields($fields_key,$this->bindModel);
         $obj = $this->bindModel;
         if($with){
             $obj = $obj->with($with);
@@ -755,7 +755,7 @@ trait ResourceController
     protected function getExportFields($fields, $model)
     {
         $res = [];
-        $select_fields = $this->selectFields($fields);
+        $select_fields = $this->selectFields($fields,$model);
         if (!$select_fields) {
             $res = $model->getKeyName() ? array_merge(array_merge($res, $model->getFillable()), [$model->getKeyName()]) : array_merge($res, $model->getFillable());
         } else {
@@ -918,7 +918,7 @@ trait ResourceController
             $value = $this->transField($value, $this->getTable($item,$mapsRelations));
             return $value;
         });
-        $fields = $this->selectFields($this->exportFields);
+        $fields = $this->selectFields($this->exportFields,$model);
         $primary_key = $model->getKeyName();
         if($primary_key && $fields && (!isset($this->noPrimaryKey) || !$this->noPrimaryKey)){
             $primary_key1 = $model->getTable().'.'.$primary_key;
