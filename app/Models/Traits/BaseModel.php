@@ -26,6 +26,7 @@ use Illuminate\Support\Str;
  * @method static ignoreUpdateAt() 忽略更新时间
  * @method static getFillables() 获取本模型可批量赋值白名单
  * @method static commaMapValue($key) 逗号分隔的字段值map
+ * @method static checkSqlFields($sql) 查询字段符号检查
  */
 trait BaseModel{
 
@@ -568,5 +569,10 @@ where
         return collect(self::getFieldsMap($key,true))->implode(',');
     }
 
-
+    public function scopeCheckSqlFields($q,$sql){
+        if(self::getConnection()->getDriverName()=='pgsql'){
+            return Str::replace('`','"',$sql);
+        }
+        return $sql;
+    }
 }
