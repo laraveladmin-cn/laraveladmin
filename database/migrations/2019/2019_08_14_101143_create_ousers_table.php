@@ -15,7 +15,7 @@ class CreateOusersTable extends Migration {
 		Schema::create('ousers', function(Blueprint $table)
 		{
 			$table->increments('id')->comment('ID');
-			$table->integer('user_id')->unsigned()->default(0)->index('ouser_user_id_index')->comment('用户ID');
+			$table->integer('user_id')->unsigned()->default(0)->index()->comment('用户ID');
 			$table->tinyInteger('type')->default(0)->comment('类型:1-qq,2-weixin,3-weibo$select');
 			$table->string('open_id')->default('')->comment('用户唯一标识');
 			$table->text('data', 65535)->comment('用户信息');

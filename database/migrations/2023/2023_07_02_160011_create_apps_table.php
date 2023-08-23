@@ -21,7 +21,7 @@ class CreateAppsTable extends Migration
             $table->string('url', 255)->default('')->comment('应用程序下载地址$qiniuUpload@required|url');
             $table->string('version', 255)->default('')->comment('版本号@required');
             $table->unsignedTinyInteger('forced_update')->default(0)->comment('是否强制更新:0-否,1-是$switch@sometimes|in:0,1');
-            $table->unsignedInteger('operate_id')->default(0)->index('operate_id_index')->comment('操作人$select2');
+            $table->unsignedInteger('operate_id')->default(0)->index()->comment('操作人$select2');
             $table->timestamps();
             $table->softDeletes();
         });

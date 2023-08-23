@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration {
             $table->increments('id')->comment('ID');
             $table->string('uname', 20)->default('')->index()->comment('用户名@sometimes|required|alpha_dash|between:6,18|unique:users,uname');
             $table->string('password', 100)->default('')->comment('密码$password@sometimes|required|digits_between:6,18');
-            $table->string('name', 50)->default('')->index('name_index')->comment('昵称@required');
+            $table->string('name', 50)->default('')->index()->comment('昵称@required');
             $table->string('avatar')->default('')->comment('头像@sometimes|required|url');
             $table->string('email', 100)->default('')->index()->comment('电子邮箱@sometimes|required|email|unique:users,email');
             $table->string('mobile_phone', 11)->default('')->index()->comment('手机号码@sometimes|required|mobile_phone|unique:users,mobile_phone');

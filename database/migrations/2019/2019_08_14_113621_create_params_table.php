@@ -15,7 +15,7 @@ class CreateParamsTable extends Migration {
 		Schema::create('params', function(Blueprint $table)
 		{
 			$table->increments('id')->comment('ID');
-			$table->integer('menu_id')->default(0)->index('api_params_menu_id_index')->comment('接口ID$select2@required|exists:menus,id');
+			$table->integer('menu_id')->default(0)->index()->comment('接口ID$select2@required|exists:menus,id');
 			$table->string('name')->default('')->comment('参数名称@required');
 			$table->tinyInteger('type')->default(1)->comment('类型:1-字符串,2-数字,3-布尔值');
 			$table->string('title')->default('')->comment('提示@required');
