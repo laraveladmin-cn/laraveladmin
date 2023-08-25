@@ -67,7 +67,7 @@ export default {
     computed:{
         value_html(){
             if(this.loading){
-                return '';
+                return this.value || '';
             }
             return marked.parse(this.value);
         }
@@ -77,7 +77,7 @@ export default {
 
     },
     updated(){
-        if(Prism){
+        if(window.Prism){
             Prism.highlightAll();
         }
     }
