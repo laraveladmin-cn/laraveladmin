@@ -123,6 +123,8 @@ return [
         public_path('bower_components/axios') => base_path('node_modules/axios/dist'),
         public_path('bower_components/vue') => base_path('node_modules/vue/dist'),
         public_path('bower_components/qs') => base_path('node_modules/qs/dist'),
+        public_path('bower_components/marked/marked.min.js') => base_path('node_modules/marked/marked.min.js'),
+        public_path('bower_components/prismjs') => base_path('node_modules/prismjs'),
 
         resource_path('theme/_variables.scss') => resource_path('sass/_variables.scss'), //主题
         resource_path('theme/echarts.theme.json') => resource_path('js/components/echarts.theme.json'),
