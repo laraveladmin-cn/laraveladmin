@@ -32,7 +32,7 @@ mix.webpackConfig({
         },
     },
     output: {
-        publicPath: '/',
+        publicPath: (process.env.ASSET_URL || '')+'/',
         chunkFilename: jsPath+'/components/[name].js?id=[chunkhash]',
     }
 });
@@ -48,8 +48,7 @@ if(process.argv.includes('--css')){
     global.Mix.manifest.name = 'mix-manifest.json';
     mix.js('resources/js/bootstrap.js', jsPath)
         .js('resources/js/app.js', jsPath);
-        //mix.tailwind()
-    ;
+        //mix.tailwind();
 }
 mix.version();
 if (!mix.inProduction()) {
