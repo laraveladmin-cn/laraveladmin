@@ -16,6 +16,11 @@ if(typeof path=="undefined"){
 let basePath = 'public/';
 let jsPath = 'js';
 let cssPath = 'css';
+let asset_url = process.env.ASSET_URL || '';
+if(asset_url.indexOf('$')==0){
+    let asset_url_key = asset_url.replaceAll(/(\$|\{|\})/g,'');
+    asset_url = process.env[asset_url_key] || '';
+}
 mix.setPublicPath(basePath);
 mix.webpackConfig({
     resolve: {
@@ -32,7 +37,7 @@ mix.webpackConfig({
         },
     },
     output: {
-        publicPath: (process.env.ASSET_URL || '')+'/',
+        publicPath: asset_url+'/',
         chunkFilename: jsPath+'/components/[name].js?id=[chunkhash]',
     }
 });
