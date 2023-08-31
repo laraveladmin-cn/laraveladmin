@@ -29,6 +29,17 @@ server {
     location ^~ /api/ {
          try_files $uri $uri/ @www_laraveladmin_cn_http;
     }
+
+    location ^~ /open/ {
+        try_files /index.html @www_laraveladmin_cn_https;
+    }
+    location ^~ /home/ {
+        try_files /index.html @www_laraveladmin_cn_https;
+    }
+    location ^~ /admin/ {
+        try_files /index.html @www_laraveladmin_cn_https;
+    }
+
     location / {
         try_files $uri $uri/ @www_laraveladmin_cn_http;
     }

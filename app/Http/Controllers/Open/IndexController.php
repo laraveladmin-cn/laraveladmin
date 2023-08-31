@@ -29,8 +29,14 @@ class IndexController extends Controller
     public function indexData(){
         $config_url = (config('laravel_admin.domain_auto')?'':config('app.url')).getRoutePrefix(config('laravel_admin.web_api_model'));
         $config_url = $this->checkUrl($config_url);
+        //$time = config('app.env')!=='local'?'time='.time():'';
+        $time = 'time='.time();
+        $partition_time_str = $time?'&'.$time:'';
+        $query_time_str = $time?'?'.$time:'';
         return [
-            'time_str'=>'&time='.time(),
+            'time_str'=>$time,
+            'partition_time_str'=>$partition_time_str,
+            'query_time_str'=>$query_time_str,
             'app_name'=>config('app.name'),
             'config_url'=>$config_url
         ];
