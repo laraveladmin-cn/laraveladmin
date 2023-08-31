@@ -12,12 +12,12 @@
     <meta name="description" content="{{$app_name}},简洁、直观、强悍的前端后端开发框架，让全栈开发更迅速的SPA单页面应用。企业官网:{{config('app.url')}}" />
     <link rel="icon" type="image/x-icon" href="{{config('app.asset_url')?asset(config('laravel_admin.logo')):config('laravel_admin.logo')}}">
     <link href="{{config('app.asset_url')?asset('/css/app.css'):'/css/app.css'}}?{{$time_str}}" rel="stylesheet">
-    <link href="{{config('app.asset_url')?asset('/css/adminlte.css'):'/css/adminlte.css'}}?{{$time_str}}" rel="stylesheet">
+    <link href="{{config('app.asset_url')?asset('/css/adminlte.css'):'/css/adminlte.css'}}?{{$time_str}}" rel="stylesheet" media="none" onload="this.media='all'">
     {{--<link href="{{config('app.asset_url')?asset('/css/tailwindcss.css'):'/css/tailwindcss.css'}}?{{$time_str}}" rel="stylesheet">--}}
     <script src="{{$config_url}}/open/config?script=AppConfig{{$time_str}}" type="application/javascript"></script>
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js" async="true"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" async="true"></script>
     <![endif]-->
 </head>
 <body>
