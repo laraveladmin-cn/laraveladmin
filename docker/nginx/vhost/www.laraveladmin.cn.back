@@ -17,32 +17,8 @@ server {
     #access_log  /data/logs/nginx80_access.log  main;
     #error_log   /data/logs/nginx80_error.log;
     client_max_body_size 100m;
-   location ~* \.php$ {
-        try_files $uri $uri/index.html @www_laraveladmin_cn_http;
-    }
-    location = / {
-         try_files $uri $uri/index.html @www_laraveladmin_cn_http;
-    }
-    location ^~ /web-api/ {
-        try_files $uri $uri/ @www_laraveladmin_cn_http;
-    }
-    location ^~ /api/ {
-         try_files $uri $uri/ @www_laraveladmin_cn_http;
-    }
 
-    location ^~ /open/ {
-        try_files /index.html @www_laraveladmin_cn_https;
-    }
-    location ^~ /home/ {
-        try_files /index.html @www_laraveladmin_cn_https;
-    }
-    location ^~ /admin/ {
-        try_files /index.html @www_laraveladmin_cn_https;
-    }
 
-    location / {
-        try_files $uri $uri/ @www_laraveladmin_cn_http;
-    }
     location @www_laraveladmin_cn_http {
         proxy_http_version 1.1;
         proxy_set_header X-Real-IP $remote_addr;
@@ -57,6 +33,15 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
         proxy_pass http://www_laraveladmin_cn;
+    }
+
+    location ~ ^/(open|home|admin)/ {
+        try_files $uri $uri/ /index.html @www_laraveladmin_cn_https;
+        break;
+    }
+
+    location / {
+        try_files $uri $uri/ @www_laraveladmin_cn_http;
     }
 }
 
