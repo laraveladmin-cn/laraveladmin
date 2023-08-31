@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -47,6 +48,13 @@ class IndexController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(){
+        if(config('app.env')!=='local'){
+            $disk = Storage::disk('root');
+            $index_html = 'public/index.html';
+            if($disk->exists($index_html)){
+                return $disk->get($index_html);
+            }
+        }
         return view('index',$this->indexData());
     }
 
@@ -112,7 +120,7 @@ class IndexController extends Controller
         $data['wechat_appid'] = config('wechat.official_account.default.app_id','');
         $max_age = 3600*24;
         $response = Response::returns($data)
-            ->header('Cache-Control','max-age='.$max_age)
+            ->header('Cache-Control','max-age='.$max_age.', public')
             ->header('Expires',gmdate('D, d M Y H:i:s ',time()+$max_age).'GMT');
         return $this->addClientId($response,$data['client_id']);
     }
