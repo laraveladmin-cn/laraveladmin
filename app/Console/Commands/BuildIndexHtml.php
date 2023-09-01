@@ -35,7 +35,7 @@ class BuildIndexHtml extends BaseCommand
     {
         //开发环境无需生成index.html
         if($this->option('force') || config('app.env')!=='local'){
-            $indexHtml = view('index',(new IndexController())->indexData())->render();
+            $indexHtml = view('index',(new IndexController())->indexData(true))->render();
             file_put_contents(public_path($this->fileName),$indexHtml);
         }
         $this->checkEnvValue();

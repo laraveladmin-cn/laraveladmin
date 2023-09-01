@@ -20,13 +20,46 @@ use Overtrue\LaravelWeChat\Facade as EasyWeChat;
 
 class IndexController extends Controller
 {
+    /**
+     * 获取静态资源编译数据
+     * @return array
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
+    protected function getManifest(){
+        $manifest = [];
+        $storage = Storage::disk('root');
+        collect(['mix-manifest.json','mix-manifest-css.json','mix-manifest-tailwindcss.json'])
+            ->each(function ($file)use(&$manifest,$storage){
+                $file_path = 'public/'.$file;
+                if($storage->exists($file_path) && $file_content = $storage->get($file_path)){
+                    try {
+                        $json = json_decode($file_content,true);
+                        if($json){
+                            $manifest = array_merge($manifest,$json);
+                        }
+                    }catch (\Exception $exception){
+
+                    }
+                }
+            });
+        return $manifest;
+    }
 
 
     /**
      * 生成index.html文件生成的数据
      * @return array
      */
-    public function indexData(){
+    public function indexData($is_running_in_console=false){
+        $cache_key = 'manifest_files';
+        if($is_running_in_console || config('app.env')==='local'){
+            $manifest = $this->getManifest();
+            Cache::put($cache_key, $manifest);
+        }else{
+            $manifest = Cache::rememberForever($cache_key, function () {
+                return $this->getManifest();
+            });
+        }
         $config_url = (config('laravel_admin.domain_auto')?'':config('app.url')).getRoutePrefix(config('laravel_admin.web_api_model'));
         $config_url = $this->checkUrl($config_url);
         //$time = config('app.env')!=='local'?'time='.time():'';
@@ -38,7 +71,8 @@ class IndexController extends Controller
             'partition_time_str'=>$partition_time_str,
             'query_time_str'=>$query_time_str,
             'app_name'=>config('app.name'),
-            'config_url'=>$config_url
+            'config_url'=>$config_url,
+            'manifest'=>$manifest
         ];
     }
 

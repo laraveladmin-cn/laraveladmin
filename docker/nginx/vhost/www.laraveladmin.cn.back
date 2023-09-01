@@ -17,6 +17,8 @@ server {
     #access_log  /data/logs/nginx80_access.log  main;
     #error_log   /data/logs/nginx80_error.log;
     client_max_body_size 100m;
+    sendfile on;
+    tcp_nodelay on;
 
 
     location @www_laraveladmin_cn_http {
