@@ -9,6 +9,7 @@ use App\Models\Menu;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
@@ -42,6 +43,24 @@ class IndexController extends Controller
                     }
                 }
             });
+        $asset_url = config('app.asset_url');
+        if($asset_url){
+            $manifest = collect($manifest)
+                ->map(function ($file){
+                return asset($file);
+            })->toArray();
+        }
+        collect([
+            '/css/app.css',
+            '/css/adminlte.css',
+            '/css/tailwindcss.css',
+            '/js/bootstrap.js',
+            '/js/app.js'
+        ])->each(function ($file)use(&$manifest){
+            if(!isset($manifest[$file])){
+                $manifest[$file] = $file;
+            }
+        });
         return $manifest;
     }
 
