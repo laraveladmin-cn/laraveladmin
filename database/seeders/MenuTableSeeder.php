@@ -3,6 +3,7 @@ namespace Database\Seeders;
 use App\Services\RouteService;
 use Illuminate\Database\Seeder;
 use App\Models\Menu;
+use Illuminate\Support\Facades\Artisan;
 use \Illuminate\Support\Facades\Cache;
 use \Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -230,6 +231,9 @@ class MenuTableSeeder extends Seeder
             $max_id = Menu::query()->withTrashed()->max('id');
             $sql = "select setval('".$tablePrefix."menus_id_seq',:max_id)";
             $connection->select($sql,['max_id'=>$max_id]);
+        }
+        if(config('laravel_admin.auto_cache_route')){
+            Artisan::call('route:cache');
         }
     }
 

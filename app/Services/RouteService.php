@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Facades\ClientAuth;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -570,6 +571,9 @@ class RouteService
         $out_menus['menus'] = $menus->values()->toArray();
         $out_menus['update_position'] = [];
         file_put_contents(base_path(self::$routes),json_encode($out_menus,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+        if(config('laravel_admin.auto_cache_route')){
+            Artisan::call('route:cache');
+        }
     }
 
 }
