@@ -1,7 +1,13 @@
 <template>
-    <div v-html="value_html">
+    <div>
+        <div v-html="value_html" v-if="value_html">
+        </div>
+        <div v-else>
+          {{value}}
+        </div>
     </div>
 </template>
+
 
 <script>
 export default {
