@@ -121,6 +121,11 @@ trait ResourceController
         //条件筛选及排序返回
         $this->addOptions();
         $data = $this->handleIndexReturn($data);
+        $this->emptyToObject($data,[
+            'maps',
+            'mapsRelations',
+            'keywordsMap'
+        ]);
         //数据返回
         return Response::returns($data);
     }
@@ -170,6 +175,10 @@ trait ResourceController
             $data['row'] = collect(Arr::get($data,'row',[]))->merge($_set)->toArray();
         }
         $data = $this->handleEditReturn($id, $data);
+        $this->emptyToObject($data,[
+            'maps',
+            'mapsRelations'
+        ]);
         return Response::returns($data); //获取一条记录
     }
 
@@ -1256,6 +1265,26 @@ trait ResourceController
      */
     protected function handleDeleteSuccess($ids=[]){
 
+    }
+
+
+    /**
+     * 空数组数据转对象
+     * @return void
+     */
+    protected function emptyToObject(&$data,$keys=[]){
+        collect($keys)->each(function ($key)use(&$data){
+            if(isset($data[$key])){
+                $value = Arr::get($data,$key);
+                if(
+                    (!$value && is_array($value)) ||
+                    ($value && !collect($value)->count())
+                ){
+                    $data[$key] = new \stdClass();
+                }
+            }
+        });
+        return $data;
     }
 
 

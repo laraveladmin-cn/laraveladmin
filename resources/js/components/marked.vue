@@ -3,7 +3,7 @@
         <div v-html="value_html" v-if="value_html">
         </div>
         <div v-else>
-          {{value}}
+            {{value}}
         </div>
     </div>
 </template>
@@ -48,26 +48,25 @@ export default {
             $script.id = 'marked-js';
             $script.type = 'text/javascript';
             $script.src = '/bower_components/marked/marked.min.js';
-            $script.async = false;
+            $script.async='true';
             document.body.appendChild($script);
             $script = document.createElement('script');
             $script.id = 'prism-js';
             $script.type = 'text/javascript';
             $script.src = '/bower_components/prismjs/prism.js';
-            $script.async = false;
             document.body.appendChild($script);
             $script = document.createElement('script');
             $script.id = 'prism-autoloader';
             $script.type = 'text/javascript';
             $script.src = '/bower_components/prismjs/plugins/autoloader/prism-autoloader.min.js';
-            $script.async = false;
             document.body.appendChild($script);
-            $script = document.createElement('script');
-            $script.id = 'prism-autoloader';
-            $script.type = 'text/javascript';
-            $script.src = '/bower_components/prismjs/components/prism-markup-templating.js';
-            $script.async = false;
-            document.body.appendChild($script);
+            setTimeout(()=>{
+                $script = document.createElement('script');
+                $script.id = 'prism-autoloader';
+                $script.type = 'text/javascript';
+                $script.src = '/bower_components/prismjs/components/prism-markup-templating.js';
+                document.body.appendChild($script);
+            },50);
         }
     },
     computed:{
@@ -75,7 +74,14 @@ export default {
             if(this.loading){
                 return this.value || '';
             }
-            return marked.parse(this.value);
+            let str = marked.parse(this.value);
+            let $div = document.createElement('div');
+            $div.innerHTML = str;
+            if(!$div.innerText){
+                return '';
+            }
+            return str;
+
         }
 
     },
@@ -83,8 +89,13 @@ export default {
 
     },
     updated(){
-        if(window.Prism){
-            Prism.highlightAll();
+        if(typeof window.Prism=="object" && !window.prism_highlight_all_ing){
+            window.prism_highlight_all_ing = true; //锁定
+            setTimeout(()=>{
+                Prism.highlightAll(false,()=>{
+                    window.prism_highlight_all_ing = false; //解锁
+                });
+            },30);
         }
     }
 }
