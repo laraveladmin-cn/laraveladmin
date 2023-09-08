@@ -72,16 +72,11 @@ export default {
     computed:{
         value_html(){
             if(this.loading){
-                return this.value || '';
-            }
-            let str = marked.parse(this.value);
-            let $div = document.createElement('div');
-            $div.innerHTML = str;
-            if(!$div.innerText){
                 return '';
             }
-            return str;
-
+            return marked.parse(this.value,{
+                sanitize:true
+            });
         }
 
     },
