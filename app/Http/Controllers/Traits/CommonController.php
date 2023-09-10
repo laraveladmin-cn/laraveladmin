@@ -171,6 +171,14 @@ trait CommonController{
      */
     protected $hasFullTextSearch=null;
 
+    /**
+     * 获取筛选项
+     * @return mixed
+     */
+    public function getSizer(){
+        return $this->sizer;
+    }
+
 
     /**
      * 查询需要输出的字段信息
@@ -353,6 +361,20 @@ trait CommonController{
         return $result;
     }
 
+    protected function getOptionsOrder(){
+        $order = Request::get('order',[]);
+        if($order){
+            return collect($order)->merge(collect($this->orderDefault)
+                ->map(function ($item,$key)use($order){
+                    return Arr::get($order,$key,$item);
+                })->toArray())->map(function ($value){
+                return $value!='desc'?'asc':'desc';
+            })->toArray();
+        }else{
+            return $this->orderDefault;
+        }
+    }
+
     /**
      * 获取筛选条件,跟排序
      * @return array
@@ -363,7 +385,7 @@ trait CommonController{
         $where = []; //输出
         $sizerDefault = collect($this->sizerDefault);
         //筛选条件全部转成一级
-        collect($this->sizer)->map(function($item,$key)use(&$where,&$options,$input,$sizerDefault){
+        collect($this->getSizer())->map(function($item,$key)use(&$where,&$options,$input,$sizerDefault){
             $inputWhere = collect($input->get('where',[]));
             if(is_array($item)){
                 $inputValue = $inputWhere->get($key);
@@ -391,17 +413,7 @@ trait CommonController{
         });
 
         $this->otherSizerOutput AND $where = array_merge($this->getOtherSizerOutput(),$where);
-        $order = $input->get('order',[]);
-        if($order){
-            $options['order'] = collect($order)->merge(collect($this->orderDefault)
-                ->map(function ($item,$key)use($order){
-                    return Arr::get($order,$key,$item);
-                })->toArray())->map(function ($value){
-                return $value!='desc'?'asc':'desc';
-            })->toArray();
-        }else{
-            $options['order'] = $this->orderDefault;
-        }
+        $options['order']  = $this->getOptionsOrder();
         LifeData::set([
             '_condition'=>[
                 'where'=>$where,

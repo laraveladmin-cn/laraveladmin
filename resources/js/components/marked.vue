@@ -1,9 +1,14 @@
 <template>
     <div>
-        <div v-html="value_html" v-if="value_html">
+        <div v-if="!highFrequency">
+            <div v-html="value_html" v-if="value_html">
+            </div>
+            <div v-else>
+                {{value}}
+            </div>
         </div>
         <div v-else>
-            {{value}}
+            <div ref="html"></div>
         </div>
     </div>
 </template>
@@ -20,11 +25,19 @@ export default {
                 return '';
             }
         },
+        //绑定值
+        highFrequency: {
+            type:[String, Number,Boolean],
+            default: function () {
+                return false;
+            }
+        },
     },
     data(){
         return {
             intervalTime:null,
-            loading:true
+            loading:true,
+            delay_time:0
         };
     },
     mounted() {
@@ -40,6 +53,38 @@ export default {
         }
     },
     methods:{
+        getValueHtml(){
+            let str = '';
+            if(!this.loading){
+                str = marked.parse(this.value,{
+                    sanitize:true
+                });
+            }
+            return str;
+        },
+        highlight(){
+            if(typeof window.Prism=="object" && !window.prism_highlight_all_ing){
+                window.prism_highlight_all_ing = true; //锁定
+                setTimeout(()=>{
+                    Prism.highlightAll(false,()=>{
+                        window.prism_highlight_all_ing = false; //解锁
+                    });
+                    setTimeout(()=>{
+                        window.prism_highlight_all_ing = false; //解锁
+                    },100)
+                },300);
+            }
+        },
+        //延迟高亮
+        delayHighlight(){
+            this.delay_time = new Date().getTime();
+            setTimeout(()=>{
+                if((new Date().getTime())-this.delay_time>500){
+                    this.highlight();
+                }
+            },300);
+        }
+
     },
     created() {
         //动态加载js文件
@@ -71,27 +116,20 @@ export default {
     },
     computed:{
         value_html(){
-            if(this.loading){
-                return '';
-            }
-            return marked.parse(this.value,{
-                sanitize:true
-            });
+            return this.getValueHtml();
         }
 
     },
-    value(val,old){
-
+    watch:{
+        value(val,old){
+            if(this.highFrequency){
+                this.$refs['html'].innerHTML = this.value_html;
+                this.delayHighlight();
+            }
+        },
     },
     updated(){
-        if(typeof window.Prism=="object" && !window.prism_highlight_all_ing){
-            window.prism_highlight_all_ing = true; //锁定
-            setTimeout(()=>{
-                Prism.highlightAll(false,()=>{
-                    window.prism_highlight_all_ing = false; //解锁
-                });
-            },30);
-        }
+        this.highlight();
     }
 }
 </script>

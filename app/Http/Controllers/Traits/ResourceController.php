@@ -41,11 +41,35 @@ trait ResourceController
     }
 
     /**
+     * 主键ID用于排序优化
+     * @return bool|mixed
+     */
+    public function isPrimaryKeyPage(){
+        return isset($this->primaryKeyPage)?$this->primaryKeyPage:false;
+    }
+
+    /**
      * 获取筛选项
      * @return mixed
      */
     public function getSizer(){
-        return $this->sizer;
+        $sizer = $this->sizer;
+        if($this->isPrimaryKeyPage()){
+            //通过排序规则判断id过滤规则
+            $order = $this->getOptionsOrder();
+            $resourceModel = $this->getModelClass();
+            $primaryKey = $resourceModel::query()->getModel()->getKeyName();
+            if($primaryKey && (!$order || //没有任何排序
+                !collect($order)
+                    ->except($primaryKey)
+                    ->count() //只有主键排序
+                )
+            ){
+                $order_value = Arr::get($order,$primaryKey)?:'asc';
+                $sizer[$primaryKey] = $order_value=='desc'?'<':'>';
+            }
+        }
+        return $sizer;
     }
 
     /**
@@ -71,7 +95,7 @@ trait ResourceController
             'exportFields' => $this->getExportFieldsName($this->exportFieldsName, $model)
         ];
         //筛选条件默认选中
-        collect($this->sizer)->keys()->filter(function ($value) {
+        collect($this->getSizer())->keys()->filter(function ($value) {
             return Str::endsWith($value, '_id');
         })->map(function ($value) use (&$data) {
             $val = collect(explode('.',$value))->last();
@@ -120,6 +144,7 @@ trait ResourceController
         });
         //条件筛选及排序返回
         $this->addOptions();
+        $data['primaryKeyPage'] = $this->isPrimaryKeyPage();
         $data = $this->handleIndexReturn($data);
         $this->emptyToObject($data,[
             'maps',
@@ -243,7 +268,7 @@ trait ResourceController
                 $validate_rules['order.' . $key] = 'in:asc,desc';
             });
         }
-        collect($this->sizer)->map(function ($value, $key) use (&$validate_rules) {
+        collect($this->getSizer())->map(function ($value, $key) use (&$validate_rules) {
             $key = str_replace('.', ' ', $key);
             if (is_array($value)) {
                 $validate_rules['where.' . $key] = 'sometimes|nullable|array';
