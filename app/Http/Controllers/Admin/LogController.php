@@ -38,6 +38,12 @@ class LogController extends Controller
     protected $disableExportOrder=true;
 
     /**
+     * 主键用于分页
+     * @var bool
+     */
+    protected $primaryKeyPage=true;
+
+    /**
      * 绑定模型
      *
      * @return mixed
@@ -144,6 +150,11 @@ class LogController extends Controller
             'id',
             'name',
         ],
+    ];
+
+
+    public $orderDefault=[
+        'id'=>'desc'
     ];
 
 

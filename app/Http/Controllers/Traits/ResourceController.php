@@ -42,32 +42,45 @@ trait ResourceController
 
     /**
      * 主键ID用于排序优化
+     * 主键用于翻页
      * @return bool|mixed
      */
-    public function isPrimaryKeyPage(){
+    public function usePrimaryKeyPage(){
         return isset($this->primaryKeyPage)?$this->primaryKeyPage:false;
+    }
+
+    public function getPrimaryKey(){
+        $resourceModel = $this->getModelClass();
+        return $resourceModel::query()->getModel()->getKeyName();
+    }
+
+    public function isPrimaryKeyPage(){
+        if($this->usePrimaryKeyPage()){
+            //通过排序规则判断id过滤规则
+            $order = $this->getOptionsOrder();
+            $primaryKey = $this->getPrimaryKey();
+            if($primaryKey && (!$order || //没有任何排序
+                    !collect($order)
+                        ->except($primaryKey)
+                        ->count() //只有主键排序
+                )
+            ){
+                $order_value = Arr::get($order,$primaryKey)?:'asc';
+                return $order_value=='desc'?'<':'>';
+            }
+        }
+        return false;
     }
 
     /**
      * 获取筛选项
      * @return mixed
      */
-    public function getSizer(){
+    public function getSizer($unset_where_primary_key=false){
         $sizer = $this->sizer;
-        if($this->isPrimaryKeyPage()){
-            //通过排序规则判断id过滤规则
-            $order = $this->getOptionsOrder();
-            $resourceModel = $this->getModelClass();
-            $primaryKey = $resourceModel::query()->getModel()->getKeyName();
-            if($primaryKey && (!$order || //没有任何排序
-                !collect($order)
-                    ->except($primaryKey)
-                    ->count() //只有主键排序
-                )
-            ){
-                $order_value = Arr::get($order,$primaryKey)?:'asc';
-                $sizer[$primaryKey] = $order_value=='desc'?'<':'>';
-            }
+        if(!$unset_where_primary_key && $order_value = $this->isPrimaryKeyPage()){
+            $primaryKey = $this->getPrimaryKey();
+            $sizer[$primaryKey] = $order_value;
         }
         return $sizer;
     }
@@ -144,7 +157,7 @@ trait ResourceController
         });
         //条件筛选及排序返回
         $this->addOptions();
-        $data['primaryKeyPage'] = $this->isPrimaryKeyPage();
+        $data['primaryKeyPage'] = $this->usePrimaryKeyPage();
         $data = $this->handleIndexReturn($data);
         $this->emptyToObject($data,[
             'maps',
@@ -348,18 +361,41 @@ trait ResourceController
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel();
         $obj = $this->handleList($obj);
-        $perPage = Request::input('per_page', $this->per_page);
+        $request = Request::instance();
+        $perPage = $request->input('per_page', $this->per_page);
         $maxPerPage = (isset($this->maxPerPage)?$this->maxPerPage:200)?:200;
         $perPage = $perPage > $maxPerPage ? $maxPerPage : $perPage; //限制单页最大获取数据量
+        $isPrimaryKeyPage = $this->isPrimaryKeyPage();
+        $real_page = $isPrimaryKeyPage?intval($request->input('real_page')):0;
         //获取分页数据
-        if (!Request::input('page') || Request::input('get_count')) {
-            $data = (clone $obj)->paginate($perPage);
+        if (!$request->input('page') || $request->input('get_count')) {
+            if($real_page>1 && $request->input('where.'.$primary_key)){
+                $total = $this->getWithOptionModel('showIndexFields',true,true)->count();
+                if($total>0){
+                    $data = (clone $obj)->simplePaginate($perPage);
+                    $data = collect($data)->toArray();
+                }else{
+                    $data = [
+                        'data'=>[],
+                        'per_page'=>$perPage
+                    ];
+                }
+                $data['total'] = $total;
+            }else{
+                $data = (clone $obj)->paginate($perPage);
+            }
         } else { //不统计条数
             $data = (clone $obj)->simplePaginate($perPage);
         }
+
+        if(
+            ($fields && $hasFullTextSearch) ||
+            $real_page
+        ){
+            $data = collect($data)->toArray();
+        }
         //全文检索过滤字段
         if($fields && $hasFullTextSearch){
-            $data = collect($data)->toArray();
             $data['data'] = collect($data['data'])->map(function ($item)use($fields){
                 return collect($item)->only($fields)->toArray();
             })->toArray();
@@ -378,6 +414,9 @@ trait ResourceController
                 'prev_page_url',
                 'to'
             ])->toArray();
+        }
+        if($real_page){
+            $data['current_page']=$real_page;
         }
         //返回响应数据存放,方便操作日志记录
         LifeData::set('list', $data);
@@ -532,10 +571,11 @@ trait ResourceController
      * 获取条件拼接对象
      * @return mixed
      */
-    protected function getWithOptionModel($fields_key = 'showIndexFields',$unset_order=false)
+    protected function getWithOptionModel($fields_key = 'showIndexFields',$unset_order=false,$unset_where_primary_key=false)
     {
-        $this->bindModel OR $this->bindModel();
-        $options = $this->getOptions(); //筛选项+排序项
+        $this->bindModel = null;
+        $this->bindModel();
+        $options = $this->getOptions($unset_where_primary_key); //筛选项+排序项
         if($unset_order){
             unset($options['order']);
         }
@@ -722,9 +762,17 @@ trait ResourceController
      */
     protected function addOptions()
     {
+        $order = LifeData::get('_condition.order');
+        if(!$order){
+            $order = new \stdClass();
+        }elseif($this->isPrimaryKeyPage() &&
+            ($real_order_value = Request::instance()->input('real_order_value'))
+        ){
+            $order[$this->getPrimaryKey()] = $real_order_value;
+        }
         LifeData::set('options', [
             'where' => LifeData::get('_condition.where', new \stdClass()),
-            'order' => LifeData::get('_condition.order', new \stdClass())
+            'order' => $order
         ]);
     }
 

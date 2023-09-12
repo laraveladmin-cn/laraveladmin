@@ -175,7 +175,7 @@ trait CommonController{
      * 获取筛选项
      * @return mixed
      */
-    public function getSizer(){
+    public function getSizer($unset_where_primary_key=false){
         return $this->sizer;
     }
 
@@ -379,13 +379,14 @@ trait CommonController{
      * 获取筛选条件,跟排序
      * @return array
      */
-    protected function getOptions(){
+    protected function getOptions($unset_where_primary_key=false){
         $options = ['where'=>[],'order'=>[]]; //结果返回
         $input = collect(Request::only(['where','order']));
         $where = []; //输出
         $sizerDefault = collect($this->sizerDefault);
         //筛选条件全部转成一级
-        collect($this->getSizer())->map(function($item,$key)use(&$where,&$options,$input,$sizerDefault){
+        $sizer = $this->getSizer($unset_where_primary_key);
+        collect($sizer)->map(function($item,$key)use(&$where,&$options,$input,$sizerDefault){
             $inputWhere = collect($input->get('where',[]));
             if(is_array($item)){
                 $inputValue = $inputWhere->get($key);

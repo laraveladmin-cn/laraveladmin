@@ -415,653 +415,729 @@
 </template>
 
 <script>
-    import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
-    export default {
-        name: "datatable",
-        components:{
-            "icheck":()=>import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
-            "el-select": ()=>import(/* webpackChunkName: "element-ui/lib/select" */ 'element-ui/lib/select'),
-            "el-option": ()=>import(/* webpackChunkName: "element-ui/lib/option" */ 'element-ui/lib/option'),
-            "el-input-number": ()=>import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
-            "el-dialog": ()=>import(/* webpackChunkName: "element-ui/lib/dialog" */ 'element-ui/lib/dialog'),
-        },
-        props: {
-            //配置选项
-            options:{
-                type: [Object],
-                default: function () {
-                    return {};
-                }
-            }
-        },
-        data(){
-            let langPath = this.options.langPath || {};
-            return {
-                ...langPath,
-                show_shade:false,
-                sizer_more:false, //更多筛选条件显示隐藏
-                loading:false, //数据加载中状态
-                initLoading:true, //初始化加载状态
-                show_export_fields:false, //导出字段按钮显示状态
-                hideLoading:false,
-                show_dialog:false,
-                edit_url:'',
-                dialog_title:'',
-                data:{
-                    options:{
-                        where:{},
-                        order:{}
-                    },
-                    maps:{
-                    },
-                    list:{
-                        data:[]
-                    },
-                    configUrl:{
-                        indexUrl:'',
-                        listUrl:'',
-                        showUrl:'',
-                        exportUrl:'',
-                        deleteUrl:'',
-                        createUrl:'',
-                        updateUrl:'',
-                        importUrl:''
-                    },
-                    keywordsMap:{},
-                    excel:{
-                        sheet:'',
-                        fileName:'',
-                        exportFields:{}
-                    },
-                    mapsRelations:{}
-                }, //数据源
-                back_options:undefined, //筛选条件+排序备份
-                affirm_options:undefined, //执行搜索后确认选项
-                export_fileds:null, //导出excel字段
-                check_ids:[], //选中id
-                select_all:[], //全选
-                pageLength:2, //当前页面前后长度
-                input_page:'', //输入页码
-                keywordKey:'', //关键字搜索key
-                check_ids_change:false,
-                options_str:'',
-                per_page_options:[10,15,20,30,50,100,200],
-                input_per_page:15,
-                import_per_page:200
-            };
-        },
-        methods:{
-            //消息提醒
-            ...mapActions({
-                pushMessage: 'pushMessage',
-                downloadExcel:'excel/download', //导出数据
-                importData:'excel/importExcel'//导入数据
+import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
 
-            }),
-            //全局数据设置,设置弹窗提示
-            ...mapMutations({
-                set:'set'
-            }),
-            toEdit(url,id){
-                this.edit_url = url;
-                this.dialog_title = id?'编辑':'新增';
-                this.show_dialog=true;
-            },
-            editCallback(){
-                this.show_dialog=false;
-                this.refresh();
-            },
-            showCode(row,k,field){
-                let str = array_get(row,k) || '';
-                if(str && typeof str=="object"){
-                    str = JSON.stringify(str);
-                };
-                if(field.limit){
-                    str = str_limit(str,field.limit);
+export default {
+    name: "datatable",
+    components: {
+        "icheck": () => import(/* webpackChunkName: "common_components/icheck.vue" */ 'common_components/icheck.vue'),
+        "el-select": () => import(/* webpackChunkName: "element-ui/lib/select" */ 'element-ui/lib/select'),
+        "el-option": () => import(/* webpackChunkName: "element-ui/lib/option" */ 'element-ui/lib/option'),
+        "el-input-number": () => import(/* webpackChunkName: "element-ui/lib/input-number" */ 'element-ui/lib/input-number'),
+        "el-dialog": () => import(/* webpackChunkName: "element-ui/lib/dialog" */ 'element-ui/lib/dialog'),
+    },
+    props: {
+        //配置选项
+        options: {
+            type: [Object],
+            default: function () {
+                return {};
+            }
+        }
+    },
+    data() {
+        let langPath = this.options.langPath || {};
+        return {
+            ...langPath,
+            show_shade: false,
+            sizer_more: false, //更多筛选条件显示隐藏
+            loading: false, //数据加载中状态
+            initLoading: true, //初始化加载状态
+            show_export_fields: false, //导出字段按钮显示状态
+            hideLoading: false,
+            show_dialog: false,
+            edit_url: '',
+            dialog_title: '',
+            data: {
+                options: {
+                    where: {},
+                    order: {}
+                },
+                maps: {},
+                list: {
+                    data: []
+                },
+                configUrl: {
+                    indexUrl: '',
+                    listUrl: '',
+                    showUrl: '',
+                    exportUrl: '',
+                    deleteUrl: '',
+                    createUrl: '',
+                    updateUrl: '',
+                    importUrl: ''
+                },
+                keywordsMap: {},
+                excel: {
+                    sheet: '',
+                    fileName: '',
+                    exportFields: {}
+                },
+                mapsRelations: {},
+                primaryKeyPage: false
+            }, //数据源
+            back_options: undefined, //筛选条件+排序备份
+            affirm_options: undefined, //执行搜索后确认选项
+            export_fileds: null, //导出excel字段
+            check_ids: [], //选中id
+            select_all: [], //全选
+            pageLength: 2, //当前页面前后长度
+            input_page: '', //输入页码
+            keywordKey: '', //关键字搜索key
+            check_ids_change: false,
+            options_str: '',
+            per_page_options: [10, 15, 20, 30, 50, 100, 200],
+            input_per_page: 15,
+            import_per_page: 200
+        };
+    },
+    methods: {
+        //消息提醒
+        ...mapActions({
+            pushMessage: 'pushMessage',
+            downloadExcel: 'excel/download', //导出数据
+            importData: 'excel/importExcel'//导入数据
+
+        }),
+        //全局数据设置,设置弹窗提示
+        ...mapMutations({
+            set: 'set'
+        }),
+        getMinId() {
+            let primaryKey = this.getPrimaryKey();
+            return collect(this.data.list.data).min(primaryKey) || '';
+        },
+        getMaxId() {
+            let primaryKey = this.getPrimaryKey();
+            return collect(this.data.list.data).max(primaryKey) || '';
+        },
+        getPrimaryKey() {
+            return this.options.primaryKey || 'id';
+        },
+        toEdit(url, id) {
+            this.edit_url = url;
+            this.dialog_title = id ? '编辑' : '新增';
+            this.show_dialog = true;
+        },
+        editCallback() {
+            this.show_dialog = false;
+            this.refresh();
+        },
+        showCode(row, k, field) {
+            let str = array_get(row, k) || '';
+            if (str && typeof str == "object") {
+                str = JSON.stringify(str);
+            };
+            if (field.limit) {
+                str = str_limit(str, field.limit, field.limit_end_str);
+            }
+            return str;
+        },
+        hasItem(key, item) {
+            if (key.indexOf('.') == -1) {
+                if (item[key] === null) {
+                    return false;
                 }
-                return str;
-            },
-            hasItem(key,item){
-                if(key.indexOf('.')==-1){
-                    if(item[key]===null){
+                return true;
+            } else {
+                let items = key.split('.');
+                items.pop();
+                let key1 = items.join('.');
+                let sub_item = this.array_get(item, key1);
+                if (typeof sub_item == "object" && sub_item) {
+                    let value = this.array_get(item, key);
+                    if (value === null) {
                         return false;
                     }
                     return true;
-                }else {
-                    let items = key.split('.');
-                    items.pop();
-                    let key1 = items.join('.');
-                    let sub_item = this.array_get(item,key1);
-                    if(typeof sub_item=="object" && sub_item){
-                        let value = this.array_get(item,key);
-                        if(value===null){
-                            return false;
-                        }
-                        return true;
-                    }else {
-                        return false;
-                    }
-                }
-            },
-            transField(name,key,table){
-                let sheet = array_get(this.data,'excel.sheet','');
-                if(!this.options.lang_table && !this.options.langTable && !sheet){
-                    return name;
-                }
-                if(!table){
-                    if(!key || key.indexOf('.')==-1){
-                        table = this.options.langTable || this.options.lang_table || sheet;
-                    }else {
-                        let arr = key.replace('.$index','').split('.');
-                        arr.pop();
-                        let key1 = arr.join('.');
-                        let table1 = arr.pop();
-                        let d=table1.length-1;
-                        if(!(d>=0 && table1.lastIndexOf('s')==d)){
-                            table1 = table1+'s'
-                        };
-                        table = array_get(this.data,'mapsRelations.'+key1,'') || table1;
-                    }
-                }
-                return this.$tp(name,{
-                    "{lang_path}": '_shared.tables.'+table+'.fields',
-                    '{lang_root}': ''
-                });
-            },
-            transMap(name,field,table){
-                let sheet = array_get(this.data,'excel.sheet','');
-                if(!this.options.lang_table && !this.options.langTable && !sheet){
-                    return name;
-                }
-                if(!table){
-                    table = this.options.langTable || this.options.lang_table || sheet;
-                }
-                return this.$tp(name,{
-                    "{lang_path}": '_shared.tables.'+table+'.maps.'+field,
-                    '{lang_root}': ''
-                });
-            },
-            mapEach(maps,field,table,prefix){
-                maps = collect(maps).map((value,key)=>{
-                    if(value && typeof value=="string"){
-                        return this.transMap(value,field,table);
-                    }else if(value && typeof value=="object"){
-                        let key1 = prefix ? prefix+'.'+key:key;
-                        let table1 = array_get(this.data,'mapsRelations.'+key1,'') || this.data.mapsRelations[key1] || '';
-                        return this.mapEach(value,key,table1 || table,key1);
-                    }else {
-                        return value;
-                    }
-                }).all();
-                return maps;
-            },
-            getItems(item,key){
-                if(key.indexOf('$index')!=-1){
-                    let keys = key.split('.$index.');
-                    return array_get(item,keys[0],[]);
-                }
-                return array_get(item,key,[]);
-
-            },
-            labelClass(item,key){
-                let val = array_get(item,key,0);
-                return  'label-'+this.statusClass[val%this.statusClass.length];
-            },
-            count(items){
-                return collect(items).count();
-            },
-            //条件搜索
-            search(){
-                //当前筛选条件
-                let options = copyObj(this.data.options);
-                this.getData(options);
-                this.$emit('search',options);
-            },
-            //重置筛选
-            reset(){
-                let options = copyObj(this.back_options);
-                this.data.options = options;
-                this.getData(options);
-                this.$emit('reset',options);
-            },
-            //跳转到对应页面
-            toPage(page,perPage){
-                let per_page = perPage || this.data.list.per_page || 15;
-                if((page>0 && page<=this.data.list['last_page'] && page!=this.data.list['current_page']) || per_page!=this.data.list.per_page){
-                    let options = copyObj(this.affirm_options);
-                    options['page'] = page;
-                    options['per_page'] = per_page;
-                    if(per_page!=this.data.list.per_page){
-                        options['page']=1;
-                    }
-                    delete options['get_count'];
-                    this.getData(options);
-                }
-            },
-            //刷新数据列表
-            getData(options,flog){
-                if(this.loading){
-                    return false;
-                }
-                //过滤为空的数据
-                /*if(options.where){
-                    options.where = collect(options.where).filter((value)=>{
-                        return value!=='';
-                    }).all();
-                }*/
-                options = copyObj(options);
-                this.loading = true;
-                let options1 = copyObj(options);
-                if(this.options.dataPush){
-                    delete options1['page'];
-                }
-                let options_str = JSON.stringify(options1);
-                this.options_str = options_str;
-                let url = this.data.configUrl['listUrl'] || this.options.url || this.$router.currentRoute.path;
-                axios.get(this.use_url+url,{params:options}).then( (response)=> {
-                    this.data.options.order = copyObj(options.order || {});
-                    if(url==this.data.configUrl['listUrl']){
-                        //判断是否是每页条数变更
-                        if(response.data.per_page!=this.data.list.per_page && typeof response.data.last_page =="undefined"){
-                            response.data.last_page = Math.ceil(this.data.list.total/response.data.per_page);
-                        }
-                        for (let i in response.data ) {
-                            if(i == 'data' && this.options.dataPush && response.data.current_page>1){ //数据追加
-                                let data = response.data[i];
-                                if(this.options.dataPrepend){
-                                    collect(data).sortByDesc(this.options.primaryKey||'id').values().each((item)=>{
-                                        this.data.list.data.unshift(item);
-                                    });
-                                }else {
-                                    for (let j in data){
-                                        this.data.list.data.push(data[j]);
-                                    }
-                                }
-
-                            }else {
-                                Vue.set(this.data.list,i,response.data[i]);
-                            }
-                        }
-                        //添加历史记录
-                        if(!options['get_count'] && !flog && !this.options.routerPushDisabled){
-                            let query = copyObj(this.$route.query);
-                            query[this.options_key] = options_str;
-                            this.$router.push({ path: this.$router.currentRoute.path, query: query}).catch(()=>{});
-                        }
-                        if(typeof response.data['total']!="undefined"){
-                            this.$emit('updateCount');
-                        }
-                    }else {
-                        for (let i in response.data ) {
-                            Vue.set(this.data,i,response.data[i]);
-                        }
-                        if(this.count(this.data.excel.exportFields) && !this.export_fileds){
-                            if(this.options.defaultExportNotAll){
-                                this.export_fileds = [];
-                            }else {
-                                this.export_fileds = collect(this.data.excel.exportFields).keys().all();
-                            }
-                        }else if(!this.export_fileds){
-                            this.export_fileds = [];
-                        }
-                        this.$emit('loaded');
-                        this.$emit('updateCount');
-                    }
-                    this.input_page = this.data.list['current_page'];
-                    this.input_per_page = this.data.list['per_page'];
-                    this.initLoading = false;
-                    this.loading = false;
-                    if(typeof(this.back_options) == "undefined"){
-                        this.back_options = copyObj(response.data.options); //筛选条件+排序备份
-                        this.affirm_options = copyObj(response.data.options); //筛选条件+排序备份
-                    }else {
-                        this.affirm_options = options;
-                    }
-                    this.select_all = [];
-                    this.check_ids = [];
-
-                }).catch((error) => {
-                    this.initLoading = false;
-                    this.loading = false;
-                });
-
-            },
-            //删除数据
-            remove(ids){
-                if(!ids.length){
-                    return false;
-                }
-                this.set({
-                    key:'modal',
-                    modal:{
-                        title:this.$t('Prompt'),
-                        content: this.$t('Are you sure you want to delete it?'),
-                        callback:()=>{
-                            axios.delete(this.use_url+this.data.configUrl['deleteUrl'], {data:{ids: ids}}).then((response)=>{
-                                this.refresh();
-                                if(typeof this.options.removeCallback=="function"){
-                                    this.options.removeCallback();
-                                }
-                            }).catch((error)=>{
-                                this.pushMessage({
-                                    'showClose':true,
-                                    'title':this.$t('{action} failed!',{action:this.$t('Delete')}),
-                                    'message':'',
-                                    'type':'danger',
-                                    'position':'top',
-                                    'iconClass':'fa-warning',
-                                    'customClass':'',
-                                    'duration':3000,
-                                    'show':true
-                                });
-                            });
-                        }}
-                });
-            },
-            //刷新
-            refresh(hideLoading){
-                this.hideLoading = !!hideLoading;
-                let options = copyObj(this.affirm_options);
-                options['page'] = this.data.list['current_page'];
-                options['get_count'] = 1;
-                this.getData(options);
-            },
-            selectAll(val){
-                if(this.check_ids_change){
-                    this.check_ids_change = false;
-                    return;
-                }
-                this.select_all = val;
-                if(this.select_all.length){
-                    let ids = collect(array_get(this.data,'list.data',[])).pluck(this.options.primaryKey||'id').all();
-                    let ids1 = [];
-                    $('.ids :checkbox[disabled=disabled]').each(function(){
-                        ids1.push($(this).val()-0);
-                    });
-                    //过滤禁用选项
-                    this.check_ids = collect(ids).diff(ids1).all();
-                }else {
-                    this.check_ids = [];
-                }
-            },
-            orderBy(key){
-                let item = this.options.fields[key];
-                let key1 = item.orderField || key;
-                if(item['order']){
-                    let order = {};
-                    if(this.affirm_options.order[key1]=='asc'){
-                        order[key1] = 'desc';
-                    }else {
-                        order[key1] = 'asc';
-                    }
-                    let options = copyObj(this.affirm_options);
-                    collect(options.order).map((item,k)=>{
-                        if(k!=key1){
-                            order[k]=item;
-                        }
-                    }).all();
-                    options.order = order;
-                    options.page = 1;
-                    this.getData(options);
-                }
-            },
-            changePage(value){
-                let val = (value+'').trim();
-                if(/^[1-9]\d*$|^$/.test(val) && val>=1 && val<=this.data.list['last_page']) { //页面输入正确
-                    this.toPage(val);
                 } else {
-                    this.input_page = this.data.list['current_page'];
-                }
-            },
-            perPage(value){
-                this.toPage(1,value);
-            },
-            changeKeywords(index){
-                this.data.options.where[this.data.options.where['_key']]='';
-                this.data.options.where['_key']=index;
-            },
-            //下载excel数据
-            download(){
-                if(!this.export_fileds.length && this.count(this.data.excel.exportFields)){
-                    this.set({
-                        key:'modal',
-                        modal:{
-                            title:this.$t('Prompt'),//'提示',
-                            content: this.$t('Please check the field you want to export to export correctly.')//'请勾选要导出的字段,才能正确导出!'
-                        }
-                    });
                     return false;
                 }
-                //查询数据条数
-                let options = copyObj(this.data.options); //当前条件下
-                let export_fileds = copyObj(this.export_fileds);
-                options['export_fileds'] = export_fileds;
-                let url = this.data.configUrl.exportUrl;
-                let sheet = array_get(this.data,'excel.sheet','');
-                let parms = {
-                    options:options,
-                    url:url,
-                    sheet:sheet,
-                    fileName:this.data.excel.fileName
-                };
-                this.downloadExcel(parms);
-            },
-            selectExcel(e){
-                let files = e.target.files;
-                if(files.length == 0) return;
-                let file = files[0];
-                //验证excel文件
-                if(!/\.xlsx$/g.test(file.name)) {
-                    this.set({
-                        key:'modal',
-                        modal:{
-                            title:this.$t('Prompt'), //提示
-                            content: this.$t('Import of XLSX format files is only supported')//'仅支持导入xlsx格式文件'
-                        }
-                    });
-                    return;
-                }
-                this.set({
-                    key:'modal',
-                    modal:{
-                        title:this.$t('Prompt'), //提示
-                        content: this.$t('Are you sure you want to import all the data in bulk?'), //'您确定要批量导入所有数据吗?',
-                        callback:()=>{
-                            $(this.$el).find('.import input:file').val('');
-                            let sheet = array_get(this.data,'excel.sheet','');
-                            this.importData({
-                                file:file,
-                                sheet:sheet,
-                                url:this.data.configUrl.importUrl,
-                                import_per_page:this.importPerPageValue,
-                                callback:()=>{
-                                    this.refresh();
-                                }
-                            });
-                        },
-                        cancel:()=>{ //取消
-                            $(this.$el).find('.import input:file').val('');
-                        }
-                    },
-
-                });
-
-            },
-            importExcel(){
-                $(this.$el).find('.import input:file').trigger('click');
-            },
-            checkboxClass(num, cardinal_number, statusClass,key){
-                if(key.indexOf('$index')!=-1){
-                    let keys = key.split('.$index.');
-                    num = array_get(num,keys[1],0);
-                }
-                return 'label-' + statusClass[(Math.log(num) / Math.log(cardinal_number) + 1) % statusClass.length];
-            }
-
-
-        },
-        watch:{
-            check_ids(value,old){
-                let count = collect(array_get(this.data,'list.data',[])).pluck(this.options.primaryKey||'id').count();
-                if(count==value.length && count){
-                    if(!this.select_all.length){
-                        this.check_ids_change = true;
-                        this.select_all = [1];
-                    }
-                }else {
-                    if(this.select_all.length){
-                        this.check_ids_change = true;
-                        this.select_all = [];
-                    }
-                };
-            },
-            '$route.fullPath'(val){
-                let value = this.$route.query[this.options_key];
-                if(value!=this.options_str){
-                    let options;
-                    if(value){
-                        options = JSON.parse(value);
-                    }else {
-                        if(typeof this.$route.query[this.options_key]=="undefined"){
-                            options = {where:{},order:{}};
-                            this.data.configUrl['listUrl'] = '';
-                        }else {
-                            options = copyObj(this.back_options);
-                        }
-                    }
-                    this.data.options = options;
-                    this.getData(options,1);
-                }
             }
         },
-        computed:{
-            ...mapState([
-                '_token',
-                'use_url',
-                'statusClass',
-                'theme'
-            ]),
-            options_key(){
-                return typeof this.options.optionsKey=="undefined"?'options':this.options.optionsKey;
-            },
-            _total(){
-                return array_get(this.data,'list.total',0);
-            },
-            _placeholder(){
-                if(typeof this.options.keywordPlaceholder=="function"){
-                    return this.options.keywordPlaceholder();
+        transField(name, key, table) {
+            let sheet = array_get(this.data, 'excel.sheet', '');
+            if (!this.options.lang_table && !this.options.langTable && !sheet) {
+                return name;
+            }
+            if (!table) {
+                if (!key || key.indexOf('.') == -1) {
+                    table = this.options.langTable || this.options.lang_table || sheet;
+                } else {
+                    let arr = key.replace('.$index', '').split('.');
+                    arr.pop();
+                    let key1 = arr.join('.');
+                    let table1 = arr.pop();
+                    let d = table1.length - 1;
+                    if (!(d >= 0 && table1.lastIndexOf('s') == d)) {
+                        table1 = table1 + 's'
+                    };
+                    table = array_get(this.data, 'mapsRelations.' + key1, '') || table1;
                 }
-                return this.$t(this.options.keywordPlaceholder) || this.$t('Please enter keywords');
-            },
-            //组件唯一标识
-            id(){
-                return this.options.id || 'data-table';
-            },
-            //数据是否为空
-            is_empty(){
-                return !array_get(this.data,'list.data',[]).length;
-            },
-            //table展示字段
-            show_fields(){
-                //排序情况
-                let orders = array_get(this.affirm_options,'order',{});
-                let fields = collect(copyObj(this.options.fields)).filter((item)=>{
-                    return item['show'] || typeof item['show']=="undefined";
-                }).map((item,key1)=>{
-                    let key = item.orderField || key1;
-                    //字段需要排序
-                    if(item.order){
-                        if(!item.class){
-                            item.class = '';
-                        }
-                        if(orders[key]){
-                            item.class += ' sorting_'+orders[key];
-                        }else {
-                            item.class += ' sorting';
-                        }
-                    }
-                    return item;
-                }).all();
-                return fields;
-            },
-            //列个数
-            col_num(){
-                let count = collect(this.show_fields).count();
-                if(this.operation){
-                    count++;
+            }
+            return this.$tp(name, {
+                "{lang_path}": '_shared.tables.' + table + '.fields',
+                '{lang_root}': ''
+            });
+        },
+        transMap(name, field, table) {
+            let sheet = array_get(this.data, 'excel.sheet', '');
+            if (!this.options.lang_table && !this.options.langTable && !sheet) {
+                return name;
+            }
+            if (!table) {
+                table = this.options.langTable || this.options.lang_table || sheet;
+            }
+            return this.$tp(name, {
+                "{lang_path}": '_shared.tables.' + table + '.maps.' + field,
+                '{lang_root}': ''
+            });
+        },
+        mapEach(maps, field, table, prefix) {
+            maps = collect(maps).map((value, key) => {
+                if (value && typeof value == "string") {
+                    return this.transMap(value, field, table);
+                } else if (value && typeof value == "object") {
+                    let key1 = prefix ? prefix + '.' + key : key;
+                    let table1 = array_get(this.data, 'mapsRelations.' + key1, '') || this.data.mapsRelations[key1] || '';
+                    return this.mapEach(value, key, table1 || table, key1);
+                } else {
+                    return value;
                 }
-                if(this.checkbox){
-                    count++;
-                }
-                return count;
-            },
-            operation(){
-                return (this.options.operation || typeof this.options.operation=="undefined");
-            },
-            checkbox(){
-                return (this.options.checkbox || typeof this.options.checkbox=="undefined" );
-            },
-            btnSizerMore(){
-                return (this.options.btnSizerMore || typeof this.options.btnSizerMore=="undefined" );
-            },
-            btnRefresh(){
-                return (this.options.btnRefresh || typeof this.options.btnRefresh=="undefined" );
-            },
-            perPageOptions(){
-                if(this.options.perPageOptions){
-                    return this.options.perPageOptions;
-                }
-                if(this.options.per_page_options){
-                    return this.options.per_page_options;
-                }
-                return this.per_page_options;
-            },
-            importPerPageValue(){
-                if(this.options.importPerPage){
-                    return this.options.importPerPage;
-                }
-                if(this.options.import_per_page){
-                    return this.options.import_per_page;
-                }
-                return this.import_per_page;
-            },
-            //翻译后的显示数据项
-            _maps(){
-                let maps = copyObj(this.data.maps);
-                return this.mapEach(maps);
-            },
-
+            }).all();
+            return maps;
+        },
+        getItems(item, key) {
+            if (key.indexOf('$index') != -1) {
+                let keys = key.split('.$index.');
+                return array_get(item, keys[0], []);
+            }
+            return array_get(item, key, []);
 
         },
-        created() {
-            //动态加载js文件
-            if(!document.getElementById('xlsx-js')){
-                let $script = document.createElement('script');
-                $script.id = 'xlsx-js';
-                $script.type = 'text/javascript';
-                $script.src = '/bower_components/xlsx/dist/xlsx.full.min.js';
-                document.body.appendChild($script);
-            }
-            //获取数据
-            let options = this.options.defOptions || JSON.parse(this.$router.currentRoute.query[this.options_key] || '{}');
-            if(this.options.keywordKey){
-                if(!options.where){
-                    options.where = {};
-                }
-                options.where._key = this.options.keywordKey;
-            }
-            if(options['page']>1){
-                options['get_count'] = 1;
-            }else if(options['page']==1){
-                delete options['page'];
-            }
-            if(this.options.mapsRelations){
-                this.data.mapsRelations = this.options.mapsRelations;
+        labelClass(item, key) {
+            let val = array_get(item, key, 0);
+            return 'label-' + this.statusClass[val % this.statusClass.length];
+        },
+        count(items) {
+            return collect(items).count();
+        },
+        isPrimaryKeyPage() {
+            return this.data.primaryKeyPage &&
+                !collect(this.data.options.order)
+                    .except(this.getPrimaryKey())
+                    .values()
+                    .count();
+        },
+        //条件搜索
+        search() {
+            //当前筛选条件
+            let options = copyObj(this.data.options);
+            if (this.isPrimaryKeyPage()) {
+                let primary_key = this.getPrimaryKey();
+                options.where[primary_key] = '';
             }
             this.getData(options);
+            this.$emit('search', options);
+        },
+        //重置筛选
+        reset() {
+            let options = copyObj(this.back_options);
+            this.data.options = options;
+            this.getData(options);
+            this.$emit('reset', options);
+        },
+        //跳转到对应页面
+        toPage(page, perPage) {
+            let per_page = perPage || this.data.list.per_page || 15;
+            if (
+                (
+                    page > 0 &&
+                    page <= this.data.list['last_page'] &&
+                    page != this.data.list['current_page']
+                ) ||
+                per_page != this.data.list.per_page
+            ) {
+                let options = copyObj(this.affirm_options);
+                options['page'] = page;
+                options['per_page'] = per_page;
+                if (per_page != this.data.list.per_page) {
+                    options['page'] = 1;
+                }
+                delete options['get_count'];
+                if (this.isPrimaryKeyPage()) {
+                    //当前页
+                    options.real_page = page;//真实页码
+                    let current_page = this.data.list['current_page'] || 1;
+                    let sub_page = page - current_page;
+                    let primary_key = this.getPrimaryKey();
+                    let order_value = options.order[primary_key] || 'asc';
+                    //dd(sub_page);
+                    if (sub_page < 0) {
+                        sub_page = 0 - sub_page;
+                        options.real_order_value = order_value;
+                        order_value = order_value == 'desc' ? 'asc' : 'desc';
+                        options.order[primary_key] = order_value;
+                    }
+                    if (order_value == 'desc') {
+                        options.where[primary_key] = this.getMinId();
+                    } else {
+                        options.where[primary_key] = this.getMaxId();
+                    }
+                    options.page = sub_page || 1;
+                }
+                this.getData(options);
+            }
+        },
+        //刷新数据列表
+        getData(options, flog) {
+            if (this.loading) {
+                return false;
+            }
+            //过滤为空的数据
+            /*if(options.where){
+                options.where = collect(options.where).filter((value)=>{
+                    return value!=='';
+                }).all();
+            }*/
+            this.loading = true;
+            let options1 = copyObj(options);
+            if (this.options.dataPush) {
+                delete options1['page'];
+            }
+            let primary_key = this.getPrimaryKey();
+            let real_order_value = options1.real_order_value;
+            if (real_order_value) {
+                options1.order[primary_key] = real_order_value;
+                delete options1['real_order_value'];
+            }
+            if (options1.real_page) {
+                options1.page = options1.real_page;
+                options1.where[primary_key] = '';
+                delete options1['real_page'];
+            }
+            //dd(options1.order);
+            let options_str = JSON.stringify(options1);
+            this.options_str = options_str;
+            let url = this.data.configUrl['listUrl'] || this.options.url || this.$router.currentRoute.path;
+            axios.get(this.use_url + url, {params: options}).then((response) => {
+                this.data.options.order = copyObj(options1.order || {});
+                if (url == this.data.configUrl['listUrl']) {
+                    if (real_order_value) { //排序
+                        let data = collect(response.data.data);
+                        if (real_order_value !== 'desc') { //主键升序
+                            data = data.sortBy(primary_key);
+                        } else { //主键降序
+                            data = data.sortByDesc(primary_key);
+                        }
+                        response.data.data = data.values().all();
+                    }
+                    //判断是否是每页条数变更
+                    if (response.data.per_page != this.data.list.per_page && typeof response.data.last_page == "undefined") {
+                        response.data.last_page = Math.ceil(this.data.list.total / response.data.per_page);
+                    }
+                    for (let i in response.data) {
+                        if (i == 'data' && this.options.dataPush && response.data.current_page > 1) { //数据追加
+                            let data = response.data[i];
+                            if (this.options.dataPrepend) {
+                                collect(data).sortByDesc(this.options.primaryKey || 'id').values().each((item) => {
+                                    this.data.list.data.unshift(item);
+                                });
+                            } else {
+                                for (let j in data) {
+                                    this.data.list.data.push(data[j]);
+                                }
+                            }
+
+                        } else {
+                            Vue.set(this.data.list, i, response.data[i]);
+                        }
+                    }
+                    //添加历史记录
+                    if (!options['get_count'] && !flog && !this.options.routerPushDisabled) {
+                        let query = copyObj(this.$route.query);
+                        query[this.options_key] = options_str;
+                        this.$router.push({path: this.$router.currentRoute.path, query: query}).catch(() => {});
+                    }
+                    if (typeof response.data['total'] != "undefined") {
+                        this.$emit('updateCount');
+                    }
+                } else {
+                    for (let i in response.data) {
+                        Vue.set(this.data, i, response.data[i]);
+                    }
+                    if (this.count(this.data.excel.exportFields) && !this.export_fileds) {
+                        if (this.options.defaultExportNotAll) {
+                            this.export_fileds = [];
+                        } else {
+                            this.export_fileds = collect(this.data.excel.exportFields).keys().all();
+                        }
+                    } else if (!this.export_fileds) {
+                        this.export_fileds = [];
+                    }
+                    this.$emit('loaded');
+                    this.$emit('updateCount');
+                }
+                this.input_page = this.data.list['current_page'];
+                this.input_per_page = this.data.list['per_page'];
+                this.initLoading = false;
+                this.loading = false;
+                if (typeof (this.back_options) == "undefined") {
+                    this.back_options = copyObj(response.data.options); //筛选条件+排序备份
+                    this.affirm_options = copyObj(response.data.options); //筛选条件+排序备份
+                } else {
+                    this.affirm_options = options1;
+                }
+                this.select_all = [];
+                this.check_ids = [];
+
+            }).catch((error) => {
+                this.initLoading = false;
+                this.loading = false;
+            });
+
+        },
+        //删除数据
+        remove(ids) {
+            if (!ids.length) {
+                return false;
+            }
+            this.set({
+                key: 'modal',
+                modal: {
+                    title: this.$t('Prompt'),
+                    content: this.$t('Are you sure you want to delete it?'),
+                    callback: () => {
+                        axios.delete(this.use_url + this.data.configUrl['deleteUrl'], {data: {ids: ids}}).then((response) => {
+                            this.refresh();
+                            if (typeof this.options.removeCallback == "function") {
+                                this.options.removeCallback();
+                            }
+                        }).catch((error) => {
+                            this.pushMessage({
+                                'showClose': true,
+                                'title': this.$t('{action} failed!', {action: this.$t('Delete')}),
+                                'message': '',
+                                'type': 'danger',
+                                'position': 'top',
+                                'iconClass': 'fa-warning',
+                                'customClass': '',
+                                'duration': 3000,
+                                'show': true
+                            });
+                        });
+                    }
+                }
+            });
+        },
+        //刷新
+        refresh(hideLoading) {
+            this.hideLoading = !!hideLoading;
+            let options = copyObj(this.affirm_options);
+            options['page'] = this.data.list['current_page'];
+            options['get_count'] = 1;
+            this.getData(options);
+        },
+        selectAll(val) {
+            if (this.check_ids_change) {
+                this.check_ids_change = false;
+                return;
+            }
+            this.select_all = val;
+            if (this.select_all.length) {
+                let ids = collect(array_get(this.data, 'list.data', [])).pluck(this.options.primaryKey || 'id').all();
+                let ids1 = [];
+                $('.ids :checkbox[disabled=disabled]').each(function () {
+                    ids1.push($(this).val() - 0);
+                });
+                //过滤禁用选项
+                this.check_ids = collect(ids).diff(ids1).all();
+            } else {
+                this.check_ids = [];
+            }
+        },
+        orderBy(key) {
+            let item = this.options.fields[key];
+            let key1 = item.orderField || key;
+            if (item['order']) {
+                let order = {};
+                if (this.affirm_options.order[key1] == 'asc') {
+                    order[key1] = 'desc';
+                } else {
+                    order[key1] = 'asc';
+                }
+                let options = copyObj(this.affirm_options);
+                collect(options.order).map((item, k) => {
+                    if (k != key1) {
+                        order[k] = item;
+                    }
+                }).all();
+                options.order = order;
+                options.page = 1;
+                if (this.isPrimaryKeyPage()) {
+                    let primary_key = this.getPrimaryKey();
+                    options.where[primary_key] = '';
+                }
+                this.getData(options);
+            }
+        },
+        changePage(value) {
+            let val = (value + '').trim();
+            if (/^[1-9]\d*$|^$/.test(val) && val >= 1 && val <= this.data.list['last_page']) { //页面输入正确
+                this.toPage(val);
+            } else {
+                this.input_page = this.data.list['current_page'];
+            }
+        },
+        perPage(value) {
+            this.toPage(1, value);
+        },
+        changeKeywords(index) {
+            this.data.options.where[this.data.options.where['_key']] = '';
+            this.data.options.where['_key'] = index;
+        },
+        //下载excel数据
+        download() {
+            if (!this.export_fileds.length && this.count(this.data.excel.exportFields)) {
+                this.set({
+                    key: 'modal',
+                    modal: {
+                        title: this.$t('Prompt'),//'提示',
+                        content: this.$t('Please check the field you want to export to export correctly.')//'请勾选要导出的字段,才能正确导出!'
+                    }
+                });
+                return false;
+            }
+            //查询数据条数
+            let options = copyObj(this.data.options); //当前条件下
+            let export_fileds = copyObj(this.export_fileds);
+            options['export_fileds'] = export_fileds;
+            let url = this.data.configUrl.exportUrl;
+            let sheet = array_get(this.data, 'excel.sheet', '');
+            let parms = {
+                options: options,
+                url: url,
+                sheet: sheet,
+                fileName: this.data.excel.fileName
+            };
+            this.downloadExcel(parms);
+        },
+        selectExcel(e) {
+            let files = e.target.files;
+            if (files.length == 0) return;
+            let file = files[0];
+            //验证excel文件
+            if (!/\.xlsx$/g.test(file.name)) {
+                this.set({
+                    key: 'modal',
+                    modal: {
+                        title: this.$t('Prompt'), //提示
+                        content: this.$t('Import of XLSX format files is only supported')//'仅支持导入xlsx格式文件'
+                    }
+                });
+                return;
+            }
+            this.set({
+                key: 'modal',
+                modal: {
+                    title: this.$t('Prompt'), //提示
+                    content: this.$t('Are you sure you want to import all the data in bulk?'), //'您确定要批量导入所有数据吗?',
+                    callback: () => {
+                        $(this.$el).find('.import input:file').val('');
+                        let sheet = array_get(this.data, 'excel.sheet', '');
+                        this.importData({
+                            file: file,
+                            sheet: sheet,
+                            url: this.data.configUrl.importUrl,
+                            import_per_page: this.importPerPageValue,
+                            callback: () => {
+                                this.refresh();
+                            }
+                        });
+                    },
+                    cancel: () => { //取消
+                        $(this.$el).find('.import input:file').val('');
+                    }
+                },
+
+            });
+
+        },
+        importExcel() {
+            $(this.$el).find('.import input:file').trigger('click');
+        },
+        checkboxClass(num, cardinal_number, statusClass, key) {
+            if (key.indexOf('$index') != -1) {
+                let keys = key.split('.$index.');
+                num = array_get(num, keys[1], 0);
+            }
+            return 'label-' + statusClass[(Math.log(num) / Math.log(cardinal_number) + 1) % statusClass.length];
+        }
+
+
+    },
+    watch: {
+        check_ids(value, old) {
+            let count = collect(array_get(this.data, 'list.data', [])).pluck(this.options.primaryKey || 'id').count();
+            if (count == value.length && count) {
+                if (!this.select_all.length) {
+                    this.check_ids_change = true;
+                    this.select_all = [1];
+                }
+            } else {
+                if (this.select_all.length) {
+                    this.check_ids_change = true;
+                    this.select_all = [];
+                }
+            };
+        },
+        '$route.fullPath'(val) {
+            let value = this.$route.query[this.options_key];
+            if (value != this.options_str) {
+                let options;
+                if (value) {
+                    options = JSON.parse(value);
+                } else {
+                    if (typeof this.$route.query[this.options_key] == "undefined") {
+                        options = {where: {}, order: {}};
+                        this.data.configUrl['listUrl'] = '';
+                    } else {
+                        options = copyObj(this.back_options);
+                    }
+                }
+                this.data.options = options;
+                this.getData(options, 1);
+            }
+        }
+    },
+    computed: {
+        ...mapState([
+            '_token',
+            'use_url',
+            'statusClass',
+            'theme'
+        ]),
+        options_key() {
+            return typeof this.options.optionsKey == "undefined" ? 'options' : this.options.optionsKey;
+        },
+        _total() {
+            return array_get(this.data, 'list.total', 0);
+        },
+        _placeholder() {
+            if (typeof this.options.keywordPlaceholder == "function") {
+                return this.options.keywordPlaceholder();
+            }
+            return this.$t(this.options.keywordPlaceholder) || this.$t('Please enter keywords');
+        },
+        //组件唯一标识
+        id() {
+            return this.options.id || 'data-table';
+        },
+        //数据是否为空
+        is_empty() {
+            return !array_get(this.data, 'list.data', []).length;
+        },
+        //table展示字段
+        show_fields() {
+            //排序情况
+            let orders = array_get(this.affirm_options, 'order', {});
+            let fields = collect(copyObj(this.options.fields)).filter((item) => {
+                return item['show'] || typeof item['show'] == "undefined";
+            }).map((item, key1) => {
+                let key = item.orderField || key1;
+                //字段需要排序
+                if (item.order) {
+                    if (!item.class) {
+                        item.class = '';
+                    }
+                    if (orders[key]) {
+                        item.class += ' sorting_' + orders[key];
+                    } else {
+                        item.class += ' sorting';
+                    }
+                }
+                return item;
+            }).all();
+            return fields;
+        },
+        //列个数
+        col_num() {
+            let count = collect(this.show_fields).count();
+            if (this.operation) {
+                count++;
+            }
+            if (this.checkbox) {
+                count++;
+            }
+            return count;
+        },
+        operation() {
+            return (this.options.operation || typeof this.options.operation == "undefined");
+        },
+        checkbox() {
+            return (this.options.checkbox || typeof this.options.checkbox == "undefined");
+        },
+        btnSizerMore() {
+            return (this.options.btnSizerMore || typeof this.options.btnSizerMore == "undefined");
+        },
+        btnRefresh() {
+            return (this.options.btnRefresh || typeof this.options.btnRefresh == "undefined");
+        },
+        perPageOptions() {
+            if (this.options.perPageOptions) {
+                return this.options.perPageOptions;
+            }
+            if (this.options.per_page_options) {
+                return this.options.per_page_options;
+            }
+            return this.per_page_options;
+        },
+        importPerPageValue() {
+            if (this.options.importPerPage) {
+                return this.options.importPerPage;
+            }
+            if (this.options.import_per_page) {
+                return this.options.import_per_page;
+            }
+            return this.import_per_page;
+        },
+        //翻译后的显示数据项
+        _maps() {
+            let maps = copyObj(this.data.maps);
+            return this.mapEach(maps);
         },
 
-    }
+
+    },
+    created() {
+        //动态加载js文件
+        if (!document.getElementById('xlsx-js')) {
+            let $script = document.createElement('script');
+            $script.id = 'xlsx-js';
+            $script.type = 'text/javascript';
+            $script.src = '/bower_components/xlsx/dist/xlsx.full.min.js';
+            document.body.appendChild($script);
+        }
+        //获取数据
+        let options = this.options.defOptions || JSON.parse(this.$router.currentRoute.query[this.options_key] || '{}');
+        if (this.options.keywordKey) {
+            if (!options.where) {
+                options.where = {};
+            }
+            options.where._key = this.options.keywordKey;
+        }
+        if (options['page'] > 1) {
+            options['get_count'] = 1;
+        } else if (options['page'] == 1) {
+            delete options['page'];
+        }
+        if (this.options.mapsRelations) {
+            this.data.mapsRelations = this.options.mapsRelations;
+        }
+        this.getData(options);
+    },
+
+}
 </script>
 
 <style scoped lang="scss">
