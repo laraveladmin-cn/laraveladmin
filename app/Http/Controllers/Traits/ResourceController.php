@@ -370,7 +370,7 @@ trait ResourceController
         //获取分页数据
         if (!$request->input('page') || $request->input('get_count')) {
             if($real_page>1 && $request->input('where.'.$primary_key)){
-                $total = $this->getWithOptionModel('showIndexFields',true,true)->count();
+                $total = $this->getWithOptionModel('showIndexFields',true,true,true)->count();
                 if($total>0){
                     $data = (clone $obj)->simplePaginate($perPage);
                     $data = collect($data)->toArray();
@@ -571,9 +571,11 @@ trait ResourceController
      * 获取条件拼接对象
      * @return mixed
      */
-    protected function getWithOptionModel($fields_key = 'showIndexFields',$unset_order=false,$unset_where_primary_key=false)
+    protected function getWithOptionModel($fields_key = 'showIndexFields',$unset_order=false,$unset_where_primary_key=false,$clear=false)
     {
-        $this->bindModel = null;
+        if($clear){
+            $this->bindModel = null;
+        }
         $this->bindModel();
         $options = $this->getOptions($unset_where_primary_key); //筛选项+排序项
         if($unset_order){
