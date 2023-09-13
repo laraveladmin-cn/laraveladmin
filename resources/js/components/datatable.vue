@@ -223,7 +223,7 @@
                     </div>
                 </slot>
             </div>
-            <div class="box-body">
+            <div :class="options.noBorder?'':'box-body'">
                 <slot name="table" :maps="_maps" :data="data" :loading="loading" :check_ids="check_ids" :remove="remove" :getItems="getItems" :checkboxClass="checkboxClass" >
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-striped text-center dataTable">
