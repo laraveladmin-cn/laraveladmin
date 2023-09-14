@@ -100,6 +100,9 @@ export default {
         },
         //新加消息
         pushMessage({commit,state},message){
+            if(!message.show){
+                return;
+            }
             state.alerts.push(message);
             let index = state.alerts.length-1;
             if(message.duration){
