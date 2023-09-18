@@ -1,2 +1,4 @@
 *.pem
 *.key
+!local_laraveladmin_cn.key
+!local_laraveladmin_cn.pem
