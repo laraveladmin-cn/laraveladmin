@@ -68,6 +68,7 @@ const App = {
             token= decodeURIComponent(token);
         }
         return {
+            show_illustrate:true,
             api: null, //请求接口对象
             back_api:null, //备份接口对象
             result:{}, //响应结果内容

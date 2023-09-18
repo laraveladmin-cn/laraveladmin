@@ -101,6 +101,36 @@
         </div>
         <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
             <h1 class="text-center">欢迎使用接口测试工具</h1>
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-danger" @click="show_illustrate=!show_illustrate">重点说明</h3>
+                </div>
+                <div class="box-body" v-show="show_illustrate">
+                    <p class="text-primary">
+                        1.调用接口需要添加对应的前缀进行请求:网页端"/web-api",移动端"/api"
+                    </p>
+                    <div class="text-success">
+                        <p>
+                            2.移动端进入应用首先请求"获取连接唯一标识"获取client_id进行永久存储,后续的每个请求头里都需要加上Client-Id这个值,出现401状态码出错且内容体为如下情况时,需要重新获取更新client_id值
+                        </p><pre>{
+    "message": "身份验证失败。",
+    "type": "app_client"
+}</pre>
+                    </div>
+                    <p class="text-info">
+                        3.移动端登录成功后获取用户的认证信息token进行存储,在发起请求时放于请求头"Authorization"=>"Bearer 变量值"键中
+                    </p>
+                    <p class="text-success">
+                        4.所有列表页接口都可加get_count:1来强制获取总条数求和
+                    </p>
+                    <p>
+                        5.对应状态码值解释参考
+                        <a href="https://baike.baidu.com/item/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/5053660" target="_blank">
+                            文档
+                        </a>
+                    </p>
+                </div>
+            </div>
             <div id="content" v-if="api">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

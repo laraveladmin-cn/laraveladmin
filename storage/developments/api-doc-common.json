@@ -368,6 +368,10 @@
         {
             "name": "row",
             "description": "单个数据对象"
+        },
+        {
+            "name": "primaryKeyPage",
+            "description": "是否支持主键ID进行翻页:当排序规则为只有主键排序时可通过主键筛选进行翻页"
         }
     ],
     "common_responses_list": [
