@@ -86,32 +86,24 @@ export default {
                         }
                         code = code.replace(/\n$/, '') + '\n';
                         let use_mermaid = code.match(/^sequenceDiagram/) || code.match(/^graph/);
-                        if(!use_mermaid){
-                            if (!lang) {
-                                return '<pre><code>'
-                                    + (escaped ? code : escape(code, true))
-                                    + '</code></pre>\n';
-                            }
-                            return '<pre><code class="'
-                                + this.options.langPrefix
-                                + escape(lang)
-                                + '">'
-                                + (escaped ? code : escape(code, true))
-                                + '</code></pre>\n';
-                        }else {
-                            if (!lang) {
-                                return '<pre><code class="mermaid">'
-                                    + (escaped ? code : escape(code, true))
-                                    + '</code></pre>\n';
-                            }
-                            return '<pre><code class="mermaid '
-                                + this.options.langPrefix
-                                + escape(lang)
-                                + '">'
-                                + (escaped ? code : escape(code, true))
-                                + '</code></pre>\n';
+                        code = (escaped ? code : escape(code, true));
+                        let class_arr = [];
+                        let class_str = '';
+                        let class_str1 = '';
+                        if(use_mermaid){
+                            class_arr.push('mermaid');
                         }
-
+                        if(lang){
+                            class_str1 = this.options.langPrefix+ escape(lang);
+                            class_arr.push(class_str1);
+                        }
+                        if(class_arr.length){
+                            class_str = ' class="'+class_arr.join(' ')+'"';
+                        }
+                        if(use_mermaid){
+                            return `<pre><code${class_str1}>${code}</code></pre>\n<pre><code${class_str}>${code}</code></pre>\n`;
+                        }
+                        return `<pre><code${class_str}>${code}</code></pre>\n`;
                     };
                     marked.setOptions({
                         renderer: renderer
