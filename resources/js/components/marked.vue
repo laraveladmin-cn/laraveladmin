@@ -95,7 +95,7 @@ export default {
                         }
                         if(lang){
                             let lang_str = this.options.langPrefix+ escape(lang);
-                            class_arr.push(lang_str);
+                            //class_arr.push(lang_str);
                             class_str1 =  ' class="'+lang_str+'"';
                         }
                         if(class_arr.length){
@@ -131,14 +131,14 @@ export default {
             if(typeof window.Prism=="object" && !window.prism_highlight_all_ing){
                 window.prism_highlight_all_ing = true; //锁定
                 setTimeout(()=>{
-                    Prism.highlightAll(false,()=>{
-                        window.prism_highlight_all_ing = false; //解锁
-                    });
                     if(typeof mermaid!="undefined"){
                         mermaid.run({
                             querySelector: '.mermaid'
                         });
                     }
+                    Prism.highlightAll(false,()=>{
+                        window.prism_highlight_all_ing = false; //解锁
+                    });
                     setTimeout(()=>{
                         window.prism_highlight_all_ing = false; //解锁
                     },100)
