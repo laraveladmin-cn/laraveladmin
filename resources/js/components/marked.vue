@@ -94,8 +94,9 @@ export default {
                             class_arr.push('mermaid');
                         }
                         if(lang){
-                            class_str1 = this.options.langPrefix+ escape(lang);
-                            class_arr.push(class_str1);
+                            let lang_str = this.options.langPrefix+ escape(lang);
+                            class_arr.push(lang_str);
+                            class_str1 =  ' class="'+lang_str+'"';
                         }
                         if(class_arr.length){
                             class_str = ' class="'+class_arr.join(' ')+'"';
