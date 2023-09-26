@@ -43,9 +43,80 @@ export default {
     mounted() {
         if(typeof marked=="undefined"){
             this.intervalTime = setInterval(()=>{
-                if(typeof marked!="undefined"){
+                if(typeof marked!="undefined" && typeof mermaid!="undefined"){
                     clearInterval(this.intervalTime);
                     this.loading = false;
+                    mermaid.initialize({ startOnLoad: false });
+                    let renderer = new marked.Renderer();
+                    renderer.code =  function (code, infostring, escaped) {
+                        const escapeTest = /[&<>"']/;
+                        const escapeReplace = new RegExp(escapeTest.source, 'g');
+                        const escapeTestNoEncode = /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/;
+                        const escapeReplaceNoEncode = new RegExp(escapeTestNoEncode.source, 'g');
+                        const escapeReplacements = {
+                            '&': '&amp;',
+                            '<': '&lt;',
+                            '>': '&gt;',
+                            '"': '&quot;',
+                            "'": '&#39;'
+                        };
+                        const getEscapeReplacement = (ch) => escapeReplacements[ch];
+                        function escape(html, encode) {
+                            if (encode) {
+                                if (escapeTest.test(html)) {
+                                    return html.replace(escapeReplace, getEscapeReplacement);
+                                }
+                            }
+                            else {
+                                if (escapeTestNoEncode.test(html)) {
+                                    return html.replace(escapeReplaceNoEncode, getEscapeReplacement);
+                                }
+                            }
+                            return html;
+                        }
+
+
+                        const lang = (infostring || '').match(/^\S*/)?.[0];
+                        if (this.options.highlight) {
+                            const out = this.options.highlight(code, lang);
+                            if (out != null && out !== code) {
+                                escaped = true;
+                                code = out;
+                            }
+                        }
+                        code = code.replace(/\n$/, '') + '\n';
+                        let use_mermaid = code.match(/^sequenceDiagram/) || code.match(/^graph/);
+                        if(!use_mermaid){
+                            if (!lang) {
+                                return '<pre><code>'
+                                    + (escaped ? code : escape(code, true))
+                                    + '</code></pre>\n';
+                            }
+                            return '<pre><code class="'
+                                + this.options.langPrefix
+                                + escape(lang)
+                                + '">'
+                                + (escaped ? code : escape(code, true))
+                                + '</code></pre>\n';
+                        }else {
+                            if (!lang) {
+                                return '<pre><code class="mermaid">'
+                                    + (escaped ? code : escape(code, true))
+                                    + '</code></pre>\n';
+                            }
+                            return '<pre><code class="mermaid '
+                                + this.options.langPrefix
+                                + escape(lang)
+                                + '">'
+                                + (escaped ? code : escape(code, true))
+                                + '</code></pre>\n';
+                        }
+
+                    };
+                    marked.setOptions({
+                        renderer: renderer
+                    });
+
                 }
             },100);
         }else {
@@ -53,6 +124,7 @@ export default {
         }
     },
     methods:{
+
         getValueHtml(){
             let str = '';
             if(!this.loading){
@@ -69,6 +141,11 @@ export default {
                     Prism.highlightAll(false,()=>{
                         window.prism_highlight_all_ing = false; //解锁
                     });
+                    if(typeof mermaid!="undefined"){
+                        mermaid.run({
+                            querySelector: '.mermaid'
+                        });
+                    }
                     setTimeout(()=>{
                         window.prism_highlight_all_ing = false; //解锁
                     },100)
@@ -112,6 +189,14 @@ export default {
                 $script.src = '/bower_components/prismjs/components/prism-markup-templating.js';
                 document.body.appendChild($script);
             },50);
+        }
+        if(!document.getElementById('mermaid-js')){
+            let $script = document.createElement('script');
+            $script.id = 'mermaid-js';
+            $script.type = 'text/javascript';
+            $script.src = '/bower_components/mermaid/mermaid.min.js';
+            $script.async='true';
+            document.body.appendChild($script);
         }
     },
     computed:{
