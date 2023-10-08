@@ -7,20 +7,10 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\LanguageMiddleware;
 use App\Http\Middleware\LogMiddleware;
 use App\Http\Middleware\ThrottleRequests;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Illuminate\Routing\Router;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 class Kernel extends HttpKernel
 {
-    public function __construct(Application $app, Router $router)
-    {
-        parent::__construct($app, $router);
-        if(config('app.env')!=='production'){
-            $this->middlewareGroups['api'][] = \Fruitcake\Cors\HandleCors::class;
-        }
-    }
-
     /**
      * The application's global HTTP middleware stack.
      *
@@ -60,6 +50,7 @@ class Kernel extends HttpKernel
             EnsureFrontendRequestsAreStateful::class,
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Fruitcake\Cors\HandleCors::class
         ],
     ];
 
