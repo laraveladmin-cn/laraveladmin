@@ -450,10 +450,16 @@ class BuildApiDoc extends BaseCommand
             $item_name = '';
             collect(explode('.',$related))->filter()->each(function ($k,$index)use(&$model,&$table,&$item_name,$related){
                 try {
-                    $true_model = $model->getModel()->$k();
-                    $table = $true_model->getModel()->getTable();
-                    $model = $true_model->getRelated();
-                    $item_name=  $model->getItemName();
+                    if($model){
+                        $model1 = $model->getModel();
+                        dump(get_class($model1),$k);
+                        $true_model = $model1->$k();
+                        $table = $true_model->getModel()->getTable();
+                        $model = $true_model->getRelated();
+                        $item_name=  $model->getItemName();
+                    }else{
+                        return false;
+                    }
                 }catch (\Exception $exception){
                     return false;
                 }
@@ -470,7 +476,7 @@ class BuildApiDoc extends BaseCommand
                     return '';
                 }
                 $value1 = Arr::get($fields,$field,'');
-                $value1 = $value1?trans_path($value1):$model->getFieldsName($field);
+                $value1 = $value1?trans_path($value1):($model?$model->getFieldsName($field):$field);
             }
             $description = $item_name.trans_path($value1, '_shared.tables.' . $table. '.fields');
 
@@ -490,9 +496,13 @@ class BuildApiDoc extends BaseCommand
             $model = $this->controller->getModel();
             collect(explode('.',$related))->filter()->each(function ($k,$index)use(&$model,&$table,$related){
                 try {
-                    $true_model = $model->getModel()->$k();
-                    $table = $true_model->getModel()->getTable();
-                    $model = $true_model->getRelated();
+                    if($model){
+                        $true_model = $model->getModel()->$k();
+                        $table = $true_model->getModel()->getTable();
+                        $model = $true_model->getRelated();
+                    }else{
+                        return false;
+                    }
                 }catch (\Exception $exception){
                     return false;
                 }
