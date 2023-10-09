@@ -76,12 +76,12 @@ class BuildApiDoc extends BaseCommand
             //->where('id','<=',16)
             //->where('id','=',13)
             ->with(['parent'=>function($q){
-            $q->select([
-                'id',
-                'name',
-                'item_name'
-            ]);
-        }])->get())->map(function ($menu)use(&$menus){
+                $q->select([
+                    'id',
+                    'name',
+                    'item_name'
+                ]);
+            }])->get())->map(function ($menu)use(&$menus){
             //扫描菜单接口
             $item = Arr::get($menus,$menu['id']);
             if(!$item){
@@ -133,6 +133,7 @@ class BuildApiDoc extends BaseCommand
                 $group = $menu->resource['group'];
             }
             $namespace = Arr::get($this->group,$group.'.namespace','');
+            dump($namespace."\\".$action);
             $actions = explode('@',$action);
             $class = $namespace.'\\'.$actions[0];
             $method = $actions[1];
@@ -450,16 +451,16 @@ class BuildApiDoc extends BaseCommand
             $item_name = '';
             collect(explode('.',$related))->filter()->each(function ($k,$index)use(&$model,&$table,&$item_name,$related){
                 try {
-                    if($model){
-                        $model1 = $model->getModel();
-                        dump(get_class($model1),$k);
-                        $true_model = $model1->$k();
-                        $table = $true_model->getModel()->getTable();
-                        $model = $true_model->getRelated();
-                        $item_name=  $model->getItemName();
-                    }else{
+                    if(!$model){
                         return false;
                     }
+                    if(in_array($k,['value'])){
+                        return false;
+                    }
+                    $true_model = $model->getModel()->$k();
+                    $table = $true_model->getModel()->getTable();
+                    $model = $true_model->getRelated();
+                    $item_name=  $model->getItemName();
                 }catch (\Exception $exception){
                     return false;
                 }
@@ -468,15 +469,18 @@ class BuildApiDoc extends BaseCommand
                 $value1 = $field;
             }else{
                 $fields = ['created_at' => 'Created At',
-                'updated_at' => 'Updated At',
-                'deleted_at' => 'Deleted At',
-                'id' => 'ID'
+                    'updated_at' => 'Updated At',
+                    'deleted_at' => 'Deleted At',
+                    'id' => 'ID'
                 ];
                 if(!$field){
                     return '';
                 }
                 $value1 = Arr::get($fields,$field,'');
-                $value1 = $value1?trans_path($value1):($model?$model->getFieldsName($field):$field);
+                if(!$value1 && !$model){
+                    return '';
+                }
+                $value1 = $value1?trans_path($value1):$model->getFieldsName($field);
             }
             $description = $item_name.trans_path($value1, '_shared.tables.' . $table. '.fields');
 
@@ -496,13 +500,12 @@ class BuildApiDoc extends BaseCommand
             $model = $this->controller->getModel();
             collect(explode('.',$related))->filter()->each(function ($k,$index)use(&$model,&$table,$related){
                 try {
-                    if($model){
-                        $true_model = $model->getModel()->$k();
-                        $table = $true_model->getModel()->getTable();
-                        $model = $true_model->getRelated();
-                    }else{
+                    if(!$model){
                         return false;
                     }
+                    $true_model = $model->getModel()->$k();
+                    $table = $true_model->getModel()->getTable();
+                    $model = $true_model->getRelated();
                 }catch (\Exception $exception){
                     return false;
                 }
