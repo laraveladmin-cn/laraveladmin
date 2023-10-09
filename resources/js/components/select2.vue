@@ -300,9 +300,11 @@
                     }else {
                         value = $.trim($(this).val());
                     }
-                    $this.$emit('input', value); //修改值
-                    $this.$emit('change',value); //修改值
-                    $this.data = value;
+                    if($this.data!==value){
+                        $this.$emit('input', value); //修改值
+                        $this.$emit('change',value); //修改值
+                        $this.data = value;
+                    }
                 }).on('select2:close',()=>{
                     $this.$emit('blur');
                 });
