@@ -312,7 +312,7 @@
                                     </slot>
                                 </td>
                                 <td class="operate" v-if="operation">
-                                    <slot name="col-operation" :data="data" :url="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])" :row="row" :to-edit="toEdit" :remove="remove">
+                                    <slot name="col-operation" :data="data" :url="(data.configUrl['showUrl'] || '').replace('{id}',row[options.primaryKey])" :row="row" :to-edit="toEdit" :remove="remove">
                                         <button v-show="data.configUrl['deleteUrl']"
                                                 :title="$t('Delete selected')"
                                                 type="button"
@@ -322,14 +322,14 @@
                                         </button>
                                         <router-link class="btn btn-info btn-xs"
                                                      :title="$t('Edit')"
-                                                     :to="data.configUrl['showUrl'].replace('{id}',row[options.primaryKey])"
+                                                     :to="(data.configUrl['showUrl'] || '').replace('{id}',row[options.primaryKey])"
                                                      v-if="data.configUrl['showUrl'] && !options.editDialog">
                                             <i class="fa fa-edit"></i>
                                         </router-link>
                                         <button class="btn btn-info btn-xs"
                                                 :title="$t('Edit')"
                                                 type="button"
-                                                @click="toEdit(data.configUrl['showUrl'].replace('{id}',row[options.primaryKey]),row[options.primaryKey])"
+                                                @click="toEdit((data.configUrl['showUrl'] || '').replace('{id}',row[options.primaryKey]),row[options.primaryKey])"
                                                 v-if="data.configUrl['showUrl'] && options.editDialog">
                                             <i class="fa fa-edit"></i>
                                         </button>
