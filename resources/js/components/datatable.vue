@@ -764,7 +764,14 @@ export default {
                     }
                 } else {
                     for (let i in response.data) {
-                        Vue.set(this.data, i, response.data[i]);
+                        if(i=='configUrl'){
+                            let configUrl = response.data.configUrl;
+                            for(let j in configUrl){
+                                Vue.set(this.data['configUrl'], j, configUrl[j]);
+                            }
+                        }else {
+                            Vue.set(this.data, i, response.data[i]);
+                        }
                     }
                     if (this.count(this.data.excel.exportFields) && !this.export_fileds) {
                         if (this.options.defaultExportNotAll) {
