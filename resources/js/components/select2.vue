@@ -338,18 +338,22 @@
 
                     }
                 }
+            },
+            reload(){
+                let val = this.value;
+                let $select2 = $(this.$el).find('select');
+                if(!val){
+                    val = val+' ';
+                }
+                $select2.val(val);
+                this.destroy();
+                this.initSelect2();
             }
         },
         watch: {
             value(val,old){
                 if(this.data!==val){
-                    let $select2 = $(this.$el).find('select');
-                    if(!val){
-                        val = val+' ';
-                    }
-                    $select2.val(val);
-                    this.destroy();
-                    this.initSelect2();
+                    this.reload();
                 }
             },
             language(val,old){
@@ -367,6 +371,9 @@
                     this.destroy();
                     this.initSelect2();
                 },50);
+            },
+            defaultOptions(){
+                this.reload();
             }
         },
         mounted() {
