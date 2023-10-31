@@ -315,6 +315,7 @@
 @elseif($table_field['showType']=='markdown')
                                     <template slot="input-item">
                                         <editor-md v-model="props.data.row['{{$table_field['Field']}}']"
+                                                   id="{{$table_field['Field']}}"
                                                    :disabled="!props.url">
                                         </editor-md>
                                     </template>
