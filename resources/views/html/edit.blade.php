@@ -104,6 +104,11 @@
             'path' => 'vue-json-views/build/index.js',
             'info' => 'json数据显示组件'
         ],
+        'many'=>[
+            'name' => 'many',
+            'path' => 'common_components/many.vue',
+            'info' => '多对象输入框组'
+        ],
         'date' =>$datePicker,
         'datetime'=>$datePicker,
         'time'=>$datePicker,
@@ -112,7 +117,8 @@
         'icheckRadio'=>$icheck,
         'icheckCheckbox'=>$icheck,
         'json'=>$json,
-        'jsonEdit'=>$json
+        'jsonEdit'=>$json,
+
     ];
     $components = collect($components)
         ->only(collect($table_fields_show)
@@ -360,6 +366,16 @@
                                                    :closed="false" :theme="'one-dark'"
                                                    :data="array_get(props,'data.row.{{$table_field['Field']}}',{}) || {}">
                                         </json-view>
+                                    </template>
+@elseif($table_field['showType']=='jsonView')
+                                    <template slot="input-item">
+                                        <many  v-model="props.data.row['{{$table_field['Field']}}']"
+                                              :new-item="{key:'',value:''}"
+                                              :fields="{key:'键',value:'值'}"
+                                              :key-value="'value'"
+                                              :sort-key="'no'"
+                                              :disabled="!props.url">
+                                        </many>
                                     </template>
 @endif
                             </edit-item>
