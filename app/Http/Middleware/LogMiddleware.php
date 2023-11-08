@@ -38,7 +38,11 @@ class LogMiddleware{
         $route = Route::getCurrentRoute()->uri;
         //请求方式
         $method = strtolower(app('request')->method());
-        if(!in_array(strtolower($method),config('laravel_admin.log_exclude_method',[]))){
+        if(!in_array(strtolower($method),config('laravel_admin.log_exclude_method',[])) ||
+            in_array($route,[
+                'web-api/open/other-login-callback/{type}'
+            ])
+        ){
             $ip = RequestFacade::header('x-real-ip',RequestFacade::ip());
             $parameters = RequestFacade::all();
             collect($this->hidden)->map(function ($value)use(&$parameters){

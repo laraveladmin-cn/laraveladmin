@@ -450,6 +450,9 @@
                 "api",
                 "web"
             ],
+            "middleware": [
+                "log"
+            ],
             "_id": 78
         },
         {
