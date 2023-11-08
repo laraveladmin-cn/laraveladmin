@@ -1,6 +1,6 @@
 <template>
     <div class="input-group colorpicker-component">
-        <input type="text" :disabled="disabled" @blur="$emit('blur')" class="form-control" />
+        <input type="text" :value="value||null" :disabled="disabled" @blur="$emit('blur')" class="form-control" />
         <span class="input-group-addon"><i></i></span>
     </div>
 </template>
@@ -35,11 +35,11 @@
                         clearInterval(this.intervalTime);
                         $this.colorpicker = $($this.$el).colorpicker({
                             allowEmpty:true,
-                            color: $this.value||null,
+                            color: $this.value||false,
                             format: "hex",
                             disable:$this.disabled
                         });
-                        $this.colorpicker.on('colorpickerChange', (e,a,b)=> {
+                        let callback = (e,a,b)=> {
                             let value = e.color.toString('hex') || '';
                             value = value=='false'?'':value;
                             if(value==$this.old_color){
@@ -51,7 +51,9 @@
                                 $this.$emit('input', value); //修改值
                                 $this.$emit('change',value); //修改值
                             }
-                        });
+                        };
+                        $this.colorpicker.on('changeColor',callback );
+                        $this.colorpicker.on('colorpickerChange', callback);
                     }
                 },500);
             }
