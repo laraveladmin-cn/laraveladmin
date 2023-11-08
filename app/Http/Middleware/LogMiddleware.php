@@ -40,7 +40,8 @@ class LogMiddleware{
         $method = strtolower(app('request')->method());
         if(!in_array(strtolower($method),config('laravel_admin.log_exclude_method',[])) ||
             in_array($route,[
-                'web-api/open/other-login-callback/{type}'
+                'web-api/open/other-login-callback/{type}',
+                'api/open/other-login-callback/{type}'
             ])
         ){
             $ip = RequestFacade::header('x-real-ip',RequestFacade::ip());
