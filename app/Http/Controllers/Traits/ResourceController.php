@@ -387,7 +387,13 @@ trait ResourceController
         } else { //不统计条数
             $data = (clone $obj)->simplePaginate($perPage);
         }
-
+        if(isset($this->showIndexAttributes) && $this->showIndexAttributes){
+            foreach ($data as $item){
+                collect($this->showIndexAttributes)->each(function ($key)use($item){
+                    Arr::get($item,$key);
+                });
+            }
+        }
         if(
             ($fields && $hasFullTextSearch) ||
             $real_page
