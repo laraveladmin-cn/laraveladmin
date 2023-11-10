@@ -1385,7 +1385,105 @@
     },
     {
         "command": "queue:listen",
-        "name": "Listen to a given queue"
+        "name": "Listen to a given queue",
+        "parameters": [
+            {
+                "key": "connection",
+                "value": "",
+                "rules": "",
+                "title": "要操作的队列连接的名称",
+                "name": "连接",
+                "placeholderValue": ""
+            },
+            {
+                "key": "name",
+                "value": "default",
+                "rules": "",
+                "title": "工作者的名称",
+                "name": "名称",
+                "placeholderValue": "",
+                "is_option": true
+            },
+            {
+                "key": "queue",
+                "value": "",
+                "rules": "",
+                "title": "要操作的队列的名称",
+                "name": "队列",
+                "placeholderValue": "",
+                "is_option": true
+            },
+            {
+                "key": "delay",
+                "value": 0,
+                "rules": "",
+                "title": "延迟失败任务的秒数（已弃用）",
+                "name": "延迟",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "backoff",
+                "value": 0,
+                "rules": "",
+                "title": "遇到未捕获异常的作业重试前的等待秒数",
+                "name": "异常等待",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "memory",
+                "value": 128,
+                "rules": "",
+                "title": "以兆字节为单位的内存限制",
+                "name": "内存",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "sleep",
+                "value": 3,
+                "rules": "",
+                "title": "当没有可用作业时睡眠的秒数",
+                "name": "睡眠",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "timeout",
+                "value": 60,
+                "rules": "",
+                "title": "子进程可以运行的秒数",
+                "name": "超时时间",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "tries",
+                "value": 1,
+                "rules": "",
+                "title": "在记录作业失败前尝试的次数",
+                "name": "尝试",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "即使在维护模式下也强制工作器运行",
+                "name": "延迟",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            }
+        ]
     },
     {
         "command": "queue:restart",
@@ -1401,7 +1499,165 @@
     },
     {
         "command": "queue:work",
-        "name": "Start processing jobs on the queue as a daemon"
+        "name": "Start processing jobs on the queue as a daemon",
+        "parameters": [
+            {
+                "key": "connection",
+                "value": "",
+                "rules": "",
+                "title": "要操作的队列连接的名称",
+                "name": "连接",
+                "placeholderValue": ""
+            },
+            {
+                "key": "name",
+                "value": "default",
+                "rules": "",
+                "title": "工作者的名称",
+                "name": "名称",
+                "placeholderValue": "",
+                "is_option": true
+            },
+            {
+                "key": "queue",
+                "value": "",
+                "rules": "",
+                "title": "要操作的队列的名称",
+                "name": "队列",
+                "placeholderValue": "",
+                "is_option": true
+            },
+            {
+                "key": "delay",
+                "value": 0,
+                "rules": "",
+                "title": "延迟失败任务的秒数（已弃用）",
+                "name": "延迟",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "backoff",
+                "value": 0,
+                "rules": "",
+                "title": "遇到未捕获异常的作业重试前的等待秒数",
+                "name": "异常等待",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "max-jobs",
+                "value": 0,
+                "rules": "",
+                "title": "在停止前要处理的作业数量",
+                "name": "最大工作任务数",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "max-time",
+                "value": 0,
+                "rules": "",
+                "title": "工作器应运行的最大秒数",
+                "name": "运行最长时间",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "memory",
+                "value": 128,
+                "rules": "",
+                "title": "以兆字节为单位的内存限制",
+                "name": "内存",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "sleep",
+                "value": 3,
+                "rules": "",
+                "title": "当没有可用作业时睡眠的秒数",
+                "name": "睡眠",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "rest",
+                "value": 0,
+                "rules": "",
+                "title": "作业之间休息的秒数",
+                "name": "休息",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "timeout",
+                "value": 60,
+                "rules": "",
+                "title": "子进程可以运行的秒数",
+                "name": "超时时间",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "tries",
+                "value": 1,
+                "rules": "",
+                "title": "在记录作业失败前尝试的次数",
+                "name": "尝试",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "force",
+                "value": 0,
+                "rules": "",
+                "title": "即使在维护模式下也强制工作器运行",
+                "name": "延迟",
+                "placeholderValue": "",
+                "is_option": true,
+                "type": "number"
+            },
+            {
+                "key": "daemon",
+                "value": 0,
+                "rules": "",
+                "title": "以守护进程模式运行工作者（已弃用）",
+                "name": "守护进程",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "once",
+                "value": 0,
+                "rules": "",
+                "title": "仅处理队列上的下一个任务",
+                "name": "单个执行",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            },
+            {
+                "key": "stop-when-empty",
+                "value": 0,
+                "rules": "",
+                "title": "当队列为空时停止",
+                "name": "没有任务停止",
+                "type": "switch",
+                "is_option": true,
+                "is_boolean": true
+            }
+        ]
     },
     {
         "command": "route:cache",
