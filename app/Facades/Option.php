@@ -4,6 +4,10 @@ namespace App\Facades;
 
 use \Illuminate\Support\Facades\Facade;
 
+/**
+ * App\Facades\Option
+ * @mixin \App\Services\OptionRepository
+ */
 class Option extends Facade
 {
     /**

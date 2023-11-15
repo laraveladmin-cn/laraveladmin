@@ -4,6 +4,10 @@ namespace App\Facades;
 
 use \Illuminate\Support\Facades\Facade;
 
+/**
+ * App\Facades\LifeData
+ * @mixin \App\Services\LifeDataRepository
+ */
 class LifeData extends Facade
 {
     /**

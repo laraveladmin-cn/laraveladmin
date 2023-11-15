@@ -4,6 +4,10 @@ namespace App\Facades;
 
 use \Illuminate\Support\Facades\Facade;
 
+/**
+ * App\Facades\ClientAuth
+ * @mixin \App\Services\ClientAuth
+ */
 class ClientAuth extends Facade
 {
     /**

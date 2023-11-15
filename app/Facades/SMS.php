@@ -4,6 +4,10 @@ namespace App\Facades;
 
 use \Illuminate\Support\Facades\Facade;
 
+/**
+ * App\Facades\SMS
+ * @mixin \App\Services\SMSNewService
+ */
 class SMS extends Facade
 {
     /**

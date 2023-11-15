@@ -4,6 +4,10 @@ namespace App\Facades;
 
 use \Illuminate\Support\Facades\Facade;
 
+/**
+ * App\Facades\Formatter
+ * @mixin \App\Services\FormatterService
+ */
 class Formatter extends Facade
 {
     /**
