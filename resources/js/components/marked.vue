@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="component-marked">
         <div v-if="!highFrequency">
             <div v-html="value_html" v-if="value_html">
             </div>
