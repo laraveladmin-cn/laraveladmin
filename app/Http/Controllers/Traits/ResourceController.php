@@ -66,7 +66,12 @@ trait ResourceController
                 )
             ){
                 $order_value = Arr::get($order,$primaryKey)?:'asc';
-                return $order_value=='desc'?'<':'>';
+                $exp = $order_value=='desc'?'<':'>';
+                $request = Request::instance();
+                if($request->input('id_location')){
+                    $exp .= '=';
+                }
+                return $exp;
             }
         }
         return false;
