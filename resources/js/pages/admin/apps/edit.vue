@@ -55,7 +55,7 @@
                                                :active-value="1"
                                                :inactive-value="0"
                                                active-text="是"
-                                               inactive-value="否"
+                                               inactive-text="'否'"
                                     >
                                     </el-switch>
                                 </template>
