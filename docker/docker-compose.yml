@@ -48,6 +48,7 @@ services: #服务
     restart: always
     environment:
       - DOCKER_APP_ENV=${APP_ENV}
+      - DOCKER_DEFAULT_PLATFORM=linux/amd64
     extra_hosts:
       - "local.laraveladmin.cn:host-gateway"
   nginx: #服务器服务
