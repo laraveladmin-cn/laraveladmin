@@ -382,6 +382,12 @@ class IndexController extends Controller
     }
 
 
-
+    /**
+     * API文档调试监控
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function apiDoc(){
+        return view('api_doc');
+    }
 
 }
