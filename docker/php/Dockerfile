@@ -17,9 +17,6 @@ RUN apt-get install -y \
         libonig-dev \
         zip \
         unzip \
-        openssl \
-        libssl-dev \
-        libcurl4-openssl-dev \
     ##安装扩展
     && docker-php-source extract; \
     docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp; \
@@ -36,32 +33,36 @@ RUN apt-get install -y \
         tokenizer
 ##扩展安装
 RUN pecl install redis-4.0.1 \
-    && docker-php-ext-enable redis
-RUN pecl install channel://pecl.php.net/mcrypt-1.0.3 \
-    && docker-php-ext-enable mcrypt
-
+    && docker-php-ext-enable redis \
+    && pecl install channel://pecl.php.net/mcrypt-1.0.3 \
+    && docker-php-ext-enable mcrypt \
+\
 # 安装swoole扩展
-RUN pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes"' \
-    https://pecl.php.net/get/swoole-4.8.3.tgz \
-    && docker-php-ext-enable swoole
-
+ && apt-get update \
+    && pecl channel-update pecl.php.net \
+    && apt-get install -y openssl \
+        libssl-dev \
+        libcurl4-openssl-dev \
+    && pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes"' https://pecl.php.net/get/swoole-4.8.3.tgz \
+    && docker-php-ext-enable swoole \
+\
 # 安装定时任务
-RUN apt-get install -y cron && \
+&& apt-get install -y cron && \
     touch /var/spool/cron/crontabs/root && \
     chown -R root:crontab /var/spool/cron/crontabs/root && \
     chmod 600 /var/spool/cron/crontabs/root && \
-    touch /var/log/cron.log
+    touch /var/log/cron.log \
 #安装进程守护工具
-RUN apt-get install -y supervisor
-RUN apt-get install -y git
+&& apt-get install -y supervisor \
+&& apt-get install -y git \
 # 安装composer
-RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" && \
+&& php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" && \
     php composer-setup.php && \
     mv composer.phar /usr/bin/composer && \
     chmod +x /usr/bin/composer && composer --version && \
-    composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer
+    composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer \
 # 用于数据库备份
-RUN apt-get install -y default-mysql-client \
+&& apt-get install -y default-mysql-client \
                    mariadb-client
 # 安装mongodb扩展
 #RUN pecl install mongodb && docker-php-ext-enable mongodb
