@@ -17,6 +17,9 @@ RUN apt-get install -y \
         libonig-dev \
         zip \
         unzip \
+        openssl \
+        libssl-dev \
+        libcurl4-openssl-dev \
     ##安装扩展
     && docker-php-source extract; \
     docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp; \
@@ -36,7 +39,11 @@ RUN pecl install redis-4.0.1 \
     && docker-php-ext-enable redis
 RUN pecl install channel://pecl.php.net/mcrypt-1.0.3 \
     && docker-php-ext-enable mcrypt
-RUN pecl install https://pecl.php.net/get/swoole-4.8.3.tgz && docker-php-ext-enable swoole
+
+# 安装swoole扩展
+RUN pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes"' \
+    https://pecl.php.net/get/swoole-4.8.3.tgz \
+    && docker-php-ext-enable swoole
 
 # 安装定时任务
 RUN apt-get install -y cron && \
