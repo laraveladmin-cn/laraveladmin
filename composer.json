@@ -25,6 +25,7 @@
         "spatie/laravel-backup": "^6.12",
         "swooletw/laravel-swoole": "^2.6",
         "symfony/filesystem": "^5.4",
+        "yurunsoft/guzzle-swoole": "^2.2",
         "zgldh/qiniu-laravel-storage": "^0.10.3",
         "zhuzhichao/ip-location-zh": "^2.4",
         "mews/captcha": "^3.2"
@@ -44,7 +45,14 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "easywechat-composer/easywechat-composer": true,
+            "php-http/discovery": true,
+            "yurunsoft/composer-include-files": true,
+            "yurunsoft/guzzle-swoole": true
+        }
     },
     "extra": {
         "laravel": {
