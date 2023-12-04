@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Response;
+use GuzzleHttp\DefaultHandler;
+use Yurun\Util\Swoole\Guzzle\SwooleHandler;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +34,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        //协程异步处理,不要阻塞整个应用
+        if(PHP_SAPI === 'cli'){
+            \Swoole\Runtime::enableCoroutine(SWOOLE_HOOK_STDIO|SWOOLE_HOOK_SOCKETS|SWOOLE_HOOK_SLEEP|SWOOLE_HOOK_CURL|SWOOLE_HOOK_STREAM_FUNCTION|SWOOLE_HOOK_FILE|SWOOLE_HOOK_STREAM_FUNCTION);
+        }
+        DefaultHandler::setDefaultHandler(SwooleHandler::class);
+
         //移动端唯一标识生成
         $this->app->singleton('app_client', ClientAuth::class);
         //返回数据存放
