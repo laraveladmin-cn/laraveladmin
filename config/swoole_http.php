@@ -43,6 +43,7 @@ return [
             // You must add --enable-openssl while compiling Swoole
             'ssl_cert_file' => null,
             'ssl_key_file' => null,
+            'task_enable_coroutine'=>true
         ],
     ],
 
