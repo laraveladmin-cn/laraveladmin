@@ -133,7 +133,7 @@ use Illuminate\Support\Str;
  */
 class Menu extends Model
 {
-    public function __construct(array $attributes = [])
+  /*  public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
         $routesConfig = json_decode(file_get_contents(base_path('routes/route.json')),true);
@@ -143,7 +143,7 @@ class Menu extends Model
         $this->fieldsShowMaps['middleware'] = collect(app(Kernel::class)->getRouteMiddleware())->map(function ($value,$key){
             return $key;
         })->toArray();
-    }
+    }*/
 
     protected $table = 'menus'; //数据表Name
     //软删除,树状结构
@@ -219,6 +219,30 @@ class Menu extends Model
         'is_out_link'=>[
             'No',
             'Yes'
+        ],
+        'group'=>[
+            "none" => "none",
+            "open" => "open",
+            "home" => "home",
+            "admin" => "admin",
+        ],
+        'middleware'=>[
+            "auth" => "auth",
+            "auth.basic" => "auth.basic",
+            "bindings" => "bindings",
+            "cache.headers" => "cache.headers",
+            "can" => "can",
+            "guest" => "guest",
+            "password.confirm" => "password.confirm",
+            "signed" => "signed",
+            "throttle" => "throttle",
+            "verified" => "verified",
+            "log" => "log",
+            "api_client" => "api_client",
+            "auth.redirect" => "auth.redirect",
+            "admin" => "admin",
+            "activated" => "activated",
+            "member" => "member"
         ]
     ];
 
