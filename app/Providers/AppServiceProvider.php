@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //协程异步处理,不要阻塞整个应用
         if(PHP_SAPI === 'cli'){
-            \Swoole\Runtime::enableCoroutine(SWOOLE_HOOK_STDIO|SWOOLE_HOOK_SOCKETS|SWOOLE_HOOK_SLEEP|SWOOLE_HOOK_CURL|SWOOLE_HOOK_STREAM_FUNCTION|SWOOLE_HOOK_FILE|SWOOLE_HOOK_STREAM_FUNCTION);
+            \Swoole\Runtime::enableCoroutine(SWOOLE_HOOK_STDIO|SWOOLE_HOOK_SOCKETS|SWOOLE_HOOK_SLEEP|SWOOLE_HOOK_NATIVE_CURL|SWOOLE_HOOK_STREAM_FUNCTION|SWOOLE_HOOK_FILE|SWOOLE_HOOK_STREAM_FUNCTION);
         }
         DefaultHandler::setDefaultHandler(SwooleHandler::class);
 
