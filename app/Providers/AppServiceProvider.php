@@ -21,6 +21,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use SwooleTW\Http\Server\Manager;
 use Symfony\Component\HttpFoundation\Response;
 use GuzzleHttp\DefaultHandler;
 use Yurun\Util\Swoole\Guzzle\SwooleHandler;
@@ -34,12 +35,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //协程异步处理,不要阻塞整个应用
-        if(PHP_SAPI === 'cli'){
-            \Swoole\Runtime::enableCoroutine(SWOOLE_HOOK_STDIO|SWOOLE_HOOK_SOCKETS|SWOOLE_HOOK_SLEEP|SWOOLE_HOOK_NATIVE_CURL|SWOOLE_HOOK_STREAM_FUNCTION|SWOOLE_HOOK_FILE|SWOOLE_HOOK_STREAM_FUNCTION);
-        }
-        DefaultHandler::setDefaultHandler(SwooleHandler::class);
-
         //移动端唯一标识生成
         $this->app->singleton('app_client', ClientAuth::class);
         //返回数据存放
@@ -57,6 +52,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('sms' , function($app){
             return new SMSNewService();
         });
+        $this->app->singleton(Manager::class, function ($app) {
+            return new \App\Server\Manager($app, 'laravel');
+        });
+
+        $this->app->alias(Manager::class, 'swoole.manager');
     }
 
     /**
