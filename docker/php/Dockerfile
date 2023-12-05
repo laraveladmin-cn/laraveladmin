@@ -1,7 +1,7 @@
 FROM php:7.4-fpm
 RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list && \
 rm -Rf /var/lib/apt/lists/* && \
-apt-get update && \
+apt-get update --fix-missing && \
 pecl channel-update pecl.php.net
 #安装php扩展
 RUN apt-get install -y \
@@ -41,6 +41,7 @@ RUN pecl install redis-4.0.1 \
 && apt-get install -y openssl \
         libssl-dev \
         libcurl4-openssl-dev \
+        libc-ares-dev \
     && pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes"' https://pecl.php.net/get/swoole-4.8.13.tgz \
     && docker-php-ext-enable swoole \
 \
