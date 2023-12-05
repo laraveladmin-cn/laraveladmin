@@ -41,7 +41,7 @@ RUN pecl install redis-4.0.1 \
 && apt-get install -y openssl \
         libssl-dev \
         libcurl4-openssl-dev \
-    && pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes"' https://pecl.php.net/get/swoole-4.8.3.tgz \
+    && pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes"' https://pecl.php.net/get/swoole-4.8.13.tgz \
     && docker-php-ext-enable swoole \
 \
 # 安装定时任务
