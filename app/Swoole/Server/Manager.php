@@ -55,10 +55,10 @@ class Manager extends \SwooleTW\Http\Server\Manager
             $sandbox->enable();
 
             // handle request via laravel/lumen's dispatcher
-            $illuminateResponse = null;
-            Coroutine::create(function () use(&$illuminateResponse,$sandbox,$illuminateRequest){
+            //$illuminateResponse = null;
+            //Coroutine::create(function () use(&$illuminateResponse,$sandbox,$illuminateRequest){
                 $illuminateResponse = $sandbox->run($illuminateRequest);
-            });
+            //});
 
             // send response
             Response::make($illuminateResponse, $swooleResponse, $swooleRequest)->send();

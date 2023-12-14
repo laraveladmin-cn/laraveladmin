@@ -44,7 +44,7 @@ return [
         ],
 
         'mysql' => [
-            'driver' => 'swoole-mysql',
+            'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
@@ -133,7 +133,7 @@ return [
 
     'redis' => [
 
-        'client' => env('REDIS_CLIENT', 'swoole-phpredis'),
+        'client' => env('REDIS_CLIENT', 'phpredis'),
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
