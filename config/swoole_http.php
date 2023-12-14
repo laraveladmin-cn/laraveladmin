@@ -43,7 +43,19 @@ return [
             // You must add --enable-openssl while compiling Swoole
             'ssl_cert_file' => null,
             'ssl_key_file' => null,
-            'task_enable_coroutine'=>true
+            'task_enable_coroutine'=>true,
+            //'enable_coroutine'=>true,
+            'debug_mode'=>(bool) env('APP_DEBUG', false),
+            'hook_flags' =>
+               SWOOLE_HOOK_STDIO
+               |SWOOLE_HOOK_SOCKETS
+               |SWOOLE_HOOK_SLEEP
+               |SWOOLE_HOOK_NATIVE_CURL
+               |SWOOLE_HOOK_STREAM_FUNCTION
+               |SWOOLE_HOOK_FILE
+
+
+
         ],
     ],
 
@@ -82,9 +94,24 @@ return [
     |--------------------------------------------------------------------------
     */
     'pre_resolved' => [
-        'view', 'files', 'session', 'session.store', 'routes',
-        'db', 'db.factory', 'cache', 'cache.store', 'config', 'cookie',
-        'encrypter', 'hash', 'router', 'translator', 'url', 'log', 'filesystem'
+        'view',
+        'files',
+        'session',
+        'session.store',
+        'routes',
+        'db',
+        'db.factory',
+        'cache',
+        'cache.store',
+        'config',
+        'cookie',
+        'encrypter',
+        'hash',
+        'router',
+        'translator',
+        'url',
+        'log',
+        'filesystem'
     ],
 
     /*
@@ -93,12 +120,16 @@ return [
     |--------------------------------------------------------------------------
     */
     'instances' => [
-        'auth','auth.driver',
+        'auth',
+        'auth.driver',
         'tymon.jwt',
         'tymon.jwt.auth',
         'tymon.jwt.parser',
         'tymon.jwt.claim.factory',
-        'tymon.jwt.manager','data','life_data','option'
+        'tymon.jwt.manager',
+        'data',
+        'life_data',
+        'option',
     ],
 
     /*

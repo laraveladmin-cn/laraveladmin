@@ -2,12 +2,6 @@
 
 namespace App\Providers;
 
-use App\Console\DevelopCommands\BuildApiDoc;
-use App\Console\DevelopCommands\CreateAll;
-use App\Console\DevelopCommands\CreateController;
-use App\Console\DevelopCommands\CreateModel;
-use App\Console\DevelopCommands\CreateSeed;
-use App\Console\DevelopCommands\CreateView;
 use App\Facades\LifeData;
 use App\Models\Traits\DbMysqlImplModel;
 use App\Models\Traits\NestedSetsService;
@@ -16,15 +10,17 @@ use App\Services\FormatterService;
 use App\Services\LifeDataRepository;
 use App\Services\OptionRepository;
 use App\Services\SMSNewService;
+use App\Swoole\Coroutine\Redis\PhpRedisConnector;
 use App\Validators\CustomValidator;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Connectors\ConnectionFactory;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
 use SwooleTW\Http\Server\Manager;
 use Symfony\Component\HttpFoundation\Response;
-use GuzzleHttp\DefaultHandler;
-use Yurun\Util\Swoole\Guzzle\SwooleHandler;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -53,10 +49,14 @@ class AppServiceProvider extends ServiceProvider
             return new SMSNewService();
         });
         $this->app->singleton(Manager::class, function ($app) {
-            return new \App\Server\Manager($app, 'laravel');
+            return new \App\Swoole\Server\Manager($app, 'laravel');
         });
 
         $this->app->alias(Manager::class, 'swoole.manager');
+        $this->app->singleton(ConnectionFactory::class, function ($app) {
+            return new \App\Swoole\Coroutine\Database\ConnectionFactory($app);
+        });
+        $this->app->alias(ConnectionFactory::class,'db.factory');
     }
 
     /**
@@ -66,6 +66,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(ResponseFactory $factory)
     {
+        Redis::extend('swoole-phpredis', function () {
+            return new PhpRedisConnector();
+        });
         Schema::defaultStringLength(191);
         //响应返回
         $factory->macro('returns', function ($value=[],$status=Response::HTTP_OK,array $headers = []) use ($factory) {
