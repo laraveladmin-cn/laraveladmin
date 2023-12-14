@@ -70,6 +70,10 @@ class SwooleMySqlConnection extends BaseConnection
                     ->withCharset($config['charset'])
                     ->withUsername($config['username'])
                     ->withPassword($config['password']);
+                if(isset($config['options']) && $config['options'] && is_array($config['options'])){
+                    $pdo_config = $pdo_config->withOptions($config['options']);
+
+                }
                 if($config['unix_socket']){
                     $pdo_config = $pdo_config->withUnixSocket($config['unix_socket']);
                 };
@@ -83,6 +87,9 @@ class SwooleMySqlConnection extends BaseConnection
                 ->withCharset($config['charset'])
                 ->withUsername($config['username'])
                 ->withPassword($config['password']);
+            if(isset($config['options']) && $config['options'] && is_array($config['options'])){
+                $pdo_config = $pdo_config->withOptions($config['options']);
+            }
             if($config['unix_socket']){
                 $pdo_config = $pdo_config->withUnixSocket($config['unix_socket']);
             };
@@ -157,6 +164,8 @@ class SwooleMySqlConnection extends BaseConnection
         $key = $only_read?'read_useing_pool_pdos':'useing_pool_pdos';
         if(!isset($this->$key[$cid])){
             $pdo = $this->getPoolPdo($only_read);
+            $pdo->setAttribute(\PDO::ATTR_STRINGIFY_FETCHES, false);
+            $pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
             $this->$key[$cid] = $pdo;
             Coroutine::defer(function ()use($key,$cid,$only_read){ //协程结束时释放数据库pdo资源
                 if(isset($this->$key[$cid])){
