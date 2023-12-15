@@ -271,9 +271,11 @@ class SwooleMySqlConnection extends BaseConnection
             ($this->recordsModified && $this->getConfig('sticky'))) {
             return $this->getPdo();
         }
-        if(Coroutine::getuid()>0) { //协程应用调度
+
+        if($this->readPdo && Coroutine::getuid()>0){ //协程应用调度
             return $this->getUseingPoolPdo(true);
         }
+
         if ($this->readPdo instanceof Closure) {
             return $this->readPdo = call_user_func($this->readPdo);
         }
