@@ -104,6 +104,31 @@ class SwooleDatabaseTest extends TestCase
         $this->assertTrue($flog);
     }
 
+    /**
+     * 原始sql查询
+     * @return void
+     */
+    public function testMysqlRaw()
+    {
+        $sql = 'show tables;';
+        $res = DB::select(DB::raw($sql));
+        $this->assertTrue($res!==false);
+    }
+
+    /**
+     * 原始sql查询
+     * @return void
+     */
+    public function testCoroutineMysqlRaw()
+    {
+        Coroutine\run(function (){
+            $sql = 'show tables;';
+            $res = DB::select(DB::raw($sql));
+            $this->assertTrue($res!==false);
+        });
+
+    }
+
 
 
 

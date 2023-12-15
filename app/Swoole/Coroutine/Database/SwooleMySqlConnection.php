@@ -5,6 +5,7 @@ namespace App\Swoole\Coroutine\Database;
 use Closure;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\MySqlConnection as BaseConnection;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Arr;
 use Swoole\Coroutine;
 use Swoole\Database\PDOConfig;
@@ -55,6 +56,41 @@ class SwooleMySqlConnection extends BaseConnection
 
         return $statement;
     }
+
+    /**
+     * 兼容协程pdo只能传入纯字符串
+     * Run a SQL statement.
+     *
+     * @param  string  $query
+     * @param  array  $bindings
+     * @param  \Closure  $callback
+     * @return mixed
+     *
+     * @throws \Illuminate\Database\QueryException
+     */
+    protected function runQueryCallback($query, $bindings, Closure $callback)
+    {
+        if(Coroutine::getuid()>0){
+            // To execute the statement, we'll simply call the callback, which will actually
+            // run the SQL against the PDO connection. Then we can calculate the time it
+            // took to execute and log the query SQL, bindings and time in our memory.
+            try {
+                return $callback((string) $query, $bindings); //字符串强制转换
+            }
+
+                // If an exception occurs when attempting to run a query, we'll format the error
+                // message to include the bindings with SQL, which will make this exception a
+                // lot more helpful to the developer instead of just the database's errors.
+            catch (Exception $e) {
+                throw new QueryException(
+                    $query, $this->prepareBindings($bindings), $e
+                );
+            }
+        }else{
+            return parent::runQueryCallback($query, $bindings,$callback);
+        }
+    }
+
 
     /**
      * 获取连接池key
