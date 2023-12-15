@@ -62,7 +62,7 @@ class BuildApiDoc extends BaseCommand
             $common_responses[] = $item;
             $common_responses[] = [
                 'name'=>'list.'.$item['name'],
-                'description'=>$item['description']
+                'description'=>$this->getDescriptionStr($item['description'])
             ];
         });
         $this->common_responses = collect($common_responses)->keyBy('name')->toArray();
@@ -286,7 +286,10 @@ class BuildApiDoc extends BaseCommand
                 $responses_data['data.$index.$index'] = ['name'=>'data.$index.$index','description'=>'excel数据项'];
                 collect(Arr::get($responses,'data.1',[]))->each(function ($value,$index)use (&$responses_data){
                     $key = 'data.$index.'.$index;
-                    $responses_data[$key] = ['name'=>$key,'description'=>$value];
+                    $responses_data[$key] = [
+                        'name'=>$key,
+                        'description'=>$this->getDescriptionStr($value)
+                    ];
                 });
             }
             $item['responses'] = collect($responses_data)->values()->toArray();
@@ -426,7 +429,10 @@ class BuildApiDoc extends BaseCommand
                         $description = '';
                     }
                 }
-                $responses_data[$k] = ['name'=>$k,'description'=>$description];
+                $responses_data[$k] = [
+                    'name'=>$k,
+                    'description'=>$this->getDescriptionStr($description)
+                ];
             }
             if(is_array($value)){
                 $this->eachArray($value,$responses_data,$k.'.');
@@ -434,6 +440,10 @@ class BuildApiDoc extends BaseCommand
         }
 
 
+    }
+
+    protected function getDescriptionStr($description){
+        return (is_array($description) || is_object($description))?'':$description;
     }
 
     /**
