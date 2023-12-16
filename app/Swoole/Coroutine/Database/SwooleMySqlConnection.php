@@ -281,11 +281,12 @@ class SwooleMySqlConnection extends BaseConnection
      */
     public function getPdo()
     {
-        if(Coroutine::getuid()>0){ //协程应用调度
-           return $this->getUseingPoolPdo();
-        }
         if ($this->pdo instanceof Closure) {
-            return $this->pdo = call_user_func($this->pdo);
+            $this->pdo = call_user_func($this->pdo);
+        }
+
+        if(Coroutine::getuid()>0){ //协程应用调度
+            return $this->getUseingPoolPdo();
         }
 
         return $this->pdo;
@@ -308,12 +309,12 @@ class SwooleMySqlConnection extends BaseConnection
             return $this->getPdo();
         }
 
-        if($this->readPdo && Coroutine::getuid()>0){ //协程应用调度
-            return $this->getUseingPoolPdo(true);
+        if ($this->readPdo instanceof Closure) {
+            $this->readPdo = call_user_func($this->readPdo);
         }
 
-        if ($this->readPdo instanceof Closure) {
-            return $this->readPdo = call_user_func($this->readPdo);
+        if($this->readPdo && Coroutine::getuid()>0){ //协程应用调度
+            return $this->getUseingPoolPdo(true);
         }
 
         return $this->readPdo ?: $this->getPdo();
