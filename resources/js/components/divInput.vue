@@ -1,11 +1,13 @@
 <template>
     <div>
-        <div ref="input" :contenteditable="!disabled" class="inline edit-input" @blur="onBlur" @focus="onFocus">
-            {{show}}
-        </div>
-         <span v-if="unit">
-            {{unit}}
-        </span>
+        <slot :show="show">
+            <div ref="input" :contenteditable="!disabled" class="inline edit-input" @blur="onBlur" @focus="onFocus">
+                {{show}}
+            </div>
+            <span v-if="unit">
+                {{unit}}
+            </span>
+        </slot>
     </div>
 </template>
 
@@ -49,7 +51,7 @@
         data(){
             let val = this.value;
             return {
-                val:val,
+                val:val
             };
         },
         watch:{
@@ -69,8 +71,10 @@
             }
         },
         methods:{
-            onBlur(){
-                let value = this.$refs['input'].textContent.trim();
+            onBlur(val){
+                this.enterVal(this.$refs['input'].textContent.trim());
+            },
+            enterVal(value){
                 if(value==this.placeholder || value===''){
                     this.val = '';
                 }else if(this.zoom==1){
