@@ -43,6 +43,7 @@ trait LoginResponseController
         $user = Auth::user();
         $this->bindOuser($user);
         $user->update(['client_id'=>SessionService::getId()]); //登录信息
+        $user->load('admin','admin.roles');
         $remember = $request->has('remember');
         $lifetime = (!$remember)?config('laravel_admin.no_remember_lifetime'):config('session.lifetime');
         if($remember){
@@ -87,6 +88,7 @@ trait LoginResponseController
             'token'=>$token,
             'redirect_url' => $redirect,
             'lifetime'=>$lifetime,
+            'user'=>$user
         ];
         if($open_id){
             $data['open_id'] = $open_id;

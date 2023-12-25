@@ -162,16 +162,29 @@
                 }
                 if(res.status==200 && res.data.token){
                     setCookie('Authorization','Bearer '+res.data.token,res.data.lifetime/60/24);
-                    this.getUser();
+                    if(res.data.user){
+                        this.setUser({
+                            key:'loading',
+                            loading:false
+                        });
+                        this.setUser({
+                            key:'user',
+                            user:res.data.user
+                        });
+                    }else {
+                        this.getUser();
+                    }
+                    setTimeout(()=>{
+                        this.$router.replace({ path: res.data.redirect_url }).catch(error => {
+                            dd(error.message);
+                        });
+                    },100)
+
                 }else if(res.data.errors){
                     let errors = catchError({response:res});
                     this.errorFun(errors);
                 }
                 this.logining = false;
-                this.loading = false;
-                this.$router.replace({ path: res.data.redirect_url }).catch(error => {
-                    dd(error.message);
-                });
             },
             errorFun(errors){
                 let username = collect(errors.username || []);
