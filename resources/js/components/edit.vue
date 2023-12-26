@@ -3,7 +3,7 @@
        <!-- <component-demos ref="demos" v-if="is_local"></component-demos>-->
         <form onsubmit="return false;">
             <validation-observer :ref="id" v-slot="{invalid,validate}">
-                <div class="row">
+                <div :class="!options.deleteClassRow?'row':''">
                     <slot name="content" :data="data" :url="url" :maps="_maps" :error="error" :trans-field="transField">
                     </slot>
                 </div>
