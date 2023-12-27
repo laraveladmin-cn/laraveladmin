@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use SwooleTW\Http\Server\Manager;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
+use App\Handler\FeishuWebhookHandler;
+use App\Handler\WorkWeixinWebhookHandler;
+use Monolog\Logger as Monolog;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -57,6 +61,17 @@ class AppServiceProvider extends ServiceProvider
             return new \App\Swoole\Coroutine\Database\ConnectionFactory($app);
         });
         $this->app->alias(ConnectionFactory::class,'db.factory');
+
+        Log::extend('feishu',function ($app,$config){
+            return new Monolog($this->parseChannel($config), [
+                $this->prepareHandler(new FeishuWebhookHandler($config)),
+            ]);
+        });
+        Log::extend('work_weixin',function ($app,$config){
+            return new Monolog($this->parseChannel($config), [
+                $this->prepareHandler(new WorkWeixinWebhookHandler($config)),
+            ]);
+        });
     }
 
     /**

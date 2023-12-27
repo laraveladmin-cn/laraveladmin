@@ -99,6 +99,22 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        'feishu'=>[
+            'driver' => 'feishu',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'host' => env('LOG_FEISHU_HOST','https://open.feishu.cn'),
+            'url' =>  env('LOG_FEISHU_URL',''),
+            'token' => env('LOG_FEISHU_TOKEN',''),
+            'lock_time'=>10 //相同错误内容锁定10秒
+        ],
+        'work_weixin'=>[ //企业微信
+            'driver' => 'work_weixin',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'host' => env('LOG_WORK_WEIXIN_HOST','https://qyapi.weixin.qq.com'),
+            'url' =>  env('LOG_WORK_WEIXIN_URL','/cgi-bin/webhook/send'),
+            'token' => env('LOG_WORK_WEIXIN_TOKEN',''),
+            'lock_time'=>10 //相同错误内容锁定10秒
+        ],
     ],
 
 ];
