@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\AppServiceProvider;
+use Laravel\Scout\EngineManager;
 
 return [
     /*
@@ -37,14 +38,16 @@ return [
             // Max buffer size for socket connections
             'socket_buffer_size' => 128 * 1024 * 1024,
             // Worker will restart after processing this number of requests
-            'max_request' => 3000,
+            'max_request' => 100,
+            'max_wait_time'=>30,
+            'reload_async'=>true,
             // Enable coroutine send
             'send_yield' => true,
             // You must add --enable-openssl while compiling Swoole
             'ssl_cert_file' => null,
             'ssl_key_file' => null,
             'task_enable_coroutine'=>true,
-            //'enable_coroutine'=>true,
+            'enable_coroutine'=>true,
             'debug_mode'=>(bool) env('APP_DEBUG', false),
             'hook_flags' =>
                SWOOLE_HOOK_STDIO
@@ -119,7 +122,7 @@ return [
     | Instances here will be cleared on every request.
     |--------------------------------------------------------------------------
     */
-    'instances' => [
+    'instances' => \App\Swoole\Coroutine\Context::$instances/*[
         'auth',
         'auth.driver',
         'tymon.jwt',
@@ -130,7 +133,7 @@ return [
         'data',
         'life_data',
         'option',
-    ],
+    ]*/,
 
     /*
     |--------------------------------------------------------------------------
@@ -151,11 +154,11 @@ return [
     |--------------------------------------------------------------------------
     */
     'resetters' => [
+        SwooleTW\Http\Server\Resetters\ClearInstances::class,
         SwooleTW\Http\Server\Resetters\ResetConfig::class,
+        SwooleTW\Http\Server\Resetters\BindRequest::class,
         SwooleTW\Http\Server\Resetters\ResetSession::class,
         SwooleTW\Http\Server\Resetters\ResetCookie::class,
-        SwooleTW\Http\Server\Resetters\ClearInstances::class,
-        SwooleTW\Http\Server\Resetters\BindRequest::class,
         SwooleTW\Http\Server\Resetters\RebindKernelContainer::class,
         SwooleTW\Http\Server\Resetters\RebindRouterContainer::class,
         SwooleTW\Http\Server\Resetters\RebindViewContainer::class,

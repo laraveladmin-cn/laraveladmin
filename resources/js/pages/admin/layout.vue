@@ -263,7 +263,8 @@
                 </div>
                 <footer class="main-footer">
                     <div class="pull-right hidden-xs">
-                        <b>{{$t('System version:')}}</b> {{version}}
+                        <b>{{$t('System version:')}}</b>
+                        <a>{{version}}</a>
                     </div>
                     <strong>{{$t('Copyright')}}
                         <a target="_blank" href="http://www.laraveladmin.cn">Laravel Admin</a>
@@ -619,7 +620,8 @@
             ...mapMutations({
                 menuSet:'menu/set',  //设置当前路由,用于菜单选中
                 setLanguage:'setLanguage',
-                set:'set'
+                set:'set',
+                setUser: 'user/set'
             }),
             search(){
                 this.menuSet({
@@ -681,7 +683,8 @@
                 'alerts',
                 'language',
                 'locales',
-                'theme'
+                'theme',
+                'name'
             ]),
             ...mapState('menu',{
                 menus:state => state.menus,
@@ -714,6 +717,14 @@
                 let loading = this.loadingMenu || this.loadingUser;
                 if(!loading){ //没有登录就跳转登录
                     if(!this.user['id']){
+                        this.setUser({
+                            key:'user',
+                            user:{}
+                        });
+                        this.setUser({
+                            key:'loading',
+                            loading:true
+                        });
                         this.$router.replace({path: `/open/login`});
                         return false;
                     }else if(!this.isAdmin){

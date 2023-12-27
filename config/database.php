@@ -61,6 +61,12 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+            'dump' => [
+                'excludeTables' => [
+       
+                    'logs'
+                ]
+            ],
             'pool_size'=>env('DB_POOL_SIZE', 64)
         ],
 
@@ -133,11 +139,13 @@ return [
 
     'redis' => [
 
-        'client' => env('REDIS_CLIENT', 'phpredis'),
+        'client' => env('REDIS_CLIENT', 'swoole-phpredis'),
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            //swoole-phpredis模式不支持数据库前缀,建议去除前缀设置
+            //'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => '',
         ],
 
         'default' => [
@@ -146,7 +154,7 @@ return [
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_DB', '0'),
-            'pool_size'=>env('REDIS_POOL_SIZE', 64)
+            'pool_size'=>env('REDIS_POOL_SIZE', 1024)
         ],
 
         'cache' => [

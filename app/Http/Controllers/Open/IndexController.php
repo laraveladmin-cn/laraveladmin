@@ -196,33 +196,41 @@ class IndexController extends Controller
         if(!isset($_SERVER['REQUEST_URI'])){
             $_SERVER['REQUEST_URI']=$request->getRequestUri();
         }
-        $officialAccount = EasyWeChat::officialAccount(); // 公众号
-        $sdk = $officialAccount->jssdk;
-        if ($url = $request->header('Referer')?:config('app.url')) {
-            $url = explode('#', $url)[0];
-            $sdk->setUrl($url);
-        }
-        $wxconfig_official = Option::get('wxconfig_official');
-        $wxconfig_official = $wxconfig_official ? $wxconfig_official : [
-            'title' => config('app.name'),
-            'desc' => config('app.name'),
-            'imgUrl' => config('app.url').'/dist/img/logo1.png'
-        ];
-        try {
-            $data['wxconfig'] = $sdk->buildConfig([
-                'updateAppMessageShareData',
-                'updateTimelineShareData',
-                'onMenuShareTimeline',
-                'onMenuShareAppMessage',
-                'onMenuShareQQ',
-                'onMenuShareWeibo',
-                'onMenuShareQZone',
-                'chooseWXPay'],  !!config('app.debug'), false, false);
-        } catch (\Exception $e) {
+        $app_id = config('wechat.official_account.default.app_id','');
+        $url = $request->header('Referer')?:config('app.url');
+        if($app_id){
+            $officialAccount = EasyWeChat::officialAccount(); // 公众号
+            $sdk = $officialAccount->jssdk;
+            if ($url) {
+                $url = explode('#', $url)[0];
+                $sdk->setUrl($url);
+            }
+            $wxconfig_official = Option::get('wxconfig_official');
+            $wxconfig_official = $wxconfig_official ?  : [
+                'title' => config('app.name'),
+                'desc' => config('app.name'),
+                'imgUrl' => config('app.url').'/dist/img/logo1.png'
+            ];
+            try {
+                $data['wxconfig'] = $sdk->buildConfig([
+                    'updateAppMessageShareData',
+                    'updateTimelineShareData',
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage',
+                    'onMenuShareQQ',
+                    'onMenuShareWeibo',
+                    'onMenuShareQZone',
+                    'chooseWXPay'],  !!config('app.debug'), false, false);
+            } catch (\Exception $e) {
+                $data['wxconfig'] = [];
+                $data['wxconfig_error'] = $e->getMessage();
+                Log::channel('daily')->error($e->getMessage());
+            }
+        }else{
             $data['wxconfig'] = [];
-            $data['wxconfig_error'] = $e->getMessage();
-            Log::channel('daily')->error($e->getMessage());
+            $data['wxconfig_error'] = 'invalid appid';
         }
+
         $wxconfig_official['link'] = $url;
         $data['show'] = $wxconfig_official;
         return $data;

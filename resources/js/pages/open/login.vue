@@ -131,6 +131,12 @@
             }
         },
         methods:{
+            ...mapMutations({
+                setUser: 'user/set'
+            }),
+            ...mapActions({
+                getUser:'user/getUser', //获取用户数据
+            }),
             //微信公众号登录
             weChatLogin(){
                 let href = window.location.href;
@@ -164,12 +170,12 @@
                     setCookie('Authorization','Bearer '+res.data.token,res.data.lifetime/60/24);
                     if(res.data.user){
                         this.setUser({
-                            key:'loading',
-                            loading:false
-                        });
-                        this.setUser({
                             key:'user',
                             user:res.data.user
+                        });
+                        this.setUser({
+                            key:'loading',
+                            loading:false
                         });
                     }else {
                         this.getUser();
@@ -265,7 +271,11 @@
                     return;
                 }
                 this.loading = true;
-                axios.get(window.AppConfig['use_url']+this.$router.currentRoute.path).then( (response) =>{
+                let options = {};
+                if(typeof this.$route.query['back_url']!="undefined"){ //跳转url
+                    options['back_url'] = this.$route.query['back_url'];
+                }
+                axios.get(window.AppConfig['use_url']+this.$router.currentRoute.path,{params:options}).then( (response) =>{
                     if(response.data){
                         this.setData(response.data);
                         let query = this.$router.currentRoute.query;

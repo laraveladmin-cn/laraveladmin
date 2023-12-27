@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(UpdateFacadeCode::class);
         $this->call(ConfigTableSeeder::class); //系统配置安装
         $this->call(MenuTableSeeder::class); //菜单数据安装
         $this->call(RoleTableSeeder::class); //角色数据安装

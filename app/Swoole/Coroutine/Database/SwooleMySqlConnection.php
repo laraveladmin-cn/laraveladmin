@@ -170,6 +170,23 @@ class SwooleMySqlConnection extends BaseConnection
         return $this->$key;
     }
 
+    public function close(){
+        $pools = $this->read_pool;
+        if($pools){
+            $pools = is_array($pools)?$pools:[$pools];
+            foreach ($pools as $pool){
+                $pool->close();
+            }
+        }
+        $pools = $this->pool;
+        if($pools){
+            $pools = is_array($pools)?$pools:[$pools];
+            foreach ($pools as $pool){
+                $pool->close();
+            }
+        }
+    }
+
 
     /**
      * 获取连接池中的pdo
@@ -182,6 +199,7 @@ class SwooleMySqlConnection extends BaseConnection
         $cid = Coroutine::getCid();
         if(is_array($this->$key)){
             $keys = array_keys($this->$key);
+            mt_srand(); //重新播种
             $index = array_rand($keys); //随机获取连接池主机
             $pool = $this->$key[$index];
             $pdo = $pool->get();

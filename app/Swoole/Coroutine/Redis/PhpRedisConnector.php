@@ -15,12 +15,15 @@ class PhpRedisConnector extends BasePhpRedisConnector
      */
     public function connect(array $config, array $options)
     {
-        $connector = function () use ($config, $options) {
-            return $this->createClient(array_merge(
-                $config, $options, Arr::pull($config, 'options', [])
-            ));
+        $use_config = array_merge(
+            $config, $options, Arr::pull($config, 'options', [])
+        );
+        //swoole连接池暂时不支持前缀先去除前缀支持
+        unset($use_config['prefix']);
+        $connector = function () use ($use_config) {
+            return $this->createClient($use_config);
         };
-        return new PhpRedisConnection($connector(), $connector, $config);
+        return new PhpRedisConnection($connector(), $connector, $use_config);
     }
 
     /**
