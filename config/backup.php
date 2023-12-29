@@ -121,12 +121,12 @@ return [
     'notifications' => [
 
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => env('MAIL_USERNAME')?['mail']:[],
+            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => env('MAIL_USERNAME')?['mail']:[],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => env('MAIL_USERNAME')?['mail']:[],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => env('MAIL_USERNAME')?['mail']:[],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => env('MAIL_USERNAME')?['mail']:[],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => env('MAIL_USERNAME')?['mail']:[],
         ],
 
         /*
