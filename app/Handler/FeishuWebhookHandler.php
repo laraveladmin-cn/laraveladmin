@@ -91,10 +91,12 @@ class FeishuWebhookHandler extends AbstractProcessingHandler
             ]
         ];
         $sendCallBack = $this->sendCallBack();
-        if(Coroutine::getcid()>0){
+        if(class_exists('Swoole\\Coroutine') && Coroutine::getcid()>0){
             Coroutine\go($sendCallBack,$postData);
-        }else{
+        }elseif(php_sapi_name() === 'fpm-fcgi'){
             register_shutdown_function($sendCallBack,$postData);
+        }else{
+            $sendCallBack();
         }
     }
 
