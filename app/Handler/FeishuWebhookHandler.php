@@ -120,7 +120,12 @@ class FeishuWebhookHandler extends AbstractProcessingHandler
 
                 $data = json_decode($body, true);
                 if (Arr::get($data, 'StatusMessage') != 'success') {
-                    $error = ['action' => __METHOD__, 'post_data' => $postData, 'response' => $data];
+                    $error = [
+                        'action' => __METHOD__,
+                        'url'=>$this->webhookUrl,
+                        'post_data' => $postData,
+                        'response' => $data
+                    ];
                     Log::channel('daily')->error('FeishuBot sendMsg Exception',$error);
                 }
             } catch (GuzzleException $e) {

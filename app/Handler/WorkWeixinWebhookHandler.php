@@ -113,6 +113,8 @@ class WorkWeixinWebhookHandler extends AbstractProcessingHandler
                 if (Arr::get($data, 'errcode') !== 0) {
                     $error = [
                         'action' => __METHOD__,
+                        'url'=>$this->webhookUrl,
+                        'key'=>$this->token,
                         'post_data' => $postData,
                         'response' => $data?:$body
                     ];
