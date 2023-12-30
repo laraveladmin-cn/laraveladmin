@@ -484,12 +484,15 @@ where
             }
             if($decode){
                 $maps = collect($maps)->map(function ($map){
-                    $map = collect($map)->map(function ($val){
+                    $map = collect($map)->filter(function ($val){
+                        return is_numeric($val) || is_string($val) || is_bool($val);
+                    })->map(function ($val){
                         if(is_numeric($val)){
                             $val = (string)$val;
                         }
                         return $val;
-                    })->toArray();
+                    })
+                        ->toArray();
                     return array_flip($map);
                 })->toArray();
             }
