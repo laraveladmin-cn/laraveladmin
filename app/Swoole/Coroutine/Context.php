@@ -49,9 +49,9 @@ class Context extends BaseContext
      * @param string $key
      * @param $value
      */
-    public static function setData(string $key, $value)
+    public static function setData(string $key, $value,$is_cid=false)
     {
-        $cid = static::getRequestedCoroutineId();
+        $cid = $is_cid?static::getCoroutineId():static::getRequestedCoroutineId();
         if($cid>0 && !isset(static::$data[$cid])){
             Coroutine::defer(function ()use($cid){ //协程结束时释放数据
                 if(Coroutine::getuid()==$cid){ //主协程结束时释放数据
@@ -60,6 +60,19 @@ class Context extends BaseContext
             });
         }
         static::$data[$cid][$key] = $value;
+    }
+
+    /**
+     * Get data by current coroutine id.
+     *
+     * @param string $key
+     *
+     * @return mixed|null
+     */
+    public static function getData(string $key,$is_cid=false)
+    {
+        $key_index = $is_cid?static::getCoroutineId():static::getRequestedCoroutineId();
+        return static::$data[$key_index][$key] ?? null;
     }
     /**
      * Set app container by current coroutine id.
@@ -91,7 +104,7 @@ class Context extends BaseContext
             if(in_array($abstract,$base_instances)){
                 $new_object = BaseContext::getData($key);
             }else{
-                $new_object = static::getData($key);
+                $new_object = static::getData($key,true)?:static::getData($key);
             }
             if(!$new_object){
                 //$new_object = clone $object;
