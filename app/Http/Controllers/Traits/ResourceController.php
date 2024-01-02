@@ -278,7 +278,9 @@ trait ResourceController
         $allow_order = $allow_order ? ':' . $allow_order : '';
         $validate_rules = [
             'where' => 'sometimes|nullable|array',
-            'order' => 'sometimes|nullable|array|array_keys_in_array' . $allow_order
+            'order' => 'sometimes|nullable|array|array_keys_in_array' . $allow_order,
+            'page'=>'sometimes|integer|min:0',
+            'per_page'=>'sometimes|integer|min:0'
         ];
         $order = Request::input('order', []);
         if ($order && is_array($order)) {
