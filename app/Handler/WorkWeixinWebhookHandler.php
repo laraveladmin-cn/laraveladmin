@@ -85,7 +85,7 @@ class WorkWeixinWebhookHandler extends AbstractProcessingHandler
         }elseif(php_sapi_name() === 'fpm-fcgi'){
             register_shutdown_function($sendCallBack,$postData);
         }else{
-            $sendCallBack();
+            $sendCallBack($postData);
         }
     }
 
