@@ -18,7 +18,7 @@ class ExcludeTopScope implements Scope
    public function apply(Builder $builder, Model $model)
    {
        $level_key = $model->getAttribute('level_key')?: 'level' ;
-       $builder->where($level_key,'>',1);
+       $builder->where($model->getTable().'.'.$level_key,'>',1);
    }
 
 

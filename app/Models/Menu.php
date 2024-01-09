@@ -7,6 +7,7 @@ use App\Facades\LifeData;
 use App\Http\Kernel;
 use App\Models\Traits\ExcludeTop;
 use App\Models\Traits\TreeModel;
+use App\Models\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -147,10 +148,10 @@ class Menu extends Model
 
     protected $table = 'menus'; //数据表Name
     //软删除,树状结构
-    use SoftDeletes,TreeModel,ExcludeTop,BaseModel;
-    protected $openRoot = [4]; //游客访问
-    protected $homeRoot = [3]; //登录用户
-    protected $adminRoot = [2]; //后台菜单
+    use SoftDeletes,TreeModel,ExcludeTop,BaseModel,UsesUuid;
+    protected $openRoot = ['ab447afa-ae00-11ee-9216-0242c0a80002']; //游客访问
+    protected $homeRoot = ['ab447a45-ae00-11ee-9216-0242c0a80002']; //登录用户
+    protected $adminRoot = ['ab447376-ae00-11ee-9216-0242c0a80002']; //后台菜单
     protected $itemName='菜单';
     //批量赋值白名单
     protected $fillable = [

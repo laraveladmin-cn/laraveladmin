@@ -395,7 +395,9 @@ where
     and
     c.relname = '$trueTable'";
         }else{
-            dd('暂不支持该数据库:'.$driver);
+            throw new \RuntimeException(
+                '暂不支持该数据库:'.$driver
+            );
         }
 
         //数据表类型
