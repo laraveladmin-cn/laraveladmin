@@ -1,7 +1,7 @@
 {
     "menus": [
         {
-            "id": 3,
+            "id": "d423c27b-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "主页",
             "params": [],
             "body_params": [],
@@ -9,7 +9,7 @@
             "route_params": []
         },
         {
-            "id": 5,
+            "id": "d423c34b-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "后台主页",
             "params": [],
             "body_params": [],
@@ -50,7 +50,7 @@
             "route_params": []
         },
         {
-            "id": 9,
+            "id": "d423c518-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "普通用户",
             "params": [
                 {
@@ -280,7 +280,7 @@
             "route_params": []
         },
         {
-            "id": 10,
+            "id": "d423c6a6-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "普通用户分页",
             "params": [
                 {
@@ -414,7 +414,7 @@
             "route_params": []
         },
         {
-            "id": 11,
+            "id": "d423c707-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导出普通用户",
             "params": [
                 {
@@ -548,7 +548,7 @@
             "route_params": []
         },
         {
-            "id": 12,
+            "id": "d423c765-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导入普通用户",
             "params": [],
             "body_params": [],
@@ -556,7 +556,7 @@
             "route_params": []
         },
         {
-            "id": 13,
+            "id": "d423c7c3-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "编辑查看普通用户",
             "params": [],
             "body_params": [],
@@ -630,7 +630,7 @@
             ]
         },
         {
-            "id": 14,
+            "id": "d423c938-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "创建普通用户",
             "params": [],
             "body_params": [],
@@ -638,7 +638,7 @@
             "route_params": []
         },
         {
-            "id": 15,
+            "id": "d423c99a-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "更新普通用户",
             "params": [],
             "body_params": [],
@@ -646,7 +646,7 @@
             "route_params": []
         },
         {
-            "id": 16,
+            "id": "d423ccc4-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "删除普通用户",
             "params": [],
             "body_params": [
@@ -663,7 +663,7 @@
             "route_params": []
         },
         {
-            "id": 17,
+            "id": "d423ce68-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "权限管理",
             "params": [
                 {
@@ -849,7 +849,7 @@
             "route_params": []
         },
         {
-            "id": 18,
+            "id": "d423d002-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "角色分页",
             "params": [
                 {
@@ -951,7 +951,7 @@
             "route_params": []
         },
         {
-            "id": 19,
+            "id": "d423ed0f-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导出角色",
             "params": [
                 {
@@ -1041,7 +1041,7 @@
             "route_params": []
         },
         {
-            "id": 20,
+            "id": "d423eda6-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导入角色",
             "params": [],
             "body_params": [],
@@ -1049,7 +1049,7 @@
             "route_params": []
         },
         {
-            "id": 21,
+            "id": "d423ee15-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "编辑查看角色",
             "params": [],
             "body_params": [],
@@ -1359,7 +1359,7 @@
             ]
         },
         {
-            "id": 22,
+            "id": "d423ee79-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "创建角色",
             "params": [],
             "body_params": [],
@@ -1367,7 +1367,7 @@
             "route_params": []
         },
         {
-            "id": 23,
+            "id": "d423eed8-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "更新角色",
             "params": [],
             "body_params": [],
@@ -1375,7 +1375,7 @@
             "route_params": []
         },
         {
-            "id": 24,
+            "id": "d423ef34-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "删除角色",
             "params": [],
             "body_params": [
@@ -1392,7 +1392,7 @@
             "route_params": []
         },
         {
-            "id": 25,
+            "id": "d423ef92-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "操作日志",
             "params": [
                 {
@@ -2054,7 +2054,7 @@
             "route_params": []
         },
         {
-            "id": 26,
+            "id": "d423eff1-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "日志分页",
             "params": [
                 {
@@ -2220,7 +2220,7 @@
             "route_params": []
         },
         {
-            "id": 27,
+            "id": "d423f04d-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导出日志",
             "params": [
                 {
@@ -2330,7 +2330,7 @@
             "route_params": []
         },
         {
-            "id": 28,
+            "id": "d423f0cb-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导入日志",
             "params": [],
             "body_params": [],
@@ -2338,7 +2338,7 @@
             "route_params": []
         },
         {
-            "id": 29,
+            "id": "d423f129-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "编辑查看日志",
             "params": [],
             "body_params": [],
@@ -2648,7 +2648,7 @@
             ]
         },
         {
-            "id": 30,
+            "id": "d423f187-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "创建日志",
             "params": [],
             "body_params": [],
@@ -2656,7 +2656,7 @@
             "route_params": []
         },
         {
-            "id": 31,
+            "id": "d423f278-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "更新日志",
             "params": [],
             "body_params": [],
@@ -2664,7 +2664,7 @@
             "route_params": []
         },
         {
-            "id": 32,
+            "id": "d423f2e0-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "删除日志",
             "params": [],
             "body_params": [
@@ -2681,7 +2681,7 @@
             "route_params": []
         },
         {
-            "id": 33,
+            "id": "d423f384-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "后台用户",
             "params": [
                 {
@@ -2935,7 +2935,7 @@
             "route_params": []
         },
         {
-            "id": 34,
+            "id": "d423f3e8-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "后台用户分页",
             "params": [
                 {
@@ -3073,7 +3073,7 @@
             "route_params": []
         },
         {
-            "id": 35,
+            "id": "d423f446-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导出后台用户",
             "params": [
                 {
@@ -3175,7 +3175,7 @@
             "route_params": []
         },
         {
-            "id": 36,
+            "id": "d423f4a3-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导入后台用户",
             "params": [],
             "body_params": [],
@@ -3183,7 +3183,7 @@
             "route_params": []
         },
         {
-            "id": 37,
+            "id": "d423f4fd-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "编辑查看后台用户",
             "params": [],
             "body_params": [],
@@ -3305,7 +3305,7 @@
             ]
         },
         {
-            "id": 38,
+            "id": "d423f55a-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "创建后台用户",
             "params": [],
             "body_params": [],
@@ -3313,7 +3313,7 @@
             "route_params": []
         },
         {
-            "id": 39,
+            "id": "d423f5b4-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "更新后台用户",
             "params": [],
             "body_params": [],
@@ -3321,7 +3321,7 @@
             "route_params": []
         },
         {
-            "id": 40,
+            "id": "d423f613-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "删除后台用户",
             "params": [],
             "body_params": [
@@ -3338,7 +3338,7 @@
             "route_params": []
         },
         {
-            "id": 41,
+            "id": "d423f66d-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "菜单设置",
             "params": [
                 {
@@ -3972,7 +3972,7 @@
             "route_params": []
         },
         {
-            "id": 42,
+            "id": "d423f6e5-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "菜单分页",
             "params": [
                 {
@@ -4122,7 +4122,7 @@
             "route_params": []
         },
         {
-            "id": 43,
+            "id": "d423f744-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导出菜单",
             "params": [
                 {
@@ -4260,7 +4260,7 @@
             "route_params": []
         },
         {
-            "id": 44,
+            "id": "d423f7a2-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导入菜单",
             "params": [],
             "body_params": [],
@@ -4268,7 +4268,7 @@
             "route_params": []
         },
         {
-            "id": 45,
+            "id": "d423f7ff-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "编辑查看菜单",
             "params": [],
             "body_params": [],
@@ -5046,7 +5046,7 @@
             ]
         },
         {
-            "id": 46,
+            "id": "d423f85c-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "创建菜单",
             "params": [],
             "body_params": [],
@@ -5054,7 +5054,7 @@
             "route_params": []
         },
         {
-            "id": 47,
+            "id": "d423f8b7-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "更新菜单",
             "params": [],
             "body_params": [],
@@ -5062,7 +5062,7 @@
             "route_params": []
         },
         {
-            "id": 48,
+            "id": "d423f918-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "删除菜单",
             "params": [],
             "body_params": [
@@ -5079,7 +5079,7 @@
             "route_params": []
         },
         {
-            "id": 49,
+            "id": "d423f9af-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "系统设置",
             "params": [
                 {
@@ -5245,7 +5245,7 @@
             "route_params": []
         },
         {
-            "id": 50,
+            "id": "d423fa38-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "系统设置分页",
             "params": [
                 {
@@ -5323,7 +5323,7 @@
             "route_params": []
         },
         {
-            "id": 51,
+            "id": "d423fab5-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导出系统设置",
             "params": [
                 {
@@ -5405,7 +5405,7 @@
             "route_params": []
         },
         {
-            "id": 52,
+            "id": "d423fb46-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "导入系统设置",
             "params": [],
             "body_params": [],
@@ -5413,7 +5413,7 @@
             "route_params": []
         },
         {
-            "id": 53,
+            "id": "d423fbc2-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "编辑查看系统设置",
             "params": [],
             "body_params": [],
@@ -5507,7 +5507,7 @@
             ]
         },
         {
-            "id": 54,
+            "id": "d423fc21-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "创建系统设置",
             "params": [],
             "body_params": [],
@@ -5515,7 +5515,7 @@
             "route_params": []
         },
         {
-            "id": 55,
+            "id": "d423fc7d-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "更新系统设置",
             "params": [],
             "body_params": [],
@@ -5523,7 +5523,7 @@
             "route_params": []
         },
         {
-            "id": 56,
+            "id": "d423fcd6-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "删除系统设置",
             "params": [],
             "body_params": [
@@ -5540,7 +5540,7 @@
             "route_params": []
         },
         {
-            "id": 57,
+            "id": "d423fd33-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "个人资料",
             "params": [],
             "body_params": [],
@@ -5649,7 +5649,7 @@
             "route_params": []
         },
         {
-            "id": 58,
+            "id": "d423fd8c-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "提交编辑修改个人资料",
             "params": [],
             "body_params": [],
@@ -5657,7 +5657,7 @@
             "route_params": []
         },
         {
-            "id": 59,
+            "id": "d423fdea-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "修改密码",
             "params": [],
             "body_params": [],
@@ -5738,7 +5738,7 @@
             "route_params": []
         },
         {
-            "id": 60,
+            "id": "d423fe45-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "提交编辑修改密码",
             "params": [],
             "body_params": [],
@@ -5746,7 +5746,7 @@
             "route_params": []
         },
         {
-            "id": 61,
+            "id": "d423fea3-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "获取配置信息",
             "params": [],
             "body_params": [],
@@ -5859,7 +5859,7 @@
             "route_params": []
         },
         {
-            "id": 62,
+            "id": "d423fefe-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "更新token",
             "params": [],
             "body_params": [],
@@ -5872,7 +5872,7 @@
             "route_params": []
         },
         {
-            "id": 63,
+            "id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "登录页面",
             "params": [],
             "body_params": [],
@@ -5905,7 +5905,7 @@
             "route_params": []
         },
         {
-            "id": 64,
+            "id": "d4240001-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "提交登录",
             "params": [],
             "body_params": [],
@@ -5913,7 +5913,7 @@
             "route_params": []
         },
         {
-            "id": 65,
+            "id": "d424005c-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "退出登录",
             "params": [],
             "body_params": [],
@@ -5921,7 +5921,7 @@
             "route_params": []
         },
         {
-            "id": 66,
+            "id": "d42400b8-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "注册页面",
             "params": [],
             "body_params": [],
@@ -5929,7 +5929,7 @@
             "route_params": []
         },
         {
-            "id": 67,
+            "id": "d4240113-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "发送注册短信",
             "params": [],
             "body_params": [],
@@ -5937,7 +5937,7 @@
             "route_params": []
         },
         {
-            "id": 68,
+            "id": "d424016a-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "提交注册",
             "params": [],
             "body_params": [],
@@ -5945,7 +5945,7 @@
             "route_params": []
         },
         {
-            "id": 69,
+            "id": "d42401c3-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "忘记页面",
             "params": [],
             "body_params": [],
@@ -5953,7 +5953,7 @@
             "route_params": []
         },
         {
-            "id": 70,
+            "id": "d424021a-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "忘记密码邮件发送",
             "params": [],
             "body_params": [],
@@ -5961,7 +5961,7 @@
             "route_params": []
         },
         {
-            "id": 71,
+            "id": "d4240273-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "忘记密码短信发送",
             "params": [],
             "body_params": [],
@@ -5969,7 +5969,7 @@
             "route_params": []
         },
         {
-            "id": 72,
+            "id": "d42402cc-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "忘记密码提交重置密码",
             "params": [],
             "body_params": [],
@@ -5977,7 +5977,7 @@
             "route_params": []
         },
         {
-            "id": 73,
+            "id": "d4240327-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "获取用户信息",
             "params": [],
             "body_params": [],
@@ -6134,7 +6134,7 @@
             "route_params": []
         },
         {
-            "id": 74,
+            "id": "d4240380-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "获取菜单信息",
             "params": [],
             "body_params": [],
@@ -6211,7 +6211,7 @@
             "route_params": []
         },
         {
-            "id": 75,
+            "id": "d42403e7-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "极验验证",
             "params": [],
             "body_params": [],
@@ -6219,7 +6219,7 @@
             "route_params": []
         },
         {
-            "id": 78,
+            "id": "d42404f6-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "提交编辑修改密码",
             "params": [],
             "body_params": [],
@@ -6227,7 +6227,7 @@
             "route_params": []
         },
         {
-            "id": 79,
+            "id": "d4240550-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "获取连接唯一标识",
             "params": [],
             "body_params": [],
@@ -6240,7 +6240,7 @@
             "route_params": []
         },
         {
-            "id": 81,
+            "id": "d42406ab-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "个人资料",
             "params": [],
             "body_params": [],
@@ -6413,7 +6413,7 @@
             "route_params": []
         },
         {
-            "id": 82,
+            "id": "d4240701-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "提交编辑修改个人资料",
             "params": [],
             "body_params": [],
@@ -6421,7 +6421,7 @@
             "route_params": []
         },
         {
-            "id": 83,
+            "id": "d4240757-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "文件上传",
             "params": [],
             "body_params": [],
@@ -6429,7 +6429,7 @@
             "route_params": []
         },
         {
-            "id": 84,
+            "id": "d42407ae-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "开发辅助",
             "params": [],
             "body_params": [],
@@ -6578,7 +6578,7 @@
             "route_params": []
         },
         {
-            "id": 85,
+            "id": "d424080a-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "编辑页面布局保存",
             "params": [],
             "body_params": [],
@@ -6586,7 +6586,7 @@
             "route_params": []
         },
         {
-            "id": 86,
+            "id": "d4240860-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "数据表查询",
             "params": [],
             "body_params": [],
@@ -6683,7 +6683,7 @@
             "route_params": []
         },
         {
-            "id": 87,
+            "id": "d42408b5-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "命令执行",
             "params": [],
             "body_params": [],
@@ -6691,7 +6691,7 @@
             "route_params": []
         },
         {
-            "id": 88,
+            "id": "d424090a-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "菜单拖拽",
             "params": [],
             "body_params": [],
@@ -6764,7 +6764,7 @@
             "route_params": []
         },
         {
-            "id": 89,
+            "id": "d424095f-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "提交菜单位置修改",
             "params": [],
             "body_params": [],
@@ -6772,7 +6772,7 @@
             "route_params": []
         },
         {
-            "id": 90,
+            "id": "d42409b6-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "日志文件",
             "params": [
                 {
@@ -6826,7 +6826,7 @@
             "route_params": []
         },
         {
-            "id": 91,
+            "id": "d4240a0c-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "七牛云TOKEN",
             "params": [],
             "body_params": [],

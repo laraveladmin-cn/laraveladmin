@@ -1,7 +1,7 @@
 {
     "menus": [
         {
-            "id": 63,
+            "id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "登录页面",
             "params": [],
             "body_params": [],
@@ -33,7 +33,7 @@
             ]
         },
         {
-            "id": 64,
+            "id": "d4240001-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "提交登录",
             "params": [],
             "body_params": [
@@ -118,7 +118,7 @@
             ]
         },
         {
-            "id": 62,
+            "id": "d423fefe-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "更新token",
             "params": [],
             "body_params": [],
@@ -130,7 +130,7 @@
             ]
         },
         {
-            "id": 61,
+            "id": "d423fea3-aed7-11ee-9216-0242c0a80002",
             "_trans_name": "获取配置信息",
             "params": [],
             "body_params": [],

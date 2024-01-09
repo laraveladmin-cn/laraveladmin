@@ -151,9 +151,9 @@ class Menu extends Model
     use SoftDeletes,TreeModel,ExcludeTop,BaseModel,UsesUuid;
 
     public $incrementing = false;
-    protected $openRoot = ['ab447afa-ae00-11ee-9216-0242c0a80002']; //游客访问
-    protected $homeRoot = ['ab447a45-ae00-11ee-9216-0242c0a80002']; //登录用户
-    protected $adminRoot = ['ab447376-ae00-11ee-9216-0242c0a80002']; //后台菜单
+    protected $openRoot = ['d423c2e2-aed7-11ee-9216-0242c0a80002']; //游客访问
+    protected $homeRoot = ['d423c27b-aed7-11ee-9216-0242c0a80002']; //登录用户
+    protected $adminRoot = ['d423c1f1-aed7-11ee-9216-0242c0a80002']; //后台菜单
     protected $itemName='菜单';
     //批量赋值白名单
     protected $fillable = [

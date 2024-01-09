@@ -14,6 +14,7 @@ use \App\Models\MenuRole;
 class AlertMenusUuidTable extends Migration
 {
 
+    protected $menu_table = 'menus';
 
     /**
      * Run the migrations.
@@ -22,6 +23,7 @@ class AlertMenusUuidTable extends Migration
      */
     public function up()
     {
+        $this->menu_table = Menu::query()->getModel()->getTable();
         //dd(11);
         //return ;
         $id_info = collect(
@@ -33,7 +35,7 @@ class AlertMenusUuidTable extends Migration
         if(\Illuminate\Support\Str::startsWith($type,'char')){
             return;
         }
-        Schema::table('menus', function (Blueprint $table) {
+        Schema::table($this->menu_table, function (Blueprint $table) {
             $table->uuid('uuid')
                 ->default('')
                 ->comment('ID');
@@ -189,8 +191,9 @@ class AlertMenusUuidTable extends Migration
                     ->map(function ($menu)use ($fields){
                         foreach ($fields as $field){
                             if(isset($menu[$field]) && is_numeric($menu[$field])){
-                                $uuid = Menu::query()
-                                    ->where('id',$menu[$field])
+                                $id = $menu[$field];
+                                $uuid = $id==1?DB::table($this->menu_table)->where('id',$id)->value('uuid'):Menu::query()
+                                    ->where('id',$id)
                                     ->value('uuid');
                                 if($uuid){
                                     $menu[$field] = $uuid;
@@ -206,8 +209,9 @@ class AlertMenusUuidTable extends Migration
                     ->map(function ($menu)use ($fields){
                         foreach ($fields as $field){
                             if(isset($menu[$field]) && is_numeric($menu[$field])){
-                               $uuid = Menu::query()
-                                    ->where('id',$menu[$field])
+                                $id = $menu[$field];
+                               $uuid = $id==1?DB::table($this->menu_table)->where('id',$id)->value('uuid'):Menu::query()
+                                    ->where('id',$id)
                                     ->value('uuid');
                                 if($uuid){
                                     $menu[$field] = $uuid;
@@ -218,8 +222,9 @@ class AlertMenusUuidTable extends Migration
                             $menu['options']['only'] = collect($menu['options']['only'])
                                 ->map(function ($item){
                                     if(isset($item['id']) && is_numeric($item['id'])){
-                                        $uuid = Menu::query()
-                                            ->where('id',$item['id'])
+                                        $id = $item['id'];
+                                        $uuid = $id==1?DB::table($this->menu_table)->where('id',$id)->value('uuid'):Menu::query()
+                                            ->where('id',$id)
                                             ->value('uuid');
                                         if($uuid){
                                             $item['id'] = $uuid;

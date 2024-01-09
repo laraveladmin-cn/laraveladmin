@@ -27,30 +27,30 @@
     },
     "menus": [
         {
-            "id": 1,
+            "id": "d423bb07-aed7-11ee-9216-0242c0a80002",
             "name": "Menu list",
             "description": "Root node, the parent node of all menus",
             "method": [],
             "_id": 1
         },
         {
-            "id": 2,
+            "id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
             "name": "Operate",
             "icons": "fa-dashboard",
             "description": "Operation module",
             "url": "/admin/index",
-            "parent_id": 1,
+            "parent_id": "d423bb07-aed7-11ee-9216-0242c0a80002",
             "method": [],
             "status": "Display",
             "_id": 2
         },
         {
-            "id": 5,
+            "id": "d423c34b-aed7-11ee-9216-0242c0a80002",
             "name": "Backstage home page",
             "icons": "fa-home",
             "description": "Backstage home page",
             "url": "/admin/index",
-            "parent_id": 2,
+            "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -60,11 +60,11 @@
             "_id": 3
         },
         {
-            "id": 80,
+            "id": "d4240653-aed7-11ee-9216-0242c0a80002",
             "name": "Error log Download",
             "description": "Error log Download",
             "url": "/admin/down-log",
-            "parent_id": 5,
+            "parent_id": "d423c34b-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -76,32 +76,32 @@
             "_id": 4
         },
         {
-            "id": 6,
+            "id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
             "name": "User management",
             "icons": "fa-users",
             "description": "User management group",
-            "parent_id": 2,
+            "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
             "method": [],
             "status": "Display",
             "_id": 5
         },
         {
-            "id": 7,
+            "id": "d423c408-aed7-11ee-9216-0242c0a80002",
             "name": "Other settings",
             "icons": "fa-gears",
             "description": "Other settings group",
-            "parent_id": 2,
+            "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
             "method": [],
             "status": "Display",
             "_id": 38
         },
         {
-            "id": 88,
+            "id": "d424090a-aed7-11ee-9216-0242c0a80002",
             "name": "Menu drag",
             "icons": "fa-mouse-pointer",
             "description": "Menu drag page data",
             "url": "/admin/menus/tree",
-            "parent_id": 41,
+            "parent_id": "d423f66d-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -110,12 +110,12 @@
             "_id": 47
         },
         {
-            "id": 89,
+            "id": "d424095f-aed7-11ee-9216-0242c0a80002",
             "name": "Submit menu location modification",
             "icons": "fa-edit",
             "description": "Submit menu location modification",
             "url": "/admin/menus/update-position",
-            "parent_id": 88,
+            "parent_id": "d424090a-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -125,12 +125,12 @@
             "_id": 48
         },
         {
-            "id": 84,
+            "id": "d42407ae-aed7-11ee-9216-0242c0a80002",
             "name": "Development assistance",
             "icons": "fa-wrench",
             "description": "Development assistant function page",
             "url": "/admin/developments/index",
-            "parent_id": 7,
+            "parent_id": "d423c408-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -142,12 +142,12 @@
             "_id": 57
         },
         {
-            "id": 85,
+            "id": "d424080a-aed7-11ee-9216-0242c0a80002",
             "name": "Edit page layout save",
             "icons": "fa-save",
             "description": "Submit edit page layout save",
             "url": "/admin/developments/layout",
-            "parent_id": 84,
+            "parent_id": "d42407ae-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -157,12 +157,12 @@
             "_id": 58
         },
         {
-            "id": 86,
+            "id": "d4240860-aed7-11ee-9216-0242c0a80002",
             "name": "Data table query",
             "icons": "fa-table",
             "description": "Data table name association query",
             "url": "/admin/developments/tables",
-            "parent_id": 84,
+            "parent_id": "d42407ae-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -172,12 +172,12 @@
             "_id": 59
         },
         {
-            "id": 87,
+            "id": "d42408b5-aed7-11ee-9216-0242c0a80002",
             "name": "Command execution",
             "icons": "fa-code",
             "description": "Submit the command for execution",
             "url": "/admin/developments/command",
-            "parent_id": 84,
+            "parent_id": "d42407ae-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -187,12 +187,12 @@
             "_id": 60
         },
         {
-            "id": 90,
+            "id": "d42409b6-aed7-11ee-9216-0242c0a80002",
             "name": "Log file",
             "icons": "fa-file",
             "description": "System log file",
             "url": "/admin/file-log/index",
-            "parent_id": 7,
+            "parent_id": "d423c408-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -203,22 +203,22 @@
             "_id": 61
         },
         {
-            "id": 8,
+            "id": "d423c4b3-aed7-11ee-9216-0242c0a80002",
             "name": "Personal Center",
             "icons": "fa-user",
             "description": "Personal Center Group",
-            "parent_id": 2,
+            "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
             "method": [],
             "status": "Display",
             "_id": 62
         },
         {
-            "id": 57,
+            "id": "d423fd33-aed7-11ee-9216-0242c0a80002",
             "name": "Personal data",
             "icons": "fa-heart",
             "description": "Personal data",
             "url": "/admin/personage/index",
-            "parent_id": 8,
+            "parent_id": "d423c4b3-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -228,12 +228,12 @@
             "_id": 63
         },
         {
-            "id": 58,
+            "id": "d423fd8c-aed7-11ee-9216-0242c0a80002",
             "name": "Submit and edit personal data",
             "icons": "fa-heart",
             "description": "Submit and edit personal data",
             "url": "/admin/personage/index",
-            "parent_id": 57,
+            "parent_id": "d423fd33-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -242,12 +242,12 @@
             "_id": 64
         },
         {
-            "id": 59,
+            "id": "d423fdea-aed7-11ee-9216-0242c0a80002",
             "name": "Change Password",
             "icons": "fa-lock",
             "description": "Change Password",
             "url": "/admin/personage/password",
-            "parent_id": 8,
+            "parent_id": "d423c4b3-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -257,12 +257,12 @@
             "_id": 65
         },
         {
-            "id": 60,
+            "id": "d423fe45-aed7-11ee-9216-0242c0a80002",
             "name": "Submit to edit to change password",
             "icons": "fa-lock",
             "description": "Submit to edit to change password",
             "url": "/admin/personage/password",
-            "parent_id": 59,
+            "parent_id": "d423fdea-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "put"
             ],
@@ -271,12 +271,12 @@
             "_id": 66
         },
         {
-            "id": 3,
+            "id": "d423c27b-aed7-11ee-9216-0242c0a80002",
             "name": "Homepage",
             "icons": "fa-user",
             "description": "Home module",
             "url": "/home/index",
-            "parent_id": 1,
+            "parent_id": "d423bb07-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -286,12 +286,12 @@
             "_id": 67
         },
         {
-            "id": 78,
+            "id": "d42404f6-aed7-11ee-9216-0242c0a80002",
             "name": "Submit to edit to change password",
             "icons": "fa-lock",
             "description": "Submit to edit to change password",
             "url": "/home/personage/password",
-            "parent_id": 3,
+            "parent_id": "d423c27b-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "put"
             ],
@@ -300,12 +300,12 @@
             "_id": 68
         },
         {
-            "id": 81,
+            "id": "d42406ab-aed7-11ee-9216-0242c0a80002",
             "name": "Personal data",
             "icons": "fa-heart",
             "description": "Personal data",
             "url": "/home/personage/index",
-            "parent_id": 3,
+            "parent_id": "d423c27b-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -315,12 +315,12 @@
             "_id": 69
         },
         {
-            "id": 82,
+            "id": "d4240701-aed7-11ee-9216-0242c0a80002",
             "name": "Submit and edit personal data",
             "icons": "fa-lock",
             "description": "Submit to edit to change password",
             "url": "/home/personage/index",
-            "parent_id": 81,
+            "parent_id": "d42406ab-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -329,12 +329,12 @@
             "_id": 70
         },
         {
-            "id": 83,
+            "id": "d4240757-aed7-11ee-9216-0242c0a80002",
             "name": "File upload",
             "icons": "fa-upload",
             "description": "File upload",
             "url": "/home/upload/index",
-            "parent_id": 3,
+            "parent_id": "d423c27b-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -343,12 +343,12 @@
             "_id": 71
         },
         {
-            "id": 4,
+            "id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "name": "Official website",
             "icons": "fa-home",
             "description": "Official website module",
             "url": "/open/index",
-            "parent_id": 1,
+            "parent_id": "d423bb07-aed7-11ee-9216-0242c0a80002",
             "method": [],
             "is_page": "Yes",
             "status": "Display",
@@ -356,11 +356,11 @@
             "_id": 72
         },
         {
-            "id": 61,
+            "id": "d423fea3-aed7-11ee-9216-0242c0a80002",
             "name": "Get configuration information",
             "description": "Get configuration information",
             "url": "/open/config",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -369,11 +369,11 @@
             "_id": 73
         },
         {
-            "id": 62,
+            "id": "d423fefe-aed7-11ee-9216-0242c0a80002",
             "name": "Update token",
             "description": "Get configuration information",
             "url": "/open/token",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -385,11 +385,11 @@
             "_id": 74
         },
         {
-            "id": 63,
+            "id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
             "name": "Login page",
             "description": "Login page",
             "url": "/open/login",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -400,11 +400,11 @@
             "_id": 75
         },
         {
-            "id": 64,
+            "id": "d4240001-aed7-11ee-9216-0242c0a80002",
             "name": "Submit login",
             "description": "Submit login",
             "url": "/open/login",
-            "parent_id": 63,
+            "parent_id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -420,11 +420,11 @@
             "_id": 76
         },
         {
-            "id": 76,
+            "id": "d424043f-aed7-11ee-9216-0242c0a80002",
             "name": "Three party login",
             "description": "Three party login",
             "url": "/open/other-login/{type}",
-            "parent_id": 63,
+            "parent_id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -436,11 +436,11 @@
             "_id": 77
         },
         {
-            "id": 77,
+            "id": "d4240498-aed7-11ee-9216-0242c0a80002",
             "name": "Callback after three party login",
             "description": "Three party login",
             "url": "/open/other-login-callback/{type}",
-            "parent_id": 76,
+            "parent_id": "d424043f-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -456,11 +456,11 @@
             "_id": 78
         },
         {
-            "id": 65,
+            "id": "d424005c-aed7-11ee-9216-0242c0a80002",
             "name": "Log out",
             "description": "Log out",
             "url": "/open/logout",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -474,11 +474,11 @@
             "_id": 79
         },
         {
-            "id": 66,
+            "id": "d42400b8-aed7-11ee-9216-0242c0a80002",
             "name": "Registration page",
             "description": "Registration page",
             "url": "/open/register",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -488,11 +488,11 @@
             "_id": 80
         },
         {
-            "id": 67,
+            "id": "d4240113-aed7-11ee-9216-0242c0a80002",
             "name": "Send sign up SMS",
             "description": "Send sign up SMS",
             "url": "/open/register/send",
-            "parent_id": 66,
+            "parent_id": "d42400b8-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -505,11 +505,11 @@
             "_id": 81
         },
         {
-            "id": 68,
+            "id": "d424016a-aed7-11ee-9216-0242c0a80002",
             "name": "Submit for registration",
             "description": "Submit for registration",
             "url": "/open/register",
-            "parent_id": 66,
+            "parent_id": "d42400b8-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -522,11 +522,11 @@
             "_id": 82
         },
         {
-            "id": 69,
+            "id": "d42401c3-aed7-11ee-9216-0242c0a80002",
             "name": "Forget page",
             "description": "Forget page",
             "url": "/open/password",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -536,11 +536,11 @@
             "_id": 83
         },
         {
-            "id": 70,
+            "id": "d424021a-aed7-11ee-9216-0242c0a80002",
             "name": "Forget password email",
             "description": "Forget password email",
             "url": "/open/forgot-password/send",
-            "parent_id": 69,
+            "parent_id": "d42401c3-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -549,11 +549,11 @@
             "_id": 84
         },
         {
-            "id": 71,
+            "id": "d4240273-aed7-11ee-9216-0242c0a80002",
             "name": "Forget password SMS sending",
             "description": "Forget password SMS sending",
             "url": "/open/forgot-password/send-sms",
-            "parent_id": 69,
+            "parent_id": "d42401c3-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -562,11 +562,11 @@
             "_id": 85
         },
         {
-            "id": 72,
+            "id": "d42402cc-aed7-11ee-9216-0242c0a80002",
             "name": "Forget password submit reset password",
             "description": "Forget password submit reset password",
             "url": "/open/forgot-password/reset-password",
-            "parent_id": 69,
+            "parent_id": "d42401c3-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "post"
             ],
@@ -574,11 +574,11 @@
             "_id": 86
         },
         {
-            "id": 73,
+            "id": "d4240327-aed7-11ee-9216-0242c0a80002",
             "name": "Get user information",
             "description": "Get user information",
             "url": "/open/user",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -587,11 +587,11 @@
             "_id": 87
         },
         {
-            "id": 74,
+            "id": "d4240380-aed7-11ee-9216-0242c0a80002",
             "name": "Get menu information",
             "description": "Get menu information",
             "url": "/open/menu",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -600,12 +600,12 @@
             "_id": 88
         },
         {
-            "id": 92,
+            "id": "d4241b9d-aed7-11ee-9216-0242c0a80002",
             "name": "Get single menu details",
             "icons": "fa-edit",
             "description": "Menu details",
             "url": "/open/menu-info",
-            "parent_id": 74,
+            "parent_id": "d4240380-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -614,11 +614,11 @@
             "_id": 89
         },
         {
-            "id": 75,
+            "id": "d42403e7-aed7-11ee-9216-0242c0a80002",
             "name": "Polar verification",
             "description": "Polar verification",
             "url": "/open/geetest",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -631,11 +631,11 @@
             "_id": 90
         },
         {
-            "id": 79,
+            "id": "d4240550-aed7-11ee-9216-0242c0a80002",
             "name": "Get the unique identity of the connection",
             "description": "Get the unique identity of the connection",
             "url": "/open/client-id",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -644,12 +644,12 @@
             "_id": 91
         },
         {
-            "id": 91,
+            "id": "d4240a0c-aed7-11ee-9216-0242c0a80002",
             "name": "Seven cattle cloud token",
             "icons": "fa-cloud-upload",
             "description": "Seven cattle cloud upload token to get",
             "url": "/open/qi-niu/token",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -658,12 +658,12 @@
             "_id": 92
         },
         {
-            "id": 93,
+            "id": "d4241c4b-aed7-11ee-9216-0242c0a80002",
             "name": "获取微信公众号配置",
             "icons": "fa-wechat",
             "description": "获取微信公众号配置",
             "url": "/open/wx-config",
-            "parent_id": 4,
+            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
             "method": [
                 "get"
             ],
@@ -674,66 +674,66 @@
     ],
     "resource": [
         {
-            "id": 9,
+            "id": "d423c518-aed7-11ee-9216-0242c0a80002",
             "name": "Ordinary users",
             "icons": "fa-user",
             "description": "Ordinary users",
             "url": "/admin/users",
-            "parent_id": 6,
+            "parent_id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
             "_id": 6,
-            "end_id": 16
+            "end_id": "d423ccc4-aed7-11ee-9216-0242c0a80002"
         },
         {
-            "id": 17,
+            "id": "d423ce68-aed7-11ee-9216-0242c0a80002",
             "name": "Authority management",
             "icons": "fa-sitemap",
             "description": "Role list",
             "url": "/admin/roles",
-            "parent_id": 6,
+            "parent_id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
             "item_name": "Role",
             "_id": 14,
-            "end_id": 24
+            "end_id": "d423ef34-aed7-11ee-9216-0242c0a80002"
         },
         {
-            "id": 25,
+            "id": "d423ef92-aed7-11ee-9216-0242c0a80002",
             "name": "Operation log",
             "icons": "fa-mouse-pointer",
             "description": "Log list",
             "url": "/admin/logs",
-            "parent_id": 6,
+            "parent_id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
             "item_name": "Journal",
             "_id": 22,
-            "end_id": 32
+            "end_id": "d423f2e0-aed7-11ee-9216-0242c0a80002"
         },
         {
-            "id": 33,
+            "id": "d423f384-aed7-11ee-9216-0242c0a80002",
             "name": "Background users",
             "icons": "fa-user-secret",
             "description": "Background users",
             "url": "/admin/admins",
-            "parent_id": 6,
+            "parent_id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
             "_id": 30,
-            "end_id": 40
+            "end_id": "d423f613-aed7-11ee-9216-0242c0a80002"
         },
         {
-            "id": 41,
+            "id": "d423f66d-aed7-11ee-9216-0242c0a80002",
             "name": "Menu settings",
             "icons": "fa-bars",
             "description": "Menu list",
             "url": "/admin/menus",
-            "parent_id": 7,
+            "parent_id": "d423c408-aed7-11ee-9216-0242c0a80002",
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
@@ -742,53 +742,53 @@
             "options": {
                 "only": [
                     {
-                        "id": 42,
+                        "id": "d423f6e5-aed7-11ee-9216-0242c0a80002",
                         "name": "list"
                     },
                     {
-                        "id": 43,
+                        "id": "d423f744-aed7-11ee-9216-0242c0a80002",
                         "name": "export"
                     },
                     {
-                        "id": 44,
+                        "id": "d423f7a2-aed7-11ee-9216-0242c0a80002",
                         "name": "import",
                         "env": "local"
                     },
                     {
-                        "id": 45,
+                        "id": "d423f7ff-aed7-11ee-9216-0242c0a80002",
                         "name": "show"
                     },
                     {
-                        "id": 46,
+                        "id": "d423f85c-aed7-11ee-9216-0242c0a80002",
                         "name": "create",
                         "env": "local"
                     },
                     {
-                        "id": 47,
+                        "id": "d423f8b7-aed7-11ee-9216-0242c0a80002",
                         "name": "update",
                         "env": "local"
                     },
                     {
-                        "id": 48,
+                        "id": "d423f918-aed7-11ee-9216-0242c0a80002",
                         "name": "delete",
                         "env": "local"
                     }
                 ]
             },
-            "end_id": 48
+            "end_id": "d423f918-aed7-11ee-9216-0242c0a80002"
         },
         {
-            "id": 49,
+            "id": "d423f9af-aed7-11ee-9216-0242c0a80002",
             "name": "System settings",
             "icons": "fa-gear",
             "description": "System settings",
             "url": "/admin/configs",
-            "parent_id": 7,
+            "parent_id": "d423c408-aed7-11ee-9216-0242c0a80002",
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
             "_id": 49,
-            "end_id": 56
+            "end_id": "d423fcd6-aed7-11ee-9216-0242c0a80002"
         }
     ],
     "update_position": []
