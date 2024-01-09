@@ -162,7 +162,13 @@ class DbMysqlImplModel  implements DbMysqlModel{
         $sqls = preg_split('/\?[TFN]/',$sql); //这是sql的分割后的数组
         $all_sql = "";
         foreach($sqls as $k=>$sql1){ //将两个数组按照位置合并成一个字符串
-            isset($params[$k]) and $all_sql .= "$sql1".$params[$k];
+            if(isset($params[$k])){
+                $val = $params[$k];
+                if($val===''){
+                    $val = "''";
+                }
+                $all_sql .= "$sql1".$val;
+            }
         }
         return $all_sql;
     }
@@ -199,4 +205,4 @@ class DbMysqlImplModel  implements DbMysqlModel{
     }
 
 
-} 
+}

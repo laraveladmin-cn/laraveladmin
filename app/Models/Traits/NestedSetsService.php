@@ -187,7 +187,7 @@ class NestedSetsService {
 	 * @return false|array items list
 	 */
 	public function getChilds($id) {
-		return $this->Db->getAll('SELECT * FROM ?T WHERE ?F = ?N ORDER BY ?F ASC', $this->tableName, $this->parentKey, (int)$id, $this->leftKey);
+		return $this->Db->getAll('SELECT * FROM ?T WHERE ?F = ?N ORDER BY ?F ASC', $this->tableName, $this->parentKey, $id, $this->leftKey);
 	}
 
 
@@ -224,7 +224,7 @@ class NestedSetsService {
 				$this->levelKey,
 				$this->tableName,
 				$this->primaryKey,
-				(int)$parent_id
+				$parent_id
 			);
 			$key = $position == 'top' ? Arr::get($tmp,$this->leftKey,0) + 1: Arr::get($tmp,$this->rightKey,0);
 			$level = Arr::get($tmp,$this->levelKey,0) + 1;
@@ -247,7 +247,7 @@ class NestedSetsService {
 		);
         if($res===false)return false;
 
-		$data[$this->parentKey] = (int)$parent_id;
+		$data[$this->parentKey] = $parent_id;
 		$data[$this->leftKey] = (int)$key;
 		$data[$this->rightKey] = (int)$key + 1;
 		$data[$this->levelKey] = (int)$level;
@@ -490,8 +490,8 @@ str;
 
 				$this->parentKey,
 					$this->primaryKey,
-					(int)$id,
-					(int)$parent_id,
+					$id,
+					$parent_id,
 					$this->parentKey,
 
 				$this->rightKey,
@@ -586,8 +586,8 @@ str;
 
 				$this->parentKey,
 					$this->primaryKey,
-					(int)$id,
-					(int)$parent_id,
+					$id,
+					$parent_id,
 					$this->parentKey,
 
 				$this->rightKey,
@@ -612,7 +612,7 @@ str;
 	 * @return array item data
 	 */
 	private function getItem($id) {
-		return $this->Db->getRow('SELECT ?F, ?F, ?F, ?F FROM ?T WHERE ?F = ?N', $this->parentKey, $this->leftKey, $this->rightKey, $this->levelKey, $this->tableName, $this->primaryKey, (int)$id);
+		return $this->Db->getRow('SELECT ?F, ?F, ?F, ?F FROM ?T WHERE ?F = ?N', $this->parentKey, $this->leftKey, $this->rightKey, $this->levelKey, $this->tableName, $this->primaryKey, $id);
 	}
 
 }

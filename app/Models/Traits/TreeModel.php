@@ -104,7 +104,39 @@ trait TreeModel{
                 return true;
             }
 
+            //$query->insert($attributes);
+            //默认父ID
+            $attributes[$this->treeField['parent_key']] = Arr::get($attributes,$this->treeField['parent_key'],'');
+
+            //初始化配置
+            $this->treeInit(app('NestedSetsService'));
+
+            //开启事务,处理边界
+            DB::beginTransaction();
+
+            //边界处理,返回修改值
+            $attributes = $this->nestend->insert($attributes[$this->treeField['parent_key']],$attributes,'bottom');
             $query->insert($attributes);
+            //保存数据
+            $keyName = $this->getKeyName();
+            $id = '';
+            if(in_array($keyName,$this->fillable?:[])){
+                $id = Arr::get($attributes,$keyName);
+            }
+
+            //结果提交
+            if($attributes!==false && $id){
+                DB::commit();
+            }else{
+                DB::rollback();
+                return false;
+            }
+            //赋值
+            $this->setAttribute($keyName, $id);
+            $this->setAttribute($this->treeField['parent_key'], $attributes[$this->treeField['parent_key']]);
+            $this->setAttribute($this->treeField['level_key'], $attributes[$this->treeField['level_key']]);
+            $this->setAttribute($this->treeField['left_key'], $attributes[$this->treeField['left_key']]);
+            $this->setAttribute($this->treeField['right_key'], $attributes[$this->treeField['right_key']]);
         }
 
         // We will go ahead and set the exists property to true, so that it is set when
@@ -140,8 +172,11 @@ trait TreeModel{
         $attributes = $this->nestend->insert($attributes[$this->treeField['parent_key']],$attributes,'bottom');
 
         //保存数据
-        $id = $query->insertGetId($attributes, $keyName = $this->getKeyName());
-
+        $keyName = $this->getKeyName();
+        $id = $query->insertGetId($attributes, $keyName);
+        if(!$id && in_array($keyName,$this->fillable?:[])){
+            $id = Arr::get($attributes,$keyName);
+        }
         //结果提交
         if($attributes!==false && $id){
             DB::commit();

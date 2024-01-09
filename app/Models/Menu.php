@@ -148,9 +148,9 @@ class Menu extends Model
 
     protected $table = 'menus'; //数据表Name
     //软删除,树状结构
-    use SoftDeletes,TreeModel,ExcludeTop,BaseModel;//,UsesUuid;
+    use SoftDeletes,TreeModel,ExcludeTop,BaseModel,UsesUuid;
 
-    //public $incrementing = false;
+    public $incrementing = false;
     protected $openRoot = ['ab447afa-ae00-11ee-9216-0242c0a80002']; //游客访问
     protected $homeRoot = ['ab447a45-ae00-11ee-9216-0242c0a80002']; //登录用户
     protected $adminRoot = ['ab447376-ae00-11ee-9216-0242c0a80002']; //后台菜单
