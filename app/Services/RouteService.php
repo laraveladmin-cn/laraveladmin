@@ -467,17 +467,19 @@ class RouteService
         $maps = Menu::getFieldsMap();
         $_id = 1; //存储创建顺序
         $level_nos = []; //层级顺序位
+        $level_ids = [];
         //查询所有菜单
         $menus = collect(Menu::withTrashed()
             ->whereRaw(DB::raw('1=1 or id=1'))
             ->orderBy('left_margin','asc')
             ->get($fillable)
             ->all())
-            ->map(function ($menu)use(&$_id,&$level_nos){
+            ->map(function ($menu)use(&$_id,&$level_nos,&$level_ids){
                 $level = $menu['level'];
-                if(!isset($level_nos[$level])){
+                if(!isset($level_nos[$level]) || Arr::get($level_ids,$level)!=$menu['parent_id']){
                     $level_nos[$level] = 1;
                 }
+                $level_ids[$level] = $menu['parent_id'];
                 $is_del = $menu->deleted_at?1:0;
                 $menu = collect($menu)->toArray();
                 if($is_del){

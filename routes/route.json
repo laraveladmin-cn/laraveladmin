@@ -107,7 +107,7 @@
             ],
             "group": "admin",
             "action": "MenuController@tree",
-            "_id": 5000036
+            "_id": 5000008
         },
         {
             "id": "d424095f-aed7-11ee-9216-0242c0a80002",
@@ -139,7 +139,7 @@
             "group": "admin",
             "action": "DevelopmentsController@index",
             "env": "local",
-            "_id": 4000008
+            "_id": 4000003
         },
         {
             "id": "d424080a-aed7-11ee-9216-0242c0a80002",
@@ -154,7 +154,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postLayout",
             "env": "local",
-            "_id": 5000044
+            "_id": 5000001
         },
         {
             "id": "d4240860-aed7-11ee-9216-0242c0a80002",
@@ -169,7 +169,7 @@
             "group": "admin",
             "action": "DevelopmentsController@tables",
             "env": "local",
-            "_id": 5000045
+            "_id": 5000002
         },
         {
             "id": "d42408b5-aed7-11ee-9216-0242c0a80002",
@@ -184,7 +184,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postCommand",
             "env": "local",
-            "_id": 5000046
+            "_id": 5000003
         },
         {
             "id": "d42409b6-aed7-11ee-9216-0242c0a80002",
@@ -200,7 +200,7 @@
             "status": "Display",
             "group": "admin",
             "action": "FileLogController@index",
-            "_id": 4000009
+            "_id": 4000004
         },
         {
             "id": "d423c4b3-aed7-11ee-9216-0242c0a80002",
@@ -225,7 +225,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000010
+            "_id": 4000001
         },
         {
             "id": "d423fd8c-aed7-11ee-9216-0242c0a80002",
@@ -239,7 +239,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@postIndex",
-            "_id": 5000047
+            "_id": 5000001
         },
         {
             "id": "d423fdea-aed7-11ee-9216-0242c0a80002",
@@ -254,7 +254,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000011
+            "_id": 4000002
         },
         {
             "id": "d423fe45-aed7-11ee-9216-0242c0a80002",
@@ -268,7 +268,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@putPassword",
-            "_id": 5000048
+            "_id": 5000001
         },
         {
             "id": "d423c27b-aed7-11ee-9216-0242c0a80002",
@@ -297,7 +297,7 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 3000005
+            "_id": 3000001
         },
         {
             "id": "d42406ab-aed7-11ee-9216-0242c0a80002",
@@ -312,7 +312,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 3000006
+            "_id": 3000002
         },
         {
             "id": "d4240701-aed7-11ee-9216-0242c0a80002",
@@ -326,7 +326,7 @@
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 4000012
+            "_id": 4000001
         },
         {
             "id": "d4240757-aed7-11ee-9216-0242c0a80002",
@@ -340,7 +340,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 3000007
+            "_id": 3000003
         },
         {
             "id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
@@ -366,7 +366,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 3000008
+            "_id": 3000001
         },
         {
             "id": "d423fefe-aed7-11ee-9216-0242c0a80002",
@@ -382,7 +382,7 @@
             "use": [
                 "web"
             ],
-            "_id": 3000009
+            "_id": 3000002
         },
         {
             "id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
@@ -397,7 +397,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 3000010
+            "_id": 3000003
         },
         {
             "id": "d4240001-aed7-11ee-9216-0242c0a80002",
@@ -417,7 +417,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 4000013
+            "_id": 4000001
         },
         {
             "id": "d424043f-aed7-11ee-9216-0242c0a80002",
@@ -433,7 +433,7 @@
             "use": [
                 "web"
             ],
-            "_id": 4000014
+            "_id": 4000002
         },
         {
             "id": "d4240498-aed7-11ee-9216-0242c0a80002",
@@ -453,7 +453,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 5000049
+            "_id": 5000001
         },
         {
             "id": "d424005c-aed7-11ee-9216-0242c0a80002",
@@ -471,7 +471,7 @@
                 "web"
             ],
             "as": "logout",
-            "_id": 3000011
+            "_id": 3000004
         },
         {
             "id": "d42400b8-aed7-11ee-9216-0242c0a80002",
@@ -485,7 +485,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 3000012
+            "_id": 3000005
         },
         {
             "id": "d4240113-aed7-11ee-9216-0242c0a80002",
@@ -502,7 +502,7 @@
                 "api",
                 "web"
             ],
-            "_id": 4000015
+            "_id": 4000001
         },
         {
             "id": "d424016a-aed7-11ee-9216-0242c0a80002",
@@ -519,7 +519,7 @@
                 "api",
                 "web"
             ],
-            "_id": 4000016
+            "_id": 4000002
         },
         {
             "id": "d42401c3-aed7-11ee-9216-0242c0a80002",
@@ -533,7 +533,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 3000013
+            "_id": 3000006
         },
         {
             "id": "d424021a-aed7-11ee-9216-0242c0a80002",
@@ -546,7 +546,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 4000017
+            "_id": 4000001
         },
         {
             "id": "d4240273-aed7-11ee-9216-0242c0a80002",
@@ -559,7 +559,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 4000018
+            "_id": 4000002
         },
         {
             "id": "d42402cc-aed7-11ee-9216-0242c0a80002",
@@ -571,7 +571,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 4000019
+            "_id": 4000003
         },
         {
             "id": "d4240327-aed7-11ee-9216-0242c0a80002",
@@ -584,7 +584,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 3000014
+            "_id": 3000007
         },
         {
             "id": "d4240380-aed7-11ee-9216-0242c0a80002",
@@ -597,7 +597,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 3000015
+            "_id": 3000008
         },
         {
             "id": "d4241b9d-aed7-11ee-9216-0242c0a80002",
@@ -611,7 +611,7 @@
             ],
             "group": "open",
             "action": "IndexController@menuInfo",
-            "_id": 4000020
+            "_id": 4000001
         },
         {
             "id": "d42403e7-aed7-11ee-9216-0242c0a80002",
@@ -628,7 +628,7 @@
                 "api",
                 "web"
             ],
-            "_id": 3000016
+            "_id": 3000009
         },
         {
             "id": "d4240550-aed7-11ee-9216-0242c0a80002",
@@ -641,7 +641,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 3000017
+            "_id": 3000010
         },
         {
             "id": "d4240a0c-aed7-11ee-9216-0242c0a80002",
@@ -655,7 +655,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 3000018
+            "_id": 3000011
         },
         {
             "id": "d4241c4b-aed7-11ee-9216-0242c0a80002",
@@ -669,7 +669,7 @@
             ],
             "group": "open",
             "action": "IndexController@wxConfig",
-            "_id": 3000019
+            "_id": 3000012
         }
     ],
     "resource": [
@@ -683,7 +683,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000002,
+            "_id": 4000001,
             "options": {
                 "only": [
                     {
@@ -728,7 +728,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Role",
-            "_id": 4000003,
+            "_id": 4000002,
             "options": {
                 "only": [
                     {
@@ -773,7 +773,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Journal",
-            "_id": 4000004,
+            "_id": 4000003,
             "options": {
                 "only": [
                     {
@@ -817,7 +817,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000005,
+            "_id": 4000004,
             "options": {
                 "only": [
                     {
@@ -862,7 +862,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Menu",
-            "_id": 4000006,
+            "_id": 4000001,
             "options": {
                 "only": [
                     {
@@ -910,7 +910,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000007,
+            "_id": 4000002,
             "options": {
                 "only": [
                     {
