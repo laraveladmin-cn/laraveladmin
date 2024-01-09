@@ -188,38 +188,48 @@ class AlertMenusUuidTable extends Migration
                     ->map(function ($menu)use ($fields){
                         foreach ($fields as $field){
                             if(isset($menu[$field]) && is_numeric($menu[$field])){
-                                $menu[$field] = Menu::query()
+                                $uuid = Menu::query()
                                     ->where('id',$menu[$field])
                                     ->value('uuid');
+                                if($uuid){
+                                    $menu[$field] = $uuid;
+                                }
                             }
                         }
                         return $menu;
                     })->toArray();
-                $disk->put($file,json_encode($json_data,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+                $disk->put($file,json_encode($json_data,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT).PHP_EOL);
             }
             if(isset($json_data['resource'])){
                 $json_data['resource'] = collect($json_data['resource'])
                     ->map(function ($menu)use ($fields){
                         foreach ($fields as $field){
                             if(isset($menu[$field]) && is_numeric($menu[$field])){
-                                $menu[$field] = Menu::query()
+                               $uuid = Menu::query()
                                     ->where('id',$menu[$field])
                                     ->value('uuid');
+                                if($uuid){
+                                    $menu[$field] = $uuid;
+                                }
                             }
                         }
                         if(isset($menu['options']['only'])){
                             $menu['options']['only'] = collect($menu['options']['only'])
                                 ->map(function ($item){
                                     if(isset($item['id']) && is_numeric($item['id'])){
-                                        $item['id']= Menu::query()
+                                        $uuid = Menu::query()
                                             ->where('id',$item['id'])
                                             ->value('uuid');
+                                        if($uuid){
+                                            $item['id'] = $uuid;
+                                        }
                                     }
+                                    return $item;
                             })->toArray();
                         }
                         return $menu;
                     })->toArray();
-                $disk->put($file,json_encode($json_data,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+                $disk->put($file,json_encode($json_data,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT).PHP_EOL);
             }
         }
     }

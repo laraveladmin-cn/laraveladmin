@@ -570,7 +570,7 @@ class RouteService
         $out_menus['resource'] = $resource->values()->toArray();
         $out_menus['menus'] = $menus->values()->toArray();
         $out_menus['update_position'] = [];
-        file_put_contents(base_path(self::$routes),json_encode($out_menus,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+        file_put_contents(base_path(self::$routes),json_encode($out_menus,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT).PHP_EOL);
         if(config('laravel_admin.auto_cache_route')){
             Artisan::call('route:cache');
         }

@@ -337,7 +337,7 @@ class BuildApiDoc extends BaseCommand
         Param::insertReplaceAll($this->params);
         Response::insertReplaceAll($this->responses);
         $data['menus'] = collect($menus)->values()->toArray();
-        file_put_contents($file,json_encode( $data ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+        file_put_contents($file,json_encode( $data ,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT).PHP_EOL);
     }
 
     /**
