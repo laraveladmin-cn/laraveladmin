@@ -22,6 +22,7 @@ class AlertMenusUuidTable extends Migration
      */
     public function up()
     {
+        //dd(11);
         //return ;
         $id_info = collect(
             collect(Menu::getTableInfo())
@@ -114,7 +115,7 @@ class AlertMenusUuidTable extends Migration
             ]);
         $this->replaceId('storage/developments/api-doc-common.json');
         $this->replaceId('storage/developments/api-doc.json');
-        $this->replaceId('routes/route.json');
+        $this->replaceId('routes/route.json',true);
 
 
         Schema::table('menu_role', function (Blueprint $table) {

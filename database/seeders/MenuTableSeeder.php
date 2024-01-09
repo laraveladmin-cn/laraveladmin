@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 use \Illuminate\Support\Facades\Cache;
 use \Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class MenuTableSeeder extends Seeder
 {
@@ -65,7 +66,7 @@ class MenuTableSeeder extends Seeder
         $add_id = $roleMenu['id'];
         $methods->each(function ($item,$key)use ($name,$roleMenu,$ids,&$add_id,$map_item){
             $item1 = $map_item->get($key,[]);
-            $add_id = $add_id+1;
+            $add_id = is_numeric($add_id)?$add_id-0+1:Str::uuid();
             $p_env = Arr::get($roleMenu,'env','');
             $env = Arr::get($item1,'env',$p_env);
             $p_disabled = Arr::get($roleMenu,'disabled',0);

@@ -187,7 +187,7 @@ class NestedSetsService {
 	 * @return false|array items list
 	 */
 	public function getChilds($id) {
-		return $this->Db->getAll('SELECT * FROM ?T WHERE ?F = ?N ORDER BY ?F ASC', $this->tableName, $this->parentKey, $id, $this->leftKey);
+		return $this->Db->getAll('SELECT * FROM ?T WHERE ?F = ?N ORDER BY ?F ASC', $this->tableName, $this->parentKey, $this->buildValue($id), $this->leftKey);
 	}
 
 
@@ -224,7 +224,7 @@ class NestedSetsService {
 				$this->levelKey,
 				$this->tableName,
 				$this->primaryKey,
-				$parent_id
+				$this->buildValue($parent_id)
 			);
 			$key = $position == 'top' ? Arr::get($tmp,$this->leftKey,0) + 1: Arr::get($tmp,$this->rightKey,0);
 			$level = Arr::get($tmp,$this->levelKey,0) + 1;
@@ -490,8 +490,8 @@ str;
 
 				$this->parentKey,
 					$this->primaryKey,
-					$id,
-					$parent_id,
+					$this->buildValue($id),
+					$this->buildValue($parent_id),
 					$this->parentKey,
 
 				$this->rightKey,
@@ -612,7 +612,15 @@ str;
 	 * @return array item data
 	 */
 	private function getItem($id) {
-		return $this->Db->getRow('SELECT ?F, ?F, ?F, ?F FROM ?T WHERE ?F = ?N', $this->parentKey, $this->leftKey, $this->rightKey, $this->levelKey, $this->tableName, $this->primaryKey, $id);
+		return $this->Db->getRow('SELECT ?F, ?F, ?F, ?F FROM ?T WHERE ?F = ?N', $this->parentKey, $this->leftKey, $this->rightKey, $this->levelKey, $this->tableName, $this->primaryKey, $this->buildValue($id));
 	}
+
+    protected function buildValue($val){
+        if(is_numeric($val)){
+            return $val;
+        }
+        $val = str_replace("'","\\'",$val);
+        return "'{$val}'";
+    }
 
 }
