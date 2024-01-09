@@ -457,24 +457,37 @@ class RouteService
     public static function upRouteJson(){
         $methods = RouteService::getResourceRoutes(['except'=>['index']]);
         $methods_count = collect($methods)->count();
-        $fillable = collect(Menu::getFillables())->prepend('id')->prepend('deleted_at')->unique()->toArray();
+        $fillable = collect(Menu::getFillables())
+            ->prepend('id')
+            ->push('level')
+            ->push('deleted_at')
+            ->unique()
+            ->toArray();
         $default = collect(Menu::getFieldsDefault())->toArray();
         $maps = Menu::getFieldsMap();
         $_id = 1; //存储创建顺序
+        $level_nos = []; //层级顺序位
         //查询所有菜单
         $menus = collect(Menu::withTrashed()
             ->whereRaw(DB::raw('1=1 or id=1'))
             ->orderBy('left_margin','asc')
             ->get($fillable)
             ->all())
-            ->map(function ($menu)use(&$_id){
+            ->map(function ($menu)use(&$_id,&$level_nos){
+                $level = $menu['level'];
+                if(!isset($level_nos[$level])){
+                    $level_nos[$level] = 1;
+                }
                 $is_del = $menu->deleted_at?1:0;
                 $menu = collect($menu)->toArray();
                 if($is_del){
                     $menu['_is_deleted'] = $is_del;
                 }
-                $menu['_id'] = $_id;
+                //$menu['_id'] = $_id;
+                $menu['_id'] = $level*1000000+$level_nos[$level];
                 $_id += 1;
+                $level_nos[$level] +=1;
+                unset($menu['level']);
                 return $menu;
             });
 

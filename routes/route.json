@@ -31,7 +31,7 @@
             "name": "Menu list",
             "description": "Root node, the parent node of all menus",
             "method": [],
-            "_id": 1
+            "_id": 1000001
         },
         {
             "id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
@@ -42,7 +42,7 @@
             "parent_id": "d423bb07-aed7-11ee-9216-0242c0a80002",
             "method": [],
             "status": "Display",
-            "_id": 2
+            "_id": 2000001
         },
         {
             "id": "d423c34b-aed7-11ee-9216-0242c0a80002",
@@ -57,7 +57,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 3
+            "_id": 3000001
         },
         {
             "id": "d4240653-aed7-11ee-9216-0242c0a80002",
@@ -73,7 +73,7 @@
             "use": [
                 "web"
             ],
-            "_id": 4
+            "_id": 4000001
         },
         {
             "id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
@@ -83,7 +83,7 @@
             "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
             "method": [],
             "status": "Display",
-            "_id": 5
+            "_id": 3000002
         },
         {
             "id": "d423c408-aed7-11ee-9216-0242c0a80002",
@@ -93,7 +93,7 @@
             "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
             "method": [],
             "status": "Display",
-            "_id": 38
+            "_id": 3000003
         },
         {
             "id": "d424090a-aed7-11ee-9216-0242c0a80002",
@@ -107,7 +107,7 @@
             ],
             "group": "admin",
             "action": "MenuController@tree",
-            "_id": 47
+            "_id": 5000036
         },
         {
             "id": "d424095f-aed7-11ee-9216-0242c0a80002",
@@ -122,7 +122,7 @@
             "group": "admin",
             "action": "MenuController@updatePosition",
             "env": "local",
-            "_id": 48
+            "_id": 6000001
         },
         {
             "id": "d42407ae-aed7-11ee-9216-0242c0a80002",
@@ -139,7 +139,7 @@
             "group": "admin",
             "action": "DevelopmentsController@index",
             "env": "local",
-            "_id": 57
+            "_id": 4000008
         },
         {
             "id": "d424080a-aed7-11ee-9216-0242c0a80002",
@@ -154,7 +154,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postLayout",
             "env": "local",
-            "_id": 58
+            "_id": 5000044
         },
         {
             "id": "d4240860-aed7-11ee-9216-0242c0a80002",
@@ -169,7 +169,7 @@
             "group": "admin",
             "action": "DevelopmentsController@tables",
             "env": "local",
-            "_id": 59
+            "_id": 5000045
         },
         {
             "id": "d42408b5-aed7-11ee-9216-0242c0a80002",
@@ -184,7 +184,7 @@
             "group": "admin",
             "action": "DevelopmentsController@postCommand",
             "env": "local",
-            "_id": 60
+            "_id": 5000046
         },
         {
             "id": "d42409b6-aed7-11ee-9216-0242c0a80002",
@@ -200,7 +200,7 @@
             "status": "Display",
             "group": "admin",
             "action": "FileLogController@index",
-            "_id": 61
+            "_id": 4000009
         },
         {
             "id": "d423c4b3-aed7-11ee-9216-0242c0a80002",
@@ -210,7 +210,7 @@
             "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
             "method": [],
             "status": "Display",
-            "_id": 62
+            "_id": 3000004
         },
         {
             "id": "d423fd33-aed7-11ee-9216-0242c0a80002",
@@ -225,7 +225,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 63
+            "_id": 4000010
         },
         {
             "id": "d423fd8c-aed7-11ee-9216-0242c0a80002",
@@ -239,7 +239,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@postIndex",
-            "_id": 64
+            "_id": 5000047
         },
         {
             "id": "d423fdea-aed7-11ee-9216-0242c0a80002",
@@ -254,7 +254,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 65
+            "_id": 4000011
         },
         {
             "id": "d423fe45-aed7-11ee-9216-0242c0a80002",
@@ -268,7 +268,7 @@
             ],
             "group": "admin",
             "action": "PersonageController@putPassword",
-            "_id": 66
+            "_id": 5000048
         },
         {
             "id": "d423c27b-aed7-11ee-9216-0242c0a80002",
@@ -283,7 +283,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 67
+            "_id": 2000002
         },
         {
             "id": "d42404f6-aed7-11ee-9216-0242c0a80002",
@@ -297,7 +297,7 @@
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 68
+            "_id": 3000005
         },
         {
             "id": "d42406ab-aed7-11ee-9216-0242c0a80002",
@@ -312,7 +312,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 69
+            "_id": 3000006
         },
         {
             "id": "d4240701-aed7-11ee-9216-0242c0a80002",
@@ -326,7 +326,7 @@
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 70
+            "_id": 4000012
         },
         {
             "id": "d4240757-aed7-11ee-9216-0242c0a80002",
@@ -340,7 +340,7 @@
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 71
+            "_id": 3000007
         },
         {
             "id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
@@ -353,7 +353,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "open",
-            "_id": 72
+            "_id": 2000003
         },
         {
             "id": "d423fea3-aed7-11ee-9216-0242c0a80002",
@@ -366,7 +366,7 @@
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 73
+            "_id": 3000008
         },
         {
             "id": "d423fefe-aed7-11ee-9216-0242c0a80002",
@@ -382,7 +382,7 @@
             "use": [
                 "web"
             ],
-            "_id": 74
+            "_id": 3000009
         },
         {
             "id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
@@ -397,7 +397,7 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 75
+            "_id": 3000010
         },
         {
             "id": "d4240001-aed7-11ee-9216-0242c0a80002",
@@ -417,7 +417,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 76
+            "_id": 4000013
         },
         {
             "id": "d424043f-aed7-11ee-9216-0242c0a80002",
@@ -433,7 +433,7 @@
             "use": [
                 "web"
             ],
-            "_id": 77
+            "_id": 4000014
         },
         {
             "id": "d4240498-aed7-11ee-9216-0242c0a80002",
@@ -453,7 +453,7 @@
             "middleware": [
                 "log"
             ],
-            "_id": 78
+            "_id": 5000049
         },
         {
             "id": "d424005c-aed7-11ee-9216-0242c0a80002",
@@ -471,7 +471,7 @@
                 "web"
             ],
             "as": "logout",
-            "_id": 79
+            "_id": 3000011
         },
         {
             "id": "d42400b8-aed7-11ee-9216-0242c0a80002",
@@ -485,7 +485,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 80
+            "_id": 3000012
         },
         {
             "id": "d4240113-aed7-11ee-9216-0242c0a80002",
@@ -502,7 +502,7 @@
                 "api",
                 "web"
             ],
-            "_id": 81
+            "_id": 4000015
         },
         {
             "id": "d424016a-aed7-11ee-9216-0242c0a80002",
@@ -519,7 +519,7 @@
                 "api",
                 "web"
             ],
-            "_id": 82
+            "_id": 4000016
         },
         {
             "id": "d42401c3-aed7-11ee-9216-0242c0a80002",
@@ -533,7 +533,7 @@
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 83
+            "_id": 3000013
         },
         {
             "id": "d424021a-aed7-11ee-9216-0242c0a80002",
@@ -546,7 +546,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 84
+            "_id": 4000017
         },
         {
             "id": "d4240273-aed7-11ee-9216-0242c0a80002",
@@ -559,7 +559,7 @@
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 85
+            "_id": 4000018
         },
         {
             "id": "d42402cc-aed7-11ee-9216-0242c0a80002",
@@ -571,7 +571,7 @@
                 "post"
             ],
             "group": "open",
-            "_id": 86
+            "_id": 4000019
         },
         {
             "id": "d4240327-aed7-11ee-9216-0242c0a80002",
@@ -584,7 +584,7 @@
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 87
+            "_id": 3000014
         },
         {
             "id": "d4240380-aed7-11ee-9216-0242c0a80002",
@@ -597,7 +597,7 @@
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 88
+            "_id": 3000015
         },
         {
             "id": "d4241b9d-aed7-11ee-9216-0242c0a80002",
@@ -611,7 +611,7 @@
             ],
             "group": "open",
             "action": "IndexController@menuInfo",
-            "_id": 89
+            "_id": 4000020
         },
         {
             "id": "d42403e7-aed7-11ee-9216-0242c0a80002",
@@ -628,7 +628,7 @@
                 "api",
                 "web"
             ],
-            "_id": 90
+            "_id": 3000016
         },
         {
             "id": "d4240550-aed7-11ee-9216-0242c0a80002",
@@ -641,7 +641,7 @@
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 91
+            "_id": 3000017
         },
         {
             "id": "d4240a0c-aed7-11ee-9216-0242c0a80002",
@@ -655,7 +655,7 @@
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 92
+            "_id": 3000018
         },
         {
             "id": "d4241c4b-aed7-11ee-9216-0242c0a80002",
@@ -669,7 +669,7 @@
             ],
             "group": "open",
             "action": "IndexController@wxConfig",
-            "_id": 93
+            "_id": 3000019
         }
     ],
     "resource": [
@@ -683,7 +683,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 6,
+            "_id": 4000002,
             "options": {
                 "only": [
                     {
@@ -728,7 +728,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Role",
-            "_id": 14,
+            "_id": 4000003,
             "options": {
                 "only": [
                     {
@@ -773,7 +773,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Journal",
-            "_id": 22,
+            "_id": 4000004,
             "options": {
                 "only": [
                     {
@@ -817,7 +817,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 30,
+            "_id": 4000005,
             "options": {
                 "only": [
                     {
@@ -862,7 +862,7 @@
             "status": "Display",
             "group": "admin",
             "item_name": "Menu",
-            "_id": 39,
+            "_id": 4000006,
             "options": {
                 "only": [
                     {
@@ -910,7 +910,7 @@
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 49,
+            "_id": 4000007,
             "options": {
                 "only": [
                     {
