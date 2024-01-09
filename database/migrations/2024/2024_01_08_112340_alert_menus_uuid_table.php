@@ -22,7 +22,7 @@ class AlertMenusUuidTable extends Migration
      */
     public function up()
     {
-        return ;
+        //return ;
         $id_info = collect(
             collect(Menu::getTableInfo())
                 ->get('table_fields')

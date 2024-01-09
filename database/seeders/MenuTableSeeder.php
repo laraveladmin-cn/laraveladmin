@@ -221,7 +221,7 @@ class MenuTableSeeder extends Seeder
             Menu::whereIn('id',$this->del_ids)->delete();
         }
         if(config('app.env')=='local'){
-            RouteService::upRouteJson();
+            //RouteService::upRouteJson();
         }
         $connection = Menu::query()->getConnection();
         $driver = $connection->getConfig('driver');
