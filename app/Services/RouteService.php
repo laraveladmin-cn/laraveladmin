@@ -477,9 +477,10 @@ class RouteService
                 $_id += 1;
                 return $menu;
             });
+
         //筛选资源菜单
         $resource = $menus->filter(function ($menu){
-            return $menu['resource_id']!=0;
+            return !!$menu['resource_id'];
         })->toArray();
         //资源菜单处理
         $resource = collect(listToTree($resource,'id','resource_id','children',-1))
@@ -506,16 +507,21 @@ class RouteService
                     }
                     return $row;
                 });
+
                 $children_count = $children->filter(function ($children){
                     return !Arr::get($children,'_is_deleted');
                 })->count();
                 $id = $menu['id'];
-                $end_id = $id+$children_count;
-                if($children_count!=$methods_count ||
-                    $children->min('id')<$id ||
-                    $children->max('id')>$end_id ||
-                    $flog
-                ){
+                if(is_numeric($id)){
+                    $end_id = $id+$children_count;
+                    if($children_count!=$methods_count ||
+                        $children->min('id')<$id ||
+                        $children->max('id')>$end_id ||
+                        $flog
+                    ){
+                        $menu['options'] = ['only'=>$children->toArray()];
+                    }
+                }else{
                     $menu['options'] = ['only'=>$children->toArray()];
                 }
                 collect($default)->map(function ($val,$key)use (&$menu){
@@ -538,12 +544,14 @@ class RouteService
                     }
                     return $value;
                 });
-                $menu['end_id'] = $end_id;
+                if(is_numeric($id)){
+                    $menu['end_id'] = $end_id;
+                }
                 return $menu;
             });
         //普通菜单处理
         $menus = $menus->filter(function ($menu){
-            return $menu['resource_id']==0;
+            return !$menu['resource_id'];
         })->map(function ($menu)use($default,$maps){
             collect($default)->map(function ($val,$key)use (&$menu){
                 if($val===$menu[$key] && $key!='method'){
@@ -563,6 +571,12 @@ class RouteService
                 }
                 return $value;
             });
+            if(!Arr::get($menu,'resource_id')){
+                unset($menu['resource_id']);
+            }
+            if(Arr::get($menu,'parent_id')==='0'){
+                unset($menu['parent_id']);
+            }
             return $menu;
         });
         //输出菜单数据

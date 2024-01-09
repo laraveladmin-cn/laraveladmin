@@ -53,8 +53,8 @@ class MenuTableSeeder extends Seeder
             if($only){
                 if(is_array($only[0])){
                     $map_item = collect($only)->keyBy('name');
-                    $only = collect($only)->pluck('name');
                     $ids = collect($only)->pluck('id','name');
+                    $only = collect($only)->pluck('name');
                     $this->del_ids = collect($this->del_ids)->merge(collect($only)->filter(function ($item){
                         return Arr::get($item,'_is_deleted');
                     })->pluck('id')
@@ -222,7 +222,7 @@ class MenuTableSeeder extends Seeder
             Menu::whereIn('id',$this->del_ids)->delete();
         }
         if(config('app.env')=='local'){
-            //RouteService::upRouteJson();
+            RouteService::upRouteJson();
         }
         $connection = Menu::query()->getConnection();
         $driver = $connection->getConfig('driver');
