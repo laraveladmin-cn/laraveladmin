@@ -322,7 +322,7 @@ class SwooleMySqlConnection extends BaseConnection
             return $this->getPdo();
         }
 
-        if ($this->readOnWriteConnection ||
+        if ((isset($this->readOnWriteConnection) && $this->readOnWriteConnection) ||
             ($this->recordsModified && $this->getConfig('sticky'))) {
             return $this->getPdo();
         }
