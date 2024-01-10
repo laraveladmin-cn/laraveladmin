@@ -66,17 +66,19 @@ class AlertMenusUuidTable extends Migration
                 ->default('')
                 ->comment('接口ID@required|exists:menus,id');
         });
+        //指定特定菜单uuid
+  /*      $menuModel = Menu::query()->getModel();
+        $this->replaceUuid($menuModel->openRoot);
+        $this->replaceUuid($menuModel->homeRoot);
+        $this->replaceUuid($menuModel->adminRoot);*/
         //生成唯一标识键
         DB::table('menus')
             ->where('uuid','')
             ->update([
-                'uuid'=>DB::raw('UUID()')
+                //'uuid'=>DB::raw('UUID()')
+                'uuid'=>DB::raw('id')
             ]);
-        //指定特定菜单uuid
-        $menuModel = Menu::query()->getModel();
-        $this->replaceUuid($menuModel->openRoot);
-        $this->replaceUuid($menuModel->homeRoot);
-        $this->replaceUuid($menuModel->adminRoot);
+
 
         //修改关联数据项
         Menu::query()
@@ -121,10 +123,11 @@ class AlertMenusUuidTable extends Migration
             ->update([
                 'menu_uuid' => DB::raw('menus.uuid')
             ]);
-        $this->replaceId('storage/developments/api-doc-common.json');
-        $this->replaceId('storage/developments/api-doc.json');
-        $this->replaceId('routes/route.json',true);
-
+        if(config('app.env')=='local'){
+            $this->replaceId('storage/developments/api-doc-common.json');
+            $this->replaceId('storage/developments/api-doc.json');
+            $this->replaceId('routes/route.json',true);
+        }
 
         Schema::table('menu_role', function (Blueprint $table) {
             $table->dropPrimary(['role_id','menu_id']);
