@@ -212,11 +212,13 @@ class AlertMenusUuidTable extends Migration
                         foreach ($fields as $field){
                             if(isset($menu[$field]) && is_numeric($menu[$field])){
                                 $id = $menu[$field];
-                                $uuid = $id==1?DB::table($this->menu_table)->where('id',$id)->value('uuid'):Menu::query()
+                                $uuid = $id==1?DB::table($this->menu_table)
+                                    ->where('id',$id)
+                                    ->value('uuid'):Menu::query()
                                     ->where('id',$id)
                                     ->value('uuid');
                                 if($uuid){
-                                    $menu[$field] = $uuid;
+                                    $menu[$field] = is_numeric($uuid)?$uuid-0:$uuid;
                                 }
                             }
                         }
@@ -230,11 +232,13 @@ class AlertMenusUuidTable extends Migration
                         foreach ($fields as $field){
                             if(isset($menu[$field]) && is_numeric($menu[$field])){
                                 $id = $menu[$field];
-                               $uuid = $id==1?DB::table($this->menu_table)->where('id',$id)->value('uuid'):Menu::query()
+                               $uuid = $id==1?DB::table($this->menu_table)
+                                   ->where('id',$id)
+                                   ->value('uuid'):Menu::query()
                                     ->where('id',$id)
                                     ->value('uuid');
                                 if($uuid){
-                                    $menu[$field] = $uuid;
+                                    $menu[$field] = is_numeric($uuid)?$uuid-0:$uuid;
                                 }
                             }
                         }
@@ -243,11 +247,13 @@ class AlertMenusUuidTable extends Migration
                                 ->map(function ($item){
                                     if(isset($item['id']) && is_numeric($item['id'])){
                                         $id = $item['id'];
-                                        $uuid = $id==1?DB::table($this->menu_table)->where('id',$id)->value('uuid'):Menu::query()
+                                        $uuid = $id==1?DB::table($this->menu_table)
+                                            ->where('id',$id)
+                                            ->value('uuid'):Menu::query()
                                             ->where('id',$id)
                                             ->value('uuid');
                                         if($uuid){
-                                            $item['id'] = $uuid;
+                                            $item['id'] = is_numeric($uuid)?$uuid-0:$uuid;
                                         }
                                     }
                                     return $item;
