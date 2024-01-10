@@ -529,13 +529,13 @@ class RouteService
                 $id = $menu['id'];
                 if(is_numeric($id)){
                     $end_id = $id+$children_count;
-                    if($children_count!=$methods_count ||
+                    /*if($children_count!=$methods_count ||
                         $children->min('id')<$id ||
                         $children->max('id')>$end_id ||
                         $flog
-                    ){
+                    ){*/
                         $menu['options'] = ['only'=>$children->toArray()];
-                    }
+                    //}
                 }else{
                     $menu['options'] = ['only'=>$children->toArray()];
                 }
@@ -596,7 +596,18 @@ class RouteService
         });
         //输出菜单数据
         $out_menus = json_decode(file_get_contents(base_path(self::$routes)),true);
-        $out_menus['resource'] = $resource->values()->toArray();
+        $old_resource = Arr::get($out_menus,'resource',[])?:[];
+        $old_menus = Arr::get($out_menus,'menus',[])?:[];
+        //新加菜单在最后追加
+        $resource = $resource->values()->keyBy('id')->toArray();
+
+
+
+        $out_menus['resource'] = collect($old_resource)
+            //->
+            ->map(function ($item)use(&$resource){
+
+        });
         $out_menus['menus'] = $menus->values()->toArray();
         $out_menus['update_position'] = [];
         file_put_contents(base_path(self::$routes),json_encode($out_menus,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT).PHP_EOL);
