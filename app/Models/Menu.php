@@ -705,7 +705,7 @@ class Menu extends Model
         $value = Arr::get($item, $key, '');
         $resource_id = Arr::get($item, 'resource_id', 0);
         $res = trans_path($value, '_shared.menus');
-        if ($resource_id>0 && $res == $value && (str_contains($value, '{') || app('translator')->getLocale() != 'en')) { //没有翻译成功
+        if (($resource_id && $resource_id!=-1)  && $res == $value && (str_contains($value, '{') || app('translator')->getLocale() != 'en')) { //没有翻译成功
             $parent_name = Arr::get($item, 'parent.item_name', '') ?: Arr::get($item, 'parent.name', '');
             $key = str_replace($parent_name, '{name}', $value);
             $data = [];
