@@ -705,7 +705,7 @@ class Menu extends Model
         $value = Arr::get($item, $key, '');
         $resource_id = Arr::get($item, 'resource_id', 0);
         $res = trans_path($value, '_shared.menus');
-        if (($resource_id && $resource_id!=-1)  && $res == $value && (str_contains($value, '{') || app('translator')->getLocale() != 'en')) { //没有翻译成功
+        if (($resource_id && !($resource_id==='0') && $resource_id!=-1)  && $res == $value && (str_contains($value, '{') || app('translator')->getLocale() != 'en')) { //没有翻译成功
             $parent_name = Arr::get($item, 'parent.item_name', '') ?: Arr::get($item, 'parent.name', '');
             $key = str_replace($parent_name, '{name}', $value);
             $data = [];
@@ -719,6 +719,22 @@ class Menu extends Model
             $res = trans_path($key, '_shared.menus',$data);
         }
         return $res;
+    }
+
+    public function getResourceIdAttribute($value)
+    {
+        if($value==='0'){
+            return 0;
+        }
+        return $value;
+    }
+
+    public function getParentIdAttribute($value)
+    {
+        if($value==='0'){
+            return 0;
+        }
+        return $value;
     }
 
 

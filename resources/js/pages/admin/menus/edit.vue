@@ -13,7 +13,7 @@
                             <edit-item key-name="_type" :options="{name: props.transField('Menu type')}" :datas="props">
                                 <template slot="input-item">
                                     <label-edit v-model="props.data.row['_type']"
-                                                :disabled="!props.url || props.data.row.resource_id>0"
+                                                :disabled="!props.url || resourceGt0(props.data.row.resource_id)"
                                                 @change="changeType(props.data.row['_type'],props)"
                                                 :map="props.maps['_type']">
                                     </label-edit>
@@ -24,11 +24,11 @@
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="url"
-                                       :options="{name: props.transField('Url path'),rules:requiredUrl(props,'url'),placeholder:getTitle('url',props),disabled:props.data.row['resource_id']>1}"
+                                       :options="{name: props.transField('Url path'),rules:requiredUrl(props,'url'),placeholder:getTitle('url',props),disabled:resourceGt0(props.data.row.resource_id)}"
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="group"
-                                       v-if="props.data.row['_type']!=0 && props.data.row['resource_id']<1"
+                                       v-if="props.data.row['_type']!=0 && !resourceGt0(props.data.row.resource_id)"
                                        :options="{name: props.transField('Group to which the route belongs'),type:'text',rules:requiredUrl(props,'group'),placeholder:getTitle('group',props)}"
                                        :datas="props">
                                 <template slot="input-item">
@@ -49,11 +49,11 @@
                             </edit-item>
                             <edit-item key-name="action"
                                        :options="{name: props.transField('Binding controller method'),type:'text', rules:'',placeholder:getTitle('action',props),title:$tp('The default recognition is based on the URL')}"
-                                       v-show="props.data.row['_type']==2 && props.data.row['resource_id']<1"
+                                       v-show="props.data.row['_type']==2 && !resourceGt0(props.data.row.resource_id)"
                                        :datas="props">
                             </edit-item>
                             <edit-item key-name="as"
-                                       v-show="props.data.row['_type']==2 && props.data.row['resource_id']<1"
+                                       v-show="props.data.row['_type']==2 && !resourceGt0(props.data.row.resource_id)"
                                        :options="{name: props.transField('Routing alias'),type:'text', rules:'',placeholder:getTitle('as',props),disabled: props.data.row['resource_id']==-1}"
                                        :datas="props">
                             </edit-item>
@@ -64,7 +64,7 @@
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['resource_id']"
-                                                 :default-options="array_get(props,'data.row.resource_id',0)>0?[array_get(props,'data.row.resource')]:[]"
+                                                 :default-options="resourceGt0(props.data.row.resource_id)?[array_get(props,'data.row.resource')]:[]"
                                                  :url="use_url+'/admin/menus/list'"
                                                  :keyword-key="'name'"
                                                  :disabled="true"
@@ -127,7 +127,7 @@
                                             <icheck v-model="props.data.row['method']"
                                                     :title="item"
                                                     :option="index"
-                                                    :disabled="!props.url || props.data.row['resource_id']==-1 || props.data.row['resource_id']>0">
+                                                    :disabled="!props.url || props.data.row['resource_id']==-1 || resourceGt0(props.data.row.resource_id)">
                                                 {{item}}
                                             </icheck>
                                         </div>
@@ -143,7 +143,7 @@
                                                     type="radio"
                                                     :option="index"
                                                     :title="item"
-                                                    :disabled="!props.url || props.data.row['resource_id']>0"> {{item}}
+                                                    :disabled="!props.url || resourceGt0(props.data.row.resource_id)"> {{item}}
                                             </icheck>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                                                     type="radio"
                                                     :option="index"
                                                     :title="item"
-                                                    :disabled="!props.url || props.data.row['resource_id']>0"> {{item}}
+                                                    :disabled="!props.url || resourceGt0(props.data.row.resource_id)"> {{item}}
                                             </icheck>
                                         </div>
                                     </div>
@@ -173,7 +173,7 @@
                                                     type="radio"
                                                     :option="index"
                                                     :title="item"
-                                                    :disabled="!props.url || props.data.row['resource_id']>0">
+                                                    :disabled="!props.url || resourceGt0(props.data.row.resource_id)">
                                                 {{item}}
                                             </icheck>
                                         </div>
@@ -242,7 +242,7 @@
                                         <ztree v-model="props.data.row['parent_id']"
                                                :check-enable="false"
                                                :multiple="false"
-                                               :disabled="!props.url || props.data.row['resource_id']>0"
+                                               :disabled="!props.url || resourceGt0(props.data.row.resource_id)"
                                                :id="'menus_edit_parent'"
                                                :chkbox-type='{ "Y" : "", "N" : "" }'
                                                :data="map_optional_parents()">
@@ -356,7 +356,7 @@
                 let value = array_get(item,key,'');
                 let resource_id = item['resource_id'];
                 let res = this.$tp(value , this.shared);
-                if(resource_id>0 && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                if(this.resourceGt0(resource_id) && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
                     let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
                     let key = value.replace(parent_name,'{name}');
                     let shared = copyObj(this.shared);
@@ -433,13 +433,40 @@
                     _name = 'Delete {l_name}';//'删除'+name;
                 }
                 let value = array_get(this.$refs['edit'].data.maps._options_name,key,_name);
-                let shared = {
+                shared = {
                     "{lang_path}": '_shared.menus',
                     '{lang_root}': '',
                     'name':name.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase()),
                     'l_name':name.toLowerCase()
                 };
-                return this.$tp(value,shared);
+                let res_str =  this.$tp(value,shared);
+                if(res_str!=value){
+                    return res_str;
+                }
+                let prefix = '_shared.menus.';
+                let name_str = name.charAt(0).toUpperCase() + name.slice(1);
+                let name_str_res = this.$t(prefix+name_str);
+                if(name_str_res.indexOf(prefix)==0){
+                    name_str_res = name_str;
+                }
+                let shared = {
+                    "{lang_path}": '_shared.menus',
+                    '{lang_root}': '',
+                    'name':name_str_res,
+                    'l_name':name_str_res
+                };
+                return this.$tp(_name,shared);
+            },
+            resourceGt0(resource_id){
+                if(typeof resource_id=="number"){
+                    return resource_id>0;
+                }else if(resource_id==='0'){
+                    return false;
+                }else if(resource_id==='-1'){
+                    return false;
+                }else {
+                    return !!resource_id;
+                }
             }
 
         },

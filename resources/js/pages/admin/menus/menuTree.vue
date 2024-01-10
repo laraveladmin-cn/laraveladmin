@@ -157,7 +157,7 @@
                 let value = array_get(item,key,'');
                 let resource_id = item['resource_id'];
                 let res = this.$tp(value , this.shared);
-                if(resource_id>0 && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                if(this.resourceGt0(resource_id) && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
                     let parent_name = array_get(item,'parent.item_name','') || array_get(item,'parent.name','') || '';
                     let key = value.replace(parent_name,'{name}');
                     let shared = copyObj(this.shared);
@@ -174,6 +174,17 @@
             },
             refresh(){
                 this.$refs['menuTree'].getData({});
+            },
+            resourceGt0(resource_id){
+                if(typeof resource_id=="number"){
+                    return resource_id>0;
+                }else if(resource_id==='0'){
+                    return false;
+                }else if(resource_id==='-1'){
+                    return false;
+                }else {
+                    return !!resource_id;
+                }
             }
         }
 

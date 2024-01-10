@@ -586,8 +586,8 @@ str;
 
 				$this->parentKey,
 					$this->primaryKey,
-					$id,
-					$parent_id,
+					$this->buildValue($id),
+					$this->buildValue($parent_id),
 					$this->parentKey,
 
 				$this->rightKey,
