@@ -27,44 +27,44 @@
     },
     "menus": [
         {
-            "id": "d423bb07-aed7-11ee-9216-0242c0a80002",
+            "id": 1,
             "name": "Menu list",
             "description": "Root node, the parent node of all menus",
             "method": [],
-            "_id": 1000001
+            "_id": 1
         },
         {
-            "id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
+            "id": 2,
             "name": "Operate",
             "icons": "fa-dashboard",
             "description": "Operation module",
             "url": "/admin/index",
-            "parent_id": "d423bb07-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 1,
             "method": [],
             "status": "Display",
-            "_id": 2000001
+            "_id": 2
         },
         {
-            "id": "d423c34b-aed7-11ee-9216-0242c0a80002",
+            "id": 5,
             "name": "Backstage home page",
             "icons": "fa-home",
             "description": "Backstage home page",
             "url": "/admin/index",
-            "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 2,
             "method": [
                 "get"
             ],
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 3000001
+            "_id": 3
         },
         {
-            "id": "d4240653-aed7-11ee-9216-0242c0a80002",
+            "id": 80,
             "name": "Error log Download",
             "description": "Error log Download",
             "url": "/admin/down-log",
-            "parent_id": "d423c34b-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 5,
             "method": [
                 "get"
             ],
@@ -73,64 +73,64 @@
             "use": [
                 "web"
             ],
-            "_id": 4000001
+            "_id": 4
         },
         {
-            "id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
+            "id": 6,
             "name": "User management",
             "icons": "fa-users",
             "description": "User management group",
-            "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 3000002
+            "_id": 5
         },
         {
-            "id": "d423c408-aed7-11ee-9216-0242c0a80002",
+            "id": 7,
             "name": "Other settings",
             "icons": "fa-gears",
             "description": "Other settings group",
-            "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 3000003
+            "_id": 38
         },
         {
-            "id": "d424090a-aed7-11ee-9216-0242c0a80002",
+            "id": 88,
             "name": "Menu drag",
             "icons": "fa-mouse-pointer",
             "description": "Menu drag page data",
             "url": "/admin/menus/tree",
-            "parent_id": "d423f66d-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 41,
             "method": [
                 "get"
             ],
             "group": "admin",
             "action": "MenuController@tree",
-            "_id": 5000008
+            "_id": 47
         },
         {
-            "id": "d424095f-aed7-11ee-9216-0242c0a80002",
+            "id": 89,
             "name": "Submit menu location modification",
             "icons": "fa-edit",
             "description": "Submit menu location modification",
             "url": "/admin/menus/update-position",
-            "parent_id": "d424090a-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 88,
             "method": [
                 "post"
             ],
             "group": "admin",
             "action": "MenuController@updatePosition",
             "env": "local",
-            "_id": 6000001
+            "_id": 48
         },
         {
-            "id": "d42407ae-aed7-11ee-9216-0242c0a80002",
+            "id": 84,
             "name": "Development assistance",
             "icons": "fa-wrench",
             "description": "Development assistant function page",
             "url": "/admin/developments/index",
-            "parent_id": "d423c408-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 7,
             "method": [
                 "get"
             ],
@@ -139,60 +139,60 @@
             "group": "admin",
             "action": "DevelopmentsController@index",
             "env": "local",
-            "_id": 4000003
+            "_id": 57
         },
         {
-            "id": "d424080a-aed7-11ee-9216-0242c0a80002",
+            "id": 85,
             "name": "Edit page layout save",
             "icons": "fa-save",
             "description": "Submit edit page layout save",
             "url": "/admin/developments/layout",
-            "parent_id": "d42407ae-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 84,
             "method": [
                 "post"
             ],
             "group": "admin",
             "action": "DevelopmentsController@postLayout",
             "env": "local",
-            "_id": 5000001
+            "_id": 58
         },
         {
-            "id": "d4240860-aed7-11ee-9216-0242c0a80002",
+            "id": 86,
             "name": "Data table query",
             "icons": "fa-table",
             "description": "Data table name association query",
             "url": "/admin/developments/tables",
-            "parent_id": "d42407ae-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 84,
             "method": [
                 "get"
             ],
             "group": "admin",
             "action": "DevelopmentsController@tables",
             "env": "local",
-            "_id": 5000002
+            "_id": 59
         },
         {
-            "id": "d42408b5-aed7-11ee-9216-0242c0a80002",
+            "id": 87,
             "name": "Command execution",
             "icons": "fa-code",
             "description": "Submit the command for execution",
             "url": "/admin/developments/command",
-            "parent_id": "d42407ae-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 84,
             "method": [
                 "post"
             ],
             "group": "admin",
             "action": "DevelopmentsController@postCommand",
             "env": "local",
-            "_id": 5000003
+            "_id": 60
         },
         {
-            "id": "d42409b6-aed7-11ee-9216-0242c0a80002",
+            "id": 90,
             "name": "Log file",
             "icons": "fa-file",
             "description": "System log file",
             "url": "/admin/file-log/index",
-            "parent_id": "d423c408-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 7,
             "method": [
                 "get"
             ],
@@ -200,180 +200,180 @@
             "status": "Display",
             "group": "admin",
             "action": "FileLogController@index",
-            "_id": 4000004
+            "_id": 61
         },
         {
-            "id": "d423c4b3-aed7-11ee-9216-0242c0a80002",
+            "id": 8,
             "name": "Personal Center",
             "icons": "fa-user",
             "description": "Personal Center Group",
-            "parent_id": "d423c1f1-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 2,
             "method": [],
             "status": "Display",
-            "_id": 3000004
+            "_id": 62
         },
         {
-            "id": "d423fd33-aed7-11ee-9216-0242c0a80002",
+            "id": 57,
             "name": "Personal data",
             "icons": "fa-heart",
             "description": "Personal data",
             "url": "/admin/personage/index",
-            "parent_id": "d423c4b3-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 8,
             "method": [
                 "get"
             ],
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000001
+            "_id": 63
         },
         {
-            "id": "d423fd8c-aed7-11ee-9216-0242c0a80002",
+            "id": 58,
             "name": "Submit and edit personal data",
             "icons": "fa-heart",
             "description": "Submit and edit personal data",
             "url": "/admin/personage/index",
-            "parent_id": "d423fd33-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 57,
             "method": [
                 "post"
             ],
             "group": "admin",
             "action": "PersonageController@postIndex",
-            "_id": 5000001
+            "_id": 64
         },
         {
-            "id": "d423fdea-aed7-11ee-9216-0242c0a80002",
+            "id": 59,
             "name": "Change Password",
             "icons": "fa-lock",
             "description": "Change Password",
             "url": "/admin/personage/password",
-            "parent_id": "d423c4b3-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 8,
             "method": [
                 "get"
             ],
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000002
+            "_id": 65
         },
         {
-            "id": "d423fe45-aed7-11ee-9216-0242c0a80002",
+            "id": 60,
             "name": "Submit to edit to change password",
             "icons": "fa-lock",
             "description": "Submit to edit to change password",
             "url": "/admin/personage/password",
-            "parent_id": "d423fdea-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 59,
             "method": [
                 "put"
             ],
             "group": "admin",
             "action": "PersonageController@putPassword",
-            "_id": 5000001
+            "_id": 66
         },
         {
-            "id": "d423c27b-aed7-11ee-9216-0242c0a80002",
+            "id": 3,
             "name": "Homepage",
             "icons": "fa-user",
             "description": "Home module",
             "url": "/home/index",
-            "parent_id": "d423bb07-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 1,
             "method": [
                 "get"
             ],
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 2000002
+            "_id": 67
         },
         {
-            "id": "d42404f6-aed7-11ee-9216-0242c0a80002",
+            "id": 78,
             "name": "Submit to edit to change password",
             "icons": "fa-lock",
             "description": "Submit to edit to change password",
             "url": "/home/personage/password",
-            "parent_id": "d423c27b-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 3,
             "method": [
                 "put"
             ],
             "group": "home",
             "action": "PersonageController@putPassword",
-            "_id": 3000001
+            "_id": 68
         },
         {
-            "id": "d42406ab-aed7-11ee-9216-0242c0a80002",
+            "id": 81,
             "name": "Personal data",
             "icons": "fa-heart",
             "description": "Personal data",
             "url": "/home/personage/index",
-            "parent_id": "d423c27b-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 3,
             "method": [
                 "get"
             ],
             "is_page": "Yes",
             "status": "Display",
             "group": "home",
-            "_id": 3000002
+            "_id": 69
         },
         {
-            "id": "d4240701-aed7-11ee-9216-0242c0a80002",
+            "id": 82,
             "name": "Submit and edit personal data",
             "icons": "fa-lock",
             "description": "Submit to edit to change password",
             "url": "/home/personage/index",
-            "parent_id": "d42406ab-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 81,
             "method": [
                 "post"
             ],
             "group": "home",
             "action": "PersonageController@postIndex",
-            "_id": 4000001
+            "_id": 70
         },
         {
-            "id": "d4240757-aed7-11ee-9216-0242c0a80002",
+            "id": 83,
             "name": "File upload",
             "icons": "fa-upload",
             "description": "File upload",
             "url": "/home/upload/index",
-            "parent_id": "d423c27b-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 3,
             "method": [
                 "post"
             ],
             "group": "home",
             "action": "UploadController@postIndex",
-            "_id": 3000003
+            "_id": 71
         },
         {
-            "id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "id": 4,
             "name": "Official website",
             "icons": "fa-home",
             "description": "Official website module",
             "url": "/open/index",
-            "parent_id": "d423bb07-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 1,
             "method": [],
             "is_page": "Yes",
             "status": "Display",
             "group": "open",
-            "_id": 2000003
+            "_id": 72
         },
         {
-            "id": "d423fea3-aed7-11ee-9216-0242c0a80002",
+            "id": 61,
             "name": "Get configuration information",
             "description": "Get configuration information",
             "url": "/open/config",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
             "group": "open",
             "action": "IndexController@config",
-            "_id": 3000001
+            "_id": 73
         },
         {
-            "id": "d423fefe-aed7-11ee-9216-0242c0a80002",
+            "id": 62,
             "name": "Update token",
             "description": "Get configuration information",
             "url": "/open/token",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
@@ -382,14 +382,14 @@
             "use": [
                 "web"
             ],
-            "_id": 3000002
+            "_id": 74
         },
         {
-            "id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
+            "id": 63,
             "name": "Login page",
             "description": "Login page",
             "url": "/open/login",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
@@ -397,14 +397,14 @@
             "group": "open",
             "action": "LoginController@showLoginForm",
             "as": "login",
-            "_id": 3000003
+            "_id": 75
         },
         {
-            "id": "d4240001-aed7-11ee-9216-0242c0a80002",
+            "id": 64,
             "name": "Submit login",
             "description": "Submit login",
             "url": "/open/login",
-            "parent_id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 63,
             "method": [
                 "post"
             ],
@@ -417,14 +417,14 @@
             "middleware": [
                 "log"
             ],
-            "_id": 4000001
+            "_id": 76
         },
         {
-            "id": "d424043f-aed7-11ee-9216-0242c0a80002",
+            "id": 76,
             "name": "Three party login",
             "description": "Three party login",
             "url": "/open/other-login/{type}",
-            "parent_id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 63,
             "method": [
                 "get"
             ],
@@ -433,14 +433,14 @@
             "use": [
                 "web"
             ],
-            "_id": 4000002
+            "_id": 77
         },
         {
-            "id": "d4240498-aed7-11ee-9216-0242c0a80002",
+            "id": 77,
             "name": "Callback after three party login",
             "description": "Three party login",
             "url": "/open/other-login-callback/{type}",
-            "parent_id": "d424043f-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 76,
             "method": [
                 "get"
             ],
@@ -453,14 +453,14 @@
             "middleware": [
                 "log"
             ],
-            "_id": 5000001
+            "_id": 78
         },
         {
-            "id": "d424005c-aed7-11ee-9216-0242c0a80002",
+            "id": 65,
             "name": "Log out",
             "description": "Log out",
             "url": "/open/logout",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "post"
             ],
@@ -471,28 +471,28 @@
                 "web"
             ],
             "as": "logout",
-            "_id": 3000004
+            "_id": 79
         },
         {
-            "id": "d42400b8-aed7-11ee-9216-0242c0a80002",
+            "id": 66,
             "name": "Registration page",
             "description": "Registration page",
             "url": "/open/register",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
             "is_page": "Yes",
             "group": "open",
             "action": "RegisterController@index",
-            "_id": 3000005
+            "_id": 80
         },
         {
-            "id": "d4240113-aed7-11ee-9216-0242c0a80002",
+            "id": 67,
             "name": "Send sign up SMS",
             "description": "Send sign up SMS",
             "url": "/open/register/send",
-            "parent_id": "d42400b8-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 66,
             "method": [
                 "post"
             ],
@@ -502,14 +502,14 @@
                 "api",
                 "web"
             ],
-            "_id": 4000001
+            "_id": 81
         },
         {
-            "id": "d424016a-aed7-11ee-9216-0242c0a80002",
+            "id": 68,
             "name": "Submit for registration",
             "description": "Submit for registration",
             "url": "/open/register",
-            "parent_id": "d42400b8-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 66,
             "method": [
                 "post"
             ],
@@ -519,106 +519,106 @@
                 "api",
                 "web"
             ],
-            "_id": 4000002
+            "_id": 82
         },
         {
-            "id": "d42401c3-aed7-11ee-9216-0242c0a80002",
+            "id": 69,
             "name": "Forget page",
             "description": "Forget page",
             "url": "/open/password",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
             "is_page": "Yes",
             "group": "open",
             "action": "ForgotPasswordController@index",
-            "_id": 3000006
+            "_id": 83
         },
         {
-            "id": "d424021a-aed7-11ee-9216-0242c0a80002",
+            "id": 70,
             "name": "Forget password email",
             "description": "Forget password email",
             "url": "/open/forgot-password/send",
-            "parent_id": "d42401c3-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 69,
             "method": [
                 "post"
             ],
             "group": "open",
             "action": "ForgotPasswordController@send",
-            "_id": 4000001
+            "_id": 84
         },
         {
-            "id": "d4240273-aed7-11ee-9216-0242c0a80002",
+            "id": 71,
             "name": "Forget password SMS sending",
             "description": "Forget password SMS sending",
             "url": "/open/forgot-password/send-sms",
-            "parent_id": "d42401c3-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 69,
             "method": [
                 "post"
             ],
             "group": "open",
             "action": "ForgotPasswordController@sendSMS",
-            "_id": 4000002
+            "_id": 85
         },
         {
-            "id": "d42402cc-aed7-11ee-9216-0242c0a80002",
+            "id": 72,
             "name": "Forget password submit reset password",
             "description": "Forget password submit reset password",
             "url": "/open/forgot-password/reset-password",
-            "parent_id": "d42401c3-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 69,
             "method": [
                 "post"
             ],
             "group": "open",
-            "_id": 4000003
+            "_id": 86
         },
         {
-            "id": "d4240327-aed7-11ee-9216-0242c0a80002",
+            "id": 73,
             "name": "Get user information",
             "description": "Get user information",
             "url": "/open/user",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
             "group": "open",
             "action": "IndexController@user",
-            "_id": 3000007
+            "_id": 87
         },
         {
-            "id": "d4240380-aed7-11ee-9216-0242c0a80002",
+            "id": 74,
             "name": "Get menu information",
             "description": "Get menu information",
             "url": "/open/menu",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
             "group": "open",
             "action": "IndexController@menu",
-            "_id": 3000008
+            "_id": 88
         },
         {
-            "id": "d4241b9d-aed7-11ee-9216-0242c0a80002",
+            "id": 92,
             "name": "Get single menu details",
             "icons": "fa-edit",
             "description": "Menu details",
             "url": "/open/menu-info",
-            "parent_id": "d4240380-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 74,
             "method": [
                 "get"
             ],
             "group": "open",
             "action": "IndexController@menuInfo",
-            "_id": 4000001
+            "_id": 89
         },
         {
-            "id": "d42403e7-aed7-11ee-9216-0242c0a80002",
+            "id": 75,
             "name": "Polar verification",
             "description": "Polar verification",
             "url": "/open/geetest",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
@@ -628,321 +628,167 @@
                 "api",
                 "web"
             ],
-            "_id": 3000009
+            "_id": 90
         },
         {
-            "id": "d4240550-aed7-11ee-9216-0242c0a80002",
+            "id": 79,
             "name": "Get the unique identity of the connection",
             "description": "Get the unique identity of the connection",
             "url": "/open/client-id",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
             "group": "open",
             "action": "IndexController@clientId",
-            "_id": 3000010
+            "_id": 91
         },
         {
-            "id": "d4240a0c-aed7-11ee-9216-0242c0a80002",
+            "id": 91,
             "name": "Seven cattle cloud token",
             "icons": "fa-cloud-upload",
             "description": "Seven cattle cloud upload token to get",
             "url": "/open/qi-niu/token",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
             "group": "open",
             "action": "QiNiuController@getToken",
-            "_id": 3000011
+            "_id": 92
         },
         {
-            "id": "d4241c4b-aed7-11ee-9216-0242c0a80002",
+            "id": 93,
             "name": "获取微信公众号配置",
             "icons": "fa-wechat",
             "description": "获取微信公众号配置",
             "url": "/open/wx-config",
-            "parent_id": "d423c2e2-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 4,
             "method": [
                 "get"
             ],
             "group": "open",
             "action": "IndexController@wxConfig",
-            "_id": 3000012
+            "_id": 93
         }
     ],
     "resource": [
         {
-            "id": "d423c518-aed7-11ee-9216-0242c0a80002",
+            "id": 9,
             "name": "Ordinary users",
             "icons": "fa-user",
             "description": "Ordinary users",
             "url": "/admin/users",
-            "parent_id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 6,
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000001,
-            "options": {
-                "only": [
-                    {
-                        "id": "32580895-587d-4e6d-a462-3fdad06c68dd",
-                        "name": "list"
-                    },
-                    {
-                        "id": "e365a353-cd12-49a8-a1c4-09c8fe9f1888",
-                        "name": "export"
-                    },
-                    {
-                        "id": "8838725d-b6a9-43ca-a6a3-4ee4e3701461",
-                        "name": "import"
-                    },
-                    {
-                        "id": "21780798-3d4e-44a9-8c1c-40a0205ff057",
-                        "name": "show"
-                    },
-                    {
-                        "id": "f1c9f134-048d-41d5-b555-d50839be2f50",
-                        "name": "create"
-                    },
-                    {
-                        "id": "441709f2-06ca-409a-b2d7-f0f57a6e6895",
-                        "name": "update"
-                    },
-                    {
-                        "id": "95d82b37-3059-46d3-9281-dc6962de0edc",
-                        "name": "delete"
-                    }
-                ]
-            }
+            "_id": 6,
+            "end_id": 16
         },
         {
-            "id": "d423ce68-aed7-11ee-9216-0242c0a80002",
+            "id": 17,
             "name": "Authority management",
             "icons": "fa-sitemap",
             "description": "Role list",
             "url": "/admin/roles",
-            "parent_id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 6,
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
             "item_name": "Role",
-            "_id": 4000002,
-            "options": {
-                "only": [
-                    {
-                        "id": "ec2e0c7c-d513-42ef-8860-082792816e2e",
-                        "name": "list"
-                    },
-                    {
-                        "id": "46478b55-bc2c-45b1-a418-77f5c1310d57",
-                        "name": "export"
-                    },
-                    {
-                        "id": "223f8ee9-2425-4e10-845b-7412cd5f783f",
-                        "name": "import"
-                    },
-                    {
-                        "id": "7171907e-831f-4243-98f7-e5766f81ebc4",
-                        "name": "show"
-                    },
-                    {
-                        "id": "587da9ae-2438-4cc6-9e73-e814ef1f7513",
-                        "name": "create"
-                    },
-                    {
-                        "id": "a3ea52ce-fc1d-4187-995e-32b6b02a2236",
-                        "name": "update"
-                    },
-                    {
-                        "id": "e751a625-76b1-4b4e-bdbf-cf00c6a555d3",
-                        "name": "delete"
-                    }
-                ]
-            }
+            "_id": 14,
+            "end_id": 24
         },
         {
-            "id": "d423ef92-aed7-11ee-9216-0242c0a80002",
+            "id": 25,
             "name": "Operation log",
             "icons": "fa-mouse-pointer",
             "description": "Log list",
             "url": "/admin/logs",
-            "parent_id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 6,
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
             "item_name": "Journal",
-            "_id": 4000003,
-            "options": {
-                "only": [
-                    {
-                        "id": "fb8ba90a-db15-4a70-aea0-41385f998b09",
-                        "name": "list"
-                    },
-                    {
-                        "id": "1227a988-d31d-44fd-aa3a-7b499e21f931",
-                        "name": "export"
-                    },
-                    {
-                        "id": "c0a6a81c-fb69-4f20-bf5c-20933f760319",
-                        "name": "import"
-                    },
-                    {
-                        "id": "2e6253dd-f4a3-475f-ac15-cd20defe1e3c",
-                        "name": "show"
-                    },
-                    {
-                        "id": "9f3c77c1-b21b-4880-a32f-5ad7bfbd4b0e",
-                        "name": "create"
-                    },
-                    {
-                        "id": "65d1064e-af51-4f28-8ea6-f2d93c2ed6d5",
-                        "name": "update"
-                    },
-                    {
-                        "id": "e58d668a-d447-4e57-97ae-d2c618908b57",
-                        "name": "delete"
-                    }
-                ]
-            }
+            "_id": 22,
+            "end_id": 32
         },
         {
-            "id": "d423f384-aed7-11ee-9216-0242c0a80002",
+            "id": 33,
             "name": "Background users",
             "icons": "fa-user-secret",
             "description": "Background users",
             "url": "/admin/admins",
-            "parent_id": "d423c3a8-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 6,
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000004,
-            "options": {
-                "only": [
-                    {
-                        "id": "f8ef618d-af2b-4e11-991a-c7dacfc18dbd",
-                        "name": "list"
-                    },
-                    {
-                        "id": "0d1b21e2-d653-405d-9a2d-b30c2220aada",
-                        "name": "export"
-                    },
-                    {
-                        "id": "edf5979c-aea1-4449-b3f8-4bbf9fab32ec",
-                        "name": "import"
-                    },
-                    {
-                        "id": "1bec7ab2-0f97-4463-a142-15283febbfce",
-                        "name": "show"
-                    },
-                    {
-                        "id": "e2e9a1d4-7db5-4e91-affc-31cf355e687e",
-                        "name": "create"
-                    },
-                    {
-                        "id": "04441631-c5b9-46f1-9b5f-99265189db97",
-                        "name": "update"
-                    },
-                    {
-                        "id": "cb137678-67cd-4006-91a3-ece05b3a19fe",
-                        "name": "delete"
-                    }
-                ]
-            }
+            "_id": 30,
+            "end_id": 40
         },
         {
-            "id": "d423f66d-aed7-11ee-9216-0242c0a80002",
+            "id": 41,
             "name": "Menu settings",
             "icons": "fa-bars",
             "description": "Menu list",
             "url": "/admin/menus",
-            "parent_id": "d423c408-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 7,
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
             "item_name": "Menu",
-            "_id": 4000001,
+            "_id": 39,
             "options": {
                 "only": [
                     {
-                        "id": "d423f6e5-aed7-11ee-9216-0242c0a80002",
+                        "id": 42,
                         "name": "list"
                     },
                     {
-                        "id": "d423f744-aed7-11ee-9216-0242c0a80002",
+                        "id": 43,
                         "name": "export"
                     },
                     {
-                        "id": "d423f7a2-aed7-11ee-9216-0242c0a80002",
+                        "id": 44,
                         "name": "import",
                         "env": "local"
                     },
                     {
-                        "id": "d423f7ff-aed7-11ee-9216-0242c0a80002",
+                        "id": 45,
                         "name": "show"
                     },
                     {
-                        "id": "d423f85c-aed7-11ee-9216-0242c0a80002",
+                        "id": 46,
                         "name": "create",
                         "env": "local"
                     },
                     {
-                        "id": "d423f8b7-aed7-11ee-9216-0242c0a80002",
+                        "id": 47,
                         "name": "update",
                         "env": "local"
                     },
                     {
-                        "id": "d423f918-aed7-11ee-9216-0242c0a80002",
+                        "id": 48,
                         "name": "delete",
                         "env": "local"
                     }
                 ]
-            }
+            },
+            "end_id": 48
         },
         {
-            "id": "d423f9af-aed7-11ee-9216-0242c0a80002",
+            "id": 49,
             "name": "System settings",
             "icons": "fa-gear",
             "description": "System settings",
             "url": "/admin/configs",
-            "parent_id": "d423c408-aed7-11ee-9216-0242c0a80002",
+            "parent_id": 7,
             "is_page": "Yes",
             "status": "Display",
             "group": "admin",
-            "_id": 4000002,
-            "options": {
-                "only": [
-                    {
-                        "id": "e90aa703-05dc-47b8-93e0-2673c2feaef7",
-                        "name": "list"
-                    },
-                    {
-                        "id": "4f06edcf-9b16-4b17-86ea-4c8188018902",
-                        "name": "export"
-                    },
-                    {
-                        "id": "c1d380dc-ad1f-4500-a3cb-c7c3a74ead1b",
-                        "name": "import"
-                    },
-                    {
-                        "id": "7814eba2-bb7a-471c-9cf6-e5df3ff6a868",
-                        "name": "show"
-                    },
-                    {
-                        "id": "3bae6744-5d98-460d-ae64-5508b62e12a0",
-                        "name": "create"
-                    },
-                    {
-                        "id": "543e4427-17dd-42e4-b976-542bb85c4a5c",
-                        "name": "update"
-                    },
-                    {
-                        "id": "d175d74c-838d-4f74-9b33-8b953b338a69",
-                        "name": "delete"
-                    }
-                ]
-            }
+            "_id": 49,
+            "end_id": 56
         }
     ],
     "update_position": []

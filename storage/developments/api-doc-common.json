@@ -1,7 +1,7 @@
 {
     "menus": [
         {
-            "id": "d423ffa1-aed7-11ee-9216-0242c0a80002",
+            "id": 63,
             "_trans_name": "登录页面",
             "params": [],
             "body_params": [],
@@ -33,7 +33,7 @@
             ]
         },
         {
-            "id": "d4240001-aed7-11ee-9216-0242c0a80002",
+            "id": 64,
             "_trans_name": "提交登录",
             "params": [],
             "body_params": [
@@ -118,7 +118,7 @@
             ]
         },
         {
-            "id": "d423fefe-aed7-11ee-9216-0242c0a80002",
+            "id": 62,
             "_trans_name": "更新token",
             "params": [],
             "body_params": [],
@@ -130,7 +130,7 @@
             ]
         },
         {
-            "id": "d423fea3-aed7-11ee-9216-0242c0a80002",
+            "id": 61,
             "_trans_name": "获取配置信息",
             "params": [],
             "body_params": [],
@@ -246,12 +246,10 @@
         {
             "name": "title",
             "description": "提示"
-        },
-        {
+        }, {
             "name": "content",
             "description": "提示内容"
-        },
-        {
+        }, {
             "name": "redirect",
             "description": "跳转至页面"
         },
@@ -306,84 +304,64 @@
         {
             "name": "list",
             "description": "列表分页数据"
-        },
-        {
+        }, {
             "name": "options",
             "description": "排序筛选对象"
-        },
-        {
+        }, {
             "name": "options.where",
             "description": "当前筛选条件"
-        },
-        {
+        }, {
             "name": "options.where._key",
             "description": "关键字搜索组使用搜索key"
-        },
-        {
+        }, {
             "name": "options.order",
             "description": "当前排序结果"
-        },
-        {
+        }, {
             "name": "maps",
             "description": "数据项字典映射"
-        },
-        {
+        }, {
             "name": "mapsRelations",
             "description": "关联对象对应的数据表"
-        },
-        {
+        }, {
             "name": "configUrl",
             "description": "拥有的可操作权限"
-        },
-        {
+        }, {
             "name": "configUrl.indexUrl",
             "description": "列表页面"
-        },
-        {
+        }, {
             "name": "configUrl.listUrl",
             "description": "分页接口"
-        },
-        {
+        }, {
             "name": "configUrl.exportUrl",
             "description": "导出地址"
-        },
-        {
+        }, {
             "name": "configUrl.importUrl",
             "description": "导入地址"
-        },
-        {
+        }, {
             "name": "configUrl.showUrl",
             "description": "查看详情"
-        },
-        {
+        }, {
             "name": "configUrl.createUrl",
             "description": "创建操作"
-        },
-        {
+        }, {
             "name": "configUrl.updateUrl",
             "description": "修改操作"
-        },
-        {
+        }, {
             "name": "configUrl.deleteUrl",
             "description": "删除操作"
-        },
-        {
+        }, {
             "name": "keywordsMap",
             "description": "关键字搜索可选项"
-        },
-        {
+        }, {
             "name": "excel",
             "description": "导出excel配置"
-        },
-        {
+        }, {
             "name": "excel.sheet",
             "description": "导出excel的sheet名称"
-        },
-        {
+        }, {
             "name": "excel.fileName",
             "description": "导出excel的文件名"
-        },
-        {
+        }, {
             "name": "excel.exportFields",
             "description": "导出excel的可选字段"
         },
@@ -400,70 +378,54 @@
         {
             "name": "current_page",
             "description": "当前页码"
-        },
-        {
+        }, {
             "name": "data",
             "description": "分页数据集合"
         },
         {
             "name": "first_page_url",
             "description": "第一页地址"
-        },
-        {
+        }, {
             "name": "from",
             "description": "数据条数开始数"
-        },
-        {
+        }, {
             "name": "last_page",
             "description": "最大页码"
-        },
-        {
+        }, {
             "name": "last_page_url",
             "description": "最后一页地址"
-        },
-        {
+        }, {
             "name": "links",
             "description": "页码按钮集合"
-        },
-        {
+        }, {
             "name": "links.$index",
             "description": "页码按钮数据对象"
-        },
-        {
+        }, {
             "name": "links.$index.url",
             "description": "页码地址"
-        },
-        {
+        }, {
             "name": "links.$index.label",
             "description": "页码数"
-        },
-        {
+        }, {
             "name": "links.$index.active",
             "description": "是否选中当前页码"
-        },
-        {
+        }, {
             "name": "next_page_url",
             "description": "下一页地址"
-        },
-        {
+        }, {
             "name": "path",
             "description": "数据地址"
-        },
-        {
+        }, {
             "name": "per_page",
             "description": "每页多少条"
-        },
-        {
+        }, {
             "name": "prev_page_url",
             "description": "上一页地址"
-        },
-        {
+        }, {
             "name": "to",
             "description": "数据条数结束数"
-        },
-        {
+        }, {
             "name": "total",
             "description": "总数据条数"
-        }
-    ]
+        }]
 }
