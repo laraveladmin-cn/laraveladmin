@@ -684,6 +684,38 @@
             "status": "Display",
             "group": "admin",
             "_id": 4000001,
+            "options": {
+                "only": [
+                    {
+                        "id": 10,
+                        "name": "list"
+                    },
+                    {
+                        "id": 11,
+                        "name": "export"
+                    },
+                    {
+                        "id": 12,
+                        "name": "import"
+                    },
+                    {
+                        "id": 13,
+                        "name": "show"
+                    },
+                    {
+                        "id": 14,
+                        "name": "create"
+                    },
+                    {
+                        "id": 15,
+                        "name": "update"
+                    },
+                    {
+                        "id": 16,
+                        "name": "delete"
+                    }
+                ]
+            },
             "end_id": 16
         },
         {
@@ -698,6 +730,38 @@
             "group": "admin",
             "item_name": "Role",
             "_id": 4000002,
+            "options": {
+                "only": [
+                    {
+                        "id": 18,
+                        "name": "list"
+                    },
+                    {
+                        "id": 19,
+                        "name": "export"
+                    },
+                    {
+                        "id": 20,
+                        "name": "import"
+                    },
+                    {
+                        "id": 21,
+                        "name": "show"
+                    },
+                    {
+                        "id": 22,
+                        "name": "create"
+                    },
+                    {
+                        "id": 23,
+                        "name": "update"
+                    },
+                    {
+                        "id": 24,
+                        "name": "delete"
+                    }
+                ]
+            },
             "end_id": 24
         },
         {
@@ -712,6 +776,38 @@
             "group": "admin",
             "item_name": "Journal",
             "_id": 4000003,
+            "options": {
+                "only": [
+                    {
+                        "id": 26,
+                        "name": "list"
+                    },
+                    {
+                        "id": 27,
+                        "name": "export"
+                    },
+                    {
+                        "id": 28,
+                        "name": "import"
+                    },
+                    {
+                        "id": 29,
+                        "name": "show"
+                    },
+                    {
+                        "id": 30,
+                        "name": "create"
+                    },
+                    {
+                        "id": 31,
+                        "name": "update"
+                    },
+                    {
+                        "id": 32,
+                        "name": "delete"
+                    }
+                ]
+            },
             "end_id": 32
         },
         {
@@ -725,6 +821,38 @@
             "status": "Display",
             "group": "admin",
             "_id": 4000004,
+            "options": {
+                "only": [
+                    {
+                        "id": 34,
+                        "name": "list"
+                    },
+                    {
+                        "id": 35,
+                        "name": "export"
+                    },
+                    {
+                        "id": 36,
+                        "name": "import"
+                    },
+                    {
+                        "id": 37,
+                        "name": "show"
+                    },
+                    {
+                        "id": 38,
+                        "name": "create"
+                    },
+                    {
+                        "id": 39,
+                        "name": "update"
+                    },
+                    {
+                        "id": 40,
+                        "name": "delete"
+                    }
+                ]
+            },
             "end_id": 40
         },
         {
@@ -788,6 +916,38 @@
             "status": "Display",
             "group": "admin",
             "_id": 4000002,
+            "options": {
+                "only": [
+                    {
+                        "id": 50,
+                        "name": "list"
+                    },
+                    {
+                        "id": 51,
+                        "name": "export"
+                    },
+                    {
+                        "id": 52,
+                        "name": "import"
+                    },
+                    {
+                        "id": 53,
+                        "name": "show"
+                    },
+                    {
+                        "id": 54,
+                        "name": "create"
+                    },
+                    {
+                        "id": 55,
+                        "name": "update"
+                    },
+                    {
+                        "id": 56,
+                        "name": "delete"
+                    }
+                ]
+            },
             "end_id": 56
         }
     ],

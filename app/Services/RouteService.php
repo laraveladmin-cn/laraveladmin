@@ -613,13 +613,32 @@ class RouteService
                 $max_old_resource++;
                 $item['_no'] = $max_old_resource;
             }else{
-
+                $item['_no'] = $old_resource[$id];
             }
-
             return $item;
-        })->values()
+        })->sortBy('_no')
+            ->map(function ($item){
+                unset($item['_no']);
+                return $item;
+            })
+            ->values()
             ->toArray();
-        $out_menus['menus'] = $menus->values()->toArray();
+        $out_menus['menus'] = $menus->map(function ($item)use(&$max_old_menus,$old_menus){
+            $id = $item['id'];
+            if(!isset($old_menus[$id])){
+                $max_old_menus++;
+                $item['_no'] = $max_old_menus;
+            }else{
+                $item['_no'] = $old_menus[$id];
+            }
+            return $item;
+        })->sortBy('_no')
+            ->map(function ($item){
+                unset($item['_no']);
+                return $item;
+            })
+            ->values()
+            ->toArray();
         $out_menus['update_position'] = [];
         file_put_contents(base_path(self::$routes),json_encode($out_menus,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT).PHP_EOL);
         if(config('laravel_admin.auto_cache_route')){
