@@ -607,8 +607,15 @@ class RouteService
             ->toArray();
         $max_old_menus = max($old_menus);
         //新加菜单在最后追加
-        $out_menus['resource'] = $resource->map(function ($item){
-            $item['_no'] =
+        $out_menus['resource'] = $resource->map(function ($item)use(&$max_old_resource,$old_resource){
+            $id = $item['id'];
+            if(!isset($old_resource[$id])){
+                $max_old_resource++;
+                $item['_no'] = $max_old_resource;
+            }else{
+
+            }
+
             return $item;
         })->values()
             ->toArray();
