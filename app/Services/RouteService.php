@@ -596,18 +596,22 @@ class RouteService
         });
         //输出菜单数据
         $out_menus = json_decode(file_get_contents(base_path(self::$routes)),true);
-        $old_resource = Arr::get($out_menus,'resource',[])?:[];
-        $old_menus = Arr::get($out_menus,'menus',[])?:[];
+        $old_resource = collect(Arr::get($out_menus,'resource',[])?:[])
+            ->pluck('id')
+            ->flip()
+            ->toArray();
+        $max_old_resource = max($old_resource);
+        $old_menus = collect(Arr::get($out_menus,'menus',[])?:[])
+            ->pluck('id')
+            ->flip()
+            ->toArray();
+        $max_old_menus = max($old_menus);
         //新加菜单在最后追加
-        $resource = $resource->values()->keyBy('id')->toArray();
-
-
-
-        $out_menus['resource'] = collect($old_resource)
-            //->
-            ->map(function ($item)use(&$resource){
-
-        });
+        $out_menus['resource'] = $resource->map(function ($item){
+            $item['_no'] =
+            return $item;
+        })->values()
+            ->toArray();
         $out_menus['menus'] = $menus->values()->toArray();
         $out_menus['update_position'] = [];
         file_put_contents(base_path(self::$routes),json_encode($out_menus,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT).PHP_EOL);

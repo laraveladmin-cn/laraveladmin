@@ -47,7 +47,10 @@
         "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "easywechat-composer/easywechat-composer": true
+            "easywechat-composer/easywechat-composer": true,
+            "php-http/discovery": true,
+            "yurunsoft/composer-include-files": true,
+            "yurunsoft/guzzle-swoole": true
         }
     },
     "extra": {
