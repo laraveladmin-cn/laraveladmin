@@ -116,7 +116,7 @@
                 let value = array_get(item,key,'');
                 let resource_id = array_get(item,'menu.resource_id',0);
                 let res = this.$tp(value , this.shared);
-                if(resource_id>0 && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
+                if(resourceGt0(resource_id) && res==value && (this._i18n.locale!='en' || value.indexOf('{')!=-1)){ //没有翻译成功
                     let parent_name = array_get(item,'menu.parent.item_name','') || array_get(item,'menu.parent.name','') || '';
                     let key = value.replace(parent_name,'{name}');
                     let shared = copyObj(this.shared);

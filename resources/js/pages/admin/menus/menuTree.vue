@@ -176,15 +176,7 @@
                 this.$refs['menuTree'].getData({});
             },
             resourceGt0(resource_id){
-                if(typeof resource_id=="number"){
-                    return resource_id>0;
-                }else if(resource_id==='0'){
-                    return false;
-                }else if(resource_id==='-1'){
-                    return false;
-                }else {
-                    return !!resource_id;
-                }
+              return resourceGt0(resource_id);
             }
         }
 
