@@ -72,6 +72,12 @@ class AlertMenusUuidTable extends Migration
             ->update([
                 'uuid'=>DB::raw('UUID()')
             ]);
+        //指定特定菜单uuid
+        $menuModel = Menu::query()->getModel();
+        $this->replaceUuid($menuModel->openRoot);
+        $this->replaceUuid($menuModel->homeRoot);
+        $this->replaceUuid($menuModel->adminRoot);
+
         //修改关联数据项
         Menu::query()
             ->where('menus.parent_uuid','')
@@ -177,6 +183,19 @@ class AlertMenusUuidTable extends Migration
     public function down()
     {
 
+    }
+
+    protected function replaceUuid($items){
+        collect($items)->each(function ($key,$val){
+            if(!$key){
+                return false;
+            }
+            DB::table('menus')
+                ->where('id',$key)
+                ->update([
+                    'uuid'=>$val
+                ]);
+        });
     }
 
     protected function replaceId($file,$is_route=false){
