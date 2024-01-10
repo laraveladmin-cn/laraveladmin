@@ -143,22 +143,11 @@ class AlertMenusUuidTable extends Migration
         });
 
         Schema::table('params', function (Blueprint $table) {
-            try {
-                $table->dropIndex('params_menu_id_index');
-            }catch (\Exception $exception){
-                $table->dropIndex('api_params_menu_id_index');
-            }
-
             $table->dropColumn(['menu_id']);
             $table->renameColumn('menu_uuid','menu_id');
             $table->index('menu_id');
         });
         Schema::table('responses', function (Blueprint $table) {
-            try {
-                $table->dropIndex('responses_menu_id_index');
-            }catch (\Exception $exception){
-                $table->dropIndex('api_responses_menu_id_index');
-            }
             $table->dropColumn(['menu_id']);
             $table->renameColumn('menu_uuid','menu_id');
             $table->index('menu_id');
@@ -195,7 +184,7 @@ class AlertMenusUuidTable extends Migration
     }
 
     protected function replaceUuid($items){
-        collect($items)->each(function ($key,$val){
+        collect($items)->each(function ($val,$key){
             if(!$key){
                 return false;
             }
