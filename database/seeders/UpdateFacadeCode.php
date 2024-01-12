@@ -47,7 +47,7 @@ class UpdateFacadeCode extends Seeder
                     'new'=><<<'str'
         public static function getFacadeApplication()
         {
-            if($now_app = \SwooleTW\Http\Coroutine\Context::getApp()){
+            if($now_app = \App\Swoole\Coroutine\Context::getApp()){
                 return $now_app;
             }
             return static::$app;
@@ -119,7 +119,7 @@ str,
             static::$instance = new static;
         }
         $instance = static::$instance;
-        if($new_instance = \SwooleTW\Http\Coroutine\Context::getApp()){
+        if($new_instance = \App\Swoole\Coroutine\Context::getApp()){
             return $new_instance;
         }
         return $instance;
