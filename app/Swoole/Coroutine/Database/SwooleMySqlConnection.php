@@ -2,6 +2,7 @@
 
 namespace App\Swoole\Coroutine\Database;
 
+use App\Swoole\Coroutine\Context;
 use Closure;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\MySqlConnection as BaseConnection;
@@ -70,7 +71,7 @@ class SwooleMySqlConnection extends BaseConnection
      */
     protected function runQueryCallback($query, $bindings, Closure $callback)
     {
-        if(Coroutine::getuid()>0){
+        if(Context::getCoroutineId()>0){
             // To execute the statement, we'll simply call the callback, which will actually
             // run the SQL against the PDO connection. Then we can calculate the time it
             // took to execute and log the query SQL, bindings and time in our memory.
@@ -196,7 +197,7 @@ class SwooleMySqlConnection extends BaseConnection
     public function getPoolPdo($only_read = false){
         $key = $this->getPoolKey($only_read);
         $this->getPool($only_read);
-        $cid = Coroutine::getCid();
+        $cid = Context::getCoroutineId();
         if(is_array($this->$key)){
             $keys = array_keys($this->$key);
             mt_srand(); //重新播种
@@ -222,7 +223,7 @@ class SwooleMySqlConnection extends BaseConnection
 
 
     public function getUseingPoolPdoInfo($only_read = false){
-        $cid = Coroutine::getCid();
+        $cid = Context::getCoroutineId();
         $key = $this->getUseingPoolKey($only_read);
         if(!isset($this->$key[$cid])){
             $pdo = $this->getPoolPdo($only_read);
@@ -303,7 +304,7 @@ class SwooleMySqlConnection extends BaseConnection
             $this->pdo = call_user_func($this->pdo);
         }
 
-        if(Coroutine::getuid()>0){ //协程应用调度
+        if(Context::getCoroutineId()>0){ //协程应用调度
             return $this->getUseingPoolPdo();
         }
 
@@ -331,7 +332,7 @@ class SwooleMySqlConnection extends BaseConnection
             $this->readPdo = call_user_func($this->readPdo);
         }
 
-        if($this->readPdo && Coroutine::getuid()>0){ //协程应用调度
+        if($this->readPdo && Context::getCoroutineId()>0){ //协程应用调度
             return $this->getUseingPoolPdo(true);
         }
 

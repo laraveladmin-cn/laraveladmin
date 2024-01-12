@@ -153,4 +153,9 @@ class Context extends BaseContext
         }
     }
 
+    public static function getCoroutineId(): int
+    {
+        return class_exists('Swoole\Coroutine')?Coroutine::getuid():-1;
+    }
+
 }

@@ -2,11 +2,11 @@
 
 namespace App\Swoole\Coroutine\Redis;
 
+use App\Swoole\Coroutine\Context;
 use Illuminate\Redis\Connections\PhpRedisConnection as BasePhpRedisConnection;
 use Illuminate\Redis\Events\CommandExecuted;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Swoole\Coroutine;
 use Swoole\Database\RedisConfig;
 use Swoole\Database\RedisPool;
 
@@ -48,7 +48,7 @@ class PhpRedisConnection extends BasePhpRedisConnection
             if (isset($this->events)) {
                 $this->event(new CommandExecuted($method, $parameters, $time, $this));
             }
-            $cid = Coroutine::getCid();
+            $cid = Context::getCoroutineId();
             if($cid>0){
                 if(isset($this->useing_pool_redies[$cid])){
                     $redis = $this->useing_pool_redies[$cid];
@@ -75,7 +75,7 @@ class PhpRedisConnection extends BasePhpRedisConnection
     public function client()
     {
         //协程调度
-        if(Coroutine::getCid()>0){ //协程应用调度
+        if(Context::getCoroutineId()>0){ //协程应用调度
             //redis连接池获取redis连接对象
             return $this->getUseingPoolRedis();
         }
@@ -157,7 +157,7 @@ class PhpRedisConnection extends BasePhpRedisConnection
      * @return mixed
      */
     protected function getUseingPoolRedis(){
-        $cid = Coroutine::getCid();
+        $cid = Context::getCoroutineId();
         if(!isset($this->useing_pool_redies[$cid])){
             $redis = $this->getPoolRedis();
             $this->useing_pool_redies[$cid] = $redis;
