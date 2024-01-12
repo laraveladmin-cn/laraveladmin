@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Open;
 use App\Facades\ClientAuth;
 use App\Facades\Option;
 use App\Http\Controllers\Controller;
+use App\Models\Config;
 use App\Models\Menu;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
@@ -387,6 +388,34 @@ class IndexController extends Controller
             'errors' => ['roue'=>trans('Routing address error')],
             'message' => trans('The resource you visited does not exist')
         ],404);
+    }
+
+    /**
+     * 协议
+     * @return array[]
+     */
+    public function markdown()
+    {
+        $request = Request::instance();
+        $key = $request->input('key');
+        $name = '';
+        $markdown = '';
+        $markdown_public_access_keys = Option::get('markdown_public_access_keys',[]);
+        if (is_array($markdown_public_access_keys) &&
+            in_array($key, $markdown_public_access_keys)
+        ) {
+            $markdown = Option::get($key, '');
+            $name = Config::query()
+                ->where('key',$key)
+                ->value('name')?:'';
+        }
+        return [
+            'row' => [
+                'id' => null,
+                'name'=>$name,
+                'markdown' => $markdown
+            ]
+        ];
     }
 
 

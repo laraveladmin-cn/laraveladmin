@@ -670,6 +670,21 @@
             "group": "open",
             "action": "IndexController@wxConfig",
             "_id": 3000012
+        },
+        {
+            "id": "d3bb657d-e28e-4d79-b48b-bcc76e4023bf",
+            "name": "浏览Markdown文本",
+            "icons": "fa-internet-explorer",
+            "description": "IndexController@markdown",
+            "url": "/open/markdown",
+            "parent_id": 4,
+            "method": [
+                "get"
+            ],
+            "is_page": "Yes",
+            "group": "open",
+            "action": "IndexController@markdown",
+            "_id": 3000013
         }
     ],
     "resource": [

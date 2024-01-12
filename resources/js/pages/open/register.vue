@@ -35,7 +35,7 @@
                                 <div class="col-xs-12 col-lg-12 row-col">
                                     <icheck v-model="agree" :option="true">
                                     <span class="checkbox-label">
-                                         {{$tp('I have read and agree')}}《<a href="#">{{$tp('Protocol')}}</a>》
+                                         {{$tp('I have read and agree')}}《<a target="_blank" href="/open/markdown?key=privacy_policy">{{$tp('Protocol')}}</a>》
                                     </span>
                                     </icheck>
                                 </div>

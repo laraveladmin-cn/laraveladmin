@@ -7,14 +7,31 @@
                     <slot name="content" :data="data" :url="url" :maps="_maps" :error="error" :trans-field="transField">
                     </slot>
                 </div>
-                <div class="row">
+                <div class="row" v-show="!options.hideFoot">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                        <!-- <button type="button" class="btn btn-info pull-left" v-if="is_local" @click="$refs['demos'].open()">组件示例</button>-->
-                        <button type="button" class="btn pull-right" ref="submit" :class="'btn-'+theme" :disabled="!url || submiting || disabledSubmit"  @click="submitForm(invalid,validate)">{{$t('Submit')}}</button>
+                        <button type="button"
+                                class="btn pull-right"
+                                ref="submit"
+                                :class="'btn-'+theme"
+                                :disabled="!url || submiting || disabledSubmit"
+                                @click="submitForm(invalid,validate)">
+                            {{$t('Submit')}}
+                        </button>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <button type="button" class="btn btn-default pull-left" @click="resetForm">{{$t('Reset')}}</button>
-                        <button type="button" class="btn pull-right" :class="'btn-'+theme" v-if="is_local" @click="saveLayout">{{$t('Save the layout')}}</button>
+                        <button type="button"
+                                class="btn btn-default pull-left"
+                                @click="resetForm">
+                            {{$t('Reset')}}
+                        </button>
+                        <button type="button"
+                                class="btn pull-right"
+                                :class="'btn-'+theme"
+                                v-if="is_local"
+                                @click="saveLayout">
+                            {{$t('Save the layout')}}
+                        </button>
                     </div>
                 </div>
             </validation-observer>

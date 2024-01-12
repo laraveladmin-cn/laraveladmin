@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 use App\Facades\Option;
+use App\Models\Config;
 use Illuminate\Database\Seeder;
 
 class VersionSeeder extends Seeder
@@ -62,6 +63,28 @@ class VersionSeeder extends Seeder
             'type'=>1,
             'itype'=>7,
             'value' => '',
+        ]);
+
+        \App\Models\Config::firstOrCreate(['key'=>'privacy_policy'],[
+            'key' => 'privacy_policy',
+            'name' => '隐私政策',
+            'description' => '隐私政策条款内容',
+            'type'=>1,
+            'itype'=>3,
+            'value' => '# LaravelAdmin隐私政策
+#### 隐私政策
+隐私政策条款内容',
+        ]);
+
+        \App\Models\Config::firstOrCreate(['key'=>'markdown_public_access_keys'],[
+            'key' => 'markdown_public_access_keys',
+            'name' => 'markdown内容公开访问KEYS',
+            'description' => '通过"/open/markdown?key=privacy_policy"访问对应的markdown解析内容页面',
+            'type'=>2,
+            'itype'=>4,
+            'value' => [
+                'privacy_policy'
+            ],
         ]);
         $this->addVersion();
     }
