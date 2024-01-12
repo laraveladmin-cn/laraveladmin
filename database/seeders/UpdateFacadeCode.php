@@ -164,18 +164,18 @@ str
         $class = $file_item['class'];
         $file = (new \ReflectionClass($class))->getFileName();
         $code = file_get_contents($file);
-        $this->buildCode($code,$file_item['codes']);
+        $this->buildCode($code,$file_item['codes'],$file);
         file_put_contents($file,$code);
     }
 
-    protected function buildCode(&$code,$codes){
-        collect($codes)->each(function ($item)use(&$code){
+    protected function buildCode(&$code,$codes,$file){
+        collect($codes)->each(function ($item)use(&$code,$file){
             $str = $item['old'];
             $up_str = $item['new'];
             if(Str::contains($code,$str)){
                 $code = Str::replace($str,$up_str,$code);
             }else if(!Str::contains($code,$up_str)){
-                $this->command->warn('没有找到对应代码:'.PHP_EOL.$str);
+                $this->command->warn($file.'中没有找到对应代码:'.PHP_EOL.$str);
             }
         });
     }
