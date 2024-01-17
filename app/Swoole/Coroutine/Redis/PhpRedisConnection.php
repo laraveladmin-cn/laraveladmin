@@ -97,25 +97,28 @@ class PhpRedisConnection extends BasePhpRedisConnection
             ->withReserved(Arr::get($config,'reserved',''))
             ->withRetryInterval(Arr::get($config,'retry_interval',0))
             ->withReadTimeout(Arr::get($config,'read_timeout',0));
-        if (! empty($config['prefix'])) {
-           $pdo_config->withOption(\Redis::OPT_PREFIX, $config['prefix']);
+        if(method_exists($pdo_config,'withOption')){
+            if (! empty($config['prefix'])) {
+                $pdo_config->withOption(\Redis::OPT_PREFIX, $config['prefix']);
+            }
+
+            if (! empty($config['scan'])) {
+                $pdo_config->withOption(\Redis::OPT_SCAN, $config['scan']);
+            }
+
+            if (array_key_exists('serializer', $config)) {
+                $pdo_config->withOption(\Redis::OPT_SERIALIZER, $config['serializer']);
+            }
+
+            if (array_key_exists('compression', $config)) {
+                $pdo_config->withOption(\Redis::OPT_COMPRESSION, $config['compression']);
+            }
+
+            if (array_key_exists('compression_level', $config)) {
+                $pdo_config->withOption(\Redis::OPT_COMPRESSION_LEVEL, $config['compression_level']);
+            }
         }
 
-        if (! empty($config['scan'])) {
-           $pdo_config->withOption(\Redis::OPT_SCAN, $config['scan']);
-        }
-
-        if (array_key_exists('serializer', $config)) {
-           $pdo_config->withOption(\Redis::OPT_SERIALIZER, $config['serializer']);
-        }
-
-        if (array_key_exists('compression', $config)) {
-           $pdo_config->withOption(\Redis::OPT_COMPRESSION, $config['compression']);
-        }
-
-        if (array_key_exists('compression_level', $config)) {
-           $pdo_config->withOption(\Redis::OPT_COMPRESSION_LEVEL, $config['compression_level']);
-        }
         $this->pool = new RedisPool($pdo_config,Arr::get($config,'pool_size',64));
         return $this;
     }
