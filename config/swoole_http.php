@@ -21,7 +21,10 @@ return [
         'access_log' => env('SWOOLE_HTTP_ACCESS_LOG', false),
         // You must add --enable-openssl while compiling Swoole
         // Put `SWOOLE_SOCK_TCP | SWOOLE_SSL` if you want to enable SSL
-        'options' => array_merge([
+        'socket_type' => defined('SWOOLE_SOCK_TCP')?SWOOLE_SOCK_TCP:1,
+        'process_type' => defined('SWOOLE_PROCESS')?SWOOLE_PROCESS:2,
+        'options' => array_merge(
+            [
             'pid_file' => env('SWOOLE_HTTP_PID_FILE', base_path('storage/logs/swoole_http.pid')),
             'log_file' => env('SWOOLE_HTTP_LOG_FILE', base_path('storage/logs/swoole_http.log')),
             'daemonize' => env('SWOOLE_HTTP_DAEMONIZE', false),
@@ -47,20 +50,16 @@ return [
             'task_enable_coroutine'=>true,
             'enable_coroutine'=>true,
             'debug_mode'=>(bool) env('APP_DEBUG', false),
-        ],defined('SWOOLE_HOOK_STDIO')?[
-            'socket_type' => SWOOLE_SOCK_TCP,
-            'process_type' => SWOOLE_PROCESS,
-            'hook_flags' =>defined('SWOOLE_HOOK_STDIO')?
+        ],
+            defined('SWOOLE_HOOK_STDIO')?[
+            'hook_flags' =>
                 SWOOLE_HOOK_STDIO
                 |SWOOLE_HOOK_SOCKETS
                 |SWOOLE_HOOK_SLEEP
                 |SWOOLE_HOOK_NATIVE_CURL
                 |SWOOLE_HOOK_STREAM_FUNCTION
-                |SWOOLE_HOOK_FILE:0
-        ]:[
-            'socket_type' => 1,
-            'process_type' => 2,
-        ]),
+                |SWOOLE_HOOK_FILE
+        ]:[]),
     ],
 
     /*
