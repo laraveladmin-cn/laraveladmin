@@ -219,7 +219,9 @@ class MenuTableSeeder extends Seeder
                 ->update(['disabled'=>1]);
         }
         if($this->del_ids){
-            Menu::whereIn('id',$this->del_ids)->delete();
+            Menu::whereIn('id',collect($this->del_ids)->map(function ($id){
+                return strval($id);
+            })->toArray())->delete();
         }
         if(config('app.env')=='local'){
             RouteService::upRouteJson();
