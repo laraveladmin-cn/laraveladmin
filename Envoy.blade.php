@@ -103,6 +103,7 @@ php artisan config:clear && \
 php artisan cache:clear && \
 @endif
 php artisan key:generate --force && \
+php artisan create:api-secret && \
 php artisan links:init --force --relative && \
 php artisan db:seed --class=CheckDatabaseSeeder --force && \
 php artisan migrate:all && \

@@ -188,9 +188,17 @@ export default {
                 config.headers.Language = decodeURIComponent(language);
             }
             config.headers.RefererPage = window.location.href;
+            let api_encryption = 0;
+            if(window.AppConfig.api_encryption && window.AppConfig.server_rsa_pub){ //判断是否可使用加密传输
+                config.headers.ApiEncryption = api_encryption = 1;
+            }
             config.paramsSerializer = function (params) {
                 params = JSON.parse(JSON.stringify(params));
                 params['json'] = 1;
+                if(api_encryption){ //加密数据
+
+
+                }
                 return jQuery.param(params);
             };
             return config;

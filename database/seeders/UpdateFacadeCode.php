@@ -89,16 +89,26 @@ str,
                     'new'=><<<'str'
         if (isset($this->instances[$abstract]) && ! $needsContextualBuild) {
             $object = $this->instances[$abstract];
-            return \App\Swoole\Coroutine\Context::coroutineUseObj($abstract,$object);
+            if(class_exists('\App\Swoole\Coroutine\Context')){
+                return \App\Swoole\Coroutine\Context::coroutineUseObj($abstract,$object);
+            }
+	        return $object;
         }
 str
                 ],
                 [
                     'old'=><<<'str'
+        array_pop($this->with);
+
         return $object;
 str,
                     'new'=><<<'str'
-        return \App\Swoole\Coroutine\Context::coroutineUseObj($abstract,$object);
+        array_pop($this->with);
+        
+        if(class_exists('\App\Swoole\Coroutine\Context')){
+            return \App\Swoole\Coroutine\Context::coroutineUseObj($abstract,$object);
+        }
+        return $object;
 str
                 ],
                 [
@@ -119,7 +129,7 @@ str,
             static::$instance = new static;
         }
         $instance = static::$instance;
-        if($new_instance = \App\Swoole\Coroutine\Context::getApp()){
+        if(class_exists('\App\Swoole\Coroutine\Context') && $new_instance = \App\Swoole\Coroutine\Context::getApp()){
             return $new_instance;
         }
         return $instance;

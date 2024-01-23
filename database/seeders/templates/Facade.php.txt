@@ -122,18 +122,19 @@ abstract class Facade
     protected static function isMock()
     {
         $name = static::getFacadeAccessor();
-        $uid = Context::getCoroutineId();
-        if(in_array($name,Context::requestInstances()) && $uid>0){
-            $instance = Context::getData('_'.$name);
-            if($instance && $instance instanceof LegacyMockInterface){
-                return $instance;
+        if(class_exists('\App\Swoole\Coroutine\Context')){
+            $uid = Context::getCoroutineId();
+            if(in_array($name,Context::requestInstances()) && $uid>0){
+                $instance = Context::getData('_'.$name);
+                if($instance && $instance instanceof LegacyMockInterface){
+                    return $instance;
+                }
+                return ;
             }
-            return ;
-        }else{
-            return (isset(static::$resolvedInstance[$name]) &&
-                static::$resolvedInstance[$name] instanceof LegacyMockInterface)?:
-                static::$resolvedInstance[$name];
         }
+        return (isset(static::$resolvedInstance[$name]) &&
+            static::$resolvedInstance[$name] instanceof LegacyMockInterface)?:
+            static::$resolvedInstance[$name];
 
     }
 
@@ -160,9 +161,16 @@ abstract class Facade
     public static function swap($instance)
     {
         $name = static::getFacadeAccessor();
-        $uid = Context::getCoroutineId();
-        if(in_array($name,Context::requestInstances()) && $uid>0){
-            Context::setData('_'.$name,$instance);
+        if(class_exists('\App\Swoole\Coroutine\Context')){
+            $uid = Context::getCoroutineId();
+            if(in_array($name,Context::requestInstances()) && $uid>0){
+                Context::setData('_'.$name,$instance);
+            }else{
+                static::$resolvedInstance[$name] = $instance;
+                if(static::$app){
+                    static::$app->instance($name, $instance);
+                }
+            }
         }else{
             static::$resolvedInstance[$name] = $instance;
             if(static::$app){
@@ -216,9 +224,11 @@ abstract class Facade
         $app = self::getFacadeApplication();
         if ($app) {
             $instance = $app[$name];
-            $uid = Context::getCoroutineId();
-            if(!(in_array($name,Context::requestInstances()) && $uid>0)){
-                static::$resolvedInstance[$name] = $instance;
+            if(class_exists('\App\Swoole\Coroutine\Context')){
+                $uid = Context::getCoroutineId();
+                if(!(in_array($name,Context::requestInstances()) && $uid>0)){
+                    static::$resolvedInstance[$name] = $instance;
+                }
             }
             return $instance;
         }
@@ -258,7 +268,7 @@ abstract class Facade
      */
     public static function getFacadeApplication()
     {
-        if($now_app = Context::getApp()){
+        if(class_exists('\App\Swoole\Coroutine\Context') && $now_app = Context::getApp()){
             return $now_app;
         }
         return static::$app;
@@ -288,7 +298,9 @@ abstract class Facade
     {
         $abstract = static::getFacadeAccessor();
         $instance = static::getFacadeRoot();
-        $instance = Context::coroutineUseObj($abstract,$instance);
+        if(class_exists('\App\Swoole\Coroutine\Context')){
+            $instance = Context::coroutineUseObj($abstract,$instance);
+        }
         if (! $instance) {
             throw new RuntimeException('A facade root has not been set.');
         }

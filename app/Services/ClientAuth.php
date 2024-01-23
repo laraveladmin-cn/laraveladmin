@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Facades\LifeData;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
@@ -43,6 +44,21 @@ class ClientAuth
         return Crypt::encryptString(json_encode($token));
     }
 
+
+    /**
+     * 解密client_id
+     * @param $client_id
+     * @return array
+     */
+    public function decodedClientId($client_id){
+        try{
+            $decoded = collect(json_decode(Crypt::decryptString($client_id),true))->toArray();
+        }catch (\Exception $e){
+            $decoded = [];
+        }
+        return $decoded;
+    }
+
     /**
      * 认证客户端
      * @return array
@@ -51,15 +67,14 @@ class ClientAuth
         return LifeData::remember('_client_auth_decoded',function (){
             $key = $this->key;
             $token = urldecode(Request::header($key,Request::cookie($key,'')))?:'';
-            try{
-                $decoded = collect(json_decode(Crypt::decryptString($token),true))->toArray();
-            }catch (\Exception $e){
-                $decoded = [];
-            }
-            return $decoded;
+            return $this->decodedClientId($token);
         });
     }
 
+    /**
+     * 获取客户端id
+     * @return mixed
+     */
     public function id(){
         return LifeData::get('_client_auth_decoded.id','');
     }

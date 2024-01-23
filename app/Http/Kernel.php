@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\ActivatedMiddleware;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ApiResponseMiddleware;
 use App\Http\Middleware\LanguageMiddleware;
 use App\Http\Middleware\LogMiddleware;
 use App\Http\Middleware\ThrottleRequests;
@@ -44,12 +45,14 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            ApiResponseMiddleware::class
         ],
 
         'api' => [
             EnsureFrontendRequestsAreStateful::class,
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            ApiResponseMiddleware::class,
             \Fruitcake\Cors\HandleCors::class
         ],
     ];
