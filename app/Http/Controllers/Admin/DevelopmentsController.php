@@ -114,7 +114,7 @@ class DevelopmentsController extends Controller
         $connection = $request->input('connection') ?: config('database.default');
         $tname = $request->input('where.table_name');
         $driver =  config('database.connections.'.$connection.'.driver');
-        if ($driver == 'mysql') {
+        if ($driver == 'mysql' || $driver=='swoole-mysql') {
             $tableModel = new Table();
             $tableModel = $tableModel->setConnection($connection)
                 ->setTable(DB::raw('information_schema.`TABLES`'))

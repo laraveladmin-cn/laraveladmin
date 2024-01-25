@@ -59,7 +59,7 @@ class CreateModel extends BaseCreate
         $trueTable = $prefix.$table;
         $driver =  config('database.connections.'.$connection.'.driver');
         //数据表备注信息
-        if($driver=='mysql'){
+        if($driver=='mysql' || $driver=='swoole-mysql'){
             $data['comment'] =  DB::connection($connection)
                 ->select('SELECT TABLE_COMMENT FROM information_schema.`TABLES` WHERE TABLE_SCHEMA= :db_name AND TABLE_NAME = :tname',
                     [
