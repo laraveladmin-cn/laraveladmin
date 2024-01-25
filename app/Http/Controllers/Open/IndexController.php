@@ -369,7 +369,7 @@ class IndexController extends Controller
     public function menuInfo(){
         $request = app('request');
         $validator = Validator::make($request->all(), [
-            'id'=>'required|integer'
+            'id'=>'required'
         ]);
         if ($validator->fails()) {
             throw ValidationException::withMessages($validator->errors()->toArray());
