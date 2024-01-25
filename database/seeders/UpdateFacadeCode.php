@@ -95,10 +95,17 @@ str
                 ],
                 [
                     'old'=><<<'str'
+        array_pop($this->with);
+
         return $object;
 str,
                     'new'=><<<'str'
-        return \App\Swoole\Coroutine\Context::coroutineUseObj($abstract,$object);
+        array_pop($this->with);
+        
+        if(class_exists('\App\Swoole\Coroutine\Context')){
+            return \App\Swoole\Coroutine\Context::coroutineUseObj($abstract,$object);
+        }
+        return $object;
 str
                 ],
                 [
