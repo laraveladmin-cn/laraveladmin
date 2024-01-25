@@ -106,7 +106,7 @@ class BuildApiDoc extends BaseCommand
                 $value = Arr::get($urls,2,'');
                 if($value){
                     $method = Arr::get($urls,3,'');
-                    if($menu['resource_id']>0 && in_array($method,['excel','{id}',''])){ //资源列表接口
+                    if($this->resourceIdgtO($menu['resource_id']) && in_array($method,['excel','{id}',''])){ //资源列表接口
                         if($method=='excel'){
                             $method = 'export';
                             $is_list=2;
@@ -129,7 +129,7 @@ class BuildApiDoc extends BaseCommand
                 }
             }
             $group = $menu['group'];//组
-            if($menu['resource_id']>0){
+            if($this->resourceIdgtO($menu['resource_id'])){
                 $group = $menu->resource['group'];
             }
             $namespace = Arr::get($this->group,$group.'.namespace','');
@@ -150,7 +150,7 @@ class BuildApiDoc extends BaseCommand
             }
             $responses = [];
             try {
-                if($method=='edit' && $menu['resource_id']>0){ //编辑查看页面
+                if($method=='edit' && $this->resourceIdgtO($menu['resource_id'])){ //编辑查看页面
                     if(!isset($route_params_data['id'])){
                         $route_params_data['id'] = [
                             "name"=>'id',
@@ -162,7 +162,7 @@ class BuildApiDoc extends BaseCommand
                         ];
                     }
                     $responses = $this->controller->$method(0);
-                }elseif($method=='delete' && $menu['resource_id']>0){
+                }elseif($method=='delete' && $this->resourceIdgtO($menu['resource_id'])){
                     if(!isset($body_params_data['ids[]'])){
                         $body_params_data['ids[]'] = [
                             "name"=>'ids[]',
@@ -282,7 +282,7 @@ class BuildApiDoc extends BaseCommand
                 }
 
             }
-            if($menu['resource_id']>0 && $method=='export'){ //导出数据接口
+            if($this->resourceIdgtO($menu['resource_id']) && $method=='export'){ //导出数据接口
                 $responses_data['data.$index.$index'] = ['name'=>'data.$index.$index','description'=>'excel数据项'];
                 collect(Arr::get($responses,'data.1',[]))->each(function ($value,$index)use (&$responses_data){
                     $key = 'data.$index.'.$index;
@@ -596,6 +596,10 @@ class BuildApiDoc extends BaseCommand
             return 1;
         }
 
+    }
+
+    protected function resourceIdgtO($resource_id){
+        return $resource_id!=-1 && $resource_id!=='0' && $resource_id;
     }
 
 }
