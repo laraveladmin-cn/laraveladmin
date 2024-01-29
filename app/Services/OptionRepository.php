@@ -6,6 +6,7 @@ use App\Models\Config;
 use ArrayAccess;
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
+use Illuminate\Support\Facades\Cache;
 
 class OptionRepository implements ArrayAccess, ConfigContract
 {
@@ -18,6 +19,23 @@ class OptionRepository implements ArrayAccess, ConfigContract
 
     protected $items_modified = [];
 
+    public static function getRows(){
+        //多个worker时可能导致配置不一致
+        $options = Cache::remember('configs_option',now()->addHours(1),function (){
+            try{
+                $options = Config::query()->get([
+                    'key',
+                    'type',
+                    'value'
+                ]);
+            }catch (\Exception $e){
+                $options = [];
+            }
+            return $options;
+        });
+        return $options;
+    }
+
     /**
      * Create a new option repository.
      *
@@ -25,12 +43,7 @@ class OptionRepository implements ArrayAccess, ConfigContract
      */
     public function __construct()
     {
-        try{
-            $options = Config::get();
-        }catch (\Exception $e){
-            $options = [];
-        }
-
+        $options = self::getRows();
         foreach ($options as $option) {
             $this->items[$option->key] = $option->value;
         }
@@ -91,6 +104,9 @@ class OptionRepository implements ArrayAccess, ConfigContract
                 $item->value = $this[$key];
                 $item->save();
             }
+        }
+        if($this->items_modified){
+            Cache::forget('configs_option');
         }
     }
 
