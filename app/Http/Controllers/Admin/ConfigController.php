@@ -71,4 +71,14 @@ class ConfigController extends Controller
         return $data;
     }
 
+    /**
+     * 保存数据后对返回数据处理
+     * @param $item
+     * @param $data
+     */
+    protected function handlePostEdit($item, $data,$old_data=[])
+    {
+        Cache::forget('configs_option');
+    }
+
 }
