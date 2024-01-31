@@ -281,13 +281,14 @@ class MenuController extends Controller
     public function handlePostEdit($item, $data)
     {
         $id = Arr::get($item,'id',0)?:0;
+        $str_id = strval($id);
         if(isset($data['_options'])){
             if($data['resource_id']==-1){ //资源
                 if($id){
-                    Menu::withTrashed()->where('resource_id',$id)->restore(); //恢复已删除
-                    Menu::where('resource_id',$id)->whereNotIn('item_name',Arr::get($data,'_options',[]))->delete(); //去掉没有的
+                    Menu::withTrashed()->where('resource_id',$str_id)->restore(); //恢复已删除
+                    Menu::where('resource_id',$str_id)->whereNotIn('item_name',Arr::get($data,'_options',[]))->delete(); //去掉没有的
                 }
-                $_options = Menu::where('resource_id',$id)->where('id','>',0)->pluck('item_name')->toArray();
+                $_options = Menu::where('resource_id',$str_id)->where('id','>',0)->pluck('item_name')->toArray();
                 $only = collect($data['_options'])->diff($_options)->map(function ($val){
                     return str_replace('_','',$val);
                 })->values()->toArray();
@@ -295,7 +296,7 @@ class MenuController extends Controller
                 $options = $only?['only'=>$only]:[];
                 $only and (new MenuTableSeeder)->createResourceMenu($item,$name,$options);
             }else{
-                $id and Menu::where('resource_id',$id)->delete();
+                $id and Menu::where('resource_id',$str_id)->delete();
             }
         }
         //更新路由数据
