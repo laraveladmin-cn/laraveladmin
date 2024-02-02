@@ -42,7 +42,7 @@ class Kernel extends ConsoleKernel
                 ->name('backup_db')
                 ->withoutOverlapping()
                 ->dailyAt('02:00')
-                ->runInBackground() 
+                ->runInBackground()
                 ->onOneServer();
         }
 
