@@ -24,6 +24,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        //非主节点主机不执行定时任何定时任务
+        if(config('app.host_id',0)!=0){
+            return;
+        }
         // $schedule->command('inspire')->hourly();
         //清理无用过期数据
         $schedule->command("db:seed --class='Database\Seeders\Commands\ForceDeleteSeeder' --force")
