@@ -34,14 +34,16 @@ class Kernel extends ConsoleKernel
             ->name('force_delete')
             ->withoutOverlapping()
             ->dailyAt('01:10')
-            ->runInBackground();
+            ->runInBackground()
+            ->onOneServer();
         if(config('app.env')!='local'){
             //数据库备份
             $schedule->command("backup:run --only-db")
                 ->name('backup_db')
                 ->withoutOverlapping()
                 ->dailyAt('02:00')
-                ->runInBackground();
+                ->runInBackground() 
+                ->onOneServer();
         }
 
     }
