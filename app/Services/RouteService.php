@@ -490,6 +490,7 @@ class RouteService
                 $_id += 1;
                 $level_nos[$level] +=1;
                 unset($menu['level']);
+                $menu = self::toNumId($menu);
                 return $menu;
             });
 
@@ -644,6 +645,20 @@ class RouteService
         if(config('laravel_admin.auto_cache_route')){
             Artisan::call('route:cache');
         }
+    }
+
+    /**
+     * id转成数字兼容
+     * @return void
+     */
+    public static function toNumId(&$item){
+        collect(['id','parent_id','resource_id'])
+            ->each(function ($key)use(&$item){
+                if(isset($item[$key])){
+                    $item[$key] = Menu::toNumOrStrId($item[$key]);
+                }
+        });
+        return $item;
     }
 
 }

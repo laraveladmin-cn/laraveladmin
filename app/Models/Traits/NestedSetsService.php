@@ -616,7 +616,8 @@ str;
 	}
 
     protected function buildValue($val){
-        if(is_numeric($val)){
+        //if(is_numeric($val)){
+        if(!is_string($val)){
             return $val;
         }
         $val = str_replace("'","\\'",$val);

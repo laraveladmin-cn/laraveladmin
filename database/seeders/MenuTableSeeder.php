@@ -178,6 +178,11 @@ class MenuTableSeeder extends Seeder
                 ->toArray())
             ->map(function ($item){
                 $item['_id'] = Arr::get($item,'_id',$item['id']);
+                foreach (['id','parent_id','resource_id'] as $key){
+                    if(isset($item[$key])){
+                        $item[$key] = strval($item[$key]);
+                    }
+                }
                 return $item;
             })
             ->sortBy('_id') //顺序创建
@@ -196,10 +201,12 @@ class MenuTableSeeder extends Seeder
                 }
             });
         collect(Arr::get($routesConfig,'update_position',[]))->map(function ($item){
+            $to = strval($item['to']);
+            $from = strval($item['from']);
             if($item['type']=='update'){
-                Menu::find($item['from'])->update(['parent_id'=>$item['to']]);
+                Menu::find($from)->update(['parent_id'=>$to]);
             }else{
-                Menu::find($item['from'])->moveNear($item['to'],$item['type']);
+                Menu::find($from)->moveNear($to,$item['type']);
             }
         });
         //禁用的菜单功能
@@ -233,7 +240,7 @@ class MenuTableSeeder extends Seeder
             $tablePrefix = $connection->getTablePrefix();
             $max_id = Menu::query()->withTrashed()->max('id');
             $sql = "select setval('".$tablePrefix."menus_id_seq',:max_id)";
-            $connection->select($sql,['max_id'=>$max_id]);
+            //$connection->select($sql,['max_id'=>$max_id]);
         }
         if(config('laravel_admin.auto_cache_route')){
             Artisan::call('route:cache');

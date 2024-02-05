@@ -726,7 +726,14 @@ class Menu extends Model
         return $res;
     }
 
-    public function getResourceIdAttribute($value)
+    public static function toNumOrStrId($value){
+        if($value==='0'){
+            return 0;
+        }
+        return is_numeric($value)?$value-0:$value;
+    }
+
+/*    public function getResourceIdAttribute($value)
     {
         if($value==='0'){
             return 0;
@@ -745,7 +752,7 @@ class Menu extends Model
     public function getIdAttribute($value)
     {
         return is_numeric($value)?$value-0:$value;
-    }
+    }*/
 
 
 }
