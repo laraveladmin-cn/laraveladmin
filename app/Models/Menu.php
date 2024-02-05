@@ -155,9 +155,9 @@ class Menu extends Model
     public $homeRoot = [3=>'d423c27b-aed7-11ee-9216-0242c0a80002']; //登录用户
     public $adminRoot = [2=>'d423c1f1-aed7-11ee-9216-0242c0a80002']; //后台菜单*/
 
-    public $openRoot = [4]; //游客访问
-    public $homeRoot = [3]; //登录用户
-    public $adminRoot = [2]; //后台菜单
+    public $openRoot = ['4']; //游客访问
+    public $homeRoot = ['3']; //登录用户
+    public $adminRoot = ['2']; //后台菜单
 
     protected $itemName='菜单';
     //批量赋值白名单
