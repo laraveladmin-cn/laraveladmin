@@ -122,7 +122,8 @@ class CustomValidator extends Validator{
      * 发送短信码验证
      */
     public function validateSendCode($attribute, $value, $parameters){
-        if(!$value) return true;
+        $value = strval($value);
+        if(!$value && $value!=='0') return true;
         $key = Arr::get($parameters,1,'');
         if(!$key){
             return false;
