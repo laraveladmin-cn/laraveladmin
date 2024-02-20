@@ -184,19 +184,19 @@ str;
         $cipher = "AES-256-CBC"; // 加密算法
         $iv_random = random_bytes(openssl_cipher_iv_length($cipher)); // 初始化向量（IV）
         $iv_base64 = base64_encode($iv_random);
-        $iv = substr(md5($iv_base64),0,16);
+        $iv = substr(md5($iv_base64),0,16);//16位数向量值
         //$iv = '025c8c1a9065b789';
         $data = base64_encode(openssl_encrypt($data_str, $cipher, $key, OPENSSL_RAW_DATA, $iv));// 加密
         //dd($data_str,$key,$data,$iv);
         $aes_key_raw = '';
-        openssl_public_encrypt(base64_encode($iv), $aes_key_raw, $pub_key);
+        openssl_public_encrypt($iv, $aes_key_raw, $pub_key);
         $aes_key = base64_encode($aes_key_raw);
         $res = [
             'aes_key'=> $aes_key,//公钥加密后的值
             'data'=>$data, //对称加密后的值
         ];
         //dump(json_encode($res).$key);
-        $res['sign'] = md5(json_encode($res).$key);
+        $res['sign'] = md5(json_encode($res,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).$key);
         return json_encode($res);
     }
 
@@ -219,14 +219,15 @@ str;
             return false;
         }
         $key = md5(config('app.key')); // 密钥
-        if($sign!==md5(collect($raw_data)->except(['sign'])->toJson().$key)){
+        if($sign!==md5(collect($raw_data)->except(['sign'])->toJson(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).$key)){
             return false;
         }
         $aes_key_raw = base64_decode($aes_key);
-        $iv_decrypted_data = '';
-        openssl_private_decrypt($aes_key_raw, $iv_decrypted_data, $pri_key);
-        $iv = base64_decode($iv_decrypted_data);
+        $iv = '';
+        openssl_private_decrypt($aes_key_raw, $iv, $pri_key);
+        //dd($iv_decrypted_data);
         $cipher = "AES-256-CBC"; // 加密算法
+        //dd(base64_decode($data), $cipher, $key, OPENSSL_RAW_DATA, $iv);
         return openssl_decrypt(base64_decode($data), $cipher, $key, OPENSSL_RAW_DATA, $iv);// 加密
     }
 }
