@@ -25,6 +25,9 @@ use Illuminate\Support\Facades\Log;
 use App\Handler\FeishuWebhookHandler;
 use App\Handler\WorkWeixinWebhookHandler;
 use Monolog\Logger as Monolog;
+use Spatie\Backup\Tasks\Backup\DbDumperFactory;
+use Spatie\DbDumper\Databases\MySql;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -72,6 +75,11 @@ class AppServiceProvider extends ServiceProvider
                 $this->prepareHandler(new WorkWeixinWebhookHandler($config)),
             ]);
         });
+        if(class_exists('Spatie\\Backup\\Tasks\\Backup\\DbDumperFactory')){
+            DbDumperFactory::extend('swoole-mysql',function (){
+                return new MySql();
+            });
+        }
     }
 
     /**
