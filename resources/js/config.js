@@ -110,10 +110,9 @@ let AppConfig = {
     },
     ...(window.AppConfig || {})
 };
-
-let encrypt_data = AppConfig.encryptData('123',rsa.client_rsa_pub);
-console.log(encrypt_data);
-console.log(AppConfig.decryptData(encrypt_data,rsa.client_rsa));
+//let encrypt_data = AppConfig.encryptData('123',rsa.client_rsa_pub);
+//console.log(encrypt_data);
+//console.log(AppConfig.decryptData(encrypt_data,rsa.client_rsa));
 AppConfig.language = (localStorage.getItem('language') || AppConfig.default_language).replace(/\_/g,'-');
 //使用请求地址
 AppConfig.use_url = AppConfig.api_url_model=='web'? AppConfig.web_url: AppConfig.api_url;

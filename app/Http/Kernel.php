@@ -5,6 +5,8 @@ namespace App\Http;
 use App\Http\Middleware\ActivatedMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ApiResponseMiddleware;
+use App\Http\Middleware\DecodeDataMiddleware;
+use App\Http\Middleware\EncryptDataMiddleware;
 use App\Http\Middleware\LanguageMiddleware;
 use App\Http\Middleware\LogMiddleware;
 use App\Http\Middleware\ThrottleRequests;
@@ -45,9 +47,10 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            ApiResponseMiddleware::class
+            DecodeDataMiddleware::class, //提交数据解密
+            ApiResponseMiddleware::class, //api格式响应转换
+            EncryptDataMiddleware::class, //响应数据加密
         ],
-
         'api' => [
             EnsureFrontendRequestsAreStateful::class,
             'throttle:60,1',
