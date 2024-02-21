@@ -1,4 +1,3 @@
-import rsa from './plugin/rsa';
 let AppConfig = {
     //标签样式
     statusClass:[
@@ -49,7 +48,6 @@ let AppConfig = {
     def_avatar:'/dist/img/user_default_180.gif',
     page_gray:0,//页面灰色
     wechat_appid:'',
-    api_encryption:0,
     app_key:'85d29c9cfb2f1ec559d46ea2811bf2ef',
     //加密要提交数据
     encryptData(data_str,server_rsa_pub){
@@ -72,17 +70,12 @@ let AppConfig = {
         };
         let sign = CryptoJS.MD5(JSON.stringify(res)+key).toString();
         res.sign = sign;
-        return JSON.stringify(res);
+        return res;
     },
     //解密后端响应数据
-    decryptData(data_str,pri_key){
-        if(!data_str){
+    decryptData(raw_data,pri_key){
+        if(!raw_data){
             //console.log('解密源数据必填');
-            return false;
-        }
-        let raw_data = JSON.parse(data_str);
-        if(raw_data===false){
-            //console.log('解析解密源数据失败');
             return false;
         }
         let sign = raw_data.sign;
@@ -106,13 +99,10 @@ let AppConfig = {
             mode: CryptoJS.mode.CBC,
             padding: CryptoJS.pad.Pkcs7
         });
-        return result.toString(CryptoJS.enc.Utf8);
+        return JSON.parse(result.toString(CryptoJS.enc.Utf8));
     },
     ...(window.AppConfig || {})
 };
-//let encrypt_data = AppConfig.encryptData('123',rsa.client_rsa_pub);
-//console.log(encrypt_data);
-//console.log(AppConfig.decryptData(encrypt_data,rsa.client_rsa));
 AppConfig.language = (localStorage.getItem('language') || AppConfig.default_language).replace(/\_/g,'-');
 //使用请求地址
 AppConfig.use_url = AppConfig.api_url_model=='web'? AppConfig.web_url: AppConfig.api_url;

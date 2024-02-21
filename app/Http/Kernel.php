@@ -45,9 +45,9 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            DecodeDataMiddleware::class, //提交数据解密
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            DecodeDataMiddleware::class, //提交数据解密
             ApiResponseMiddleware::class, //api格式响应转换
             EncryptDataMiddleware::class, //响应数据加密
         ],

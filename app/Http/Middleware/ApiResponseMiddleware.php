@@ -17,9 +17,7 @@ class ApiResponseMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        dd(3);
         $response = $next($request);
-        dd(4);
         if($request->header('Format-Response')){
             if(get_class($response)=='Illuminate\Http\JsonResponse'){
                 $content = json_decode($response->getContent(),true);
@@ -57,7 +55,6 @@ class ApiResponseMiddleware
                 $response->setContent(json_encode($data));
                 $response->setStatusCode(200);
             }
-
         }
         return $response;
     }
