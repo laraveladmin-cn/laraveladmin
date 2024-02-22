@@ -179,6 +179,7 @@ class IndexController extends Controller
         $data['page_gray'] = Option::get('page_gray',0);
         $data['c_j_u'] = collect(str_split(Option::get('crawler_jump_url','')))->filter()->toArray();
         $data['wechat_appid'] = config('wechat.official_account.default.app_id','');
+        $data['app_key'] = md5(config('app.key'));
         $max_age = 3600*24;
         $response = Response::returns($data)
             ->header('Cache-Control','max-age='.$max_age.', public')
