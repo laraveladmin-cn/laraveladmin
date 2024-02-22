@@ -99,6 +99,7 @@ return [
             'key'=>env('GOOGLE_WEB_API_KEY',''),
         ]
     ],
+    'api_encryption'=>env('API_ENCRYPTION',0),//接口加密:0-不加密,1-兼容加密,2-强制加密
 
 
 

@@ -147,6 +147,7 @@ class IndexController extends Controller
         $data['lifetime']= config('session.lifetime');
         $data['verify'] = config('laravel_admin.verify.type')=='captcha' ? $this->captcha() : $this->geetest(); //验证配置
         $data['client_id'] = ClientAuth::getClient();
+        $data['api_encryption'] = (config('laravel_admin.api_encryption')?:0)-0;
         $data['default_language'] = str_replace('_','-',app('translator')->getLocale());
         $data['tinymce_key'] = config('laravel_admin.tinymce_key','');
         $data['locales'] = collect(config('laravel_admin.locales',[]))
@@ -293,7 +294,10 @@ class IndexController extends Controller
      * @return mixed
      */
     public function clientId(){
-        $data = ['client_id'=>ClientAuth::getClient()];
+        $client_id = ClientAuth::getClient();
+        $data = [
+            'client_id'=>$client_id
+        ];
         $response = Response::returns($data);
         return $this->addClientId($response,$data['client_id']);
     }

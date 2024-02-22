@@ -66,6 +66,7 @@
 </style>
 <script>
     import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
+    import rsa from '../plugin/rsa';
     export default {
         components: {
             'el-upload': ()=>import(/* webpackChunkName: "element-ui/lib/upload" */ 'element-ui/lib/upload'),
@@ -151,6 +152,7 @@
                 }).values().all();
             },
             getUrl(res){
+                res = this.decodeData(res);
                 let url = array_get(res,this.valueKey,'') || res.title || '';
                 if(this.noparm){
                     let urls = url.split("?");
@@ -197,6 +199,7 @@
             },
             handleAvatarError(res){
                 let errors = JSON.parse(res.message);
+                errors = this.decodeData(errors);
                 this.pushMessage({
                     'showClose':true,
                     'title':this.$t('{action} failed!',{action:this.$t('Upload')}),
@@ -208,6 +211,15 @@
                     'duration':3000,
                     'show':true
                 });
+            },
+            decodeData(data){
+                if(typeof data=="object" && data.aes_key && data.data && data.sign){
+                    let decode_data = window.AppConfig.decryptData(data,rsa.client_rsa);
+                    if(decode_data){
+                        data = decode_data;
+                    }
+                }
+                return data;
             }
         },
         computed:{

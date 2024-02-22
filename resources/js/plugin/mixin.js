@@ -1,6 +1,7 @@
 import {mapState, mapActions, mapMutations} from 'vuex';
 import config from '../config.js';
 let jweixin = require('weixin-js-sdk');
+import rsa from './rsa';
 export default {
     computed: {
         ...mapState([
@@ -64,6 +65,14 @@ export default {
         $('body').addClass(this.theme);
         //添加弹窗拦截器
         window.axios.interceptors.response.use((response) => {
+                let headers = response.headers || {};
+                if(headers['response-encryption']==1){ //响应加密先对数据进行解密
+                    let raw_data = response.data;
+                    let decode_data = window.AppConfig.decryptData(raw_data,rsa.client_rsa);
+                    if(decode_data){
+                        response.data = decode_data;
+                    }
+                }
                 //跳转
                 if (typeof response.data != 'undefined' &&
                     typeof response.data.force_logout != 'undefined' &&
@@ -114,6 +123,15 @@ export default {
                 return response;
             },
             (error) => {
+                let response = error.response;
+                let headers = response.headers || {};
+                if(headers['response-encryption']==1){ //响应加密先对数据进行解密
+                    let raw_data = response.data;
+                    let decode_data = window.AppConfig.decryptData(raw_data,rsa.client_rsa);
+                    if(decode_data){
+                        response.data = decode_data;
+                    }
+                }
                 //跳转
                 if (typeof error.response != 'undefined' &&
                     typeof error.response.data != 'undefined' &&
@@ -187,12 +205,31 @@ export default {
             if (language) {
                 config.headers.Language = decodeURIComponent(language);
             }
-            config.headers.RefererPage = window.location.href;
             config.paramsSerializer = function (params) {
                 params = JSON.parse(JSON.stringify(params));
                 params['json'] = 1;
                 return jQuery.param(params);
             };
+            config.headers.RefererPage = window.location.href;
+            let api_encryption = 0;
+            if(window.AppConfig.api_encryption && //允许加密提交
+                rsa.server_rsa_pub && //有服务端公钥
+                config.method!='get' && //非get请求
+                !window.AppConfig.debug //调试模式不加密
+            ){ //判断是否可使用加密传输
+                config.headers['Api-Encryption'] = api_encryption = 1;
+                let data = config.data;
+                if (typeof data === 'object') {
+                    let encrypt_data = window.AppConfig.encryptData(JSON.stringify(config.data),rsa.server_rsa_pub);
+                    config.data = encrypt_data;
+                }
+            }
+            if(window.AppConfig.api_encryption && //允许加密响应
+                rsa.client_rsa && //
+                !window.AppConfig.debug
+            ){//是否支持响应加密
+                config.headers['Support-Response-Encryption'] = 1;
+            }
             return config;
         }, function (error) {
             return Promise.reject(error);
