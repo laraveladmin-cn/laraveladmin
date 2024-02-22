@@ -17,7 +17,10 @@ class DecodeDataMiddleware
      */
     protected $server_rsa='';
 
-    protected $except = []; //排除路由
+    protected $except = [
+        '/web-api/home/upload/index',//文件上传
+        '/api/home/upload/index',
+    ]; //排除路由
 
 
 
@@ -40,17 +43,20 @@ class DecodeDataMiddleware
     public function handle(Request $request, Closure $next)
     {
         $api_encryption = (config('laravel_admin.api_encryption')?:0)-0; //0-不需要加密,1-兼容加密,2-强制加密传输
+        $method = $request->method();
         if(
-            $request->method()!=='get' && //非get请求
+            !in_array($method,['get','GET']) && //非get请求
             (($api_encryption==2 && !$this->inExceptArray($request)) || //强制加密传输
             $request->header('Api-Encryption')==1) //客户端加密传输
         ){
             $payload = collect($request->all())->except(collect($request->query())->keys()->toArray())->toArray();
             $data = $this->decryptData($payload,$this->server_rsa);
-            $request->merge($data);
-            collect(['aes_key','data','sign'])->each(function ($key)use($request){
-                $request->offsetUnset($key);
-            });
+            if($data){
+                collect(['aes_key','data','sign'])->each(function ($key)use($request){
+                    $request->offsetUnset($key);
+                });
+                $request->merge($data);
+            }
         }
         $response = $next($request);
         return $response;
