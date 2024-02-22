@@ -38,6 +38,7 @@ class EncryptDataMiddleware
         $response = $next($request);
         $api_encryption = (config('laravel_admin.api_encryption')?:0)-0; //0-不需要加密,1-兼容加密,2-强制加密传输
         if(
+            $this->client_rsa_pub &&
             get_class($response)=='Illuminate\Http\JsonResponse' && //响应是json数据
             (($api_encryption==2 && !$this->inExceptArray($request)) || //强制响应加密
                 $request->header('Support-Response-Encryption')==1 || //客户端支持响应加密

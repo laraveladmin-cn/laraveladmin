@@ -46,6 +46,7 @@ class DecodeDataMiddleware
         $method = $request->method();
         if(
             !in_array($method,['get','GET']) && //非get请求
+            $this->server_rsa && //服务端私钥
             (($api_encryption==2 && !$this->inExceptArray($request)) || //强制加密传输
             $request->header('Api-Encryption')==1) //客户端加密传输
         ){

@@ -29,6 +29,7 @@ class CreateApiSecret extends BaseCommand
 
     protected $path = 'storage/app/secret_key/api';
     protected $disk = null;
+    protected $rsa_raw_js = 'resources/js/plugin/rsa_raw.js';
 
 
     /**
@@ -52,16 +53,20 @@ class CreateApiSecret extends BaseCommand
         if(!$disk->exists($this->path)){
             $disk->makeDirectory($this->path);
         }
-        $public_key = $this->writeSecretFile();
-        $private_key = $this->writeSecretFile('client');
-      /*  $data = [
-            'public_key'=>$public_key,
-            'private_key'=>$private_key
-        ];
-        $cipher_str = json_encode($data);
-        $encrypted = openssl_encrypt($cipher_str, 'AES-256-CBC', md5($app_key));
-        $this->disk->put($this->path.'/js.txt',$encrypted);*/
-        $this->info('API秘钥对生成成功:'.base_path($this->path));
+        $public_key = trim($this->writeSecretFile());
+        $private_key = trim($this->writeSecretFile('client'));
+        $rsa_raw = <<<str
+let data = {
+    server_rsa_pub:`$public_key`,
+    client_rsa:`$private_key`
+};
+export default data;
+str;
+        $this->disk->put($this->rsa_raw_js,$rsa_raw);
+        $rsa_js = Str::replaceFirst('rsa_raw.js','rsa.js',$this->rsa_raw_js);
+        $this->disk->put($rsa_js,$rsa_raw);
+        $path = base_path($this->path);
+        $this->info("API秘钥对生成成功秘钥存放目录在:$path\n您可将秘钥'$this->rsa_raw_js'\n文件中的data变量进行加密混淆保护后替换到文件\n'$rsa_js'中\n在线加密混淆工具:https://www.xdtool.com/jsjiami");
     }
 
     protected function writeSecretFile($name='server'){
