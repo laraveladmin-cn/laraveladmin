@@ -54,8 +54,10 @@ class Kernel extends HttpKernel
         'api' => [
             EnsureFrontendRequestsAreStateful::class,
             'throttle:60,1',
+            DecodeDataMiddleware::class, //提交数据解密
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             ApiResponseMiddleware::class,
+            EncryptDataMiddleware::class, //响应数据加密
             \Fruitcake\Cors\HandleCors::class
         ],
     ];
