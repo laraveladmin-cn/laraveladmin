@@ -68,7 +68,8 @@ export default {
                 let headers = response.headers || {};
                 if(headers['response-encryption']==1){ //响应加密先对数据进行解密
                     let raw_data = response.data;
-                    let decode_data = window.AppConfig.decryptData(raw_data,rsa.client_rsa);
+                    let app_key = window.AppConfig.app_key || rsa.app_key;
+                    let decode_data = window.AppConfig.decryptData(raw_data,rsa.client_rsa,app_key);
                     if(decode_data){
                         response.data = decode_data;
                     }
@@ -127,7 +128,8 @@ export default {
                 let headers = response.headers || {};
                 if(headers['response-encryption']==1){ //响应加密先对数据进行解密
                     let raw_data = response.data;
-                    let decode_data = window.AppConfig.decryptData(raw_data,rsa.client_rsa);
+                    let app_key = window.AppConfig.app_key || rsa.app_key;
+                    let decode_data = window.AppConfig.decryptData(raw_data,rsa.client_rsa,app_key);
                     if(decode_data){
                         response.data = decode_data;
                     }
@@ -220,7 +222,8 @@ export default {
                 config.headers['Api-Encryption'] = api_encryption = 1;
                 let data = config.data;
                 if (typeof data === 'object') {
-                    let encrypt_data = window.AppConfig.encryptData(JSON.stringify(config.data),rsa.server_rsa_pub);
+                    let app_key = window.AppConfig.app_key || rsa.app_key;
+                    let encrypt_data = window.AppConfig.encryptData(JSON.stringify(config.data),rsa.server_rsa_pub,app_key);
                     config.data = encrypt_data;
                 }
             }

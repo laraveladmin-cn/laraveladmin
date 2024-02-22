@@ -50,8 +50,8 @@ let AppConfig = {
     wechat_appid:'',
     app_key:'',
     //加密要提交数据
-    encryptData(data_str,server_rsa_pub){
-        const key = this.app_key;
+    encryptData(data_str,server_rsa_pub,app_key){
+        const key = app_key || this.app_key;
         const iv = CryptoJS.MD5(Date.now()).toString().slice(0,16);
         //const iv = '025c8c1a9065b789';
         let data = CryptoJS.AES.encrypt(data_str, CryptoJS.enc.Utf8.parse(key), {
@@ -73,7 +73,7 @@ let AppConfig = {
         return res;
     },
     //解密后端响应数据
-    decryptData(raw_data,pri_key){
+    decryptData(raw_data,pri_key,app_key){
         if(!raw_data){
             //console.log('解密源数据必填');
             return false;
@@ -85,7 +85,7 @@ let AppConfig = {
             //console.log('解析解密源数据项错误');
             return false;
         }
-        const key = this.app_key;
+        const key = app_key || this.app_key;
         if(sign!==CryptoJS.MD5(collect(raw_data).except(['sign']).toJson()+key).toString()){
             //console.log('解析验签失败');
             return false;

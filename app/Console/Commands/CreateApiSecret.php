@@ -55,10 +55,12 @@ class CreateApiSecret extends BaseCommand
         }
         $public_key = trim($this->writeSecretFile());
         $private_key = trim($this->writeSecretFile('client'));
+        $app_key_str = md5($app_key);
         $rsa_raw = <<<str
 let data = {
     server_rsa_pub:`$public_key`,
-    client_rsa:`$private_key`
+    client_rsa:`$private_key`,
+    app_key:`$app_key_str`
 };
 export default data;
 str;
