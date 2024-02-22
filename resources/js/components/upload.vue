@@ -214,7 +214,8 @@
             },
             decodeData(data){
                 if(typeof data=="object" && data.aes_key && data.data && data.sign){
-                    let decode_data = window.AppConfig.decryptData(data,rsa.client_rsa);
+                    let app_key = window.AppConfig.app_key || rsa.app_key;
+                    let decode_data = window.AppConfig.decryptData(raw_data,rsa.client_rsa,app_key);
                     if(decode_data){
                         data = decode_data;
                     }
