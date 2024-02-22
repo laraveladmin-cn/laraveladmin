@@ -48,7 +48,7 @@ let AppConfig = {
     def_avatar:'/dist/img/user_default_180.gif',
     page_gray:0,//页面灰色
     wechat_appid:'',
-    app_key:'85d29c9cfb2f1ec559d46ea2811bf2ef',
+    app_key:'',
     //加密要提交数据
     encryptData(data_str,server_rsa_pub){
         const key = this.app_key;
