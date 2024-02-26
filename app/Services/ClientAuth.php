@@ -66,8 +66,13 @@ class ClientAuth
     public function auth(){
         return LifeData::remember('_client_auth_decoded',function (){
             $key = $this->key;
-            $token = urldecode(Request::header($key,Request::cookie($key,'')))?:'';
-            return $this->decodedClientId($token);
+            $key_value = Request::header($key,Request::cookie($key,''));
+            $token = urldecode($key_value)?:'';
+            $decoded = $this->decodedClientId($token);
+            if(!$decoded){
+                $decoded = $this->decodedClientId($key_value);
+            }
+            return $decoded;
         });
     }
 
