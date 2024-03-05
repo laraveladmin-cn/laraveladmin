@@ -48,16 +48,16 @@ class Kernel extends HttpKernel
             DecodeDataMiddleware::class, //提交数据解密
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            ApiResponseMiddleware::class, //api格式响应转换
             EncryptDataMiddleware::class, //响应数据加密
+            ApiResponseMiddleware::class, //api格式响应转换
         ],
         'api' => [
             EnsureFrontendRequestsAreStateful::class,
             'throttle:60,1',
             DecodeDataMiddleware::class, //提交数据解密
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            ApiResponseMiddleware::class,
             EncryptDataMiddleware::class, //响应数据加密
+            ApiResponseMiddleware::class,
             \Fruitcake\Cors\HandleCors::class
         ],
     ];
