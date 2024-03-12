@@ -24,6 +24,7 @@
             };
     }
     import { mapState } from 'vuex';
+    import rsa from '../plugin/rsa';
     export default {
         data(){
             return {
@@ -218,6 +219,21 @@
                                 if(token){
                                     request.setRequestHeader("Authorization",decodeURIComponent(token));
                                 }
+                                let open_id = getCookie('Open-Id');
+                                if (open_id) {
+                                    request.setRequestHeader("Open-Id",decodeURIComponent(open_id));
+                                }
+                                let language = localStorage.getItem('language');
+                                if (language) {
+                                    request.setRequestHeader("Language",decodeURIComponent(language));
+                                }
+                                request.setRequestHeader("RefererPage",window.location.href);
+                                if(window.AppConfig.api_encryption && //允许加密响应
+                                    rsa.client_rsa && //
+                                    !window.AppConfig.debug
+                                ){//是否支持响应加密
+                                    request.setRequestHeader("Support-Response-Encryption",1);
+                                }
                             },
                             //搜索参数
                             data: function (params) {
@@ -233,6 +249,14 @@
                             },
                             //最后一页
                             processResults: function (data, params) {
+                                if(this._request.getResponseHeader('Response-Encryption')){ //解密响应
+                                    let raw_data = data;
+                                    let app_key = window.AppConfig.app_key || rsa.app_key;
+                                    let decode_data = window.AppConfig.decryptData(raw_data,rsa.client_rsa,app_key);
+                                    if(decode_data){
+                                        data = decode_data;
+                                    }
+                                }
                                 params.page = params.page || 1;
                                 let text, i, j,row;
                                 for(i in data.data){
