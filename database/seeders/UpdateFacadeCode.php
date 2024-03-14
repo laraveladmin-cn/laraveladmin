@@ -144,10 +144,10 @@ str
                 [
                     'old'=><<<'str'
     static::$app->
-    str,
+str,
                     'new'=><<<'str'
     self::getFacadeApplication()->
-    str
+str
                 ]
             ]
         ]
