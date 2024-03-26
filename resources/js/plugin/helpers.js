@@ -173,6 +173,19 @@ export default {
         }
         return _str;
     },
+    to_local_time(date_str,format){
+        if(!format){
+            format = 'yyyy-MM-dd hh:mm:ss';
+        }
+        if(date_str===null){
+            return '';
+        }
+        if(date_str && date_str.indexOf('T')==-1){
+            return date_str; //不是标准时间格式
+        }
+        let date = new Date(date_str);
+        return date_format(date,format,true);
+    },
     format_time(seconds) {
         if (typeof seconds == "undefined" || seconds === '') {
             return '';
