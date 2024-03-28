@@ -14,6 +14,7 @@ use App\Facades\LifeData;
 use App\Models\Menu;
 use App\Models\User;
 use App\Services\RouteService;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -360,6 +361,8 @@ trait ResourceController
             $fields1 = collect($fields)->map(function ($val){
                 if(is_string($val)){
                     return Str::replace('`','',$val);
+                }elseif($val instanceof Expression){
+                    return Str::replace('`','',$val->__toString());
                 }
                 return $val;
             })->toArray();
