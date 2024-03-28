@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Request;
 use Swoole\Coroutine;
 use \SwooleTW\Http\Coroutine\Context as BaseContext;
 use SwooleTW\Http\Server\Sandbox;
+use \Laravel\Socialite\Contracts\Factory as SocialiteFactory;
 
 class Context extends BaseContext
 {
 
     public static $instances=[
+        SocialiteFactory::class,
         StartSession::class,
         'config',
         'session',
@@ -37,6 +39,7 @@ class Context extends BaseContext
         'telegram_bot',
         'NestedSetsService',
         'DbMysqlModel',
+        'wechat.official_account'
     ];
     public static $instances_more=[
         'router',
