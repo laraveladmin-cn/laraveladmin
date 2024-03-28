@@ -357,7 +357,13 @@ trait ResourceController
         $primary_key = $model->getKeyName();
         if($primary_key && $fields && (!isset($this->noPrimaryKey) || !$this->noPrimaryKey)){
             $primary_key1 = $model->getTable().'.'.$primary_key;
-            $has_primary_key = in_array($primary_key,$fields) || in_array($primary_key1,$fields);
+            $fields1 = collect($fields)->map(function ($val){
+                if(is_string($val)){
+                    return Str::replace('`','',$val);
+                }
+                return $val;
+            })->toArray();
+            $has_primary_key = in_array($primary_key,$fields1) || in_array($primary_key1,$fields1);
             $fields = $has_primary_key ? $fields : array_merge([$primary_key1], $fields);
         }
         $hasFullTextSearch = $this->existFullTextSearch();
