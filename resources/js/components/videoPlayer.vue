@@ -1,6 +1,6 @@
 <template>
     <div ref="player" class="video-player">
-        <video playsinline controls="controls" autoplay>
+        <video playsinline controls="controls" class="w-100">
             <source :src="value"
                     type="video/mp4">
             您的浏览器暂不支持该视频播放

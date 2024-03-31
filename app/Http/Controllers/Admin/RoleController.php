@@ -173,6 +173,7 @@ class RoleController extends Controller
         });
         //所有权限菜单
         $data['maps']['permissions'] = collect(Menu::mainAdmin()
+            ->orderBy('left_margin')
             ->with(['parent'=>function($q){
                 $q->select([
                     'id',
