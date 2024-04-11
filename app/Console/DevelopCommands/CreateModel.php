@@ -160,13 +160,26 @@ where
         $data['table_comment'] = $data['tableInfo']['table_comment'];
         $data['table_relations'] = $data['tableInfo']['table_relations'];
         $data['table_types'] = $data['tableInfo']['table_types'];
+        $fields = $table_fields->pluck('Field')->toArray();
+        //存在软删除字段,加入软删除功能
+        if(!in_array('softDeletes',$data['table_types']) &&
+            in_array('deleted_at',$fields)
+        ){
+            $data['table_types'][] = 'softDeletes';
+        }
+        //存在修改时间字段,加入更新修改时间功能
+        if(!in_array('timestamps',$data['table_types']) &&
+            in_array('updated_at',$fields)
+        ){
+            $data['table_types'][] = 'timestamps';
+        }
         $data['comment'] = $data['tableInfo']['comment'];
         $data['dates'] = $table_fields->filter(function($item){
             return $item['showType']=='time' ||
                 in_array($item['Field'],['deleted_at', 'created_at','updated_at']) ||
                 in_array($item['Type'],['timestamp', 'timestamp with time zone']) ;
-        })->pluck('Field')->implode("','");
-        $data['dates'] = $data['dates'] ? "'".$data['dates']."'":'';
+        })->pluck('Field')->implode("',\n       '");
+        $data['dates'] = $data['dates'] ? $this->formatShow("       '".$data['dates']."'"):'';
         //隐藏输出字段
         $data['delete'] = $table_fields->filter(function($item){
             return in_array($item['showType'],['delete','password']) || in_array($item['Field'],['deleted_at']);
@@ -181,8 +194,8 @@ where
             'id'
         ])->all())->implode("',\n       '");
         $data['fillable'] = $data['fillable'] ? $this->formatShow("       '".$data['fillable']."'"):'';
-        $data['delete'] = $data['delete']->implode("','");
-        $data['delete'] = $data['delete'] ? "'".$data['delete']."'":'';
+        $data['delete'] = $data['delete']->implode("',\n       '");
+        $data['delete'] = $data['delete'] ? $this->formatShow("       '".$data['delete']."'"):'';
 
         $data['fieldsShowMaps'] = $this->formatShow(collect($table_fields)->filter(function ($item) {
             return in_array($item['showType'], ['radio', 'checkbox','select','label','icheck-radio','icheck','icheck-checkbox']);
