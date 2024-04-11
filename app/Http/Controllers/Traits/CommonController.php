@@ -132,6 +132,12 @@ trait CommonController{
     public $editFields = [];
 
     /**
+     * 创建,新增,导入时同时自动处理hasOne跟hasMany关系数据
+     * @var array
+     */
+    protected $syncRelation= [];
+
+    /**
      * excel导出数据字段
      * @var array
      */

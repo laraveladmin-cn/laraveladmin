@@ -14,6 +14,8 @@ use App\Facades\LifeData;
 use App\Models\Menu;
 use App\Models\User;
 use App\Services\RouteService;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -179,23 +181,37 @@ trait ResourceController
      */
     public function edit($id = 0)
     {
+        $data = [];
         $id = $id ?: Request::input('id', $id);
         try {
             $data['row'] = $this->one($id);
         } catch (\Exception $exception) {
-            return Response::returns(['alert' => alert(['message' =>
-                trans('Data does not exist!')//'数据不存在!'
-            ], HttpResponse::HTTP_NOT_FOUND)], HttpResponse::HTTP_NOT_FOUND);
+            $res = [
+                'alert' => alert(
+                    [
+                        'message' =>trans('Data does not exist!')//'数据不存在!'
+                    ], HttpResponse::HTTP_NOT_FOUND
+                ),
+                'exception'=>$exception->getTraceAsString()
+            ];
+            if(!config('app.debug')){
+                unset($res['exception']);
+            }
+            return Response::returns($res, HttpResponse::HTTP_NOT_FOUND);
         }
+        $data['initObjRelations'] = [];
         //关系数据处理
         collect($this->editFields)->map(function ($item, $key) use ($id, &$data) {
             if (is_array($item) && Str::endsWith($key, 's')) { //多个关联
                 if ($id) {
                     $data['row'][Str::singular($key) . '_ids'] = collect(Arr::get($data, 'row.' . $key, []))->pluck( $this->newBindModel()->$key()->getRelated()->getKeyName())->toArray();
+                    $initObj = $this->editDefaultFields($this->editFields[$key],$this->newBindModel()->$key()->getRelated());
                 } else {
                     $data['row'][Str::singular($key) . '_ids'] = [];
+                    $initObj = $data['row'][$key];
                     $data['row'][$key] = [];
                 }
+                $data['initObjRelations'][$key] = $initObj;
             }
         });
         //数据字段映射信息
@@ -221,7 +237,8 @@ trait ResourceController
         $data = $this->handleEditReturn($id, $data);
         $this->emptyToObject($data,[
             'maps',
-            'mapsRelations'
+            'mapsRelations',
+            'initObjRelations'
         ]);
         return Response::returns($data); //获取一条记录
     }
@@ -703,6 +720,19 @@ trait ResourceController
                 }
             }
         });
+        //处理一对一(hasOne)或一对多(hasMany)跟关系数据
+        if(isset($this->syncRelation) && $this->syncRelation){
+            collect($this->syncRelation)->each(function ($relation_key)use($item,$data){
+                $relationObj = $item->$relation_key();
+                if($relationObj instanceof HasOne){
+                    //处理一对一关系数据
+                    $this->syncHasOne($item, $data,$relation_key);
+                }elseif ($relationObj instanceof HasMany){
+                    //处理一对多关系数据
+                    $this->syncHasMany($item, $data,$relation_key);
+                }
+            });
+        }
     }
 
 
@@ -1382,6 +1412,65 @@ trait ResourceController
             }
         });
         return $data;
+    }
+
+    /**
+     * 同步修改更新关联数据 一对一
+     * @param $item
+     * @param $data
+     * @param $relation_key
+     * @return void
+     */
+    protected function syncHasOne($item,$data,$relation_key){
+        if(!isset($data,$relation_key)){
+            return;
+        }
+        $relation_data = Arr::get($data,$relation_key);
+        $relation_obj = $item->$relation_key();
+        if($relation_data){
+            $local_key = $relation_obj->getLocalKeyName();
+            $foreign_key = $relation_obj->getForeignKeyName();
+            $relation_data[$foreign_key] = $item[$local_key];
+            $class = get_class($relation_obj->getModel());
+            $class::updateOrCreate([
+                $foreign_key=>$item[$local_key]
+            ],$relation_data);
+        }else{
+            $item->$relation_key()->delete();
+        }
+    }
+
+    /**
+     * 同步修改更新关联数据 一对多
+     * @param $item
+     * @param $data
+     * @param $relation_key
+     * @return void
+     */
+    protected function syncHasMany($item,$data,$relation_key){
+        if(!isset($data,$relation_key)){
+            return;
+        }
+        $relation_obj = $item->$relation_key();
+        $class = get_class($relation_obj->getModel());
+        $local_key = $relation_obj->getLocalKeyName();
+        $foreign_key = $relation_obj->getForeignKeyName();
+        $old_relation_ids = $item->$relation_key()->pluck($local_key)->toArray()?:[];
+        $relation_items = Arr::get($data,$relation_key,[]);
+        $relation_ids  = [];
+        foreach ($relation_items as $relation_item){
+            $relation_item[$foreign_key] = $item[$local_key];
+            $relation_item_id = Arr::get($relation_item,$local_key);
+            if($relation_item_id && in_array($relation_item_id,$old_relation_ids)){
+                $new_relation_item = $class::updateOrCreate([
+                    $local_key=>$relation_item_id
+                ],$relation_item);
+            }else{
+                $new_relation_item = $class::create($relation_item);
+            }
+            $relation_ids[] = $new_relation_item[$local_key];
+        }
+        $class::whereNotIn($local_key,$relation_ids)->delete();
     }
 
 
