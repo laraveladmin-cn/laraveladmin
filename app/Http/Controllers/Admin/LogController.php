@@ -162,10 +162,8 @@ class LogController extends Controller
      * 验证规则
      * @return  array
      */
-    protected function getValidateRule()
+    protected function getValidateRule($id=0)
     {
-        $id = Request::input('id',0);
-
         return [];
     }
 

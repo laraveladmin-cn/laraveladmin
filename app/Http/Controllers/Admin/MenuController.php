@@ -197,7 +197,7 @@ class MenuController extends Controller
      * 验证规则
      * @return  array
      */
-    protected function getValidateRule()
+    protected function getValidateRule($id=0)
     {
         $_type = Request::input('_type',0);
         $validate = [

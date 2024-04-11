@@ -34,8 +34,7 @@ class ConfigController extends Controller
      * 验证规则
      * @return  array
      */
-    protected function getValidateRule(){
-        $id = Request::input('id',0)?:0;
+    protected function getValidateRule($id=0){
         $model_class = $this->getModelClass();
         return [
             'name' => 'required',

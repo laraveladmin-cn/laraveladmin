@@ -141,7 +141,7 @@ class AdminController extends Controller
      *
      * @return  array
      */
-    protected function getValidateRule()
+    protected function getValidateRule($id=0)
     {
         $id = Request::input('id',0)?:0;
         $user_id = Request::input('user_id',0)?:0;

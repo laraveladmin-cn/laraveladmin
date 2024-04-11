@@ -109,7 +109,7 @@ class RoleController extends Controller
      *
      * @return  array
      */
-    protected function getValidateRule()
+    protected function getValidateRule($id=0)
     {
         $id = Request::input('id',0);
 

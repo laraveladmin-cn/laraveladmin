@@ -89,7 +89,7 @@ class UserController extends Controller
      * 添加或修改时数据验证规则
      * @return array
      */
-    protected function getValidateRule()
+    protected function getValidateRule($id=0)
     {
         $id = Request::input('id',0)?:0;
         //没有密码值不对密码进行修改
