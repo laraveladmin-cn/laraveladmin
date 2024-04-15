@@ -581,7 +581,7 @@ class Menu extends Model
         }
         $q->module($this->adminRoot)
             ->whereHas('menu_roles', function ($q) {
-            $q->whereIn('role_id',Role::getRoleIds());
+            $q->whereIn('role_id',Role::getRoleIds(true));
         });
         return $q;
     }

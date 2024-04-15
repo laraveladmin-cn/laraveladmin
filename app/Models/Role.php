@@ -157,9 +157,9 @@ class Role extends Model
     /**
      * 我拥有的角色
      */
-    public function scopeMain($query,$self='='){
+    public function scopeMain($query,$self='=',$use_tmp_id=false){
         $user_id = Arr::get(Auth::user(),'id'); //当前用户ID
-        $query->haveByUserId($user_id,$self);
+        $query->haveByUserId($user_id,$self,$use_tmp_id);
         return $query;
     }
 
@@ -199,9 +199,12 @@ class Role extends Model
 
 
 
-    public function scopeGetRoleIds($query){
-        return LifeData::remember('_role_ids',function ()use($query){
-            return $query->main()->pluck('id')->toArray();
+    public function scopeGetRoleIds($query,$use_tmp_id=false){
+        return LifeData::remember($use_tmp_id?'_role_ids':'_role_ids_1',function ()use($query,$use_tmp_id){
+            return $query->main('=',$use_tmp_id)
+                ->where('status',1)
+                ->pluck('id')
+                ->toArray();
         });
     }
 
@@ -210,7 +213,7 @@ class Role extends Model
      * @param $query
      * @param $user_id
      */
-    public function scopeHaveByUserId($query,$user_id,$self='='){
+    public function scopeHaveByUserId($query,$user_id,$self='=',$use_tmp_id=false){
         if($user_id==Arr::get(Auth::user(),'id')){
             $admin_id = Arr::get(Auth::user(),'admin.id');
         }else{
@@ -226,13 +229,15 @@ class Role extends Model
             return $query;
         }
         $tmp_ids = [];
-        $roles = $roles->filter(function ($role)use(&$tmp_ids){
-            $tmp_id = $role['tmp_id'];
-            if($tmp_id){
-                $tmp_ids[] = $role['tmp_id'];
-            }
-            return !$tmp_id;
-        });
+        if($use_tmp_id){
+            $roles = $roles->filter(function ($role)use(&$tmp_ids){
+                $tmp_id = $role['tmp_id'];
+                if($tmp_id){
+                    $tmp_ids[] = $role['tmp_id'];
+                }
+                return !$tmp_id;
+            });
+        }
         if($tmp_ids){
             $tmp_ids = collect($tmp_ids)
                 ->unique()
