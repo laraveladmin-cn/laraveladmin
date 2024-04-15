@@ -214,14 +214,37 @@ class Role extends Model
         if($user_id==Arr::get(Auth::user(),'id')){
             $admin_id = Arr::get(Auth::user(),'admin.id');
         }else{
-            $admin_id = Admin::where('user_id',$user_id)->value('id');
+            $admin_id = Admin::query()
+                ->where('user_id',$user_id)
+                ->value('id');
         }
         //查询用户的角色
-        $roles = Role::whereHas('admin_roles', function ($q) use ($admin_id) {
+        $roles = collect(Role::query()->whereHas('admin_roles', function ($q) use ($admin_id) {
             $q->where('admin_id', $admin_id);
-        })->get(['id', 'left_margin', 'right_margin']);
+        })->get(['id','tmp_id', 'left_margin', 'right_margin']));
         if($roles->contains('id',1)){ //超级管理员
             return $query;
+        }
+        $tmp_ids = [];
+        $roles = $roles->filter(function ($role)use(&$tmp_ids){
+            $tmp_id = $role['tmp_id'];
+            if($tmp_id){
+                $tmp_ids[] = $role['tmp_id'];
+            }
+            return !$tmp_id;
+        });
+        if($tmp_ids){
+            $tmp_ids = collect($tmp_ids)
+                ->unique()
+                ->values()
+                ->toArray();
+            $tmp_roles = collect(Role::query()
+                ->whereIn('id',$tmp_ids)
+                ->get(['id', 'left_margin', 'right_margin'])
+            )->toArray();
+            $roles = $roles->merge($tmp_roles)
+                ->keyBy('id')
+                ->values();
         }
         $query->where(function($q)use($roles,$self){
             $q->whereRaw('false');

@@ -132,7 +132,7 @@ class RoleController extends Controller
      * @param $item
      * @return array
      */
-    protected function getImportValidateRule($id, $item)
+    protected function getImportValidateRule($id=0, $item)
     {
         $validate = [];
 
@@ -188,7 +188,14 @@ class RoleController extends Controller
             return $item;
         });
         if ( $id == 1 ) {
-            $data['row']['menu_ids'] = collect($data['maps']['permissions'])->pluck('id')->toArray();
+            $data['row']['menu_ids'] = collect($data['maps']['permissions'])
+                ->pluck('id')
+                ->toArray();
+        }elseif($tmp_id = Arr::get($data,'row.tmp_id')){
+            $data['row']['menu_ids'] = MenuRole::query()
+                ->where('role_id',$tmp_id)
+                ->pluck('menu_id')
+                ->toArray()?:[];
         }
 
         return $data;
@@ -218,7 +225,10 @@ class RoleController extends Controller
             }
         }
         if($id==1){
-            unset($data['menu_ids']);
+            $data['menu_ids'] = [];
+        }
+        if(Arr::get($data,'is_tmp')==1){
+            $data['tmp_id'] = 0;
         }
         return $data;
     }
@@ -251,14 +261,14 @@ class RoleController extends Controller
                     return ['role_id'=>$item['id'],'menu_id'=>$value];
                 })->toArray());
                 //如果是模板,修改子集
-                if ( $data['is_tmp'] ) {
+                /*if ( $data['is_tmp'] ) {
                     Role::where('tmp_id','=',$id)->get()->map(function($item)use($add_permissions,$del_permissions){
                         $del_permissions AND $item->menus()->detach($del_permissions);
                         $add_permissions AND MenuRole::insertReplaceAll(collect($add_permissions)->map(function($value)use($item){
                             return ['role_id'=>$item['id'],'menu_id'=>$value];
                         })->toArray());
                     });
-                }
+                }*/
                 //新增权限父节点都将拥有
                 Role::parents($item,true)->get()->each(function($item) use($add_permissions){
                     $add_permissions AND MenuRole::insertReplaceAll(collect($add_permissions)->map(function($value)use($item){

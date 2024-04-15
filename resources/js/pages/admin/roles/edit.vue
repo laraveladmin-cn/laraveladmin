@@ -21,7 +21,7 @@
                                     </div>
                                 </template>
                             </edit-item>
-                            <edit-item key-name="is_tmp" :options='{"name": props.transField("Template selection"), "type":"select"}' :datas="props">
+                            <edit-item key-name="tmp_id" v-show="!props.data.row['is_tmp']" :options='{"name": props.transField("Template selection"), "type":"select"}' :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
                                         <select2 v-model="props.data.row['tmp_id']"
