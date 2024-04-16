@@ -63,8 +63,8 @@ cd {{$path_dir}} && \
 php artisan down --redirect="/503" --retry=60 && \
 git pull origin {{$branch}} && \
 @if($composer_install)
-php composer-check.php @if($is_online) --no-dev @endif && \
-composer install --optimize-autoloader --no-interaction {{--@if($is_online) --no-dev @endif --}}&& \
+php composer-check.php && \
+composer install --optimize-autoloader --no-interaction && \
 @endif
 @if($is_online)
     php artisan optimize && \
@@ -97,7 +97,7 @@ chmod 777 public && \
 @if($unzip_vendor)
     unzip -o -d ./ ./vendor.zip && \
 @endif
-composer install --optimize-autoloader --no-interaction @if($is_online) --no-dev @endif && \
+composer install --optimize-autoloader --no-interaction && \
 @if(!$is_online)
 php artisan config:clear && \
 php artisan cache:clear && \
