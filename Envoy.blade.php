@@ -64,7 +64,7 @@ php artisan down --redirect="/503" --retry=60 && \
 git pull origin {{$branch}} && \
 @if($composer_install)
 php composer-check.php @if($is_online) --no-dev @endif && \
-composer install --optimize-autoloader --no-interaction @if($is_online) --no-dev @endif && \
+composer install --optimize-autoloader --no-interaction {{--@if($is_online) --no-dev @endif --}}&& \
 @endif
 @if($is_online)
     php artisan optimize && \
