@@ -1470,7 +1470,9 @@ trait ResourceController
             }
             $relation_ids[] = $new_relation_item[$local_key];
         }
-        $class::whereNotIn($local_key,$relation_ids)->delete();
+        $class::where($foreign_key,$item[$local_key])
+            ->whereNotIn($local_key,$relation_ids)
+            ->delete();
     }
 
 
