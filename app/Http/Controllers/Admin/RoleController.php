@@ -304,4 +304,18 @@ class RoleController extends Controller
 
         return $data;
     }
+
+    /**
+     * 执行修改前查询到数据结果后对数据进行处理
+     * @param $data
+     * @param $item
+     * @return mixed
+     */
+    protected function handlePostEditFindReturn(&$data,$item){
+        //优先获取旧数据源的菜单权限
+        if($item){
+            $item->menus;
+        }
+        return $data;
+    }
 }
