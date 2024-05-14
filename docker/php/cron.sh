@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 code_dir=${LARAVEL_DIR}
 if [ "${code_dir}" = "" ]
     then

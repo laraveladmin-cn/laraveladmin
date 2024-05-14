@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #set -x
 # 将环境变量保存至 /etc/default/locale
 code_dir=${LARAVEL_DIR}

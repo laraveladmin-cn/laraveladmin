@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #set -x
 ##代码更新重载phpswoole
 code_dir=${LARAVEL_DIR}
