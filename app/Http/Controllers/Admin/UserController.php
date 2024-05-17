@@ -67,7 +67,11 @@ class UserController extends Controller
      * 编辑页面时的字段值
      * @var array
      */
-    public $editFields = [];
+    public $editFields = [
+        'province'=>['id','name'],
+        'city'=>['id','name'],
+        'area'=>['id','name']
+    ];
 
     public $exportFieldsName = [];
 
@@ -131,6 +135,22 @@ class UserController extends Controller
             return $id > 1;
         })->toArray();
 
+        return $data;
+    }
+
+    /**
+     * 编辑页面返回数据前对数据处理
+     * @param $data
+     * @return mixed
+     */
+    protected function handleEditReturn($id, &$data)
+    {
+        $data['row'] = collect($data['row'])->toArray();
+        if(!is_null(Arr::get($data,'row.lng'))){
+            $data['row']['location'] = [Arr::get($data,'row.lng'),Arr::get($data,'row.lat')];
+        }else{
+            $data['row']['location'] = null;
+        }
         return $data;
     }
 }

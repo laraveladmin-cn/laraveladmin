@@ -24,6 +24,7 @@ $str = <<<'str'
     "Initializing the creation of a soft connection": "Initializing the creation of a soft connection",
     "The \":link\" link has been connected to \":target\"": "The \":link\" link has been connected to \":target\"",
     "The links have been created": "The links have been created",
+    "Generate software code text for software copyright application": "Generate software code text for software copyright application",
     "To enable support for relative links, please install the symfony/filesystem package": "To enable support for relative links, please install the symfony/filesystem package",
     "Failed to delete file \":file\"": "Failed to delete file \":file\""
 }

@@ -5,12 +5,12 @@
                 <language ref="language" :value="language" @change="setLanguage"></language>
             </a>
         </div>
-        <div>{{$tp('Header')}}</div>
-        <div>{{$tp('Menu field')}}</div>
+      <!--  <div>{{$tp('Header')}}</div>
+        <div>{{$tp('Menu field')}}</div>-->
         <transition name="fade" enter-active-class="animated fadeIn faster" mode="out-in" leave-active-class="animated fadeOut faster">
             <router-view></router-view>
         </transition>
-        <div>{{$tp('Footer')}}</div>
+   <!--     <div>{{$tp('Footer')}}</div>-->
     </div>
 </template>
 

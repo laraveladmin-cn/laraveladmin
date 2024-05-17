@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </el-tab-pane>
-            <el-tab-pane :label="$tp(tabs[1])" :name="1+''" :key="1" v-if="update_url">
+            <el-tab-pane :label="$tp(tabs[1])" :name="1+''" :key="1">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">

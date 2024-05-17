@@ -19,14 +19,6 @@
                             </edit-item>
                             <edit-item key-name="name" :options="{name: props.transField('Name'), required: true,rules:'required'}"  :datas="props">
                             </edit-item>
-                            <edit-item key-name="description" :options="{name: props.transField('Remarks'), required: false,type:'textarea'}"  :datas="props">
-                            </edit-item>
-                        </div>
-                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <edit-item key-name="email" :options="{name: props.transField('E-mail'), required: !props.data.row.mobile_phone,rules:props.data.row.mobile_phone?'':'required|email'}"  :datas="props">
-                            </edit-item>
-                            <edit-item key-name="mobile_phone" :options="{name: props.transField('Phone number'), required: !props.data.row.email,rules:props.data.row.email?'':'required|mobile'}"  :datas="props">
-                            </edit-item>
                             <edit-item key-name="status" :options="{name: props.transField('State'), required: true}"  :datas="props">
                                 <template slot="input-item">
                                     <div class="edit-item-content">
@@ -39,8 +31,96 @@
                                     </div>
                                 </template>
                             </edit-item>
+                            <edit-item key-name="description" :options="{name: props.transField('Remarks'), required: false,type:'textarea'}"  :datas="props">
+                            </edit-item>
                         </div>
                         <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                            <edit-item key-name="email" :options="{name: props.transField('E-mail'), required: !props.data.row.mobile_phone,rules:props.data.row.mobile_phone?'':'required|email'}"  :datas="props">
+                            </edit-item>
+                            <edit-item key-name="mobile_phone" :options="{name: props.transField('Phone number'), required: !props.data.row.email,rules:props.data.row.email?'':'required|mobile'}"  :datas="props">
+                            </edit-item>
+
+                            <edit-item key-name="province_id" :options="{name: props.transField('Province'), required: ''}"  :datas="props">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <select2 v-model="props.data.row['province_id']"
+                                                 :disabled="!props.url || props.data.row['id']==1"
+                                                 :keyword-key="'name'"
+                                                 :default-options="array_get(props,'data.row.province.id',0)?[array_get(props,'data.row.province')]:[]"
+                                                 :placeholder-value="0"
+                                                 :url="use_url+'/admin/areas/list'"
+                                                 :is-ajax="true"
+                                                 :params="{where:{'level':2}}"
+                                                 @change="changeProvinceId(props.data.row)"
+                                                 ref="province"
+                                        >
+                                        </select2>
+                                    </div>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="city_id" :options="{name: props.transField('City'), required: ''}"  :datas="props">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <select2 v-model="props.data.row['city_id']"
+                                                 :disabled="!props.url || props.data.row['id']==1 || !props.data.row['province_id']"
+                                                 :default-options="array_get(props,'data.row.city.id',0)?[array_get(props,'data.row.city')]:[]"
+                                                 :placeholder-value="0"
+                                                 :url="use_url+'/admin/areas/list'"
+                                                 :keyword-key="'name'"
+                                                 :is-ajax="true"
+                                                 :params="{where:{'parent_id':props.data.row['province_id']}}"
+                                                 @change="changeCityId(props.data.row)"
+                                                 ref="city"
+                                        >
+                                        </select2>
+                                    </div>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="area_id" :options="{name: props.transField('Zone'), required: ''}"  :datas="props">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <select2 v-model="props.data.row['area_id']"
+                                                 :disabled="!props.url || props.data.row['id']==1 || !props.data.row['city_id']"
+                                                 :default-options="array_get(props,'data.row.area.id',0)?[array_get(props,'data.row.area')]:[]"
+                                                 :placeholder-value="0"
+                                                 :url="use_url+'/admin/areas/list'"
+                                                 :keyword-key="'name'"
+                                                 :is-ajax="true"
+                                                 :params="{where:{'parent_id':props.data.row['city_id']}}"
+                                                 @change="changeAreaId(props.data.row)"
+                                                 ref="area"
+                                        >
+                                        </select2>
+                                    </div>
+                                </template>
+                            </edit-item>
+                            <edit-item key-name="addr"
+                                       :options="{name: props.transField('Detailed address'), required: false, rules:'',title:''}"
+                                       :datas="props"
+                                       @change="updateKeywords(props.data.row)"
+                            >
+                            </edit-item>
+                        </div>
+                        <div class="move-items col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                            <edit-item key-name="lng" :options="{name: $t('Coordinates'), required: false, rules:'',title:''}"  :datas="props">
+                                <template slot="input-item">
+                                    <div class="edit-item-content">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                {{props.transField('Coordinate longitude')}}:{{props.data.row['lng'] || '--'}}
+                                            </div>
+                                            <div class="col-xs-6">
+                                                {{props.transField('Coordinate latitude')}}:{{props.data.row['lat'] || '--'}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <gaode-map v-model="props.data.row['location']"
+                                               @change="props.data.row['lng']=props.data.row['location'][0];props.data.row['lat']=props.data.row['location'][1]"
+                                               :keywords="keywords"
+                                               :disabled="!props.url"
+                                    ></gaode-map>
+                                </template>
+                            </edit-item>
                             <edit-item key-name="avatar" :options="{name: props.transField('Head portrait'), required: false}"  :datas="props">
                                 <template slot="input-item">
                                     <upload v-model="props.data.row['avatar']"
@@ -66,8 +146,27 @@
             "password-edit": ()=>import(/* webpackChunkName: "common_components/passwordEdit.vue" */ 'common_components/passwordEdit.vue'),
             "select2":()=>import(/* webpackChunkName: "common_components/select2.vue" */ 'common_components/select2.vue'),
             "upload":()=>import(/* webpackChunkName: "common_components/upload.vue" */ 'common_components/upload.vue'),
+            "gaode-map":()=>import(/* webpackChunkName: "common_components/gaodeMap.vue" */ 'common_components/gaodeMap.vue'),
         },
         props: {
+            url:{
+                type: [String],
+                default: function () {
+                    return '';
+                }
+            },
+            noBack:{
+                type: [Boolean],
+                default: function () {
+                    return false;
+                }
+            },
+            callback:{
+                type: [Function],
+                default: function () {
+                    return function () {};
+                }
+            },
         },
         data(){
             return {
@@ -75,28 +174,74 @@
                 options:{
                     lang_table:'users',
                     id:'edit', //多个组件同时使用时唯一标识
-                    url:'', //数据表请求数据地址
+                    url:this.url || '', //数据表请求数据地址
                     params:this.$router.currentRoute.query || {},
+                    no_back:this.noBack,
                     callback:(response,row)=>{ //修改成功
                         if(row.id==this.user.id){
                             this.getUser(1);
                         }
+                        this.callback();
                     }
-                }
+                },
+                keywords:''
             };
         },
         methods:{
             ...mapActions({
                 getUser:'user/getUser', //获取用户数据
             }),
+            changeProvinceId(row){
+                row.city_id = 0;
+                row.area_id = 0;
+                row.addr='';
+                this.updateKeywords(row);
+            },
+            changeCityId(row){
+                row.area_id = 0;
+                row.addr='';
+                this.updateKeywords(row);
+            },
+            changeAreaId(row){
+                row.addr='';
+                this.updateKeywords(row);
+            },
+            updateKeywords(row){
+                let obj = {
+                    province:'',
+                    city:'',
+                    area:'',
+                };
+                let keywords = collect(obj).map((value,key)=>{
+                    let val = $(this.$refs[key].$el).find("select option:selected").text() || '';
+                    return val.replace(this.$t('Please select'),'');
+                }).values().implode('');
+                let addr = row.addr || '';
+                keywords = keywords+addr;
+                if(keywords!=this.keywords){
+                    this.keywords = keywords;
+                }
+            }
         },
         computed:{
+            ...mapState([
+                'use_url',
+                'theme'
+            ]),
             ...mapState('user',{
                 user:state => state.user
             }),
-            ...mapState([
-                'theme'
-            ]),
-        }
+
+        },
+        mounted() {
+        },
+        watch:{
+            url(val){
+                this.options.url = val;
+            }
+        },
+        ...mapState([
+            'theme'
+        ]),
     };
 </script>
