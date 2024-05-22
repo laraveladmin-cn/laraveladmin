@@ -15,7 +15,7 @@ class CreateAdminsTable extends Migration {
 		Schema::create('admins', function(Blueprint $table)
 		{
 			$table->increments('id')->comment('ID');
-			$table->integer('user_id')->default(0)->unique()->comment('用户ID@required|exists:users,id|unique:admins,user_id');
+			$table->integer('user_id')->default(0)->index()->comment('用户ID@required|exists:users,id|unique:admins,user_id');
 			$table->timestamps();
 			$table->softDeletes();
             //设置表备注

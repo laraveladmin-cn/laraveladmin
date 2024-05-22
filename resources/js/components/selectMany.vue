@@ -159,14 +159,50 @@
             value(val){
                 if(this.val!=val){
                     this.val = val;
+                    this.val_id = '';
+                    this.syncShow();
                 }
             },
             val(val){
                 this.$emit('input', val); //修改值
                 this.$emit('change',val); //修改值
+            },
+            options(){
+
             }
         },
         methods:{
+            //同步显示对应值
+            syncShow(){
+                //移除展示可选项
+                let remove_options = [];
+                collect(this.options).each((option)=>{
+                    let id = array_get(option,this.primaryKey);
+                    if(this.val.indexOf(id)==-1){
+                        remove_options.push(option);
+                    }
+                });
+                collect(remove_options).each((option)=>{
+                    this.remove(option);
+                });
+                let show_ids = collect(this.options).map((option)=>{
+                    let id = array_get(option,this.primaryKey);
+                    return id;
+                }).values()
+                    .all();
+                collect(this.val).diff(show_ids).values().each((id)=>{
+                    //查询险种信息
+                    axios.get(this.use_url+this.itemUrl + id, {params: {}}).then((response) => {
+                        let item = response.data.row;
+                        //处理顺序值
+                        let sort_value = (collect(this.options).pluck(this.sortKey).max() || 0)+1;
+                        array_set(item,this.sortKey,sort_value);
+                        this.options.push(item);
+                    }).catch( (error) =>{
+                    });
+                });
+
+            },
             changeSelect(){
               if(this.autoSelect){
                   this.add();
