@@ -1067,11 +1067,16 @@ trait ResourceController
         $primary_key = $model->getKeyName();
         $no_order = $primary_key && ((isset($this->disableExportOrder) && $this->disableExportOrder ) || //禁用排序 或
                 !Arr::get($this->getOptions(),'order')); //没有排序
+        $ids = Request::input('ids',[]);
+        $export_type = Request::input('export_type',0);
         //获取分页数据
         if (!Request::input('page')) {
             //获取带有筛选条件的对象
             $obj = $this->getWithOptionModel('exportFields');
             $obj = $this->handleExport($obj);
+            if($export_type){
+                $obj = $obj->whereIn($primary_key,$ids);
+            }
             $data = $obj->paginate(200)->toArray();
             if($no_order){
                 $data['max_id'] = collect($data['data'])->max($primary_key)?:0;
@@ -1080,12 +1085,18 @@ trait ResourceController
         } else if($no_order){
             $id = Request::get('id',0);
             $obj = $this->getWithOptionModel('exportFields',true)->where($primary_key,'>',$id);
+            if($export_type){
+                $obj = $obj->whereIn($primary_key,$ids);
+            }
             $data = $obj->simplePaginate(200,['*'],'page',1)->toArray();
             $data['max_id'] = collect($data['data'])->max($primary_key)?:$id;
             $data['current_page'] = Request::get('page',1);
         }else{ //不统计条数
             //获取带有筛选条件的对象
             $obj = $this->getWithOptionModel('exportFields');
+            if($export_type){
+                $obj = $obj->whereIn($primary_key,$ids);
+            }
             $data = $obj->simplePaginate(200)->toArray();
         }
         $maps = $this->getFieldsMap($this->exportFields, $model,false,true);

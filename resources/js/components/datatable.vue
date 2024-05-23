@@ -107,9 +107,24 @@
                                               <i class="glyphicon glyphicon-folder-open"></i>
                                               <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
                                           </button>-->
-                                        <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl']">
+                                        <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl'] && !options.exportMore">
                                             <i class="glyphicon glyphicon-download-alt"></i>
                                         </button>
+                                        <div class="btn-group" v-if="data.configUrl['exportUrl'] && options.exportMore">
+                                            <button type="button"
+                                                    class="btn dropdown-toggle"
+                                                    :title="$t('Export data')"
+                                                    data-toggle="dropdown"
+                                                    :class="'btn-'+theme"
+                                                    v-if="data.configUrl['exportUrl']">
+                                                <i class="glyphicon glyphicon-download-alt"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a @click="download">导出全部</a></li>
+                                                <li><a @click="download(1)">导出勾选</a></li>
+                                                <li><a @click="download(2)">导出当前页</a></li>
+                                            </ul>
+                                        </div>
                                         <slot name="input_group_add_btn" :data="data"></slot>
                                     </div>
                                 </div>
@@ -904,7 +919,7 @@ export default {
             this.data.options.where['_key'] = index;
         },
         //下载excel数据
-        download() {
+        download(type) {
             if (!this.export_fileds.length && this.count(this.data.excel.exportFields)) {
                 this.set({
                     key: 'modal',
@@ -919,6 +934,17 @@ export default {
             let options = copyObj(this.data.options); //当前条件下
             let export_fileds = copyObj(this.export_fileds);
             options['export_fileds'] = export_fileds;
+            options['export_type'] = type; //导出类型
+            if(type){
+                let ids = [];
+                if(type==1){ //导出勾选数据
+                    ids = this.check_ids;
+                }else if(type==2){ //导出当前页面数据
+                    ids = collect(array_get(this.data, 'list.data', [])).pluck(this.options.primaryKey || 'id').all();
+                }
+                options['ids'] = ids;
+            }
+
             let url = this.data.configUrl.exportUrl;
             let sheet = array_get(this.data, 'excel.sheet', '');
             let parms = {
