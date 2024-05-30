@@ -658,7 +658,10 @@ class Menu extends Model
         $method = self::methodValue($method);
         $isIn = false;
         $menus = collect($menus)->filter(function($item) use (&$isIn,$url,$method,&$menu){
-            return $item['url']===$url && in_array($method,$item['method']);
+            return $item['url']===$url && ( //url地址相等
+                in_array($method,$item['method']) || //请求方式包含
+                (!$method && !$item['method']) //仅权限标记
+                );
             //return strpos($item['url'],$url)===0 && in_array($method,$item['method']);
         });
         $menu = collect($menus)->first(function ($item)use($url){

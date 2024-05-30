@@ -11,7 +11,7 @@
                class="form-control"
                autocomplete="on"
                :placeholder="_placeholder">
-        <div class="input-group-addon">
+        <div class="input-group-addon" @mouseenter="show" @mouseleave="hide">
             <i class="fa fa-eye" v-show="type=='password'" @click="toggle"></i>
             <i class="fa fa-eye-slash" v-show="type!='password'" @click="toggle"></i>
         </div>
@@ -43,12 +43,18 @@
                 default: function () {
                     return false;
                 }
-            }
+            },
+            mouseenterShow:{
+                default: function () {
+                    return false;
+                }
+            },
         },
         data(){
             return {
                 password:this.value,
-                type:'password'
+                type:'password',
+                init_click:false
             };
         },
         watch:{
@@ -63,7 +69,19 @@
             }
         },
         methods:{
+            show(){
+                if(this.mouseenterShow){
+                    this.init_click = false;
+                    this.type = 'text';
+                }
+            },
+            hide(){
+                if(this.mouseenterShow && !this.init_click){
+                    this.type = 'password';
+                }
+            },
             toggle(){
+                this.init_click = true;
                 this.type = this.type=='password'?'text':'password';
             },
             randomPass(len = 16, mode = "high"){

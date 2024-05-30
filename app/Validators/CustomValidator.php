@@ -221,6 +221,100 @@ class CustomValidator extends Validator{
         return preg_match('/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/', $value) > 0;
     }
 
+    /**
+     * 银行卡验证
+     * 16-19 位卡号校验位采用 Luhm 校验方法计算：
+     * 1，将未带校验位的 15 位卡号从右依次编号 1 到 15，位于奇数位号上的数字乘以 2
+     * 2，将奇位乘积的个十位全部相加，再加上所有偶数位上的数字
+     * 3，将加法和加上校验位能被 10 整除。
+     * @param $s
+     * @return bool
+     */
+    public function validateBankCard($attribute, $value, $parameters)
+    {
+        if (!$value) return true;
+        if(!preg_match("/^[0-9]{1,}$/", $value)){
+            return false;
+        }
+        $n = 0;
+        $ns = strrev($value); // 倒序
+        for ($i = 0; $i < strlen($value); $i++) {
+            if ($i % 2 == 0) {
+                $n += $ns[$i]; // 偶数位，包含校验码
+            } else {
+                $t = $ns[$i] * 2;
+                if ($t >= 10) {
+                    $t = $t - 9;
+                }
+                $n += $t;
+            }
+        }
+        $res = ($n % 10) == 0;
+        $bank_code = Arr::get($parameters, 0, '');
+
+        if (!$bank_code || !$res) { //不验证所属银行代码
+            return $res;
+        }
+        try {
+            $url = 'https://ccdcapi.alipay.com/validateAndCacheCardInfo.json';
+            $response = \App\Facades\Client::request('get', $url, [
+                'query' => [
+                    '_input_charset' => 'utf-8',
+                    'cardNo' => $value,
+                    'cardBinCheck' => 'true'
+                ]
+            ]);
+            if ($response->getStatusCode() == 200) {
+                $stringBody = $response->getBody()->getContents();
+                $result = json_decode($stringBody, true);
+                $res_bank_code = array_get($result, 'bank', '');
+                if (array_get($result, 'stat') == 'ok' && $res_bank_code) {
+                    $res = array_get($result, 'validated') &&  //有效卡号
+                        $bank_code == $res_bank_code
+                        //&& //卡号所属银行
+                        //array_get($result, 'cardType') == 'DC' //DC-储蓄卡,CC-信用卡
+                    ;
+                }
+            }
+        } catch (\Exception $e) {
+        }
+        return $res;
+    }
+
+    /**
+     * 社会统一信用码验证
+     * @param $code
+     * @return bool
+     */
+    public function validateUnifiedSocialCreditIdentifier($attribute, $code)
+    {
+        if (is_null($code) || $code==='') return true;
+        if (!preg_match('~^[0-9ABCDEFGHJKLMNPQRTUWXY]{18}$~', $code)) {
+            return false;
+        }
+        $code = strtoupper($code);
+        // 18位统一社会信用代码不使用I、O、Z、S、V这五个英文字母
+        $alphaMap = [
+            '0' => 0, '1'  => 1, '2'  => 2, '3'  => 3, '4'  => 4,
+            '5' => 5, '6'  => 6, '7'  => 7, '8'  => 8, '9'  => 9,
+            'A' => 10, 'B' => 11, 'C' => 12, 'D' => 13, 'E' => 14,
+            'F' => 15, 'G' => 16, 'H' => 17, 'J' => 18, 'K' => 19,
+            'L' => 20, 'M' => 21, 'N' => 22, 'P' => 23, 'Q' => 24,
+            'R' => 25, 'T' => 26, 'U' => 27, 'W' => 28, 'X' => 29,
+            'Y' => 30,
+        ];
+        $weight = [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28];
+        $chrs   = str_split($code);
+        $sum    = 0;
+        foreach (array_slice($chrs, 0, 17) as $index => $chr) {
+            $sum += $alphaMap[$chr] * $weight[$index];
+        }
+        $checkNum     = 31 - ($sum % 31);
+        $checkNum     = $checkNum == 31 ? 0 : $checkNum;
+        $flipAlphaMap = array_flip($alphaMap);
+        return $chrs[17] === (string) $flipAlphaMap[$checkNum];
+    }
+
 
 
 

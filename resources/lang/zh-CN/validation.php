@@ -125,6 +125,7 @@ return [
     'domain'=>':attribute 必须是有效域名。',
     'is_idcard'=>':attribute 必须是有效的身份证号码。',
     'geetest'=>':attribute 验证失败。',
+    'bank_card'=>':attribute 输入不正确',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

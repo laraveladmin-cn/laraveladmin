@@ -520,6 +520,7 @@ trait ResourceController
                 'message' => trans('Create a failure!') //创建失败
             ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
+        $this->saveRelationBefore($item,$data);
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data,[]);
         $primaryKey = $this->newBindModel()->getKeyName() ?: 'id';
@@ -567,6 +568,7 @@ trait ResourceController
                 'message' => trans('Modify the failure!') //修改失败
             ], HttpResponse::HTTP_INTERNAL_SERVER_ERROR)], HttpResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
+        $this->saveRelationBefore($item,$data);
         $this->saveRelation($item, $data);
         $this->handlePostEdit($item, $data,$old);
 
@@ -733,6 +735,10 @@ trait ResourceController
                 }
             });
         }
+    }
+
+    protected function saveRelationBefore($item,&$data){
+        return $data;
     }
 
 
@@ -1256,6 +1262,7 @@ trait ResourceController
                 $old_data = [];
                 $item = $bindModel::create($row);
             }
+            $this->saveRelationBefore($item, $row);
             $this->saveRelation($item, $row);
             $this->handlePostEdit($item, $row,$old_data);
         }
