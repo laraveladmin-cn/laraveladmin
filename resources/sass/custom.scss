@@ -251,7 +251,9 @@ body {
     border-collapse: collapse;
     padding: 8px;
 }
-
+.has-error .el-input__inner{
+    border-color: #dd4b39;
+}
 
 
 
