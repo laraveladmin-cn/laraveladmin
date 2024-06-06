@@ -19,7 +19,9 @@
         <slot>
             <div class="value" v-show="value">
                 <div class="show-value">
-                    <a target="_blank" :href="value" :title="value">{{value}}</a>
+                    <a target="_blank" :href="value" :title="value">
+                        {{fileName || value}}
+                    </a>
                 </div>
                 <i class="fa fa-times pull-right remove" @click="remove"></i>
             </div>
@@ -88,7 +90,13 @@
                 default: function () {
                     return '';
                 }
-            }
+            },
+            fileName:{
+                type:[String],
+                default: function () {
+                    return '';
+                }
+            },
 
         },
         data(){

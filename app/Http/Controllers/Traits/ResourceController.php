@@ -423,7 +423,15 @@ trait ResourceController
         if(isset($this->showIndexAttributes) && $this->showIndexAttributes){
             foreach ($data as $item){
                 collect($this->showIndexAttributes)->each(function ($key)use($item){
-                    Arr::get($item,$key);
+                    if(Str::contains($key,'.$index.')){
+                        $keys = explode('.$index.',$key);
+                        $items = Arr::get($item,$keys[0]);
+                        foreach ($items as $obj){
+                            Arr::get($obj,$keys[1]);
+                        }
+                    }else{
+                        Arr::get($item,$key);
+                    }
                 });
             }
         }
