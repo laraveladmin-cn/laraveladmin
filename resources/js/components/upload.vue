@@ -152,7 +152,6 @@
                 }).values().all();
             },
             getUrl(res){
-                res = this.decodeData(res);
                 let url = array_get(res,this.valueKey,'') || res.title || '';
                 if(this.noparm){
                     let urls = url.split("?");
@@ -161,12 +160,14 @@
                 }
                 return url;
             },
-            handleSuccess(file, fileList) {
+            handleSuccess(old_file, fileList) {
+                let file = this.decodeData(old_file);
                 file.url = this.getUrl(file);
                 this.val.push(file);
             },
-            handleAvatarSuccess(res, file){
+            handleAvatarSuccess(old_res, file){
                 this.refreshToken();
+                let res = this.decodeData(old_res);
                 let url = this.getUrl(res);
                 if(url){
                     //弹窗
