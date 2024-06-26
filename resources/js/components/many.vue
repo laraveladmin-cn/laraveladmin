@@ -151,10 +151,12 @@ export default {
             let sort = this.items_length?collect(this.items).values().max(this.sortKey):0;
             array_set(item,this.sortKey,sort+1);
             this.items.push(item);
+            this.$emit('add',item); //添加对象
         },
         delItem(index){
             this.closePopover(index);
             this.items.splice(index, 1);
+            this.$emit('del',index); //修改值
         },
         //更新排序值
         updateOptionsSortValue(){
