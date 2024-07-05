@@ -32,10 +32,25 @@ class MigrateAllCommand extends BaseCommand
     public function handle()
     {
         $directories = Storage::disk('migrations')->allDirectories();
+        if(!$directories){
+            $directories = $this->getAllDirectories(database_path('migrations'));
+        }
         $this->call('migrate',['--force'=>true]);
         collect($directories)->each(function ($dir){
             $this->call('migrate',['--force'=>true,'--path'=>'database/migrations/'.$dir]);
         });
     }
+
+    public function getAllDirectories($directory) {
+        $directories = [];
+        $scannedItems = scandir($directory);
+        foreach ($scannedItems as $item) {
+          if (is_dir($directory . DIRECTORY_SEPARATOR . $item) && $item != '.' && $item != '..') {
+            $directories[] =  $item;
+          }
+        }
+      
+        return $directories;
+      }
 
 }
