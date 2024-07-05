@@ -361,15 +361,9 @@ trait ResourceController
         return $this->hasFullTextSearch;
     }
 
-    /**
-     * 获取翻页数据
-     */
-    public function getList()
-    {
-        $this->selectValidate();
-        $this->bindModel = $this->bindModel();
+    protected function selectIndexFields(&$query,&$fields=[],&$primary_key=''){
         //指定查询字段
-        $fields = $this->selectFields($this->showIndexFields,$this->bindModel);
+        $fields = $this->selectFields($this->showIndexFields,$query);
         //判断是否包含主键字段,没有包含自动添加
         $model = $this->newBindModel();
         $primary_key = $model->getKeyName();
@@ -388,9 +382,22 @@ trait ResourceController
         }
         $hasFullTextSearch = $this->existFullTextSearch();
         if($fields && !$hasFullTextSearch){
-            $this->bindModel = $this->bindModel->select($fields);
+            $query = $query->select($fields);
         }
+        return $query;
+    }
 
+    /**
+     * 获取翻页数据
+     */
+    public function getList()
+    {
+        $this->selectValidate();
+        $this->bindModel = $this->bindModel();
+        $primary_key = '';
+        $fields = [];
+        $hasFullTextSearch = $this->existFullTextSearch();
+        $this->bindModel = $this->selectIndexFields($this->bindModel,$fields,$primary_key);
         //获取带有筛选条件的对象
         $obj = $this->getWithOptionModel();
         $obj = $this->handleList($obj);
