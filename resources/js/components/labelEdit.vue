@@ -4,7 +4,7 @@
            role="button"
            v-for="(item, index) in maps"
            :key="index"
-           :class="active(item.value)?'btn-'+theme:'btn-default'"
+           :class="(active(item.value)?'btn-'+theme:'btn-default')+' '+btnClass"
            @click="onChange(item.value)">
             {{ showName(item) }}
         </a>
@@ -64,7 +64,12 @@
                 default() {
                     return 'name';
                 }
-            }
+            },
+            btnClass:{
+                default() {
+                    return '';
+                }
+            },
 
         },
         data(){
