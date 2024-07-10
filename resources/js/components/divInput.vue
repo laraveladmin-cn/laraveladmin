@@ -1,7 +1,7 @@
 <template>
     <div>
         <slot :show="show">
-            <div ref="input" :contenteditable="!disabled" class="inline edit-input" @blur="onBlur" @focus="onFocus">
+            <div ref="input" :contenteditable="!disabled" class="inline-block edit-input" @blur="onBlur" @focus="onFocus">
                 {{show}}
             </div>
             <span v-if="unit">
@@ -113,6 +113,9 @@
     .edit-input{
         outline: none;
         min-width: 20px;
+    }
+    .inline-block{
+        display: inline-block;
     }
 
 </style>
