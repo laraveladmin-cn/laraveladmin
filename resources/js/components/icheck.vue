@@ -55,15 +55,21 @@
         },
         data(){
           return {
-              val:this.value,
+              val: this.copyObj(this.value),
               icheck:null,
               changeing:false
           }
         },
         watch:{
           val(value){
-              this.$emit('input', value); //修改值
-              this.$emit('change',value); //修改值
+              if(typeof value=="object" && JSON.stringify(value)!=JSON.stringify(this.value)){
+                  let value_copy = this.copyObj(value);
+                  this.$emit('input', value_copy); //修改值
+                  this.$emit('change',value_copy); //修改值
+              }else if(typeof value!="object" && value!=this.value){
+                  this.$emit('input', value); //修改值
+                  this.$emit('change',value); //修改值
+              }
               if((typeof value=="object" && collect(value).filter((val)=>{
                   return val==this.option;
               }).count()) || value==this.option){
@@ -73,9 +79,16 @@
               }
           },
             value(value){
-              if(value!=this.val){
-                  this.val = value;
+              if(typeof value=="object"){
+                  if(JSON.stringify(value)!=JSON.stringify(this.val)){
+                      this.val = this.copyObj(value);
+                  }
+              }else {
+                  if(value!=this.val){
+                      this.val = value;
+                  }
               }
+
             },
             disabled(value){
               if(value){
@@ -122,6 +135,12 @@
             });
         },
         methods:{
+            copyObj(obj){
+                if(typeof obj!="object" || isNull(obj)){
+                    return obj;
+                }
+                return JSON.parse(JSON.stringify(obj || {}));
+            },
             clickFun(){
                 this.$emit('click');
             }

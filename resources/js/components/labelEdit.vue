@@ -91,6 +91,9 @@
             },
             map(){
 
+            },
+            btnClass(){
+
             }
         },
         methods:{
