@@ -4,7 +4,7 @@
             <div ref="input" :contenteditable="!disabled" class="inline-block edit-input" @blur="onBlur" @focus="onFocus">
                 {{show}}
             </div>
-            <span v-if="unit">
+            <span v-if="unit" @click="clickUnit">
                 {{unit}}
             </span>
         </slot>
@@ -89,6 +89,9 @@
                 if(this.$refs['input'].textContent.trim()==this.placeholder){
                     this.$refs['input'].innerHTML = '';
                 }
+            },
+            clickUnit(){
+                this.$emit('clickUnit');
             }
         },
         computed:{
