@@ -1488,24 +1488,34 @@ trait ResourceController
         $class = get_class($relation_obj->getModel());
         $local_key = $relation_obj->getLocalKeyName();
         $foreign_key = $relation_obj->getForeignKeyName();
-        $old_relation_ids = $item->$relation_key()->pluck($local_key)->toArray()?:[];
+        $old_items = collect($item->$relation_key)->keyBy($local_key);
+        $old_relation_ids = $old_items->keys()->toArray()?:[];
         $relation_items = Arr::get($data,$relation_key,[]);
         $relation_ids  = [];
         foreach ($relation_items as $relation_item){
             $relation_item[$foreign_key] = $item[$local_key];
             $relation_item_id = Arr::get($relation_item,$local_key);
             if($relation_item_id && in_array($relation_item_id,$old_relation_ids)){
-                $new_relation_item = $class::updateOrCreate([
-                    $local_key=>$relation_item_id
-                ],$relation_item);
+                $new_relation_item = $old_items[$relation_item_id];
+                $new_relation_item->update($relation_item);
             }else{
                 $new_relation_item = $class::create($relation_item);
             }
             $relation_ids[] = $new_relation_item[$local_key];
         }
-        $class::where($foreign_key,$item[$local_key])
-            ->whereNotIn($local_key,$relation_ids)
-            ->delete();
+        $del_ids = collect($old_relation_ids)->diff($relation_ids);
+        $del_count = $del_ids->count();
+        if($del_count){
+            if($del_count<count($relation_ids)){
+                $class::where($foreign_key,$item[$local_key])
+                    ->whereIn($local_key,$del_ids->toArray())
+                    ->delete();
+            }else{
+                $class::where($foreign_key,$item[$local_key])
+                    ->whereNotIn($local_key,$relation_ids)
+                    ->delete();
+            }
+        }
     }
 
 
