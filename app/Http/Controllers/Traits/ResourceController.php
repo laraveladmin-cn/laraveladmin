@@ -1236,9 +1236,10 @@ trait ResourceController
         })->filter(function ($item) use (&$errors, $key_name, $relation_keys, $maps1, $multipleFields) { //数据验证
             $data = getRelationData($item);
             $data = $this->handleImportValidateBefore($data);
+            $validate = $this->getImportValidateRule(Arr::get($data, $key_name, 0), $data);
             $messages = $this->validateMessages??[];
             $customAttributes = $this->validateCustomAttributes??[];
-            $validator = Validator::make($data, $this->getImportValidateRule(Arr::get($data, $key_name, 0), $data), $messages, array_merge($customAttributes,$this->exportFieldsName));
+            $validator = Validator::make($data, $validate, $messages, array_merge($customAttributes,$this->exportFieldsName));
             $flog = !$validator->fails(); //验证状态
             if ($validator->fails()) {
                 $item['error'] = collect($validator->errors()->toArray())->map(function ($v, $k) {
