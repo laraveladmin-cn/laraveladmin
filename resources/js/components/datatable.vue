@@ -107,7 +107,7 @@
                                               <i class="glyphicon glyphicon-folder-open"></i>
                                               <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
                                           </button>-->
-                                        <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl'] && !options.exportMore">
+                                        <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download(0)" v-if="data.configUrl['exportUrl'] && !options.exportMore">
                                             <i class="glyphicon glyphicon-download-alt"></i>
                                         </button>
                                         <div class="btn-group" v-if="data.configUrl['exportUrl'] && options.exportMore">
@@ -120,7 +120,7 @@
                                                 <i class="glyphicon glyphicon-download-alt"></i>
                                             </button>
                                             <ul class="dropdown-menu pull-right" role="menu">
-                                                <li><a @click="download">导出全部</a></li>
+                                                <li><a @click="download(0)">导出全部</a></li>
                                                 <li><a @click="download(1)">导出勾选</a></li>
                                                 <li><a @click="download(2)">导出当前页</a></li>
                                             </ul>
@@ -171,7 +171,7 @@
                                                   <i class="glyphicon glyphicon-folder-open"></i>
                                                   <input type="file" @change="selectExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" v-show="false"></input>
                                               </button>-->
-                                            <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download" v-if="data.configUrl['exportUrl']">
+                                            <button type="button" :title="$t('Export data')" class="btn" :class="'btn-'+theme" @click="download(0)" v-if="data.configUrl['exportUrl']">
                                                 <i class="glyphicon glyphicon-download-alt"></i>
                                             </button>
                                             <slot name="input_group_add_btn" :data="data"></slot>
