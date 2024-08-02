@@ -355,7 +355,7 @@ trait ResourceController
     protected function existFullTextSearch(){
         if(!isset($this->hasFullTextSearch) || is_null($this->hasFullTextSearch)){
             $this->hasFullTextSearch = collect(Arr::get($this->getOptions(),'where',[]))
-                    ->where('exp','=','search')
+                ->where('exp','=','search')
                 ->first()?:false;
         }
         return $this->hasFullTextSearch;
@@ -512,7 +512,9 @@ trait ResourceController
     public function create(\Illuminate\Http\Request $request)
     {
         $validate = $this->getValidateRule(0);
-        $validator = Validator::make($request->all(), $validate);
+        $messages = $this->validateMessages??[];
+        $customAttributes = $this->validateCustomAttributes??[];
+        $validator = Validator::make($request->all(), $validate,$messages,$customAttributes);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
@@ -556,7 +558,9 @@ trait ResourceController
         $request = Request::instance();
         $id = $id ?: $request->get('id', 0);
         $validate = $this->getValidateRule($id);
-        $validator = Validator::make($request->all(), $validate);
+        $messages = $this->validateMessages??[];
+        $customAttributes = $this->validateCustomAttributes??[];
+        $validator = Validator::make($request->all(), $validate,$messages,$customAttributes);
         if ($validator->fails()) {
             return Response::returns([
                 'errors' => $validator->errors()->toArray(),
@@ -660,7 +664,7 @@ trait ResourceController
                     }else{
                         $obj = $obj->where($item['key'],$item['exp'],$item['val']);
                     }
-            });
+                });
             collect(Arr::get($options,'order',[]))
                 ->each(function ($item,$key)use(&$obj){
                     $obj = $obj->orderBy($key,$item);
@@ -1232,7 +1236,9 @@ trait ResourceController
         })->filter(function ($item) use (&$errors, $key_name, $relation_keys, $maps1, $multipleFields) { //数据验证
             $data = getRelationData($item);
             $data = $this->handleImportValidateBefore($data);
-            $validator = Validator::make($data, $this->getImportValidateRule(Arr::get($data, $key_name, 0), $data), [], $this->exportFieldsName);
+            $messages = $this->validateMessages??[];
+            $customAttributes = $this->validateCustomAttributes??[];
+            $validator = Validator::make($data, $this->getImportValidateRule(Arr::get($data, $key_name, 0), $data), $messages, array_merge($customAttributes,$this->exportFieldsName));
             $flog = !$validator->fails(); //验证状态
             if ($validator->fails()) {
                 $item['error'] = collect($validator->errors()->toArray())->map(function ($v, $k) {
