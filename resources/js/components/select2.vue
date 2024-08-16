@@ -377,6 +377,7 @@
         watch: {
             value(val,old){
                 if(this.data!==val){
+                    this.data = this.copyObj(val);
                     this.reload();
                 }
             },
