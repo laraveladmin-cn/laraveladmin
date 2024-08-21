@@ -1025,6 +1025,9 @@ export default {
             };
         },
         '$route.fullPath'(val) {
+            if(typeof this.options.watchFullPath != "undefined" && !this.options.watchFullPath){
+                return ;
+            }
             let value = this.$route.query[this.options_key];
             if (value != this.options_str) {
                 let options;
