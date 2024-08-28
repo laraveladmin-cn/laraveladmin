@@ -13,7 +13,7 @@
                 <slot name="col" :vid="keyValue+'.'+index+'.'+i" :field-key="i" :field-name="field" :item="item">
                     <validation-provider :vid="keyValue+'.'+index+'.'+i" :name="field" v-slot="{ errors }">
                         <div :class="{'has-error':(errors && errors.length>0)}">
-                            <input type="text" v-model="item[i]" :disabled="disabled" placeholder="请输入" class="form-control input-sm"/>
+                            <input type="text" v-model="item[i]" :disabled="disabled" :placeholder="$t('Please enter')" class="form-control input-sm"/>
                         </div>
                     </validation-provider>
                 </slot>
@@ -24,17 +24,17 @@
                     :ref="'popover_'+index"
                     width="160"
                     trigger="click">
-                    <p>确定删除吗？</p>
+                    <p>{{$t('Are you sure you want to delete it?')}}</p>
                     <div style="text-align: right; margin: 0">
-                        <el-button size="mini" type="text" @click="closePopover(index)">取消</el-button>
-                        <el-button type="primary" size="mini" @click="delItem(index)">确定</el-button>
+                        <el-button size="mini" type="text" @click="closePopover(index)">{{$t('Cancel')}}</el-button>
+                        <el-button type="primary" size="mini" @click="delItem(index)">{{$t('Sure')}}</el-button>
                     </div>
                     <button class="btn btn-danger btn-xs"
                             v-show="confirmDeletion"
                             slot="reference"
                             :disabled="disabled"
                     >
-                        删除
+                        {{$t('Delete')}}
                     </button>
                 </el-popover>
                <button class="btn btn-danger btn-xs"
@@ -42,13 +42,13 @@
                         :disabled="disabled"
                         @click="delItem(index)"
                 >
-                    删除
+                   {{$t('Delete')}}
                 </button>
             </td>
         </tr>
         <tr v-if="!items_length">
             <td :colspan="fields_count" class="text-center">
-                暂无数据
+                {{$t('Temporarily no data')}}
             </td>
         </tr>
         <tr>
@@ -57,7 +57,7 @@
                         @click="addItem"
                         :disabled="disabled">
                     <i class="fa fa-plus"></i>
-                    添加
+                    {{$t('Add')}}
                 </button>
             </td>
         </tr>
