@@ -202,7 +202,7 @@ trait ResourceController
         $data['initObjRelations'] = [];
         //关系数据处理
         collect($this->editFields)->map(function ($item, $key) use ($id, &$data) {
-            if (is_array($item) && Str::endsWith($key, 's')) { //多个关联
+            if (is_array($item) && (Str::endsWith($key, 's') || Str::singular($key)!=$key)) { //多个关联
                 if ($id) {
                     $data['row'][Str::singular($key) . '_ids'] = collect(Arr::get($data, 'row.' . $key, []))->pluck( $this->newBindModel()->$key()->getRelated()->getKeyName())->toArray();
                     $initObj = $this->editDefaultFields($this->editFields[$key],$this->newBindModel()->$key()->getRelated());
