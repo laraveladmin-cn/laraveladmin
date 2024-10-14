@@ -342,6 +342,10 @@ trait BaseModel{
             $exps[] = 'whereRaw';
             $where = Str::camel(implode('_',$exps));
             $query->$where("FIND_IN_SET( ? ,`{$key}`)",[$val]);
+        }elseif($exp=='!&'){
+            $exps[] = 'whereRaw';
+            $where = Str::camel(implode('_',$exps));
+            $query->$where("(`{$key}`& ?)=0",[$val]);
         }else{
             $exps[] = 'where';
             $where = Str::camel(implode('_',$exps));
