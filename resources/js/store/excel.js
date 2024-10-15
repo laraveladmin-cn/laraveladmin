@@ -205,7 +205,7 @@ export default {
                                 'customClass' : '', //自定义样式
                                 'duration' : 3000, //显示时间毫秒
                                 'show' : true //是否自动弹出
-                             };
+                            };
                             dispatch('pushMessage', message, { root: true }); //消息提醒
                             setTimeout(()=>{
                                 commit({
@@ -302,162 +302,175 @@ export default {
                         dispatch('pushMessage', message, { root: true }); //消息提醒
                         return;
                     }
-                    //导入开始
-                    commit({
-                        type: 'set',
-                        key:'downloading',
-                        downloading: true
+                    let datas = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+                    let title_desc = collect(datas.shift()).all(); //去掉表头
+                    dispatch('importExcelData',{
+                        datas:datas,
+                        title_desc:title_desc,
+                        import_per_page:parms.import_per_page,
+                        sheet:parms.sheet,
+                        callback:parms.callback,
+                        url:parms.url
                     });
-                    commit({
-                        type: 'set',
-                        key:'download_progress',
-                        download_progress: 0
-                    });
-                    commit({
-                        type: 'set',
-                        key:'pauseing',
-                        pauseing: false
-                    });
-                    commit({
-                        type: 'set',
-                        key:'model',
-                        model: 1
-                    });
-                    let datas = collect(XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]));
-                    let title = collect(datas.shift()); //去掉表头
-                    let error_title = collect(JSON.parse(JSON.stringify(title.all())));
-                    error_title.put('error',i18n.t('Error message')); //错误信息
-                    datas = datas.map( (item) =>{
-                        collect(title).each((name,key)=>{
-                            if(typeof item[key]=="undefined"){
-                                item[key] = '';
-                            }else if(typeof(item[key])=='string' && ((item[key].startsWith('{') && item[key].endsWith('}')) || (item[key].startsWith('[') && item[key].endsWith(']')))){
-                                try {
-                                    let value = JSON.parse(item[key]);
-                                    item[key] = value;
-                                }catch (e) {
-                                }
-                            }
-                        });
-                        return item;
-                    });
-                    let total = datas.count();
-                    datas = datas.chunk(parms.import_per_page || 200);
-                    let count = datas.count() || 1; //总请求数
-                    data = datas.shift(); //第一组数据
-                    if(!importCallback){
-                        importFail = (error)=>{
-                            commit({
-                                type: 'set',
-                                key:'pauseing',
-                                pauseing: true
-                            });
-                            message.title = i18n.t('Import error, import has been suspended');//'导入出错,已暂停导入!';
-                            dispatch('pushMessage', message, { root: true }); //消息提醒
-                            datas.prepend(data);//将导入提交数据还原
-                        };
-                        importCallback = (response)=>{
-                            if(response.status==200){
-                                //进度
-                                commit({
-                                    type: 'set',
-                                    key:'download_progress',
-                                    download_progress: Math.floor((count-datas.count())/count*100)
-                                });
-                                if(typeof response.data.errors!="undefined" && response.data.errors.length){
-                                    errors = collect(errors).merge(collect(response.data.errors).map(function (row) {
-                                        //重新整理排序
-                                        let item = [];
-                                        error_title.each((val,key)=>{
-                                            item[item.length] = row[key];
-                                        });
-                                        return item;
-                                    }).all()).all(); //存放错误数据
-                                }
-                            }else {
-                                importFail();
-                                return;
-                            }
-                            if(!state.downloading || state.pauseing){ //取消上传
-                                return ;
-                            }
-                            data = datas.shift(); //第一组数据
-                            if(data && data.count()){
-                                importChunk({datas:data.all()},url,importCallback,importFail);
-                            }else {
-                                if(errors.length) { //错误数据导出
-                                    commit('set',{
-                                        key:'modal',
-                                        modal:{
-                                            title:'提示',
-                                            type : 'warning', //消息类型
-                                            content: i18n.t('Import {success_number} data successfully, import {error_number} data failed! Did you download wrong data',
-                                                {
-                                                    success_number:total-errors.length,
-                                                    error_number:errors.length
-                                                }),//'成功导入'+(total-errors.length)+'条数据,导入失败'+errors.length+'数据!是否下载错误数据?',
-                                            callback:()=>{
-                                                let data = collect(errors)
-                                                    .prepend(error_title.values().all())
-                                                    .prepend(error_title.keys().all()).all();
-                                                exportExcel(data,parms.sheet,i18n.t('Wrong data'));//错误数据
-                                                errors = [];
-                                                if(typeof parms.callback=="function"){
-                                                    parms.callback();
-                                                }
-                                            },
-                                            cancel:()=>{ //取消
-                                                errors = [];
-                                                if(typeof parms.callback=="function"){
-                                                    parms.callback();
-                                                }
-                                            }
-                                        }
-                                    }, {root: true});
-
-                                }else { //全部导入成功
-                                    let message = {
-                                        'showClose' : true, //显示关闭按钮
-                                        'title' : i18n.t('All imported successfully'),//'全部导入成功!', //消息内容
-                                        'message' : '', //消息内容
-                                        'type' : 'success', //消息类型
-                                        'position' : 'top',
-                                        'iconClass' : 'fa-check', //图标
-                                        'customClass' : '', //自定义样式
-                                        'duration' : 3000, //显示时间毫秒
-                                        'show' : true //是否自动弹出
-                                    };
-                                    dispatch('pushMessage', message, { root: true }); //消息提醒
-                                    if(typeof parms.callback=="function"){
-                                        parms.callback();
-                                    }
-                                }
-                                setTimeout(()=>{
-                                    commit({
-                                        type: 'set',
-                                        key:'download_progress',
-                                        download_progress: 0
-                                    });
-                                    commit({
-                                        type: 'set',
-                                        key:'downloading',
-                                        downloading: false
-                                    });
-                                    commit({
-                                        type: 'set',
-                                        key:'pauseing',
-                                        pauseing: false
-                                    });
-                                },1000);
-                            }
-                        };
-
-                    }
-                    importChunk({datas:data.all()},url,importCallback,importFail);
                 };
             }
 
             reader.readAsBinaryString(parms.file);
+        },
+        importExcelData({ state, commit, rootState,dispatch },options){
+            let title_desc = options.title_desc;
+            let url = rootState['use_url']+options.url;
+            //导入开始
+            commit({
+                type: 'set',
+                key:'downloading',
+                downloading: true
+            });
+            commit({
+                type: 'set',
+                key:'download_progress',
+                download_progress: 0
+            });
+            commit({
+                type: 'set',
+                key:'pauseing',
+                pauseing: false
+            });
+            commit({
+                type: 'set',
+                key:'model',
+                model: 1
+            });
+            let error_title = collect(JSON.parse(JSON.stringify(title_desc)));
+            error_title.put('error',i18n.t('Error message')); //错误信息
+            let datas = collect(options.datas).map( (item) =>{
+                collect(title_desc).each((name,key)=>{
+                    if(typeof item[key]=="undefined"){
+                        item[key] = '';
+                    }else if(typeof(item[key])=='string' && ((item[key].startsWith('{') && item[key].endsWith('}')) || (item[key].startsWith('[') && item[key].endsWith(']')))){
+                        try {
+                            let value = JSON.parse(item[key]);
+                            item[key] = value;
+                        }catch (e) {
+                        }
+                    }
+                });
+                return item;
+            });
+            let total = datas.count();
+            datas = datas.chunk(options.import_per_page || 200);
+            let count = datas.count() || 1; //总请求数
+            data = datas.shift(); //第一组数据
+            if(!importCallback){
+                importFail = (error)=>{
+                    commit({
+                        type: 'set',
+                        key:'pauseing',
+                        pauseing: true
+                    });
+                    message.title = i18n.t('Import error, import has been suspended');//'导入出错,已暂停导入!';
+                    dispatch('pushMessage', message, { root: true }); //消息提醒
+                    datas.prepend(data);//将导入提交数据还原
+                };
+                importCallback = (response)=>{
+                    if(response.status==200){
+                        //进度
+                        commit({
+                            type: 'set',
+                            key:'download_progress',
+                            download_progress: Math.floor((count-datas.count())/count*100)
+                        });
+                        if(typeof response.data.errors!="undefined" && response.data.errors.length){
+                            errors = collect(errors).merge(collect(response.data.errors).map(function (row) {
+                                //重新整理排序
+                                let item = [];
+                                error_title.each((val,key)=>{
+                                    item[item.length] = row[key];
+                                });
+                                return item;
+                            }).all()).all(); //存放错误数据
+                        }
+                    }else {
+                        importFail();
+                        return;
+                    }
+                    if(!state.downloading || state.pauseing){ //取消上传
+                        return ;
+                    }
+                    data = datas.shift(); //第一组数据
+                    if(data && data.count()){
+                        importChunk({datas:data.all()},url,importCallback,importFail);
+                    }else {
+                        if(errors.length) { //错误数据导出
+                            commit('set',{
+                                key:'modal',
+                                modal:{
+                                    title:'提示',
+                                    type : 'warning', //消息类型
+                                    content: i18n.t('Import {success_number} data successfully, import {error_number} data failed! Did you download wrong data',
+                                        {
+                                            success_number:total-errors.length,
+                                            error_number:errors.length
+                                        }),//'成功导入'+(total-errors.length)+'条数据,导入失败'+errors.length+'数据!是否下载错误数据?',
+                                    callback:()=>{
+                                        let data = collect(errors)
+                                            .prepend(error_title.values().all())
+                                            .prepend(error_title.keys().all()).all();
+                                        exportExcel(data,options.sheet,i18n.t('Wrong data'));//错误数据
+                                        errors = [];
+                                        if(typeof options.callback=="function"){
+                                            options.callback();
+                                        }
+                                    },
+                                    cancel:()=>{ //取消
+                                        errors = [];
+                                        if(typeof options.callback=="function"){
+                                            options.callback();
+                                        }
+                                    }
+                                }
+                            }, {root: true});
+
+                        }
+                        else { //全部导入成功
+                            let message = {
+                                'showClose' : true, //显示关闭按钮
+                                'title' : i18n.t('All imported successfully'),//'全部导入成功!', //消息内容
+                                'message' : '', //消息内容
+                                'type' : 'success', //消息类型
+                                'position' : 'top',
+                                'iconClass' : 'fa-check', //图标
+                                'customClass' : '', //自定义样式
+                                'duration' : 3000, //显示时间毫秒
+                                'show' : true //是否自动弹出
+                            };
+                            dispatch('pushMessage', message, { root: true }); //消息提醒
+                            if(typeof options.callback=="function"){
+                                options.callback();
+                            }
+                        }
+                        setTimeout(()=>{
+                            commit({
+                                type: 'set',
+                                key:'download_progress',
+                                download_progress: 0
+                            });
+                            commit({
+                                type: 'set',
+                                key:'downloading',
+                                downloading: false
+                            });
+                            commit({
+                                type: 'set',
+                                key:'pauseing',
+                                pauseing: false
+                            });
+                        },1000);
+                    }
+                };
+
+            }
+            importChunk({datas:data.all()},url,importCallback,importFail);
         }
     },
     getters:{}
