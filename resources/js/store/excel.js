@@ -58,6 +58,9 @@ let sheet = '';
 let fileName = '';
 let fail,importFail;
 let reader,errors;
+let total=0;
+let error_title;
+let count;
 export default {
     namespaced: true,
     state:{
@@ -341,7 +344,7 @@ export default {
                 key:'model',
                 model: 1
             });
-            let error_title = collect(JSON.parse(JSON.stringify(title_desc)));
+            error_title = collect(JSON.parse(JSON.stringify(title_desc)));
             error_title.put('error',i18n.t('Error message')); //错误信息
             let datas = collect(options.datas).map( (item) =>{
                 collect(title_desc).each((name,key)=>{
@@ -357,9 +360,10 @@ export default {
                 });
                 return item;
             });
-            let total = datas.count();
+            total = datas.count();
+            dd('总数:'+total);
             datas = datas.chunk(options.import_per_page || 200);
-            let count = datas.count() || 1; //总请求数
+            count = datas.count() || 1; //总请求数
             data = datas.shift(); //第一组数据
             if(!importCallback){
                 importFail = (error)=>{
@@ -401,6 +405,7 @@ export default {
                     if(data && data.count()){
                         importChunk({datas:data.all()},url,importCallback,importFail);
                     }else {
+                        dd('总数1:'+total);
                         if(errors.length) { //错误数据导出
                             commit('set',{
                                 key:'modal',
