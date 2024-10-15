@@ -361,7 +361,6 @@ export default {
                 return item;
             });
             total = datas.count();
-            dd('总数:'+total);
             datas = datas.chunk(options.import_per_page || 200);
             count = datas.count() || 1; //总请求数
             data = datas.shift(); //第一组数据
@@ -405,7 +404,6 @@ export default {
                     if(data && data.count()){
                         importChunk({datas:data.all()},url,importCallback,importFail);
                     }else {
-                        dd('总数1:'+total);
                         if(errors.length) { //错误数据导出
                             commit('set',{
                                 key:'modal',
