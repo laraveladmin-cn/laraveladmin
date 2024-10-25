@@ -36,6 +36,10 @@ collect(routesConfig.group).map((group,key)=>{
         let path = path_arr.join('/');
         let path1 = ((name?name+'/':'')+path).replace(/-/g,'_');
         let pathName = 'pages'+path1+'.vue';
+        if(path.indexOf('{id}')!=-1){
+            path = path.replace('{id}',':id');
+            pathName = pathName.replace('{id}','edit');
+        }
         let route = {
             path: path,
             component: () => import(/* webpackChunkName: "[request]" */ `./${pathName}`)
