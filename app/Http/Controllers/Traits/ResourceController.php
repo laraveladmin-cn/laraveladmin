@@ -1277,6 +1277,7 @@ trait ResourceController
             $row = getRelationData($row); //将一维数组转成多维数组
             $this->handlePostEditReturn($row);
             $item = $bindModel::where($key_name,Arr::get($row, $key_name) ?: null)->first();
+            $row = $this->handlePostEditFindReturn($row,$item);
             if($item){ //更新数据
                 $old_data = collect($item)->toArray();
                 $item->update($row);
