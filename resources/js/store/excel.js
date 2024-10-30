@@ -61,6 +61,7 @@ let reader,errors;
 let total=0;
 let error_title;
 let count;
+let datas;
 export default {
     namespaced: true,
     state:{
@@ -346,7 +347,7 @@ export default {
             });
             error_title = collect(JSON.parse(JSON.stringify(title_desc)));
             error_title.put('error',i18n.t('Error message')); //错误信息
-            let datas = collect(options.datas).map( (item) =>{
+            let excel_datas = collect(options.datas).map( (item) =>{
                 collect(title_desc).each((name,key)=>{
                     if(typeof item[key]=="undefined"){
                         item[key] = '';
@@ -360,8 +361,8 @@ export default {
                 });
                 return item;
             });
-            total = datas.count();
-            datas = datas.chunk(options.import_per_page || 200);
+            total = excel_datas.count();
+            datas = excel_datas.chunk(options.import_per_page || 200);
             count = datas.count() || 1; //总请求数
             data = datas.shift(); //第一组数据
             if(!importCallback){
